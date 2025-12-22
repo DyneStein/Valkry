@@ -1,0 +1,252 @@
+[
+    {
+        "id": "easy13",
+        "title": "Binary Search",
+        "description": "Search in sorted array.",
+        "difficulty": "EASY",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint binarySearch(int arr[], int n, int x) { return -1; }\nint main() { int a[] = {1,3,5,7,9}; cout << binarySearch(a, 5, 5); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint binarySearch(int arr[], int n, int x) { int l=0, r=n-1; while(l<=r) { int m=(l+r)/2; if(arr[m]==x) return m; if(arr[m]<x) l=m+1; else r=m-1; } return -1; }\nint main() { int a[] = {1,3,5,7,9}; cout << binarySearch(a, 5, 5); return 0; }",
+        "explanation": {
+            "approach": "Divide search space in half each time.",
+            "analogy": "Like dictionary lookup - open to middle, go left or right.",
+            "steps": [
+                "Check middle",
+                "If less, search right half",
+                "If more, search left half"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy14",
+        "title": "Bubble Sort",
+        "description": "Sort array ascending.",
+        "difficulty": "EASY",
+        "category": "Sorting",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid bubbleSort(int arr[], int n) {}\nint main() { int a[] = {5,1,4,2,8}; bubbleSort(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "expectedOutput": "1 2 4 5 8",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid bubbleSort(int arr[], int n) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(arr[j]>arr[j+1]) { int t=arr[j]; arr[j]=arr[j+1]; arr[j+1]=t; } }\nint main() { int a[] = {5,1,4,2,8}; bubbleSort(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "explanation": {
+            "approach": "Bubble largest elements to end repeatedly.",
+            "analogy": "Bubbles rise to top - large elements float up.",
+            "steps": [
+                "Compare adjacent pairs",
+                "Swap if out of order",
+                "Repeat n times"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy15",
+        "title": "Selection Sort",
+        "description": "Sort by selecting minimum.",
+        "difficulty": "EASY",
+        "category": "Sorting",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid selectionSort(int arr[], int n) {}\nint main() { int a[] = {64,25,12,22,11}; selectionSort(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "expectedOutput": "11 12 22 25 64",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid selectionSort(int arr[], int n) { for(int i=0;i<n-1;i++) { int m=i; for(int j=i+1;j<n;j++) if(arr[j]<arr[m]) m=j; int t=arr[i]; arr[i]=arr[m]; arr[m]=t; } }\nint main() { int a[] = {64,25,12,22,11}; selectionSort(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "explanation": {
+            "approach": "Find minimum, put in position, repeat.",
+            "analogy": "Pick smallest card, then next smallest...",
+            "steps": [
+                "Find minimum in unsorted part",
+                "Swap to current position"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy16",
+        "title": "Insertion Sort",
+        "description": "Sort by inserting in place.",
+        "difficulty": "EASY",
+        "category": "Sorting",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid insertionSort(int arr[], int n) {}\nint main() { int a[] = {12,11,13,5,6}; insertionSort(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "expectedOutput": "5 6 11 12 13",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid insertionSort(int arr[], int n) { for(int i=1;i<n;i++) { int k=arr[i], j=i-1; while(j>=0 && arr[j]>k) { arr[j+1]=arr[j]; j--; } arr[j+1]=k; } }\nint main() { int a[] = {12,11,13,5,6}; insertionSort(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "explanation": {
+            "approach": "Insert each element into sorted portion.",
+            "analogy": "Like sorting cards in hand one by one.",
+            "steps": [
+                "Take each element",
+                "Insert in correct position in sorted part"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy17",
+        "title": "String Length",
+        "description": "Find length of string.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint strLen(char s[]) { return 0; }\nint main() { cout << strLen(\"hello\"); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint strLen(char s[]) { int l=0; while(s[l]) l++; return l; }\nint main() { cout << strLen(\"hello\"); return 0; }",
+        "explanation": {
+            "approach": "Count until null character.",
+            "analogy": "Count steps until you hit the wall.",
+            "steps": [
+                "Loop until \\0",
+                "Count characters"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy18",
+        "title": "String Copy",
+        "description": "Copy string to another.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid strCopy(char dest[], char src[]) {}\nint main() { char d[20]; strCopy(d, \"hello\"); cout << d; return 0; }",
+        "expectedOutput": "hello",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid strCopy(char dest[], char src[]) { int i=0; while(src[i]) { dest[i]=src[i]; i++; } dest[i]='\\0'; }\nint main() { char d[20]; strCopy(d, \"hello\"); cout << d; return 0; }",
+        "explanation": {
+            "approach": "Copy character by character.",
+            "analogy": "Photocopy each letter.",
+            "steps": [
+                "Copy each char",
+                "Add null terminator"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy19",
+        "title": "String Compare",
+        "description": "Compare two strings.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint strCmp(char a[], char b[]) { return 0; }\nint main() { cout << strCmp(\"abc\", \"abc\"); return 0; }",
+        "expectedOutput": "0",
+        "solution": "#include <iostream>\nusing namespace std;\nint strCmp(char a[], char b[]) { int i=0; while(a[i] && a[i]==b[i]) i++; return a[i]-b[i]; }\nint main() { cout << strCmp(\"abc\", \"abc\"); return 0; }",
+        "explanation": {
+            "approach": "Compare char by char, return difference.",
+            "analogy": "Compare letters alphabetically.",
+            "steps": [
+                "Loop while matching",
+                "Return difference at first mismatch"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy20",
+        "title": "Reverse String",
+        "description": "Reverse a string.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid reverse(char s[]) {}\nint main() { char s[] = \"hello\"; reverse(s); cout << s; return 0; }",
+        "expectedOutput": "olleh",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid reverse(char s[]) { int l=0, r=0; while(s[r]) r++; r--; while(l<r) { char t=s[l]; s[l]=s[r]; s[r]=t; l++; r--; } }\nint main() { char s[] = \"hello\"; reverse(s); cout << s; return 0; }",
+        "explanation": {
+            "approach": "Swap characters from both ends.",
+            "analogy": "Mirror image of the string.",
+            "steps": [
+                "Find length",
+                "Swap first-last pairs"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy21",
+        "title": "Check Palindrome String",
+        "description": "Is string a palindrome.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPalindrome(char s[]) { return false; }\nint main() { cout << isPalindrome(\"radar\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPalindrome(char s[]) { int l=0, r=0; while(s[r]) r++; r--; while(l<r) if(s[l++]!=s[r--]) return false; return true; }\nint main() { cout << isPalindrome(\"radar\"); return 0; }",
+        "explanation": {
+            "approach": "Compare characters from both ends.",
+            "analogy": "Reads same forwards and backwards.",
+            "steps": [
+                "Compare s[left] with s[right]",
+                "Move inward"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy22",
+        "title": "Count Vowels",
+        "description": "Count vowels in string.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countVowels(char s[]) { return 0; }\nint main() { cout << countVowels(\"hello world\"); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint countVowels(char s[]) { int c=0; for(int i=0; s[i]; i++) { char ch=tolower(s[i]); if(ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u') c++; } return c; }\nint main() { cout << countVowels(\"hello world\"); return 0; }",
+        "explanation": {
+            "approach": "Check each character for vowel.",
+            "analogy": "Count A, E, I, O, U.",
+            "steps": [
+                "Loop through string",
+                "Check if vowel",
+                "Count"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy23",
+        "title": "Count Words",
+        "description": "Count words in string.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countWords(char s[]) { return 0; }\nint main() { cout << countWords(\"hello world test\"); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint countWords(char s[]) { int c=0; bool inWord=false; for(int i=0; s[i]; i++) { if(s[i]!=' ' && !inWord) { c++; inWord=true; } else if(s[i]==' ') inWord=false; } return c; }\nint main() { cout << countWords(\"hello world test\"); return 0; }",
+        "explanation": {
+            "approach": "Count transitions from space to word.",
+            "analogy": "Words are separated by spaces.",
+            "steps": [
+                "Track if in word",
+                "Count when entering word"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy24",
+        "title": "Convert to Uppercase",
+        "description": "Convert string to uppercase.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid toUpper(char s[]) {}\nint main() { char s[] = \"hello\"; toUpper(s); cout << s; return 0; }",
+        "expectedOutput": "HELLO",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid toUpper(char s[]) { for(int i=0; s[i]; i++) if(s[i]>='a' && s[i]<='z') s[i] -= 32; }\nint main() { char s[] = \"hello\"; toUpper(s); cout << s; return 0; }",
+        "explanation": {
+            "approach": "Subtract 32 from lowercase letters.",
+            "analogy": "'a'(97) - 32 = 'A'(65)",
+            "steps": [
+                "Check if lowercase",
+                "Subtract 32"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy25",
+        "title": "Convert to Lowercase",
+        "description": "Convert string to lowercase.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid toLower(char s[]) {}\nint main() { char s[] = \"HELLO\"; toLower(s); cout << s; return 0; }",
+        "expectedOutput": "hello",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid toLower(char s[]) { for(int i=0; s[i]; i++) if(s[i]>='A' && s[i]<='Z') s[i] += 32; }\nint main() { char s[] = \"HELLO\"; toLower(s); cout << s; return 0; }",
+        "explanation": {
+            "approach": "Add 32 to uppercase letters.",
+            "analogy": "'A'(65) + 32 = 'a'(97)",
+            "steps": [
+                "Check if uppercase",
+                "Add 32"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    }
+]

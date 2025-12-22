@@ -1,0 +1,146 @@
+[
+    {
+        "id": "h151",
+        "title": "Dungeon Game",
+        "description": "Min health to reach princess.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint calculateMinimumHP(int d[][3], int r, int c) { return 0; }\nint main() { int d[][3]={{-2,-3,3},{-5,-10,1},{10,30,-5}}; cout<<calculateMinimumHP(d,3,3); return 0; }",
+        "expectedOutput": "7",
+        "solution": "#include <iostream>\nusing namespace std;\nint calculateMinimumHP(int d[][3], int r, int c) { int dp[r][c]; dp[r-1][c-1]=max(1,1-d[r-1][c-1]); for(int i=r-2;i>=0;i--) dp[i][c-1]=max(1,dp[i+1][c-1]-d[i][c-1]); for(int j=c-2;j>=0;j--) dp[r-1][j]=max(1,dp[r-1][j+1]-d[r-1][j]); for(int i=r-2;i>=0;i--) for(int j=c-2;j>=0;j--) dp[i][j]=max(1,min(dp[i+1][j],dp[i][j+1])-d[i][j]); return dp[0][0]; }\nint main() { int d[][3]={{-2,-3,3},{-5,-10,1},{10,30,-5}}; cout<<calculateMinimumHP(d,3,3); return 0; }",
+        "explanation": {
+            "approach": "DP from bottom-right.",
+            "steps": [
+                "dp[i][j] = min health needed at (i,j)",
+                "Work backwards from target"
+            ],
+            "complexity": "Time: O(mn), Space: O(mn)"
+        }
+    },
+    {
+        "id": "h152",
+        "title": "Cherry Pickup",
+        "description": "Max cherries round trip.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint cherryPickup(int g[][3], int n) { return 0; }\nint main() { int g[][3]={{0,1,-1},{1,0,-1},{1,1,1}}; cout<<cherryPickup(g,3); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint cherryPickup(int g[][3], int n) { int dp[n][n][n]; for(int i=0;i<n;i++) for(int j=0;j<n;j++) for(int k=0;k<n;k++) dp[i][j][k]=-1e9; dp[0][0][0]=g[0][0]; for(int r1=0;r1<n;r1++) for(int c1=0;c1<n;c1++) for(int r2=0;r2<n;r2++) { int c2=r1+c1-r2; if(c2<0||c2>=n||g[r1][c1]==-1||g[r2][c2]==-1) continue; int v=dp[r1][c1][r2]; if(r1>0) v=max(v,dp[r1-1][c1][r2]); if(c1>0) v=max(v,dp[r1][c1-1][r2]); if(r2>0) v=max(v,dp[r1][c1][r2-1]); if(r1>0&&r2>0) v=max(v,dp[r1-1][c1][r2-1]); if(v<0) continue; v+=g[r1][c1]; if(r1!=r2) v+=g[r2][c2]; dp[r1][c1][r2]=v; } return max(0,dp[n-1][n-1][n-1]); }\nint main() { int g[][3]={{0,1,-1},{1,0,-1},{1,1,1}}; cout<<cherryPickup(g,3); return 0; }",
+        "explanation": {
+            "approach": "Two paths simultaneously.",
+            "steps": [
+                "Simulate two people going together",
+                "dp[r1][c1][r2] with c2 derived"
+            ],
+            "complexity": "Time: O(n³), Space: O(n³)"
+        }
+    },
+    {
+        "id": "h153",
+        "title": "Super Egg Drop",
+        "description": "Min moves for k eggs n floors.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint superEggDrop(int k, int n) { return 0; }\nint main() { cout<<superEggDrop(2,6); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint superEggDrop(int k, int n) { int dp[n+1][k+1]; for(int i=0;i<=n;i++) for(int j=0;j<=k;j++) dp[i][j]=0; for(int m=1;m<=n;m++) { for(int j=1;j<=k;j++) dp[m][j]=dp[m-1][j-1]+dp[m-1][j]+1; if(dp[m][k]>=n) return m; } return n; }\nint main() { cout<<superEggDrop(2,6); return 0; }",
+        "explanation": {
+            "approach": "DP on moves.",
+            "steps": [
+                "dp[m][k] = max floors checkable with m moves, k eggs",
+                "Stop when >= n"
+            ],
+            "complexity": "Time: O(kn), Space: O(kn)"
+        }
+    },
+    {
+        "id": "h154",
+        "title": "Count Different Palindromes",
+        "description": "Count distinct palindromic subseq.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countPalindromicSubsequences(char s[]) { return 0; }\nint main() { cout<<countPalindromicSubsequences(\"bccb\"); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint countPalindromicSubsequences(char s[]) { int n=0; while(s[n]) n++; int dp[n][n]; for(int i=0;i<n;i++) { dp[i][i]=1; for(int j=0;j<i;j++) dp[i][j]=0; } for(int len=2;len<=n;len++) for(int i=0;i<=n-len;i++) { int j=i+len-1; if(s[i]==s[j]) { int l=i+1,r=j-1; while(l<=r&&s[l]!=s[i]) l++; while(l<=r&&s[r]!=s[i]) r--; if(l>r) dp[i][j]=dp[i+1][j-1]*2+2; else if(l==r) dp[i][j]=dp[i+1][j-1]*2+1; else dp[i][j]=dp[i+1][j-1]*2-dp[l+1][r-1]; } else dp[i][j]=dp[i+1][j]+dp[i][j-1]-dp[i+1][j-1]; } return dp[0][n-1]; }\nint main() { cout<<countPalindromicSubsequences(\"bccb\"); return 0; }",
+        "explanation": {
+            "approach": "DP with inclusion-exclusion.",
+            "steps": [
+                "If s[i]==s[j], expand from middle",
+                "Handle duplicates carefully"
+            ],
+            "complexity": "Time: O(n²), Space: O(n²)"
+        }
+    },
+    {
+        "id": "h155",
+        "title": "Frog Jump",
+        "description": "Can frog cross river.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool canCross(int stones[], int n) { return false; }\nint main() { int s[]={0,1,3,5,6,8,12,17}; cout<<canCross(s,8); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool canCross(int stones[], int n) { if(n<2) return true; if(stones[1]!=1) return false; bool dp[n][n+1]; for(int i=0;i<n;i++) for(int k=0;k<=n;k++) dp[i][k]=false; dp[0][0]=true; for(int i=0;i<n;i++) for(int k=0;k<=n;k++) if(dp[i][k]) for(int j=i+1;j<n;j++) { int jump=stones[j]-stones[i]; if(jump>=k-1&&jump<=k+1&&jump<=n) dp[j][jump]=true; } for(int k=0;k<=n;k++) if(dp[n-1][k]) return true; return false; }\nint main() { int s[]={0,1,3,5,6,8,12,17}; cout<<canCross(s,8); return 0; }",
+        "explanation": {
+            "approach": "DP tracking positions and jumps.",
+            "steps": [
+                "dp[i][k] = can reach stone i with jump k",
+                "Try k-1, k, k+1 from each"
+            ],
+            "complexity": "Time: O(n²), Space: O(n²)"
+        }
+    },
+    {
+        "id": "h156",
+        "title": "Split Array Largest Sum",
+        "description": "Min largest sum splitting into m.",
+        "difficulty": "HARD",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint splitArray(int nums[], int n, int m) { return 0; }\nint main() { int a[]={7,2,5,10,8}; cout<<splitArray(a,5,2); return 0; }",
+        "expectedOutput": "18",
+        "solution": "#include <iostream>\nusing namespace std;\nbool canSplit(int nums[], int n, int m, int mx) { int cnt=1; long sum=0; for(int i=0;i<n;i++) { if(nums[i]>mx) return false; if(sum+nums[i]<=mx) sum+=nums[i]; else { cnt++; sum=nums[i]; } } return cnt<=m; }\nint splitArray(int nums[], int n, int m) { long l=0,r=0; for(int i=0;i<n;i++) { l=max(l,(long)nums[i]); r+=nums[i]; } while(l<r) { long mid=(l+r)/2; if(canSplit(nums,n,m,mid)) r=mid; else l=mid+1; } return l; }\nint main() { int a[]={7,2,5,10,8}; cout<<splitArray(a,5,2); return 0; }",
+        "explanation": {
+            "approach": "Binary search on answer.",
+            "steps": [
+                "Binary search max sum",
+                "Greedily check if can split into m parts"
+            ],
+            "complexity": "Time: O(n log S), Space: O(1)"
+        }
+    },
+    {
+        "id": "h157",
+        "title": "Koko Eating Bananas",
+        "description": "Min eating speed.",
+        "difficulty": "MEDIUM",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint minEatingSpeed(int piles[], int n, int h) { return 0; }\nint main() { int p[]={3,6,7,11}; cout<<minEatingSpeed(p,4,8); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nbool canEat(int p[], int n, int h, int k) { int time=0; for(int i=0;i<n;i++) time+=(p[i]+k-1)/k; return time<=h; }\nint minEatingSpeed(int p[], int n, int h) { int l=1,r=0; for(int i=0;i<n;i++) r=max(r,p[i]); while(l<r) { int m=(l+r)/2; if(canEat(p,n,h,m)) r=m; else l=m+1; } return l; }\nint main() { int p[]={3,6,7,11}; cout<<minEatingSpeed(p,4,8); return 0; }",
+        "explanation": {
+            "approach": "Binary search on speed.",
+            "steps": [
+                "Check if speed k is enough",
+                "Binary search for minimum"
+            ],
+            "complexity": "Time: O(n log M), Space: O(1)"
+        }
+    },
+    {
+        "id": "h158",
+        "title": "Median of Two Sorted",
+        "description": "Find median of two sorted arrays.",
+        "difficulty": "HARD",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble findMedianSortedArrays(int a[], int m, int b[], int n) { return 0; }\nint main() { int a[]={1,3}; int b[]={2}; cout<<findMedianSortedArrays(a,2,b,1); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble findMedianSortedArrays(int a[], int m, int b[], int n) { if(m>n) return findMedianSortedArrays(b,n,a,m); int l=0,r=m; while(l<=r) { int i=(l+r)/2; int j=(m+n+1)/2-i; int al=i==0?-1e9:a[i-1]; int ar=i==m?1e9:a[i]; int bl=j==0?-1e9:b[j-1]; int br=j==n?1e9:b[j]; if(al<=br&&bl<=ar) { if((m+n)%2) return max(al,bl); return (max(al,bl)+min(ar,br))/2.0; } if(al>br) r=i-1; else l=i+1; } return 0; }\nint main() { int a[]={1,3}; int b[]={2}; cout<<findMedianSortedArrays(a,2,b,1); return 0; }",
+        "explanation": {
+            "approach": "Binary search on partition.",
+            "steps": [
+                "Partition both arrays",
+                "Find correct partition point"
+            ],
+            "complexity": "Time: O(log min(m,n)), Space: O(1)"
+        }
+    }
+]

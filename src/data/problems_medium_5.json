@@ -1,0 +1,194 @@
+[
+    {
+        "id": "med41",
+        "title": "Clone Graph",
+        "description": "Deep copy of graph.",
+        "difficulty": "MEDIUM",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* adj[10]; int sz; Node(int x):v(x),sz(0){} };\nNode* cloneGraph(Node* n) { return nullptr; }\nint main() { cout<<\"Graph cloned\"; return 0; }",
+        "expectedOutput": "Graph cloned",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* adj[10]; int sz; Node(int x):v(x),sz(0){} };\nNode* visited[101]={};\nNode* cloneGraph(Node* n) { if(!n) return 0; if(visited[n->v]) return visited[n->v]; Node* c=new Node(n->v); visited[n->v]=c; for(int i=0;i<n->sz;i++) c->adj[c->sz++]=cloneGraph(n->adj[i]); return c; }\nint main() { cout<<\"Graph cloned\"; return 0; }",
+        "explanation": {
+            "approach": "DFS with visited map.",
+            "analogy": "Clone each node once.",
+            "steps": [
+                "Check if already cloned",
+                "Create clone",
+                "Recurse on neighbors"
+            ],
+            "complexity": "Time: O(V+E), Space: O(V)"
+        }
+    },
+    {
+        "id": "med42",
+        "title": "Pacific Atlantic Water",
+        "description": "Cells flowing to both oceans.",
+        "difficulty": "MEDIUM",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid pacificAtlantic(int h[][5], int r, int c) {}\nint main() { int h[][5]={{1,2,2,3,5},{3,2,3,4,4},{2,4,5,3,1},{6,7,1,4,5},{5,1,1,2,4}}; pacificAtlantic(h,5,5); return 0; }",
+        "expectedOutput": "0,4 1,3 1,4 2,2 3,0 3,1 4,0",
+        "solution": "#include <iostream>\nusing namespace std;\nbool pac[10][10],atl[10][10];\nvoid dfs(int h[][5], int r, int c, int i, int j, bool vis[][10], int prev) { if(i<0||i>=r||j<0||j>=c||vis[i][j]||h[i][j]<prev) return; vis[i][j]=true; dfs(h,r,c,i+1,j,vis,h[i][j]); dfs(h,r,c,i-1,j,vis,h[i][j]); dfs(h,r,c,i,j+1,vis,h[i][j]); dfs(h,r,c,i,j-1,vis,h[i][j]); }\nvoid pacificAtlantic(int h[][5], int r, int c) { for(int i=0;i<r;i++) for(int j=0;j<c;j++) { pac[i][j]=atl[i][j]=false; } for(int i=0;i<r;i++) { dfs(h,r,c,i,0,pac,0); dfs(h,r,c,i,c-1,atl,0); } for(int j=0;j<c;j++) { dfs(h,r,c,0,j,pac,0); dfs(h,r,c,r-1,j,atl,0); } for(int i=0;i<r;i++) for(int j=0;j<c;j++) if(pac[i][j]&&atl[i][j]) cout<<i<<\",\"<<j<<\" \"; }\nint main() { int h[][5]={{1,2,2,3,5},{3,2,3,4,4},{2,4,5,3,1},{6,7,1,4,5},{5,1,1,2,4}}; pacificAtlantic(h,5,5); return 0; }",
+        "explanation": {
+            "approach": "DFS from ocean edges inward.",
+            "analogy": "Reverse flow from oceans.",
+            "steps": [
+                "DFS from Pacific edges",
+                "DFS from Atlantic edges",
+                "Find intersection"
+            ],
+            "complexity": "Time: O(rc), Space: O(rc)"
+        }
+    },
+    {
+        "id": "med43",
+        "title": "Rotting Oranges",
+        "description": "Time for all oranges to rot.",
+        "difficulty": "MEDIUM",
+        "category": "BFS",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint orangesRotting(int g[][3], int r, int c) { return 0; }\nint main() { int g[][3]={{2,1,1},{1,1,0},{0,1,1}}; cout<<orangesRotting(g,3,3); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint orangesRotting(int g[][3], int r, int c) { int qr[100],qc[100],f=0,re=0,fresh=0; for(int i=0;i<r;i++) for(int j=0;j<c;j++) { if(g[i][j]==2) { qr[re]=i; qc[re++]=j; } else if(g[i][j]==1) fresh++; } if(fresh==0) return 0; int dx[]={1,-1,0,0},dy[]={0,0,1,-1},t=-1; while(f<re) { int sz=re-f; t++; for(int q=0;q<sz;q++) { int i=qr[f],j=qc[f++]; for(int d=0;d<4;d++) { int ni=i+dx[d],nj=j+dy[d]; if(ni>=0&&ni<r&&nj>=0&&nj<c&&g[ni][nj]==1) { g[ni][nj]=2; fresh--; qr[re]=ni; qc[re++]=nj; } } } } return fresh==0?t:-1; }\nint main() { int g[][3]={{2,1,1},{1,1,0},{0,1,1}}; cout<<orangesRotting(g,3,3); return 0; }",
+        "explanation": {
+            "approach": "Multi-source BFS.",
+            "analogy": "Rot spreads level by level.",
+            "steps": [
+                "Add all rotten to queue",
+                "BFS, count levels",
+                "Check if all fresh rotted"
+            ],
+            "complexity": "Time: O(rc), Space: O(rc)"
+        }
+    },
+    {
+        "id": "med44",
+        "title": "Word Ladder Length",
+        "description": "Min transformations.",
+        "difficulty": "MEDIUM",
+        "category": "BFS",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint ladderLength(char begin[], char end[], char words[][10], int n) { return 0; }\nint main() { char words[][10]={\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"}; cout<<ladderLength(\"hit\",\"cog\",words,6); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nbool diff1(char a[], char b[]) { int c=0; for(int i=0;a[i];i++) if(a[i]!=b[i]) c++; return c==1; }\nint ladderLength(char begin[], char end[], char words[][10], int n) { char q[100][10]; int f=0,r=0; bool vis[100]={}; int i=0; while(begin[i]) { q[r][i]=begin[i]; i++; } q[r][i]=0; r++; int lv=1; while(f<r) { int sz=r-f; for(int s=0;s<sz;s++) { char* cur=q[f++]; for(int w=0;w<n;w++) { if(!vis[w] && diff1(cur,words[w])) { bool eq=true; for(int k=0;end[k];k++) if(end[k]!=words[w][k]) eq=false; if(eq) return lv+1; vis[w]=true; int j=0; while(words[w][j]) { q[r][j]=words[w][j]; j++; } q[r][j]=0; r++; } } } lv++; } return 0; }\nint main() { char words[][10]={\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"}; cout<<ladderLength(\"hit\",\"cog\",words,6); return 0; }",
+        "explanation": {
+            "approach": "BFS to find shortest path.",
+            "analogy": "Transform one letter at a time.",
+            "steps": [
+                "BFS from begin word",
+                "Try all 1-letter changes",
+                "Count levels"
+            ],
+            "complexity": "Time: O(n × m × 26), Space: O(n)"
+        }
+    },
+    {
+        "id": "med45",
+        "title": "Coin Change",
+        "description": "Min coins for amount.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint coinChange(int coins[], int n, int amt) { return 0; }\nint main() { int coins[]={1,2,5}; cout<<coinChange(coins,3,11); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint coinChange(int coins[], int n, int amt) { int dp[amt+1]; for(int i=0;i<=amt;i++) dp[i]=1e9; dp[0]=0; for(int i=1;i<=amt;i++) for(int j=0;j<n;j++) if(coins[j]<=i && dp[i-coins[j]]!=1e9) dp[i]=min(dp[i],dp[i-coins[j]]+1); return dp[amt]>=1e9?-1:dp[amt]; }\nint main() { int coins[]={1,2,5}; cout<<coinChange(coins,3,11); return 0; }",
+        "explanation": {
+            "approach": "DP - min coins for each amount.",
+            "analogy": "Build up from 0.",
+            "steps": [
+                "dp[i] = min coins for i",
+                "Try each coin"
+            ],
+            "complexity": "Time: O(amt × n), Space: O(amt)"
+        }
+    },
+    {
+        "id": "med46",
+        "title": "Longest Increasing Subseq",
+        "description": "LIS length.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint lengthOfLIS(int a[], int n) { return 0; }\nint main() { int a[]={10,9,2,5,3,7,101,18}; cout<<lengthOfLIS(a,8); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint lengthOfLIS(int a[], int n) { int dp[n]; for(int i=0;i<n;i++) dp[i]=1; for(int i=1;i<n;i++) for(int j=0;j<i;j++) if(a[j]<a[i]) dp[i]=max(dp[i],dp[j]+1); int mx=0; for(int i=0;i<n;i++) mx=max(mx,dp[i]); return mx; }\nint main() { int a[]={10,9,2,5,3,7,101,18}; cout<<lengthOfLIS(a,8); return 0; }",
+        "explanation": {
+            "approach": "DP - LIS ending at each index.",
+            "analogy": "Extend previous subsequences.",
+            "steps": [
+                "dp[i] = LIS ending at i",
+                "Check all j < i"
+            ],
+            "complexity": "Time: O(n²), Space: O(n)"
+        }
+    },
+    {
+        "id": "med47",
+        "title": "Word Break",
+        "description": "Can segment into dict words.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool wordBreak(char s[], char dict[][10], int n) { return false; }\nint main() { char dict[][10]={\"apple\",\"pen\"}; cout<<wordBreak(\"applepenapple\",dict,2); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool eq(char a[], int start, int end, char b[]) { int i=0; for(int j=start;j<end;j++,i++) if(a[j]!=b[i]) return false; return !b[i]; }\nbool wordBreak(char s[], char dict[][10], int n) { int len=0; while(s[len]) len++; bool dp[len+1]={}; dp[0]=true; for(int i=1;i<=len;i++) for(int j=0;j<i;j++) if(dp[j]) for(int k=0;k<n;k++) if(eq(s,j,i,dict[k])) { dp[i]=true; break; } return dp[len]; }\nint main() { char dict[][10]={\"apple\",\"pen\"}; cout<<wordBreak(\"applepenapple\",dict,2); return 0; }",
+        "explanation": {
+            "approach": "DP - can reach each position.",
+            "analogy": "Check if prefix + dict word works.",
+            "steps": [
+                "dp[i] = can segment s[0..i]",
+                "Check all j < i with dict word"
+            ],
+            "complexity": "Time: O(n² × m), Space: O(n)"
+        }
+    },
+    {
+        "id": "med48",
+        "title": "House Robber",
+        "description": "Max money without adjacent.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint rob(int a[], int n) { return 0; }\nint main() { int a[]={2,7,9,3,1}; cout<<rob(a,5); return 0; }",
+        "expectedOutput": "12",
+        "solution": "#include <iostream>\nusing namespace std;\nint rob(int a[], int n) { if(n==0) return 0; if(n==1) return a[0]; int dp[n]; dp[0]=a[0]; dp[1]=max(a[0],a[1]); for(int i=2;i<n;i++) dp[i]=max(dp[i-1],dp[i-2]+a[i]); return dp[n-1]; }\nint main() { int a[]={2,7,9,3,1}; cout<<rob(a,5); return 0; }",
+        "explanation": {
+            "approach": "DP - max at each house.",
+            "analogy": "Rob or skip each house.",
+            "steps": [
+                "dp[i] = max(skip, rob+dp[i-2])"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "med49",
+        "title": "Decode Ways",
+        "description": "Number of decodings.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint numDecodings(char s[]) { return 0; }\nint main() { cout<<numDecodings(\"226\"); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint numDecodings(char s[]) { int n=0; while(s[n]) n++; if(n==0||s[0]=='0') return 0; int dp[n+1]={}; dp[0]=1; dp[1]=1; for(int i=2;i<=n;i++) { if(s[i-1]!='0') dp[i]=dp[i-1]; int two=(s[i-2]-'0')*10+(s[i-1]-'0'); if(two>=10&&two<=26) dp[i]+=dp[i-2]; } return dp[n]; }\nint main() { cout<<numDecodings(\"226\"); return 0; }",
+        "explanation": {
+            "approach": "DP - ways at each position.",
+            "analogy": "Single or pair digit decode.",
+            "steps": [
+                "dp[i] = ways to decode s[0..i]",
+                "Try 1 and 2 digit decodings"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "med50",
+        "title": "Unique Paths",
+        "description": "Paths from top-left to bottom-right.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint uniquePaths(int m, int n) { return 0; }\nint main() { cout<<uniquePaths(3,7); return 0; }",
+        "expectedOutput": "28",
+        "solution": "#include <iostream>\nusing namespace std;\nint uniquePaths(int m, int n) { int dp[m][n]; for(int i=0;i<m;i++) dp[i][0]=1; for(int j=0;j<n;j++) dp[0][j]=1; for(int i=1;i<m;i++) for(int j=1;j<n;j++) dp[i][j]=dp[i-1][j]+dp[i][j-1]; return dp[m-1][n-1]; }\nint main() { cout<<uniquePaths(3,7); return 0; }",
+        "explanation": {
+            "approach": "DP - paths to each cell.",
+            "analogy": "Sum of paths from top and left.",
+            "steps": [
+                "dp[i][j] = dp[i-1][j] + dp[i][j-1]"
+            ],
+            "complexity": "Time: O(mn), Space: O(mn)"
+        }
+    }
+]

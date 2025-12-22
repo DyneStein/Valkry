@@ -1,0 +1,474 @@
+[
+    {
+        "id": "fun26",
+        "title": "Nth Term AP",
+        "description": "Find nth term of AP.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint nthAP(int a, int d, int n) { return 0; }\nint main() { cout<<nthAP(2,3,5); return 0; }",
+        "expectedOutput": "14",
+        "solution": "#include <iostream>\nusing namespace std;\nint nthAP(int a, int d, int n) {\n    return a + (n-1) * d;\n}\nint main() { cout<<nthAP(2,3,5); return 0; }",
+        "explanation": {
+            "approach": "Use formula: nth term = first term + (n-1) × common difference",
+            "analogy": "Like climbing stairs with equal steps - each step adds the same height.",
+            "steps": [
+                "First term is a",
+                "Each step adds d",
+                "After n-1 steps: a + (n-1)×d"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun27",
+        "title": "Nth Term GP",
+        "description": "Find nth term of GP.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint nthGP(int a, int r, int n) { return 0; }\nint main() { cout<<nthGP(2,3,4); return 0; }",
+        "expectedOutput": "54",
+        "solution": "#include <iostream>\nusing namespace std;\nint nthGP(int a, int r, int n) {\n    int result = a;\n    for(int i = 1; i < n; i++) result *= r;\n    return result;\n}\nint main() { cout<<nthGP(2,3,4); return 0; }",
+        "explanation": {
+            "approach": "Multiply first term by ratio (n-1) times.",
+            "analogy": "Like doubling money n times - it grows by multiplication.",
+            "steps": [
+                "Start with first term a",
+                "Multiply by r, (n-1) times",
+                "Result is a × r^(n-1)"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun28",
+        "title": "Power Function",
+        "description": "Calculate x^n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint power(int x, int n) { return 0; }\nint main() { cout<<power(2,10); return 0; }",
+        "expectedOutput": "1024",
+        "solution": "#include <iostream>\nusing namespace std;\nint power(int x, int n) {\n    int result = 1;\n    for(int i = 0; i < n; i++) result *= x;\n    return result;\n}\nint main() { cout<<power(2,10); return 0; }",
+        "explanation": {
+            "approach": "Multiply x by itself n times.",
+            "analogy": "2^10 means multiply 2 ten times: 2×2×2×2×2×2×2×2×2×2 = 1024",
+            "steps": [
+                "Start with 1",
+                "Multiply by x, n times",
+                "Return result"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun29",
+        "title": "Cube of Number",
+        "description": "Calculate n^3.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint cube(int n) { return 0; }\nint main() { cout<<cube(5); return 0; }",
+        "expectedOutput": "125",
+        "solution": "#include <iostream>\nusing namespace std;\nint cube(int n) {\n    return n * n * n;\n}\nint main() { cout<<cube(5); return 0; }",
+        "explanation": {
+            "approach": "Simply multiply n by itself 3 times.",
+            "analogy": "Like the volume of a cube with side n.",
+            "steps": [
+                "Return n × n × n"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun30",
+        "title": "Square Root Integer",
+        "description": "Floor of square root.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint mySqrt(int n) { return 0; }\nint main() { cout<<mySqrt(26); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint mySqrt(int n) {\n    int i = 1;\n    while(i * i <= n) i++;\n    return i - 1;\n}\nint main() { cout<<mySqrt(26); return 0; }",
+        "explanation": {
+            "approach": "Find largest i where i² ≤ n.",
+            "analogy": "What's the biggest number that when squared is still ≤ n?",
+            "steps": [
+                "Start i=1",
+                "While i² ≤ n, increment i",
+                "Return i-1 (last valid i)"
+            ],
+            "complexity": "Time: O(√n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun31",
+        "title": "Calculate Percentage",
+        "description": "Find percentage.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble percentage(int obtained, int total) { return 0; }\nint main() { cout<<percentage(45,50); return 0; }",
+        "expectedOutput": "90",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble percentage(int obtained, int total) {\n    return (obtained * 100.0) / total;\n}\nint main() { cout<<percentage(45,50); return 0; }",
+        "explanation": {
+            "approach": "(Obtained/Total) × 100",
+            "analogy": "If you got 45 out of 50, that's 90%.",
+            "steps": [
+                "Divide obtained by total",
+                "Multiply by 100"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun32",
+        "title": "Simple Interest",
+        "description": "Calculate SI.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble simpleInterest(int p, int r, int t) { return 0; }\nint main() { cout<<simpleInterest(1000,5,2); return 0; }",
+        "expectedOutput": "100",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble simpleInterest(int p, int r, int t) {\n    return (p * r * t) / 100.0;\n}\nint main() { cout<<simpleInterest(1000,5,2); return 0; }",
+        "explanation": {
+            "approach": "SI = (Principal × Rate × Time) / 100",
+            "analogy": "Simple interest is like flat rent on your money.",
+            "steps": [
+                "Multiply P × R × T",
+                "Divide by 100"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun33",
+        "title": "Celsius to Fahrenheit",
+        "description": "Temperature conversion.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble toFahrenheit(double c) { return 0; }\nint main() { cout<<toFahrenheit(0); return 0; }",
+        "expectedOutput": "32",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble toFahrenheit(double c) {\n    return c * 9.0/5.0 + 32;\n}\nint main() { cout<<toFahrenheit(0); return 0; }",
+        "explanation": {
+            "approach": "F = C × (9/5) + 32",
+            "analogy": "0°C = 32°F (freezing point), 100°C = 212°F (boiling)",
+            "steps": [
+                "Multiply C by 9/5",
+                "Add 32"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun34",
+        "title": "Fahrenheit to Celsius",
+        "description": "Temperature conversion.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble toCelsius(double f) { return 0; }\nint main() { cout<<toCelsius(32); return 0; }",
+        "expectedOutput": "0",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble toCelsius(double f) {\n    return (f - 32) * 5.0/9.0;\n}\nint main() { cout<<toCelsius(32); return 0; }",
+        "explanation": {
+            "approach": "C = (F - 32) × (5/9)",
+            "analogy": "Reverse of Celsius to Fahrenheit.",
+            "steps": [
+                "Subtract 32 from F",
+                "Multiply by 5/9"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun35",
+        "title": "Area of Circle",
+        "description": "Calculate area.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble areaCircle(double r) { return 0; }\nint main() { cout<<fixed<<setprecision(2)<<areaCircle(7); return 0; }",
+        "expectedOutput": "153.94",
+        "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble areaCircle(double r) {\n    return 3.14159 * r * r;\n}\nint main() { cout<<fixed<<setprecision(2)<<areaCircle(7); return 0; }",
+        "explanation": {
+            "approach": "Area = π × r²",
+            "analogy": "How much space is inside a circle.",
+            "steps": [
+                "Square the radius",
+                "Multiply by π (3.14159)"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun36",
+        "title": "Area of Triangle",
+        "description": "Using base and height.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble areaTriangle(double b, double h) { return 0; }\nint main() { cout<<areaTriangle(10,5); return 0; }",
+        "expectedOutput": "25",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble areaTriangle(double b, double h) {\n    return 0.5 * b * h;\n}\nint main() { cout<<areaTriangle(10,5); return 0; }",
+        "explanation": {
+            "approach": "Area = ½ × base × height",
+            "analogy": "A triangle is half of a rectangle.",
+            "steps": [
+                "Multiply base by height",
+                "Divide by 2"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun37",
+        "title": "Area of Rectangle",
+        "description": "Length times width.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint areaRect(int l, int w) { return 0; }\nint main() { cout<<areaRect(10,5); return 0; }",
+        "expectedOutput": "50",
+        "solution": "#include <iostream>\nusing namespace std;\nint areaRect(int l, int w) {\n    return l * w;\n}\nint main() { cout<<areaRect(10,5); return 0; }",
+        "explanation": {
+            "approach": "Area = length × width",
+            "analogy": "Count tiles in a l×w grid.",
+            "steps": [
+                "Multiply length by width"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun38",
+        "title": "Perimeter of Rectangle",
+        "description": "2*(l+w).",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint perimeter(int l, int w) { return 0; }\nint main() { cout<<perimeter(10,5); return 0; }",
+        "expectedOutput": "30",
+        "solution": "#include <iostream>\nusing namespace std;\nint perimeter(int l, int w) {\n    return 2 * (l + w);\n}\nint main() { cout<<perimeter(10,5); return 0; }",
+        "explanation": {
+            "approach": "Perimeter = 2 × (length + width)",
+            "analogy": "Walk around the rectangle - two lengths and two widths.",
+            "steps": [
+                "Add length and width",
+                "Multiply by 2"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun39",
+        "title": "Check Vowel",
+        "description": "Is character vowel.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isVowel(char c) { return false; }\nint main() { cout<<isVowel('a'); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isVowel(char c) {\n    c = tolower(c);\n    return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';\n}\nint main() { cout<<isVowel('a'); return 0; }",
+        "explanation": {
+            "approach": "Check if character is a, e, i, o, or u.",
+            "analogy": "Vowels are the singing letters - A E I O U.",
+            "steps": [
+                "Convert to lowercase",
+                "Check against each vowel"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun40",
+        "title": "Check Consonant",
+        "description": "Is character consonant.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isConsonant(char c) { return false; }\nint main() { cout<<isConsonant('b'); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isConsonant(char c) {\n    c = tolower(c);\n    return isalpha(c) && !(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u');\n}\nint main() { cout<<isConsonant('b'); return 0; }",
+        "explanation": {
+            "approach": "Is a letter but NOT a vowel.",
+            "analogy": "Consonants are all letters except A E I O U.",
+            "steps": [
+                "Check if it's a letter",
+                "Check if it's not a vowel"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun41",
+        "title": "Check Uppercase",
+        "description": "Is character uppercase.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isUpper(char c) { return false; }\nint main() { cout<<isUpper('A'); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isUpper(char c) {\n    return c >= 'A' && c <= 'Z';\n}\nint main() { cout<<isUpper('A'); return 0; }",
+        "explanation": {
+            "approach": "Check if between 'A' and 'Z' in ASCII.",
+            "analogy": "Capital letters live between A(65) and Z(90) in ASCII.",
+            "steps": [
+                "Compare with 'A' and 'Z'"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun42",
+        "title": "Check Lowercase",
+        "description": "Is character lowercase.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isLower(char c) { return false; }\nint main() { cout<<isLower('a'); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isLower(char c) {\n    return c >= 'a' && c <= 'z';\n}\nint main() { cout<<isLower('a'); return 0; }",
+        "explanation": {
+            "approach": "Check if between 'a' and 'z'.",
+            "analogy": "Lowercase letters are a(97) to z(122).",
+            "steps": [
+                "Compare with 'a' and 'z'"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun43",
+        "title": "Check Alphabet",
+        "description": "Is character a letter.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isAlpha(char c) { return false; }\nint main() { cout<<isAlpha('z'); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isAlpha(char c) {\n    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');\n}\nint main() { cout<<isAlpha('z'); return 0; }",
+        "explanation": {
+            "approach": "Either lowercase OR uppercase.",
+            "analogy": "Is it any letter from A-Z?",
+            "steps": [
+                "Check if lowercase",
+                "OR check if uppercase"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun44",
+        "title": "Check Digit",
+        "description": "Is character a digit.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isDigit(char c) { return false; }\nint main() { cout<<isDigit('5'); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isDigit(char c) {\n    return c >= '0' && c <= '9';\n}\nint main() { cout<<isDigit('5'); return 0; }",
+        "explanation": {
+            "approach": "Check if between '0' and '9'.",
+            "analogy": "Digits are characters 0-9.",
+            "steps": [
+                "Compare with '0' and '9'"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun45",
+        "title": "ASCII Value",
+        "description": "Get ASCII value.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint getASCII(char c) { return 0; }\nint main() { cout<<getASCII('A'); return 0; }",
+        "expectedOutput": "65",
+        "solution": "#include <iostream>\nusing namespace std;\nint getASCII(char c) {\n    return (int)c;\n}\nint main() { cout<<getASCII('A'); return 0; }",
+        "explanation": {
+            "approach": "Cast char to int to get ASCII value.",
+            "analogy": "Each character has a number code. A=65, a=97, 0=48.",
+            "steps": [
+                "Cast character to integer"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun46",
+        "title": "Character from ASCII",
+        "description": "Get character from ASCII.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nchar getChar(int n) { return 0; }\nint main() { cout<<getChar(65); return 0; }",
+        "expectedOutput": "A",
+        "solution": "#include <iostream>\nusing namespace std;\nchar getChar(int n) {\n    return (char)n;\n}\nint main() { cout<<getChar(65); return 0; }",
+        "explanation": {
+            "approach": "Cast int to char.",
+            "analogy": "Convert number back to its character. 65 → 'A'.",
+            "steps": [
+                "Cast integer to character"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun47",
+        "title": "Toggle Case",
+        "description": "Swap case of character.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nchar toggleCase(char c) { return 0; }\nint main() { cout<<toggleCase('a'); return 0; }",
+        "expectedOutput": "A",
+        "solution": "#include <iostream>\nusing namespace std;\nchar toggleCase(char c) {\n    if(c >= 'a' && c <= 'z') return c - 32;\n    if(c >= 'A' && c <= 'Z') return c + 32;\n    return c;\n}\nint main() { cout<<toggleCase('a'); return 0; }",
+        "explanation": {
+            "approach": "Lowercase and uppercase differ by 32 in ASCII.",
+            "analogy": "'a'(97) - 32 = 'A'(65). Add/subtract 32 to toggle.",
+            "steps": [
+                "If lowercase, subtract 32",
+                "If uppercase, add 32"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun48",
+        "title": "Days in Month",
+        "description": "Days given month.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint daysInMonth(int m, int y) { return 0; }\nint main() { cout<<daysInMonth(2,2024); return 0; }",
+        "expectedOutput": "29",
+        "solution": "#include <iostream>\nusing namespace std;\nint daysInMonth(int m, int y) {\n    int days[] = {31,28,31,30,31,30,31,31,30,31,30,31};\n    if(m == 2 && ((y%4==0 && y%100!=0) || y%400==0)) return 29;\n    return days[m-1];\n}\nint main() { cout<<daysInMonth(2,2024); return 0; }",
+        "explanation": {
+            "approach": "Use array for days. Check leap year for February.",
+            "analogy": "30 days has September, April, June, November...",
+            "steps": [
+                "Store days in array",
+                "For Feb, check leap year",
+                "Return appropriate days"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun49",
+        "title": "Check Leap Year",
+        "description": "Is year leap.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isLeap(int y) { return false; }\nint main() { cout<<isLeap(2024); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isLeap(int y) {\n    return (y % 4 == 0 && y % 100 != 0) || (y % 400 == 0);\n}\nint main() { cout<<isLeap(2024); return 0; }",
+        "explanation": {
+            "approach": "Divisible by 4 but not 100, OR divisible by 400.",
+            "analogy": "2024 is leap (÷4, not ÷100). 2000 is leap (÷400). 1900 is not (÷100 but not ÷400).",
+            "steps": [
+                "Check if divisible by 4 but not 100",
+                "OR divisible by 400"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun50",
+        "title": "Sum 1 to N Formula",
+        "description": "Using n*(n+1)/2.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sum1ToN(int n) { return 0; }\nint main() { cout<<sum1ToN(100); return 0; }",
+        "expectedOutput": "5050",
+        "solution": "#include <iostream>\nusing namespace std;\nint sum1ToN(int n) {\n    return n * (n + 1) / 2;\n}\nint main() { cout<<sum1ToN(100); return 0; }",
+        "explanation": {
+            "approach": "Gauss formula: n(n+1)/2",
+            "analogy": "Pair first and last: 1+100=101, 2+99=101... 50 pairs × 101 = 5050.",
+            "steps": [
+                "Apply formula n(n+1)/2"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    }
+]

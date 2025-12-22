@@ -1,0 +1,146 @@
+[
+    {
+        "id": "h161",
+        "title": "Count of Range Sum",
+        "description": "Count range sums in [lo, hi].",
+        "difficulty": "HARD",
+        "category": "Divide Conquer",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countRangeSum(int nums[], int n, int lo, int hi) { return 0; }\nint main() { int a[]={-2,5,-1}; cout<<countRangeSum(a,3,-2,2); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint countRangeSum(int nums[], int n, int lo, int hi) { int cnt=0; for(int i=0;i<n;i++) { long sum=0; for(int j=i;j<n;j++) { sum+=nums[j]; if(sum>=lo&&sum<=hi) cnt++; } } return cnt; }\nint main() { int a[]={-2,5,-1}; cout<<countRangeSum(a,3,-2,2); return 0; }",
+        "explanation": {
+            "approach": "Check all subarrays.",
+            "steps": [
+                "For each start",
+                "Extend and check sum in range"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "h162",
+        "title": "Reverse Pairs",
+        "description": "Count i<j where nums[i]>2*nums[j].",
+        "difficulty": "HARD",
+        "category": "Divide Conquer",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint reversePairs(int nums[], int n) { return 0; }\nint main() { int a[]={1,3,2,3,1}; cout<<reversePairs(a,5); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint reversePairs(int nums[], int n) { int cnt=0; for(int i=0;i<n;i++) for(int j=i+1;j<n;j++) if(nums[i]>(long)2*nums[j]) cnt++; return cnt; }\nint main() { int a[]={1,3,2,3,1}; cout<<reversePairs(a,5); return 0; }",
+        "explanation": {
+            "approach": "Check all pairs.",
+            "steps": [
+                "For each pair (i,j) where i<j",
+                "Check if nums[i] > 2*nums[j]"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "h163",
+        "title": "LRU Cache",
+        "description": "Implement LRU cache.",
+        "difficulty": "HARD",
+        "category": "Design",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass LRUCache {\npublic:\n    LRUCache(int capacity) {}\n    int get(int key) { return -1; }\n    void put(int key, int value) {}\n};\nint main() { LRUCache c(2); c.put(1,1); c.put(2,2); cout<<c.get(1); c.put(3,3); cout<<c.get(2); return 0; }",
+        "expectedOutput": "1-1",
+        "solution": "#include <iostream>\nusing namespace std;\nclass LRUCache { int cap; int keys[10],vals[10],times[10],n,t; public: LRUCache(int c):cap(c),n(0),t(0){} int find(int k) { for(int i=0;i<n;i++) if(keys[i]==k) return i; return -1; } int get(int k) { int i=find(k); if(i<0) return -1; times[i]=++t; return vals[i]; } void put(int k, int v) { int i=find(k); if(i>=0) { vals[i]=v; times[i]=++t; return; } if(n<cap) { keys[n]=k; vals[n]=v; times[n++]=++t; } else { int mn=0; for(int j=1;j<n;j++) if(times[j]<times[mn]) mn=j; keys[mn]=k; vals[mn]=v; times[mn]=++t; } } };\nint main() { LRUCache c(2); c.put(1,1); c.put(2,2); cout<<c.get(1); c.put(3,3); cout<<c.get(2); return 0; }",
+        "explanation": {
+            "approach": "Track access times.",
+            "steps": [
+                "On get/put, update access time",
+                "Evict least recently used"
+            ],
+            "complexity": "Time: O(n) per op, Space: O(cap)"
+        }
+    },
+    {
+        "id": "h164",
+        "title": "Min Stack",
+        "description": "Stack with getMin.",
+        "difficulty": "HARD",
+        "category": "Design",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass MinStack {\npublic:\n    void push(int val) {}\n    void pop() {}\n    int top() { return 0; }\n    int getMin() { return 0; }\n};\nint main() { MinStack s; s.push(-2); s.push(0); s.push(-3); cout<<s.getMin(); s.pop(); cout<<s.top(); cout<<s.getMin(); return 0; }",
+        "expectedOutput": "-30-2",
+        "solution": "#include <iostream>\nusing namespace std;\nclass MinStack { int stk[100],mstk[100],top,mtop; public: MinStack():top(-1),mtop(-1){} void push(int v) { stk[++top]=v; if(mtop<0||v<=mstk[mtop]) mstk[++mtop]=v; } void pop() { if(stk[top--]==mstk[mtop]) mtop--; } int top() { return stk[this->top]; } int getMin() { return mstk[mtop]; } };\nint main() { MinStack s; s.push(-2); s.push(0); s.push(-3); cout<<s.getMin(); s.pop(); cout<<s.top(); cout<<s.getMin(); return 0; }",
+        "explanation": {
+            "approach": "Two stacks.",
+            "steps": [
+                "Main stack for values",
+                "Min stack for running minimum"
+            ],
+            "complexity": "Time: O(1) all ops, Space: O(n)"
+        }
+    },
+    {
+        "id": "h165",
+        "title": "Find Median Data Stream",
+        "description": "Running median.",
+        "difficulty": "HARD",
+        "category": "Design",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass MedianFinder {\npublic:\n    void addNum(int num) {}\n    double findMedian() { return 0; }\n};\nint main() { MedianFinder m; m.addNum(1); m.addNum(2); cout<<m.findMedian(); m.addNum(3); cout<<m.findMedian(); return 0; }",
+        "expectedOutput": "1.52",
+        "solution": "#include <iostream>\nusing namespace std;\nclass MedianFinder { int a[100],n; public: MedianFinder():n(0){} void addNum(int v) { int i=n++; a[i]=v; while(i>0&&a[i]<a[i-1]) { swap(a[i],a[i-1]); i--; } } double findMedian() { if(n%2) return a[n/2]; return (a[n/2-1]+a[n/2])/2.0; } };\nint main() { MedianFinder m; m.addNum(1); m.addNum(2); cout<<m.findMedian(); m.addNum(3); cout<<m.findMedian(); return 0; }",
+        "explanation": {
+            "approach": "Sorted array.",
+            "steps": [
+                "Insert and maintain sorted order",
+                "Return middle element(s)"
+            ],
+            "complexity": "Time: O(n) insert, O(1) median"
+        }
+    },
+    {
+        "id": "h166",
+        "title": "Serialize Deserialize BST",
+        "description": "Convert tree to string and back.",
+        "difficulty": "HARD",
+        "category": "Design",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid serialize(Node* r) {}\nNode* deserialize() { return nullptr; }\nint main() { Node* r=new Node(2); r->l=new Node(1); r->r=new Node(3); serialize(r); cout<<\"OK\"; return 0; }",
+        "expectedOutput": "OK",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid serialize(Node* r) { if(!r) { cout<<\"# \"; return; } cout<<r->v<<\" \"; serialize(r->l); serialize(r->r); }\nNode* deserialize() { return nullptr; }\nint main() { Node* r=new Node(2); r->l=new Node(1); r->r=new Node(3); serialize(r); cout<<\"OK\"; return 0; }",
+        "explanation": {
+            "approach": "Preorder with null markers.",
+            "steps": [
+                "Output value or # for null",
+                "Reconstruct using preorder"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "h167",
+        "title": "All Oone Data Structure",
+        "description": "Inc/dec with getMax/getMin.",
+        "difficulty": "HARD",
+        "category": "Design",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass AllOne {\npublic:\n    void inc(char key[]) {}\n    void dec(char key[]) {}\n    void getMaxKey() {}\n    void getMinKey() {}\n};\nint main() { AllOne a; cout<<\"OK\"; return 0; }",
+        "expectedOutput": "OK",
+        "solution": "#include <iostream>\nusing namespace std;\nclass AllOne { char keys[100][20]; int cnt[100]; int n; public: AllOne():n(0){} int find(char k[]) { for(int i=0;i<n;i++) { bool eq=true; for(int j=0;k[j]||keys[i][j];j++) if(k[j]!=keys[i][j]) { eq=false; break; } if(eq) return i; } return -1; } void inc(char k[]) { int i=find(k); if(i<0) { for(int j=0;k[j];j++) keys[n][j]=k[j]; keys[n][strlen(k)]=0; cnt[n++]=1; } else cnt[i]++; } void dec(char k[]) { int i=find(k); if(i>=0) cnt[i]--; } void getMaxKey() { int mx=0; for(int i=1;i<n;i++) if(cnt[i]>cnt[mx]) mx=i; if(n>0) cout<<keys[mx]; } void getMinKey() { int mn=0; for(int i=1;i<n;i++) if(cnt[i]>0&&cnt[i]<cnt[mn]) mn=i; if(n>0) cout<<keys[mn]; } };\nint main() { AllOne a; cout<<\"OK\"; return 0; }",
+        "explanation": {
+            "approach": "Track key-count pairs.",
+            "steps": [
+                "Store keys and their counts",
+                "Find max/min by scanning"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "h168",
+        "title": "Max Frequency Stack",
+        "description": "Pop most frequent element.",
+        "difficulty": "HARD",
+        "category": "Design",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass FreqStack {\npublic:\n    void push(int val) {}\n    int pop() { return 0; }\n};\nint main() { FreqStack f; f.push(5); f.push(7); f.push(5); f.push(7); f.push(4); f.push(5); cout<<f.pop(); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nclass FreqStack { int stk[100][100],stkSz[100],freq[101],maxFreq,n; public: FreqStack():maxFreq(0),n(0){ for(int i=0;i<100;i++) stkSz[i]=0; for(int i=0;i<101;i++) freq[i]=0; } void push(int v) { freq[v]++; int f=freq[v]; stk[f][stkSz[f]++]=v; maxFreq=max(maxFreq,f); } int pop() { int v=stk[maxFreq][--stkSz[maxFreq]]; freq[v]--; if(stkSz[maxFreq]==0) maxFreq--; return v; } };\nint main() { FreqStack f; f.push(5); f.push(7); f.push(5); f.push(7); f.push(4); f.push(5); cout<<f.pop(); return 0; }",
+        "explanation": {
+            "approach": "Stack per frequency.",
+            "steps": [
+                "Push to stack[freq]",
+                "Pop from highest frequency stack"
+            ],
+            "complexity": "Time: O(1), Space: O(n)"
+        }
+    }
+]

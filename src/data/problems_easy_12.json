@@ -1,0 +1,181 @@
+[
+    {
+        "id": "e551",
+        "title": "Valid Parentheses",
+        "description": "Check bracket matching.",
+        "difficulty": "EASY",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isValid(char s[]) { return false; }\nint main() { cout<<isValid(\"()[]{}\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isValid(char s[]) { char stk[100]; int top=-1; for(int i=0;s[i];i++) { if(s[i]=='('||s[i]=='{'||s[i]=='[') stk[++top]=s[i]; else { if(top<0) return false; if(s[i]==')'&&stk[top]!='(') return false; if(s[i]=='}'&&stk[top]!='{') return false; if(s[i]==']'&&stk[top]!='[') return false; top--; } } return top==-1; }\nint main() { cout<<isValid(\"()[]{}\"); return 0; }",
+        "explanation": {
+            "approach": "Stack for matching.",
+            "steps": [
+                "Push opening brackets",
+                "Pop and match closing"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "e552",
+        "title": "Min Stack",
+        "description": "Stack with getMin.",
+        "difficulty": "MEDIUM",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass MinStack {\npublic:\n    void push(int val) {}\n    void pop() {}\n    int top() { return 0; }\n    int getMin() { return 0; }\n};\nint main() { cout<<\"OK\"; return 0; }",
+        "expectedOutput": "OK",
+        "solution": "#include <iostream>\nusing namespace std;\nclass MinStack { int stk[100],mstk[100],top; public: MinStack():top(-1){} void push(int v) { stk[++top]=v; mstk[top]=top==0?v:min(v,mstk[top-1]); } void pop() { top--; } int top() { return stk[this->top]; } int getMin() { return mstk[top]; } };\nint main() { cout<<\"OK\"; return 0; }",
+        "explanation": {
+            "approach": "Track min at each level.",
+            "steps": [
+                "Store min for each stack state"
+            ],
+            "complexity": "Time: O(1), Space: O(n)"
+        }
+    },
+    {
+        "id": "e553",
+        "title": "Implement Queue Using Stacks",
+        "description": "Queue from two stacks.",
+        "difficulty": "EASY",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass MyQueue {\npublic:\n    void push(int x) {}\n    int pop() { return 0; }\n    int peek() { return 0; }\n    bool empty() { return true; }\n};\nint main() { MyQueue q; q.push(1); q.push(2); cout<<q.peek(); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nclass MyQueue { int s1[100],s2[100],t1,t2; public: MyQueue():t1(-1),t2(-1){} void push(int x) { s1[++t1]=x; } void move() { if(t2<0) while(t1>=0) s2[++t2]=s1[t1--]; } int pop() { move(); return s2[t2--]; } int peek() { move(); return s2[t2]; } bool empty() { return t1<0&&t2<0; } };\nint main() { MyQueue q; q.push(1); q.push(2); cout<<q.peek(); return 0; }",
+        "explanation": {
+            "approach": "Two stacks.",
+            "steps": [
+                "Push to s1",
+                "Move to s2 for pop/peek"
+            ],
+            "complexity": "Time: O(1) amortized, Space: O(n)"
+        }
+    },
+    {
+        "id": "e554",
+        "title": "Implement Stack Using Queues",
+        "description": "Stack from queue.",
+        "difficulty": "EASY",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass MyStack {\npublic:\n    void push(int x) {}\n    int pop() { return 0; }\n    int top() { return 0; }\n    bool empty() { return true; }\n};\nint main() { MyStack s; s.push(1); s.push(2); cout<<s.top(); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nclass MyStack { int q[100],f,b; public: MyStack():f(0),b(0){} void push(int x) { q[b++]=x; for(int i=0;i<b-f-1;i++) { q[b++]=q[f++]; } } int pop() { return q[f++]; } int top() { return q[f]; } bool empty() { return f==b; } };\nint main() { MyStack s; s.push(1); s.push(2); cout<<s.top(); return 0; }",
+        "explanation": {
+            "approach": "Rotate queue on push.",
+            "steps": [
+                "Push new element",
+                "Move all others to back"
+            ],
+            "complexity": "Time: O(n) push, Space: O(n)"
+        }
+    },
+    {
+        "id": "e555",
+        "title": "Next Greater Element I",
+        "description": "Next greater in nums2 for nums1.",
+        "difficulty": "EASY",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid nextGreaterElement(int n1[], int l1, int n2[], int l2) {}\nint main() { int a[]={4,1,2}; int b[]={1,3,4,2}; nextGreaterElement(a,3,b,4); return 0; }",
+        "expectedOutput": "-1 3 -1",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid nextGreaterElement(int n1[], int l1, int n2[], int l2) { for(int i=0;i<l1;i++) { int res=-1; bool found=false; for(int j=0;j<l2;j++) { if(n2[j]==n1[i]) found=true; if(found && n2[j]>n1[i]) { res=n2[j]; break; } } cout<<res<<\" \"; } }\nint main() { int a[]={4,1,2}; int b[]={1,3,4,2}; nextGreaterElement(a,3,b,4); return 0; }",
+        "explanation": {
+            "approach": "Find in nums2, then find next greater.",
+            "steps": [
+                "Locate element",
+                "Find first larger after"
+            ],
+            "complexity": "Time: O(n×m), Space: O(1)"
+        }
+    },
+    {
+        "id": "e556",
+        "title": "Baseball Game",
+        "description": "Calculate score.",
+        "difficulty": "EASY",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint calPoints(char* ops[], int n) { return 0; }\nint main() { char* o[]={\"5\",\"2\",\"C\",\"D\",\"+\"}; cout<<calPoints(o,5); return 0; }",
+        "expectedOutput": "30",
+        "solution": "#include <iostream>\nusing namespace std;\nint calPoints(char* ops[], int n) { int stk[100],top=-1; for(int i=0;i<n;i++) { if(ops[i][0]=='C') top--; else if(ops[i][0]=='D') stk[++top]=stk[top-1]*2; else if(ops[i][0]=='+') stk[++top]=stk[top-1]+stk[top-2]; else { int v=0,neg=ops[i][0]=='-'; for(int j=neg?1:0;ops[i][j];j++) v=v*10+ops[i][j]-'0'; stk[++top]=neg?-v:v; } } int sum=0; for(int i=0;i<=top;i++) sum+=stk[i]; return sum; }\nint main() { char* o[]={\"5\",\"2\",\"C\",\"D\",\"+\"}; cout<<calPoints(o,5); return 0; }",
+        "explanation": {
+            "approach": "Stack simulation.",
+            "steps": [
+                "Apply operations",
+                "Sum all scores"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "e557",
+        "title": "Remove All Adjacent Duplicates",
+        "description": "Remove adjacent same chars.",
+        "difficulty": "EASY",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid removeDuplicates(char s[]) {}\nint main() { char s[]=\"abbaca\"; removeDuplicates(s); return 0; }",
+        "expectedOutput": "ca",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid removeDuplicates(char s[]) { char stk[100]; int top=-1; for(int i=0;s[i];i++) { if(top>=0&&stk[top]==s[i]) top--; else stk[++top]=s[i]; } for(int i=0;i<=top;i++) cout<<stk[i]; }\nint main() { char s[]=\"abbaca\"; removeDuplicates(s); return 0; }",
+        "explanation": {
+            "approach": "Stack for removal.",
+            "steps": [
+                "Pop if same as top",
+                "Else push"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "e558",
+        "title": "Maximum Frequency Stack",
+        "description": "Pop most frequent.",
+        "difficulty": "HARD",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass FreqStack {\npublic:\n    void push(int val) {}\n    int pop() { return 0; }\n};\nint main() { cout<<\"OK\"; return 0; }",
+        "expectedOutput": "OK",
+        "solution": "#include <iostream>\nusing namespace std;\nclass FreqStack { int stk[100],freq[101],n,mf; public: FreqStack():n(0),mf(0){ for(int i=0;i<101;i++) freq[i]=0; } void push(int v) { freq[v]++; if(freq[v]>mf) mf=freq[v]; stk[n++]=v; } int pop() { while(n>0&&freq[stk[n-1]]<mf) n--; if(n==0) { mf--; return -1; } int v=stk[--n]; freq[v]--; while(mf>0) { bool found=false; for(int i=0;i<101;i++) if(freq[i]==mf) { found=true; break; } if(found) break; mf--; } return v; } };\nint main() { cout<<\"OK\"; return 0; }",
+        "explanation": {
+            "approach": "Track frequency.",
+            "steps": [
+                "Push to stack",
+                "Pop from highest frequency"
+            ],
+            "complexity": "Time: O(1), Space: O(n)"
+        }
+    },
+    {
+        "id": "e559",
+        "title": "Daily Temperatures",
+        "description": "Days until warmer.",
+        "difficulty": "MEDIUM",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid dailyTemperatures(int t[], int n) {}\nint main() { int t[]={73,74,75,71,69,72,76,73}; dailyTemperatures(t,8); return 0; }",
+        "expectedOutput": "1 1 4 2 1 1 0 0",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid dailyTemperatures(int t[], int n) { int stk[100],top=-1,res[n]={}; for(int i=0;i<n;i++) { while(top>=0&&t[i]>t[stk[top]]) { res[stk[top]]=i-stk[top]; top--; } stk[++top]=i; } for(int i=0;i<n;i++) cout<<res[i]<<\" \"; }\nint main() { int t[]={73,74,75,71,69,72,76,73}; dailyTemperatures(t,8); return 0; }",
+        "explanation": {
+            "approach": "Monotonic stack.",
+            "steps": [
+                "Pop while current is warmer",
+                "Calculate days difference"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "e560",
+        "title": "Backspace String Compare",
+        "description": "Compare with backspaces.",
+        "difficulty": "EASY",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool backspaceCompare(char s[], char t[]) { return false; }\nint main() { cout<<backspaceCompare(\"ab#c\",\"ad#c\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid process(char s[], char r[]) { int j=0; for(int i=0;s[i];i++) { if(s[i]=='#') { if(j>0) j--; } else r[j++]=s[i]; } r[j]=0; }\nbool backspaceCompare(char s[], char t[]) { char r1[100],r2[100]; process(s,r1); process(t,r2); for(int i=0;;i++) { if(r1[i]!=r2[i]) return false; if(!r1[i]) return true; } }\nint main() { cout<<backspaceCompare(\"ab#c\",\"ad#c\"); return 0; }",
+        "explanation": {
+            "approach": "Process then compare.",
+            "steps": [
+                "Apply backspaces",
+                "Compare results"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    }
+]

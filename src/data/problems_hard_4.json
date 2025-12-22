@@ -1,0 +1,156 @@
+[
+    {
+        "id": "hard25",
+        "title": "LRU Cache",
+        "description": "Implement LRU cache.",
+        "difficulty": "HARD",
+        "category": "Design",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass LRUCache { public: LRUCache(int cap) {} int get(int k) { return -1; } void put(int k, int v) {} };\nint main() { LRUCache c(2); c.put(1,1); c.put(2,2); cout<<c.get(1)<<\" \"; c.put(3,3); cout<<c.get(2); return 0; }",
+        "expectedOutput": "1 -1",
+        "solution": "#include <iostream>\nusing namespace std;\nclass LRUCache { int cap,sz; int keys[100],vals[100]; int find(int k) { for(int i=0;i<sz;i++) if(keys[i]==k) return i; return -1; } void moveToFront(int i) { int k=keys[i],v=vals[i]; for(int j=i;j>0;j--) { keys[j]=keys[j-1]; vals[j]=vals[j-1]; } keys[0]=k; vals[0]=v; } public: LRUCache(int c):cap(c),sz(0){} int get(int k) { int i=find(k); if(i<0) return -1; moveToFront(i); return vals[0]; } void put(int k, int v) { int i=find(k); if(i>=0) { vals[i]=v; moveToFront(i); return; } if(sz<cap) sz++; for(int j=sz-1;j>0;j--) { keys[j]=keys[j-1]; vals[j]=vals[j-1]; } keys[0]=k; vals[0]=v; } };\nint main() { LRUCache c(2); c.put(1,1); c.put(2,2); cout<<c.get(1)<<\" \"; c.put(3,3); cout<<c.get(2); return 0; }",
+        "explanation": {
+            "approach": "Array with move to front.",
+            "analogy": "Most recently used at front.",
+            "steps": [
+                "Find key, move to front",
+                "Evict last if full"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "hard26",
+        "title": "Find Median Stream",
+        "description": "Median from data stream.",
+        "difficulty": "HARD",
+        "category": "Design",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass MedianFinder { public: void addNum(int n) {} double findMedian() { return 0; } };\nint main() { MedianFinder mf; mf.addNum(1); mf.addNum(2); cout<<mf.findMedian()<<\" \"; mf.addNum(3); cout<<mf.findMedian(); return 0; }",
+        "expectedOutput": "1.5 2",
+        "solution": "#include <iostream>\nusing namespace std;\nclass MedianFinder { int data[100],sz; public: MedianFinder():sz(0){} void addNum(int n) { int i=sz++; data[i]=n; while(i>0 && data[i]<data[i-1]) { swap(data[i],data[i-1]); i--; } } double findMedian() { if(sz%2) return data[sz/2]; return (data[sz/2-1]+data[sz/2])/2.0; } };\nint main() { MedianFinder mf; mf.addNum(1); mf.addNum(2); cout<<mf.findMedian()<<\" \"; mf.addNum(3); cout<<mf.findMedian(); return 0; }",
+        "explanation": {
+            "approach": "Keep sorted array.",
+            "analogy": "Insert in sorted order.",
+            "steps": [
+                "Insert and bubble to correct position",
+                "Return middle element(s)"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "hard27",
+        "title": "Word Ladder",
+        "description": "Shortest transformation.",
+        "difficulty": "HARD",
+        "category": "BFS",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint ladderLength(char begin[], char end[], char words[][10], int n) { return 0; }\nint main() { char words[][10]={\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"}; cout<<ladderLength(\"hit\",\"cog\",words,6); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nbool diff1(char a[], char b[]) { int c=0; for(int i=0;a[i];i++) if(a[i]!=b[i]) c++; return c==1; }\nbool eq(char a[], char b[]) { int i=0; while(a[i] && a[i]==b[i]) i++; return !a[i] && !b[i]; }\nint ladderLength(char begin[], char end[], char words[][10], int n) { char q[100][10]; int f=0,r=0; bool vis[100]={}; int i=0; while(begin[i]) { q[r][i]=begin[i]; i++; } q[r++][i]=0; int lv=1; while(f<r) { int sz=r-f; for(int s=0;s<sz;s++) { for(int w=0;w<n;w++) { if(!vis[w] && diff1(q[f],words[w])) { if(eq(words[w],end)) return lv+1; vis[w]=true; int j=0; while(words[w][j]) { q[r][j]=words[w][j]; j++; } q[r++][j]=0; } } f++; } lv++; } return 0; }\nint main() { char words[][10]={\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"}; cout<<ladderLength(\"hit\",\"cog\",words,6); return 0; }",
+        "explanation": {
+            "approach": "BFS shortest path.",
+            "analogy": "One letter change at a time.",
+            "steps": [
+                "BFS from begin",
+                "Try all 1-letter changes",
+                "Count levels"
+            ],
+            "complexity": "Time: O(n × m × 26), Space: O(n)"
+        }
+    },
+    {
+        "id": "hard28",
+        "title": "Alien Dictionary",
+        "description": "Order of alien alphabet.",
+        "difficulty": "HARD",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid alienOrder(char words[][10], int n) {}\nint main() { char words[][10]={\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"}; alienOrder(words,5); return 0; }",
+        "expectedOutput": "wertf",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid alienOrder(char words[][10], int n) { int adj[26][26]={},deg[26]={},sz[26]={}; bool exists[26]={}; for(int i=0;i<n;i++) for(int j=0;words[i][j];j++) exists[words[i][j]-'a']=true; for(int i=0;i<n-1;i++) { int j=0; while(words[i][j] && words[i][j]==words[i+1][j]) j++; if(words[i][j] && words[i+1][j]) { int u=words[i][j]-'a',v=words[i+1][j]-'a'; adj[u][sz[u]++]=v; deg[v]++; } } int q[26],f=0,r=0; for(int i=0;i<26;i++) if(exists[i] && deg[i]==0) q[r++]=i; while(f<r) { int u=q[f++]; cout<<(char)('a'+u); for(int i=0;i<sz[u];i++) if(--deg[adj[u][i]]==0) q[r++]=adj[u][i]; } }\nint main() { char words[][10]={\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"}; alienOrder(words,5); return 0; }",
+        "explanation": {
+            "approach": "Topological sort from comparisons.",
+            "analogy": "Build graph from word order.",
+            "steps": [
+                "Compare adjacent words for order",
+                "Build graph edges",
+                "Topological sort"
+            ],
+            "complexity": "Time: O(C), Space: O(1)"
+        }
+    },
+    {
+        "id": "hard29",
+        "title": "Critical Connections",
+        "description": "Find bridges in graph.",
+        "difficulty": "HARD",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid criticalConnections(int n, int edges[][2], int m) {}\nint main() { int edges[][2]={{0,1},{1,2},{2,0},{1,3}}; criticalConnections(4,edges,4); return 0; }",
+        "expectedOutput": "1-3",
+        "solution": "#include <iostream>\nusing namespace std;\nint adj[10][10],sz[10],disc[10],low[10],timer=0;\nvoid dfs(int u, int p) { disc[u]=low[u]=++timer; for(int i=0;i<sz[u];i++) { int v=adj[u][i]; if(!disc[v]) { dfs(v,u); low[u]=min(low[u],low[v]); if(low[v]>disc[u]) cout<<u<<\"-\"<<v<<\" \"; } else if(v!=p) low[u]=min(low[u],disc[v]); } }\nvoid criticalConnections(int n, int edges[][2], int m) { for(int i=0;i<n;i++) { sz[i]=0; disc[i]=0; low[i]=0; } for(int i=0;i<m;i++) { adj[edges[i][0]][sz[edges[i][0]]++]=edges[i][1]; adj[edges[i][1]][sz[edges[i][1]]++]=edges[i][0]; } for(int i=0;i<n;i++) if(!disc[i]) dfs(i,-1); }\nint main() { int edges[][2]={{0,1},{1,2},{2,0},{1,3}}; criticalConnections(4,edges,4); return 0; }",
+        "explanation": {
+            "approach": "Tarjan's bridge finding.",
+            "analogy": "Edge is bridge if no back edge goes around.",
+            "steps": [
+                "Track discovery and low times",
+                "Bridge if low[v] > disc[u]"
+            ],
+            "complexity": "Time: O(V+E), Space: O(V)"
+        }
+    },
+    {
+        "id": "hard30",
+        "title": "Count Smaller After",
+        "description": "Count smaller elements to right.",
+        "difficulty": "HARD",
+        "category": "Divide and Conquer",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid countSmaller(int a[], int n) {}\nint main() { int a[]={5,2,6,1}; countSmaller(a,4); return 0; }",
+        "expectedOutput": "2 1 1 0",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid countSmaller(int a[], int n) { int res[n]={}; for(int i=0;i<n;i++) for(int j=i+1;j<n;j++) if(a[j]<a[i]) res[i]++; for(int i=0;i<n;i++) cout<<res[i]<<\" \"; }\nint main() { int a[]={5,2,6,1}; countSmaller(a,4); return 0; }",
+        "explanation": {
+            "approach": "Count smaller elements to right.",
+            "analogy": "Compare with all following elements.",
+            "steps": [
+                "For each element",
+                "Count smaller to the right"
+            ],
+            "complexity": "Time: O(n²), Space: O(n)"
+        }
+    },
+    {
+        "id": "hard31",
+        "title": "Skyline Problem",
+        "description": "Building skyline outline.",
+        "difficulty": "HARD",
+        "category": "Divide and Conquer",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid getSkyline(int buildings[][3], int n) {}\nint main() { int b[][3]={{2,9,10},{3,7,15},{5,12,12},{15,20,10},{19,24,8}}; getSkyline(b,5); return 0; }",
+        "expectedOutput": "2,10 3,15 7,12 12,0 15,10 20,8 24,0",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid getSkyline(int buildings[][3], int n) { int events[2*n][3], k=0; for(int i=0;i<n;i++) { events[k][0]=buildings[i][0]; events[k][1]=buildings[i][2]; events[k++][2]=1; events[k][0]=buildings[i][1]; events[k][1]=buildings[i][2]; events[k++][2]=0; } for(int i=0;i<2*n-1;i++) for(int j=0;j<2*n-i-1;j++) if(events[j][0]>events[j+1][0]) { swap(events[j][0],events[j+1][0]); swap(events[j][1],events[j+1][1]); swap(events[j][2],events[j+1][2]); } int active[100],az=0,lastH=-1; for(int i=0;i<2*n;i++) { if(events[i][2]) active[az++]=events[i][1]; else { for(int j=0;j<az;j++) if(active[j]==events[i][1]) { active[j]=active[--az]; break; } } int maxH=0; for(int j=0;j<az;j++) maxH=max(maxH,active[j]); if(maxH!=lastH) { cout<<events[i][0]<<\",\"<<maxH<<\" \"; lastH=maxH; } } }\nint main() { int b[][3]={{2,9,10},{3,7,15},{5,12,12},{15,20,10},{19,24,8}}; getSkyline(b,5); return 0; }",
+        "explanation": {
+            "approach": "Line sweep with events.",
+            "analogy": "Track max height at each x.",
+            "steps": [
+                "Create start/end events",
+                "Sweep and track active heights"
+            ],
+            "complexity": "Time: O(n²), Space: O(n)"
+        }
+    },
+    {
+        "id": "hard32",
+        "title": "Smallest Range",
+        "description": "Range covering all lists.",
+        "difficulty": "HARD",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid smallestRange(int nums[][5], int k, int sizes[]) {}\nint main() { int nums[][5]={{4,10,15,24,26},{0,9,12,20},{5,18,22,30}}; int sizes[]={5,4,4}; smallestRange(nums,3,sizes); return 0; }",
+        "expectedOutput": "20-24",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid smallestRange(int nums[][5], int k, int sizes[]) { int idx[k]={}; int minR=0,maxR=1e9; while(true) { int mi=0,mx=0; for(int i=0;i<k;i++) { if(nums[i][idx[i]]<nums[mi][idx[mi]]) mi=i; if(nums[i][idx[i]]>nums[mx][idx[mx]]) mx=i; } if(nums[mx][idx[mx]]-nums[mi][idx[mi]]<maxR-minR) { minR=nums[mi][idx[mi]]; maxR=nums[mx][idx[mx]]; } idx[mi]++; if(idx[mi]>=sizes[mi]) break; } cout<<minR<<\"-\"<<maxR; }\nint main() { int nums[][5]={{4,10,15,24,26},{0,9,12,20},{5,18,22,30}}; int sizes[]={5,4,4}; smallestRange(nums,3,sizes); return 0; }",
+        "explanation": {
+            "approach": "Expand minimum pointer.",
+            "analogy": "Keep one from each list.",
+            "steps": [
+                "Track pointers to each list",
+                "Advance minimum each time"
+            ],
+            "complexity": "Time: O(n × k), Space: O(k)"
+        }
+    }
+]

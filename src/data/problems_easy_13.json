@@ -1,0 +1,182 @@
+[
+    {
+        "id": "e601",
+        "title": "Invert Binary Tree",
+        "description": "Mirror the tree.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* invertTree(Node* r) { return nullptr; }\nvoid pre(Node* r) { if(!r) return; cout<<r->v<<\" \"; pre(r->l); pre(r->r); }\nint main() { Node* r=new Node(4); r->l=new Node(2); r->r=new Node(7); r=invertTree(r); pre(r); return 0; }",
+        "expectedOutput": "4 7 2",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* invertTree(Node* r) { if(!r) return 0; Node* t=r->l; r->l=invertTree(r->r); r->r=invertTree(t); return r; }\nvoid pre(Node* r) { if(!r) return; cout<<r->v<<\" \"; pre(r->l); pre(r->r); }\nint main() { Node* r=new Node(4); r->l=new Node(2); r->r=new Node(7); r=invertTree(r); pre(r); return 0; }",
+        "explanation": {
+            "approach": "Swap children recursively.",
+            "steps": [
+                "Swap left and right",
+                "Recurse"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        }
+    },
+    {
+        "id": "e602",
+        "title": "Same Tree",
+        "description": "Check if identical.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nbool isSameTree(Node* p, Node* q) { return false; }\nint main() { Node* p=new Node(1); p->l=new Node(2); Node* q=new Node(1); q->l=new Node(2); cout<<isSameTree(p,q); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nbool isSameTree(Node* p, Node* q) { if(!p&&!q) return true; if(!p||!q) return false; return p->v==q->v && isSameTree(p->l,q->l) && isSameTree(p->r,q->r); }\nint main() { Node* p=new Node(1); p->l=new Node(2); Node* q=new Node(1); q->l=new Node(2); cout<<isSameTree(p,q); return 0; }",
+        "explanation": {
+            "approach": "Compare recursively.",
+            "steps": [
+                "Both null = same",
+                "Compare values and children"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        }
+    },
+    {
+        "id": "e603",
+        "title": "Merge Two Binary Trees",
+        "description": "Merge overlapping nodes.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* mergeTrees(Node* r1, Node* r2) { return nullptr; }\nvoid pre(Node* r) { if(!r) return; cout<<r->v<<\" \"; pre(r->l); pre(r->r); }\nint main() { Node* t1=new Node(1); t1->l=new Node(3); Node* t2=new Node(2); t2->l=new Node(1); t2->r=new Node(3); Node* m=mergeTrees(t1,t2); pre(m); return 0; }",
+        "expectedOutput": "3 4 3",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* mergeTrees(Node* r1, Node* r2) { if(!r1) return r2; if(!r2) return r1; r1->v+=r2->v; r1->l=mergeTrees(r1->l,r2->l); r1->r=mergeTrees(r1->r,r2->r); return r1; }\nvoid pre(Node* r) { if(!r) return; cout<<r->v<<\" \"; pre(r->l); pre(r->r); }\nint main() { Node* t1=new Node(1); t1->l=new Node(3); Node* t2=new Node(2); t2->l=new Node(1); t2->r=new Node(3); Node* m=mergeTrees(t1,t2); pre(m); return 0; }",
+        "explanation": {
+            "approach": "Add values, recurse.",
+            "steps": [
+                "Sum overlapping nodes",
+                "Recurse on children"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        }
+    },
+    {
+        "id": "e604",
+        "title": "Search in BST",
+        "description": "Find node in BST.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* searchBST(Node* r, int val) { return nullptr; }\nint main() { Node* r=new Node(4); r->l=new Node(2); r->r=new Node(7); Node* res=searchBST(r,2); cout<<(res?res->v:-1); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* searchBST(Node* r, int val) { if(!r||r->v==val) return r; return val<r->v?searchBST(r->l,val):searchBST(r->r,val); }\nint main() { Node* r=new Node(4); r->l=new Node(2); r->r=new Node(7); Node* res=searchBST(r,2); cout<<(res?res->v:-1); return 0; }",
+        "explanation": {
+            "approach": "BST property search.",
+            "steps": [
+                "If less go left",
+                "If more go right"
+            ],
+            "complexity": "Time: O(h), Space: O(h)"
+        }
+    },
+    {
+        "id": "e605",
+        "title": "Range Sum BST",
+        "description": "Sum values in range.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint rangeSumBST(Node* r, int lo, int hi) { return 0; }\nint main() { Node* r=new Node(10); r->l=new Node(5); r->r=new Node(15); r->l->l=new Node(3); r->l->r=new Node(7); cout<<rangeSumBST(r,7,15); return 0; }",
+        "expectedOutput": "32",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint rangeSumBST(Node* r, int lo, int hi) { if(!r) return 0; int s=0; if(r->v>=lo && r->v<=hi) s+=r->v; if(r->v>lo) s+=rangeSumBST(r->l,lo,hi); if(r->v<hi) s+=rangeSumBST(r->r,lo,hi); return s; }\nint main() { Node* r=new Node(10); r->l=new Node(5); r->r=new Node(15); r->l->l=new Node(3); r->l->r=new Node(7); cout<<rangeSumBST(r,7,15); return 0; }",
+        "explanation": {
+            "approach": "Prune using BST property.",
+            "steps": [
+                "Add if in range",
+                "Skip subtrees outside range"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        }
+    },
+    {
+        "id": "e606",
+        "title": "Minimum Depth Binary Tree",
+        "description": "Shortest path to leaf.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint minDepth(Node* r) { return 0; }\nint main() { Node* r=new Node(3); r->l=new Node(9); r->r=new Node(20); r->r->l=new Node(15); r->r->r=new Node(7); cout<<minDepth(r); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint minDepth(Node* r) { if(!r) return 0; if(!r->l) return 1+minDepth(r->r); if(!r->r) return 1+minDepth(r->l); return 1+min(minDepth(r->l),minDepth(r->r)); }\nint main() { Node* r=new Node(3); r->l=new Node(9); r->r=new Node(20); r->r->l=new Node(15); r->r->r=new Node(7); cout<<minDepth(r); return 0; }",
+        "explanation": {
+            "approach": "Handle single child case.",
+            "steps": [
+                "If one child null, go other way",
+                "Else take minimum"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        }
+    },
+    {
+        "id": "e607",
+        "title": "Count Complete Tree Nodes",
+        "description": "Count nodes efficiently.",
+        "difficulty": "MEDIUM",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint countNodes(Node* r) { return 0; }\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->l->l=new Node(4); r->l->r=new Node(5); r->r->l=new Node(6); cout<<countNodes(r); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint countNodes(Node* r) { if(!r) return 0; return 1+countNodes(r->l)+countNodes(r->r); }\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->l->l=new Node(4); r->l->r=new Node(5); r->r->l=new Node(6); cout<<countNodes(r); return 0; }",
+        "explanation": {
+            "approach": "Recursive count.",
+            "steps": [
+                "Count left + right + 1"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        }
+    },
+    {
+        "id": "e608",
+        "title": "Sum of Left Leaves",
+        "description": "Sum all left leaves.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint sumOfLeftLeaves(Node* r) { return 0; }\nint main() { Node* r=new Node(3); r->l=new Node(9); r->r=new Node(20); r->r->l=new Node(15); r->r->r=new Node(7); cout<<sumOfLeftLeaves(r); return 0; }",
+        "expectedOutput": "24",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint sumOfLeftLeaves(Node* r) { if(!r) return 0; int s=0; if(r->l && !r->l->l && !r->l->r) s+=r->l->v; s+=sumOfLeftLeaves(r->l)+sumOfLeftLeaves(r->r); return s; }\nint main() { Node* r=new Node(3); r->l=new Node(9); r->r=new Node(20); r->r->l=new Node(15); r->r->r=new Node(7); cout<<sumOfLeftLeaves(r); return 0; }",
+        "explanation": {
+            "approach": "Check if left child is leaf.",
+            "steps": [
+                "Add left leaf value",
+                "Recurse on children"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        }
+    },
+    {
+        "id": "e609",
+        "title": "Find Mode in BST",
+        "description": "Most frequent values.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid findMode(Node* r) {}\nint main() { Node* r=new Node(1); r->r=new Node(2); r->r->l=new Node(2); findMode(r); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint cnt[101]={};\nvoid inorder(Node* r) { if(!r) return; inorder(r->l); cnt[r->v]++; inorder(r->r); }\nvoid findMode(Node* r) { inorder(r); int mx=0; for(int i=0;i<101;i++) mx=max(mx,cnt[i]); for(int i=0;i<101;i++) if(cnt[i]==mx) cout<<i<<\" \"; }\nint main() { Node* r=new Node(1); r->r=new Node(2); r->r->l=new Node(2); findMode(r); return 0; }",
+        "explanation": {
+            "approach": "Count occurrences.",
+            "steps": [
+                "Inorder traversal",
+                "Find max frequency"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "e610",
+        "title": "Lowest Common Ancestor BST",
+        "description": "LCA in BST.",
+        "difficulty": "MEDIUM",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* lowestCommonAncestor(Node* r, Node* p, Node* q) { return nullptr; }\nint main() { Node* r=new Node(6); r->l=new Node(2); r->r=new Node(8); cout<<lowestCommonAncestor(r,r->l,r->r)->v; return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* lowestCommonAncestor(Node* r, Node* p, Node* q) { if(p->v<r->v && q->v<r->v) return lowestCommonAncestor(r->l,p,q); if(p->v>r->v && q->v>r->v) return lowestCommonAncestor(r->r,p,q); return r; }\nint main() { Node* r=new Node(6); r->l=new Node(2); r->r=new Node(8); cout<<lowestCommonAncestor(r,r->l,r->r)->v; return 0; }",
+        "explanation": {
+            "approach": "BST split point.",
+            "steps": [
+                "If both left, go left",
+                "If both right, go right",
+                "Else current is LCA"
+            ],
+            "complexity": "Time: O(h), Space: O(h)"
+        }
+    }
+]

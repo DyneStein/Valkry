@@ -1,0 +1,190 @@
+[
+    {
+        "id": "prac11",
+        "title": "Fahrenheit to Celsius",
+        "description": "Convert temperature.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble fToC(double f) { return 0; }\nint main() { cout<<fToC(98.6); return 0; }",
+        "expectedOutput": "37",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble fToC(double f) { return (f-32)*5/9; }\nint main() { cout<<(int)fToC(98.6); return 0; }",
+        "explanation": {
+            "approach": "C = (F-32) × 5/9.",
+            "analogy": "Temperature conversion formula.",
+            "steps": [
+                "Subtract 32",
+                "Multiply by 5/9"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac12",
+        "title": "Celsius to Fahrenheit",
+        "description": "Convert temperature.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble cToF(double c) { return 0; }\nint main() { cout<<cToF(37); return 0; }",
+        "expectedOutput": "98.6",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble cToF(double c) { return c*9/5+32; }\nint main() { cout<<cToF(37); return 0; }",
+        "explanation": {
+            "approach": "F = C × 9/5 + 32.",
+            "analogy": "Temperature conversion formula.",
+            "steps": [
+                "Multiply by 9/5",
+                "Add 32"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac13",
+        "title": "Simple Interest",
+        "description": "Calculate simple interest.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble simpleInterest(double p, double r, double t) { return 0; }\nint main() { cout<<simpleInterest(1000,5,2); return 0; }",
+        "expectedOutput": "100",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble simpleInterest(double p, double r, double t) { return p*r*t/100; }\nint main() { cout<<simpleInterest(1000,5,2); return 0; }",
+        "explanation": {
+            "approach": "SI = P × R × T / 100.",
+            "analogy": "Interest on principal.",
+            "steps": [
+                "Multiply principal, rate, time",
+                "Divide by 100"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac14",
+        "title": "Compound Interest",
+        "description": "Calculate compound interest.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble compoundInterest(double p, double r, int t) { return 0; }\nint main() { cout<<(int)compoundInterest(1000,10,2); return 0; }",
+        "expectedOutput": "210",
+        "solution": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble compoundInterest(double p, double r, int t) { return p*pow(1+r/100,t)-p; }\nint main() { cout<<(int)compoundInterest(1000,10,2); return 0; }",
+        "explanation": {
+            "approach": "CI = P × (1+r/100)^t - P.",
+            "analogy": "Interest on interest.",
+            "steps": [
+                "Calculate amount with compound",
+                "Subtract principal"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac15",
+        "title": "Area of Triangle",
+        "description": "Calculate triangle area.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble triangleArea(double b, double h) { return 0; }\nint main() { cout<<triangleArea(10,5); return 0; }",
+        "expectedOutput": "25",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble triangleArea(double b, double h) { return 0.5*b*h; }\nint main() { cout<<triangleArea(10,5); return 0; }",
+        "explanation": {
+            "approach": "A = 0.5 × base × height.",
+            "analogy": "Half of rectangle.",
+            "steps": [
+                "Multiply base and height",
+                "Divide by 2"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac16",
+        "title": "Volume of Cube",
+        "description": "Calculate cube volume.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint cubeVolume(int a) { return 0; }\nint main() { cout<<cubeVolume(3); return 0; }",
+        "expectedOutput": "27",
+        "solution": "#include <iostream>\nusing namespace std;\nint cubeVolume(int a) { return a*a*a; }\nint main() { cout<<cubeVolume(3); return 0; }",
+        "explanation": {
+            "approach": "V = a³.",
+            "analogy": "Side cubed.",
+            "steps": [
+                "Multiply side by itself 3 times"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac17",
+        "title": "Volume of Sphere",
+        "description": "Calculate sphere volume.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble sphereVolume(double r) { return 0; }\nint main() { cout<<fixed<<setprecision(2)<<sphereVolume(3); return 0; }",
+        "expectedOutput": "113.10",
+        "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble sphereVolume(double r) { return 4.0/3.0*3.14159*r*r*r; }\nint main() { cout<<fixed<<setprecision(2)<<sphereVolume(3); return 0; }",
+        "explanation": {
+            "approach": "V = 4/3 × π × r³.",
+            "analogy": "Sphere volume formula.",
+            "steps": [
+                "Multiply 4/3, π, and r³"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac18",
+        "title": "Perimeter of Rectangle",
+        "description": "Calculate rectangle perimeter.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint rectPerimeter(int l, int w) { return 0; }\nint main() { cout<<rectPerimeter(5,3); return 0; }",
+        "expectedOutput": "16",
+        "solution": "#include <iostream>\nusing namespace std;\nint rectPerimeter(int l, int w) { return 2*(l+w); }\nint main() { cout<<rectPerimeter(5,3); return 0; }",
+        "explanation": {
+            "approach": "P = 2 × (length + width).",
+            "analogy": "Sum of all sides.",
+            "steps": [
+                "Add length and width",
+                "Multiply by 2"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac19",
+        "title": "Hypotenuse",
+        "description": "Calculate hypotenuse.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble hypotenuse(double a, double b) { return 0; }\nint main() { cout<<hypotenuse(3,4); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble hypotenuse(double a, double b) { return sqrt(a*a+b*b); }\nint main() { cout<<hypotenuse(3,4); return 0; }",
+        "explanation": {
+            "approach": "c = √(a² + b²).",
+            "analogy": "Pythagorean theorem.",
+            "steps": [
+                "Square both sides",
+                "Sum and sqrt"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac20",
+        "title": "Print Multiplication Table",
+        "description": "Print table of n.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid multiTable(int n) {}\nint main() { multiTable(5); return 0; }",
+        "expectedOutput": "5 10 15 20 25 30 35 40 45 50",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid multiTable(int n) { for(int i=1;i<=10;i++) cout<<n*i<<\" \"; }\nint main() { multiTable(5); return 0; }",
+        "explanation": {
+            "approach": "Print n×i for i=1 to 10.",
+            "analogy": "Multiplication table.",
+            "steps": [
+                "Loop 1 to 10",
+                "Print n × i"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    }
+]

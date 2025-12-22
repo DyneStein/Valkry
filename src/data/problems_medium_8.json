@@ -1,0 +1,238 @@
+[
+    {
+        "id": "m201",
+        "title": "Unique Binary Search Trees",
+        "description": "Given an integer n, return the number of structurally unique BST's (binary search trees) which has exactly n nodes of unique values from 1 to n. This is the nth Catalan number.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint numTrees(int n) { return 0; }\nint main() { cout << numTrees(3); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint numTrees(int n) {\n    int dp[n + 1] = {};\n    dp[0] = dp[1] = 1;\n    \n    for(int nodes = 2; nodes <= n; nodes++) {\n        for(int root = 1; root <= nodes; root++) {\n            int leftNodes = root - 1;      // Nodes smaller than root\n            int rightNodes = nodes - root; // Nodes larger than root\n            dp[nodes] += dp[leftNodes] * dp[rightNodes];\n        }\n    }\n    return dp[n];\n}\nint main() { cout << numTrees(3); return 0; }",
+        "explanation": {
+            "approach": "Use dynamic programming. For n nodes, try each value as root. Left subtree uses smaller values, right uses larger. Total combinations = left_count × right_count.",
+            "analogy": "Like building all possible family trees - each person can be the 'root' parent, with younger family on left, older on right.",
+            "steps": [
+                "dp[i] = number of unique BSTs with i nodes",
+                "Base case: dp[0] = dp[1] = 1 (empty tree or single node)",
+                "For each count of nodes (2 to n)",
+                "Try each value as root (1 to nodes)",
+                "Left subtree has (root-1) nodes, right has (nodes-root) nodes",
+                "Add dp[left] × dp[right] to dp[nodes]"
+            ],
+            "complexity": "Time: O(n²), Space: O(n)"
+        }
+    },
+    {
+        "id": "m202",
+        "title": "Ugly Number II",
+        "description": "An ugly number is a positive integer whose prime factors are limited to 2, 3, and 5. Given integer n, return the nth ugly number. The sequence is: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12...",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint nthUglyNumber(int n) { return 0; }\nint main() { cout << nthUglyNumber(10); return 0; }",
+        "expectedOutput": "12",
+        "solution": "#include <iostream>\nusing namespace std;\nint nthUglyNumber(int n) {\n    int ugly[n];\n    ugly[0] = 1;\n    int i2 = 0, i3 = 0, i5 = 0;  // Pointers for multiplying by 2, 3, 5\n    \n    for(int i = 1; i < n; i++) {\n        int next2 = ugly[i2] * 2;\n        int next3 = ugly[i3] * 3;\n        int next5 = ugly[i5] * 5;\n        \n        ugly[i] = min(next2, min(next3, next5));\n        \n        // Advance pointers that contributed to this ugly number\n        if(ugly[i] == next2) i2++;\n        if(ugly[i] == next3) i3++;\n        if(ugly[i] == next5) i5++;\n    }\n    return ugly[n - 1];\n}\nint main() { cout << nthUglyNumber(10); return 0; }",
+        "explanation": {
+            "approach": "Use three pointers, one for each prime factor (2, 3, 5). Each ugly number is formed by multiplying a previous ugly number by 2, 3, or 5. Always pick the smallest candidate.",
+            "analogy": "Like three assembly lines producing ugly numbers - one multiplies by 2, one by 3, one by 5. Always take the smallest product from all lines.",
+            "steps": [
+                "Start with ugly[0] = 1",
+                "Maintain three pointers i2, i3, i5 starting at 0",
+                "Compute next candidates: ugly[i2]*2, ugly[i3]*3, ugly[i5]*5",
+                "Take the minimum as next ugly number",
+                "Advance pointer(s) that produced this minimum",
+                "Repeat until we have n ugly numbers"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "m203",
+        "title": "Count Numbers with Unique Digits",
+        "description": "Given an integer n, count all numbers with unique digits in the range [0, 10^n). For n=2, count all numbers from 0 to 99 with unique digits.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countNumbersWithUniqueDigits(int n) { return 0; }\nint main() { cout << countNumbersWithUniqueDigits(2); return 0; }",
+        "expectedOutput": "91",
+        "solution": "#include <iostream>\nusing namespace std;\nint countNumbersWithUniqueDigits(int n) {\n    if(n == 0) return 1;\n    \n    int result = 10;  // For n=1, we have 0-9\n    int uniqueDigits = 9;  // First digit choices (can't be 0)\n    int availableDigits = 9;  // Remaining digit choices\n    \n    for(int i = 2; i <= n && availableDigits > 0; i++) {\n        uniqueDigits *= availableDigits;\n        result += uniqueDigits;\n        availableDigits--;\n    }\n    return result;\n}\nint main() { cout << countNumbersWithUniqueDigits(2); return 0; }",
+        "explanation": {
+            "approach": "Combinatorics approach. For each digit position, count how many choices remain. First digit has 9 choices (no 0), each subsequent has one fewer.",
+            "analogy": "Like choosing seats in a theater - first person has many choices, each next person has one fewer seat available.",
+            "steps": [
+                "For n=0: only 1 number (0)",
+                "For n=1: 10 numbers (0-9)",
+                "For 2-digit: first digit 9 choices (1-9), second digit 9 choices (0-9 except first)",
+                "For 3-digit: 9 × 9 × 8 new numbers",
+                "Pattern: 9 × 9 × 8 × 7 × ... until we run out of available digits",
+                "Sum all counts"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "m204",
+        "title": "Frequency of Most Frequent Element",
+        "description": "Given an array of integers and a number k, you can increment any element at most k times total. Return the maximum possible frequency of any element after performing at most k increments.",
+        "difficulty": "MEDIUM",
+        "category": "Sliding Window",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint maxFrequency(int nums[], int n, int k) { return 0; }\nint main() { int nu[] = {1, 2, 4}; cout << maxFrequency(nu, 3, 5); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint maxFrequency(int nums[], int n, int k) {\n    // Sort the array first\n    for(int i = 0; i < n - 1; i++) {\n        for(int j = 0; j < n - i - 1; j++) {\n            if(nums[j] > nums[j + 1]) {\n                int temp = nums[j];\n                nums[j] = nums[j + 1];\n                nums[j + 1] = temp;\n            }\n        }\n    }\n    \n    long long sum = 0;\n    int left = 0, maxFreq = 1;\n    \n    for(int right = 0; right < n; right++) {\n        sum += nums[right];\n        \n        // Check if we can make all elements in window equal to nums[right]\n        // Cost = nums[right] * windowSize - sum\n        while((long long)nums[right] * (right - left + 1) - sum > k) {\n            sum -= nums[left];\n            left++;\n        }\n        \n        maxFreq = max(maxFreq, right - left + 1);\n    }\n    return maxFreq;\n}\nint main() { int nu[] = {1, 2, 4}; cout << maxFrequency(nu, 3, 5); return 0; }",
+        "explanation": {
+            "approach": "Sort the array then use sliding window. For any window, the cost to make all elements equal to the maximum (rightmost) is: max × windowSize - sumOfWindow. If cost > k, shrink window.",
+            "analogy": "Like a team trying to reach the same level - the strongest person sets the target, and we need to 'spend' energy to lift others up. We want the biggest team we can afford to lift.",
+            "steps": [
+                "Sort array so we can easily find max in window",
+                "Use sliding window with left and right pointers",
+                "Track sum of elements in window",
+                "Target = nums[right] (max in sorted window)",
+                "Cost = target × windowSize - sum",
+                "If cost > k, shrink window from left",
+                "Track maximum window size"
+            ],
+            "complexity": "Time: O(n log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "m205",
+        "title": "Maximum Erasure Value",
+        "description": "Given an array of positive integers, find the maximum sum of a subarray where all elements are unique (no duplicates in the subarray).",
+        "difficulty": "MEDIUM",
+        "category": "Sliding Window",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint maximumUniqueSubarray(int nums[], int n) { return 0; }\nint main() { int nu[] = {4, 2, 4, 5, 6}; cout << maximumUniqueSubarray(nu, 5); return 0; }",
+        "expectedOutput": "17",
+        "solution": "#include <iostream>\nusing namespace std;\nint maximumUniqueSubarray(int nums[], int n) {\n    bool seen[10001] = {};  // Track seen elements\n    int left = 0, sum = 0, maxSum = 0;\n    \n    for(int right = 0; right < n; right++) {\n        // Shrink window while current element is duplicate\n        while(seen[nums[right]]) {\n            seen[nums[left]] = false;\n            sum -= nums[left];\n            left++;\n        }\n        \n        // Add current element to window\n        seen[nums[right]] = true;\n        sum += nums[right];\n        maxSum = max(maxSum, sum);\n    }\n    return maxSum;\n}\nint main() { int nu[] = {4, 2, 4, 5, 6}; cout << maximumUniqueSubarray(nu, 5); return 0; }",
+        "explanation": {
+            "approach": "Sliding window with a set to track unique elements. When we see a duplicate, shrink window from left until the duplicate is removed. Track maximum sum.",
+            "analogy": "Like collecting unique stamps - keep adding stamps until you find a duplicate, then give away stamps from the start until no duplicates remain.",
+            "steps": [
+                "Use sliding window with left and right pointers",
+                "Track seen elements using boolean array or set",
+                "Track current window sum",
+                "For each right element:",
+                "  - If duplicate found, shrink window until it's gone",
+                "  - Add element to window and sum",
+                "  - Update max sum if current is larger"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "m206",
+        "title": "Container With Most Water",
+        "description": "Given n non-negative integers representing n vertical lines, find two lines that together with the x-axis form a container with the most water. Return the maximum amount of water a container can store.",
+        "difficulty": "MEDIUM",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint maxArea(int height[], int n) { return 0; }\nint main() { int h[] = {1, 8, 6, 2, 5, 4, 8, 3, 7}; cout << maxArea(h, 9); return 0; }",
+        "expectedOutput": "49",
+        "solution": "#include <iostream>\nusing namespace std;\nint maxArea(int height[], int n) {\n    int left = 0, right = n - 1;\n    int maxWater = 0;\n    \n    while(left < right) {\n        int h = min(height[left], height[right]);\n        int width = right - left;\n        int water = h * width;\n        maxWater = max(maxWater, water);\n        \n        // Move the shorter line inward\n        if(height[left] < height[right]) {\n            left++;\n        } else {\n            right--;\n        }\n    }\n    return maxWater;\n}\nint main() { int h[] = {1, 8, 6, 2, 5, 4, 8, 3, 7}; cout << maxArea(h, 9); return 0; }",
+        "explanation": {
+            "approach": "Use two pointers at both ends. Water = min(left_height, right_height) × width. Move the shorter line inward because only a taller line can potentially increase water.",
+            "analogy": "Like filling a pool between two walls - water level is limited by the shorter wall. Moving the shorter wall gives us hope of finding a taller one.",
+            "steps": [
+                "Start with left at 0, right at n-1 (widest possible)",
+                "Calculate water: min(heights) × width",
+                "Update maximum if current is larger",
+                "Move the shorter line inward",
+                "Why? Moving shorter gives chance for more height",
+                "Continue until pointers meet"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "m207",
+        "title": "3Sum",
+        "description": "Given an array of integers, find all unique triplets that sum to zero. The solution set must not contain duplicate triplets.",
+        "difficulty": "MEDIUM",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint threeSum(int nums[], int n) { return 0; }\nint main() { int nu[] = {-1, 0, 1, 2, -1, -4}; cout << threeSum(nu, 6); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint threeSum(int nums[], int n) {\n    // Sort the array\n    for(int i = 0; i < n - 1; i++) {\n        for(int j = 0; j < n - i - 1; j++) {\n            if(nums[j] > nums[j + 1]) {\n                int temp = nums[j];\n                nums[j] = nums[j + 1];\n                nums[j + 1] = temp;\n            }\n        }\n    }\n    \n    int count = 0;\n    for(int i = 0; i < n - 2; i++) {\n        // Skip duplicates for i\n        if(i > 0 && nums[i] == nums[i - 1]) continue;\n        \n        int left = i + 1, right = n - 1;\n        while(left < right) {\n            int sum = nums[i] + nums[left] + nums[right];\n            if(sum == 0) {\n                count++;\n                // Skip duplicates\n                while(left < right && nums[left] == nums[left + 1]) left++;\n                while(left < right && nums[right] == nums[right - 1]) right--;\n                left++;\n                right--;\n            } else if(sum < 0) {\n                left++;\n            } else {\n                right--;\n            }\n        }\n    }\n    return count;\n}\nint main() { int nu[] = {-1, 0, 1, 2, -1, -4}; cout << threeSum(nu, 6); return 0; }",
+        "explanation": {
+            "approach": "Sort the array. Fix one element, then use two pointers to find the other two. Skip duplicates to avoid repeating triplets.",
+            "analogy": "Like balancing a scale - fix one weight on one side, then find two weights on the other side that balance it (sum to negative of first).",
+            "steps": [
+                "Sort the array",
+                "For each element i (first of triplet):",
+                "  - Skip if duplicate of previous",
+                "  - Use two pointers (left=i+1, right=n-1)",
+                "  - If sum < 0, move left right (need bigger sum)",
+                "  - If sum > 0, move right left (need smaller sum)",
+                "  - If sum = 0, found triplet! Skip duplicates and continue"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "m208",
+        "title": "3Sum Closest",
+        "description": "Given an array of integers and a target value, find the sum of three integers closest to the target. Return the sum.",
+        "difficulty": "MEDIUM",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint threeSumClosest(int nums[], int n, int target) { return 0; }\nint main() { int nu[] = {-1, 2, 1, -4}; cout << threeSumClosest(nu, 4, 1); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint threeSumClosest(int nums[], int n, int target) {\n    // Sort array\n    for(int i = 0; i < n - 1; i++) {\n        for(int j = 0; j < n - i - 1; j++) {\n            if(nums[j] > nums[j + 1]) {\n                int temp = nums[j];\n                nums[j] = nums[j + 1];\n                nums[j + 1] = temp;\n            }\n        }\n    }\n    \n    int closest = nums[0] + nums[1] + nums[2];\n    \n    for(int i = 0; i < n - 2; i++) {\n        int left = i + 1, right = n - 1;\n        while(left < right) {\n            int sum = nums[i] + nums[left] + nums[right];\n            \n            if(abs(sum - target) < abs(closest - target)) {\n                closest = sum;\n            }\n            \n            if(sum < target) {\n                left++;\n            } else {\n                right--;\n            }\n        }\n    }\n    return closest;\n}\nint main() { int nu[] = {-1, 2, 1, -4}; cout << threeSumClosest(nu, 4, 1); return 0; }",
+        "explanation": {
+            "approach": "Similar to 3Sum, but instead of finding exact zero sum, track the sum closest to target. Move pointers based on whether current sum is less or more than target.",
+            "analogy": "Like playing darts - trying to get as close to the bullseye (target) as possible. Keep track of your best throw.",
+            "steps": [
+                "Sort the array",
+                "Initialize closest with first triplet's sum",
+                "For each element i:",
+                "  - Use two pointers left and right",
+                "  - Calculate sum of triplet",
+                "  - Update closest if this sum is closer to target",
+                "  - Move left right if sum < target (need bigger)",
+                "  - Move right left if sum > target (need smaller)"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "m209",
+        "title": "Sort Colors",
+        "description": "Given an array of 0s, 1s, and 2s, sort them in-place so that objects of the same color are adjacent in order (0s, then 1s, then 2s). This is the Dutch National Flag problem.",
+        "difficulty": "MEDIUM",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid sortColors(int nums[], int n) {}\nint main() { int nu[] = {2, 0, 2, 1, 1, 0}; sortColors(nu, 6); for(int i = 0; i < 6; i++) cout << nu[i] << \" \"; return 0; }",
+        "expectedOutput": "0 0 1 1 2 2",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid sortColors(int nums[], int n) {\n    int low = 0, mid = 0, high = n - 1;\n    \n    while(mid <= high) {\n        if(nums[mid] == 0) {\n            // Swap with low, move both forward\n            int temp = nums[low];\n            nums[low] = nums[mid];\n            nums[mid] = temp;\n            low++;\n            mid++;\n        } else if(nums[mid] == 1) {\n            // 1 is in right place, just move mid\n            mid++;\n        } else {\n            // nums[mid] == 2, swap with high\n            int temp = nums[mid];\n            nums[mid] = nums[high];\n            nums[high] = temp;\n            high--;\n            // Don't increment mid - need to check swapped element\n        }\n    }\n}\nint main() { int nu[] = {2, 0, 2, 1, 1, 0}; sortColors(nu, 6); for(int i = 0; i < 6; i++) cout << nu[i] << \" \"; return 0; }",
+        "explanation": {
+            "approach": "Use three pointers: low (boundary for 0s), mid (current element), high (boundary for 2s). Partition array so 0s go left, 2s go right, 1s stay in middle.",
+            "analogy": "Like sorting laundry into three piles - whites (0) go left, grays (1) in middle, darks (2) go right. One pass through the pile.",
+            "steps": [
+                "low = 0 (everything before low is 0)",
+                "high = n-1 (everything after high is 2)",
+                "mid = 0 (current element being examined)",
+                "If nums[mid] == 0: swap with low, move low and mid forward",
+                "If nums[mid] == 1: just move mid forward",
+                "If nums[mid] == 2: swap with high, move high backward",
+                "Continue until mid passes high"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "m210",
+        "title": "Minimum Size Subarray Sum",
+        "description": "Given an array of positive integers and a target sum, find the minimal length of a contiguous subarray whose sum is greater than or equal to target. Return 0 if no such subarray exists.",
+        "difficulty": "MEDIUM",
+        "category": "Sliding Window",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint minSubArrayLen(int target, int nums[], int n) { return 0; }\nint main() { int nu[] = {2, 3, 1, 2, 4, 3}; cout << minSubArrayLen(7, nu, 6); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint minSubArrayLen(int target, int nums[], int n) {\n    int left = 0, sum = 0;\n    int minLen = n + 1;  // Start with impossible length\n    \n    for(int right = 0; right < n; right++) {\n        sum += nums[right];\n        \n        // Try to minimize window while sum >= target\n        while(sum >= target) {\n            minLen = min(minLen, right - left + 1);\n            sum -= nums[left];\n            left++;\n        }\n    }\n    \n    return minLen > n ? 0 : minLen;\n}\nint main() { int nu[] = {2, 3, 1, 2, 4, 3}; cout << minSubArrayLen(7, nu, 6); return 0; }",
+        "explanation": {
+            "approach": "Use sliding window. Expand right to add elements until sum >= target. Then shrink from left while maintaining sum >= target, tracking minimum length.",
+            "analogy": "Like finding the shortest distance you can walk while collecting at least $10. Start walking, and once you have $10, see if you can start from further along.",
+            "steps": [
+                "Expand window by adding right element to sum",
+                "While sum >= target:",
+                "  - Update minimum length if current is smaller",
+                "  - Try removing left element (shrink window)",
+                "  - If still >= target, continue shrinking",
+                "Return minimum length (or 0 if not found)"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    }
+]

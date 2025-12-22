@@ -1,0 +1,486 @@
+[
+    {
+        "id": "fun51",
+        "title": "Sum of Squares 1 to N",
+        "description": "Formula: n(n+1)(2n+1)/6.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumSquares(int n) { return 0; }\nint main() { cout<<sumSquares(5); return 0; }",
+        "expectedOutput": "55",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumSquares(int n) {\n    return n * (n + 1) * (2 * n + 1) / 6;\n}\nint main() { cout<<sumSquares(5); return 0; }",
+        "explanation": {
+            "approach": "Formula: n(n+1)(2n+1)/6 gives 1² + 2² + 3² + ... + n²",
+            "analogy": "Like stacking squares - there's a magic formula for the total.",
+            "steps": [
+                "Apply formula: n(n+1)(2n+1)/6"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun52",
+        "title": "Sum of Cubes 1 to N",
+        "description": "Formula: (n(n+1)/2)².",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumCubes(int n) { return 0; }\nint main() { cout<<sumCubes(5); return 0; }",
+        "expectedOutput": "225",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumCubes(int n) {\n    int sum = n * (n + 1) / 2;\n    return sum * sum;\n}\nint main() { cout<<sumCubes(5); return 0; }",
+        "explanation": {
+            "approach": "Formula: (n(n+1)/2)² = (sum of 1 to n)²",
+            "analogy": "Amazing: 1³+2³+3³+...+n³ = (1+2+3+...+n)²",
+            "steps": [
+                "Calculate sum 1 to n",
+                "Square it"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun53",
+        "title": "Print Odd Numbers",
+        "description": "Print odd 1 to N.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid printOdd(int n) {}\nint main() { printOdd(10); return 0; }",
+        "expectedOutput": "1 3 5 7 9",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid printOdd(int n) {\n    for(int i = 1; i <= n; i += 2)\n        cout << i << (i + 2 <= n ? \" \" : \"\");\n}\nint main() { printOdd(10); return 0; }",
+        "explanation": {
+            "approach": "Start from 1, increment by 2 each time.",
+            "analogy": "Skip every other number starting from 1.",
+            "steps": [
+                "Start at 1",
+                "Add 2 each step",
+                "Stop when > n"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun54",
+        "title": "Print Even Numbers",
+        "description": "Print even 1 to N.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid printEven(int n) {}\nint main() { printEven(10); return 0; }",
+        "expectedOutput": "2 4 6 8 10",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid printEven(int n) {\n    for(int i = 2; i <= n; i += 2)\n        cout << i << (i + 2 <= n ? \" \" : \"\");\n}\nint main() { printEven(10); return 0; }",
+        "explanation": {
+            "approach": "Start from 2, increment by 2.",
+            "analogy": "Skip every other number starting from 2.",
+            "steps": [
+                "Start at 2",
+                "Add 2 each step",
+                "Stop when > n"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun55",
+        "title": "Sum of Even 1 to N",
+        "description": "Sum of even numbers.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumEven(int n) { return 0; }\nint main() { cout<<sumEven(10); return 0; }",
+        "expectedOutput": "30",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumEven(int n) {\n    int sum = 0;\n    for(int i = 2; i <= n; i += 2) sum += i;\n    return sum;\n}\nint main() { cout<<sumEven(10); return 0; }",
+        "explanation": {
+            "approach": "Add all even numbers from 2 to n.",
+            "analogy": "2+4+6+8+10 = 30",
+            "steps": [
+                "Loop through even numbers",
+                "Add each to sum"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun56",
+        "title": "Sum of Odd 1 to N",
+        "description": "Sum of odd numbers.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumOdd(int n) { return 0; }\nint main() { cout<<sumOdd(10); return 0; }",
+        "expectedOutput": "25",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumOdd(int n) {\n    int sum = 0;\n    for(int i = 1; i <= n; i += 2) sum += i;\n    return sum;\n}\nint main() { cout<<sumOdd(10); return 0; }",
+        "explanation": {
+            "approach": "Add all odd numbers from 1 to n.",
+            "analogy": "1+3+5+7+9 = 25",
+            "steps": [
+                "Loop through odd numbers",
+                "Add each to sum"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun57",
+        "title": "Product of Digits",
+        "description": "Multiply all digits.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint productDigits(int n) { return 0; }\nint main() { cout<<productDigits(234); return 0; }",
+        "expectedOutput": "24",
+        "solution": "#include <iostream>\nusing namespace std;\nint productDigits(int n) {\n    int prod = 1;\n    while(n > 0) {\n        prod *= n % 10;\n        n /= 10;\n    }\n    return prod;\n}\nint main() { cout<<productDigits(234); return 0; }",
+        "explanation": {
+            "approach": "Extract each digit and multiply together.",
+            "analogy": "234 → 2×3×4 = 24",
+            "steps": [
+                "Get last digit",
+                "Multiply to product",
+                "Remove last digit",
+                "Repeat"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun58",
+        "title": "First Digit",
+        "description": "Get first digit.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint firstDigit(int n) { return 0; }\nint main() { cout<<firstDigit(12345); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint firstDigit(int n) {\n    while(n >= 10) n /= 10;\n    return n;\n}\nint main() { cout<<firstDigit(12345); return 0; }",
+        "explanation": {
+            "approach": "Keep dividing by 10 until single digit.",
+            "analogy": "12345 → 1234 → 123 → 12 → 1",
+            "steps": [
+                "Divide by 10 repeatedly",
+                "Until n < 10"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun59",
+        "title": "Last Digit",
+        "description": "Get last digit.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint lastDigit(int n) { return 0; }\nint main() { cout<<lastDigit(12345); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint lastDigit(int n) {\n    return n % 10;\n}\nint main() { cout<<lastDigit(12345); return 0; }",
+        "explanation": {
+            "approach": "Modulo 10 gives last digit.",
+            "analogy": "12345 % 10 = 5",
+            "steps": [
+                "Return n % 10"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun60",
+        "title": "Sum First and Last",
+        "description": "Sum of first and last digit.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumFirstLast(int n) { return 0; }\nint main() { cout<<sumFirstLast(12345); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumFirstLast(int n) {\n    int last = n % 10;\n    while(n >= 10) n /= 10;\n    return n + last;\n}\nint main() { cout<<sumFirstLast(12345); return 0; }",
+        "explanation": {
+            "approach": "Get last digit, then find first digit, add them.",
+            "analogy": "12345 → 1 + 5 = 6",
+            "steps": [
+                "Get last digit (n%10)",
+                "Find first digit",
+                "Add them"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun61",
+        "title": "Swap First and Last Digit",
+        "description": "Swap first and last.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint swapFirstLast(int n) { return 0; }\nint main() { cout<<swapFirstLast(12345); return 0; }",
+        "expectedOutput": "52341",
+        "solution": "#include <iostream>\nusing namespace std;\nint swapFirstLast(int n) {\n    int digits = 0, temp = n;\n    while(temp > 0) { digits++; temp /= 10; }\n    int first = n, mult = 1;\n    while(first >= 10) { first /= 10; mult *= 10; }\n    int last = n % 10;\n    return n - first * mult - last + last * mult + first;\n}\nint main() { cout<<swapFirstLast(12345); return 0; }",
+        "explanation": {
+            "approach": "Calculate positions, swap mathematically.",
+            "analogy": "12345 → swap 1 and 5 → 52341",
+            "steps": [
+                "Find first and last digits",
+                "Calculate their positions",
+                "Swap using math"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun62",
+        "title": "Remove First Digit",
+        "description": "Number without first digit.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint removeFirst(int n) { return 0; }\nint main() { cout<<removeFirst(12345); return 0; }",
+        "expectedOutput": "2345",
+        "solution": "#include <iostream>\nusing namespace std;\nint removeFirst(int n) {\n    int mult = 1, temp = n;\n    while(temp >= 10) { mult *= 10; temp /= 10; }\n    return n % mult;\n}\nint main() { cout<<removeFirst(12345); return 0; }",
+        "explanation": {
+            "approach": "Use modulo to remove first digit.",
+            "analogy": "12345 % 10000 = 2345",
+            "steps": [
+                "Find power of 10 equal to first digit position",
+                "Modulo by that"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun63",
+        "title": "Remove Last Digit",
+        "description": "Number without last digit.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint removeLast(int n) { return 0; }\nint main() { cout<<removeLast(12345); return 0; }",
+        "expectedOutput": "1234",
+        "solution": "#include <iostream>\nusing namespace std;\nint removeLast(int n) {\n    return n / 10;\n}\nint main() { cout<<removeLast(12345); return 0; }",
+        "explanation": {
+            "approach": "Integer division by 10.",
+            "analogy": "12345 / 10 = 1234",
+            "steps": [
+                "Divide by 10"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun64",
+        "title": "Rotate Left Once",
+        "description": "Move first digit to end.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint rotateLeft(int n) { return 0; }\nint main() { cout<<rotateLeft(12345); return 0; }",
+        "expectedOutput": "23451",
+        "solution": "#include <iostream>\nusing namespace std;\nint rotateLeft(int n) {\n    int mult = 1, temp = n;\n    while(temp >= 10) { mult *= 10; temp /= 10; }\n    return (n % mult) * 10 + temp;\n}\nint main() { cout<<rotateLeft(12345); return 0; }",
+        "explanation": {
+            "approach": "Remove first digit, append it at end.",
+            "analogy": "12345 → 2345 × 10 + 1 = 23451",
+            "steps": [
+                "Find first digit",
+                "Remove it",
+                "Append to end"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun65",
+        "title": "Rotate Right Once",
+        "description": "Move last digit to start.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint rotateRight(int n) { return 0; }\nint main() { cout<<rotateRight(12345); return 0; }",
+        "expectedOutput": "51234",
+        "solution": "#include <iostream>\nusing namespace std;\nint rotateRight(int n) {\n    int last = n % 10;\n    int mult = 1, temp = n;\n    while(temp >= 10) { mult *= 10; temp /= 10; }\n    return last * mult + n / 10;\n}\nint main() { cout<<rotateRight(12345); return 0; }",
+        "explanation": {
+            "approach": "Remove last digit, prepend it at start.",
+            "analogy": "12345 → 5 × 10000 + 1234 = 51234",
+            "steps": [
+                "Get last digit",
+                "Remove it",
+                "Prepend at start"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun66",
+        "title": "Neon Number",
+        "description": "Sum of digits of square = n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isNeon(int n) { return false; }\nint main() { cout<<isNeon(9); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isNeon(int n) {\n    int sq = n * n, sum = 0;\n    while(sq > 0) { sum += sq % 10; sq /= 10; }\n    return sum == n;\n}\nint main() { cout<<isNeon(9); return 0; }",
+        "explanation": {
+            "approach": "Square n, sum its digits, check if equals n.",
+            "analogy": "9² = 81, 8+1 = 9 ✓",
+            "steps": [
+                "Calculate n²",
+                "Sum digits of square",
+                "Check if equals n"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun67",
+        "title": "Spy Number",
+        "description": "Sum of digits = product.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isSpy(int n) { return false; }\nint main() { cout<<isSpy(1124); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isSpy(int n) {\n    int sum = 0, prod = 1;\n    while(n > 0) {\n        int d = n % 10;\n        sum += d; prod *= d;\n        n /= 10;\n    }\n    return sum == prod;\n}\nint main() { cout<<isSpy(1124); return 0; }",
+        "explanation": {
+            "approach": "Calculate sum and product of digits, compare.",
+            "analogy": "1124: sum=1+1+2+4=8, prod=1×1×2×4=8 ✓",
+            "steps": [
+                "Calculate sum of digits",
+                "Calculate product of digits",
+                "Check if equal"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun68",
+        "title": "Automorphic Number",
+        "description": "Square ends with n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isAutomorphic(int n) { return false; }\nint main() { cout<<isAutomorphic(25); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isAutomorphic(int n) {\n    int sq = n * n, mult = 1;\n    int temp = n;\n    while(temp > 0) { mult *= 10; temp /= 10; }\n    return sq % mult == n;\n}\nint main() { cout<<isAutomorphic(25); return 0; }",
+        "explanation": {
+            "approach": "Check if n² ends with n.",
+            "analogy": "25² = 625, ends with 25 ✓",
+            "steps": [
+                "Calculate n²",
+                "Check if last digits equal n"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun69",
+        "title": "Duck Number",
+        "description": "Has zero but not at start.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isDuck(int n) { return false; }\nint main() { cout<<isDuck(1023); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isDuck(int n) {\n    while(n > 0) {\n        if(n % 10 == 0 && n >= 10) return true;\n        n /= 10;\n    }\n    return false;\n}\nint main() { cout<<isDuck(1023); return 0; }",
+        "explanation": {
+            "approach": "Check if 0 appears (not at start).",
+            "analogy": "1023 has 0 not at start ✓",
+            "steps": [
+                "Check each digit",
+                "If 0 found (not first), it's duck"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun70",
+        "title": "Buzz Number",
+        "description": "Ends in 7 or divisible by 7.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isBuzz(int n) { return false; }\nint main() { cout<<isBuzz(14); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isBuzz(int n) {\n    return n % 10 == 7 || n % 7 == 0;\n}\nint main() { cout<<isBuzz(14); return 0; }",
+        "explanation": {
+            "approach": "Check if ends in 7 OR divisible by 7.",
+            "analogy": "14 is divisible by 7 ✓, 27 ends in 7 ✓",
+            "steps": [
+                "Check if n % 10 == 7",
+                "OR check if n % 7 == 0"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun71",
+        "title": "Harshad Number",
+        "description": "Divisible by sum of digits.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isHarshad(int n) { return false; }\nint main() { cout<<isHarshad(18); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isHarshad(int n) {\n    int sum = 0, temp = n;\n    while(temp > 0) { sum += temp % 10; temp /= 10; }\n    return n % sum == 0;\n}\nint main() { cout<<isHarshad(18); return 0; }",
+        "explanation": {
+            "approach": "Find digit sum, check if n divisible by it.",
+            "analogy": "18: sum=1+8=9, 18÷9=2 ✓",
+            "steps": [
+                "Calculate digit sum",
+                "Check if n % sum == 0"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun72",
+        "title": "Pronic Number",
+        "description": "Product of consecutive ints.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPronic(int n) { return false; }\nint main() { cout<<isPronic(12); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPronic(int n) {\n    for(int i = 0; i * i <= n; i++)\n        if(i * (i + 1) == n) return true;\n    return false;\n}\nint main() { cout<<isPronic(12); return 0; }",
+        "explanation": {
+            "approach": "Check if n = k × (k+1) for some k.",
+            "analogy": "12 = 3 × 4 ✓",
+            "steps": [
+                "Try each k",
+                "Check if k × (k+1) = n"
+            ],
+            "complexity": "Time: O(√n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun73",
+        "title": "Happy Number",
+        "description": "Sum of digit squares reaches 1.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isHappy(int n) { return false; }\nint main() { cout<<isHappy(19); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumSq(int n) { int s=0; while(n>0){int d=n%10; s+=d*d; n/=10;} return s; }\nbool isHappy(int n) {\n    int slow = n, fast = n;\n    do { slow = sumSq(slow); fast = sumSq(sumSq(fast)); } while(slow != fast);\n    return slow == 1;\n}\nint main() { cout<<isHappy(19); return 0; }",
+        "explanation": {
+            "approach": "Keep replacing n with sum of digit squares. If reaches 1, it's happy.",
+            "analogy": "19→82→68→100→1 ✓ Happy!",
+            "steps": [
+                "Replace n with sum of digit²",
+                "Repeat until 1 or cycle",
+                "1 means happy"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun74",
+        "title": "Sad Number",
+        "description": "Not a happy number.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isSad(int n) { return false; }\nint main() { cout<<isSad(4); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumSq(int n) { int s=0; while(n>0){int d=n%10; s+=d*d; n/=10;} return s; }\nbool isSad(int n) {\n    int slow = n, fast = n;\n    do { slow = sumSq(slow); fast = sumSq(sumSq(fast)); } while(slow != fast);\n    return slow != 1;\n}\nint main() { cout<<isSad(4); return 0; }",
+        "explanation": {
+            "approach": "Not a happy number - gets stuck in a cycle.",
+            "analogy": "4→16→37→58→89→145→42→20→4 (cycle, never reaches 1)",
+            "steps": [
+                "Same as happy",
+                "But return true if NOT 1"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fun75",
+        "title": "Abundant Number",
+        "description": "Sum of divisors > n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isAbundant(int n) { return false; }\nint main() { cout<<isAbundant(12); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isAbundant(int n) {\n    int sum = 0;\n    for(int i = 1; i < n; i++)\n        if(n % i == 0) sum += i;\n    return sum > n;\n}\nint main() { cout<<isAbundant(12); return 0; }",
+        "explanation": {
+            "approach": "Sum proper divisors, check if > n.",
+            "analogy": "12: divisors 1+2+3+4+6=16 > 12 ✓",
+            "steps": [
+                "Find all divisors except n",
+                "Sum them",
+                "Check if sum > n"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    }
+]

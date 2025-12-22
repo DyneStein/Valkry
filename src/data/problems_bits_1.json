@@ -1,0 +1,233 @@
+[
+    {
+        "id": "bit1",
+        "title": "Check if Even",
+        "description": "Using bit operation.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isEven(int n) { return false; }\nint main() { cout<<isEven(10); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isEven(int n) { return (n & 1) == 0; }\nint main() { cout<<isEven(10); return 0; }",
+        "explanation": {
+            "approach": "Last bit is 0 for even numbers.",
+            "analogy": "In binary, even numbers always end in 0.",
+            "steps": [
+                "AND with 1",
+                "If result is 0, it's even"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "bit2",
+        "title": "Check if Odd",
+        "description": "Using bit operation.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isOdd(int n) { return false; }\nint main() { cout<<isOdd(7); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isOdd(int n) { return (n & 1) == 1; }\nint main() { cout<<isOdd(7); return 0; }",
+        "explanation": {
+            "approach": "Last bit is 1 for odd numbers.",
+            "analogy": "In binary, odd numbers end in 1.",
+            "steps": [
+                "AND with 1",
+                "If result is 1, it's odd"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "bit3",
+        "title": "Count Set Bits",
+        "description": "Count 1s in binary.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countSetBits(int n) { return 0; }\nint main() { cout<<countSetBits(13); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint countSetBits(int n) { int c = 0; while(n) { c += n & 1; n >>= 1; } return c; }\nint main() { cout<<countSetBits(13); return 0; }",
+        "explanation": {
+            "approach": "Check last bit, shift right, repeat.",
+            "analogy": "13 = 1101 in binary, has three 1s.",
+            "steps": [
+                "Check last bit",
+                "Shift right",
+                "Count 1s"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "bit4",
+        "title": "Check Power of 2",
+        "description": "Is number power of 2.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPowerOf2(int n) { return false; }\nint main() { cout<<isPowerOf2(16); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPowerOf2(int n) { return n > 0 && (n & (n-1)) == 0; }\nint main() { cout<<isPowerOf2(16); return 0; }",
+        "explanation": {
+            "approach": "Power of 2 has exactly one 1 bit.",
+            "analogy": "16 = 10000, 16-1 = 01111, AND = 00000",
+            "steps": [
+                "n & (n-1) removes lowest set bit",
+                "If result is 0, only one bit was set"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "bit5",
+        "title": "Toggle Kth Bit",
+        "description": "Flip the kth bit.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint toggleBit(int n, int k) { return 0; }\nint main() { cout<<toggleBit(13,1); return 0; }",
+        "expectedOutput": "15",
+        "solution": "#include <iostream>\nusing namespace std;\nint toggleBit(int n, int k) { return n ^ (1 << k); }\nint main() { cout<<toggleBit(13,1); return 0; }",
+        "explanation": {
+            "approach": "XOR with 1 at position k flips that bit.",
+            "analogy": "13=1101, toggle bit 1 → 1111=15",
+            "steps": [
+                "Create mask: 1 << k",
+                "XOR with n"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "bit6",
+        "title": "Set Kth Bit",
+        "description": "Set kth bit to 1.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint setBit(int n, int k) { return 0; }\nint main() { cout<<setBit(10,0); return 0; }",
+        "expectedOutput": "11",
+        "solution": "#include <iostream>\nusing namespace std;\nint setBit(int n, int k) { return n | (1 << k); }\nint main() { cout<<setBit(10,0); return 0; }",
+        "explanation": {
+            "approach": "OR with 1 at position k sets that bit.",
+            "analogy": "10=1010, set bit 0 → 1011=11",
+            "steps": [
+                "Create mask: 1 << k",
+                "OR with n"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "bit7",
+        "title": "Clear Kth Bit",
+        "description": "Set kth bit to 0.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint clearBit(int n, int k) { return 0; }\nint main() { cout<<clearBit(15,1); return 0; }",
+        "expectedOutput": "13",
+        "solution": "#include <iostream>\nusing namespace std;\nint clearBit(int n, int k) { return n & ~(1 << k); }\nint main() { cout<<clearBit(15,1); return 0; }",
+        "explanation": {
+            "approach": "AND with inverted mask clears that bit.",
+            "analogy": "15=1111, clear bit 1 → 1101=13",
+            "steps": [
+                "Create mask: ~(1 << k)",
+                "AND with n"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "bit8",
+        "title": "Check Kth Bit",
+        "description": "Is kth bit set.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool checkBit(int n, int k) { return false; }\nint main() { cout<<checkBit(13,2); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool checkBit(int n, int k) { return (n >> k) & 1; }\nint main() { cout<<checkBit(13,2); return 0; }",
+        "explanation": {
+            "approach": "Shift right k positions, check last bit.",
+            "analogy": "13=1101, bit 2 is 1",
+            "steps": [
+                "Shift n right by k",
+                "AND with 1"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "bit9",
+        "title": "Swap Two Numbers",
+        "description": "Swap without temp using XOR.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid swap(int &a, int &b) {}\nint main() { int a=5, b=10; swap(a,b); cout<<a<<\" \"<<b; return 0; }",
+        "expectedOutput": "10 5",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid swap(int &a, int &b) { a = a ^ b; b = a ^ b; a = a ^ b; }\nint main() { int a=5, b=10; swap(a,b); cout<<a<<\" \"<<b; return 0; }",
+        "explanation": {
+            "approach": "XOR trick: a^=b, b^=a, a^=b",
+            "analogy": "Magic math swap without extra variable!",
+            "steps": [
+                "a = a XOR b",
+                "b = a XOR b (now b = original a)",
+                "a = a XOR b"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "bit10",
+        "title": "Find Single Number",
+        "description": "One appears once, others twice.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint singleNumber(int a[], int n) { return 0; }\nint main() { int a[]={2,1,4,5,2,4,1}; cout<<singleNumber(a,7); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint singleNumber(int a[], int n) { int r = 0; for(int i = 0; i < n; i++) r ^= a[i]; return r; }\nint main() { int a[]={2,1,4,5,2,4,1}; cout<<singleNumber(a,7); return 0; }",
+        "explanation": {
+            "approach": "XOR all: pairs cancel, single remains.",
+            "analogy": "a^a=0, so duplicates vanish, unique stays.",
+            "steps": [
+                "XOR all elements",
+                "Pairs cancel out",
+                "Unique number remains"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "bit11",
+        "title": "Rightmost Set Bit",
+        "description": "Position of rightmost 1.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint rightmostSetBit(int n) { return 0; }\nint main() { cout<<rightmostSetBit(12); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint rightmostSetBit(int n) { int pos = 0; while((n & 1) == 0) { n >>= 1; pos++; } return pos; }\nint main() { cout<<rightmostSetBit(12); return 0; }",
+        "explanation": {
+            "approach": "Shift right until last bit is 1.",
+            "analogy": "12=1100, first 1 from right is at position 2",
+            "steps": [
+                "Shift until bit is 1",
+                "Count shifts"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "bit12",
+        "title": "Turn Off Rightmost Bit",
+        "description": "Clear rightmost 1.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint turnOffRightmost(int n) { return 0; }\nint main() { cout<<turnOffRightmost(12); return 0; }",
+        "expectedOutput": "8",
+        "solution": "#include <iostream>\nusing namespace std;\nint turnOffRightmost(int n) { return n & (n - 1); }\nint main() { cout<<turnOffRightmost(12); return 0; }",
+        "explanation": {
+            "approach": "n & (n-1) clears rightmost set bit.",
+            "analogy": "12=1100, 11=1011, AND = 1000=8",
+            "steps": [
+                "n-1 flips from rightmost 1",
+                "AND removes that bit"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    }
+]

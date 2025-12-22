@@ -1,0 +1,187 @@
+[
+    {
+        "id": "prac1",
+        "title": "Hello Name",
+        "description": "Print greeting with name.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid greet(char name[]) {}\nint main() { greet(\"Alice\"); return 0; }",
+        "expectedOutput": "Hello Alice!",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid greet(char name[]) { cout<<\"Hello \"<<name<<\"!\"; }\nint main() { greet(\"Alice\"); return 0; }",
+        "explanation": {
+            "approach": "Concatenate greeting with name.",
+            "analogy": "Simple string output.",
+            "steps": [
+                "Print Hello, name, then !"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac2",
+        "title": "Rectangle Area",
+        "description": "Calculate rectangle area.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint area(int l, int w) { return 0; }\nint main() { cout<<area(5,3); return 0; }",
+        "expectedOutput": "15",
+        "solution": "#include <iostream>\nusing namespace std;\nint area(int l, int w) { return l*w; }\nint main() { cout<<area(5,3); return 0; }",
+        "explanation": {
+            "approach": "Area = length × width.",
+            "analogy": "Count tiles in grid.",
+            "steps": [
+                "Multiply length by width"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac3",
+        "title": "Circle Circumference",
+        "description": "Calculate circumference.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble circumference(double r) { return 0; }\nint main() { cout<<fixed<<setprecision(2)<<circumference(5); return 0; }",
+        "expectedOutput": "31.42",
+        "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble circumference(double r) { return 2*3.14159*r; }\nint main() { cout<<fixed<<setprecision(2)<<circumference(5); return 0; }",
+        "explanation": {
+            "approach": "C = 2πr.",
+            "analogy": "Distance around the circle.",
+            "steps": [
+                "Multiply 2 × π × radius"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac4",
+        "title": "Grade Calculator",
+        "description": "Assign letter grade.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\nchar grade(int score) { return 'F'; }\nint main() { cout<<grade(85); return 0; }",
+        "expectedOutput": "B",
+        "solution": "#include <iostream>\nusing namespace std;\nchar grade(int score) { if(score>=90) return 'A'; if(score>=80) return 'B'; if(score>=70) return 'C'; if(score>=60) return 'D'; return 'F'; }\nint main() { cout<<grade(85); return 0; }",
+        "explanation": {
+            "approach": "Check score ranges.",
+            "analogy": "Grading scale conversion.",
+            "steps": [
+                "Check each threshold",
+                "Return corresponding grade"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac5",
+        "title": "Age in Days",
+        "description": "Convert years to days.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint ageDays(int years) { return 0; }\nint main() { cout<<ageDays(10); return 0; }",
+        "expectedOutput": "3650",
+        "solution": "#include <iostream>\nusing namespace std;\nint ageDays(int years) { return years*365; }\nint main() { cout<<ageDays(10); return 0; }",
+        "explanation": {
+            "approach": "Days = years × 365.",
+            "analogy": "Convert units.",
+            "steps": [
+                "Multiply by 365"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac6",
+        "title": "Tip Calculator",
+        "description": "Calculate tip amount.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble tip(double bill, int percent) { return 0; }\nint main() { cout<<tip(50,20); return 0; }",
+        "expectedOutput": "10",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble tip(double bill, int percent) { return bill*percent/100; }\nint main() { cout<<tip(50,20); return 0; }",
+        "explanation": {
+            "approach": "Tip = bill × percent / 100.",
+            "analogy": "Percentage of bill.",
+            "steps": [
+                "Multiply bill by percentage",
+                "Divide by 100"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac7",
+        "title": "BMI Calculator",
+        "description": "Calculate BMI.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble bmi(double w, double h) { return 0; }\nint main() { cout<<fixed<<setprecision(1)<<bmi(70,1.75); return 0; }",
+        "expectedOutput": "22.9",
+        "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble bmi(double w, double h) { return w/(h*h); }\nint main() { cout<<fixed<<setprecision(1)<<bmi(70,1.75); return 0; }",
+        "explanation": {
+            "approach": "BMI = weight / height².",
+            "analogy": "Body mass index formula.",
+            "steps": [
+                "Divide weight by height squared"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac8",
+        "title": "Distance Formula",
+        "description": "Distance between two points.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble distance(int x1, int y1, int x2, int y2) { return 0; }\nint main() { cout<<distance(0,0,3,4); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble distance(int x1, int y1, int x2, int y2) { return sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)); }\nint main() { cout<<distance(0,0,3,4); return 0; }",
+        "explanation": {
+            "approach": "d = √((x2-x1)² + (y2-y1)²).",
+            "analogy": "Pythagorean theorem.",
+            "steps": [
+                "Calculate differences",
+                "Square and sum",
+                "Take square root"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac9",
+        "title": "Quadratic Roots",
+        "description": "Find roots of ax²+bx+c=0.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\n#include <cmath>\nusing namespace std;\nvoid roots(int a, int b, int c) {}\nint main() { roots(1,-5,6); return 0; }",
+        "expectedOutput": "3 2",
+        "solution": "#include <iostream>\n#include <cmath>\nusing namespace std;\nvoid roots(int a, int b, int c) { double d=b*b-4*a*c; double r1=(-b+sqrt(d))/(2*a), r2=(-b-sqrt(d))/(2*a); cout<<(int)r1<<\" \"<<(int)r2; }\nint main() { roots(1,-5,6); return 0; }",
+        "explanation": {
+            "approach": "Quadratic formula: (-b ± √(b²-4ac)) / 2a.",
+            "analogy": "Standard formula from algebra.",
+            "steps": [
+                "Calculate discriminant",
+                "Apply quadratic formula"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac10",
+        "title": "Check Triangle",
+        "description": "Can sides form triangle.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isTriangle(int a, int b, int c) { return false; }\nint main() { cout<<isTriangle(3,4,5); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isTriangle(int a, int b, int c) { return a+b>c && b+c>a && a+c>b; }\nint main() { cout<<isTriangle(3,4,5); return 0; }",
+        "explanation": {
+            "approach": "Sum of any two sides must exceed third.",
+            "analogy": "Triangle inequality theorem.",
+            "steps": [
+                "Check all three combinations"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    }
+]

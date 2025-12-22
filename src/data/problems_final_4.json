@@ -1,0 +1,193 @@
+[
+    {
+        "id": "fin31",
+        "title": "Cycle Start Node",
+        "description": "Find where cycle begins.",
+        "difficulty": "MEDIUM",
+        "category": "Linked List",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* detectCycle(Node* h) { return nullptr; }\nint main() { Node* h=new Node(3); h->n=new Node(2); h->n->n=new Node(0); h->n->n->n=new Node(-4); h->n->n->n->n=h->n; Node* r=detectCycle(h); cout<<(r?r->v:-1); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* detectCycle(Node* h) { Node* s=h,*f=h; while(f&&f->n) { s=s->n; f=f->n->n; if(s==f) { s=h; while(s!=f) { s=s->n; f=f->n; } return s; } } return 0; }\nint main() { Node* h=new Node(3); h->n=new Node(2); h->n->n=new Node(0); h->n->n->n=new Node(-4); h->n->n->n->n=h->n; Node* r=detectCycle(h); cout<<(r?r->v:-1); return 0; }",
+        "explanation": {
+            "approach": "Floyd's detect, then find start.",
+            "analogy": "Reset one pointer to head.",
+            "steps": [
+                "Detect cycle with fast/slow",
+                "Move one to head",
+                "Move both by 1, meet at start"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fin32",
+        "title": "Reverse Linked List",
+        "description": "Reverse entire list.",
+        "difficulty": "EASY",
+        "category": "Linked List",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* reverseList(Node* h) { return nullptr; }\nint main() { Node* h=new Node(1); h->n=new Node(2); h->n->n=new Node(3); h->n->n->n=new Node(4); h->n->n->n->n=new Node(5); h=reverseList(h); while(h) { cout<<h->v<<\" \"; h=h->n; } return 0; }",
+        "expectedOutput": "5 4 3 2 1",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* reverseList(Node* h) { Node* p=0; while(h) { Node* t=h->n; h->n=p; p=h; h=t; } return p; }\nint main() { Node* h=new Node(1); h->n=new Node(2); h->n->n=new Node(3); h->n->n->n=new Node(4); h->n->n->n->n=new Node(5); h=reverseList(h); while(h) { cout<<h->v<<\" \"; h=h->n; } return 0; }",
+        "explanation": {
+            "approach": "Iterative pointer reversal.",
+            "analogy": "Flip each arrow.",
+            "steps": [
+                "Save next",
+                "Point current to prev",
+                "Move pointers forward"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fin33",
+        "title": "Best Time Buy Sell",
+        "description": "Max profit one transaction.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint maxProfit(int p[], int n) { return 0; }\nint main() { int p[]={7,1,5,3,6,4}; cout<<maxProfit(p,6); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint maxProfit(int p[], int n) { int mn=1e9,mx=0; for(int i=0;i<n;i++) { mn=min(mn,p[i]); mx=max(mx,p[i]-mn); } return mx; }\nint main() { int p[]={7,1,5,3,6,4}; cout<<maxProfit(p,6); return 0; }",
+        "explanation": {
+            "approach": "Track min and max profit.",
+            "analogy": "Buy low, sell high.",
+            "steps": [
+                "Track minimum seen",
+                "Track max profit so far"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fin34",
+        "title": "Best Time Buy Sell II",
+        "description": "Max profit unlimited transactions.",
+        "difficulty": "MEDIUM",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint maxProfit(int p[], int n) { return 0; }\nint main() { int p[]={7,1,5,3,6,4}; cout<<maxProfit(p,6); return 0; }",
+        "expectedOutput": "7",
+        "solution": "#include <iostream>\nusing namespace std;\nint maxProfit(int p[], int n) { int profit=0; for(int i=1;i<n;i++) if(p[i]>p[i-1]) profit+=p[i]-p[i-1]; return profit; }\nint main() { int p[]={7,1,5,3,6,4}; cout<<maxProfit(p,6); return 0; }",
+        "explanation": {
+            "approach": "Add all positive differences.",
+            "analogy": "Capture every upswing.",
+            "steps": [
+                "If tomorrow higher, buy today sell tomorrow"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fin35",
+        "title": "Contains Duplicate",
+        "description": "Check if array has duplicates.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool containsDuplicate(int a[], int n) { return false; }\nint main() { int a[]={1,2,3,1}; cout<<containsDuplicate(a,4); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool containsDuplicate(int a[], int n) { for(int i=0;i<n;i++) for(int j=i+1;j<n;j++) if(a[i]==a[j]) return true; return false; }\nint main() { int a[]={1,2,3,1}; cout<<containsDuplicate(a,4); return 0; }",
+        "explanation": {
+            "approach": "Check all pairs.",
+            "analogy": "Find any match.",
+            "steps": [
+                "Compare each pair"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "fin36",
+        "title": "Single Number",
+        "description": "Find element appearing once.",
+        "difficulty": "EASY",
+        "category": "Bits",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint singleNumber(int a[], int n) { return 0; }\nint main() { int a[]={4,1,2,1,2}; cout<<singleNumber(a,5); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint singleNumber(int a[], int n) { int x=0; for(int i=0;i<n;i++) x^=a[i]; return x; }\nint main() { int a[]={4,1,2,1,2}; cout<<singleNumber(a,5); return 0; }",
+        "explanation": {
+            "approach": "XOR all elements.",
+            "analogy": "Pairs cancel out.",
+            "steps": [
+                "XOR cancels duplicates",
+                "Single remains"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fin37",
+        "title": "Majority Element",
+        "description": "Element appearing > n/2 times.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint majorityElement(int a[], int n) { return 0; }\nint main() { int a[]={3,2,3}; cout<<majorityElement(a,3); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint majorityElement(int a[], int n) { int c=0,m=0; for(int i=0;i<n;i++) { if(c==0) m=a[i]; c+=(a[i]==m)?1:-1; } return m; }\nint main() { int a[]={3,2,3}; cout<<majorityElement(a,3); return 0; }",
+        "explanation": {
+            "approach": "Boyer-Moore voting.",
+            "analogy": "Cancel different elements.",
+            "steps": [
+                "If count 0, pick new candidate",
+                "Inc if same, dec if different"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fin38",
+        "title": "Valid Parentheses",
+        "description": "Check balanced brackets.",
+        "difficulty": "EASY",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isValid(char s[]) { return false; }\nint main() { cout<<isValid(\"()[]{}\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isValid(char s[]) { char stk[100]; int top=-1; for(int i=0;s[i];i++) { if(s[i]=='('||s[i]=='['||s[i]=='{') stk[++top]=s[i]; else { if(top<0) return false; char p=stk[top--]; if((s[i]==')' && p!='(') || (s[i]==']' && p!='[') || (s[i]=='}' && p!='{')) return false; } } return top==-1; }\nint main() { cout<<isValid(\"()[]{}\"); return 0; }",
+        "explanation": {
+            "approach": "Stack for matching.",
+            "analogy": "Push opens, pop and match closes.",
+            "steps": [
+                "Push open brackets",
+                "Pop and match on close",
+                "Stack empty at end"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "fin39",
+        "title": "Min Stack",
+        "description": "Stack with getMin O(1).",
+        "difficulty": "MEDIUM",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass MinStack { public: void push(int x) {} void pop() {} int top() { return 0; } int getMin() { return 0; } };\nint main() { MinStack s; s.push(-2); s.push(0); s.push(-3); cout<<s.getMin()<<\" \"; s.pop(); cout<<s.top()<<\" \"<<s.getMin(); return 0; }",
+        "expectedOutput": "-3 0 -2",
+        "solution": "#include <iostream>\nusing namespace std;\nclass MinStack { int stk[100],minStk[100],t,mt; public: MinStack():t(-1),mt(-1){} void push(int x) { stk[++t]=x; if(mt<0||x<=minStk[mt]) minStk[++mt]=x; } void pop() { if(stk[t]==minStk[mt]) mt--; t--; } int top() { return stk[t]; } int getMin() { return minStk[mt]; } };\nint main() { MinStack s; s.push(-2); s.push(0); s.push(-3); cout<<s.getMin()<<\" \"; s.pop(); cout<<s.top()<<\" \"<<s.getMin(); return 0; }",
+        "explanation": {
+            "approach": "Auxiliary min stack.",
+            "analogy": "Track min at each level.",
+            "steps": [
+                "Push to min stack if <= current min",
+                "Pop from min stack if popping min"
+            ],
+            "complexity": "Time: O(1), Space: O(n)"
+        }
+    },
+    {
+        "id": "fin40",
+        "title": "Evaluate RPN",
+        "description": "Evaluate reverse polish notation.",
+        "difficulty": "MEDIUM",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint evalRPN(char tokens[][10], int n) { return 0; }\nint main() { char t[][10]={\"2\",\"1\",\"+\",\"3\",\"*\"}; cout<<evalRPN(t,5); return 0; }",
+        "expectedOutput": "9",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isOp(char c) { return c=='+'||c=='-'||c=='*'||c=='/'; }\nint evalRPN(char tokens[][10], int n) { int stk[100],top=-1; for(int i=0;i<n;i++) { if(isOp(tokens[i][0]) && !tokens[i][1]) { int b=stk[top--],a=stk[top--]; if(tokens[i][0]=='+') stk[++top]=a+b; else if(tokens[i][0]=='-') stk[++top]=a-b; else if(tokens[i][0]=='*') stk[++top]=a*b; else stk[++top]=a/b; } else { int v=0,neg=0,j=0; if(tokens[i][0]=='-') { neg=1; j=1; } for(;tokens[i][j];j++) v=v*10+(tokens[i][j]-'0'); stk[++top]=neg?-v:v; } } return stk[0]; }\nint main() { char t[][10]={\"2\",\"1\",\"+\",\"3\",\"*\"}; cout<<evalRPN(t,5); return 0; }",
+        "explanation": {
+            "approach": "Stack for operands.",
+            "analogy": "Push numbers, apply operators.",
+            "steps": [
+                "Push numbers",
+                "On operator, pop 2, compute, push result"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    }
+]

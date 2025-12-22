@@ -1,0 +1,194 @@
+[
+    {
+        "id": "fin41",
+        "title": "Daily Temperatures",
+        "description": "Days until warmer temp.",
+        "difficulty": "MEDIUM",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid dailyTemps(int t[], int n) {}\nint main() { int t[]={73,74,75,71,69,72,76,73}; dailyTemps(t,8); return 0; }",
+        "expectedOutput": "1 1 4 2 1 1 0 0",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid dailyTemps(int t[], int n) { int res[n]={}, stk[n], top=-1; for(int i=n-1;i>=0;i--) { while(top>=0 && t[stk[top]]<=t[i]) top--; res[i]=top<0?0:stk[top]-i; stk[++top]=i; } for(int i=0;i<n;i++) cout<<res[i]<<\" \"; }\nint main() { int t[]={73,74,75,71,69,72,76,73}; dailyTemps(t,8); return 0; }",
+        "explanation": {
+            "approach": "Monotonic decreasing stack.",
+            "analogy": "Find next greater element.",
+            "steps": [
+                "Pop while current >= stack top",
+                "Difference is days to wait"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "fin42",
+        "title": "Next Greater Element",
+        "description": "Next larger element.",
+        "difficulty": "MEDIUM",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid nextGreater(int a[], int n) {}\nint main() { int a[]={4,5,2,25}; nextGreater(a,4); return 0; }",
+        "expectedOutput": "5 25 25 -1",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid nextGreater(int a[], int n) { int res[n], stk[n], top=-1; for(int i=n-1;i>=0;i--) { while(top>=0 && stk[top]<=a[i]) top--; res[i]=top<0?-1:stk[top]; stk[++top]=a[i]; } for(int i=0;i<n;i++) cout<<res[i]<<\" \"; }\nint main() { int a[]={4,5,2,25}; nextGreater(a,4); return 0; }",
+        "explanation": {
+            "approach": "Monotonic stack from right.",
+            "analogy": "Stack holds candidates.",
+            "steps": [
+                "Pop while current >= stack top",
+                "Top is next greater"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "fin43",
+        "title": "Car Fleet",
+        "description": "Count car fleets.",
+        "difficulty": "MEDIUM",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint carFleet(int target, int pos[], int speed[], int n) { return 0; }\nint main() { int pos[]={10,8,0,5,3}, speed[]={2,4,1,1,3}; cout<<carFleet(12,pos,speed,5); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint carFleet(int target, int pos[], int speed[], int n) { double time[n]; int idx[n]; for(int i=0;i<n;i++) { idx[i]=i; time[i]=(double)(target-pos[i])/speed[i]; } for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(pos[idx[j]]<pos[idx[j+1]]) { int t=idx[j]; idx[j]=idx[j+1]; idx[j+1]=t; } int fleets=0; double maxTime=-1; for(int i=0;i<n;i++) { if(time[idx[i]]>maxTime) { fleets++; maxTime=time[idx[i]]; } } return fleets; }\nint main() { int pos[]={10,8,0,5,3}, speed[]={2,4,1,1,3}; cout<<carFleet(12,pos,speed,5); return 0; }",
+        "explanation": {
+            "approach": "Sort by position, count fleets.",
+            "analogy": "Cars reaching target form fleets.",
+            "steps": [
+                "Sort by position descending",
+                "Count cars with higher arrival time"
+            ],
+            "complexity": "Time: O(n log n), Space: O(n)"
+        }
+    },
+    {
+        "id": "fin44",
+        "title": "Search 2D Matrix II",
+        "description": "Search in row/col sorted matrix.",
+        "difficulty": "MEDIUM",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool searchMatrix(int m[][5], int r, int c, int t) { return false; }\nint main() { int m[][5]={{1,4,7,11,15},{2,5,8,12,19},{3,6,9,16,22},{10,13,14,17,24},{18,21,23,26,30}}; cout<<searchMatrix(m,5,5,5); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool searchMatrix(int m[][5], int r, int c, int t) { int i=0,j=c-1; while(i<r && j>=0) { if(m[i][j]==t) return true; if(m[i][j]>t) j--; else i++; } return false; }\nint main() { int m[][5]={{1,4,7,11,15},{2,5,8,12,19},{3,6,9,16,22},{10,13,14,17,24},{18,21,23,26,30}}; cout<<searchMatrix(m,5,5,5); return 0; }",
+        "explanation": {
+            "approach": "Start from top-right corner.",
+            "analogy": "Eliminate row or column each step.",
+            "steps": [
+                "If target < current, go left",
+                "If target > current, go down"
+            ],
+            "complexity": "Time: O(r+c), Space: O(1)"
+        }
+    },
+    {
+        "id": "fin45",
+        "title": "Median of Two Sorted",
+        "description": "Find median of merged arrays.",
+        "difficulty": "HARD",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble findMedian(int a[], int m, int b[], int n) { return 0; }\nint main() { int a[]={1,3}, b[]={2}; cout<<findMedian(a,2,b,1); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble findMedian(int a[], int m, int b[], int n) { if(m>n) return findMedian(b,n,a,m); int lo=0,hi=m,half=(m+n+1)/2; while(lo<=hi) { int i=(lo+hi)/2, j=half-i; int left1=i>0?a[i-1]:-1e9; int right1=i<m?a[i]:1e9; int left2=j>0?b[j-1]:-1e9; int right2=j<n?b[j]:1e9; if(left1<=right2 && left2<=right1) { if((m+n)%2) return max(left1,left2); return (max(left1,left2)+min(right1,right2))/2.0; } if(left1>right2) hi=i-1; else lo=i+1; } return 0; }\nint main() { int a[]={1,3}, b[]={2}; cout<<findMedian(a,2,b,1); return 0; }",
+        "explanation": {
+            "approach": "Binary search on smaller array.",
+            "analogy": "Find correct partition.",
+            "steps": [
+                "Binary search partition in smaller",
+                "Derive partition in larger",
+                "Check if valid partition"
+            ],
+            "complexity": "Time: O(log(min(m,n))), Space: O(1)"
+        }
+    },
+    {
+        "id": "fin46",
+        "title": "Kth Largest in Stream",
+        "description": "Maintain kth largest.",
+        "difficulty": "EASY",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass KthLargest { public: KthLargest(int k, int nums[], int n) {} int add(int val) { return 0; } };\nint main() { int nums[]={4,5,8,2}; KthLargest kl(3,nums,4); cout<<kl.add(3)<<\" \"<<kl.add(5); return 0; }",
+        "expectedOutput": "4 5",
+        "solution": "#include <iostream>\nusing namespace std;\nclass KthLargest { int heap[10000],sz,K; void up(int i) { while(i>0 && heap[(i-1)/2]>heap[i]) { swap(heap[(i-1)/2],heap[i]); i=(i-1)/2; } } void down(int i) { while(2*i+1<sz) { int s=2*i+1; if(s+1<sz && heap[s+1]<heap[s]) s++; if(heap[i]<=heap[s]) break; swap(heap[i],heap[s]); i=s; } } public: KthLargest(int k, int nums[], int n) { K=k; sz=0; for(int i=0;i<n;i++) add(nums[i]); } int add(int val) { if(sz<K) { heap[sz++]=val; up(sz-1); } else if(val>heap[0]) { heap[0]=val; down(0); } return heap[0]; } };\nint main() { int nums[]={4,5,8,2}; KthLargest kl(3,nums,4); cout<<kl.add(3)<<\" \"<<kl.add(5); return 0; }",
+        "explanation": {
+            "approach": "Min-heap of size k.",
+            "analogy": "Keep k largest, return smallest of them.",
+            "steps": [
+                "Maintain min-heap of k elements",
+                "If new > root, replace and heapify"
+            ],
+            "complexity": "Time: O(log k), Space: O(k)"
+        }
+    },
+    {
+        "id": "fin47",
+        "title": "Last Stone Weight",
+        "description": "Smash stones until one left.",
+        "difficulty": "EASY",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint lastStoneWeight(int stones[], int n) { return 0; }\nint main() { int stones[]={2,7,4,1,8,1}; cout<<lastStoneWeight(stones,6); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint lastStoneWeight(int stones[], int n) { while(n>1) { int m1=0,m2=1; if(stones[m1]<stones[m2]) swap(m1,m2); for(int i=2;i<n;i++) { if(stones[i]>stones[m1]) { m2=m1; m1=i; } else if(stones[i]>stones[m2]) m2=i; } int diff=stones[m1]-stones[m2]; if(m1>m2) { stones[m1]=stones[--n]; stones[m2]=stones[--n]; } else { stones[m2]=stones[--n]; stones[m1]=stones[--n]; } if(diff>0) stones[n++]=diff; } return n?stones[0]:0; }\nint main() { int stones[]={2,7,4,1,8,1}; cout<<lastStoneWeight(stones,6); return 0; }",
+        "explanation": {
+            "approach": "Find two largest, smash.",
+            "analogy": "Repeat until one or none left.",
+            "steps": [
+                "Find two largest",
+                "Replace with difference or remove"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "fin48",
+        "title": "K Closest Points",
+        "description": "K closest points to origin.",
+        "difficulty": "MEDIUM",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid kClosest(int p[][2], int n, int k) {}\nint main() { int p[][2]={{1,3},{-2,2},{5,8},{0,1}}; kClosest(p,4,2); return 0; }",
+        "expectedOutput": "0,1 -2,2",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid kClosest(int p[][2], int n, int k) { int dist[n]; for(int i=0;i<n;i++) dist[i]=p[i][0]*p[i][0]+p[i][1]*p[i][1]; for(int i=0;i<k;i++) { int mn=i; for(int j=i+1;j<n;j++) if(dist[j]<dist[mn]) mn=j; swap(dist[i],dist[mn]); swap(p[i][0],p[mn][0]); swap(p[i][1],p[mn][1]); } for(int i=0;i<k;i++) cout<<p[i][0]<<\",\"<<p[i][1]<<\" \"; }\nint main() { int p[][2]={{1,3},{-2,2},{5,8},{0,1}}; kClosest(p,4,2); return 0; }",
+        "explanation": {
+            "approach": "Partial selection sort.",
+            "analogy": "Find k smallest distances.",
+            "steps": [
+                "Calculate distances",
+                "Select k smallest"
+            ],
+            "complexity": "Time: O(nk), Space: O(n)"
+        }
+    },
+    {
+        "id": "fin49",
+        "title": "Task Scheduler",
+        "description": "Min intervals to complete tasks.",
+        "difficulty": "MEDIUM",
+        "category": "Greedy",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint leastInterval(char tasks[], int n, int k) { return 0; }\nint main() { char tasks[]=\"AAABBB\"; cout<<leastInterval(tasks,6,2); return 0; }",
+        "expectedOutput": "8",
+        "solution": "#include <iostream>\nusing namespace std;\nint leastInterval(char tasks[], int n, int k) { int freq[26]={}; for(int i=0;i<n;i++) freq[tasks[i]-'A']++; int maxF=0,maxC=0; for(int i=0;i<26;i++) maxF=max(maxF,freq[i]); for(int i=0;i<26;i++) if(freq[i]==maxF) maxC++; int slots=(maxF-1)*(k+1)+maxC; return max(n,slots); }\nint main() { char tasks[]=\"AAABBB\"; cout<<leastInterval(tasks,6,2); return 0; }",
+        "explanation": {
+            "approach": "Calculate idle slots needed.",
+            "analogy": "Fill gaps between max frequency task.",
+            "steps": [
+                "Find max frequency",
+                "Calculate slots needed",
+                "Return max of n and slots"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "fin50",
+        "title": "Design Twitter",
+        "description": "Simplified Twitter feed.",
+        "difficulty": "MEDIUM",
+        "category": "Design",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass Twitter { public: void postTweet(int u, int t) {} void getNewsFeed(int u) {} };\nint main() { Twitter tw; tw.postTweet(1,5); tw.getNewsFeed(1); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nclass Twitter { int tweets[100][2], sz; public: Twitter():sz(0){} void postTweet(int u, int t) { tweets[sz][0]=u; tweets[sz++][1]=t; } void getNewsFeed(int u) { int c=0; for(int i=sz-1;i>=0 && c<10;i--) if(tweets[i][0]==u) { cout<<tweets[i][1]<<\" \"; c++; } } };\nint main() { Twitter tw; tw.postTweet(1,5); tw.getNewsFeed(1); return 0; }",
+        "explanation": {
+            "approach": "Store tweets with user and timestamp.",
+            "analogy": "Simple chronological feed.",
+            "steps": [
+                "Store (user, tweet) pairs",
+                "Return recent 10 from user"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    }
+]

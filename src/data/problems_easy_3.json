@@ -1,0 +1,209 @@
+[
+    {
+        "id": "easy26",
+        "title": "Matrix Sum",
+        "description": "Sum all matrix elements.",
+        "difficulty": "EASY",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint matSum(int m[][3], int r, int c) { return 0; }\nint main() { int m[][3] = {{1,2,3},{4,5,6},{7,8,9}}; cout << matSum(m,3,3); return 0; }",
+        "expectedOutput": "45",
+        "solution": "#include <iostream>\nusing namespace std;\nint matSum(int m[][3], int r, int c) { int s=0; for(int i=0;i<r;i++) for(int j=0;j<c;j++) s+=m[i][j]; return s; }\nint main() { int m[][3] = {{1,2,3},{4,5,6},{7,8,9}}; cout << matSum(m,3,3); return 0; }",
+        "explanation": {
+            "approach": "Loop through all elements and sum.",
+            "analogy": "Count all cells in a grid.",
+            "steps": [
+                "Loop rows and columns",
+                "Add each element"
+            ],
+            "complexity": "Time: O(r×c), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy27",
+        "title": "Matrix Transpose",
+        "description": "Transpose a matrix.",
+        "difficulty": "EASY",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid transpose(int m[][3], int r, int c) {}\nint main() { int m[][3]={{1,2,3},{4,5,6}}; transpose(m,2,3); return 0; }",
+        "expectedOutput": "1 4 2 5 3 6",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid transpose(int m[][3], int r, int c) { for(int j=0;j<c;j++) { for(int i=0;i<r;i++) cout<<m[i][j]<<(i<r-1||j<c-1?\" \":\"\"); } }\nint main() { int m[][3]={{1,2,3},{4,5,6}}; transpose(m,2,3); return 0; }",
+        "explanation": {
+            "approach": "Swap rows and columns.",
+            "analogy": "Flip matrix diagonally.",
+            "steps": [
+                "Print m[j][i] instead of m[i][j]"
+            ],
+            "complexity": "Time: O(r×c), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy28",
+        "title": "Diagonal Sum",
+        "description": "Sum of main diagonal.",
+        "difficulty": "EASY",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint diagSum(int m[][3], int n) { return 0; }\nint main() { int m[][3]={{1,2,3},{4,5,6},{7,8,9}}; cout<<diagSum(m,3); return 0; }",
+        "expectedOutput": "15",
+        "solution": "#include <iostream>\nusing namespace std;\nint diagSum(int m[][3], int n) { int s=0; for(int i=0;i<n;i++) s+=m[i][i]; return s; }\nint main() { int m[][3]={{1,2,3},{4,5,6},{7,8,9}}; cout<<diagSum(m,3); return 0; }",
+        "explanation": {
+            "approach": "Sum elements where row = column.",
+            "analogy": "Top-left to bottom-right diagonal.",
+            "steps": [
+                "Sum m[0][0], m[1][1], m[2][2]..."
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy29",
+        "title": "Row Sum",
+        "description": "Sum of each row.",
+        "difficulty": "EASY",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid rowSum(int m[][3], int r, int c) {}\nint main() { int m[][3]={{1,2,3},{4,5,6}}; rowSum(m,2,3); return 0; }",
+        "expectedOutput": "6 15",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid rowSum(int m[][3], int r, int c) { for(int i=0;i<r;i++) { int s=0; for(int j=0;j<c;j++) s+=m[i][j]; cout<<s<<(i<r-1?\" \":\"\"); } }\nint main() { int m[][3]={{1,2,3},{4,5,6}}; rowSum(m,2,3); return 0; }",
+        "explanation": {
+            "approach": "Sum each row separately.",
+            "analogy": "Total for each row of spreadsheet.",
+            "steps": [
+                "For each row, sum its columns"
+            ],
+            "complexity": "Time: O(r×c), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy30",
+        "title": "Column Sum",
+        "description": "Sum of each column.",
+        "difficulty": "EASY",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid colSum(int m[][3], int r, int c) {}\nint main() { int m[][3]={{1,2,3},{4,5,6}}; colSum(m,2,3); return 0; }",
+        "expectedOutput": "5 7 9",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid colSum(int m[][3], int r, int c) { for(int j=0;j<c;j++) { int s=0; for(int i=0;i<r;i++) s+=m[i][j]; cout<<s<<(j<c-1?\" \":\"\"); } }\nint main() { int m[][3]={{1,2,3},{4,5,6}}; colSum(m,2,3); return 0; }",
+        "explanation": {
+            "approach": "Sum each column separately.",
+            "analogy": "Total for each column of spreadsheet.",
+            "steps": [
+                "For each column, sum its rows"
+            ],
+            "complexity": "Time: O(r×c), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy31",
+        "title": "Second Largest",
+        "description": "Find second largest element.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint secondLargest(int a[], int n) { return 0; }\nint main() { int a[]={12,35,1,10,34,1}; cout<<secondLargest(a,6); return 0; }",
+        "expectedOutput": "34",
+        "solution": "#include <iostream>\nusing namespace std;\nint secondLargest(int a[], int n) { int f=-1, s=-1; for(int i=0;i<n;i++) { if(a[i]>f) { s=f; f=a[i]; } else if(a[i]>s && a[i]!=f) s=a[i]; } return s; }\nint main() { int a[]={12,35,1,10,34,1}; cout<<secondLargest(a,6); return 0; }",
+        "explanation": {
+            "approach": "Track first and second largest.",
+            "analogy": "Silver medalist in competition.",
+            "steps": [
+                "Track largest",
+                "Track second if smaller than first"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy32",
+        "title": "Remove Duplicates",
+        "description": "Remove duplicates from sorted array.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint removeDups(int a[], int n) { return 0; }\nint main() { int a[]={1,1,2,2,3,4,4,5}; int k=removeDups(a,8); for(int i=0;i<k;i++) cout<<a[i]<<(i<k-1?\" \":\"\"); return 0; }",
+        "expectedOutput": "1 2 3 4 5",
+        "solution": "#include <iostream>\nusing namespace std;\nint removeDups(int a[], int n) { if(n==0) return 0; int j=1; for(int i=1;i<n;i++) if(a[i]!=a[i-1]) a[j++]=a[i]; return j; }\nint main() { int a[]={1,1,2,2,3,4,4,5}; int k=removeDups(a,8); for(int i=0;i<k;i++) cout<<a[i]<<(i<k-1?\" \":\"\"); return 0; }",
+        "explanation": {
+            "approach": "Keep unique elements in-place.",
+            "analogy": "Skip repeats, keep first occurrence.",
+            "steps": [
+                "Compare consecutive",
+                "Keep if different"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy33",
+        "title": "Move Zeros to End",
+        "description": "Move all zeros to end.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid moveZeros(int a[], int n) {}\nint main() { int a[]={0,1,0,3,12}; moveZeros(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "expectedOutput": "1 3 12 0 0",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid moveZeros(int a[], int n) { int j=0; for(int i=0;i<n;i++) if(a[i]!=0) a[j++]=a[i]; while(j<n) a[j++]=0; }\nint main() { int a[]={0,1,0,3,12}; moveZeros(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "explanation": {
+            "approach": "Copy non-zeros, fill rest with zeros.",
+            "analogy": "Slide non-zeros left, zeros fall to end.",
+            "steps": [
+                "Copy non-zero elements",
+                "Fill remaining with 0"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy34",
+        "title": "Rotate Array Left",
+        "description": "Rotate array left by k.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid rotateLeft(int a[], int n, int k) {}\nint main() { int a[]={1,2,3,4,5}; rotateLeft(a,5,2); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "expectedOutput": "3 4 5 1 2",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid rev(int a[], int l, int r) { while(l<r) { int t=a[l]; a[l]=a[r]; a[r]=t; l++; r--; } }\nvoid rotateLeft(int a[], int n, int k) { k%=n; rev(a,0,k-1); rev(a,k,n-1); rev(a,0,n-1); }\nint main() { int a[]={1,2,3,4,5}; rotateLeft(a,5,2); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "explanation": {
+            "approach": "Reverse first k, reverse rest, reverse all.",
+            "analogy": "Rotate words in sentence.",
+            "steps": [
+                "Reverse [0,k)",
+                "Reverse [k,n)",
+                "Reverse all"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy35",
+        "title": "Rotate Array Right",
+        "description": "Rotate array right by k.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid rotateRight(int a[], int n, int k) {}\nint main() { int a[]={1,2,3,4,5}; rotateRight(a,5,2); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "expectedOutput": "4 5 1 2 3",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid rev(int a[], int l, int r) { while(l<r) { int t=a[l]; a[l]=a[r]; a[r]=t; l++; r--; } }\nvoid rotateRight(int a[], int n, int k) { k%=n; rev(a,0,n-1); rev(a,0,k-1); rev(a,k,n-1); }\nint main() { int a[]={1,2,3,4,5}; rotateRight(a,5,2); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "explanation": {
+            "approach": "Reverse all, reverse first k, reverse rest.",
+            "analogy": "Opposite of left rotation.",
+            "steps": [
+                "Reverse entire array",
+                "Reverse [0,k)",
+                "Reverse [k,n)"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy36",
+        "title": "Check Sorted",
+        "description": "Is array sorted.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isSorted(int a[], int n) { return false; }\nint main() { int a[]={1,2,3,4,5}; cout<<isSorted(a,5); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isSorted(int a[], int n) { for(int i=1;i<n;i++) if(a[i]<a[i-1]) return false; return true; }\nint main() { int a[]={1,2,3,4,5}; cout<<isSorted(a,5); return 0; }",
+        "explanation": {
+            "approach": "Check if each element >= previous.",
+            "analogy": "Are stairs going only up?",
+            "steps": [
+                "Compare consecutive pairs",
+                "Return false if decreasing"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    }
+]

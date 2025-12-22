@@ -1,0 +1,180 @@
+[
+    {
+        "id": "m21",
+        "title": "Combination Sum",
+        "description": "Unique combinations summing to target.",
+        "difficulty": "MEDIUM",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint combinationSum(int candidates[], int n, int target) { return 0; }\nint main() { int c[]={2,3,6,7}; cout << combinationSum(c,4,7); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint cnt=0;\nvoid solve(int c[], int n, int t, int start) { if(t==0) { cnt++; return; } for(int i=start;i<n&&c[i]<=t;i++) solve(c,n,t-c[i],i); }\nint combinationSum(int c[], int n, int target) { cnt=0; for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(c[j]>c[j+1]) swap(c[j],c[j+1]); solve(c,n,target,0); return cnt; }\nint main() { int c[]={2,3,6,7}; cout << combinationSum(c,4,7); return 0; }",
+        "explanation": {
+            "approach": "Backtracking with reuse.",
+            "steps": [
+                "Sort candidates",
+                "Recursively pick candidates >= start"
+            ],
+            "complexity": "Time: O(2^t), Space: O(t)"
+        }
+    },
+    {
+        "id": "m22",
+        "title": "Combination Sum II",
+        "description": "Each number used once.",
+        "difficulty": "MEDIUM",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint combinationSum2(int candidates[], int n, int target) { return 0; }\nint main() { int c[]={10,1,2,7,6,1,5}; cout << combinationSum2(c,7,8); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint cnt=0;\nvoid solve(int c[], int n, int t, int start) { if(t==0) { cnt++; return; } for(int i=start;i<n&&c[i]<=t;i++) { if(i>start&&c[i]==c[i-1]) continue; solve(c,n,t-c[i],i+1); } }\nint combinationSum2(int c[], int n, int t) { cnt=0; for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(c[j]>c[j+1]) swap(c[j],c[j+1]); solve(c,n,t,0); return cnt; }\nint main() { int c[]={10,1,2,7,6,1,5}; cout << combinationSum2(c,7,8); return 0; }",
+        "explanation": {
+            "approach": "Backtracking skip duplicates.",
+            "steps": [
+                "Sort",
+                "Skip same elements at same level"
+            ],
+            "complexity": "Time: O(2^n), Space: O(n)"
+        }
+    },
+    {
+        "id": "m23",
+        "title": "Permutations",
+        "description": "All permutations of array.",
+        "difficulty": "MEDIUM",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint permute(int nums[], int n) { return 0; }\nint main() { int nu[]={1,2,3}; cout << permute(nu,3); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint cnt=0;\nvoid solve(int nums[], int n, int start) { if(start==n) { cnt++; return; } for(int i=start;i<n;i++) { swap(nums[start],nums[i]); solve(nums,n,start+1); swap(nums[start],nums[i]); } }\nint permute(int nums[], int n) { cnt=0; solve(nums,n,0); return cnt; }\nint main() { int nu[]={1,2,3}; cout << permute(nu,3); return 0; }",
+        "explanation": {
+            "approach": "Swap and recurse.",
+            "steps": [
+                "At each position, try all remaining",
+                "Backtrack by swapping back"
+            ],
+            "complexity": "Time: O(n!), Space: O(n)"
+        }
+    },
+    {
+        "id": "m24",
+        "title": "Subsets",
+        "description": "All subsets of array.",
+        "difficulty": "MEDIUM",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint subsets(int nums[], int n) { return 0; }\nint main() { int nu[]={1,2,3}; cout << subsets(nu,3); return 0; }",
+        "expectedOutput": "8",
+        "solution": "#include <iostream>\nusing namespace std;\nint subsets(int nums[], int n) { return 1<<n; }\nint main() { int nu[]={1,2,3}; cout << subsets(nu,3); return 0; }",
+        "explanation": {
+            "approach": "Power set = 2^n.",
+            "steps": [
+                "Each element included or not"
+            ],
+            "complexity": "Time: O(2^n), Space: O(n)"
+        }
+    },
+    {
+        "id": "m25",
+        "title": "Word Search",
+        "description": "Find word in grid.",
+        "difficulty": "MEDIUM",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool exist(char board[][4], int m, int n, char word[]) { return false; }\nint main() { char b[][4]={{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}; cout << exist(b,3,4,\"ABCCED\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool dfs(char b[][4],int m,int n,int i,int j,char w[],int k) { if(!w[k]) return true; if(i<0||i>=m||j<0||j>=n||b[i][j]!=w[k]) return false; char t=b[i][j]; b[i][j]='#'; bool f=dfs(b,m,n,i+1,j,w,k+1)||dfs(b,m,n,i-1,j,w,k+1)||dfs(b,m,n,i,j+1,w,k+1)||dfs(b,m,n,i,j-1,w,k+1); b[i][j]=t; return f; }\nbool exist(char b[][4], int m, int n, char w[]) { for(int i=0;i<m;i++) for(int j=0;j<n;j++) if(dfs(b,m,n,i,j,w,0)) return true; return false; }\nint main() { char b[][4]={{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}; cout << exist(b,3,4,\"ABCCED\"); return 0; }",
+        "explanation": {
+            "approach": "DFS with backtracking.",
+            "steps": [
+                "Try starting from each cell",
+                "Mark visited, explore 4 directions"
+            ],
+            "complexity": "Time: O(m×n×4^L), Space: O(L)"
+        }
+    },
+    {
+        "id": "m26",
+        "title": "Restore IP Addresses",
+        "description": "All valid IP addresses.",
+        "difficulty": "MEDIUM",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint restoreIpAddresses(char s[]) { return 0; }\nint main() { cout << restoreIpAddresses(\"25525511135\"); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint cnt=0;\nvoid solve(char s[], int start, int parts) { if(parts==4) { if(!s[start]) cnt++; return; } for(int len=1;len<=3&&s[start+len-1];len++) { int val=0; for(int i=0;i<len;i++) val=val*10+s[start+i]-'0'; if(val>255) break; if(len>1&&s[start]=='0') break; solve(s,start+len,parts+1); } }\nint restoreIpAddresses(char s[]) { cnt=0; solve(s,0,0); return cnt; }\nint main() { cout << restoreIpAddresses(\"25525511135\"); return 0; }",
+        "explanation": {
+            "approach": "Try 1-3 digit segments.",
+            "steps": [
+                "For each part, try 1-3 digits",
+                "Validate 0-255"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "m27",
+        "title": "Generate Parentheses",
+        "description": "All valid n pairs.",
+        "difficulty": "MEDIUM",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint generateParenthesis(int n) { return 0; }\nint main() { cout << generateParenthesis(3); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint cnt=0;\nvoid gen(int open, int close, int n) { if(open==n&&close==n) { cnt++; return; } if(open<n) gen(open+1,close,n); if(close<open) gen(open,close+1,n); }\nint generateParenthesis(int n) { cnt=0; gen(0,0,n); return cnt; }\nint main() { cout << generateParenthesis(3); return 0; }",
+        "explanation": {
+            "approach": "Track open and close counts.",
+            "steps": [
+                "Add ( if open < n",
+                "Add ) if close < open"
+            ],
+            "complexity": "Time: O(4^n/√n), Space: O(n)"
+        }
+    },
+    {
+        "id": "m28",
+        "title": "Letter Combinations",
+        "description": "Phone number letter combos.",
+        "difficulty": "MEDIUM",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint letterCombinations(char digits[]) { return 0; }\nint main() { cout << letterCombinations(\"23\"); return 0; }",
+        "expectedOutput": "9",
+        "solution": "#include <iostream>\nusing namespace std;\nchar* map[]={\"abc\",\"def\",\"ghi\",\"jkl\",\"mno\",\"pqrs\",\"tuv\",\"wxyz\"};\nint cnt=0;\nvoid solve(char d[], int i) { if(!d[i]) { cnt++; return; } char* letters=map[d[i]-'2']; for(int j=0;letters[j];j++) solve(d,i+1); }\nint letterCombinations(char d[]) { if(!d[0]) return 0; cnt=0; solve(d,0); return cnt; }\nint main() { cout << letterCombinations(\"23\"); return 0; }",
+        "explanation": {
+            "approach": "Map digits to letters, recurse.",
+            "steps": [
+                "For each digit, try all mapped letters"
+            ],
+            "complexity": "Time: O(4^n), Space: O(n)"
+        }
+    },
+    {
+        "id": "m29",
+        "title": "Sudoku Solver",
+        "description": "Solve sudoku puzzle.",
+        "difficulty": "HARD",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool solveSudoku(int board[][9]) { return false; }\nint main() { cout << 1; return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isValid(int b[][9],int r,int c,int n) { for(int i=0;i<9;i++) if(b[r][i]==n||b[i][c]==n) return false; int sr=(r/3)*3,sc=(c/3)*3; for(int i=0;i<3;i++) for(int j=0;j<3;j++) if(b[sr+i][sc+j]==n) return false; return true; }\nbool solve(int b[][9]) { for(int i=0;i<9;i++) for(int j=0;j<9;j++) if(b[i][j]==0) { for(int n=1;n<=9;n++) if(isValid(b,i,j,n)) { b[i][j]=n; if(solve(b)) return true; b[i][j]=0; } return false; } return true; }\nbool solveSudoku(int b[][9]) { return solve(b); }\nint main() { cout << 1; return 0; }",
+        "explanation": {
+            "approach": "Backtracking with constraint check.",
+            "steps": [
+                "Find empty cell",
+                "Try 1-9, backtrack if invalid"
+            ],
+            "complexity": "Time: O(9^81), Space: O(81)"
+        }
+    },
+    {
+        "id": "m30",
+        "title": "N-Queens Count",
+        "description": "Count valid placements.",
+        "difficulty": "HARD",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint totalNQueens(int n) { return 0; }\nint main() { cout << totalNQueens(4); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint cnt; bool col[10],d1[20],d2[20];\nvoid solve(int r, int n) { if(r==n) { cnt++; return; } for(int c=0;c<n;c++) if(!col[c]&&!d1[r-c+n]&&!d2[r+c]) { col[c]=d1[r-c+n]=d2[r+c]=true; solve(r+1,n); col[c]=d1[r-c+n]=d2[r+c]=false; } }\nint totalNQueens(int n) { cnt=0; solve(0,n); return cnt; }\nint main() { cout << totalNQueens(4); return 0; }",
+        "explanation": {
+            "approach": "Track columns and diagonals.",
+            "steps": [
+                "Place queen if safe",
+                "Backtrack"
+            ],
+            "complexity": "Time: O(n!), Space: O(n)"
+        }
+    }
+]

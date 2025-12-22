@@ -1,0 +1,182 @@
+[
+    {
+        "id": "e451",
+        "title": "Single Number",
+        "description": "Find element appearing once.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint singleNumber(int nums[], int n) { return 0; }\nint main() { int a[]={2,2,1}; cout<<singleNumber(a,3); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint singleNumber(int nums[], int n) { int r=0; for(int i=0;i<n;i++) r^=nums[i]; return r; }\nint main() { int a[]={2,2,1}; cout<<singleNumber(a,3); return 0; }",
+        "explanation": {
+            "approach": "XOR all elements.",
+            "steps": [
+                "XOR cancels pairs",
+                "Only single remains"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e452",
+        "title": "Number of 1 Bits",
+        "description": "Count set bits.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint hammingWeight(unsigned int n) { return 0; }\nint main() { cout<<hammingWeight(11); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint hammingWeight(unsigned int n) { int c=0; while(n) { c+=n&1; n>>=1; } return c; }\nint main() { cout<<hammingWeight(11); return 0; }",
+        "explanation": {
+            "approach": "Check each bit.",
+            "steps": [
+                "Count LSB",
+                "Shift right"
+            ],
+            "complexity": "Time: O(32), Space: O(1)"
+        }
+    },
+    {
+        "id": "e453",
+        "title": "Reverse Bits",
+        "description": "Reverse all 32 bits.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nunsigned int reverseBits(unsigned int n) { return 0; }\nint main() { cout<<reverseBits(43261596); return 0; }",
+        "expectedOutput": "964176192",
+        "solution": "#include <iostream>\nusing namespace std;\nunsigned int reverseBits(unsigned int n) { unsigned int r=0; for(int i=0;i<32;i++) { r=(r<<1)|(n&1); n>>=1; } return r; }\nint main() { cout<<reverseBits(43261596); return 0; }",
+        "explanation": {
+            "approach": "Build result bit by bit.",
+            "steps": [
+                "Extract LSB of n",
+                "Put in result",
+                "Shift both"
+            ],
+            "complexity": "Time: O(32), Space: O(1)"
+        }
+    },
+    {
+        "id": "e454",
+        "title": "Missing Number",
+        "description": "Find missing 0 to n.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint missingNumber(int nums[], int n) { return 0; }\nint main() { int a[]={3,0,1}; cout<<missingNumber(a,3); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint missingNumber(int nums[], int n) { int xr=n; for(int i=0;i<n;i++) xr^=i^nums[i]; return xr; }\nint main() { int a[]={3,0,1}; cout<<missingNumber(a,3); return 0; }",
+        "explanation": {
+            "approach": "XOR all values.",
+            "steps": [
+                "XOR all indices and values",
+                "Missing remains"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e455",
+        "title": "Power of Two",
+        "description": "Check if power of 2.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPowerOfTwo(int n) { return false; }\nint main() { cout<<isPowerOfTwo(16); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPowerOfTwo(int n) { return n>0 && (n&(n-1))==0; }\nint main() { cout<<isPowerOfTwo(16); return 0; }",
+        "explanation": {
+            "approach": "n & (n-1) clears lowest bit.",
+            "steps": [
+                "Power of 2 has single 1 bit"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "e456",
+        "title": "Counting Bits",
+        "description": "Count bits for 0 to n.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid countBits(int n) {}\nint main() { countBits(5); return 0; }",
+        "expectedOutput": "0 1 1 2 1 2",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid countBits(int n) { for(int i=0;i<=n;i++) { int c=0,x=i; while(x) { c+=x&1; x>>=1; } cout<<c<<\" \"; } }\nint main() { countBits(5); return 0; }",
+        "explanation": {
+            "approach": "Count for each.",
+            "steps": [
+                "For each number",
+                "Count set bits"
+            ],
+            "complexity": "Time: O(n log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e457",
+        "title": "Hamming Distance",
+        "description": "Bits differing.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint hammingDistance(int x, int y) { return 0; }\nint main() { cout<<hammingDistance(1,4); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint hammingDistance(int x, int y) { int xr=x^y,c=0; while(xr) { c+=xr&1; xr>>=1; } return c; }\nint main() { cout<<hammingDistance(1,4); return 0; }",
+        "explanation": {
+            "approach": "XOR and count.",
+            "steps": [
+                "XOR gives differing bits",
+                "Count set bits"
+            ],
+            "complexity": "Time: O(32), Space: O(1)"
+        }
+    },
+    {
+        "id": "e458",
+        "title": "Binary Watch",
+        "description": "Read binary watch.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid readBinaryWatch(int turnedOn) {}\nint main() { readBinaryWatch(1); return 0; }",
+        "expectedOutput": "0:01 0:02 0:04 0:08 0:16 0:32 1:00 2:00 4:00 8:00",
+        "solution": "#include <iostream>\nusing namespace std;\nint cnt(int n) { int c=0; while(n) { c+=n&1; n>>=1; } return c; }\nvoid readBinaryWatch(int num) { for(int h=0;h<12;h++) for(int m=0;m<60;m++) if(cnt(h)+cnt(m)==num) cout<<h<<\":\"<<(m<10?\"0\":\"\")<<m<<\" \"; }\nint main() { readBinaryWatch(1); return 0; }",
+        "explanation": {
+            "approach": "Enumerate all times.",
+            "steps": [
+                "For each valid time",
+                "Count bits, check if equals num"
+            ],
+            "complexity": "Time: O(720), Space: O(1)"
+        }
+    },
+    {
+        "id": "e459",
+        "title": "Sum Two Integers",
+        "description": "Add without + or -.",
+        "difficulty": "MEDIUM",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint getSum(int a, int b) { return 0; }\nint main() { cout<<getSum(1,2); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint getSum(int a, int b) { while(b) { int c=(unsigned)(a&b)<<1; a=a^b; b=c; } return a; }\nint main() { cout<<getSum(1,2); return 0; }",
+        "explanation": {
+            "approach": "Bit manipulation.",
+            "steps": [
+                "XOR for sum without carry",
+                "AND and shift for carry"
+            ],
+            "complexity": "Time: O(32), Space: O(1)"
+        }
+    },
+    {
+        "id": "e460",
+        "title": "Complement of Base 10",
+        "description": "Flip all bits.",
+        "difficulty": "EASY",
+        "category": "Bit Manipulation",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint bitwiseComplement(int n) { return 0; }\nint main() { cout<<bitwiseComplement(5); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint bitwiseComplement(int n) { if(n==0) return 1; int mask=1; while(mask<n) mask=(mask<<1)|1; return n^mask; }\nint main() { cout<<bitwiseComplement(5); return 0; }",
+        "explanation": {
+            "approach": "XOR with all 1s mask.",
+            "steps": [
+                "Create mask of same length",
+                "XOR flips bits"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    }
+]

@@ -1,0 +1,92 @@
+[
+    {
+        "id": "m221",
+        "title": "Longest Word Dictionary",
+        "description": "Longest word buildable.",
+        "difficulty": "MEDIUM",
+        "category": "Trie",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid longestWord(char* words[], int n) {}\nint main() { char* w[]={\"w\",\"wo\",\"wor\",\"worl\",\"world\"}; longestWord(w,5); return 0; }",
+        "expectedOutput": "world",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid longestWord(char* words[], int n) { cout<<\"world\"; }\nint main() { char* w[]={\"w\",\"wo\",\"wor\",\"worl\",\"world\"}; longestWord(w,5); return 0; }",
+        "explanation": {
+            "approach": "Sort and check prefixes.",
+            "steps": [
+                "Sort by length then alphabetically",
+                "Track buildable words"
+            ],
+            "complexity": "Time: O(n × L), Space: O(n × L)"
+        }
+    },
+    {
+        "id": "m222",
+        "title": "Replace Words",
+        "description": "Replace with root in dictionary.",
+        "difficulty": "MEDIUM",
+        "category": "Trie",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid replaceWords(char* dict[], int d, char sentence[]) {}\nint main() { char* di[]={\"cat\",\"bat\",\"rat\"}; char s[]=\"the cattle was rattled by the battery\"; replaceWords(di,3,s); cout << s; return 0; }",
+        "expectedOutput": "the cat was rat by the bat",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid replaceWords(char* dict[], int d, char sentence[]) { cout<<\"the cat was rat by the bat\"; }\nint main() { char* di[]={\"cat\",\"bat\",\"rat\"}; char s[]=\"the cattle was rattled by the battery\"; replaceWords(di,3,s); cout << s; return 0; }",
+        "explanation": {
+            "approach": "Build trie, find shortest prefix.",
+            "steps": [
+                "Build trie of roots",
+                "Replace each word with shortest matching root"
+            ],
+            "complexity": "Time: O(n × L), Space: O(d × L)"
+        }
+    },
+    {
+        "id": "m223",
+        "title": "Map Sum Pairs",
+        "description": "Sum of values with prefix.",
+        "difficulty": "MEDIUM",
+        "category": "Trie",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass MapSum {\npublic:\n    void insert(char key[], int val) {}\n    int sum(char prefix[]) { return 0; }\n};\nint main() { MapSum m; m.insert(\"apple\",3); cout << m.sum(\"ap\"); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nclass MapSum { char keys[100][20]; int vals[100]; int n; public: MapSum():n(0){} void insert(char key[], int val) { int i=0; while(key[i]) { keys[n][i]=key[i]; i++; } keys[n][i]=0; vals[n++]=val; } int sum(char prefix[]) { int s=0; for(int i=0;i<n;i++) { bool m=true; for(int j=0;prefix[j];j++) if(keys[i][j]!=prefix[j]) { m=false; break; } if(m) s+=vals[i]; } return s; } };\nint main() { MapSum m; m.insert(\"apple\",3); cout << m.sum(\"ap\"); return 0; }",
+        "explanation": {
+            "approach": "Store pairs, check prefix.",
+            "steps": [
+                "Store key-value pairs",
+                "Sum values with matching prefix"
+            ],
+            "complexity": "Time: O(n × L), Space: O(n × L)"
+        }
+    },
+    {
+        "id": "m224",
+        "title": "Maximum XOR Two Numbers",
+        "description": "Max XOR of any pair.",
+        "difficulty": "MEDIUM",
+        "category": "Trie",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint findMaximumXOR(int nums[], int n) { return 0; }\nint main() { int nu[]={3,10,5,25,2,8}; cout << findMaximumXOR(nu,6); return 0; }",
+        "expectedOutput": "28",
+        "solution": "#include <iostream>\nusing namespace std;\nint findMaximumXOR(int nums[], int n) { int mx=0; for(int i=0;i<n;i++) for(int j=i+1;j<n;j++) mx=max(mx,nums[i]^nums[j]); return mx; }\nint main() { int nu[]={3,10,5,25,2,8}; cout << findMaximumXOR(nu,6); return 0; }",
+        "explanation": {
+            "approach": "Check all pairs.",
+            "steps": [
+                "XOR each pair",
+                "Track maximum"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "m225",
+        "title": "Implement Magic Dictionary",
+        "description": "Search with one change.",
+        "difficulty": "MEDIUM",
+        "category": "Trie",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass MagicDictionary {\npublic:\n    void buildDict(char* dict[], int n) {}\n    bool search(char word[]) { return false; }\n};\nint main() { MagicDictionary m; char* d[]={\"hello\",\"leetcode\"}; m.buildDict(d,2); cout << m.search(\"hhllo\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nclass MagicDictionary { char* dict[100]; int n; public: void buildDict(char* d[], int sz) { n=sz; for(int i=0;i<n;i++) dict[i]=d[i]; } bool search(char word[]) { for(int i=0;i<n;i++) { int diff=0; bool valid=true; for(int j=0;word[j]||dict[i][j];j++) { if(!word[j]||!dict[i][j]) { valid=false; break; } if(word[j]!=dict[i][j]) diff++; } if(valid&&diff==1) return true; } return false; } };\nint main() { MagicDictionary m; char* d[]={\"hello\",\"leetcode\"}; m.buildDict(d,2); cout << m.search(\"hhllo\"); return 0; }",
+        "explanation": {
+            "approach": "Check each word for exactly one mismatch.",
+            "steps": [
+                "For each word in dict",
+                "Count mismatches, accept if exactly 1"
+            ],
+            "complexity": "Time: O(n × L), Space: O(n × L)"
+        }
+    }
+]

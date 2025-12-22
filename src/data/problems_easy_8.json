@@ -1,0 +1,227 @@
+[
+    {
+        "id": "easy85",
+        "title": "Hollow Diamond",
+        "description": "Print hollow diamond.",
+        "difficulty": "EASY",
+        "category": "Patterns",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid hollowDiamond(int n) {}\nint main() { hollowDiamond(3); return 0; }",
+        "expectedOutput": "  *\n * *\n*   *\n * *\n  *",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid hollowDiamond(int n) { for(int i=1;i<=n;i++) { for(int j=0;j<n-i;j++) cout<<\" \"; cout<<\"*\"; if(i>1) { for(int j=0;j<2*i-3;j++) cout<<\" \"; cout<<\"*\"; } cout<<\"\\n\"; } for(int i=n-1;i>=1;i--) { for(int j=0;j<n-i;j++) cout<<\" \"; cout<<\"*\"; if(i>1) { for(int j=0;j<2*i-3;j++) cout<<\" \"; cout<<\"*\"; } if(i>1) cout<<\"\\n\"; } }\nint main() { hollowDiamond(3); return 0; }",
+        "explanation": {
+            "approach": "Only edges of diamond.",
+            "analogy": "Outline of diamond.",
+            "steps": [
+                "First and last star of each row"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy86",
+        "title": "Alphabet Pattern",
+        "description": "Print A to Z pattern.",
+        "difficulty": "EASY",
+        "category": "Patterns",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid alphabetPattern(int n) {}\nint main() { alphabetPattern(4); return 0; }",
+        "expectedOutput": "A\nA B\nA B C\nA B C D",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid alphabetPattern(int n) { for(int i=0;i<n;i++) { for(int j=0;j<=i;j++) cout<<(char)('A'+j)<<\" \"; if(i<n-1) cout<<\"\\n\"; } }\nint main() { alphabetPattern(4); return 0; }",
+        "explanation": {
+            "approach": "Letters increasing per row.",
+            "analogy": "A to alphabet.",
+            "steps": [
+                "Row i prints A to (A+i)"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy87",
+        "title": "Butterfly Pattern",
+        "description": "Print butterfly.",
+        "difficulty": "EASY",
+        "category": "Patterns",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid butterfly(int n) {}\nint main() { butterfly(3); return 0; }",
+        "expectedOutput": "*    *\n**  **\n******\n**  **\n*    *",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid butterfly(int n) { for(int i=1;i<=n;i++) { for(int j=0;j<i;j++) cout<<\"*\"; for(int j=0;j<2*(n-i);j++) cout<<\" \"; for(int j=0;j<i;j++) cout<<\"*\"; cout<<\"\\n\"; } for(int i=n-1;i>=1;i--) { for(int j=0;j<i;j++) cout<<\"*\"; for(int j=0;j<2*(n-i);j++) cout<<\" \"; for(int j=0;j<i;j++) cout<<\"*\"; if(i>1) cout<<\"\\n\"; } }\nint main() { butterfly(3); return 0; }",
+        "explanation": {
+            "approach": "Two triangles mirrored.",
+            "analogy": "Wings of butterfly.",
+            "steps": [
+                "Upper: expand",
+                "Lower: contract"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy88",
+        "title": "Smallest of Three",
+        "description": "Find smallest of 3 numbers.",
+        "difficulty": "EASY",
+        "category": "Basic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint smallest(int a, int b, int c) { return 0; }\nint main() { cout<<smallest(5,3,8); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint smallest(int a, int b, int c) { int m=a; if(b<m) m=b; if(c<m) m=c; return m; }\nint main() { cout<<smallest(5,3,8); return 0; }",
+        "explanation": {
+            "approach": "Compare and track minimum.",
+            "analogy": "Find smallest among three.",
+            "steps": [
+                "Assume first is min",
+                "Update if others smaller"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy89",
+        "title": "Largest of Three",
+        "description": "Find largest of 3 numbers.",
+        "difficulty": "EASY",
+        "category": "Basic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint largest(int a, int b, int c) { return 0; }\nint main() { cout<<largest(5,3,8); return 0; }",
+        "expectedOutput": "8",
+        "solution": "#include <iostream>\nusing namespace std;\nint largest(int a, int b, int c) { int m=a; if(b>m) m=b; if(c>m) m=c; return m; }\nint main() { cout<<largest(5,3,8); return 0; }",
+        "explanation": {
+            "approach": "Compare and track maximum.",
+            "analogy": "Find largest among three.",
+            "steps": [
+                "Assume first is max",
+                "Update if others larger"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy90",
+        "title": "Swap Two Numbers",
+        "description": "Swap without temp.",
+        "difficulty": "EASY",
+        "category": "Basic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid swap(int &a, int &b) {}\nint main() { int a=5,b=10; swap(a,b); cout<<a<<\" \"<<b; return 0; }",
+        "expectedOutput": "10 5",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid myswap(int &a, int &b) { a=a+b; b=a-b; a=a-b; }\nint main() { int a=5,b=10; myswap(a,b); cout<<a<<\" \"<<b; return 0; }",
+        "explanation": {
+            "approach": "Use arithmetic to swap.",
+            "analogy": "Store sum, extract values.",
+            "steps": [
+                "a = a + b",
+                "b = a - b (original a)",
+                "a = a - b (original b)"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy91",
+        "title": "Middle of Three",
+        "description": "Find middle value.",
+        "difficulty": "EASY",
+        "category": "Basic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint middle(int a, int b, int c) { return 0; }\nint main() { cout<<middle(5,8,3); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint middle(int a, int b, int c) { if((a>=b && a<=c)||(a<=b && a>=c)) return a; if((b>=a && b<=c)||(b<=a && b>=c)) return b; return c; }\nint main() { cout<<middle(5,8,3); return 0; }",
+        "explanation": {
+            "approach": "Check which is between others.",
+            "analogy": "Not min, not max.",
+            "steps": [
+                "Check if a is middle",
+                "Check if b is middle",
+                "Else c"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy92",
+        "title": "Absolute Value",
+        "description": "Get absolute value.",
+        "difficulty": "EASY",
+        "category": "Basic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint absolute(int n) { return 0; }\nint main() { cout<<absolute(-5); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint absolute(int n) { return n<0?-n:n; }\nint main() { cout<<absolute(-5); return 0; }",
+        "explanation": {
+            "approach": "Negate if negative.",
+            "analogy": "Distance from zero.",
+            "steps": [
+                "If negative, multiply by -1"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy93",
+        "title": "Average of Array",
+        "description": "Calculate average.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble average(int a[], int n) { return 0; }\nint main() { int a[]={10,20,30,40,50}; cout<<average(a,5); return 0; }",
+        "expectedOutput": "30",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble average(int a[], int n) { int s=0; for(int i=0;i<n;i++) s+=a[i]; return (double)s/n; }\nint main() { int a[]={10,20,30,40,50}; cout<<average(a,5); return 0; }",
+        "explanation": {
+            "approach": "Sum divided by count.",
+            "analogy": "Mean value.",
+            "steps": [
+                "Sum all elements",
+                "Divide by n"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy94",
+        "title": "Product of Array",
+        "description": "Multiply all elements.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint product(int a[], int n) { return 0; }\nint main() { int a[]={1,2,3,4,5}; cout<<product(a,5); return 0; }",
+        "expectedOutput": "120",
+        "solution": "#include <iostream>\nusing namespace std;\nint product(int a[], int n) { int p=1; for(int i=0;i<n;i++) p*=a[i]; return p; }\nint main() { int a[]={1,2,3,4,5}; cout<<product(a,5); return 0; }",
+        "explanation": {
+            "approach": "Multiply all elements.",
+            "analogy": "Factorial-like product.",
+            "steps": [
+                "Start with 1",
+                "Multiply each element"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy95",
+        "title": "Count Evens",
+        "description": "Count even numbers.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countEvens(int a[], int n) { return 0; }\nint main() { int a[]={1,2,3,4,5,6}; cout<<countEvens(a,6); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint countEvens(int a[], int n) { int c=0; for(int i=0;i<n;i++) if(a[i]%2==0) c++; return c; }\nint main() { int a[]={1,2,3,4,5,6}; cout<<countEvens(a,6); return 0; }",
+        "explanation": {
+            "approach": "Count elements divisible by 2.",
+            "analogy": "How many are even?",
+            "steps": [
+                "Check each if % 2 == 0"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy96",
+        "title": "Count Odds",
+        "description": "Count odd numbers.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countOdds(int a[], int n) { return 0; }\nint main() { int a[]={1,2,3,4,5,6}; cout<<countOdds(a,6); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint countOdds(int a[], int n) { int c=0; for(int i=0;i<n;i++) if(a[i]%2!=0) c++; return c; }\nint main() { int a[]={1,2,3,4,5,6}; cout<<countOdds(a,6); return 0; }",
+        "explanation": {
+            "approach": "Count elements not divisible by 2.",
+            "analogy": "How many are odd?",
+            "steps": [
+                "Check each if % 2 != 0"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    }
+]

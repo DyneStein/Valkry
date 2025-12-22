@@ -1,0 +1,236 @@
+[
+    {
+        "id": "easy37",
+        "title": "Merge Two Arrays",
+        "description": "Merge sorted arrays.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid merge(int a[], int m, int b[], int n, int c[]) {}\nint main() { int a[]={1,3,5}, b[]={2,4,6}, c[6]; merge(a,3,b,3,c); for(int i=0;i<6;i++) cout<<c[i]<<\" \"; return 0; }",
+        "expectedOutput": "1 2 3 4 5 6",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid merge(int a[], int m, int b[], int n, int c[]) { int i=0,j=0,k=0; while(i<m && j<n) c[k++]=a[i]<b[j]?a[i++]:b[j++]; while(i<m) c[k++]=a[i++]; while(j<n) c[k++]=b[j++]; }\nint main() { int a[]={1,3,5}, b[]={2,4,6}, c[6]; merge(a,3,b,3,c); for(int i=0;i<6;i++) cout<<c[i]<<\" \"; return 0; }",
+        "explanation": {
+            "approach": "Two pointers, pick smaller.",
+            "analogy": "Merge sorted decks of cards.",
+            "steps": [
+                "Compare fronts",
+                "Pick smaller",
+                "Handle remainder"
+            ],
+            "complexity": "Time: O(m+n), Space: O(m+n)"
+        }
+    },
+    {
+        "id": "easy38",
+        "title": "Find Intersection",
+        "description": "Common elements.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid intersection(int a[], int m, int b[], int n) {}\nint main() { int a[]={1,2,3,4,5}, b[]={3,4,5,6,7}; intersection(a,5,b,5); return 0; }",
+        "expectedOutput": "3 4 5",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid intersection(int a[], int m, int b[], int n) { for(int i=0;i<m;i++) for(int j=0;j<n;j++) if(a[i]==b[j]) { cout<<a[i]<<\" \"; break; } }\nint main() { int a[]={1,2,3,4,5}, b[]={3,4,5,6,7}; intersection(a,5,b,5); return 0; }",
+        "explanation": {
+            "approach": "Check each element in both.",
+            "analogy": "Find matching items.",
+            "steps": [
+                "For each in a, search in b",
+                "Print if found"
+            ],
+            "complexity": "Time: O(m×n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy39",
+        "title": "Find Union",
+        "description": "All unique elements.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid unionArr(int a[], int m, int b[], int n) {}\nint main() { int a[]={1,2,3}, b[]={3,4,5}; unionArr(a,3,b,3); return 0; }",
+        "expectedOutput": "1 2 3 4 5",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid unionArr(int a[], int m, int b[], int n) { for(int i=0;i<m;i++) cout<<a[i]<<\" \"; for(int i=0;i<n;i++) { bool found=false; for(int j=0;j<m;j++) if(b[i]==a[j]) { found=true; break; } if(!found) cout<<b[i]<<\" \"; } }\nint main() { int a[]={1,2,3}, b[]={3,4,5}; unionArr(a,3,b,3); return 0; }",
+        "explanation": {
+            "approach": "Print a, then b elements not in a.",
+            "analogy": "Combine without duplicates.",
+            "steps": [
+                "Print all of a",
+                "Print b if not in a"
+            ],
+            "complexity": "Time: O(m×n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy40",
+        "title": "Frequency Count",
+        "description": "Count each element.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid frequency(int a[], int n) {}\nint main() { int a[]={1,2,2,3,3,3,4,4,4,4}; frequency(a,10); return 0; }",
+        "expectedOutput": "1:1 2:2 3:3 4:4",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid frequency(int a[], int n) { int vis[n]={}; for(int i=0;i<n;i++) { if(vis[i]) continue; int c=1; for(int j=i+1;j<n;j++) if(a[i]==a[j]) { c++; vis[j]=1; } cout<<a[i]<<\":\"<<c<<\" \"; } }\nint main() { int a[]={1,2,2,3,3,3,4,4,4,4}; frequency(a,10); return 0; }",
+        "explanation": {
+            "approach": "Count occurrences of each.",
+            "analogy": "Tally each unique element.",
+            "steps": [
+                "Mark visited",
+                "Count matches",
+                "Print count"
+            ],
+            "complexity": "Time: O(n²), Space: O(n)"
+        }
+    },
+    {
+        "id": "easy41",
+        "title": "Left Rotate Once",
+        "description": "Rotate left by 1.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid rotateLeft(int a[], int n) {}\nint main() { int a[]={1,2,3,4,5}; rotateLeft(a,5); for(int i=0;i<5;i++) cout<<a[i]<<\" \"; return 0; }",
+        "expectedOutput": "2 3 4 5 1",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid rotateLeft(int a[], int n) { int t=a[0]; for(int i=0;i<n-1;i++) a[i]=a[i+1]; a[n-1]=t; }\nint main() { int a[]={1,2,3,4,5}; rotateLeft(a,5); for(int i=0;i<5;i++) cout<<a[i]<<\" \"; return 0; }",
+        "explanation": {
+            "approach": "Save first, shift left, put at end.",
+            "analogy": "Move everyone one seat left.",
+            "steps": [
+                "Save first element",
+                "Shift all left",
+                "Put saved at end"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy42",
+        "title": "Right Rotate Once",
+        "description": "Rotate right by 1.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid rotateRight(int a[], int n) {}\nint main() { int a[]={1,2,3,4,5}; rotateRight(a,5); for(int i=0;i<5;i++) cout<<a[i]<<\" \"; return 0; }",
+        "expectedOutput": "5 1 2 3 4",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid rotateRight(int a[], int n) { int t=a[n-1]; for(int i=n-1;i>0;i--) a[i]=a[i-1]; a[0]=t; }\nint main() { int a[]={1,2,3,4,5}; rotateRight(a,5); for(int i=0;i<5;i++) cout<<a[i]<<\" \"; return 0; }",
+        "explanation": {
+            "approach": "Save last, shift right, put at start.",
+            "analogy": "Move everyone one seat right.",
+            "steps": [
+                "Save last element",
+                "Shift all right",
+                "Put saved at start"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy43",
+        "title": "Peak Element",
+        "description": "Find local maximum.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint findPeak(int a[], int n) { return 0; }\nint main() { int a[]={1,3,20,4,1,0}; cout<<findPeak(a,6); return 0; }",
+        "expectedOutput": "20",
+        "solution": "#include <iostream>\nusing namespace std;\nint findPeak(int a[], int n) { for(int i=0;i<n;i++) { bool left = i==0 || a[i]>=a[i-1]; bool right = i==n-1 || a[i]>=a[i+1]; if(left && right) return a[i]; } return -1; }\nint main() { int a[]={1,3,20,4,1,0}; cout<<findPeak(a,6); return 0; }",
+        "explanation": {
+            "approach": "Find element >= both neighbors.",
+            "analogy": "Mountain top.",
+            "steps": [
+                "Check if >= left and >= right",
+                "Return first peak"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy44",
+        "title": "Find Minimum",
+        "description": "Minimum element.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint findMin(int a[], int n) { return 0; }\nint main() { int a[]={3,1,4,1,5,9,2}; cout<<findMin(a,7); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint findMin(int a[], int n) { int mn=a[0]; for(int i=1;i<n;i++) if(a[i]<mn) mn=a[i]; return mn; }\nint main() { int a[]={3,1,4,1,5,9,2}; cout<<findMin(a,7); return 0; }",
+        "explanation": {
+            "approach": "Track minimum while scanning.",
+            "analogy": "Find smallest number.",
+            "steps": [
+                "Assume first is min",
+                "Update if smaller found"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy45",
+        "title": "Sum of Digits",
+        "description": "Sum all digits.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumDigits(int n) { return 0; }\nint main() { cout<<sumDigits(12345); return 0; }",
+        "expectedOutput": "15",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumDigits(int n) { int s=0; while(n>0) { s+=n%10; n/=10; } return s; }\nint main() { cout<<sumDigits(12345); return 0; }",
+        "explanation": {
+            "approach": "Extract and sum each digit.",
+            "analogy": "Add up all digit values.",
+            "steps": [
+                "Get last digit with %10",
+                "Add to sum",
+                "Remove digit with /10"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy46",
+        "title": "Count Digits",
+        "description": "Number of digits.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countDigits(int n) { return 0; }\nint main() { cout<<countDigits(12345); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint countDigits(int n) { int c=0; while(n>0) { c++; n/=10; } return c; }\nint main() { cout<<countDigits(12345); return 0; }",
+        "explanation": {
+            "approach": "Count divisions by 10.",
+            "analogy": "How many times can we divide by 10?",
+            "steps": [
+                "Divide by 10",
+                "Count iterations"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy47",
+        "title": "Reverse Number",
+        "description": "Reverse digit order.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint reverse(int n) { return 0; }\nint main() { cout<<reverse(12345); return 0; }",
+        "expectedOutput": "54321",
+        "solution": "#include <iostream>\nusing namespace std;\nint reverse(int n) { int r=0; while(n>0) { r=r*10+n%10; n/=10; } return r; }\nint main() { cout<<reverse(12345); return 0; }",
+        "explanation": {
+            "approach": "Build reversed number digit by digit.",
+            "analogy": "Read number backwards.",
+            "steps": [
+                "Get last digit",
+                "Add to result × 10",
+                "Remove digit"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy48",
+        "title": "Is Palindrome Number",
+        "description": "Number reads same forwards and backwards.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPalindrome(int n) { return false; }\nint main() { cout<<isPalindrome(12321); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPalindrome(int n) { int orig=n, r=0; while(n>0) { r=r*10+n%10; n/=10; } return r==orig; }\nint main() { cout<<isPalindrome(12321); return 0; }",
+        "explanation": {
+            "approach": "Reverse and compare.",
+            "analogy": "Does it read the same backward?",
+            "steps": [
+                "Reverse the number",
+                "Compare with original"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    }
+]

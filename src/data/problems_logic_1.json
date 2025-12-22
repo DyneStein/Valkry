@@ -1,0 +1,191 @@
+[
+    {
+        "id": "logic1",
+        "title": "Josephus Problem",
+        "description": "Find last survivor.",
+        "difficulty": "MEDIUM",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint josephus(int n, int k) { return 0; }\nint main() { cout<<josephus(5,2); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint josephus(int n, int k) { if(n==1) return 0; return (josephus(n-1,k)+k)%n; }\nint main() { cout<<josephus(5,2); return 0; }",
+        "explanation": {
+            "approach": "f(n,k) = (f(n-1,k)+k) mod n.",
+            "analogy": "Circle elimination game.",
+            "steps": [
+                "Base: 1 person at position 0",
+                "Recurse with shifted positions"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "logic2",
+        "title": "Tower of Hanoi Steps",
+        "description": "Count minimum moves.",
+        "difficulty": "EASY",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint hanoiMoves(int n) { return 0; }\nint main() { cout<<hanoiMoves(3); return 0; }",
+        "expectedOutput": "7",
+        "solution": "#include <iostream>\nusing namespace std;\nint hanoiMoves(int n) { return (1<<n)-1; }\nint main() { cout<<hanoiMoves(3); return 0; }",
+        "explanation": {
+            "approach": "Formula: 2^n - 1 moves.",
+            "analogy": "Doubles with each disk added, minus 1.",
+            "steps": [
+                "2^n - 1"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "logic3",
+        "title": "Egg Drop Problem",
+        "description": "Min tries with 2 eggs.",
+        "difficulty": "MEDIUM",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint eggDrop(int n) { return 0; }\nint main() { cout<<eggDrop(10); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint eggDrop(int n) { int tries=1; while(tries*(tries+1)/2<n) tries++; return tries; }\nint main() { cout<<eggDrop(10); return 0; }",
+        "explanation": {
+            "approach": "Find k where k(k+1)/2 >= n.",
+            "analogy": "Triangular number covers n floors.",
+            "steps": [
+                "With k tries, can cover k(k+1)/2 floors"
+            ],
+            "complexity": "Time: O(√n), Space: O(1)"
+        }
+    },
+    {
+        "id": "logic4",
+        "title": "Water Jug Problem",
+        "description": "Can measure target liters.",
+        "difficulty": "MEDIUM",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool canMeasure(int x, int y, int z) { return false; }\nint main() { cout<<canMeasure(3,5,4); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) { return b==0?a:gcd(b,a%b); }\nbool canMeasure(int x, int y, int z) { return z<=x+y && z%gcd(x,y)==0; }\nint main() { cout<<canMeasure(3,5,4); return 0; }",
+        "explanation": {
+            "approach": "Possible if z divides gcd(x,y) and z <= x+y.",
+            "analogy": "Can only measure multiples of GCD.",
+            "steps": [
+                "Check z <= x+y",
+                "Check z % gcd(x,y) == 0"
+            ],
+            "complexity": "Time: O(log min(x,y)), Space: O(1)"
+        }
+    },
+    {
+        "id": "logic5",
+        "title": "Monty Hall",
+        "description": "Should you switch?",
+        "difficulty": "EASY",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid montyHall() {}\nint main() { montyHall(); return 0; }",
+        "expectedOutput": "Switch",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid montyHall() { cout<<\"Switch\"; }\nint main() { montyHall(); return 0; }",
+        "explanation": {
+            "approach": "Switching wins 2/3 of the time.",
+            "analogy": "Initial choice is 1/3, other two are 2/3. Host reveals one, so switch gets 2/3.",
+            "steps": [
+                "Original choice: 1/3 chance",
+                "Other door: 2/3 chance",
+                "Always switch!"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "logic6",
+        "title": "Birthday Paradox",
+        "description": "People needed for 50% same birthday.",
+        "difficulty": "EASY",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint birthdayParadox() { return 0; }\nint main() { cout<<birthdayParadox(); return 0; }",
+        "expectedOutput": "23",
+        "solution": "#include <iostream>\nusing namespace std;\nint birthdayParadox() { double p=1; int n=0; while(p>0.5) { n++; p*=(365.0-n+1)/365; } return n; }\nint main() { cout<<birthdayParadox(); return 0; }",
+        "explanation": {
+            "approach": "Calculate probability of all different birthdays.",
+            "analogy": "With 23 people, >50% chance of shared birthday.",
+            "steps": [
+                "P(all different) = 365/365 × 364/365 × ...",
+                "Find when < 0.5"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "logic7",
+        "title": "Prisoner Hat Problem",
+        "description": "Max saves with strategy.",
+        "difficulty": "EASY",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint maxSaves(int n) { return 0; }\nint main() { cout<<maxSaves(10); return 0; }",
+        "expectedOutput": "9",
+        "solution": "#include <iostream>\nusing namespace std;\nint maxSaves(int n) { return n-1; }\nint main() { cout<<maxSaves(10); return 0; }",
+        "explanation": {
+            "approach": "First person encodes parity, guarantees n-1 saves.",
+            "analogy": "First person says parity of black hats ahead.",
+            "steps": [
+                "First says odd/even count",
+                "Others deduce their color"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "logic8",
+        "title": "Bridge Crossing",
+        "description": "Min time for 4 people.",
+        "difficulty": "MEDIUM",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint bridgeCrossing(int a, int b, int c, int d) { return 0; }\nint main() { cout<<bridgeCrossing(1,2,5,10); return 0; }",
+        "expectedOutput": "17",
+        "solution": "#include <iostream>\nusing namespace std;\nint bridgeCrossing(int a, int b, int c, int d) { int t[4]={a,b,c,d}; for(int i=0;i<4;i++) for(int j=i+1;j<4;j++) if(t[i]>t[j]) swap(t[i],t[j]); int opt1=t[0]+t[1]+t[0]+t[3]+t[0]+t[2]; int opt2=t[0]+t[3]+t[0]+t[2]+t[0]+t[1]; int opt3=t[1]+t[1]+t[0]+t[3]+t[1]+t[1]; return min({t[0]+t[1]+t[0]+t[3]+t[2], t[1]+t[0]+t[3]+t[1]+t[2], t[0]+t[3]+t[0]+t[2]+t[1]}); }\nint main() { cout<<bridgeCrossing(1,2,5,10); return 0; }",
+        "explanation": {
+            "approach": "Use fastest as shuttle or pair slowest.",
+            "analogy": "Balance between fast returning and slow pairing.",
+            "steps": [
+                "Option 1: fastest shuttles everyone",
+                "Option 2: pair slowest"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "logic9",
+        "title": "Weighing Balls",
+        "description": "Min weighings for fake ball.",
+        "difficulty": "EASY",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint minWeighings(int n) { return 0; }\nint main() { cout<<minWeighings(9); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint minWeighings(int n) { int w=0; while(n>1) { n=(n+2)/3; w++; } return w; }\nint main() { cout<<minWeighings(9); return 0; }",
+        "explanation": {
+            "approach": "Divide into 3 groups, one weighing eliminates 2/3.",
+            "analogy": "Like ternary search.",
+            "steps": [
+                "Each weighing divides by 3",
+                "log₃(n) weighings needed"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "logic10",
+        "title": "Chessboard Rice",
+        "description": "Grains on chessboard.",
+        "difficulty": "EASY",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nlong long totalRice(int n) { return 0; }\nint main() { cout<<totalRice(8); return 0; }",
+        "expectedOutput": "255",
+        "solution": "#include <iostream>\nusing namespace std;\nlong long totalRice(int n) { return (1LL<<n)-1; }\nint main() { cout<<totalRice(8); return 0; }",
+        "explanation": {
+            "approach": "Sum of 2^0 + 2^1 + ... + 2^(n-1) = 2^n - 1.",
+            "analogy": "Geometric series with ratio 2.",
+            "steps": [
+                "Each square doubles previous",
+                "Total = 2^n - 1"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    }
+]

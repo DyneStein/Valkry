@@ -1,0 +1,193 @@
+[
+    {
+        "id": "dp11",
+        "title": "Rod Cutting",
+        "description": "Max profit from rod pieces.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint cutRod(int prices[], int n) { return 0; }\nint main() { int prices[]={1,5,8,9,10,17,17,20}; cout<<cutRod(prices,8); return 0; }",
+        "expectedOutput": "22",
+        "solution": "#include <iostream>\nusing namespace std;\nint cutRod(int prices[], int n) { int dp[n+1]={}; for(int i=1;i<=n;i++) for(int j=1;j<=i;j++) dp[i]=max(dp[i],prices[j-1]+dp[i-j]); return dp[n]; }\nint main() { int prices[]={1,5,8,9,10,17,17,20}; cout<<cutRod(prices,8); return 0; }",
+        "explanation": {
+            "approach": "DP - max value for each length.",
+            "analogy": "Try all first cut positions.",
+            "steps": [
+                "dp[i] = max profit for length i",
+                "Try cutting at each position"
+            ],
+            "complexity": "Time: O(n²), Space: O(n)"
+        }
+    },
+    {
+        "id": "dp12",
+        "title": "Matrix Chain Multiplication",
+        "description": "Min operations to multiply matrices.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint matrixChain(int dims[], int n) { return 0; }\nint main() { int dims[]={10,30,5,60}; cout<<matrixChain(dims,4); return 0; }",
+        "expectedOutput": "4500",
+        "solution": "#include <iostream>\nusing namespace std;\nint matrixChain(int dims[], int n) { int m=n-1; int dp[m][m]; for(int i=0;i<m;i++) dp[i][i]=0; for(int len=2;len<=m;len++) for(int i=0;i<=m-len;i++) { int j=i+len-1; dp[i][j]=1e9; for(int k=i;k<j;k++) dp[i][j]=min(dp[i][j],dp[i][k]+dp[k+1][j]+dims[i]*dims[k+1]*dims[j+1]); } return dp[0][m-1]; }\nint main() { int dims[]={10,30,5,60}; cout<<matrixChain(dims,4); return 0; }",
+        "explanation": {
+            "approach": "DP on ranges.",
+            "analogy": "Find optimal split point.",
+            "steps": [
+                "dp[i][j] = min ops for i to j",
+                "Try all split points k"
+            ],
+            "complexity": "Time: O(n³), Space: O(n²)"
+        }
+    },
+    {
+        "id": "dp13",
+        "title": "Egg Drop",
+        "description": "Min trials for k eggs, n floors.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint eggDrop(int k, int n) { return 0; }\nint main() { cout<<eggDrop(2,10); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint eggDrop(int k, int n) { int dp[k+1][n+1]; for(int i=0;i<=k;i++) { dp[i][0]=0; dp[i][1]=1; } for(int j=0;j<=n;j++) dp[1][j]=j; for(int i=2;i<=k;i++) for(int j=2;j<=n;j++) { dp[i][j]=j; for(int x=1;x<=j;x++) dp[i][j]=min(dp[i][j],1+max(dp[i-1][x-1],dp[i][j-x])); } return dp[k][n]; }\nint main() { cout<<eggDrop(2,10); return 0; }",
+        "explanation": {
+            "approach": "DP - min trials for eggs and floors.",
+            "analogy": "Try dropping from each floor.",
+            "steps": [
+                "dp[k][n] = min trials for k eggs, n floors",
+                "Try dropping from each floor x"
+            ],
+            "complexity": "Time: O(k × n²), Space: O(kn)"
+        }
+    },
+    {
+        "id": "dp14",
+        "title": "Longest Bitonic Subseq",
+        "description": "Longest increasing then decreasing.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint longestBitonic(int a[], int n) { return 0; }\nint main() { int a[]={1,11,2,10,4,5,2,1}; cout<<longestBitonic(a,8); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint longestBitonic(int a[], int n) { int lis[n],lds[n]; for(int i=0;i<n;i++) { lis[i]=1; for(int j=0;j<i;j++) if(a[j]<a[i]) lis[i]=max(lis[i],lis[j]+1); } for(int i=n-1;i>=0;i--) { lds[i]=1; for(int j=n-1;j>i;j--) if(a[j]<a[i]) lds[i]=max(lds[i],lds[j]+1); } int mx=0; for(int i=0;i<n;i++) mx=max(mx,lis[i]+lds[i]-1); return mx; }\nint main() { int a[]={1,11,2,10,4,5,2,1}; cout<<longestBitonic(a,8); return 0; }",
+        "explanation": {
+            "approach": "LIS from left + LDS from right.",
+            "analogy": "Peak at each position.",
+            "steps": [
+                "Compute LIS ending at each i",
+                "Compute LDS starting at each i",
+                "Max of lis[i] + lds[i] - 1"
+            ],
+            "complexity": "Time: O(n²), Space: O(n)"
+        }
+    },
+    {
+        "id": "dp15",
+        "title": "Palindrome Partitioning",
+        "description": "Min cuts for palindrome partition.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint minCut(char s[]) { return 0; }\nint main() { cout<<minCut(\"aab\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint minCut(char s[]) { int n=0; while(s[n]) n++; bool isPalin[n][n]={}; for(int i=0;i<n;i++) isPalin[i][i]=true; for(int len=2;len<=n;len++) for(int i=0;i<=n-len;i++) { int j=i+len-1; if(s[i]==s[j]) isPalin[i][j]=(len==2)|isPalin[i+1][j-1]; } int dp[n]; for(int i=0;i<n;i++) { if(isPalin[0][i]) dp[i]=0; else { dp[i]=i; for(int j=1;j<=i;j++) if(isPalin[j][i]) dp[i]=min(dp[i],dp[j-1]+1); } } return dp[n-1]; }\nint main() { cout<<minCut(\"aab\"); return 0; }",
+        "explanation": {
+            "approach": "DP with palindrome precomputation.",
+            "analogy": "Min cuts to make all parts palindromes.",
+            "steps": [
+                "Precompute all palindrome substrings",
+                "dp[i] = min cuts for s[0..i]"
+            ],
+            "complexity": "Time: O(n²), Space: O(n²)"
+        }
+    },
+    {
+        "id": "dp16",
+        "title": "Longest Zigzag",
+        "description": "Longest alternating subsequence.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint longestZigzag(int a[], int n) { return 0; }\nint main() { int a[]={1,7,4,9,2,5}; cout<<longestZigzag(a,6); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint longestZigzag(int a[], int n) { int up[n],down[n]; up[0]=down[0]=1; for(int i=1;i<n;i++) { up[i]=down[i]=1; for(int j=0;j<i;j++) { if(a[i]>a[j]) up[i]=max(up[i],down[j]+1); if(a[i]<a[j]) down[i]=max(down[i],up[j]+1); } } int mx=1; for(int i=0;i<n;i++) mx=max(mx,max(up[i],down[i])); return mx; }\nint main() { int a[]={1,7,4,9,2,5}; cout<<longestZigzag(a,6); return 0; }",
+        "explanation": {
+            "approach": "Track up and down endings.",
+            "analogy": "Alternate up then down.",
+            "steps": [
+                "up[i] = zigzag ending up at i",
+                "down[i] = zigzag ending down at i"
+            ],
+            "complexity": "Time: O(n²), Space: O(n)"
+        }
+    },
+    {
+        "id": "dp17",
+        "title": "Count Palindromic Substrings",
+        "description": "Count all palindromic substrings.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countSubstrings(char s[]) { return 0; }\nint main() { cout<<countSubstrings(\"aaa\"); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint countSubstrings(char s[]) { int n=0; while(s[n]) n++; int cnt=0; for(int i=0;i<n;i++) { int l=i,r=i; while(l>=0 && r<n && s[l]==s[r]) { cnt++; l--; r++; } l=i; r=i+1; while(l>=0 && r<n && s[l]==s[r]) { cnt++; l--; r++; } } return cnt; }\nint main() { cout<<countSubstrings(\"aaa\"); return 0; }",
+        "explanation": {
+            "approach": "Expand around each center.",
+            "analogy": "Try odd and even length palindromes.",
+            "steps": [
+                "For each center, expand",
+                "Count all palindromes found"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "dp18",
+        "title": "Optimal BST",
+        "description": "Min search cost BST.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint optimalBST(int keys[], int freq[], int n) { return 0; }\nint main() { int keys[]={10,12,20}; int freq[]={34,8,50}; cout<<optimalBST(keys,freq,3); return 0; }",
+        "expectedOutput": "142",
+        "solution": "#include <iostream>\nusing namespace std;\nint optimalBST(int keys[], int freq[], int n) { int dp[n][n], sum[n][n]; for(int i=0;i<n;i++) { dp[i][i]=freq[i]; sum[i][i]=freq[i]; } for(int len=2;len<=n;len++) for(int i=0;i<=n-len;i++) { int j=i+len-1; dp[i][j]=1e9; sum[i][j]=sum[i][j-1]+freq[j]; for(int r=i;r<=j;r++) { int c=sum[i][j]+(r>i?dp[i][r-1]:0)+(r<j?dp[r+1][j]:0); dp[i][j]=min(dp[i][j],c); } } return dp[0][n-1]; }\nint main() { int keys[]={10,12,20}; int freq[]={34,8,50}; cout<<optimalBST(keys,freq,3); return 0; }",
+        "explanation": {
+            "approach": "DP on ranges, try each as root.",
+            "analogy": "Min expected search cost.",
+            "steps": [
+                "dp[i][j] = min cost for keys i to j",
+                "Try each key as root"
+            ],
+            "complexity": "Time: O(n³), Space: O(n²)"
+        }
+    },
+    {
+        "id": "dp19",
+        "title": "Maximum Product Subarray",
+        "description": "Max product contiguous.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint maxProduct(int a[], int n) { return 0; }\nint main() { int a[]={2,3,-2,4}; cout<<maxProduct(a,4); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint maxProduct(int a[], int n) { int mx=a[0],mn=a[0],res=a[0]; for(int i=1;i<n;i++) { if(a[i]<0) swap(mx,mn); mx=max(a[i],mx*a[i]); mn=min(a[i],mn*a[i]); res=max(res,mx); } return res; }\nint main() { int a[]={2,3,-2,4}; cout<<maxProduct(a,4); return 0; }",
+        "explanation": {
+            "approach": "Track max and min products.",
+            "analogy": "Negative × negative = positive.",
+            "steps": [
+                "Track both max and min at each position",
+                "Swap on negative"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "dp20",
+        "title": "Coin Change Count",
+        "description": "Number of ways to make amount.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint coinChangeWays(int coins[], int n, int amt) { return 0; }\nint main() { int coins[]={1,2,5}; cout<<coinChangeWays(coins,3,5); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint coinChangeWays(int coins[], int n, int amt) { int dp[amt+1]={}; dp[0]=1; for(int i=0;i<n;i++) for(int j=coins[i];j<=amt;j++) dp[j]+=dp[j-coins[i]]; return dp[amt]; }\nint main() { int coins[]={1,2,5}; cout<<coinChangeWays(coins,3,5); return 0; }",
+        "explanation": {
+            "approach": "DP - count ways for each amount.",
+            "analogy": "Unbounded knapsack variation.",
+            "steps": [
+                "Process each coin",
+                "Add ways using that coin"
+            ],
+            "complexity": "Time: O(n × amt), Space: O(amt)"
+        }
+    }
+]

@@ -1,0 +1,185 @@
+[
+    {
+        "id": "m31",
+        "title": "Rotate Image",
+        "description": "Rotate matrix 90 degrees.",
+        "difficulty": "MEDIUM",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid rotate(int m[][3], int n) {}\nint main() { int m[][3]={{1,2,3},{4,5,6},{7,8,9}}; rotate(m,3); for(int i=0;i<3;i++) { for(int j=0;j<3;j++) cout<<m[i][j]<<\" \"; } return 0; }",
+        "expectedOutput": "7 4 1 8 5 2 9 6 3",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid rotate(int m[][3], int n) { for(int i=0;i<n;i++) for(int j=i+1;j<n;j++) swap(m[i][j],m[j][i]); for(int i=0;i<n;i++) for(int j=0;j<n/2;j++) swap(m[i][j],m[i][n-1-j]); }\nint main() { int m[][3]={{1,2,3},{4,5,6},{7,8,9}}; rotate(m,3); for(int i=0;i<3;i++) { for(int j=0;j<3;j++) cout<<m[i][j]<<\" \"; } return 0; }",
+        "explanation": {
+            "approach": "Transpose then reverse rows.",
+            "steps": [
+                "Transpose matrix",
+                "Reverse each row"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "m32",
+        "title": "Set Matrix Zeroes",
+        "description": "Mark entire row/col as zero.",
+        "difficulty": "MEDIUM",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid setZeroes(int m[][3], int r, int c) {}\nint main() { int m[][3]={{1,1,1},{1,0,1},{1,1,1}}; setZeroes(m,3,3); for(int i=0;i<3;i++) for(int j=0;j<3;j++) cout<<m[i][j]<<\" \"; return 0; }",
+        "expectedOutput": "1 0 1 0 0 0 1 0 1",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid setZeroes(int m[][3], int r, int c) { bool zeroR[10]={},zeroC[10]={}; for(int i=0;i<r;i++) for(int j=0;j<c;j++) if(m[i][j]==0) { zeroR[i]=true; zeroC[j]=true; } for(int i=0;i<r;i++) for(int j=0;j<c;j++) if(zeroR[i]||zeroC[j]) m[i][j]=0; }\nint main() { int m[][3]={{1,1,1},{1,0,1},{1,1,1}}; setZeroes(m,3,3); for(int i=0;i<3;i++) for(int j=0;j<3;j++) cout<<m[i][j]<<\" \"; return 0; }",
+        "explanation": {
+            "approach": "Mark rows and cols to zero.",
+            "steps": [
+                "Find zeros, mark rows/cols",
+                "Set marked rows/cols to zero"
+            ],
+            "complexity": "Time: O(mn), Space: O(m+n)"
+        }
+    },
+    {
+        "id": "m33",
+        "title": "Spiral Matrix",
+        "description": "Return elements in spiral.",
+        "difficulty": "MEDIUM",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid spiralOrder(int m[][3], int r, int c) {}\nint main() { int m[][3]={{1,2,3},{4,5,6},{7,8,9}}; spiralOrder(m,3,3); return 0; }",
+        "expectedOutput": "1 2 3 6 9 8 7 4 5",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid spiralOrder(int m[][3], int r, int c) { int t=0,b=r-1,l=0,ri=c-1; while(t<=b&&l<=ri) { for(int i=l;i<=ri;i++) cout<<m[t][i]<<\" \"; t++; for(int i=t;i<=b;i++) cout<<m[i][ri]<<\" \"; ri--; if(t<=b) { for(int i=ri;i>=l;i--) cout<<m[b][i]<<\" \"; b--; } if(l<=ri) { for(int i=b;i>=t;i--) cout<<m[i][l]<<\" \"; l++; } } }\nint main() { int m[][3]={{1,2,3},{4,5,6},{7,8,9}}; spiralOrder(m,3,3); return 0; }",
+        "explanation": {
+            "approach": "Layer by layer traversal.",
+            "steps": [
+                "Maintain top, bottom, left, right",
+                "Process each layer"
+            ],
+            "complexity": "Time: O(mn), Space: O(1)"
+        }
+    },
+    {
+        "id": "m34",
+        "title": "Search 2D Matrix",
+        "description": "Search in row/col sorted matrix.",
+        "difficulty": "MEDIUM",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool searchMatrix(int m[][4], int r, int c, int t) { return false; }\nint main() { int m[][4]={{1,3,5,7},{10,11,16,20},{23,30,34,60}}; cout << searchMatrix(m,3,4,3); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool searchMatrix(int m[][4], int r, int c, int t) { int lo=0,hi=r*c-1; while(lo<=hi) { int mid=(lo+hi)/2; int v=m[mid/c][mid%c]; if(v==t) return true; if(v<t) lo=mid+1; else hi=mid-1; } return false; }\nint main() { int m[][4]={{1,3,5,7},{10,11,16,20},{23,30,34,60}}; cout << searchMatrix(m,3,4,3); return 0; }",
+        "explanation": {
+            "approach": "Binary search treating as 1D.",
+            "steps": [
+                "Map index to (row, col)",
+                "Binary search"
+            ],
+            "complexity": "Time: O(log(mn)), Space: O(1)"
+        }
+    },
+    {
+        "id": "m35",
+        "title": "Word Search",
+        "description": "Find word in grid.",
+        "difficulty": "MEDIUM",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool exist(char b[][4], int m, int n, char w[]) { return false; }\nint main() { char b[][4]={{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}; cout << exist(b,3,4,\"SEE\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool dfs(char b[][4],int m,int n,int i,int j,char w[],int k) { if(!w[k]) return true; if(i<0||i>=m||j<0||j>=n||b[i][j]!=w[k]) return false; char t=b[i][j]; b[i][j]='#'; bool f=dfs(b,m,n,i+1,j,w,k+1)||dfs(b,m,n,i-1,j,w,k+1)||dfs(b,m,n,i,j+1,w,k+1)||dfs(b,m,n,i,j-1,w,k+1); b[i][j]=t; return f; }\nbool exist(char b[][4],int m,int n,char w[]) { for(int i=0;i<m;i++) for(int j=0;j<n;j++) if(dfs(b,m,n,i,j,w,0)) return true; return false; }\nint main() { char b[][4]={{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}; cout << exist(b,3,4,\"SEE\"); return 0; }",
+        "explanation": {
+            "approach": "DFS with backtracking.",
+            "steps": [
+                "Try each cell as start",
+                "DFS in 4 directions"
+            ],
+            "complexity": "Time: O(m×n×4^L), Space: O(L)"
+        }
+    },
+    {
+        "id": "m36",
+        "title": "Reverse Linked List II",
+        "description": "Reverse between positions.",
+        "difficulty": "MEDIUM",
+        "category": "Linked List",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* reverseBetween(Node* h, int l, int r) { return nullptr; }\nint main() { Node* h=new Node(1); h->n=new Node(2); h->n->n=new Node(3); h->n->n->n=new Node(4); h->n->n->n->n=new Node(5); h=reverseBetween(h,2,4); while(h) { cout<<h->v<<\" \"; h=h->n; } return 0; }",
+        "expectedOutput": "1 4 3 2 5",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* reverseBetween(Node* h, int l, int r) { Node d(0); d.n=h; Node* pre=&d; for(int i=1;i<l;i++) pre=pre->n; Node* cur=pre->n; for(int i=0;i<r-l;i++) { Node* t=cur->n; cur->n=t->n; t->n=pre->n; pre->n=t; } return d.n; }\nint main() { Node* h=new Node(1); h->n=new Node(2); h->n->n=new Node(3); h->n->n->n=new Node(4); h->n->n->n->n=new Node(5); h=reverseBetween(h,2,4); while(h) { cout<<h->v<<\" \"; h=h->n; } return 0; }",
+        "explanation": {
+            "approach": "Move nodes to front of segment.",
+            "steps": [
+                "Find node before l",
+                "Move each node to front"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "m37",
+        "title": "Copy List Random",
+        "description": "Deep copy with random pointer.",
+        "difficulty": "MEDIUM",
+        "category": "Linked List",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *n, *r; Node(int x):v(x),n(0),r(0){} };\nNode* copyRandomList(Node* h) { return nullptr; }\nint main() { cout << \"OK\"; return 0; }",
+        "expectedOutput": "OK",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *n, *r; Node(int x):v(x),n(0),r(0){} };\nNode* copyRandomList(Node* h) { if(!h) return 0; Node* cur=h; while(cur) { Node* copy=new Node(cur->v); copy->n=cur->n; cur->n=copy; cur=copy->n; } cur=h; while(cur) { if(cur->r) cur->n->r=cur->r->n; cur=cur->n->n; } Node* newH=h->n; cur=h; while(cur) { Node* copy=cur->n; cur->n=copy->n; cur=cur->n; if(copy->n) copy->n=copy->n->n; } return newH; }\nint main() { cout << \"OK\"; return 0; }",
+        "explanation": {
+            "approach": "Interleave copies, then separate.",
+            "steps": [
+                "Insert copies after originals",
+                "Set random pointers",
+                "Separate lists"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "m38",
+        "title": "Add Two Numbers",
+        "description": "Add two numbers as linked lists.",
+        "difficulty": "MEDIUM",
+        "category": "Linked List",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* addTwoNumbers(Node* l1, Node* l2) { return nullptr; }\nint main() { Node* l1=new Node(2); l1->n=new Node(4); l1->n->n=new Node(3); Node* l2=new Node(5); l2->n=new Node(6); l2->n->n=new Node(4); Node* r=addTwoNumbers(l1,l2); while(r) { cout<<r->v; r=r->n; } return 0; }",
+        "expectedOutput": "708",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* addTwoNumbers(Node* l1, Node* l2) { Node d(0),*t=&d; int c=0; while(l1||l2||c) { int s=c; if(l1) { s+=l1->v; l1=l1->n; } if(l2) { s+=l2->v; l2=l2->n; } c=s/10; t->n=new Node(s%10); t=t->n; } return d.n; }\nint main() { Node* l1=new Node(2); l1->n=new Node(4); l1->n->n=new Node(3); Node* l2=new Node(5); l2->n=new Node(6); l2->n->n=new Node(4); Node* r=addTwoNumbers(l1,l2); while(r) { cout<<r->v; r=r->n; } return 0; }",
+        "explanation": {
+            "approach": "Add digit by digit with carry.",
+            "steps": [
+                "Traverse both lists",
+                "Add digits and carry",
+                "Create result node"
+            ],
+            "complexity": "Time: O(max(m,n)), Space: O(max(m,n))"
+        }
+    },
+    {
+        "id": "m39",
+        "title": "Remove Nth From End",
+        "description": "Remove nth node from end.",
+        "difficulty": "MEDIUM",
+        "category": "Linked List",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* removeNthFromEnd(Node* h, int n) { return nullptr; }\nint main() { Node* h=new Node(1); h->n=new Node(2); h->n->n=new Node(3); h->n->n->n=new Node(4); h->n->n->n->n=new Node(5); h=removeNthFromEnd(h,2); while(h) { cout<<h->v<<\" \"; h=h->n; } return 0; }",
+        "expectedOutput": "1 2 3 5",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* removeNthFromEnd(Node* h, int n) { Node d(0); d.n=h; Node *f=&d,*s=&d; for(int i=0;i<=n;i++) f=f->n; while(f) { f=f->n; s=s->n; } s->n=s->n->n; return d.n; }\nint main() { Node* h=new Node(1); h->n=new Node(2); h->n->n=new Node(3); h->n->n->n=new Node(4); h->n->n->n->n=new Node(5); h=removeNthFromEnd(h,2); while(h) { cout<<h->v<<\" \"; h=h->n; } return 0; }",
+        "explanation": {
+            "approach": "Two pointers n apart.",
+            "steps": [
+                "Move fast n+1 ahead",
+                "Move both until fast reaches end",
+                "Remove slow.next"
+            ],
+            "complexity": "Time: O(L), Space: O(1)"
+        }
+    },
+    {
+        "id": "m40",
+        "title": "Partition List",
+        "description": "Partition around value x.",
+        "difficulty": "MEDIUM",
+        "category": "Linked List",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* partition(Node* h, int x) { return nullptr; }\nint main() { Node* h=new Node(1); h->n=new Node(4); h->n->n=new Node(3); h->n->n->n=new Node(2); h->n->n->n->n=new Node(5); h->n->n->n->n->n=new Node(2); h=partition(h,3); while(h) { cout<<h->v<<\" \"; h=h->n; } return 0; }",
+        "expectedOutput": "1 2 2 4 3 5",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* partition(Node* h, int x) { Node less(0),greater(0); Node *l=&less, *g=&greater; while(h) { if(h->v<x) { l->n=h; l=l->n; } else { g->n=h; g=g->n; } h=h->n; } g->n=0; l->n=greater.n; return less.n; }\nint main() { Node* h=new Node(1); h->n=new Node(4); h->n->n=new Node(3); h->n->n->n=new Node(2); h->n->n->n->n=new Node(5); h->n->n->n->n->n=new Node(2); h=partition(h,3); while(h) { cout<<h->v<<\" \"; h=h->n; } return 0; }",
+        "explanation": {
+            "approach": "Two lists: less and greater.",
+            "steps": [
+                "Build two lists",
+                "Connect less to greater"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    }
+]

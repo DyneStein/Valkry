@@ -1,0 +1,183 @@
+[
+    {
+        "id": "ext31",
+        "title": "Kth Largest",
+        "description": "Kth largest in stream.",
+        "difficulty": "EASY",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass KthLargest {\npublic:\n    KthLargest(int k, int nums[], int n) {}\n    int add(int val) { return 0; }\n};\nint main() { int a[]={4,5,8,2}; KthLargest kl(3,a,4); cout<<kl.add(3); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nclass KthLargest { int arr[100],n,k; public: KthLargest(int k, int nums[], int sz):k(k),n(0) { for(int i=0;i<sz;i++) add(nums[i]); } int add(int val) { arr[n++]=val; for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(arr[j]<arr[j+1]) swap(arr[j],arr[j+1]); return arr[k-1]; } };\nint main() { int a[]={4,5,8,2}; KthLargest kl(3,a,4); cout<<kl.add(3); return 0; }",
+        "explanation": {
+            "approach": "Sort and return kth.",
+            "steps": [
+                "Maintain sorted array",
+                "Return kth largest"
+            ],
+            "complexity": "Time: O(n log n), Space: O(n)"
+        }
+    },
+    {
+        "id": "ext32",
+        "title": "Top K Frequent",
+        "description": "K most frequent elements.",
+        "difficulty": "MEDIUM",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid topKFrequent(int nums[], int n, int k) {}\nint main() { int a[]={1,1,1,2,2,3}; topKFrequent(a,6,2); return 0; }",
+        "expectedOutput": "1 2",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid topKFrequent(int nums[], int n, int k) { int vals[100],cnt[100],m=0; for(int i=0;i<n;i++) { int j=0; while(j<m&&vals[j]!=nums[i]) j++; if(j<m) cnt[j]++; else { vals[m]=nums[i]; cnt[m++]=1; } } for(int i=0;i<k;i++) { int mx=0; for(int j=1;j<m;j++) if(cnt[j]>cnt[mx]) mx=j; cout<<vals[mx]<<\" \"; cnt[mx]=-1; } }\nint main() { int a[]={1,1,1,2,2,3}; topKFrequent(a,6,2); return 0; }",
+        "explanation": {
+            "approach": "Count and pick top k.",
+            "steps": [
+                "Count frequencies",
+                "Select k highest"
+            ],
+            "complexity": "Time: O(n × k), Space: O(n)"
+        }
+    },
+    {
+        "id": "ext33",
+        "title": "Find Kth Smallest",
+        "description": "Kth smallest in sorted matrix.",
+        "difficulty": "MEDIUM",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint kthSmallest(int m[][3], int n, int k) { return 0; }\nint main() { int m[][3]={{1,5,9},{10,11,13},{12,13,15}}; cout<<kthSmallest(m,3,8); return 0; }",
+        "expectedOutput": "13",
+        "solution": "#include <iostream>\nusing namespace std;\nint kthSmallest(int m[][3], int n, int k) { int arr[100],c=0; for(int i=0;i<n;i++) for(int j=0;j<n;j++) arr[c++]=m[i][j]; for(int i=0;i<c-1;i++) for(int j=0;j<c-i-1;j++) if(arr[j]>arr[j+1]) swap(arr[j],arr[j+1]); return arr[k-1]; }\nint main() { int m[][3]={{1,5,9},{10,11,13},{12,13,15}}; cout<<kthSmallest(m,3,8); return 0; }",
+        "explanation": {
+            "approach": "Flatten and sort.",
+            "steps": [
+                "Put all elements in array",
+                "Sort and return kth"
+            ],
+            "complexity": "Time: O(n² log n²), Space: O(n²)"
+        }
+    },
+    {
+        "id": "ext34",
+        "title": "Minimum Meeting Rooms",
+        "description": "Min rooms needed.",
+        "difficulty": "MEDIUM",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint minMeetingRooms(int start[], int end[], int n) { return 0; }\nint main() { int s[]={0,5,15}; int e[]={30,10,20}; cout<<minMeetingRooms(s,e,3); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint minMeetingRooms(int start[], int end[], int n) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(start[j]>start[j+1]) { swap(start[j],start[j+1]); swap(end[j],end[j+1]); } int rooms[100],m=0; for(int i=0;i<n;i++) { int j=0; while(j<m&&rooms[j]>start[i]) j++; if(j<m) rooms[j]=end[i]; else rooms[m++]=end[i]; } return m; }\nint main() { int s[]={0,5,15}; int e[]={30,10,20}; cout<<minMeetingRooms(s,e,3); return 0; }",
+        "explanation": {
+            "approach": "Sort and assign rooms.",
+            "steps": [
+                "Sort by start time",
+                "Reuse room if available, else add new"
+            ],
+            "complexity": "Time: O(n log n), Space: O(n)"
+        }
+    },
+    {
+        "id": "ext35",
+        "title": "Sliding Window Max",
+        "description": "Max in each window.",
+        "difficulty": "HARD",
+        "category": "Sliding Window",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid maxSlidingWindow(int nums[], int n, int k) {}\nint main() { int a[]={1,3,-1,-3,5,3,6,7}; maxSlidingWindow(a,8,3); return 0; }",
+        "expectedOutput": "3 3 5 5 6 7",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid maxSlidingWindow(int nums[], int n, int k) { for(int i=0;i<=n-k;i++) { int mx=nums[i]; for(int j=i;j<i+k;j++) mx=max(mx,nums[j]); cout<<mx<<\" \"; } }\nint main() { int a[]={1,3,-1,-3,5,3,6,7}; maxSlidingWindow(a,8,3); return 0; }",
+        "explanation": {
+            "approach": "Check each window.",
+            "steps": [
+                "For each window",
+                "Find maximum"
+            ],
+            "complexity": "Time: O(nk), Space: O(1)"
+        }
+    },
+    {
+        "id": "ext36",
+        "title": "Implement Trie",
+        "description": "Prefix tree implementation.",
+        "difficulty": "MEDIUM",
+        "category": "Trie",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass Trie {\npublic:\n    void insert(char word[]) {}\n    bool search(char word[]) { return false; }\n    bool startsWith(char prefix[]) { return false; }\n};\nint main() { Trie t; t.insert(\"apple\"); cout<<t.search(\"apple\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nclass Trie { char words[100][50]; int n; public: Trie():n(0){} void insert(char word[]) { int i=0; while(word[i]) { words[n][i]=word[i]; i++; } words[n++][i]=0; } bool search(char word[]) { for(int i=0;i<n;i++) { bool eq=true; for(int j=0;word[j]||words[i][j];j++) if(word[j]!=words[i][j]) { eq=false; break; } if(eq) return true; } return false; } bool startsWith(char pre[]) { for(int i=0;i<n;i++) { bool m=true; for(int j=0;pre[j];j++) if(words[i][j]!=pre[j]) { m=false; break; } if(m) return true; } return false; } };\nint main() { Trie t; t.insert(\"apple\"); cout<<t.search(\"apple\"); return 0; }",
+        "explanation": {
+            "approach": "Store words array.",
+            "steps": [
+                "Insert adds to array",
+                "Search checks exact match",
+                "StartsWith checks prefix"
+            ],
+            "complexity": "Time: O(n × L), Space: O(n × L)"
+        }
+    },
+    {
+        "id": "ext37",
+        "title": "Word Break",
+        "description": "Can segment into words.",
+        "difficulty": "MEDIUM",
+        "category": "Trie",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool wordBreak(char s[], char* dict[], int n) { return false; }\nint main() { char* d[]={\"leet\",\"code\"}; cout<<wordBreak(\"leetcode\",d,2); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool wordBreak(char s[], char* dict[], int n) { int len=0; while(s[len]) len++; bool dp[len+1]={}; dp[0]=true; for(int i=1;i<=len;i++) for(int j=0;j<n;j++) { int wl=0; while(dict[j][wl]) wl++; if(i>=wl&&dp[i-wl]) { bool m=true; for(int k=0;k<wl;k++) if(s[i-wl+k]!=dict[j][k]) { m=false; break; } if(m) dp[i]=true; } } return dp[len]; }\nint main() { char* d[]={\"leet\",\"code\"}; cout<<wordBreak(\"leetcode\",d,2); return 0; }",
+        "explanation": {
+            "approach": "DP with word matching.",
+            "steps": [
+                "dp[i] = can form s[0..i-1]",
+                "Try each word ending at i"
+            ],
+            "complexity": "Time: O(n × m × L), Space: O(n)"
+        }
+    },
+    {
+        "id": "ext38",
+        "title": "Range Sum Query",
+        "description": "Sum of range [i,j].",
+        "difficulty": "EASY",
+        "category": "Segment Tree",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass NumArray {\n    int a[100],n;\npublic:\n    NumArray(int nums[], int sz) { n=sz; for(int i=0;i<n;i++) a[i]=nums[i]; }\n    int sumRange(int i, int j) { int s=0; for(int k=i;k<=j;k++) s+=a[k]; return s; }\n};\nint main() { int a[]={-2,0,3,-5,2,-1}; NumArray na(a,6); cout<<na.sumRange(0,2); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nclass NumArray { int pre[101],n; public: NumArray(int nums[], int sz) { n=sz; pre[0]=0; for(int i=0;i<n;i++) pre[i+1]=pre[i]+nums[i]; } int sumRange(int i, int j) { return pre[j+1]-pre[i]; } };\nint main() { int a[]={-2,0,3,-5,2,-1}; NumArray na(a,6); cout<<na.sumRange(0,2); return 0; }",
+        "explanation": {
+            "approach": "Prefix sum.",
+            "steps": [
+                "Precompute prefix sums",
+                "Return pre[j+1] - pre[i]"
+            ],
+            "complexity": "Time: O(1) query, Space: O(n)"
+        }
+    },
+    {
+        "id": "ext39",
+        "title": "Range Sum 2D",
+        "description": "Sum of rectangle.",
+        "difficulty": "MEDIUM",
+        "category": "Segment Tree",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass NumMatrix {\n    int m[10][10],r,c;\npublic:\n    NumMatrix(int mat[][5], int rows, int cols) { r=rows; c=cols; for(int i=0;i<r;i++) for(int j=0;j<c;j++) m[i][j]=mat[i][j]; }\n    int sumRegion(int r1, int c1, int r2, int c2) { int s=0; for(int i=r1;i<=r2;i++) for(int j=c1;j<=c2;j++) s+=m[i][j]; return s; }\n};\nint main() { int m[][5]={{3,0,1,4,2},{5,6,3,2,1},{1,2,0,1,5},{4,1,0,1,7},{1,0,3,0,5}}; NumMatrix nm(m,5,5); cout<<nm.sumRegion(2,1,4,3); return 0; }",
+        "expectedOutput": "8",
+        "solution": "#include <iostream>\nusing namespace std;\nclass NumMatrix { int pre[11][11],r,c; public: NumMatrix(int mat[][5], int rows, int cols) { r=rows; c=cols; for(int i=0;i<=r;i++) pre[i][0]=0; for(int j=0;j<=c;j++) pre[0][j]=0; for(int i=1;i<=r;i++) for(int j=1;j<=c;j++) pre[i][j]=mat[i-1][j-1]+pre[i-1][j]+pre[i][j-1]-pre[i-1][j-1]; } int sumRegion(int r1, int c1, int r2, int c2) { return pre[r2+1][c2+1]-pre[r1][c2+1]-pre[r2+1][c1]+pre[r1][c1]; } };\nint main() { int m[][5]={{3,0,1,4,2},{5,6,3,2,1},{1,2,0,1,5},{4,1,0,1,7},{1,0,3,0,5}}; NumMatrix nm(m,5,5); cout<<nm.sumRegion(2,1,4,3); return 0; }",
+        "explanation": {
+            "approach": "2D prefix sum.",
+            "steps": [
+                "Precompute 2D prefix sums",
+                "Use inclusion-exclusion"
+            ],
+            "complexity": "Time: O(1) query, Space: O(mn)"
+        }
+    },
+    {
+        "id": "ext40",
+        "title": "Count of Smaller",
+        "description": "Count smaller elements to right.",
+        "difficulty": "HARD",
+        "category": "Segment Tree",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid countSmaller(int nums[], int n) {}\nint main() { int a[]={5,2,6,1}; countSmaller(a,4); return 0; }",
+        "expectedOutput": "2 1 1 0",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid countSmaller(int nums[], int n) { for(int i=0;i<n;i++) { int cnt=0; for(int j=i+1;j<n;j++) if(nums[j]<nums[i]) cnt++; cout<<cnt<<\" \"; } }\nint main() { int a[]={5,2,6,1}; countSmaller(a,4); return 0; }",
+        "explanation": {
+            "approach": "Check all pairs.",
+            "steps": [
+                "For each element",
+                "Count smaller elements to right"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    }
+]

@@ -1,0 +1,192 @@
+[
+    {
+        "id": "prac21",
+        "title": "Pointers Swap",
+        "description": "Swap using pointers.",
+        "difficulty": "EASY",
+        "category": "Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid swapPtr(int *a, int *b) {}\nint main() { int x=5,y=10; swapPtr(&x,&y); cout<<x<<\" \"<<y; return 0; }",
+        "expectedOutput": "10 5",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid swapPtr(int *a, int *b) { int t=*a; *a=*b; *b=t; }\nint main() { int x=5,y=10; swapPtr(&x,&y); cout<<x<<\" \"<<y; return 0; }",
+        "explanation": {
+            "approach": "Use pointers to swap values.",
+            "analogy": "Dereference to access values.",
+            "steps": [
+                "Save *a",
+                "Assign *b to *a",
+                "Assign saved to *b"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac22",
+        "title": "Pointer Arithmetic",
+        "description": "Traverse array with pointer.",
+        "difficulty": "EASY",
+        "category": "Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid printArr(int *a, int n) {}\nint main() { int a[]={1,2,3,4,5}; printArr(a,5); return 0; }",
+        "expectedOutput": "1 2 3 4 5",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid printArr(int *a, int n) { for(int i=0;i<n;i++) cout<<*(a+i)<<\" \"; }\nint main() { int a[]={1,2,3,4,5}; printArr(a,5); return 0; }",
+        "explanation": {
+            "approach": "Use pointer arithmetic to traverse.",
+            "analogy": "a+i points to ith element.",
+            "steps": [
+                "*(a+i) gives value at index i"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac23",
+        "title": "Function Overloading",
+        "description": "Overload add function.",
+        "difficulty": "EASY",
+        "category": "OOP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint add2(int a, int b) { return 0; }\nint add3(int a, int b, int c) { return 0; }\nint main() { cout<<add2(1,2)<<\" \"<<add3(1,2,3); return 0; }",
+        "expectedOutput": "3 6",
+        "solution": "#include <iostream>\nusing namespace std;\nint add2(int a, int b) { return a+b; }\nint add3(int a, int b, int c) { return a+b+c; }\nint main() { cout<<add2(1,2)<<\" \"<<add3(1,2,3); return 0; }",
+        "explanation": {
+            "approach": "Same function name, different parameters.",
+            "analogy": "Choose version based on arguments.",
+            "steps": [
+                "2-param version adds 2",
+                "3-param adds 3"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac24",
+        "title": "Constructor Example",
+        "description": "Class with constructor.",
+        "difficulty": "EASY",
+        "category": "OOP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass Box { int w,h; public: Box(int w, int h) : w(0), h(0) {} int area() { return 0; } };\nint main() { Box b(5,3); cout<<b.area(); return 0; }",
+        "expectedOutput": "15",
+        "solution": "#include <iostream>\nusing namespace std;\nclass Box { int w,h; public: Box(int w, int h) : w(w), h(h) {} int area() { return w*h; } };\nint main() { Box b(5,3); cout<<b.area(); return 0; }",
+        "explanation": {
+            "approach": "Initialize members in constructor.",
+            "analogy": "Constructor sets up object.",
+            "steps": [
+                "Constructor initializes w and h",
+                "area() returns w×h"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "prac25",
+        "title": "Inheritance Example",
+        "description": "Basic inheritance.",
+        "difficulty": "EASY",
+        "category": "OOP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass Animal { public: void speak() {} };\nclass Dog : public Animal { public: void speak() {} };\nint main() { Dog d; d.speak(); return 0; }",
+        "expectedOutput": "Woof",
+        "solution": "#include <iostream>\nusing namespace std;\nclass Animal { public: virtual void speak() { cout<<\"Sound\"; } };\nclass Dog : public Animal { public: void speak() override { cout<<\"Woof\"; } };\nint main() { Dog d; d.speak(); return 0; }",
+        "explanation": {
+            "approach": "Child overrides parent method.",
+            "analogy": "Dog is-a Animal.",
+            "steps": [
+                "Dog inherits from Animal",
+                "Dog overrides speak()"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "extra11",
+        "title": "Minimum Difference BST",
+        "description": "Min difference between nodes.",
+        "difficulty": "MEDIUM",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint minDiff(Node* r) { return 0; }\nint main() { Node* r=new Node(4); r->l=new Node(2); r->r=new Node(6); r->l->l=new Node(1); r->l->r=new Node(3); cout<<minDiff(r); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint prev_val=-1,minD=1e9;\nvoid inorder(Node* r) { if(!r) return; inorder(r->l); if(prev_val>=0) minD=min(minD,r->v-prev_val); prev_val=r->v; inorder(r->r); }\nint minDiff(Node* r) { prev_val=-1; minD=1e9; inorder(r); return minD; }\nint main() { Node* r=new Node(4); r->l=new Node(2); r->r=new Node(6); r->l->l=new Node(1); r->l->r=new Node(3); cout<<minDiff(r); return 0; }",
+        "explanation": {
+            "approach": "Inorder gives sorted, check consecutive.",
+            "analogy": "Adjacent in sorted order.",
+            "steps": [
+                "Inorder traversal",
+                "Track previous and diff"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        }
+    },
+    {
+        "id": "extra12",
+        "title": "Serialize Binary Tree",
+        "description": "Encode tree to string.",
+        "difficulty": "HARD",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid serialize(Node* r) {}\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->r->l=new Node(4); r->r->r=new Node(5); serialize(r); return 0; }",
+        "expectedOutput": "1 2 # # 3 4 # # 5 # #",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid serialize(Node* r) { if(!r) { cout<<\"# \"; return; } cout<<r->v<<\" \"; serialize(r->l); serialize(r->r); }\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->r->l=new Node(4); r->r->r=new Node(5); serialize(r); return 0; }",
+        "explanation": {
+            "approach": "Preorder with null markers.",
+            "analogy": "Encode structure with placeholders.",
+            "steps": [
+                "Print value or # for null",
+                "Recurse left then right"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "extra13",
+        "title": "Sliding Window Max",
+        "description": "Maximum in each window.",
+        "difficulty": "HARD",
+        "category": "Sliding Window",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid maxSliding(int a[], int n, int k) {}\nint main() { int a[]={1,3,-1,-3,5,3,6,7}; maxSliding(a,8,3); return 0; }",
+        "expectedOutput": "3 3 5 5 6 7",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid maxSliding(int a[], int n, int k) { int dq[n],f=0,r=0; for(int i=0;i<n;i++) { while(f<r && dq[f]<=i-k) f++; while(f<r && a[dq[r-1]]<=a[i]) r--; dq[r++]=i; if(i>=k-1) cout<<a[dq[f]]<<\" \"; } }\nint main() { int a[]={1,3,-1,-3,5,3,6,7}; maxSliding(a,8,3); return 0; }",
+        "explanation": {
+            "approach": "Monotonic deque.",
+            "analogy": "Keep only useful candidates.",
+            "steps": [
+                "Remove out of window",
+                "Remove smaller from back",
+                "Front is max"
+            ],
+            "complexity": "Time: O(n), Space: O(k)"
+        }
+    },
+    {
+        "id": "extra14",
+        "title": "Subarray Sum K",
+        "description": "Count subarrays with sum k.",
+        "difficulty": "MEDIUM",
+        "category": "Hashing",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint subarraySum(int a[], int n, int k) { return 0; }\nint main() { int a[]={1,1,1}; cout<<subarraySum(a,3,2); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint subarraySum(int a[], int n, int k) { int c=0; for(int i=0;i<n;i++) { int s=0; for(int j=i;j<n;j++) { s+=a[j]; if(s==k) c++; } } return c; }\nint main() { int a[]={1,1,1}; cout<<subarraySum(a,3,2); return 0; }",
+        "explanation": {
+            "approach": "Check all subarrays.",
+            "analogy": "Count matching sums.",
+            "steps": [
+                "For each start, sum to each end"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        }
+    },
+    {
+        "id": "extra15",
+        "title": "Longest Substring No Repeat",
+        "description": "Longest unique char substring.",
+        "difficulty": "MEDIUM",
+        "category": "Sliding Window",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint lengthOfLongest(char s[]) { return 0; }\nint main() { cout<<lengthOfLongest(\"abcabcbb\"); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint lengthOfLongest(char s[]) { int seen[256]={}; int mx=0,l=0; for(int r=0;s[r];r++) { while(seen[(int)s[r]]) { seen[(int)s[l]]=0; l++; } seen[(int)s[r]]=1; mx=max(mx,r-l+1); } return mx; }\nint main() { cout<<lengthOfLongest(\"abcabcbb\"); return 0; }",
+        "explanation": {
+            "approach": "Sliding window with set.",
+            "analogy": "Shrink when duplicate found.",
+            "steps": [
+                "Expand right",
+                "Shrink left until unique"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    }
+]

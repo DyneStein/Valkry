@@ -1,0 +1,227 @@
+[
+    {
+        "id": "easy1",
+        "title": "Add Two Numbers",
+        "description": "Return sum of two integers.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint add(int a, int b) { return 0; }\nint main() { cout << add(5, 3); return 0; }",
+        "expectedOutput": "8",
+        "solution": "#include <iostream>\nusing namespace std;\nint add(int a, int b) { return a + b; }\nint main() { cout << add(5, 3); return 0; }",
+        "explanation": {
+            "approach": "Simply use the + operator to add two numbers.",
+            "analogy": "Like counting on fingers - combine both hands.",
+            "steps": [
+                "Return a + b"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy2",
+        "title": "Multiply Two Numbers",
+        "description": "Return product of two integers.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint multiply(int a, int b) { return 0; }\nint main() { cout << multiply(4, 7); return 0; }",
+        "expectedOutput": "28",
+        "solution": "#include <iostream>\nusing namespace std;\nint multiply(int a, int b) { return a * b; }\nint main() { cout << multiply(4, 7); return 0; }",
+        "explanation": {
+            "approach": "Use multiplication operator.",
+            "analogy": "4 groups of 7 items.",
+            "steps": [
+                "Return a * b"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy3",
+        "title": "Find Maximum of Two",
+        "description": "Return larger of two numbers.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint maxOfTwo(int a, int b) { return 0; }\nint main() { cout << maxOfTwo(10, 25); return 0; }",
+        "expectedOutput": "25",
+        "solution": "#include <iostream>\nusing namespace std;\nint maxOfTwo(int a, int b) { return a > b ? a : b; }\nint main() { cout << maxOfTwo(10, 25); return 0; }",
+        "explanation": {
+            "approach": "Compare and return larger.",
+            "analogy": "Which is taller?",
+            "steps": [
+                "If a > b return a, else return b"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy4",
+        "title": "Absolute Value",
+        "description": "Return absolute value.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint absolute(int n) { return 0; }\nint main() { cout << absolute(-15); return 0; }",
+        "expectedOutput": "15",
+        "solution": "#include <iostream>\nusing namespace std;\nint absolute(int n) { return n < 0 ? -n : n; }\nint main() { cout << absolute(-15); return 0; }",
+        "explanation": {
+            "approach": "If negative, negate it.",
+            "analogy": "Distance from zero is always positive.",
+            "steps": [
+                "If n < 0, return -n",
+                "Else return n"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy5",
+        "title": "Check Even or Odd",
+        "description": "Print 'Even' or 'Odd'.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid check(int n) {}\nint main() { check(7); return 0; }",
+        "expectedOutput": "Odd",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid check(int n) { cout << (n % 2 == 0 ? \"Even\" : \"Odd\"); }\nint main() { check(7); return 0; }",
+        "explanation": {
+            "approach": "If divisible by 2, it's even.",
+            "analogy": "Can you split evenly into two groups?",
+            "steps": [
+                "Check n % 2",
+                "If 0, even; else odd"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy6",
+        "title": "Print Hello World",
+        "description": "Print Hello World.",
+        "difficulty": "EASY",
+        "category": "Basics",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
+        "expectedOutput": "Hello World",
+        "solution": "#include <iostream>\nusing namespace std;\nint main() { cout << \"Hello World\"; return 0; }",
+        "explanation": {
+            "approach": "Use cout to print.",
+            "analogy": "Your first program!",
+            "steps": [
+                "Use cout << \"Hello World\""
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy7",
+        "title": "Sum of Array",
+        "description": "Find sum of array elements.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sum(int arr[], int n) { return 0; }\nint main() { int a[] = {1,2,3,4,5}; cout << sum(a, 5); return 0; }",
+        "expectedOutput": "15",
+        "solution": "#include <iostream>\nusing namespace std;\nint sum(int arr[], int n) { int s = 0; for(int i = 0; i < n; i++) s += arr[i]; return s; }\nint main() { int a[] = {1,2,3,4,5}; cout << sum(a, 5); return 0; }",
+        "explanation": {
+            "approach": "Loop through and add each element.",
+            "analogy": "Count all coins.",
+            "steps": [
+                "Init sum = 0",
+                "Add each element"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy8",
+        "title": "Find Array Maximum",
+        "description": "Find largest element.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint findMax(int arr[], int n) { return 0; }\nint main() { int a[] = {3,1,4,1,5,9}; cout << findMax(a, 6); return 0; }",
+        "expectedOutput": "9",
+        "solution": "#include <iostream>\nusing namespace std;\nint findMax(int arr[], int n) { int m = arr[0]; for(int i = 1; i < n; i++) if(arr[i] > m) m = arr[i]; return m; }\nint main() { int a[] = {3,1,4,1,5,9}; cout << findMax(a, 6); return 0; }",
+        "explanation": {
+            "approach": "Track maximum while looping.",
+            "analogy": "King of the hill contest.",
+            "steps": [
+                "Assume first is max",
+                "Compare with each element"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy9",
+        "title": "Find Array Minimum",
+        "description": "Find smallest element.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint findMin(int arr[], int n) { return 0; }\nint main() { int a[] = {3,1,4,1,5,9}; cout << findMin(a, 6); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint findMin(int arr[], int n) { int m = arr[0]; for(int i = 1; i < n; i++) if(arr[i] < m) m = arr[i]; return m; }\nint main() { int a[] = {3,1,4,1,5,9}; cout << findMin(a, 6); return 0; }",
+        "explanation": {
+            "approach": "Track minimum while looping.",
+            "analogy": "Find shortest person.",
+            "steps": [
+                "Assume first is min",
+                "Compare with each"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy10",
+        "title": "Reverse Array",
+        "description": "Reverse array in-place.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid reverse(int arr[], int n) {}\nint main() { int a[] = {1,2,3,4,5}; reverse(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "expectedOutput": "5 4 3 2 1",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid reverse(int arr[], int n) { int l=0, r=n-1; while(l<r) { int t=arr[l]; arr[l]=arr[r]; arr[r]=t; l++; r--; } }\nint main() { int a[] = {1,2,3,4,5}; reverse(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "explanation": {
+            "approach": "Two pointers swap from ends.",
+            "analogy": "Swap first-last, second-second-last, etc.",
+            "steps": [
+                "Put pointers at both ends",
+                "Swap and move inward"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy11",
+        "title": "Count Occurrences",
+        "description": "Count how many times x appears.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint count(int arr[], int n, int x) { return 0; }\nint main() { int a[] = {1,2,2,3,2,4}; cout << count(a, 6, 2); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint count(int arr[], int n, int x) { int c = 0; for(int i = 0; i < n; i++) if(arr[i] == x) c++; return c; }\nint main() { int a[] = {1,2,2,3,2,4}; cout << count(a, 6, 2); return 0; }",
+        "explanation": {
+            "approach": "Loop and count matches.",
+            "analogy": "Count all red balls.",
+            "steps": [
+                "For each element, check if equals x",
+                "Increment counter"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy12",
+        "title": "Linear Search",
+        "description": "Find index of element.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint search(int arr[], int n, int x) { return -1; }\nint main() { int a[] = {5,3,7,1,9}; cout << search(a, 5, 7); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint search(int arr[], int n, int x) { for(int i = 0; i < n; i++) if(arr[i] == x) return i; return -1; }\nint main() { int a[] = {5,3,7,1,9}; cout << search(a, 5, 7); return 0; }",
+        "explanation": {
+            "approach": "Check each element one by one.",
+            "analogy": "Looking for your keys - check each pocket.",
+            "steps": [
+                "Loop through array",
+                "Return index when found",
+                "Return -1 if not found"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    }
+]

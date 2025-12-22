@@ -1,0 +1,179 @@
+[
+    {
+        "id": "e401",
+        "title": "Binary Search",
+        "description": "Find target in sorted array.",
+        "difficulty": "EASY",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint search(int nums[], int n, int target) { return -1; }\nint main() { int a[]={-1,0,3,5,9,12}; cout<<search(a,6,9); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint search(int nums[], int n, int target) { int l=0,r=n-1; while(l<=r) { int m=(l+r)/2; if(nums[m]==target) return m; if(nums[m]<target) l=m+1; else r=m-1; } return -1; }\nint main() { int a[]={-1,0,3,5,9,12}; cout<<search(a,6,9); return 0; }",
+        "explanation": {
+            "approach": "Binary search.",
+            "steps": [
+                "Compare middle with target",
+                "Narrow search range"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e402",
+        "title": "First Bad Version",
+        "description": "Find first bad version.",
+        "difficulty": "EASY",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isBadVersion(int v) { return v>=4; }\nint firstBadVersion(int n) { return 0; }\nint main() { cout<<firstBadVersion(5); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isBadVersion(int v) { return v>=4; }\nint firstBadVersion(int n) { int l=1,r=n; while(l<r) { int m=l+(r-l)/2; if(isBadVersion(m)) r=m; else l=m+1; } return l; }\nint main() { cout<<firstBadVersion(5); return 0; }",
+        "explanation": {
+            "approach": "Binary search for first.",
+            "steps": [
+                "If bad, search left",
+                "Else search right"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e403",
+        "title": "Search Insert Position",
+        "description": "Find insert position.",
+        "difficulty": "EASY",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint searchInsert(int nums[], int n, int target) { return 0; }\nint main() { int a[]={1,3,5,6}; cout<<searchInsert(a,4,5); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint searchInsert(int nums[], int n, int target) { int l=0,r=n-1; while(l<=r) { int m=(l+r)/2; if(nums[m]==target) return m; if(nums[m]<target) l=m+1; else r=m-1; } return l; }\nint main() { int a[]={1,3,5,6}; cout<<searchInsert(a,4,5); return 0; }",
+        "explanation": {
+            "approach": "Binary search.",
+            "steps": [
+                "Return index where target would be"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e404",
+        "title": "Guess Number",
+        "description": "Guess the picked number.",
+        "difficulty": "EASY",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint pick=6;\nint guess(int n) { return n<pick?1:n>pick?-1:0; }\nint guessNumber(int n) { return 0; }\nint main() { cout<<guessNumber(10); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint pick=6;\nint guess(int n) { return n<pick?1:n>pick?-1:0; }\nint guessNumber(int n) { int l=1,r=n; while(l<=r) { int m=l+(r-l)/2; int g=guess(m); if(g==0) return m; if(g==1) l=m+1; else r=m-1; } return l; }\nint main() { cout<<guessNumber(10); return 0; }",
+        "explanation": {
+            "approach": "Binary search with guess API.",
+            "steps": [
+                "Use guess result to narrow range"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e405",
+        "title": "Peak Index Mountain",
+        "description": "Find peak index.",
+        "difficulty": "EASY",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint peakIndexInMountainArray(int arr[], int n) { return 0; }\nint main() { int a[]={0,2,1,0}; cout<<peakIndexInMountainArray(a,4); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint peakIndexInMountainArray(int arr[], int n) { int l=0,r=n-1; while(l<r) { int m=(l+r)/2; if(arr[m]<arr[m+1]) l=m+1; else r=m; } return l; }\nint main() { int a[]={0,2,1,0}; cout<<peakIndexInMountainArray(a,4); return 0; }",
+        "explanation": {
+            "approach": "Binary search for peak.",
+            "steps": [
+                "If ascending, go right",
+                "Else go left"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e406",
+        "title": "Valid Perfect Square",
+        "description": "Check if perfect square.",
+        "difficulty": "EASY",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPerfectSquare(int num) { return false; }\nint main() { cout<<isPerfectSquare(16); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPerfectSquare(int num) { long l=1,r=num; while(l<=r) { long m=(l+r)/2; if(m*m==num) return true; if(m*m<num) l=m+1; else r=m-1; } return false; }\nint main() { cout<<isPerfectSquare(16); return 0; }",
+        "explanation": {
+            "approach": "Binary search.",
+            "steps": [
+                "Find if any m² = num"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e407",
+        "title": "Intersection Two Arrays",
+        "description": "Find common elements.",
+        "difficulty": "EASY",
+        "category": "Searching",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid intersection(int a[], int m, int b[], int n) {}\nint main() { int a[]={1,2,2,1}; int b[]={2,2}; intersection(a,4,b,2); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid intersection(int a[], int m, int b[], int n) { bool seen[1001]={}; for(int i=0;i<m;i++) seen[a[i]]=true; bool printed[1001]={}; for(int i=0;i<n;i++) if(seen[b[i]]&&!printed[b[i]]) { cout<<b[i]<<\" \"; printed[b[i]]=true; } }\nint main() { int a[]={1,2,2,1}; int b[]={2,2}; intersection(a,4,b,2); return 0; }",
+        "explanation": {
+            "approach": "Hash set intersection.",
+            "steps": [
+                "Mark elements of first array",
+                "Print matching from second"
+            ],
+            "complexity": "Time: O(m+n), Space: O(m)"
+        }
+    },
+    {
+        "id": "e408",
+        "title": "Intersection II",
+        "description": "Common elements with duplicates.",
+        "difficulty": "EASY",
+        "category": "Searching",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid intersect(int a[], int m, int b[], int n) {}\nint main() { int a[]={1,2,2,1}; int b[]={2,2}; intersect(a,4,b,2); return 0; }",
+        "expectedOutput": "2 2",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid intersect(int a[], int m, int b[], int n) { int cnt[1001]={}; for(int i=0;i<m;i++) cnt[a[i]]++; for(int i=0;i<n;i++) if(cnt[b[i]]>0) { cout<<b[i]<<\" \"; cnt[b[i]]--; } }\nint main() { int a[]={1,2,2,1}; int b[]={2,2}; intersect(a,4,b,2); return 0; }",
+        "explanation": {
+            "approach": "Count occurrences.",
+            "steps": [
+                "Count first array",
+                "Decrement when matching in second"
+            ],
+            "complexity": "Time: O(m+n), Space: O(min(m,n))"
+        }
+    },
+    {
+        "id": "e409",
+        "title": "Two Sum II Sorted",
+        "description": "Two sum in sorted array.",
+        "difficulty": "MEDIUM",
+        "category": "Searching",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid twoSum(int nums[], int n, int target) {}\nint main() { int a[]={2,7,11,15}; twoSum(a,4,9); return 0; }",
+        "expectedOutput": "1 2",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid twoSum(int nums[], int n, int target) { int l=0,r=n-1; while(l<r) { int s=nums[l]+nums[r]; if(s==target) { cout<<l+1<<\" \"<<r+1; return; } if(s<target) l++; else r--; } }\nint main() { int a[]={2,7,11,15}; twoSum(a,4,9); return 0; }",
+        "explanation": {
+            "approach": "Two pointers.",
+            "steps": [
+                "If sum too small, move left",
+                "If sum too big, move right"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e410",
+        "title": "Find Smallest Letter",
+        "description": "Smallest letter greater than target.",
+        "difficulty": "EASY",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\nchar nextGreatestLetter(char letters[], int n, char target) { return 'a'; }\nint main() { char l[]={'c','f','j'}; cout<<nextGreatestLetter(l,3,'a'); return 0; }",
+        "expectedOutput": "c",
+        "solution": "#include <iostream>\nusing namespace std;\nchar nextGreatestLetter(char letters[], int n, char target) { int l=0,r=n; while(l<r) { int m=(l+r)/2; if(letters[m]<=target) l=m+1; else r=m; } return letters[l%n]; }\nint main() { char l[]={'c','f','j'}; cout<<nextGreatestLetter(l,3,'a'); return 0; }",
+        "explanation": {
+            "approach": "Binary search.",
+            "steps": [
+                "Find first letter > target",
+                "Wrap around if needed"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    }
+]

@@ -1,0 +1,182 @@
+[
+    {
+        "id": "e251",
+        "title": "Find Pivot Index",
+        "description": "Index where left sum equals right sum.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint pivotIndex(int nums[], int n) { return -1; }\nint main() { int a[]={1,7,3,6,5,6}; cout<<pivotIndex(a,6); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint pivotIndex(int nums[], int n) { int total=0,left=0; for(int i=0;i<n;i++) total+=nums[i]; for(int i=0;i<n;i++) { if(left==total-left-nums[i]) return i; left+=nums[i]; } return -1; }\nint main() { int a[]={1,7,3,6,5,6}; cout<<pivotIndex(a,6); return 0; }",
+        "explanation": {
+            "approach": "Track left sum.",
+            "steps": [
+                "Compute total sum",
+                "Check if left == right at each index"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e252",
+        "title": "Largest Number At Least Twice",
+        "description": "Index of largest if >= 2x others.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint dominantIndex(int nums[], int n) { return -1; }\nint main() { int a[]={3,6,1,0}; cout<<dominantIndex(a,4); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint dominantIndex(int nums[], int n) { int mx=0; for(int i=1;i<n;i++) if(nums[i]>nums[mx]) mx=i; for(int i=0;i<n;i++) if(i!=mx && nums[mx]<2*nums[i]) return -1; return mx; }\nint main() { int a[]={3,6,1,0}; cout<<dominantIndex(a,4); return 0; }",
+        "explanation": {
+            "approach": "Find max, check condition.",
+            "steps": [
+                "Find largest element",
+                "Check if >= 2x all others"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e253",
+        "title": "Plus One",
+        "description": "Add one to number as array.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid plusOne(int digits[], int n) {}\nint main() { int d[]={1,2,3}; plusOne(d,3); return 0; }",
+        "expectedOutput": "1 2 4",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid plusOne(int digits[], int n) { for(int i=n-1;i>=0;i--) { if(digits[i]<9) { digits[i]++; for(int j=0;j<n;j++) cout<<digits[j]<<\" \"; return; } digits[i]=0; } cout<<1<<\" \"; for(int i=0;i<n;i++) cout<<0<<\" \"; }\nint main() { int d[]={1,2,3}; plusOne(d,3); return 0; }",
+        "explanation": {
+            "approach": "Add with carry.",
+            "steps": [
+                "Increment last digit",
+                "Handle carry if 9"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e254",
+        "title": "Diagonal Traverse",
+        "description": "Traverse matrix diagonally.",
+        "difficulty": "MEDIUM",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid findDiagonalOrder(int m[][3], int r, int c) {}\nint main() { int m[][3]={{1,2,3},{4,5,6},{7,8,9}}; findDiagonalOrder(m,3,3); return 0; }",
+        "expectedOutput": "1 2 4 7 5 3 6 8 9",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid findDiagonalOrder(int m[][3], int r, int c) { int row=0,col=0,d=1; for(int i=0;i<r*c;i++) { cout<<m[row][col]<<\" \"; row-=d; col+=d; if(row>=r) { row=r-1; col+=2; d=-d; } if(col>=c) { col=c-1; row+=2; d=-d; } if(row<0) { row=0; d=-d; } if(col<0) { col=0; d=-d; } } }\nint main() { int m[][3]={{1,2,3},{4,5,6},{7,8,9}}; findDiagonalOrder(m,3,3); return 0; }",
+        "explanation": {
+            "approach": "Track direction, handle bounds.",
+            "steps": [
+                "Move diagonally",
+                "Change direction at boundaries"
+            ],
+            "complexity": "Time: O(mn), Space: O(1)"
+        }
+    },
+    {
+        "id": "e255",
+        "title": "Spiral Matrix II",
+        "description": "Generate spiral matrix.",
+        "difficulty": "MEDIUM",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid generateMatrix(int n) {}\nint main() { generateMatrix(3); return 0; }",
+        "expectedOutput": "1 2 3 8 9 4 7 6 5",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid generateMatrix(int n) { int m[10][10]={}; int t=0,b=n-1,l=0,r=n-1,v=1; while(t<=b&&l<=r) { for(int i=l;i<=r;i++) m[t][i]=v++; t++; for(int i=t;i<=b;i++) m[i][r]=v++; r--; for(int i=r;i>=l;i--) m[b][i]=v++; b--; for(int i=b;i>=t;i--) m[i][l]=v++; l++; } for(int i=0;i<n;i++) for(int j=0;j<n;j++) cout<<m[i][j]<<\" \"; }\nint main() { generateMatrix(3); return 0; }",
+        "explanation": {
+            "approach": "Fill layer by layer.",
+            "steps": [
+                "Fill top, right, bottom, left",
+                "Move inward"
+            ],
+            "complexity": "Time: O(n²), Space: O(n²)"
+        }
+    },
+    {
+        "id": "e256",
+        "title": "Pascal's Triangle",
+        "description": "Generate Pascal's triangle.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid generate(int n) {}\nint main() { generate(5); return 0; }",
+        "expectedOutput": "1 1 1 1 2 1 1 3 3 1 1 4 6 4 1",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid generate(int n) { int t[10][10]; for(int i=0;i<n;i++) { t[i][0]=t[i][i]=1; for(int j=1;j<i;j++) t[i][j]=t[i-1][j-1]+t[i-1][j]; for(int j=0;j<=i;j++) cout<<t[i][j]<<\" \"; } }\nint main() { generate(5); return 0; }",
+        "explanation": {
+            "approach": "Build row by row.",
+            "steps": [
+                "First and last are 1",
+                "Middle = sum of two above"
+            ],
+            "complexity": "Time: O(n²), Space: O(n²)"
+        }
+    },
+    {
+        "id": "e257",
+        "title": "Pascal's Triangle II",
+        "description": "Get kth row.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid getRow(int k) {}\nint main() { getRow(3); return 0; }",
+        "expectedOutput": "1 3 3 1",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid getRow(int k) { int row[k+1]; row[0]=1; for(int i=1;i<=k;i++) { row[i]=1; for(int j=i-1;j>0;j--) row[j]+=row[j-1]; } for(int i=0;i<=k;i++) cout<<row[i]<<\" \"; }\nint main() { getRow(3); return 0; }",
+        "explanation": {
+            "approach": "Update row in place.",
+            "steps": [
+                "Start from end to preserve values",
+                "Each value = sum of two above"
+            ],
+            "complexity": "Time: O(k²), Space: O(k)"
+        }
+    },
+    {
+        "id": "e258",
+        "title": "Missing Ranges",
+        "description": "Find missing number ranges.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid findMissingRanges(int nums[], int n, int lo, int hi) {}\nint main() { int a[]={0,1,3,50,75}; findMissingRanges(a,5,0,99); return 0; }",
+        "expectedOutput": "2 4-49 51-74 76-99",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid findMissingRanges(int nums[], int n, int lo, int hi) { int prev=lo-1; for(int i=0;i<=n;i++) { int cur=i<n?nums[i]:hi+1; if(cur-prev>=2) { if(cur-prev==2) cout<<prev+1<<\" \"; else cout<<prev+1<<\"-\"<<cur-1<<\" \"; } prev=cur; } }\nint main() { int a[]={0,1,3,50,75}; findMissingRanges(a,5,0,99); return 0; }",
+        "explanation": {
+            "approach": "Track gaps.",
+            "steps": [
+                "Check gap between consecutive",
+                "Format as single or range"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e259",
+        "title": "Reverse String Vowels",
+        "description": "Reverse only vowels.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid reverseVowels(char s[]) {}\nint main() { char s[]=\"hello\"; reverseVowels(s); cout<<s; return 0; }",
+        "expectedOutput": "holle",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isVowel(char c) { return c=='a'||c=='e'||c=='i'||c=='o'||c=='u'||c=='A'||c=='E'||c=='I'||c=='O'||c=='U'; }\nvoid reverseVowels(char s[]) { int n=0; while(s[n]) n++; int l=0,r=n-1; while(l<r) { while(l<r&&!isVowel(s[l])) l++; while(l<r&&!isVowel(s[r])) r--; swap(s[l++],s[r--]); } }\nint main() { char s[]=\"hello\"; reverseVowels(s); cout<<s; return 0; }",
+        "explanation": {
+            "approach": "Two pointers on vowels.",
+            "steps": [
+                "Find vowels from both ends",
+                "Swap them"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e260",
+        "title": "Ransom Note",
+        "description": "Can construct from magazine.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool canConstruct(char r[], char m[]) { return false; }\nint main() { cout<<canConstruct(\"aa\",\"aab\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool canConstruct(char r[], char m[]) { int cnt[26]={}; for(int i=0;m[i];i++) cnt[m[i]-'a']++; for(int i=0;r[i];i++) if(--cnt[r[i]-'a']<0) return false; return true; }\nint main() { cout<<canConstruct(\"aa\",\"aab\"); return 0; }",
+        "explanation": {
+            "approach": "Count magazine chars.",
+            "steps": [
+                "Count all magazine letters",
+                "Decrement for ransom, fail if negative"
+            ],
+            "complexity": "Time: O(m+n), Space: O(26)"
+        }
+    }
+]

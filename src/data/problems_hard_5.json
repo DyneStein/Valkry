@@ -1,0 +1,185 @@
+[
+    {
+        "id": "h126",
+        "title": "Longest Substring with At Least K Repeating",
+        "description": "Given a string s and an integer k, return the length of the longest substring where every character appears at least k times in that substring.",
+        "difficulty": "HARD",
+        "category": "Divide Conquer",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint longestSubstring(char s[], int k) { return 0; }\nint main() { cout << longestSubstring(\"aaabb\", 3); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint longestSubstring(char s[], int k) {\n    int n = 0;\n    while(s[n]) n++;\n    if(n == 0) return 0;\n    \n    // Count frequency of each character\n    int count[26] = {};\n    for(int i = 0; i < n; i++) {\n        count[s[i] - 'a']++;\n    }\n    \n    // Find first character with count < k (invalid character)\n    for(int i = 0; i < n; i++) {\n        if(count[s[i] - 'a'] < k) {\n            // Split at this character and recurse\n            int maxLen = 0;\n            int start = 0;\n            for(int j = 0; j <= n; j++) {\n                if(j == n || count[s[j] - 'a'] < k) {\n                    if(j > start) {\n                        char sub[j - start + 1];\n                        for(int t = start; t < j; t++) sub[t - start] = s[t];\n                        sub[j - start] = 0;\n                        int len = longestSubstring(sub, k);\n                        if(len > maxLen) maxLen = len;\n                    }\n                    start = j + 1;\n                }\n            }\n            return maxLen;\n        }\n    }\n    \n    // All characters appear at least k times\n    return n;\n}\nint main() { cout << longestSubstring(\"aaabb\", 3); return 0; }",
+        "explanation": {
+            "approach": "Divide and conquer. Find any character that appears less than k times - it cannot be part of the answer. Split the string at that character and recursively solve each part.",
+            "analogy": "Like removing weak links from a chain - if any character can't meet the quota, it breaks the chain, and we work on the remaining pieces.",
+            "steps": [
+                "Count frequency of each character",
+                "Find a character appearing < k times (if any)",
+                "If found, it's a 'bad' character that can't be in the answer",
+                "Split string at all occurrences of bad characters",
+                "Recursively find longest valid substring in each piece",
+                "If no bad character found, entire string is valid"
+            ],
+            "complexity": "Time: O(26 × n), Space: O(n) due to recursion"
+        }
+    },
+    {
+        "id": "h127",
+        "title": "IPO",
+        "description": "You have initial capital and can complete at most k projects. Each project has a profit and requires minimum capital. Find the maximum capital you can have after completing at most k projects.",
+        "difficulty": "HARD",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint findMaximizedCapital(int k, int w, int profits[], int capital[], int n) { return 0; }\nint main() { int p[] = {1, 2, 3}; int c[] = {0, 1, 1}; cout << findMaximizedCapital(2, 0, p, c, 3); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint findMaximizedCapital(int k, int w, int profits[], int capital[], int n) {\n    for(int i = 0; i < k; i++) {\n        int bestIdx = -1;\n        int bestProfit = 0;\n        \n        // Find project with maximum profit that we can afford\n        for(int j = 0; j < n; j++) {\n            if(capital[j] <= w && profits[j] > bestProfit) {\n                bestProfit = profits[j];\n                bestIdx = j;\n            }\n        }\n        \n        if(bestIdx == -1) break;  // No affordable project\n        \n        w += profits[bestIdx];     // Complete project, add profit\n        capital[bestIdx] = 1e9;    // Mark as used\n    }\n    return w;\n}\nint main() { int p[] = {1, 2, 3}; int c[] = {0, 1, 1}; cout << findMaximizedCapital(2, 0, p, c, 3); return 0; }",
+        "explanation": {
+            "approach": "Greedy approach - always pick the most profitable project from all currently affordable projects. After each project, your capital increases, potentially unlocking more projects.",
+            "analogy": "Like a startup founder - always take the best-paying job you can afford to do now, which gives you more money to take on even better opportunities.",
+            "steps": [
+                "Start with initial capital w",
+                "Repeat k times (or until no project available):",
+                "  - Find all projects with capital requirement <= w",
+                "  - Pick the one with maximum profit",
+                "  - Add profit to capital",
+                "  - Mark project as completed",
+                "Return final capital"
+            ],
+            "complexity": "Time: O(k × n), Space: O(1)"
+        }
+    },
+    {
+        "id": "h128",
+        "title": "Sliding Window Median",
+        "description": "Given an array and a window size k, return the median of each sliding window as it moves from left to right.",
+        "difficulty": "HARD",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid medianSlidingWindow(int nums[], int n, int k) {}\nint main() { int n[] = {1, 3, -1, -3, 5, 3, 6, 7}; medianSlidingWindow(n, 8, 3); return 0; }",
+        "expectedOutput": "1 -1 -1 3 5 6",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid medianSlidingWindow(int nums[], int n, int k) {\n    for(int i = 0; i <= n - k; i++) {\n        // Copy window elements and sort\n        int window[k];\n        for(int j = 0; j < k; j++) {\n            window[j] = nums[i + j];\n        }\n        \n        // Sort window\n        for(int a = 0; a < k - 1; a++) {\n            for(int b = 0; b < k - a - 1; b++) {\n                if(window[b] > window[b + 1]) {\n                    int temp = window[b];\n                    window[b] = window[b + 1];\n                    window[b + 1] = temp;\n                }\n            }\n        }\n        \n        // Print median (middle element for odd k)\n        cout << window[k / 2] << \" \";\n    }\n}\nint main() { int n[] = {1, 3, -1, -3, 5, 3, 6, 7}; medianSlidingWindow(n, 8, 3); return 0; }",
+        "explanation": {
+            "approach": "For each window position, copy the k elements, sort them, and find the median. The median is the middle element (for odd k) or average of two middle elements (for even k).",
+            "analogy": "Like a moving spotlight on an orchestra - at each position, you arrange the musicians by height and pick the one in the middle.",
+            "steps": [
+                "For each starting position i from 0 to n-k:",
+                "  - Extract window elements nums[i] to nums[i+k-1]",
+                "  - Sort these k elements",
+                "  - Median is at index k/2 (for odd k)",
+                "  - Output the median"
+            ],
+            "complexity": "Time: O(n × k log k), Space: O(k)"
+        }
+    },
+    {
+        "id": "h129",
+        "title": "Find Median from Data Stream",
+        "description": "Design a data structure that supports adding numbers and finding the running median (the middle value if sorted).",
+        "difficulty": "HARD",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass MedianFinder {\npublic:\n    void addNum(int num) {}\n    double findMedian() { return 0; }\n};\nint main() { MedianFinder m; m.addNum(1); m.addNum(2); cout << m.findMedian(); return 0; }",
+        "expectedOutput": "1.5",
+        "solution": "#include <iostream>\nusing namespace std;\nclass MedianFinder {\n    int arr[100];\n    int n;\npublic:\n    MedianFinder() : n(0) {}\n    \n    void addNum(int num) {\n        // Insert in sorted position\n        arr[n] = num;\n        int i = n;\n        while(i > 0 && arr[i] < arr[i - 1]) {\n            int temp = arr[i];\n            arr[i] = arr[i - 1];\n            arr[i - 1] = temp;\n            i--;\n        }\n        n++;\n    }\n    \n    double findMedian() {\n        if(n % 2 == 1) {\n            return arr[n / 2];\n        } else {\n            return (arr[n / 2 - 1] + arr[n / 2]) / 2.0;\n        }\n    }\n};\nint main() { MedianFinder m; m.addNum(1); m.addNum(2); cout << m.findMedian(); return 0; }",
+        "explanation": {
+            "approach": "Maintain a sorted array. When adding a number, insert it in the correct sorted position. Finding median is just looking at the middle element(s).",
+            "analogy": "Like keeping a sorted card deck - each new card goes in its proper place, so finding the middle card is instant.",
+            "steps": [
+                "Maintain array in sorted order",
+                "addNum: Insert number and shift to maintain sorted order",
+                "findMedian: If odd count, return middle element",
+                "If even count, return average of two middle elements"
+            ],
+            "complexity": "Time: O(n) insert, O(1) median. Space: O(n)"
+        }
+    },
+    {
+        "id": "h130",
+        "title": "Critical Connections in a Network",
+        "description": "Find all critical connections (bridges) in a network. A bridge is an edge that, when removed, disconnects the graph into separate components.",
+        "difficulty": "HARD",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint criticalConnections(int n, int connections[][2], int c) { return 0; }\nint main() { int conn[][2] = {{0,1}, {1,2}, {2,0}, {1,3}}; cout << criticalConnections(4, conn, 4); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint disc[10], low[10], timer_val = 0;\n\nvoid dfs(int adj[][10], int sz[], int u, int parent) {\n    disc[u] = low[u] = ++timer_val;\n    \n    for(int i = 0; i < sz[u]; i++) {\n        int v = adj[u][i];\n        if(disc[v] == 0) {\n            dfs(adj, sz, v, u);\n            low[u] = min(low[u], low[v]);\n        } else if(v != parent) {\n            low[u] = min(low[u], disc[v]);\n        }\n    }\n}\n\nint criticalConnections(int n, int connections[][2], int c) {\n    int adj[10][10], sz[10] = {};\n    \n    // Build adjacency list\n    for(int i = 0; i < c; i++) {\n        int u = connections[i][0], v = connections[i][1];\n        adj[u][sz[u]++] = v;\n        adj[v][sz[v]++] = u;\n    }\n    \n    // Run DFS\n    dfs(adj, sz, 0, -1);\n    \n    // Count bridges\n    int bridges = 0;\n    for(int i = 0; i < c; i++) {\n        int u = connections[i][0], v = connections[i][1];\n        if(low[v] > disc[u] || low[u] > disc[v]) {\n            bridges++;\n        }\n    }\n    return bridges;\n}\nint main() { int conn[][2] = {{0,1}, {1,2}, {2,0}, {1,3}}; cout << criticalConnections(4, conn, 4); return 0; }",
+        "explanation": {
+            "approach": "Use Tarjan's Algorithm. Track discovery time and lowest reachable time for each node. An edge (u,v) is a bridge if low[v] > disc[u], meaning v can't reach back to u or earlier without this edge.",
+            "analogy": "Like finding which bridge, if destroyed, would isolate an island. If there's no other path to reach back, that bridge is critical.",
+            "steps": [
+                "Build adjacency list from connections",
+                "DFS from node 0, tracking:",
+                "  - disc[u]: when node u was discovered",
+                "  - low[u]: earliest node reachable from u's subtree",
+                "For each unvisited neighbor, recurse and update low",
+                "For visited neighbor (not parent), update low",
+                "Edge (u,v) is bridge if low[v] > disc[u]"
+            ],
+            "complexity": "Time: O(V + E), Space: O(V)"
+        }
+    },
+    {
+        "id": "h131",
+        "title": "Edit Distance",
+        "description": "Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2. Operations are: insert, delete, or replace a character.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint minDistance(char a[], char b[]) { return 0; }\nint main() { cout << minDistance(\"horse\", \"ros\"); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint minDistance(char a[], char b[]) {\n    int m = 0, n = 0;\n    while(a[m]) m++;\n    while(b[n]) n++;\n    \n    int dp[m + 1][n + 1];\n    \n    // Base cases\n    for(int i = 0; i <= m; i++) dp[i][0] = i;  // Delete all\n    for(int j = 0; j <= n; j++) dp[0][j] = j;  // Insert all\n    \n    for(int i = 1; i <= m; i++) {\n        for(int j = 1; j <= n; j++) {\n            if(a[i - 1] == b[j - 1]) {\n                dp[i][j] = dp[i - 1][j - 1];  // No operation needed\n            } else {\n                dp[i][j] = 1 + min(dp[i - 1][j],      // Delete from a\n                              min(dp[i][j - 1],       // Insert into a\n                                  dp[i - 1][j - 1])); // Replace\n            }\n        }\n    }\n    return dp[m][n];\n}\nint main() { cout << minDistance(\"horse\", \"ros\"); return 0; }",
+        "explanation": {
+            "approach": "Dynamic programming. dp[i][j] = minimum operations to convert first i characters of a to first j characters of b. If characters match, no operation needed. Otherwise, try insert/delete/replace and take minimum.",
+            "analogy": "Like autocorrect suggesting the shortest path to fix a typo - what's the minimum number of letter changes needed?",
+            "steps": [
+                "dp[i][j] = min ops to convert a[0..i-1] to b[0..j-1]",
+                "Base: dp[i][0] = i (delete all), dp[0][j] = j (insert all)",
+                "If a[i-1] == b[j-1]: dp[i][j] = dp[i-1][j-1]",
+                "Else: dp[i][j] = 1 + min(",
+                "  dp[i-1][j]   (delete from a),",
+                "  dp[i][j-1]   (insert into a),",
+                "  dp[i-1][j-1] (replace))"
+            ],
+            "complexity": "Time: O(m × n), Space: O(m × n)"
+        }
+    },
+    {
+        "id": "h132",
+        "title": "Regular Expression Matching",
+        "description": "Implement regular expression matching with support for '.' (matches any single character) and '*' (matches zero or more of the preceding element).",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isMatch(char s[], char p[]) { return false; }\nint main() { cout << isMatch(\"aa\", \"a*\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isMatch(char s[], char p[]) {\n    int m = 0, n = 0;\n    while(s[m]) m++;\n    while(p[n]) n++;\n    \n    bool dp[m + 1][n + 1];\n    for(int i = 0; i <= m; i++)\n        for(int j = 0; j <= n; j++)\n            dp[i][j] = false;\n    \n    dp[0][0] = true;\n    \n    // Handle patterns like a*, a*b*, a*b*c* matching empty string\n    for(int j = 2; j <= n; j++) {\n        if(p[j - 1] == '*') {\n            dp[0][j] = dp[0][j - 2];\n        }\n    }\n    \n    for(int i = 1; i <= m; i++) {\n        for(int j = 1; j <= n; j++) {\n            if(p[j - 1] == '*') {\n                // * matches zero of preceding\n                dp[i][j] = dp[i][j - 2];\n                // OR * matches one or more (if preceding matches current char)\n                if(p[j - 2] == '.' || p[j - 2] == s[i - 1]) {\n                    dp[i][j] = dp[i][j] || dp[i - 1][j];\n                }\n            } else if(p[j - 1] == '.' || p[j - 1] == s[i - 1]) {\n                dp[i][j] = dp[i - 1][j - 1];\n            }\n        }\n    }\n    return dp[m][n];\n}\nint main() { cout << isMatch(\"aa\", \"a*\"); return 0; }",
+        "explanation": {
+            "approach": "Dynamic programming. dp[i][j] = does s[0..i-1] match p[0..j-1]? Handle * specially - it can match 0 or more of the preceding character.",
+            "analogy": "Like a flexible template matching - '.' is a wildcard for one character, '*' means 'repeat the previous thing any number of times'.",
+            "steps": [
+                "dp[i][j] = true if s[0..i-1] matches p[0..j-1]",
+                "If p[j-1] is regular char or '.': dp[i][j] = dp[i-1][j-1] if chars match",
+                "If p[j-1] is '*':",
+                "  - Zero occurrences: dp[i][j-2]",
+                "  - One or more: if p[j-2] matches s[i-1], then dp[i-1][j]"
+            ],
+            "complexity": "Time: O(m × n), Space: O(m × n)"
+        }
+    },
+    {
+        "id": "h133",
+        "title": "Trapping Rain Water",
+        "description": "Given n non-negative integers representing an elevation map, compute how much water it can trap after raining. Water is trapped above lower bars between taller bars.",
+        "difficulty": "HARD",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint trap(int h[], int n) { return 0; }\nint main() { int h[] = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}; cout << trap(h, 12); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint trap(int h[], int n) {\n    int left = 0, right = n - 1;\n    int leftMax = 0, rightMax = 0;\n    int water = 0;\n    \n    while(left < right) {\n        if(h[left] < h[right]) {\n            if(h[left] >= leftMax) {\n                leftMax = h[left];\n            } else {\n                water += leftMax - h[left];\n            }\n            left++;\n        } else {\n            if(h[right] >= rightMax) {\n                rightMax = h[right];\n            } else {\n                water += rightMax - h[right];\n            }\n            right--;\n        }\n    }\n    return water;\n}\nint main() { int h[] = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}; cout << trap(h, 12); return 0; }",
+        "explanation": {
+            "approach": "Two pointers from both ends, tracking maximum heights seen from each side. Water at any position = min(leftMax, rightMax) - height. We process from the shorter side since that determines the water level.",
+            "analogy": "Like filling a pool between mountains - water level is determined by the shorter side. Process from the shorter side since it limits how much water can be held.",
+            "steps": [
+                "Two pointers: left at start, right at end",
+                "Track leftMax (tallest bar from left) and rightMax (from right)",
+                "If h[left] < h[right]: water level limited by left side",
+                "  - If h[left] >= leftMax: new wall, update leftMax",
+                "  - Else: water trapped = leftMax - h[left]",
+                "Process whichever side is shorter"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    }
+]

@@ -1,0 +1,224 @@
+[
+    {
+        "id": "easy49",
+        "title": "Power of Number",
+        "description": "Calculate x^n.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint power(int x, int n) { return 0; }\nint main() { cout<<power(2,10); return 0; }",
+        "expectedOutput": "1024",
+        "solution": "#include <iostream>\nusing namespace std;\nint power(int x, int n) { int r=1; while(n>0) { if(n%2) r*=x; x*=x; n/=2; } return r; }\nint main() { cout<<power(2,10); return 0; }",
+        "explanation": {
+            "approach": "Fast exponentiation by squaring.",
+            "analogy": "Double the exponent, halve the work.",
+            "steps": [
+                "If odd, multiply result",
+                "Square base, halve exponent"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy50",
+        "title": "Check Perfect Square",
+        "description": "Is n a perfect square.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPerfectSquare(int n) { return false; }\nint main() { cout<<isPerfectSquare(16); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPerfectSquare(int n) { int r=0; while(r*r<n) r++; return r*r==n; }\nint main() { cout<<isPerfectSquare(16); return 0; }",
+        "explanation": {
+            "approach": "Find root, check if r² = n.",
+            "analogy": "Is there an integer whose square equals n?",
+            "steps": [
+                "Find sqrt",
+                "Check if exact"
+            ],
+            "complexity": "Time: O(√n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy51",
+        "title": "Leap Year Check",
+        "description": "Is year a leap year.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isLeapYear(int y) { return false; }\nint main() { cout<<isLeapYear(2024); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isLeapYear(int y) { return (y%4==0 && y%100!=0) || y%400==0; }\nint main() { cout<<isLeapYear(2024); return 0; }",
+        "explanation": {
+            "approach": "Divisible by 4 but not 100, or by 400.",
+            "analogy": "Calendar leap year rules.",
+            "steps": [
+                "Check divisibility rules"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy52",
+        "title": "Days in Month",
+        "description": "Number of days in month.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint daysInMonth(int m, int y) { return 0; }\nint main() { cout<<daysInMonth(2,2024); return 0; }",
+        "expectedOutput": "29",
+        "solution": "#include <iostream>\nusing namespace std;\nint daysInMonth(int m, int y) { int d[]={31,28,31,30,31,30,31,31,30,31,30,31}; if(m==2 && ((y%4==0 && y%100!=0) || y%400==0)) return 29; return d[m-1]; }\nint main() { cout<<daysInMonth(2,2024); return 0; }",
+        "explanation": {
+            "approach": "Lookup table with leap year check.",
+            "analogy": "30 days hath September...",
+            "steps": [
+                "Use days array",
+                "Handle Feb leap year"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy53",
+        "title": "Sum of N Natural",
+        "description": "Sum 1 to n.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumN(int n) { return 0; }\nint main() { cout<<sumN(10); return 0; }",
+        "expectedOutput": "55",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumN(int n) { return n*(n+1)/2; }\nint main() { cout<<sumN(10); return 0; }",
+        "explanation": {
+            "approach": "Gauss formula n(n+1)/2.",
+            "analogy": "Pair up: 1+10=11, 2+9=11, etc.",
+            "steps": [
+                "Use formula n(n+1)/2"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy54",
+        "title": "Sum of Squares",
+        "description": "Sum 1² to n².",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumSquares(int n) { return 0; }\nint main() { cout<<sumSquares(5); return 0; }",
+        "expectedOutput": "55",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumSquares(int n) { return n*(n+1)*(2*n+1)/6; }\nint main() { cout<<sumSquares(5); return 0; }",
+        "explanation": {
+            "approach": "Formula n(n+1)(2n+1)/6.",
+            "analogy": "Sum of pyramid blocks.",
+            "steps": [
+                "Use formula"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy55",
+        "title": "Sum of Cubes",
+        "description": "Sum 1³ to n³.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumCubes(int n) { return 0; }\nint main() { cout<<sumCubes(5); return 0; }",
+        "expectedOutput": "225",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumCubes(int n) { int s=n*(n+1)/2; return s*s; }\nint main() { cout<<sumCubes(5); return 0; }",
+        "explanation": {
+            "approach": "Formula: (n(n+1)/2)².",
+            "analogy": "Sum of cubes = square of sum.",
+            "steps": [
+                "Calculate sum of n",
+                "Square it"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy56",
+        "title": "Even or Odd String",
+        "description": "Check if count of chars is even.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid evenOdd(char s[]) {}\nint main() { evenOdd(\"hello\"); return 0; }",
+        "expectedOutput": "Odd",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid evenOdd(char s[]) { int len=0; while(s[len]) len++; cout<<(len%2==0?\"Even\":\"Odd\"); }\nint main() { evenOdd(\"hello\"); return 0; }",
+        "explanation": {
+            "approach": "Count length, check parity.",
+            "analogy": "Is string length even or odd?",
+            "steps": [
+                "Count characters",
+                "Check if even or odd"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy57",
+        "title": "Toggle Case",
+        "description": "Toggle each character case.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid toggleCase(char s[]) {}\nint main() { char s[]=\"Hello World\"; toggleCase(s); cout<<s; return 0; }",
+        "expectedOutput": "hELLO wORLD",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid toggleCase(char s[]) { for(int i=0;s[i];i++) { if(s[i]>='A'&&s[i]<='Z') s[i]+=32; else if(s[i]>='a'&&s[i]<='z') s[i]-=32; } }\nint main() { char s[]=\"Hello World\"; toggleCase(s); cout<<s; return 0; }",
+        "explanation": {
+            "approach": "Flip case of each letter.",
+            "analogy": "Uppercase becomes lower and vice versa.",
+            "steps": [
+                "If uppercase, add 32",
+                "If lowercase, subtract 32"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy58",
+        "title": "Remove Spaces",
+        "description": "Remove all spaces.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid removeSpaces(char s[]) {}\nint main() { char s[]=\"hello world test\"; removeSpaces(s); cout<<s; return 0; }",
+        "expectedOutput": "helloworldtest",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid removeSpaces(char s[]) { int j=0; for(int i=0;s[i];i++) if(s[i]!=' ') s[j++]=s[i]; s[j]=0; }\nint main() { char s[]=\"hello world test\"; removeSpaces(s); cout<<s; return 0; }",
+        "explanation": {
+            "approach": "Copy non-space chars.",
+            "analogy": "Filter out spaces.",
+            "steps": [
+                "Copy if not space"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy59",
+        "title": "First Uppercase",
+        "description": "Find first uppercase letter.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nchar firstUpper(char s[]) { return 0; }\nint main() { cout<<firstUpper(\"helloWorld\"); return 0; }",
+        "expectedOutput": "W",
+        "solution": "#include <iostream>\nusing namespace std;\nchar firstUpper(char s[]) { for(int i=0;s[i];i++) if(s[i]>='A'&&s[i]<='Z') return s[i]; return 0; }\nint main() { cout<<firstUpper(\"helloWorld\"); return 0; }",
+        "explanation": {
+            "approach": "Scan for uppercase.",
+            "analogy": "Find first capital letter.",
+            "steps": [
+                "Check each char if A-Z"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy60",
+        "title": "Count Consonants",
+        "description": "Count consonants in string.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countConsonants(char s[]) { return 0; }\nint main() { cout<<countConsonants(\"hello world\"); return 0; }",
+        "expectedOutput": "7",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isVowel(char c) { c=tolower(c); return c=='a'||c=='e'||c=='i'||c=='o'||c=='u'; }\nint countConsonants(char s[]) { int c=0; for(int i=0;s[i];i++) if(isalpha(s[i]) && !isVowel(s[i])) c++; return c; }\nint main() { cout<<countConsonants(\"hello world\"); return 0; }",
+        "explanation": {
+            "approach": "Count letters that aren't vowels.",
+            "analogy": "Count non-vowel letters.",
+            "steps": [
+                "Check if letter and not vowel"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    }
+]
