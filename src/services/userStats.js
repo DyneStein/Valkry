@@ -42,6 +42,9 @@ export async function initUserStats(userId, userName, userAvatar = null) {
             updatedAt: Date.now()
         });
 
+        // Increment global player count
+        await incrementGlobalStats('player');
+
         return initialStats;
     }
 
