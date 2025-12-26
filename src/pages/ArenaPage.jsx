@@ -1,18 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, RotateCcw, Clock, Loader, Swords, Flag, Target, UserPlus, X, Check, Users, Code, CheckCircle, XCircle, AlertCircle, LogIn } from 'lucide-react';
+import { Play, RotateCcw, Clock, Loader, Swords, Flag, Target, UserPlus, X, Check, Users, Code, CheckCircle, XCircle, AlertCircle, LogIn, Eye, AlertTriangle, Zap, Info, Trophy, ChevronDown, Filter } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Editor from '@monaco-editor/react';
 import { executeCode } from '../services/judge0';
 import { joinQueue, leaveQueue, subscribeToMatchmaking, subscribeToBattle, updatePlayerProgress, forfeitBattle } from '../services/matchmaking';
 import { setPlayerOnline, subscribeToOnlinePlayers, sendChallenge, subscribeToIncomingChallenge, acceptChallenge, declineChallenge, subscribeToChallengeResponse, setPlayerStatus } from '../services/onlinePlayers';
-import { getRandomProblem } from '../data/problems';
+import { getRandomProblem, getAllCategories } from '../data/problems';
 import { initUserStats, recordBattleResult, checkAchievements, incrementGlobalStats } from '../services/userStats';
+import { subscribeToFriends, subscribeToFriendsOnlineStatus } from '../services/friendsService';
 
 const MATCHMAKING_TIMEOUT = 30000; // 30 seconds
 
 const ArenaPage = () => {
     const { user } = useAuth();
+    const location = useLocation();
     const [gameState, setGameState] = useState('lobby');
     const [isRunning, setIsRunning] = useState(false);
     const [output, setOutput] = useState({ type: 'info', content: 'Click "Run" to execute your code' });
@@ -30,6 +32,10 @@ const ArenaPage = () => {
     const [showOnlinePlayers, setShowOnlinePlayers] = useState(false);
     const [showAuthModal, setShowAuthModal] = useState(false);
     const [newAchievements, setNewAchievements] = useState([]);
+    const [showSolutionModal, setShowSolutionModal] = useState(false);
+    const [solutionRevealed, setSolutionRevealed] = useState(false);
+    const [friends, setFriends] = useState([]);
+    const [friendStatuses, setFriendStatuses] = useState({});
 
     const unsubscribeRef = useRef(null);
     const battleUnsubRef = useRef(null);
@@ -37,6 +43,8 @@ const ArenaPage = () => {
     const challengeUnsubRef = useRef(null);
     const timeoutRef = useRef(null);
     const searchIntervalRef = useRef(null);
+    const friendsUnsubRef = useRef(null);
+    const challengeTriggeredRef = useRef(false);
     const [code, setCode] = useState(currentProblem.starterCode);
 
     // Initialize user stats on mount
@@ -46,20 +54,67 @@ const ArenaPage = () => {
         }
     }, [user]);
 
+    // Handle challenge from FriendsPage navigation
+    useEffect(() => {
+        if (user && location.state?.challengeFriend && !challengeTriggeredRef.current) {
+            const friend = location.state.challengeFriend;
+            const options = location.state.challengeOptions || {};
+
+            challengeTriggeredRef.current = true;
+            // Clear the state so it doesn't re-trigger on re-renders
+            window.history.replaceState({}, document.title);
+
+            // Auto-trigger the challenge with options
+            const problem = getRandomProblem(options);
+            sendChallenge({ id: user.id, name: user.name, avatar: user.avatar }, friend.id, problem);
+            setChallengeSent({ target: friend, problem });
+            subscribeToChallengeResponse(friend.id,
+                (c) => startBattle(c.battleId, friend, c.problem, null),
+                () => setChallengeSent(null),
+                () => setChallengeSent(null)
+            );
+        }
+    }, [user, location.state]);
+
     useEffect(() => {
         if (user) {
-            const cleanup = setPlayerOnline({ id: user.id, name: user.name, avatar: user.avatar });
             onlineUnsubRef.current = subscribeToOnlinePlayers(user.id, (players) => {
                 setOnlinePlayers(players.filter(p => p.status === 'available'));
             });
             challengeUnsubRef.current = subscribeToIncomingChallenge(user.id, setIncomingChallenge);
+            // Subscribe to friends list
+            friendsUnsubRef.current = subscribeToFriends(user.id, setFriends);
             return () => {
-                cleanup();
                 if (onlineUnsubRef.current) onlineUnsubRef.current();
                 if (challengeUnsubRef.current) challengeUnsubRef.current();
+                if (friendsUnsubRef.current) friendsUnsubRef.current();
             };
         }
     }, [user]);
+
+    // Subscribe to friends' online status
+    useEffect(() => {
+        if (friends.length > 0) {
+            const friendIds = friends.map(f => f.id);
+            const unsub = subscribeToFriendsOnlineStatus(friendIds, setFriendStatuses);
+            return unsub;
+        }
+    }, [friends]);
+
+    // Challenge & Filtering State
+    const [soloOptions, setSoloOptions] = useState({ difficulty: 'Random', category: 'Random' });
+    const [matchmakingOptions, setMatchmakingOptions] = useState({ difficulty: 'Random', category: 'Random' });
+    const [showMatchmakingSettings, setShowMatchmakingSettings] = useState(false);
+    const [categories, setCategories] = useState([]);
+
+    // Friend Challenge Settings State
+    const [showFriendChallengeSettings, setShowFriendChallengeSettings] = useState(false);
+    const [friendChallengeTarget, setFriendChallengeTarget] = useState(null);
+    const [friendChallengeOptions, setFriendChallengeOptions] = useState({ difficulty: 'Random', category: 'Random' });
+
+    useEffect(() => {
+        setCategories(getAllCategories().sort());
+    }, []);
 
     useEffect(() => {
         let interval;
@@ -129,8 +184,9 @@ const ArenaPage = () => {
         }, 1000);
 
         try {
-            const key = await joinQueue({ id: user.id, name: user.name });
+            const key = await joinQueue({ id: user.id, name: user.name }, matchmakingOptions);
             setQueueKey(key);
+            setShowMatchmakingSettings(false);
 
             // Set timeout for matchmaking
             timeoutRef.current = setTimeout(async () => {
@@ -170,16 +226,47 @@ const ArenaPage = () => {
         if (user) setPlayerStatus(user.id, 'available');
     };
 
-    const handleChallenge = async (target) => {
-        const problem = getRandomProblem();
+    const handlePractice = () => {
+        const problem = getRandomProblem(soloOptions);
+        setCurrentProblem(problem);
+        setCode(problem.starterCode);
+        setGameState('playing');
+        setBattleResult(null);
+        setBattleStartTime(Date.now());
+        setOpponent(null);
+        setBattleId(null);
+        setSearchTimer(0);
+        setShowSoloSettings(false);
+    };
+
+    const [showSoloSettings, setShowSoloSettings] = useState(false);
+
+    const handleRevealSolution = () => {
+        setSolutionRevealed(true);
+        setShowSolutionModal(false);
+        if (opponent) {
+            forfeitBattle(battleId, user.id);
+        }
+    };
+
+    const handleChallenge = async (target, options = {}) => {
+        const problem = getRandomProblem(options);
         await sendChallenge({ id: user.id, name: user.name, avatar: user.avatar }, target.id, problem);
         setChallengeSent({ target, problem });
-        setShowOnlinePlayers(false);
+        setShowOnlinePlayers(false); // Close friend list modal if open
+        setShowFriendChallengeSettings(false); // Close settings modal if open
         subscribeToChallengeResponse(target.id,
             (c) => startBattle(c.battleId, target, c.problem, null),
             () => setChallengeSent(null),
             () => setChallengeSent(null)
         );
+    };
+
+    const openFriendChallengeSettings = (friend) => {
+        setFriendChallengeTarget(friend);
+        setFriendChallengeOptions({ difficulty: 'Random', category: 'Random' });
+        setShowOnlinePlayers(false);
+        setShowFriendChallengeSettings(true);
     };
 
     const handleAccept = async () => {
@@ -217,16 +304,7 @@ const ArenaPage = () => {
         setIsRunning(false);
     };
 
-    const handlePractice = () => {
-        const p = getRandomProblem();
-        setCurrentProblem(p);
-        setCode(p.starterCode);
-        setGameState('playing');
-        setOpponent(null);
-        setBattleId(null);
-        setBattleStartTime(Date.now());
-        setTimer(0);
-    };
+
 
     const handlePlayAgain = () => {
         setGameState('lobby');
@@ -235,9 +313,12 @@ const ArenaPage = () => {
         setBattleId(null);
         setOpponent(null);
         setNewAchievements([]);
+        setSolutionRevealed(false);
         if (battleUnsubRef.current) battleUnsubRef.current();
         if (user) setPlayerStatus(user.id, 'available');
     };
+
+
 
     const ResultIcon = battleResult === 'win' ? CheckCircle : XCircle;
 
@@ -365,7 +446,7 @@ const ArenaPage = () => {
             {newAchievements.length > 0 && (
                 <Modal onClose={() => setNewAchievements([])}>
                     <div style={{ textAlign: 'center' }}>
-                        <div style={{ fontSize: '48px', marginBottom: '16px' }}>🏆</div>
+                        <Trophy size={48} style={{ color: 'var(--orange)', marginBottom: '16px' }} />
                         <h2 className="headline-small" style={{ marginBottom: '8px' }}>Achievement Unlocked!</h2>
                         {newAchievements.map((a, i) => (
                             <div key={i} style={{
@@ -383,55 +464,143 @@ const ArenaPage = () => {
                 </Modal>
             )}
 
-            {/* Online Players Modal */}
+            {/* Challenge Friend Modal */}
             {showOnlinePlayers && (
                 <Modal onClose={() => setShowOnlinePlayers(false)}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-                        <h2 className="headline-small" style={{ margin: 0 }}>Online Players</h2>
-                        <button onClick={() => setShowOnlinePlayers(false)} style={{ background: 'none', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', padding: '4px' }}>
+                        <h2 className="headline-small" style={{ margin: 0 }}>Challenge Friend</h2>
+                        <button onClick={() => setShowOnlinePlayers(false)} className="btn btn-ghost" style={{ padding: '8px' }}>
                             <X size={20} />
                         </button>
                     </div>
-                    {onlinePlayers.length > 0 ? (
+
+                    {/* Online Friends */}
+                    {friends.filter(f => friendStatuses[f.id]).length > 0 ? (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            {onlinePlayers.map(p => (
+                            {friends.filter(f => friendStatuses[f.id]).map(f => (
                                 <div
-                                    key={p.id}
-                                    onClick={() => handleChallenge(p)}
+                                    key={f.id}
+                                    onClick={() => openFriendChallengeSettings(f)}
                                     style={{
                                         display: 'flex', alignItems: 'center', gap: '12px',
                                         padding: '12px 16px', background: 'var(--bg-secondary)', borderRadius: '12px',
                                         cursor: 'pointer', transition: 'background 0.15s'
                                     }}
                                 >
-                                    {p.avatar ? (
+                                    {f.avatar ? (
                                         <img
-                                            src={p.avatar}
-                                            alt={p.name}
+                                            src={f.avatar}
+                                            alt={f.name}
                                             style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }}
                                         />
                                     ) : (
                                         <div className="avatar" style={{ width: '40px', height: '40px', fontSize: '15px' }}>
-                                            {p.name?.charAt(0).toUpperCase()}
+                                            {f.name?.charAt(0).toUpperCase()}
                                         </div>
                                     )}
                                     <div style={{ flex: 1 }}>
-                                        <div style={{ fontWeight: '500' }}>{p.name}</div>
-                                        <div style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>Available</div>
+                                        <div style={{ fontWeight: '500' }}>{f.name}</div>
+                                        <div style={{ fontSize: '12px', color: 'var(--green)' }}>Online</div>
                                     </div>
                                     <Swords size={16} style={{ color: 'var(--accent)' }} />
                                 </div>
                             ))}
                         </div>
                     ) : (
-                        <div style={{ textAlign: 'center', padding: '40px 0', color: 'var(--text-tertiary)' }}>
-                            <Users size={32} style={{ marginBottom: '12px', opacity: 0.5 }} />
-                            <p>No players online</p>
+                        <div style={{ textAlign: 'center', padding: '40px 0' }}>
+                            <Users size={32} style={{ marginBottom: '12px', opacity: 0.5, color: 'var(--text-tertiary)' }} />
+                            <p style={{ color: 'var(--text-secondary)', marginBottom: '8px' }}>
+                                {friends.length === 0 ? 'No friends added yet' : 'No friends online right now'}
+                            </p>
+                            <Link to="/friends" onClick={() => setShowOnlinePlayers(false)} style={{ textDecoration: 'none' }}>
+                                <button className="btn btn-primary" style={{ marginTop: '12px', padding: '10px 20px' }}>
+                                    <UserPlus size={16} /> Add Friends
+                                </button>
+                            </Link>
+                        </div>
+                    )}
+
+                    {/* Offline Friends */}
+                    {friends.filter(f => !friendStatuses[f.id]).length > 0 && (
+                        <div style={{ marginTop: '20px' }}>
+                            <span className="caption" style={{ display: 'block', marginBottom: '8px' }}>OFFLINE</span>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                {friends.filter(f => !friendStatuses[f.id]).map(f => (
+                                    <div
+                                        key={f.id}
+                                        style={{
+                                            display: 'flex', alignItems: 'center', gap: '12px',
+                                            padding: '10px 14px', background: 'var(--bg-secondary)', borderRadius: '10px',
+                                            opacity: 0.5
+                                        }}
+                                    >
+                                        {f.avatar ? (
+                                            <img src={f.avatar} alt={f.name} style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} />
+                                        ) : (
+                                            <div className="avatar" style={{ width: '32px', height: '32px', fontSize: '12px' }}>{f.name?.charAt(0).toUpperCase()}</div>
+                                        )}
+                                        <div style={{ flex: 1, fontSize: '14px' }}>{f.name}</div>
+                                        <span style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>Offline</span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     )}
                 </Modal>
             )}
 
+            {/* Solution Reveal Modal */}
+            {showSolutionModal && (
+                <Modal onClose={() => setShowSolutionModal(false)}>
+                    <div style={{ textAlign: 'center' }}>
+                        <AlertTriangle size={48} style={{ color: 'var(--orange)', marginBottom: '16px' }} />
+                        <h2 className="headline-small" style={{ marginBottom: '8px' }}>Reveal Solution?</h2>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '8px' }}>
+                            This will show you the complete solution and all test cases.
+                        </p>
+                        {opponent && (
+                            <div style={{
+                                background: 'rgba(255, 69, 58, 0.12)',
+                                border: '1px solid rgba(255, 69, 58, 0.3)',
+                                borderRadius: '10px',
+                                padding: '12px',
+                                marginBottom: '20px'
+                            }}>
+                                <p style={{ color: 'var(--red)', fontSize: '14px', fontWeight: '500', margin: 0 }}>
+                                    <Zap size={14} style={{ display: 'inline', marginRight: '4px' }} /> This will forfeit the battle and count as a loss
+                                </p>
+                            </div>
+                        )}
+                        {!opponent && (
+                            <p style={{ color: 'var(--orange)', fontSize: '13px', marginBottom: '20px' }}>
+                                Practice mode - no penalty applied
+                            </p>
+                        )}
+                        <div style={{ display: 'flex', gap: '12px' }}>
+                            <button
+                                onClick={() => setShowSolutionModal(false)}
+                                style={{
+                                    flex: 1, padding: '12px', background: 'transparent',
+                                    border: '1px solid var(--border)', borderRadius: '980px',
+                                    color: 'var(--text)', cursor: 'pointer'
+                                }}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleRevealSolution}
+                                style={{
+                                    flex: 1, padding: '12px',
+                                    background: 'var(--red)', border: 'none', borderRadius: '980px',
+                                    color: 'white', cursor: 'pointer', fontWeight: '500'
+                                }}
+                            >
+                                Reveal Solution
+                            </button>
+                        </div>
+                    </div>
+                </Modal>
+            )}
 
 
             {/* Lobby */}
@@ -443,7 +612,7 @@ const ArenaPage = () => {
                             Compete in real-time coding challenges
                         </p>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                            <button className="btn btn-primary" onClick={() => user ? handleAutoMatch() : setShowAuthModal(true)} style={{ width: '100%', padding: '14px' }}>
+                            <button className="btn btn-primary" onClick={() => user ? setShowMatchmakingSettings(true) : setShowAuthModal(true)} style={{ width: '100%', padding: '14px' }}>
                                 <Target size={18} /> Find Match
                             </button>
                             <button onClick={() => user ? setShowOnlinePlayers(true) : setShowAuthModal(true)} style={{
@@ -452,7 +621,7 @@ const ArenaPage = () => {
                             }}>
                                 <UserPlus size={18} /> Challenge Friend
                             </button>
-                            <button onClick={handlePractice} style={{
+                            <button onClick={() => setShowSoloSettings(true)} style={{
                                 width: '100%', padding: '14px', background: 'transparent', border: 'none',
                                 borderRadius: '980px', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
                             }}>
@@ -461,6 +630,181 @@ const ArenaPage = () => {
                         </div>
                     </div>
                 </div>
+            )}
+
+            {/* Matchmaking Settings Modal */}
+            {showMatchmakingSettings && (
+                <Modal onClose={() => setShowMatchmakingSettings(false)}>
+                    <div style={{ textAlign: 'center' }}>
+                        <Target size={40} style={{ color: 'var(--accent)', marginBottom: '16px' }} />
+                        <h2 className="headline-small" style={{ marginBottom: '8px' }}>Matchmaking Settings</h2>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>
+                            Find a worthy opponent
+                        </p>
+
+                        <div style={{ textAlign: 'left', marginBottom: '20px' }}>
+                            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: 'var(--text-secondary)' }}>Difficulty</label>
+                            <div style={{ display: 'flex', gap: '8px' }}>
+                                {['Random', 'Easy', 'Medium', 'Hard'].map(diff => (
+                                    <button
+                                        key={diff}
+                                        onClick={() => setMatchmakingOptions({ ...matchmakingOptions, difficulty: diff })}
+                                        style={{
+                                            flex: 1,
+                                            padding: '10px',
+                                            borderRadius: '8px',
+                                            border: matchmakingOptions.difficulty === diff ? '1px solid var(--accent)' : '1px solid var(--border)',
+                                            background: matchmakingOptions.difficulty === diff ? 'rgba(56, 189, 248, 0.1)' : 'var(--bg-secondary)',
+                                            color: matchmakingOptions.difficulty === diff ? 'var(--accent)' : 'var(--text-secondary)',
+                                            cursor: 'pointer',
+                                            fontSize: '13px',
+                                            fontWeight: '500'
+                                        }}
+                                    >
+                                        {diff}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div style={{ textAlign: 'left', marginBottom: '24px' }}>
+                            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: 'var(--text-secondary)' }}>Category</label>
+                            <div style={{ position: 'relative' }}>
+                                <select
+                                    value={matchmakingOptions.category}
+                                    onChange={(e) => setMatchmakingOptions({ ...matchmakingOptions, category: e.target.value })}
+                                    style={{
+                                        width: '100%',
+                                        padding: '12px',
+                                        paddingRight: '40px',
+                                        background: 'var(--bg-secondary)',
+                                        border: '1px solid var(--border)',
+                                        borderRadius: '8px',
+                                        color: 'var(--text)',
+                                        fontSize: '14px',
+                                        appearance: 'none',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    <option value="Random">Random Category</option>
+                                    {categories.map(cat => (
+                                        <option key={cat} value={cat}>{cat}</option>
+                                    ))}
+                                </select>
+                                <ChevronDown size={16} style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-tertiary)' }} />
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '12px' }}>
+                            <button
+                                onClick={() => setShowMatchmakingSettings(false)}
+                                style={{
+                                    flex: 1,
+                                    padding: '12px',
+                                    background: 'transparent',
+                                    border: '1px solid var(--border)',
+                                    borderRadius: '8px',
+                                    color: 'var(--text)',
+                                    cursor: 'pointer',
+                                    fontSize: '14px',
+                                    fontWeight: '500'
+                                }}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleAutoMatch}
+                                style={{
+                                    flex: 1,
+                                    padding: '12px',
+                                    background: 'var(--accent)',
+                                    border: 'none',
+                                    borderRadius: '8px',
+                                    color: 'white',
+                                    cursor: 'pointer',
+                                    fontSize: '14px',
+                                    fontWeight: '600',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: '8px'
+                                }}
+                            >
+                                <Target size={16} /> Find Match
+                            </button>
+                        </div>
+                    </div>
+                </Modal>
+            )}
+
+            {/* Solo Settings Modal */}
+            {showSoloSettings && (
+                <Modal onClose={() => setShowSoloSettings(false)}>
+                    <div style={{ textAlign: 'center' }}>
+                        <Code size={40} style={{ color: 'var(--text-secondary)', marginBottom: '16px' }} />
+                        <h2 className="headline-small" style={{ marginBottom: '8px' }}>Practice Settings</h2>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>
+                            Customize your practice session
+                        </p>
+
+                        <div style={{ textAlign: 'left', marginBottom: '20px' }}>
+                            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: 'var(--text-secondary)' }}>Difficulty</label>
+                            <div style={{ display: 'flex', gap: '8px' }}>
+                                {['Random', 'Easy', 'Medium', 'Hard'].map(diff => (
+                                    <button
+                                        key={diff}
+                                        onClick={() => setSoloOptions({ ...soloOptions, difficulty: diff })}
+                                        style={{
+                                            flex: 1,
+                                            padding: '10px',
+                                            borderRadius: '8px',
+                                            border: soloOptions.difficulty === diff ? '1px solid var(--accent)' : '1px solid var(--border)',
+                                            background: soloOptions.difficulty === diff ? 'rgba(56, 189, 248, 0.1)' : 'var(--bg-secondary)',
+                                            color: soloOptions.difficulty === diff ? 'var(--accent)' : 'var(--text-secondary)',
+                                            cursor: 'pointer',
+                                            fontSize: '13px',
+                                            fontWeight: '500'
+                                        }}
+                                    >
+                                        {diff}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div style={{ textAlign: 'left', marginBottom: '24px' }}>
+                            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: 'var(--text-secondary)' }}>Category</label>
+                            <div style={{ position: 'relative' }}>
+                                <select
+                                    value={soloOptions.category}
+                                    onChange={(e) => setSoloOptions({ ...soloOptions, category: e.target.value })}
+                                    style={{
+                                        width: '100%',
+                                        padding: '12px',
+                                        paddingRight: '40px',
+                                        background: 'var(--bg-secondary)',
+                                        border: '1px solid var(--border)',
+                                        borderRadius: '8px',
+                                        color: 'var(--text)',
+                                        fontSize: '14px',
+                                        appearance: 'none',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    <option value="Random">Random Category</option>
+                                    {categories.map(cat => (
+                                        <option key={cat} value={cat}>{cat}</option>
+                                    ))}
+                                </select>
+                                <ChevronDown size={16} style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-tertiary)' }} />
+                            </div>
+                        </div>
+
+                        <button className="btn btn-primary" onClick={handlePractice} style={{ width: '100%', padding: '12px' }}>
+                            Start Practice
+                        </button>
+                    </div>
+                </Modal>
             )}
 
             {/* Searching */}
@@ -558,6 +902,8 @@ const ArenaPage = () => {
                             }}>
                                 <RotateCcw size={14} /> Reset
                             </button>
+
+
                             {opponent && gameState === 'playing' && (
                                 <button onClick={handleForfeit} style={{
                                     marginLeft: 'auto', padding: '10px 16px', background: 'transparent', border: 'none',
@@ -570,7 +916,7 @@ const ArenaPage = () => {
                     </div>
 
                     {/* Problem Panel */}
-                    <div style={{ width: '400px', display: 'flex', flexDirection: 'column', background: 'var(--bg-secondary)' }}>
+                    <div style={{ width: '400px', display: 'flex', flexDirection: 'column', background: 'var(--bg-secondary)', overflow: 'auto' }}>
                         <div style={{ padding: '24px', borderBottom: '1px solid var(--border)' }}>
                             <span className="badge" style={{
                                 marginBottom: '12px',
@@ -581,6 +927,35 @@ const ArenaPage = () => {
                             </span>
                             <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '12px' }}>{currentProblem.title}</h2>
                             <p style={{ color: 'var(--text-secondary)', fontSize: '15px', lineHeight: 1.6 }}>{currentProblem.description}</p>
+
+                            {/* Sample I/O */}
+                            {currentProblem.testCases && currentProblem.testCases.length > 0 && (
+                                <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid var(--border)' }}>
+                                    <span className="caption" style={{ display: 'block', marginBottom: '10px' }}>SAMPLE I/O</span>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                        {currentProblem.testCases.slice(0, 2).map((tc, idx) => (
+                                            <div key={idx} style={{
+                                                background: 'var(--bg)',
+                                                borderRadius: '8px',
+                                                padding: '10px 12px',
+                                                border: '1px solid var(--border)',
+                                                fontSize: '12px'
+                                            }}>
+                                                <div style={{ display: 'flex', gap: '12px' }}>
+                                                    <div style={{ flex: 1 }}>
+                                                        <span style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: '600' }}>IN</span>
+                                                        <code className="mono" style={{ display: 'block', color: 'var(--text)', marginTop: '2px' }}>{tc.input}</code>
+                                                    </div>
+                                                    <div style={{ flex: 1 }}>
+                                                        <span style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: '600' }}>OUT</span>
+                                                        <code className="mono" style={{ display: 'block', color: 'var(--green)', marginTop: '2px' }}>{tc.expectedOutput}</code>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         {/* Output */}
@@ -599,21 +974,297 @@ const ArenaPage = () => {
                             </div>
                         </div>
 
-                        {/* Result */}
-                        {gameState === 'finished' && (
-                            <div style={{ padding: '24px', borderTop: '1px solid var(--border)', textAlign: 'center' }}>
-                                <ResultIcon size={48} style={{ color: battleResult === 'win' ? 'var(--green)' : 'var(--red)', marginBottom: '12px' }} />
-                                <h3 style={{ fontSize: '24px', fontWeight: '600', marginBottom: '4px', color: battleResult === 'win' ? 'var(--green)' : 'var(--red)' }}>
-                                    {battleResult === 'win' ? 'Victory!' : 'Defeated'}
-                                </h3>
-                                <p style={{ color: 'var(--text-tertiary)', marginBottom: '20px' }}>Time: {formatTime(timer)}</p>
-                                <button className="btn btn-primary" onClick={handlePlayAgain} style={{ width: '100%', padding: '14px' }}>
-                                    Play Again
+                        {/* View Solution Button */}
+                        {!solutionRevealed && gameState === 'playing' && (
+                            <div style={{ padding: '0 20px 16px' }}>
+                                <button
+                                    onClick={() => setShowSolutionModal(true)}
+                                    style={{
+                                        width: '100%',
+                                        padding: '10px',
+                                        background: 'transparent',
+                                        border: '1px dashed var(--border)',
+                                        borderRadius: '8px',
+                                        color: 'var(--text-tertiary)',
+                                        cursor: 'pointer',
+                                        fontSize: '13px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        gap: '6px'
+                                    }}
+                                >
+                                    <Eye size={14} />
+                                    View Solution {opponent && '(forfeit)'}
                                 </button>
+                            </div>
+                        )}
+
+                        {/* Revealed Solution */}
+                        {solutionRevealed && (
+                            <div style={{ padding: '0 20px 20px' }}>
+                                <div style={{
+                                    background: 'rgba(255, 159, 10, 0.08)',
+                                    border: '1px solid rgba(255, 159, 10, 0.3)',
+                                    borderRadius: '12px',
+                                    padding: '16px'
+                                }}>
+                                    <span className="caption" style={{ display: 'block', marginBottom: '10px', color: 'var(--orange)' }}>
+                                        SOLUTION (REVEALED)
+                                    </span>
+                                    <pre className="mono" style={{
+                                        margin: 0,
+                                        fontSize: '11px',
+                                        whiteSpace: 'pre-wrap',
+                                        color: 'var(--text)',
+                                        maxHeight: '150px',
+                                        overflow: 'auto'
+                                    }}>
+                                        {currentProblem.solution}
+                                    </pre>
+
+                                    {/* All Test Cases */}
+                                    {currentProblem.testCases && (
+                                        <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid var(--border)' }}>
+                                            <span style={{ fontSize: '11px', color: 'var(--text-tertiary)', fontWeight: '600' }}>
+                                                ALL TEST CASES ({currentProblem.testCases.length})
+                                            </span>
+                                            <div style={{ marginTop: '8px', maxHeight: '120px', overflow: 'auto' }}>
+                                                {currentProblem.testCases.map((tc, idx) => (
+                                                    <div key={idx} style={{
+                                                        fontSize: '11px',
+                                                        padding: '6px 8px',
+                                                        background: 'var(--bg)',
+                                                        borderRadius: '6px',
+                                                        marginBottom: '4px'
+                                                    }}>
+                                                        <span className="mono" style={{ color: 'var(--text-secondary)' }}>
+                                                            {tc.input} → <span style={{ color: 'var(--green)' }}>{tc.expectedOutput}</span>
+                                                        </span>
+                                                        {tc.explanation && (
+                                                            <span style={{ color: 'var(--text-tertiary)', marginLeft: '8px' }}>
+                                                                ({tc.explanation})
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Result Overlay */}
+                        {/* Result Overlay */}
+                        {gameState === 'finished' && (
+                            <div style={{
+                                position: 'fixed',
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                width: '100vw',
+                                height: '100vh',
+                                background: 'rgba(5, 5, 5, 0.6)',
+                                backdropFilter: 'blur(12px)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                zIndex: 2000,
+                                animation: 'fadeIn 0.4s ease-out'
+                            }}>
+                                <div style={{
+                                    background: 'var(--bg-elevated)',
+                                    borderRadius: '32px',
+                                    padding: '56px 48px',
+                                    width: '100%',
+                                    maxWidth: '440px',
+                                    textAlign: 'center',
+                                    boxShadow: '0 40px 80px -20px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border)',
+                                    animation: 'scaleUp 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+                                    position: 'relative',
+                                    overflow: 'hidden'
+                                }}>
+                                    {/* Ambient Glow */}
+                                    <div style={{
+                                        position: 'absolute',
+                                        top: '-50%',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        width: '100%',
+                                        height: '100%',
+                                        background: battleResult === 'win'
+                                            ? 'radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, transparent 70%)'
+                                            : 'radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, transparent 70%)',
+                                        pointerEvents: 'none'
+                                    }} />
+
+                                    {/* Content */}
+                                    <div style={{ position: 'relative', zIndex: 1 }}>
+                                        {/* Icon */}
+                                        <div style={{
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            width: '80px',
+                                            height: '80px',
+                                            borderRadius: '50%',
+                                            background: battleResult === 'win' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                                            color: battleResult === 'win' ? 'var(--green)' : 'var(--red)',
+                                            marginBottom: '32px'
+                                        }}>
+                                            <ResultIcon size={40} style={{ strokeWidth: 2.5 }} />
+                                        </div>
+
+                                        {/* Title */}
+                                        <h2 style={{
+                                            margin: '0 0 8px',
+                                            fontSize: '32px',
+                                            fontWeight: '700',
+                                            letterSpacing: '-0.02em',
+                                            color: 'var(--text)'
+                                        }}>
+                                            {battleResult === 'win' ? 'Victory' : 'Defeated'}
+                                        </h2>
+
+                                        <p style={{
+                                            color: 'var(--text-secondary)',
+                                            fontSize: '16px',
+                                            marginBottom: '40px'
+                                        }}>
+                                            {battleResult === 'win' ? 'Great job! You solved it.' : 'Keep practicing, you will get it next time.'}
+                                        </p>
+
+                                        {/* Stats Row */}
+                                        <div style={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            marginBottom: '40px',
+                                            padding: '16px',
+                                            background: 'var(--bg)',
+                                            borderRadius: '16px',
+                                            border: '1px solid var(--border)'
+                                        }}>
+                                            <div style={{ padding: '0 24px' }}>
+                                                <span style={{ display: 'block', fontSize: '11px', fontWeight: '600', color: 'var(--text-tertiary)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '4px' }}>Time</span>
+                                                <span className="mono" style={{ fontSize: '18px', color: 'var(--text)' }}>{formatTime(timer)}</span>
+                                            </div>
+                                        </div>
+
+                                        {/* Actions */}
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                            <button
+                                                className="btn"
+                                                onClick={handlePlayAgain}
+                                                style={{
+                                                    width: '100%',
+                                                    padding: '16px',
+                                                    fontSize: '15px',
+                                                    borderRadius: '14px',
+                                                    background: 'var(--text)',
+                                                    color: 'var(--bg)',
+                                                    border: 'none',
+                                                    fontWeight: '600',
+                                                    cursor: 'pointer',
+                                                    transition: 'transform 0.1s'
+                                                }}
+                                                onMouseDown={e => e.currentTarget.style.transform = 'scale(0.98)'}
+                                                onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+                                                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                                            >
+                                                Play Again
+                                            </button>
+
+                                            <button
+                                                className="btn"
+                                                onClick={() => setGameState('lobby')}
+                                                style={{
+                                                    width: '100%',
+                                                    padding: '16px',
+                                                    fontSize: '15px',
+                                                    background: 'transparent',
+                                                    border: 'none',
+                                                    color: 'var(--text-secondary)',
+                                                    cursor: 'pointer',
+                                                    fontWeight: '500'
+                                                }}
+                                            >
+                                                Return to Lobby
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <style>{`
+                                    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+                                    @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+                                `}</style>
                             </div>
                         )}
                     </div>
                 </div>
+            )}
+            {/* Friend Challenge Settings Modal */}
+            {showFriendChallengeSettings && friendChallengeTarget && (
+                <Modal onClose={() => setShowFriendChallengeSettings(false)}>
+                    <div style={{ padding: '0 4px' }}>
+                        <h2 className="headline-small" style={{ marginBottom: '8px' }}>Challenge {friendChallengeTarget.name}</h2>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>
+                            Configure the battle settings
+                        </p>
+
+                        {/* Difficulty */}
+                        <div style={{ marginBottom: '24px' }}>
+                            <label className="caption" style={{ marginBottom: '8px', display: 'block' }}>DIFFICULTY</label>
+                            <div style={{ display: 'flex', gap: '8px' }}>
+                                {['Random', 'Easy', 'Medium', 'Hard'].map(d => (
+                                    <button
+                                        key={d}
+                                        onClick={() => setFriendChallengeOptions(prev => ({ ...prev, difficulty: d }))}
+                                        style={{
+                                            flex: 1,
+                                            padding: '12px',
+                                            borderRadius: '12px',
+                                            border: friendChallengeOptions.difficulty === d ? '2px solid var(--accent)' : '1px solid var(--border)',
+                                            background: friendChallengeOptions.difficulty === d ? 'rgba(56, 189, 248, 0.1)' : 'transparent',
+                                            color: friendChallengeOptions.difficulty === d ? 'var(--accent)' : 'var(--text)',
+                                            cursor: 'pointer',
+                                            fontWeight: '500',
+                                            transition: 'all 0.2s'
+                                        }}
+                                    >
+                                        {d}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Category */}
+                        <div style={{ marginBottom: '32px' }}>
+                            <label className="caption" style={{ marginBottom: '8px', display: 'block' }}>CATEGORY</label>
+                            <div style={{ position: 'relative' }}>
+                                <select
+                                    value={friendChallengeOptions.category}
+                                    onChange={(e) => setFriendChallengeOptions(prev => ({ ...prev, category: e.target.value }))}
+                                    className="input"
+                                    style={{ width: '100%', appearance: 'none', cursor: 'pointer' }}
+                                >
+                                    <option value="Random">Random Category</option>
+                                    {categories.map(c => <option key={c} value={c}>{c}</option>)}
+                                </select>
+                                <ChevronDown size={18} style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-tertiary)' }} />
+                            </div>
+                        </div>
+
+                        <button
+                            className="btn btn-primary"
+                            style={{ width: '100%', padding: '16px', fontSize: '16px' }}
+                            onClick={() => handleChallenge(friendChallengeTarget, friendChallengeOptions)}
+                        >
+                            <Swords size={20} /> Send Challenge
+                        </button>
+                    </div>
+                </Modal>
             )}
         </div>
     );

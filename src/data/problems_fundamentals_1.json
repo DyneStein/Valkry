@@ -9,16 +9,35 @@
         "expectedOutput": "0 1",
         "solution": "#include <iostream>\nusing namespace std;\nvoid twoSum(int a[], int n, int t) {\n    for(int i = 0; i < n; i++) {\n        for(int j = i + 1; j < n; j++) {\n            if(a[i] + a[j] == t) {\n                cout << i << \" \" << j;\n                return;\n            }\n        }\n    }\n}\nint main() { int a[]={2,7,11,15}; twoSum(a,4,9); return 0; }",
         "explanation": {
-            "approach": "Check every pair of numbers. If two numbers add up to target, print their positions.",
-            "analogy": "Imagine you have coins and need to find two that add to exactly $1. You pick one coin, then check every other coin to see if they add up to $1.",
+            "approach": "Check every pair of numbers.",
             "steps": [
-                "Start with the first number",
-                "Compare it with every number after it",
-                "If they add to target, print both positions",
-                "If not found, try next starting number"
+                "For each element, check all elements after it",
+                "If sum equals target, print indices"
             ],
             "complexity": "Time: O(n²), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "arr=[2,7,11,15], target=9",
+                "expectedOutput": "0 1",
+                "explanation": "2+7=9, indices 0 and 1"
+            },
+            {
+                "input": "arr=[3,2,4], target=6",
+                "expectedOutput": "1 2",
+                "explanation": "2+4=6"
+            },
+            {
+                "input": "arr=[3,3], target=6",
+                "expectedOutput": "0 1",
+                "explanation": "Both 3s sum to 6"
+            },
+            {
+                "input": "arr=[1,2,3,4,5], target=9",
+                "expectedOutput": "3 4",
+                "explanation": "4+5=9"
+            }
+        ]
     },
     {
         "id": "fun2",
@@ -30,17 +49,36 @@
         "expectedOutput": "5 4 3 2 1",
         "solution": "#include <iostream>\nusing namespace std;\nvoid reverse(int a[], int n) {\n    int left = 0, right = n - 1;\n    while(left < right) {\n        int temp = a[left];\n        a[left] = a[right];\n        a[right] = temp;\n        left++;\n        right--;\n    }\n}\nint main() { int a[]={1,2,3,4,5}; reverse(a,5); for(int i=0;i<5;i++) cout<<a[i]<<\" \"; return 0; }",
         "explanation": {
-            "approach": "Use two pointers - one at start, one at end. Swap them and move inward until they meet.",
-            "analogy": "Like reversing a line of people - person at front goes to back, person at back goes to front, then do the same for the next pair moving inward.",
+            "approach": "Two pointers from both ends, swap and move inward.",
             "steps": [
-                "Put one pointer at start (left=0)",
-                "Put another at end (right=n-1)",
-                "Swap elements at both pointers",
-                "Move left forward, right backward",
-                "Repeat until they meet"
+                "Put pointers at start and end",
+                "Swap elements",
+                "Move pointers toward center"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "arr=[1,2,3,4,5]",
+                "expectedOutput": "5 4 3 2 1",
+                "explanation": "Reverse odd-length array"
+            },
+            {
+                "input": "arr=[1,2,3,4]",
+                "expectedOutput": "4 3 2 1",
+                "explanation": "Reverse even-length array"
+            },
+            {
+                "input": "arr=[1]",
+                "expectedOutput": "1",
+                "explanation": "Single element unchanged"
+            },
+            {
+                "input": "arr=[1,2]",
+                "expectedOutput": "2 1",
+                "explanation": "Two elements swapped"
+            }
+        ]
     },
     {
         "id": "fun3",
@@ -52,16 +90,36 @@
         "expectedOutput": "9",
         "solution": "#include <iostream>\nusing namespace std;\nint findMax(int a[], int n) {\n    int maxVal = a[0];\n    for(int i = 1; i < n; i++) {\n        if(a[i] > maxVal) {\n            maxVal = a[i];\n        }\n    }\n    return maxVal;\n}\nint main() { int a[]={3,7,1,9,2}; cout<<findMax(a,5); return 0; }",
         "explanation": {
-            "approach": "Assume first element is maximum. Compare with each element - if we find bigger, update our maximum.",
-            "analogy": "Like finding the tallest person in a room. Assume first person is tallest, then walk around comparing heights.",
+            "approach": "Assume first is max, compare with rest.",
             "steps": [
-                "Start assuming first element is max",
-                "Loop through remaining elements",
-                "If current element is bigger than max, update max",
-                "Return the maximum found"
+                "Start with first element as max",
+                "Compare each element",
+                "Update max if larger found"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "arr=[3,7,1,9,2]",
+                "expectedOutput": "9",
+                "explanation": "9 is the largest"
+            },
+            {
+                "input": "arr=[-5,-2,-8]",
+                "expectedOutput": "-2",
+                "explanation": "-2 is largest negative"
+            },
+            {
+                "input": "arr=[5]",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "arr=[5,5,5,5]",
+                "expectedOutput": "5",
+                "explanation": "All same values"
+            }
+        ]
     },
     {
         "id": "fun4",
@@ -73,16 +131,36 @@
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nint findMin(int a[], int n) {\n    int minVal = a[0];\n    for(int i = 1; i < n; i++) {\n        if(a[i] < minVal) {\n            minVal = a[i];\n        }\n    }\n    return minVal;\n}\nint main() { int a[]={3,7,1,9,2}; cout<<findMin(a,5); return 0; }",
         "explanation": {
-            "approach": "Same as finding max, but look for smaller values instead.",
-            "analogy": "Like finding the shortest person - assume first is shortest, then check everyone else.",
+            "approach": "Assume first is min, compare with rest.",
             "steps": [
-                "Start assuming first element is min",
-                "Loop through remaining elements",
-                "If current element is smaller, update min",
-                "Return the minimum found"
+                "Start with first element as min",
+                "Compare each element",
+                "Update min if smaller found"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "arr=[3,7,1,9,2]",
+                "expectedOutput": "1",
+                "explanation": "1 is the smallest"
+            },
+            {
+                "input": "arr=[-5,-2,-8]",
+                "expectedOutput": "-8",
+                "explanation": "-8 is smallest"
+            },
+            {
+                "input": "arr=[5]",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "arr=[10,10,10]",
+                "expectedOutput": "10",
+                "explanation": "All same values"
+            }
+        ]
     },
     {
         "id": "fun5",
@@ -94,16 +172,36 @@
         "expectedOutput": "15",
         "solution": "#include <iostream>\nusing namespace std;\nint sum(int a[], int n) {\n    int total = 0;\n    for(int i = 0; i < n; i++) {\n        total += a[i];\n    }\n    return total;\n}\nint main() { int a[]={1,2,3,4,5}; cout<<sum(a,5); return 0; }",
         "explanation": {
-            "approach": "Start with 0, add each element one by one.",
-            "analogy": "Like counting money - start with $0, add each bill you find to your total.",
+            "approach": "Start with 0, add each element.",
             "steps": [
                 "Initialize sum to 0",
-                "Loop through each element",
-                "Add each element to sum",
-                "Return total sum"
+                "Loop through array",
+                "Add each element to sum"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "arr=[1,2,3,4,5]",
+                "expectedOutput": "15",
+                "explanation": "1+2+3+4+5=15"
+            },
+            {
+                "input": "arr=[10,20,30]",
+                "expectedOutput": "60",
+                "explanation": "10+20+30=60"
+            },
+            {
+                "input": "arr=[-1,-2,3]",
+                "expectedOutput": "0",
+                "explanation": "-1-2+3=0"
+            },
+            {
+                "input": "arr=[100]",
+                "expectedOutput": "100",
+                "explanation": "Single element"
+            }
+        ]
     },
     {
         "id": "fun6",
@@ -115,15 +213,36 @@
         "expectedOutput": "30",
         "solution": "#include <iostream>\nusing namespace std;\ndouble average(int a[], int n) {\n    int total = 0;\n    for(int i = 0; i < n; i++) {\n        total += a[i];\n    }\n    return (double)total / n;\n}\nint main() { int a[]={10,20,30,40,50}; cout<<average(a,5); return 0; }",
         "explanation": {
-            "approach": "First find sum, then divide by count of elements.",
-            "analogy": "Like finding average test score - add all scores, divide by number of students.",
+            "approach": "Sum all elements, divide by count.",
             "steps": [
-                "Calculate sum of all elements",
-                "Divide sum by number of elements",
-                "Return the result"
+                "Calculate sum",
+                "Divide by n",
+                "Return average"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "arr=[10,20,30,40,50]",
+                "expectedOutput": "30",
+                "explanation": "150/5=30"
+            },
+            {
+                "input": "arr=[1,2,3,4]",
+                "expectedOutput": "2.5",
+                "explanation": "10/4=2.5"
+            },
+            {
+                "input": "arr=[5]",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "arr=[0,0,0,0]",
+                "expectedOutput": "0",
+                "explanation": "All zeros"
+            }
+        ]
     },
     {
         "id": "fun7",
@@ -135,16 +254,36 @@
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint countEven(int a[], int n) {\n    int count = 0;\n    for(int i = 0; i < n; i++) {\n        if(a[i] % 2 == 0) {\n            count++;\n        }\n    }\n    return count;\n}\nint main() { int a[]={1,2,3,4,5,6}; cout<<countEven(a,6); return 0; }",
         "explanation": {
-            "approach": "Check each number - if divisible by 2 with no remainder, it's even.",
-            "analogy": "Like sorting socks into pairs - if a number divides evenly by 2, it's 'even' like matching socks.",
+            "approach": "Check if each number is divisible by 2.",
             "steps": [
-                "Start with count = 0",
-                "For each number, check if num % 2 == 0",
-                "If yes, increment count",
-                "Return final count"
+                "For each element",
+                "Check if num % 2 == 0",
+                "If yes, increment count"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "arr=[1,2,3,4,5,6]",
+                "expectedOutput": "3",
+                "explanation": "2,4,6 are even"
+            },
+            {
+                "input": "arr=[1,3,5,7]",
+                "expectedOutput": "0",
+                "explanation": "No even numbers"
+            },
+            {
+                "input": "arr=[2,4,6,8]",
+                "expectedOutput": "4",
+                "explanation": "All even"
+            },
+            {
+                "input": "arr=[0,1,2]",
+                "expectedOutput": "2",
+                "explanation": "0 and 2 are even"
+            }
+        ]
     },
     {
         "id": "fun8",
@@ -156,16 +295,36 @@
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint countOdd(int a[], int n) {\n    int count = 0;\n    for(int i = 0; i < n; i++) {\n        if(a[i] % 2 != 0) {\n            count++;\n        }\n    }\n    return count;\n}\nint main() { int a[]={1,2,3,4,5,6}; cout<<countOdd(a,6); return 0; }",
         "explanation": {
-            "approach": "Check each number - if dividing by 2 leaves remainder, it's odd.",
-            "analogy": "The leftover sock that doesn't have a pair is 'odd'.",
+            "approach": "Check if each number has remainder when divided by 2.",
             "steps": [
-                "Start with count = 0",
-                "For each number, check if num % 2 != 0",
-                "If yes, increment count",
-                "Return final count"
+                "For each element",
+                "Check if num % 2 != 0",
+                "If yes, increment count"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "arr=[1,2,3,4,5,6]",
+                "expectedOutput": "3",
+                "explanation": "1,3,5 are odd"
+            },
+            {
+                "input": "arr=[1,3,5,7]",
+                "expectedOutput": "4",
+                "explanation": "All odd"
+            },
+            {
+                "input": "arr=[2,4,6,8]",
+                "expectedOutput": "0",
+                "explanation": "No odd numbers"
+            },
+            {
+                "input": "arr=[0,1]",
+                "expectedOutput": "1",
+                "explanation": "Only 1 is odd"
+            }
+        ]
     },
     {
         "id": "fun9",
@@ -175,18 +334,38 @@
         "category": "Fundamentals",
         "starterCode": "#include <iostream>\nusing namespace std;\nint main() { int a=5, b=10; int t=a; a=b; b=t; cout<<a<<\" \"<<b; return 0; }",
         "expectedOutput": "10 5",
-        "solution": "#include <iostream>\nusing namespace std;\nint main() {\n    int a = 5, b = 10;\n    int temp = a;  // Save a's value\n    a = b;         // Put b's value in a\n    b = temp;      // Put saved value in b\n    cout << a << \" \" << b;\n    return 0;\n}",
+        "solution": "#include <iostream>\nusing namespace std;\nint main() {\n    int a = 5, b = 10;\n    int temp = a;\n    a = b;\n    b = temp;\n    cout << a << \" \" << b;\n    return 0;\n}",
         "explanation": {
-            "approach": "Save one value in a temporary box, then shuffle values around.",
-            "analogy": "Like swapping drinks between two glasses - you need a third empty glass to hold one drink temporarily.",
+            "approach": "Use temporary variable to hold one value during swap.",
             "steps": [
-                "Store a in temporary variable",
+                "Store a in temp",
                 "Copy b into a",
-                "Copy temporary into b",
-                "Now a and b are swapped!"
+                "Copy temp into b"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "a=5, b=10",
+                "expectedOutput": "10 5",
+                "explanation": "Values swapped"
+            },
+            {
+                "input": "a=0, b=1",
+                "expectedOutput": "1 0",
+                "explanation": "Swap with zero"
+            },
+            {
+                "input": "a=-5, b=5",
+                "expectedOutput": "5 -5",
+                "explanation": "Swap negative"
+            },
+            {
+                "input": "a=7, b=7",
+                "expectedOutput": "7 7",
+                "explanation": "Same values"
+            }
+        ]
     },
     {
         "id": "fun10",
@@ -198,15 +377,35 @@
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isPositive(int n) {\n    return n > 0;\n}\nint main() { cout<<isPositive(5); return 0; }",
         "explanation": {
-            "approach": "Simply check if the number is greater than zero.",
-            "analogy": "Like checking if you have money in your wallet - anything above $0 is positive!",
+            "approach": "Check if number is greater than zero.",
             "steps": [
-                "Compare number with 0",
-                "If greater than 0, return true",
-                "Otherwise return false"
+                "Compare n with 0",
+                "Return true if n > 0"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "1",
+                "explanation": "5 is positive"
+            },
+            {
+                "input": "n=-5",
+                "expectedOutput": "0",
+                "explanation": "-5 is not positive"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "0",
+                "explanation": "0 is not positive"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "1",
+                "explanation": "100 is positive"
+            }
+        ]
     },
     {
         "id": "fun11",
@@ -219,14 +418,34 @@
         "solution": "#include <iostream>\nusing namespace std;\nbool isNegative(int n) {\n    return n < 0;\n}\nint main() { cout<<isNegative(-5); return 0; }",
         "explanation": {
             "approach": "Check if number is less than zero.",
-            "analogy": "Like being in debt - anything below $0 is negative.",
             "steps": [
-                "Compare number with 0",
-                "If less than 0, return true",
-                "Otherwise return false"
+                "Compare n with 0",
+                "Return true if n < 0"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=-5",
+                "expectedOutput": "1",
+                "explanation": "-5 is negative"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "0",
+                "explanation": "5 is not negative"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "0",
+                "explanation": "0 is not negative"
+            },
+            {
+                "input": "n=-100",
+                "expectedOutput": "1",
+                "explanation": "-100 is negative"
+            }
+        ]
     },
     {
         "id": "fun12",
@@ -238,15 +457,36 @@
         "expectedOutput": "9",
         "solution": "#include <iostream>\nusing namespace std;\nint largest(int a, int b, int c) {\n    if(a >= b && a >= c) return a;\n    if(b >= a && b >= c) return b;\n    return c;\n}\nint main() { cout<<largest(5,9,3); return 0; }",
         "explanation": {
-            "approach": "Compare each number with the other two. The one that beats both is the largest.",
-            "analogy": "Like a mini tournament - compare contestants until you find the champion.",
+            "approach": "Compare each with the other two.",
             "steps": [
-                "Check if a is >= both b and c, if yes return a",
-                "Check if b is >= both a and c, if yes return b",
-                "Otherwise c is the largest"
+                "Check if a is largest",
+                "Check if b is largest",
+                "Otherwise c is largest"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "a=5, b=9, c=3",
+                "expectedOutput": "9",
+                "explanation": "9 is largest"
+            },
+            {
+                "input": "a=10, b=5, c=3",
+                "expectedOutput": "10",
+                "explanation": "a is largest"
+            },
+            {
+                "input": "a=1, b=1, c=1",
+                "expectedOutput": "1",
+                "explanation": "All equal"
+            },
+            {
+                "input": "a=-1, b=-2, c=-3",
+                "expectedOutput": "-1",
+                "explanation": "-1 is largest negative"
+            }
+        ]
     },
     {
         "id": "fun13",
@@ -258,15 +498,36 @@
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint smallest(int a, int b, int c) {\n    if(a <= b && a <= c) return a;\n    if(b <= a && b <= c) return b;\n    return c;\n}\nint main() { cout<<smallest(5,9,3); return 0; }",
         "explanation": {
-            "approach": "Same as largest, but look for the one that's smaller than both others.",
-            "analogy": "Like finding who finishes last in a race - compare everyone's times.",
+            "approach": "Compare each with the other two.",
             "steps": [
-                "Check if a is <= both b and c, if yes return a",
-                "Check if b is <= both a and c, if yes return b",
-                "Otherwise c is the smallest"
+                "Check if a is smallest",
+                "Check if b is smallest",
+                "Otherwise c is smallest"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "a=5, b=9, c=3",
+                "expectedOutput": "3",
+                "explanation": "3 is smallest"
+            },
+            {
+                "input": "a=1, b=5, c=3",
+                "expectedOutput": "1",
+                "explanation": "a is smallest"
+            },
+            {
+                "input": "a=7, b=7, c=7",
+                "expectedOutput": "7",
+                "explanation": "All equal"
+            },
+            {
+                "input": "a=-1, b=-2, c=-3",
+                "expectedOutput": "-3",
+                "explanation": "-3 is smallest"
+            }
+        ]
     },
     {
         "id": "fun14",
@@ -278,15 +539,35 @@
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isDivisible(int a, int b) {\n    return a % b == 0;\n}\nint main() { cout<<isDivisible(10,5); return 0; }",
         "explanation": {
-            "approach": "Use modulo operator - if remainder is 0, it's divisible.",
-            "analogy": "Like dividing pizza slices equally - if everyone gets same amount with nothing left, it's divisible.",
+            "approach": "Use modulo - if remainder is 0, it's divisible.",
             "steps": [
-                "Calculate a % b (remainder)",
-                "If remainder is 0, return true",
-                "Otherwise return false"
+                "Calculate a % b",
+                "Return true if remainder is 0"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "a=10, b=5",
+                "expectedOutput": "1",
+                "explanation": "10 is divisible by 5"
+            },
+            {
+                "input": "a=10, b=3",
+                "expectedOutput": "0",
+                "explanation": "10 not divisible by 3"
+            },
+            {
+                "input": "a=12, b=4",
+                "expectedOutput": "1",
+                "explanation": "12 divisible by 4"
+            },
+            {
+                "input": "a=7, b=7",
+                "expectedOutput": "1",
+                "explanation": "Any number divisible by itself"
+            }
+        ]
     },
     {
         "id": "fun15",
@@ -298,16 +579,35 @@
         "expectedOutput": "120",
         "solution": "#include <iostream>\nusing namespace std;\nint factorial(int n) {\n    int result = 1;\n    for(int i = 1; i <= n; i++) {\n        result *= i;\n    }\n    return result;\n}\nint main() { cout<<factorial(5); return 0; }",
         "explanation": {
-            "approach": "Multiply all numbers from 1 to n together. 5! = 1×2×3×4×5 = 120",
-            "analogy": "Like a snowball rolling downhill - it keeps multiplying and getting bigger.",
+            "approach": "Multiply all numbers from 1 to n.",
             "steps": [
-                "Start with result = 1",
-                "Multiply by 1, then 2, then 3...",
-                "Keep multiplying until we reach n",
-                "Return the product"
+                "Start with 1",
+                "Multiply by each number up to n"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "120",
+                "explanation": "5!=120"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "1",
+                "explanation": "0!=1 by definition"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "1!=1"
+            },
+            {
+                "input": "n=6",
+                "expectedOutput": "720",
+                "explanation": "6!=720"
+            }
+        ]
     },
     {
         "id": "fun16",
@@ -317,18 +617,38 @@
         "category": "Fundamentals",
         "starterCode": "#include <iostream>\nusing namespace std;\nint digitSum(int n) { return 0; }\nint main() { cout<<digitSum(1234); return 0; }",
         "expectedOutput": "10",
-        "solution": "#include <iostream>\nusing namespace std;\nint digitSum(int n) {\n    int sum = 0;\n    while(n > 0) {\n        sum += n % 10;  // Get last digit\n        n /= 10;        // Remove last digit\n    }\n    return sum;\n}\nint main() { cout<<digitSum(1234); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nint digitSum(int n) {\n    int sum = 0;\n    while(n > 0) {\n        sum += n % 10;\n        n /= 10;\n    }\n    return sum;\n}\nint main() { cout<<digitSum(1234); return 0; }",
         "explanation": {
-            "approach": "Extract each digit using modulo 10 (gets last digit), add it to sum, then divide by 10 to remove that digit. Repeat.",
-            "analogy": "Like breaking apart a number into individual digits and adding them. 1234 → 1+2+3+4 = 10",
+            "approach": "Extract each digit and add to sum.",
             "steps": [
-                "Get last digit using n % 10",
-                "Add it to sum",
-                "Remove last digit using n / 10",
-                "Repeat until n becomes 0"
+                "Get last digit with %10",
+                "Add to sum",
+                "Remove digit with /10"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=1234",
+                "expectedOutput": "10",
+                "explanation": "1+2+3+4=10"
+            },
+            {
+                "input": "n=999",
+                "expectedOutput": "27",
+                "explanation": "9+9+9=27"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "1",
+                "explanation": "1+0+0=1"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "5",
+                "explanation": "Single digit"
+            }
+        ]
     },
     {
         "id": "fun17",
@@ -340,17 +660,36 @@
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nint countDigits(int n) {\n    int count = 0;\n    while(n > 0) {\n        count++;\n        n /= 10;\n    }\n    return count;\n}\nint main() { cout<<countDigits(12345); return 0; }",
         "explanation": {
-            "approach": "Keep dividing by 10 and count how many times until number becomes 0.",
-            "analogy": "Like counting how many times you can cut a number in half (by powers of 10).",
+            "approach": "Divide by 10 and count iterations.",
             "steps": [
-                "Start with count = 0",
-                "Divide n by 10",
+                "Divide by 10",
                 "Increment count",
-                "Repeat until n is 0",
-                "Return count"
+                "Repeat until 0"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=12345",
+                "expectedOutput": "5",
+                "explanation": "5 digits"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "1 digit"
+            },
+            {
+                "input": "n=1000",
+                "expectedOutput": "4",
+                "explanation": "4 digits"
+            },
+            {
+                "input": "n=99",
+                "expectedOutput": "2",
+                "explanation": "2 digits"
+            }
+        ]
     },
     {
         "id": "fun18",
@@ -362,16 +701,36 @@
         "expectedOutput": "54321",
         "solution": "#include <iostream>\nusing namespace std;\nint reverse(int n) {\n    int reversed = 0;\n    while(n > 0) {\n        reversed = reversed * 10 + n % 10;\n        n /= 10;\n    }\n    return reversed;\n}\nint main() { cout<<reverse(12345); return 0; }",
         "explanation": {
-            "approach": "Build new number by taking digits from end and adding to result.",
-            "analogy": "Like reading a number backwards - take last digit, put it first in new number.",
+            "approach": "Build new number from end digits.",
             "steps": [
-                "Get last digit (n % 10)",
-                "Multiply result by 10 and add this digit",
-                "Remove last digit from n (n / 10)",
-                "Repeat until n is 0"
+                "Get last digit",
+                "Add to reversed*10",
+                "Remove last digit"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=12345",
+                "expectedOutput": "54321",
+                "explanation": "Reversed"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "1",
+                "explanation": "Leading zeros dropped"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "7",
+                "explanation": "Single digit unchanged"
+            },
+            {
+                "input": "n=1234",
+                "expectedOutput": "4321",
+                "explanation": "Even digits reversed"
+            }
+        ]
     },
     {
         "id": "fun19",
@@ -383,16 +742,36 @@
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isPalindrome(int n) {\n    int original = n, reversed = 0;\n    while(n > 0) {\n        reversed = reversed * 10 + n % 10;\n        n /= 10;\n    }\n    return original == reversed;\n}\nint main() { cout<<isPalindrome(12321); return 0; }",
         "explanation": {
-            "approach": "Reverse the number and check if it's same as original.",
-            "analogy": "A palindrome reads the same forwards and backwards - like 'racecar' or 12321.",
+            "approach": "Reverse number and compare to original.",
             "steps": [
-                "Save original number",
+                "Save original",
                 "Reverse the number",
-                "Compare reversed with original",
-                "If same, it's a palindrome"
+                "Compare"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=12321",
+                "expectedOutput": "1",
+                "explanation": "Reads same both ways"
+            },
+            {
+                "input": "n=12345",
+                "expectedOutput": "0",
+                "explanation": "Not a palindrome"
+            },
+            {
+                "input": "n=11",
+                "expectedOutput": "1",
+                "explanation": "Two same digits"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Single digit is palindrome"
+            }
+        ]
     },
     {
         "id": "fun20",
@@ -404,15 +783,36 @@
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isPerfectSquare(int n) {\n    int root = 1;\n    while(root * root < n) root++;\n    return root * root == n;\n}\nint main() { cout<<isPerfectSquare(16); return 0; }",
         "explanation": {
-            "approach": "Find the integer that when squared equals n. If found, it's a perfect square.",
-            "analogy": "Like asking: can I arrange n squares into a perfect larger square? 16 = 4×4 ✓",
+            "approach": "Find integer whose square equals n.",
             "steps": [
-                "Start with root = 1",
-                "Keep incrementing until root² >= n",
-                "Check if root² == n exactly"
+                "Start with 1",
+                "Increment until root²>=n",
+                "Check if root²==n"
             ],
             "complexity": "Time: O(√n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=16",
+                "expectedOutput": "1",
+                "explanation": "4²=16"
+            },
+            {
+                "input": "n=14",
+                "expectedOutput": "0",
+                "explanation": "Not a perfect square"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "1²=1"
+            },
+            {
+                "input": "n=25",
+                "expectedOutput": "1",
+                "explanation": "5²=25"
+            }
+        ]
     },
     {
         "id": "fun21",
@@ -424,16 +824,36 @@
         "expectedOutput": "* ** *** ****",
         "solution": "#include <iostream>\nusing namespace std;\nvoid pattern(int n) {\n    for(int i = 1; i <= n; i++) {\n        for(int j = 1; j <= i; j++) {\n            cout << \"*\";\n        }\n        if(i < n) cout << \" \";\n    }\n}\nint main() { pattern(4); return 0; }",
         "explanation": {
-            "approach": "Use nested loops - outer loop for rows, inner loop prints stars equal to row number.",
-            "analogy": "Like building stairs - each step has one more block than the previous.",
+            "approach": "Nested loops - outer for rows, inner for stars.",
             "steps": [
-                "Row 1: print 1 star",
-                "Row 2: print 2 stars",
-                "Row 3: print 3 stars",
-                "Continue until row n"
+                "Row 1: 1 star",
+                "Row 2: 2 stars",
+                "Continue to n"
             ],
             "complexity": "Time: O(n²), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=4",
+                "expectedOutput": "* ** *** ****",
+                "explanation": "Triangle with 4 rows"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "*",
+                "explanation": "Single star"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "* ** ***",
+                "explanation": "3 rows"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "* **",
+                "explanation": "2 rows"
+            }
+        ]
     },
     {
         "id": "fun22",
@@ -445,76 +865,158 @@
         "expectedOutput": "**** *** ** *",
         "solution": "#include <iostream>\nusing namespace std;\nvoid pattern(int n) {\n    for(int i = n; i >= 1; i--) {\n        for(int j = 1; j <= i; j++) {\n            cout << \"*\";\n        }\n        if(i > 1) cout << \" \";\n    }\n}\nint main() { pattern(4); return 0; }",
         "explanation": {
-            "approach": "Start from n stars and decrease by 1 each row.",
-            "analogy": "Like stairs going down - each step has one less block.",
+            "approach": "Start from n stars, decrease each row.",
             "steps": [
-                "Row 1: print n stars",
-                "Row 2: print n-1 stars",
-                "Continue decreasing",
-                "Last row: print 1 star"
+                "Row 1: n stars",
+                "Row 2: n-1 stars",
+                "Continue to 1"
             ],
             "complexity": "Time: O(n²), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=4",
+                "expectedOutput": "**** *** ** *",
+                "explanation": "Inverted 4-row triangle"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "*",
+                "explanation": "Single star"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "*** ** *",
+                "explanation": "3 rows inverted"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "** *",
+                "explanation": "2 rows inverted"
+            }
+        ]
     },
     {
         "id": "fun23",
-        "title": "Print Number Pyramid",
-        "description": "Number pattern.",
+        "title": "Check Prime",
+        "description": "Is number prime.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid pattern(int n) {}\nint main() { pattern(4); return 0; }",
-        "expectedOutput": "1 12 123 1234",
-        "solution": "#include <iostream>\nusing namespace std;\nvoid pattern(int n) {\n    for(int i = 1; i <= n; i++) {\n        for(int j = 1; j <= i; j++) {\n            cout << j;\n        }\n        if(i < n) cout << \" \";\n    }\n}\nint main() { pattern(4); return 0; }",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPrime(int n) { return false; }\nint main() { cout<<isPrime(7); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPrime(int n) {\n    if(n < 2) return false;\n    for(int i = 2; i * i <= n; i++) {\n        if(n % i == 0) return false;\n    }\n    return true;\n}\nint main() { cout<<isPrime(7); return 0; }",
         "explanation": {
-            "approach": "Each row prints numbers from 1 up to the row number.",
-            "analogy": "Like counting higher each row - 1, then 12, then 123...",
+            "approach": "Check divisibility up to sqrt(n).",
             "steps": [
-                "Row 1: print 1",
-                "Row 2: print 12",
-                "Row 3: print 123",
-                "Row i: print 1 to i"
+                "If n<2, not prime",
+                "Check divisors from 2 to √n",
+                "If any divide evenly, not prime"
             ],
-            "complexity": "Time: O(n²), Space: O(1)"
-        }
+            "complexity": "Time: O(√n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=7",
+                "expectedOutput": "1",
+                "explanation": "7 is prime"
+            },
+            {
+                "input": "n=4",
+                "expectedOutput": "0",
+                "explanation": "4=2×2, not prime"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "0",
+                "explanation": "1 is not prime"
+            },
+            {
+                "input": "n=13",
+                "expectedOutput": "1",
+                "explanation": "13 is prime"
+            }
+        ]
     },
     {
         "id": "fun24",
-        "title": "Sum of AP",
-        "description": "Sum of arithmetic progression.",
+        "title": "Fibonacci Loop",
+        "description": "Nth Fibonacci number.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumAP(int a, int d, int n) { return 0; }\nint main() { cout<<sumAP(1,2,5); return 0; }",
-        "expectedOutput": "25",
-        "solution": "#include <iostream>\nusing namespace std;\nint sumAP(int a, int d, int n) {\n    // Sum = n/2 * (2a + (n-1)d)\n    return n * (2*a + (n-1)*d) / 2;\n}\nint main() { cout<<sumAP(1,2,5); return 0; }",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint fib(int n) { return 0; }\nint main() { cout<<fib(6); return 0; }",
+        "expectedOutput": "8",
+        "solution": "#include <iostream>\nusing namespace std;\nint fib(int n) {\n    if(n <= 1) return n;\n    int a = 0, b = 1;\n    for(int i = 2; i <= n; i++) {\n        int c = a + b;\n        a = b;\n        b = c;\n    }\n    return b;\n}\nint main() { cout<<fib(6); return 0; }",
         "explanation": {
-            "approach": "Use the formula: Sum = n/2 × (first term + last term) or n/2 × (2a + (n-1)d)",
-            "analogy": "If you pair first and last terms, each pair has same sum. Multiply pairs by count/2.",
+            "approach": "Each number is sum of previous two.",
             "steps": [
-                "First term a, difference d, n terms",
-                "Last term = a + (n-1)d",
-                "Sum = n × (first + last) / 2"
+                "Start with 0, 1",
+                "Add to get next",
+                "Repeat n times"
             ],
-            "complexity": "Time: O(1), Space: O(1)"
-        }
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=6",
+                "expectedOutput": "8",
+                "explanation": "Fib(6)=8 (0,1,1,2,3,5,8)"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "0",
+                "explanation": "Fib(0)=0"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Fib(1)=1"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "55",
+                "explanation": "Fib(10)=55"
+            }
+        ]
     },
     {
         "id": "fun25",
-        "title": "Sum of GP",
-        "description": "Sum of geometric progression.",
+        "title": "GCD Euclidean",
+        "description": "Greatest Common Divisor.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumGP(int a, int r, int n) { return 0; }\nint main() { cout<<sumGP(1,2,5); return 0; }",
-        "expectedOutput": "31",
-        "solution": "#include <iostream>\nusing namespace std;\nint sumGP(int a, int r, int n) {\n    // Sum = a * (r^n - 1) / (r - 1)\n    int rn = 1;\n    for(int i = 0; i < n; i++) rn *= r;\n    return a * (rn - 1) / (r - 1);\n}\nint main() { cout<<sumGP(1,2,5); return 0; }",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) { return 0; }\nint main() { cout<<gcd(48,18); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) {\n    while(b != 0) {\n        int t = b;\n        b = a % b;\n        a = t;\n    }\n    return a;\n}\nint main() { cout<<gcd(48,18); return 0; }",
         "explanation": {
-            "approach": "Use formula: Sum = a × (rⁿ - 1) / (r - 1) where r is common ratio.",
-            "analogy": "Each term is multiplied by r. Like compound interest - grows exponentially.",
+            "approach": "Euclidean algorithm: repeatedly take remainder.",
             "steps": [
-                "Calculate r^n",
-                "Apply formula: a × (r^n - 1) / (r - 1)",
-                "Return result"
+                "Replace (a,b) with (b, a%b)",
+                "Repeat until b=0",
+                "a is the GCD"
             ],
-            "complexity": "Time: O(n), Space: O(1)"
-        }
+            "complexity": "Time: O(log min(a,b)), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "a=48, b=18",
+                "expectedOutput": "6",
+                "explanation": "GCD(48,18)=6"
+            },
+            {
+                "input": "a=100, b=25",
+                "expectedOutput": "25",
+                "explanation": "25 divides 100"
+            },
+            {
+                "input": "a=17, b=13",
+                "expectedOutput": "1",
+                "explanation": "Coprime numbers"
+            },
+            {
+                "input": "a=12, b=12",
+                "expectedOutput": "12",
+                "explanation": "Same numbers"
+            }
+        ]
     }
 ]

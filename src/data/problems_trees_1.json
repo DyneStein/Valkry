@@ -16,7 +16,29 @@
                 "Check value and recurse on children"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "p=[1,2,3], q=[1,2,3]",
+                "expectedOutput": "1",
+                "explanation": "Identical trees"
+            },
+            {
+                "input": "p=[1,2], q=[1,null,2]",
+                "expectedOutput": "0",
+                "explanation": "Different structure"
+            },
+            {
+                "input": "p=[], q=[]",
+                "expectedOutput": "1",
+                "explanation": "Both empty"
+            },
+            {
+                "input": "p=[1,2,1], q=[1,1,2]",
+                "expectedOutput": "0",
+                "explanation": "Same values, different positions"
+            }
+        ]
     },
     {
         "id": "tree12",
@@ -35,7 +57,29 @@
                 "Check left and right subtrees"
             ],
             "complexity": "Time: O(m×n), Space: O(h)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "s=[3,4,5,1,2], t=[4,1,2]",
+                "expectedOutput": "1",
+                "explanation": "t is subtree of s"
+            },
+            {
+                "input": "s=[3,4,5,1,2,null,null,null,null,0], t=[4,1,2]",
+                "expectedOutput": "0",
+                "explanation": "Not exact match"
+            },
+            {
+                "input": "s=[1], t=[1]",
+                "expectedOutput": "1",
+                "explanation": "Single node match"
+            },
+            {
+                "input": "s=[1,2,3], t=[2]",
+                "expectedOutput": "1",
+                "explanation": "t is a leaf in s"
+            }
+        ]
     },
     {
         "id": "tree13",
@@ -54,7 +98,29 @@
                 "Recurse on children"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[4,2,7,1,3]",
+                "expectedOutput": "4 7 2 3 1",
+                "explanation": "Tree mirrored"
+            },
+            {
+                "input": "[2,1,3]",
+                "expectedOutput": "2 3 1",
+                "explanation": "Simple inversion"
+            },
+            {
+                "input": "[]",
+                "expectedOutput": "",
+                "explanation": "Empty tree"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "1",
+                "explanation": "Single node unchanged"
+            }
+        ]
     },
     {
         "id": "tree14",
@@ -73,7 +139,29 @@
                 "Update global with path through node"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[-10,9,20,null,null,15,7]",
+                "expectedOutput": "42",
+                "explanation": "15+20+7=42"
+            },
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "6",
+                "explanation": "2+1+3=6"
+            },
+            {
+                "input": "[-3]",
+                "expectedOutput": "-3",
+                "explanation": "Single negative node"
+            },
+            {
+                "input": "[5,4,8,11,null,13,4]",
+                "expectedOutput": "48",
+                "explanation": "11+4+5+8+13+4 or similar path"
+            }
+        ]
     },
     {
         "id": "tree15",
@@ -92,7 +180,29 @@
                 "Find in inorder to get left and right subtrees"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "pre=[3,9,20,15,7], in=[9,3,15,20,7]",
+                "expectedOutput": "9 15 7 20 3",
+                "explanation": "Reconstructed tree postorder"
+            },
+            {
+                "input": "pre=[1,2], in=[2,1]",
+                "expectedOutput": "2 1",
+                "explanation": "Left child only"
+            },
+            {
+                "input": "pre=[1], in=[1]",
+                "expectedOutput": "1",
+                "explanation": "Single node"
+            },
+            {
+                "input": "pre=[1,2,3], in=[2,1,3]",
+                "expectedOutput": "2 3 1",
+                "explanation": "Balanced tree"
+            }
+        ]
     },
     {
         "id": "tree16",
@@ -111,7 +221,29 @@
                 "Link children as you go"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[1,2,3,4,5,null,7]",
+                "expectedOutput": "3 7",
+                "explanation": "2->next=3, 5->next=7"
+            },
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "3",
+                "explanation": "2->next=3"
+            },
+            {
+                "input": "[]",
+                "expectedOutput": "",
+                "explanation": "Empty tree"
+            },
+            {
+                "input": "[1,2,3,4,5,6,7]",
+                "expectedOutput": "3 5",
+                "explanation": "Perfect binary tree linking"
+            }
+        ]
     },
     {
         "id": "tree17",
@@ -130,7 +262,29 @@
                 "Count if current >= max"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[3,1,4,3,null,1,5]",
+                "expectedOutput": "4",
+                "explanation": "Nodes 3,3,4,5 are good"
+            },
+            {
+                "input": "[3,3,null,4,2]",
+                "expectedOutput": "3",
+                "explanation": "3,3,4 are good"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "1",
+                "explanation": "Root is always good"
+            },
+            {
+                "input": "[2,null,4,null,6]",
+                "expectedOutput": "3",
+                "explanation": "Increasing path, all good"
+            }
+        ]
     },
     {
         "id": "tree18",
@@ -140,7 +294,7 @@
         "category": "Trees",
         "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid binaryTreePaths(Node* r) {}\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->l->r=new Node(5); binaryTreePaths(r); return 0; }",
         "expectedOutput": "1->2->5 1->3",
-        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid dfs(Node* r, int path[], int len) { if(!r) return; path[len++]=r->v; if(!r->l && !r->r) { for(int i=0;i<len;i++) cout<<(i?\"->\": \"\")<<path[i]; cout<<\" \"; } dfs(r->l,path,len); dfs(r->r,path,len); }\nvoid binaryTreePaths(Node* r) { int path[100]; dfs(r,path,0); }\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->l->r=new Node(5); binaryTreePaths(r); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid dfs(Node* r, int path[], int len) { if(!r) return; path[len++]=r->v; if(!r->l && !r->r) { for(int i=0;i<len;i++) cout<<(i?\"->\":\"\")<<path[i]; cout<<\" \"; } dfs(r->l,path,len); dfs(r->r,path,len); }\nvoid binaryTreePaths(Node* r) { int path[100]; dfs(r,path,0); }\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->l->r=new Node(5); binaryTreePaths(r); return 0; }",
         "explanation": {
             "approach": "DFS building path.",
             "analogy": "Collect nodes on path to leaf.",
@@ -150,7 +304,29 @@
                 "Recurse on children"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[1,2,3,null,5]",
+                "expectedOutput": "1->2->5 1->3",
+                "explanation": "Two paths"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "1",
+                "explanation": "Single node is a path"
+            },
+            {
+                "input": "[1,2,null]",
+                "expectedOutput": "1->2",
+                "explanation": "Left-only path"
+            },
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "1->2->4 1->2->5 1->3",
+                "explanation": "Three paths"
+            }
+        ]
     },
     {
         "id": "tree19",
@@ -169,7 +345,29 @@
                 "Track max left + right heights"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "3",
+                "explanation": "Path 4-2-1-3 or 5-2-1-3"
+            },
+            {
+                "input": "[1,2]",
+                "expectedOutput": "1",
+                "explanation": "Just one edge"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "0",
+                "explanation": "No edges"
+            },
+            {
+                "input": "[1,2,null,3,null,4]",
+                "expectedOutput": "3",
+                "explanation": "Chain path 4-3-2-1"
+            }
+        ]
     },
     {
         "id": "tree20",
@@ -189,6 +387,28 @@
                 "Sum all leaf numbers"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "25",
+                "explanation": "12+13=25"
+            },
+            {
+                "input": "[4,9,0,5,1]",
+                "expectedOutput": "1026",
+                "explanation": "495+491+40=1026"
+            },
+            {
+                "input": "[0]",
+                "expectedOutput": "0",
+                "explanation": "Single zero"
+            },
+            {
+                "input": "[1,0,1,0,1,0,1]",
+                "expectedOutput": "422",
+                "explanation": "100+101+100+101=402"
+            }
+        ]
     }
 ]

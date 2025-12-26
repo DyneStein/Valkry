@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { problems, getAllCategories, getCountByDifficulty } from '../data/problems';
-import { ChevronDown, ChevronRight, Eye, EyeOff, ChevronLeft, ChevronsLeft, ChevronsRight, Search } from 'lucide-react';
+import { ChevronDown, ChevronRight, Eye, EyeOff, ChevronLeft, ChevronsLeft, ChevronsRight, Search, Info } from 'lucide-react';
 import Editor from '@monaco-editor/react';
 
 const ITEMS_PER_PAGE = 20;
@@ -11,6 +11,7 @@ const LearningPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [expandedProblem, setExpandedProblem] = useState(null);
     const [showSolution, setShowSolution] = useState({});
+    const [showAllTestCases, setShowAllTestCases] = useState({});
     const [currentPage, setCurrentPage] = useState(1);
 
     const categories = useMemo(() => ['ALL', ...getAllCategories()], []);
@@ -190,6 +191,75 @@ const LearningPage = () => {
                                                             </code>
                                                         </div>
                                                     </div>
+
+                                                    {/* Test Cases Section */}
+                                                    {problem.testCases && problem.testCases.length > 0 && (
+                                                        <div style={{ marginBottom: '24px' }}>
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                                                                <span className="caption">
+                                                                    TEST CASES ({problem.testCases.length})
+                                                                </span>
+                                                                {problem.testCases.length > 3 && (
+                                                                    <button
+                                                                        onClick={(e) => {
+                                                                            e.stopPropagation();
+                                                                            setShowAllTestCases(prev => ({ ...prev, [problem.id]: !prev[problem.id] }));
+                                                                        }}
+                                                                        style={{
+                                                                            background: 'transparent',
+                                                                            border: 'none',
+                                                                            color: 'var(--accent)',
+                                                                            cursor: 'pointer',
+                                                                            fontSize: '13px',
+                                                                            fontWeight: '500'
+                                                                        }}
+                                                                    >
+                                                                        {showAllTestCases[problem.id] ? 'Show Less' : `Show All ${problem.testCases.length}`}
+                                                                    </button>
+                                                                )}
+                                                            </div>
+                                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                                                {(showAllTestCases[problem.id] ? problem.testCases : problem.testCases.slice(0, 3)).map((tc, idx) => (
+                                                                    <div
+                                                                        key={idx}
+                                                                        style={{
+                                                                            background: 'var(--bg-elevated)',
+                                                                            borderRadius: '10px',
+                                                                            padding: '12px 14px',
+                                                                            border: '1px solid var(--border)'
+                                                                        }}
+                                                                    >
+                                                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px' }}>
+                                                                            <div style={{ flex: 1 }}>
+                                                                                <span style={{ fontSize: '11px', color: 'var(--text-tertiary)', fontWeight: '600', letterSpacing: '0.5px' }}>
+                                                                                    INPUT
+                                                                                </span>
+                                                                                <code className="mono" style={{ display: 'block', fontSize: '13px', color: 'var(--text)', marginTop: '4px' }}>
+                                                                                    {tc.input}
+                                                                                </code>
+                                                                            </div>
+                                                                            <div style={{ flex: 1 }}>
+                                                                                <span style={{ fontSize: '11px', color: 'var(--text-tertiary)', fontWeight: '600', letterSpacing: '0.5px' }}>
+                                                                                    OUTPUT
+                                                                                </span>
+                                                                                <code className="mono" style={{ display: 'block', fontSize: '13px', color: 'var(--green)', marginTop: '4px' }}>
+                                                                                    {tc.expectedOutput}
+                                                                                </code>
+                                                                            </div>
+                                                                        </div>
+                                                                        {tc.explanation && (
+                                                                            <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid var(--border)', display: 'flex', alignItems: 'flex-start', gap: '6px' }}>
+                                                                                <Info size={12} style={{ color: 'var(--text-tertiary)', marginTop: '2px', flexShrink: 0 }} />
+                                                                                <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+                                                                                    {tc.explanation}
+                                                                                </span>
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
 
                                                     <div style={{ marginBottom: '24px' }}>
                                                         <span className="caption" style={{ display: 'block', marginBottom: '12px' }}>

@@ -2,45 +2,87 @@
     {
         "id": "ds1",
         "title": "Stack using Array",
-        "description": "Implement stack operations.",
+        "description": "Implement basic stack operations with array.",
         "difficulty": "EASY",
         "category": "Data Structures",
         "starterCode": "#include <iostream>\nusing namespace std;\nclass Stack { int a[100], t; public: Stack():t(-1){} void push(int x){} int pop(){return -1;} int top(){return -1;} bool empty(){return true;} };\nint main() { Stack s; s.push(1); s.push(2); cout<<s.top()<<\" \"; s.pop(); cout<<s.top(); return 0; }",
         "expectedOutput": "2 1",
         "solution": "#include <iostream>\nusing namespace std;\nclass Stack { int a[100], t; public: Stack():t(-1){} void push(int x){a[++t]=x;} int pop(){return a[t--];} int top(){return a[t];} bool empty(){return t==-1;} };\nint main() { Stack s; s.push(1); s.push(2); cout<<s.top()<<\" \"; s.pop(); cout<<s.top(); return 0; }",
         "explanation": {
-            "approach": "Array with top pointer.",
-            "analogy": "Stack of plates - add/remove from top.",
+            "approach": "Array with top pointer, LIFO behavior.",
             "steps": [
                 "push: increment top, store",
                 "pop: return and decrement top"
             ],
             "complexity": "Time: O(1) all ops, Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "push(1), push(2), top(), pop(), top()",
+                "expectedOutput": "2 1",
+                "explanation": "LIFO order"
+            },
+            {
+                "input": "push(5), top()",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "push(1), push(2), push(3), pop(), pop(), top()",
+                "expectedOutput": "1",
+                "explanation": "Multiple pops"
+            },
+            {
+                "input": "empty() on new stack",
+                "expectedOutput": "true",
+                "explanation": "Initial state is empty"
+            }
+        ]
     },
     {
         "id": "ds2",
         "title": "Queue using Array",
-        "description": "Implement queue operations.",
+        "description": "Implement basic queue operations with array.",
         "difficulty": "EASY",
         "category": "Data Structures",
         "starterCode": "#include <iostream>\nusing namespace std;\nclass Queue { int a[100], f, r; public: Queue():f(0),r(-1){} void enqueue(int x){} int dequeue(){return -1;} int front(){return -1;} bool empty(){return true;} };\nint main() { Queue q; q.enqueue(1); q.enqueue(2); cout<<q.front()<<\" \"; q.dequeue(); cout<<q.front(); return 0; }",
         "expectedOutput": "1 2",
         "solution": "#include <iostream>\nusing namespace std;\nclass Queue { int a[100], f, r; public: Queue():f(0),r(-1){} void enqueue(int x){a[++r]=x;} int dequeue(){return a[f++];} int front(){return a[f];} bool empty(){return f>r;} };\nint main() { Queue q; q.enqueue(1); q.enqueue(2); cout<<q.front()<<\" \"; q.dequeue(); cout<<q.front(); return 0; }",
         "explanation": {
-            "approach": "Array with front and rear pointers.",
-            "analogy": "Line at a store - join at back, leave from front.",
+            "approach": "Array with front and rear pointers, FIFO.",
             "steps": [
                 "enqueue: add at rear",
                 "dequeue: remove from front"
             ],
             "complexity": "Time: O(1) all ops, Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "enqueue(1), enqueue(2), front(), dequeue(), front()",
+                "expectedOutput": "1 2",
+                "explanation": "FIFO order"
+            },
+            {
+                "input": "enqueue(5), front()",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "enqueue(1), enqueue(2), enqueue(3), dequeue(), front()",
+                "expectedOutput": "2",
+                "explanation": "After one dequeue"
+            },
+            {
+                "input": "empty() on new queue",
+                "expectedOutput": "true",
+                "explanation": "Initial state is empty"
+            }
+        ]
     },
     {
         "id": "ds3",
         "title": "Linked List Insert",
-        "description": "Insert at end of list.",
+        "description": "Insert element at end of linked list.",
         "difficulty": "EASY",
         "category": "Data Structures",
         "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x):val(x),next(0){} };\nNode* insert(Node* head, int x) { return nullptr; }\nint main() { Node* h=nullptr; h=insert(h,1); h=insert(h,2); h=insert(h,3); Node* t=h; while(t) { cout<<t->val<<\" \"; t=t->next; } return 0; }",
@@ -48,58 +90,121 @@
         "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x):val(x),next(0){} };\nNode* insert(Node* head, int x) { Node* n=new Node(x); if(!head) return n; Node* t=head; while(t->next) t=t->next; t->next=n; return head; }\nint main() { Node* h=nullptr; h=insert(h,1); h=insert(h,2); h=insert(h,3); Node* t=h; while(t) { cout<<t->val<<\" \"; t=t->next; } return 0; }",
         "explanation": {
             "approach": "Traverse to end, link new node.",
-            "analogy": "Add to end of chain.",
             "steps": [
                 "Create new node",
                 "Find last node",
                 "Link new node"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "insert 1,2,3",
+                "expectedOutput": "1 2 3",
+                "explanation": "Insertion order preserved"
+            },
+            {
+                "input": "insert to empty list",
+                "expectedOutput": "5",
+                "explanation": "First becomes head"
+            },
+            {
+                "input": "insert 10,20",
+                "expectedOutput": "10 20",
+                "explanation": "Two elements"
+            },
+            {
+                "input": "insert 1,1,1",
+                "expectedOutput": "1 1 1",
+                "explanation": "Duplicates allowed"
+            }
+        ]
     },
     {
         "id": "ds4",
         "title": "Linked List Delete",
-        "description": "Delete node with value.",
+        "description": "Delete node with given value from linked list.",
         "difficulty": "EASY",
         "category": "Data Structures",
         "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x):val(x),next(0){} };\nNode* deleteNode(Node* head, int x) { return nullptr; }\nint main() { Node* h=new Node(1); h->next=new Node(2); h->next->next=new Node(3); h=deleteNode(h,2); Node* t=h; while(t) { cout<<t->val<<\" \"; t=t->next; } return 0; }",
         "expectedOutput": "1 3",
         "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x):val(x),next(0){} };\nNode* deleteNode(Node* head, int x) { if(!head) return nullptr; if(head->val==x) return head->next; Node* t=head; while(t->next && t->next->val!=x) t=t->next; if(t->next) t->next=t->next->next; return head; }\nint main() { Node* h=new Node(1); h->next=new Node(2); h->next->next=new Node(3); h=deleteNode(h,2); Node* t=h; while(t) { cout<<t->val<<\" \"; t=t->next; } return 0; }",
         "explanation": {
-            "approach": "Find node before target, skip over.",
-            "analogy": "Remove link from chain.",
+            "approach": "Find predecessor, skip target node.",
             "steps": [
-                "Find predecessor",
+                "Find node before target",
                 "Skip target node"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "1->2->3, delete 2",
+                "expectedOutput": "1 3",
+                "explanation": "Middle deletion"
+            },
+            {
+                "input": "1->2->3, delete 1",
+                "expectedOutput": "2 3",
+                "explanation": "Head deletion"
+            },
+            {
+                "input": "1->2->3, delete 3",
+                "expectedOutput": "1 2",
+                "explanation": "Tail deletion"
+            },
+            {
+                "input": "1->2->3, delete 5",
+                "expectedOutput": "1 2 3",
+                "explanation": "Not found, no change"
+            }
+        ]
     },
     {
         "id": "ds5",
         "title": "Reverse Linked List",
-        "description": "Reverse list in-place.",
+        "description": "Reverse a singly linked list in-place.",
         "difficulty": "EASY",
         "category": "Data Structures",
         "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x):val(x),next(0){} };\nNode* reverse(Node* head) { return nullptr; }\nint main() { Node* h=new Node(1); h->next=new Node(2); h->next->next=new Node(3); h=reverse(h); Node* t=h; while(t) { cout<<t->val<<\" \"; t=t->next; } return 0; }",
         "expectedOutput": "3 2 1",
         "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x):val(x),next(0){} };\nNode* reverse(Node* head) { Node* prev=nullptr, *cur=head; while(cur) { Node* next=cur->next; cur->next=prev; prev=cur; cur=next; } return prev; }\nint main() { Node* h=new Node(1); h->next=new Node(2); h->next->next=new Node(3); h=reverse(h); Node* t=h; while(t) { cout<<t->val<<\" \"; t=t->next; } return 0; }",
         "explanation": {
-            "approach": "Reverse pointers one by one.",
-            "analogy": "Turn each arrow backwards.",
+            "approach": "Iteratively reverse each link.",
             "steps": [
                 "Track previous",
                 "Reverse current's next",
                 "Move forward"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "1->2->3",
+                "expectedOutput": "3 2 1",
+                "explanation": "Full reversal"
+            },
+            {
+                "input": "1->2",
+                "expectedOutput": "2 1",
+                "explanation": "Two elements"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Single element unchanged"
+            },
+            {
+                "input": "null (empty list)",
+                "expectedOutput": "null",
+                "explanation": "Empty list stays empty"
+            }
+        ]
     },
     {
         "id": "ds6",
         "title": "Detect Cycle in List",
-        "description": "Check for cycle.",
+        "description": "Check if linked list has a cycle.",
         "difficulty": "MEDIUM",
         "category": "Data Structures",
         "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x):val(x),next(0){} };\nbool hasCycle(Node* head) { return false; }\nint main() { Node* h=new Node(1); h->next=new Node(2); h->next->next=new Node(3); h->next->next->next=h->next; cout<<hasCycle(h); return 0; }",
@@ -107,39 +212,81 @@
         "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x):val(x),next(0){} };\nbool hasCycle(Node* head) { Node* s=head, *f=head; while(f && f->next) { s=s->next; f=f->next->next; if(s==f) return true; } return false; }\nint main() { Node* h=new Node(1); h->next=new Node(2); h->next->next=new Node(3); h->next->next->next=h->next; cout<<hasCycle(h); return 0; }",
         "explanation": {
             "approach": "Floyd's cycle detection - slow and fast pointers.",
-            "analogy": "If runners on track, they'll meet if there's a loop.",
             "steps": [
                 "Slow moves 1 step",
                 "Fast moves 2 steps",
                 "If they meet, cycle exists"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "List with cycle",
+                "expectedOutput": "1",
+                "explanation": "Cycle detected"
+            },
+            {
+                "input": "1->2->3 (no cycle)",
+                "expectedOutput": "0",
+                "explanation": "No cycle"
+            },
+            {
+                "input": "Self-loop: 1->1",
+                "expectedOutput": "1",
+                "explanation": "Single node cycle"
+            },
+            {
+                "input": "Empty list",
+                "expectedOutput": "0",
+                "explanation": "No cycle in empty"
+            }
+        ]
     },
     {
         "id": "ds7",
         "title": "Valid Parentheses",
-        "description": "Check balanced brackets.",
+        "description": "Check if brackets are balanced.",
         "difficulty": "EASY",
         "category": "Data Structures",
         "starterCode": "#include <iostream>\nusing namespace std;\nbool isValid(char s[]) { return false; }\nint main() { cout<<isValid(\"([{}])\"); return 0; }",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isValid(char s[]) { char stk[100]; int t=-1; for(int i=0;s[i];i++) { if(s[i]=='('||s[i]=='['||s[i]=='{') stk[++t]=s[i]; else { if(t<0) return false; if(s[i]==')' && stk[t]!='(') return false; if(s[i]==']' && stk[t]!='[') return false; if(s[i]=='}' && stk[t]!='{') return false; t--; } } return t==-1; }\nint main() { cout<<isValid(\"([{}])\"); return 0; }",
         "explanation": {
-            "approach": "Stack to match brackets.",
-            "analogy": "Each opener waits for its closer.",
+            "approach": "Stack to match opening and closing brackets.",
             "steps": [
                 "Push opening brackets",
                 "Pop and match closing",
-                "Stack should be empty at end"
+                "Stack empty at end = valid"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "([{}])",
+                "expectedOutput": "1",
+                "explanation": "Nested valid"
+            },
+            {
+                "input": "()[]{}",
+                "expectedOutput": "1",
+                "explanation": "Sequential valid"
+            },
+            {
+                "input": "(]",
+                "expectedOutput": "0",
+                "explanation": "Mismatched"
+            },
+            {
+                "input": "(()",
+                "expectedOutput": "0",
+                "explanation": "Unclosed bracket"
+            }
+        ]
     },
     {
         "id": "ds8",
         "title": "Min Stack",
-        "description": "Stack with getMin in O(1).",
+        "description": "Stack with O(1) getMin operation.",
         "difficulty": "MEDIUM",
         "category": "Data Structures",
         "starterCode": "#include <iostream>\nusing namespace std;\nclass MinStack { public: void push(int x){} void pop(){} int top(){return 0;} int getMin(){return 0;} };\nint main() { MinStack s; s.push(5); s.push(2); s.push(3); cout<<s.getMin(); return 0; }",
@@ -147,18 +294,39 @@
         "solution": "#include <iostream>\nusing namespace std;\nclass MinStack { int a[100], m[100], t; public: MinStack():t(-1){} void push(int x){a[++t]=x; m[t]=t==0?x:min(x,m[t-1]);} void pop(){t--;} int top(){return a[t];} int getMin(){return m[t];} };\nint main() { MinStack s; s.push(5); s.push(2); s.push(3); cout<<s.getMin(); return 0; }",
         "explanation": {
             "approach": "Auxiliary stack tracking min at each level.",
-            "analogy": "Remember minimum as you build up.",
             "steps": [
                 "Track min at each push",
-                "Pop updates automatically"
+                "Min updates automatically on pop"
             ],
             "complexity": "Time: O(1) all ops, Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "push(5,2,3), getMin()",
+                "expectedOutput": "2",
+                "explanation": "Min is 2"
+            },
+            {
+                "input": "push(1,2,3), getMin()",
+                "expectedOutput": "1",
+                "explanation": "First is min"
+            },
+            {
+                "input": "push(3,2,1), pop(), getMin()",
+                "expectedOutput": "2",
+                "explanation": "After pop, new min"
+            },
+            {
+                "input": "push(2,2,2), getMin()",
+                "expectedOutput": "2",
+                "explanation": "All same"
+            }
+        ]
     },
     {
         "id": "ds9",
         "title": "Implement Queue using Stacks",
-        "description": "Queue with two stacks.",
+        "description": "Queue implemented with two stacks.",
         "difficulty": "MEDIUM",
         "category": "Data Structures",
         "starterCode": "#include <iostream>\nusing namespace std;\nclass MyQueue { int s1[100], s2[100], t1, t2; public: MyQueue():t1(-1),t2(-1){} void push(int x){} int pop(){return 0;} };\nint main() { MyQueue q; q.push(1); q.push(2); cout<<q.pop()<<\" \"<<q.pop(); return 0; }",
@@ -166,31 +334,73 @@
         "solution": "#include <iostream>\nusing namespace std;\nclass MyQueue { int s1[100], s2[100], t1, t2; public: MyQueue():t1(-1),t2(-1){} void push(int x){s1[++t1]=x;} int pop(){ if(t2<0) while(t1>=0) s2[++t2]=s1[t1--]; return s2[t2--]; } };\nint main() { MyQueue q; q.push(1); q.push(2); cout<<q.pop()<<\" \"<<q.pop(); return 0; }",
         "explanation": {
             "approach": "Push to s1, pop from s2 (transfer when empty).",
-            "analogy": "Two stacks simulate queue via reversal.",
             "steps": [
                 "Push always to s1",
                 "Pop from s2, refill from s1 if empty"
             ],
             "complexity": "Time: O(1) amortized, Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "push(1,2), pop(), pop()",
+                "expectedOutput": "1 2",
+                "explanation": "FIFO order"
+            },
+            {
+                "input": "push(1), pop(), push(2), pop()",
+                "expectedOutput": "1 2",
+                "explanation": "Interleaved ops"
+            },
+            {
+                "input": "push(5), pop()",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "push(1,2,3), pop(), pop(), pop()",
+                "expectedOutput": "1 2 3",
+                "explanation": "Three elements"
+            }
+        ]
     },
     {
         "id": "ds10",
         "title": "Implement Stack using Queues",
-        "description": "Stack with two queues.",
+        "description": "Stack implemented with queues.",
         "difficulty": "MEDIUM",
         "category": "Data Structures",
         "starterCode": "#include <iostream>\nusing namespace std;\n#include <queue>\nclass MyStack { queue<int> q; public: void push(int x){} int pop(){return 0;} };\nint main() { MyStack s; s.push(1); s.push(2); cout<<s.pop()<<\" \"<<s.pop(); return 0; }",
         "expectedOutput": "2 1",
         "solution": "#include <iostream>\nusing namespace std;\n#include <queue>\nclass MyStack { queue<int> q; public: void push(int x){ q.push(x); for(int i=0;i<q.size()-1;i++){q.push(q.front());q.pop();} } int pop(){ int t=q.front(); q.pop(); return t; } };\nint main() { MyStack s; s.push(1); s.push(2); cout<<s.pop()<<\" \"<<s.pop(); return 0; }",
         "explanation": {
-            "approach": "After push, rotate to put new at front.",
-            "analogy": "Reorganize queue so last is first.",
+            "approach": "After push, rotate to put new element at front.",
             "steps": [
                 "Push to queue",
                 "Rotate n-1 elements to back"
             ],
             "complexity": "Time: O(n) push, O(1) pop, Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "push(1,2), pop(), pop()",
+                "expectedOutput": "2 1",
+                "explanation": "LIFO order"
+            },
+            {
+                "input": "push(5), pop()",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "push(1,2,3), pop()",
+                "expectedOutput": "3",
+                "explanation": "Last pushed = first popped"
+            },
+            {
+                "input": "push(1), push(2), pop(), push(3), pop()",
+                "expectedOutput": "2 3",
+                "explanation": "Mixed operations"
+            }
+        ]
     }
 ]

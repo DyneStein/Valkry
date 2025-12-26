@@ -7,6 +7,58 @@
         "category": "Stack",
         "starterCode": "#include <iostream>\nusing namespace std;\nbool isValid(char s[]) { return false; }\nint main() { cout<<isValid(\"()[]{}\"); return 0; }",
         "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "()[]{}",
+                "expectedOutput": "1",
+                "explanation": "All brackets match"
+            },
+            {
+                "input": "()",
+                "expectedOutput": "1",
+                "explanation": "Simple pair"
+            },
+            {
+                "input": "(]",
+                "expectedOutput": "0",
+                "explanation": "Mismatched"
+            },
+            {
+                "input": "([)]",
+                "expectedOutput": "0",
+                "explanation": "Interleaved wrong"
+            },
+            {
+                "input": "{[]}",
+                "expectedOutput": "1",
+                "explanation": "Nested properly"
+            },
+            {
+                "input": "",
+                "expectedOutput": "1",
+                "explanation": "Empty string valid"
+            },
+            {
+                "input": "(",
+                "expectedOutput": "0",
+                "explanation": "Unclosed"
+            },
+            {
+                "input": ")",
+                "expectedOutput": "0",
+                "explanation": "No opening"
+            },
+            {
+                "input": "((()))",
+                "expectedOutput": "1",
+                "explanation": "Deep nesting"
+            },
+            {
+                "input": "({[]})",
+                "expectedOutput": "1",
+                "explanation": "All types nested"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nbool isValid(char s[]) { char stk[100]; int top=-1; for(int i=0;s[i];i++) { if(s[i]=='('||s[i]=='{'||s[i]=='[') stk[++top]=s[i]; else { if(top<0) return false; if(s[i]==')'&&stk[top]!='(') return false; if(s[i]=='}'&&stk[top]!='{') return false; if(s[i]==']'&&stk[top]!='[') return false; top--; } } return top==-1; }\nint main() { cout<<isValid(\"()[]{}\"); return 0; }",
         "explanation": {
             "approach": "Stack for matching.",
@@ -25,7 +77,59 @@
         "category": "Stack",
         "starterCode": "#include <iostream>\nusing namespace std;\nclass MinStack {\npublic:\n    void push(int val) {}\n    void pop() {}\n    int top() { return 0; }\n    int getMin() { return 0; }\n};\nint main() { cout<<\"OK\"; return 0; }",
         "expectedOutput": "OK",
-        "solution": "#include <iostream>\nusing namespace std;\nclass MinStack { int stk[100],mstk[100],top; public: MinStack():top(-1){} void push(int v) { stk[++top]=v; mstk[top]=top==0?v:min(v,mstk[top-1]); } void pop() { top--; } int top() { return stk[this->top]; } int getMin() { return mstk[top]; } };\nint main() { cout<<\"OK\"; return 0; }",
+        "testCases": [
+            {
+                "input": "push -2, push 0, push -3, getMin, pop, top, getMin",
+                "expectedOutput": "-3, -2, 0, -2",
+                "explanation": "Standard operations"
+            },
+            {
+                "input": "push 1, getMin",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "push 1, push 2, getMin",
+                "expectedOutput": "1",
+                "explanation": "First is min"
+            },
+            {
+                "input": "push 2, push 1, getMin",
+                "expectedOutput": "1",
+                "explanation": "Last is min"
+            },
+            {
+                "input": "push 1, push 1, pop, getMin",
+                "expectedOutput": "1",
+                "explanation": "Duplicate min"
+            },
+            {
+                "input": "push 5, push 3, push 7, getMin",
+                "expectedOutput": "3",
+                "explanation": "Min in middle"
+            },
+            {
+                "input": "push 0, getMin",
+                "expectedOutput": "0",
+                "explanation": "Zero value"
+            },
+            {
+                "input": "push -1, push -2, pop, getMin",
+                "expectedOutput": "-1",
+                "explanation": "Negative values"
+            },
+            {
+                "input": "push 1, push 2, push 3, pop, pop, getMin",
+                "expectedOutput": "1",
+                "explanation": "Multiple pops"
+            },
+            {
+                "input": "push 5, push 5, pop, getMin",
+                "expectedOutput": "5",
+                "explanation": "Same values"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nclass MinStack { int stk[100],mstk[100],t; public: MinStack():t(-1){} void push(int v) { stk[++t]=v; mstk[t]=t==0?v:min(v,mstk[t-1]); } void pop() { t--; } int top() { return stk[t]; } int getMin() { return mstk[t]; } };\nint main() { cout<<\"OK\"; return 0; }",
         "explanation": {
             "approach": "Track min at each level.",
             "steps": [
@@ -42,6 +146,58 @@
         "category": "Stack",
         "starterCode": "#include <iostream>\nusing namespace std;\nclass MyQueue {\npublic:\n    void push(int x) {}\n    int pop() { return 0; }\n    int peek() { return 0; }\n    bool empty() { return true; }\n};\nint main() { MyQueue q; q.push(1); q.push(2); cout<<q.peek(); return 0; }",
         "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "push 1, push 2, peek",
+                "expectedOutput": "1",
+                "explanation": "FIFO order"
+            },
+            {
+                "input": "push 1, pop",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "push 1, push 2, pop, peek",
+                "expectedOutput": "2",
+                "explanation": "After pop"
+            },
+            {
+                "input": "push 1, push 2, push 3, pop, pop",
+                "expectedOutput": "1, 2",
+                "explanation": "Multiple ops"
+            },
+            {
+                "input": "empty() on new queue",
+                "expectedOutput": "true",
+                "explanation": "Initially empty"
+            },
+            {
+                "input": "push 1, empty",
+                "expectedOutput": "false",
+                "explanation": "Not empty after push"
+            },
+            {
+                "input": "push 5, pop, empty",
+                "expectedOutput": "true",
+                "explanation": "Empty after pop"
+            },
+            {
+                "input": "push 1, push 2, pop, push 3, peek",
+                "expectedOutput": "2",
+                "explanation": "Mixed ops"
+            },
+            {
+                "input": "push 10, push 20, peek",
+                "expectedOutput": "10",
+                "explanation": "First in first out"
+            },
+            {
+                "input": "push 1, peek, peek",
+                "expectedOutput": "1, 1",
+                "explanation": "Peek doesn't remove"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nclass MyQueue { int s1[100],s2[100],t1,t2; public: MyQueue():t1(-1),t2(-1){} void push(int x) { s1[++t1]=x; } void move() { if(t2<0) while(t1>=0) s2[++t2]=s1[t1--]; } int pop() { move(); return s2[t2--]; } int peek() { move(); return s2[t2]; } bool empty() { return t1<0&&t2<0; } };\nint main() { MyQueue q; q.push(1); q.push(2); cout<<q.peek(); return 0; }",
         "explanation": {
             "approach": "Two stacks.",
@@ -60,6 +216,58 @@
         "category": "Stack",
         "starterCode": "#include <iostream>\nusing namespace std;\nclass MyStack {\npublic:\n    void push(int x) {}\n    int pop() { return 0; }\n    int top() { return 0; }\n    bool empty() { return true; }\n};\nint main() { MyStack s; s.push(1); s.push(2); cout<<s.top(); return 0; }",
         "expectedOutput": "2",
+        "testCases": [
+            {
+                "input": "push 1, push 2, top",
+                "expectedOutput": "2",
+                "explanation": "LIFO order"
+            },
+            {
+                "input": "push 1, pop",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "push 1, push 2, pop",
+                "expectedOutput": "2",
+                "explanation": "Last in first out"
+            },
+            {
+                "input": "push 1, push 2, push 3, top",
+                "expectedOutput": "3",
+                "explanation": "Multiple pushes"
+            },
+            {
+                "input": "empty() on new stack",
+                "expectedOutput": "true",
+                "explanation": "Initially empty"
+            },
+            {
+                "input": "push 1, empty",
+                "expectedOutput": "false",
+                "explanation": "Not empty"
+            },
+            {
+                "input": "push 1, pop, empty",
+                "expectedOutput": "true",
+                "explanation": "Empty after pop"
+            },
+            {
+                "input": "push 5, push 3, pop, top",
+                "expectedOutput": "5",
+                "explanation": "After pop"
+            },
+            {
+                "input": "push 1, top, top",
+                "expectedOutput": "1, 1",
+                "explanation": "Top doesn't remove"
+            },
+            {
+                "input": "push 10, push 20, pop, pop",
+                "expectedOutput": "20, 10",
+                "explanation": "LIFO pops"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nclass MyStack { int q[100],f,b; public: MyStack():f(0),b(0){} void push(int x) { q[b++]=x; for(int i=0;i<b-f-1;i++) { q[b++]=q[f++]; } } int pop() { return q[f++]; } int top() { return q[f]; } bool empty() { return f==b; } };\nint main() { MyStack s; s.push(1); s.push(2); cout<<s.top(); return 0; }",
         "explanation": {
             "approach": "Rotate queue on push.",
@@ -78,6 +286,58 @@
         "category": "Stack",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid nextGreaterElement(int n1[], int l1, int n2[], int l2) {}\nint main() { int a[]={4,1,2}; int b[]={1,3,4,2}; nextGreaterElement(a,3,b,4); return 0; }",
         "expectedOutput": "-1 3 -1",
+        "testCases": [
+            {
+                "input": "3 4\n4 1 2\n1 3 4 2",
+                "expectedOutput": "-1 3 -1",
+                "explanation": "4→-1, 1→3, 2→-1"
+            },
+            {
+                "input": "2 4\n2 4\n1 2 3 4",
+                "expectedOutput": "3 -1",
+                "explanation": "2→3, 4→-1"
+            },
+            {
+                "input": "1 1\n5\n5",
+                "expectedOutput": "-1",
+                "explanation": "No greater element"
+            },
+            {
+                "input": "2 3\n1 2\n1 2 3",
+                "expectedOutput": "2 3",
+                "explanation": "Both have greater"
+            },
+            {
+                "input": "3 3\n3 2 1\n1 2 3",
+                "expectedOutput": "-1 3 2",
+                "explanation": "Reverse order"
+            },
+            {
+                "input": "1 3\n2\n1 2 3",
+                "expectedOutput": "3",
+                "explanation": "Middle element"
+            },
+            {
+                "input": "2 2\n1 2\n2 1",
+                "expectedOutput": "-1 -1",
+                "explanation": "No greater after"
+            },
+            {
+                "input": "3 5\n1 3 5\n1 2 3 4 5",
+                "expectedOutput": "2 4 -1",
+                "explanation": "Various positions"
+            },
+            {
+                "input": "1 2\n1\n1 2",
+                "expectedOutput": "2",
+                "explanation": "Simple case"
+            },
+            {
+                "input": "2 4\n2 1\n1 2 3 4",
+                "expectedOutput": "3 2",
+                "explanation": "Out of order"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid nextGreaterElement(int n1[], int l1, int n2[], int l2) { for(int i=0;i<l1;i++) { int res=-1; bool found=false; for(int j=0;j<l2;j++) { if(n2[j]==n1[i]) found=true; if(found && n2[j]>n1[i]) { res=n2[j]; break; } } cout<<res<<\" \"; } }\nint main() { int a[]={4,1,2}; int b[]={1,3,4,2}; nextGreaterElement(a,3,b,4); return 0; }",
         "explanation": {
             "approach": "Find in nums2, then find next greater.",
@@ -96,6 +356,58 @@
         "category": "Stack",
         "starterCode": "#include <iostream>\nusing namespace std;\nint calPoints(char* ops[], int n) { return 0; }\nint main() { char* o[]={\"5\",\"2\",\"C\",\"D\",\"+\"}; cout<<calPoints(o,5); return 0; }",
         "expectedOutput": "30",
+        "testCases": [
+            {
+                "input": "5 2 C D +",
+                "expectedOutput": "30",
+                "explanation": "5+10+15=30"
+            },
+            {
+                "input": "5 -2 4 C D 9 + +",
+                "expectedOutput": "27",
+                "explanation": "Complex operations"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Single score"
+            },
+            {
+                "input": "1 C",
+                "expectedOutput": "0",
+                "explanation": "Score then cancel"
+            },
+            {
+                "input": "1 2 +",
+                "expectedOutput": "6",
+                "explanation": "1+2+3=6"
+            },
+            {
+                "input": "5 D",
+                "expectedOutput": "15",
+                "explanation": "5+10=15"
+            },
+            {
+                "input": "3 4 +",
+                "expectedOutput": "14",
+                "explanation": "3+4+7=14"
+            },
+            {
+                "input": "1 2 3 C",
+                "expectedOutput": "3",
+                "explanation": "Cancel last"
+            },
+            {
+                "input": "10 D D",
+                "expectedOutput": "70",
+                "explanation": "10+20+40"
+            },
+            {
+                "input": "-5 D +",
+                "expectedOutput": "-25",
+                "explanation": "Negative scores"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint calPoints(char* ops[], int n) { int stk[100],top=-1; for(int i=0;i<n;i++) { if(ops[i][0]=='C') top--; else if(ops[i][0]=='D') stk[++top]=stk[top-1]*2; else if(ops[i][0]=='+') stk[++top]=stk[top-1]+stk[top-2]; else { int v=0,neg=ops[i][0]=='-'; for(int j=neg?1:0;ops[i][j];j++) v=v*10+ops[i][j]-'0'; stk[++top]=neg?-v:v; } } int sum=0; for(int i=0;i<=top;i++) sum+=stk[i]; return sum; }\nint main() { char* o[]={\"5\",\"2\",\"C\",\"D\",\"+\"}; cout<<calPoints(o,5); return 0; }",
         "explanation": {
             "approach": "Stack simulation.",
@@ -114,6 +426,58 @@
         "category": "Stack",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid removeDuplicates(char s[]) {}\nint main() { char s[]=\"abbaca\"; removeDuplicates(s); return 0; }",
         "expectedOutput": "ca",
+        "testCases": [
+            {
+                "input": "abbaca",
+                "expectedOutput": "ca",
+                "explanation": "bb→a, then aa→empty"
+            },
+            {
+                "input": "azxxzy",
+                "expectedOutput": "ay",
+                "explanation": "xx→empty, zz→empty"
+            },
+            {
+                "input": "aab",
+                "expectedOutput": "b",
+                "explanation": "aa removed"
+            },
+            {
+                "input": "abc",
+                "expectedOutput": "abc",
+                "explanation": "No duplicates"
+            },
+            {
+                "input": "aa",
+                "expectedOutput": "",
+                "explanation": "All removed"
+            },
+            {
+                "input": "a",
+                "expectedOutput": "a",
+                "explanation": "Single char"
+            },
+            {
+                "input": "aabb",
+                "expectedOutput": "",
+                "explanation": "Two pairs"
+            },
+            {
+                "input": "abba",
+                "expectedOutput": "",
+                "explanation": "Cascading removal"
+            },
+            {
+                "input": "abcd",
+                "expectedOutput": "abcd",
+                "explanation": "No adjacent same"
+            },
+            {
+                "input": "aabbcc",
+                "expectedOutput": "",
+                "explanation": "Three pairs"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid removeDuplicates(char s[]) { char stk[100]; int top=-1; for(int i=0;s[i];i++) { if(top>=0&&stk[top]==s[i]) top--; else stk[++top]=s[i]; } for(int i=0;i<=top;i++) cout<<stk[i]; }\nint main() { char s[]=\"abbaca\"; removeDuplicates(s); return 0; }",
         "explanation": {
             "approach": "Stack for removal.",
@@ -132,6 +496,58 @@
         "category": "Stack",
         "starterCode": "#include <iostream>\nusing namespace std;\nclass FreqStack {\npublic:\n    void push(int val) {}\n    int pop() { return 0; }\n};\nint main() { cout<<\"OK\"; return 0; }",
         "expectedOutput": "OK",
+        "testCases": [
+            {
+                "input": "push 5, push 7, push 5, push 7, push 4, push 5, pop, pop, pop, pop",
+                "expectedOutput": "5, 7, 5, 4",
+                "explanation": "Pop by frequency then recency"
+            },
+            {
+                "input": "push 1, pop",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "push 1, push 1, pop",
+                "expectedOutput": "1",
+                "explanation": "Duplicate"
+            },
+            {
+                "input": "push 1, push 2, pop, pop",
+                "expectedOutput": "2, 1",
+                "explanation": "Same freq, LIFO"
+            },
+            {
+                "input": "push 5, push 5, push 5, pop, pop, pop",
+                "expectedOutput": "5, 5, 5",
+                "explanation": "All same"
+            },
+            {
+                "input": "push 1, push 2, push 1, pop",
+                "expectedOutput": "1",
+                "explanation": "1 is most frequent"
+            },
+            {
+                "input": "push 3, push 3, push 1, push 1, pop",
+                "expectedOutput": "1",
+                "explanation": "Tie breaker by recency"
+            },
+            {
+                "input": "push 1, push 2, push 3, pop, pop, pop",
+                "expectedOutput": "3, 2, 1",
+                "explanation": "LIFO when tied"
+            },
+            {
+                "input": "push 9, push 9, pop, push 9, pop",
+                "expectedOutput": "9, 9",
+                "explanation": "Push after pop"
+            },
+            {
+                "input": "push 1, push 1, push 2, push 2, pop, pop",
+                "expectedOutput": "2, 1",
+                "explanation": "Two pairs"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nclass FreqStack { int stk[100],freq[101],n,mf; public: FreqStack():n(0),mf(0){ for(int i=0;i<101;i++) freq[i]=0; } void push(int v) { freq[v]++; if(freq[v]>mf) mf=freq[v]; stk[n++]=v; } int pop() { while(n>0&&freq[stk[n-1]]<mf) n--; if(n==0) { mf--; return -1; } int v=stk[--n]; freq[v]--; while(mf>0) { bool found=false; for(int i=0;i<101;i++) if(freq[i]==mf) { found=true; break; } if(found) break; mf--; } return v; } };\nint main() { cout<<\"OK\"; return 0; }",
         "explanation": {
             "approach": "Track frequency.",
@@ -150,6 +566,58 @@
         "category": "Stack",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid dailyTemperatures(int t[], int n) {}\nint main() { int t[]={73,74,75,71,69,72,76,73}; dailyTemperatures(t,8); return 0; }",
         "expectedOutput": "1 1 4 2 1 1 0 0",
+        "testCases": [
+            {
+                "input": "8\n73 74 75 71 69 72 76 73",
+                "expectedOutput": "1 1 4 2 1 1 0 0",
+                "explanation": "Days until warmer"
+            },
+            {
+                "input": "4\n30 40 50 60",
+                "expectedOutput": "1 1 1 0",
+                "explanation": "Increasing temps"
+            },
+            {
+                "input": "4\n30 60 90 0",
+                "expectedOutput": "1 1 0 0",
+                "explanation": "Last two no warmer"
+            },
+            {
+                "input": "1\n50",
+                "expectedOutput": "0",
+                "explanation": "Single day"
+            },
+            {
+                "input": "3\n70 70 70",
+                "expectedOutput": "0 0 0",
+                "explanation": "All same"
+            },
+            {
+                "input": "3\n90 80 70",
+                "expectedOutput": "0 0 0",
+                "explanation": "Decreasing"
+            },
+            {
+                "input": "5\n50 60 50 60 50",
+                "expectedOutput": "1 0 1 0 0",
+                "explanation": "Alternating"
+            },
+            {
+                "input": "4\n100 99 100 101",
+                "expectedOutput": "3 1 1 0",
+                "explanation": "Wait for 101"
+            },
+            {
+                "input": "2\n50 51",
+                "expectedOutput": "1 0",
+                "explanation": "Simple pair"
+            },
+            {
+                "input": "3\n75 80 75",
+                "expectedOutput": "1 0 0",
+                "explanation": "Peak in middle"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid dailyTemperatures(int t[], int n) { int stk[100],top=-1,res[n]={}; for(int i=0;i<n;i++) { while(top>=0&&t[i]>t[stk[top]]) { res[stk[top]]=i-stk[top]; top--; } stk[++top]=i; } for(int i=0;i<n;i++) cout<<res[i]<<\" \"; }\nint main() { int t[]={73,74,75,71,69,72,76,73}; dailyTemperatures(t,8); return 0; }",
         "explanation": {
             "approach": "Monotonic stack.",
@@ -168,6 +636,58 @@
         "category": "Stack",
         "starterCode": "#include <iostream>\nusing namespace std;\nbool backspaceCompare(char s[], char t[]) { return false; }\nint main() { cout<<backspaceCompare(\"ab#c\",\"ad#c\"); return 0; }",
         "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "ab#c ad#c",
+                "expectedOutput": "1",
+                "explanation": "Both become 'ac'"
+            },
+            {
+                "input": "ab## c#d#",
+                "expectedOutput": "1",
+                "explanation": "Both become empty"
+            },
+            {
+                "input": "a#c a#c",
+                "expectedOutput": "1",
+                "explanation": "Same result"
+            },
+            {
+                "input": "a b",
+                "expectedOutput": "0",
+                "explanation": "Different"
+            },
+            {
+                "input": "## ",
+                "expectedOutput": "1",
+                "explanation": "All backspaced"
+            },
+            {
+                "input": "abc abc",
+                "expectedOutput": "1",
+                "explanation": "Same strings"
+            },
+            {
+                "input": "abc ab",
+                "expectedOutput": "0",
+                "explanation": "Different lengths"
+            },
+            {
+                "input": "bxj##tw bxo#j##tw",
+                "expectedOutput": "1",
+                "explanation": "Complex backspace"
+            },
+            {
+                "input": "a# b#",
+                "expectedOutput": "1",
+                "explanation": "Both empty"
+            },
+            {
+                "input": "y#fo##f y#f#o##f",
+                "expectedOutput": "1",
+                "explanation": "Different paths same result"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid process(char s[], char r[]) { int j=0; for(int i=0;s[i];i++) { if(s[i]=='#') { if(j>0) j--; } else r[j++]=s[i]; } r[j]=0; }\nbool backspaceCompare(char s[], char t[]) { char r1[100],r2[100]; process(s,r1); process(t,r2); for(int i=0;;i++) { if(r1[i]!=r2[i]) return false; if(!r1[i]) return true; } }\nint main() { cout<<backspaceCompare(\"ab#c\",\"ad#c\"); return 0; }",
         "explanation": {
             "approach": "Process then compare.",

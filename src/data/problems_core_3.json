@@ -17,7 +17,29 @@
                 "Merge sorted halves"
             ],
             "complexity": "Time: O(n log n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{38,27,43,3,9,82,10}",
+                "expectedOutput": "3 9 10 27 38 43 82",
+                "explanation": "Sorted array"
+            },
+            {
+                "input": "{5,4,3,2,1}",
+                "expectedOutput": "1 2 3 4 5",
+                "explanation": "Reverse sorted"
+            },
+            {
+                "input": "{1}",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "{1,2,3,4,5}",
+                "expectedOutput": "1 2 3 4 5",
+                "explanation": "Already sorted"
+            }
+        ]
     },
     {
         "id": "core27",
@@ -37,7 +59,29 @@
                 "Recurse on both sides"
             ],
             "complexity": "Time: O(n log n) avg, Space: O(log n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{10,7,8,9,1,5}",
+                "expectedOutput": "1 5 7 8 9 10",
+                "explanation": "Sorted array"
+            },
+            {
+                "input": "{1,2,3}",
+                "expectedOutput": "1 2 3",
+                "explanation": "Already sorted"
+            },
+            {
+                "input": "{3,3,3}",
+                "expectedOutput": "3 3 3",
+                "explanation": "All same"
+            },
+            {
+                "input": "{9,8,7,6,5,4,3,2,1}",
+                "expectedOutput": "1 2 3 4 5 6 7 8 9",
+                "explanation": "Large reverse sorted"
+            }
+        ]
     },
     {
         "id": "core28",
@@ -56,7 +100,29 @@
                 "Each cell = paths from left + paths from above"
             ],
             "complexity": "Time: O(2^(m+n)), Space: O(m+n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "m=3, n=3",
+                "expectedOutput": "6",
+                "explanation": "6 unique paths"
+            },
+            {
+                "input": "m=2, n=2",
+                "expectedOutput": "2",
+                "explanation": "2 paths"
+            },
+            {
+                "input": "m=1, n=5",
+                "expectedOutput": "1",
+                "explanation": "Only one path along edge"
+            },
+            {
+                "input": "m=4, n=4",
+                "expectedOutput": "20",
+                "explanation": "C(6,3) = 20 paths"
+            }
+        ]
     },
     {
         "id": "core29",
@@ -75,7 +141,29 @@
                 "f(n) = f(n-1) + f(n-2)"
             ],
             "complexity": "Time: O(2^n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "8",
+                "explanation": "8 ways to climb 5 stairs"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "3",
+                "explanation": "3 ways: 1+1+1, 1+2, 2+1"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Only one way"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "89",
+                "explanation": "89 ways for 10 stairs"
+            }
+        ]
     },
     {
         "id": "core30",
@@ -95,7 +183,29 @@
                 "Print unmarked"
             ],
             "complexity": "Time: O(n log log n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=30",
+                "expectedOutput": "2 3 5 7 11 13 17 19 23 29",
+                "explanation": "Primes up to 30"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "2 3 5 7",
+                "explanation": "Primes up to 10"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "2",
+                "explanation": "Smallest prime"
+            },
+            {
+                "input": "n=50",
+                "expectedOutput": "2 3 5 7 11 13 17 19 23 29 31 37 41 43 47",
+                "explanation": "Primes up to 50"
+            }
+        ]
     },
     {
         "id": "core31",
@@ -114,7 +224,29 @@
                 "Repeat until one is 0"
             ],
             "complexity": "Time: O(log min(a,b)), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "a=48, b=18",
+                "expectedOutput": "6",
+                "explanation": "GCD(48,18) = 6"
+            },
+            {
+                "input": "a=7, b=3",
+                "expectedOutput": "1",
+                "explanation": "Coprime numbers"
+            },
+            {
+                "input": "a=12, b=12",
+                "expectedOutput": "12",
+                "explanation": "Same numbers"
+            },
+            {
+                "input": "a=0, b=5",
+                "expectedOutput": "5",
+                "explanation": "GCD with 0"
+            }
+        ]
     },
     {
         "id": "core32",
@@ -133,7 +265,29 @@
                 "Square base each iteration"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "x=2, n=10, m=1000",
+                "expectedOutput": "24",
+                "explanation": "2^10 mod 1000 = 1024 mod 1000 = 24"
+            },
+            {
+                "input": "x=3, n=5, m=7",
+                "expectedOutput": "5",
+                "explanation": "243 mod 7 = 5"
+            },
+            {
+                "input": "x=2, n=0, m=10",
+                "expectedOutput": "1",
+                "explanation": "Any^0 = 1"
+            },
+            {
+                "input": "x=10, n=9, m=6",
+                "expectedOutput": "4",
+                "explanation": "10^9 mod 6 = 4"
+            }
+        ]
     },
     {
         "id": "core33",
@@ -152,7 +306,29 @@
                 "Work back: x=y1, y=x1-(a/b)*y1"
             ],
             "complexity": "Time: O(log min(a,b)), Space: O(log min(a,b))"
-        }
+        },
+        "testCases": [
+            {
+                "input": "a=30, b=20",
+                "expectedOutput": "10 1 -1",
+                "explanation": "30*1 + 20*(-1) = 10"
+            },
+            {
+                "input": "a=35, b=15",
+                "expectedOutput": "5 1 -2",
+                "explanation": "35*1 + 15*(-2) = 5"
+            },
+            {
+                "input": "a=7, b=5",
+                "expectedOutput": "1 -2 3",
+                "explanation": "7*(-2) + 5*3 = 1"
+            },
+            {
+                "input": "a=15, b=10",
+                "expectedOutput": "5 1 -1",
+                "explanation": "15*1 + 10*(-1) = 5"
+            }
+        ]
     },
     {
         "id": "core34",
@@ -171,7 +347,29 @@
                 "Return x mod m"
             ],
             "complexity": "Time: O(log m), Space: O(log m)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "a=3, m=7",
+                "expectedOutput": "5",
+                "explanation": "3*5 = 15 ≡ 1 (mod 7)"
+            },
+            {
+                "input": "a=2, m=5",
+                "expectedOutput": "3",
+                "explanation": "2*3 = 6 ≡ 1 (mod 5)"
+            },
+            {
+                "input": "a=7, m=11",
+                "expectedOutput": "8",
+                "explanation": "7*8 = 56 ≡ 1 (mod 11)"
+            },
+            {
+                "input": "a=4, m=13",
+                "expectedOutput": "10",
+                "explanation": "4*10 = 40 ≡ 1 (mod 13)"
+            }
+        ]
     },
     {
         "id": "core35",
@@ -190,6 +388,28 @@
                 "For each: x += r[i] * M/m[i] * inverse"
             ],
             "complexity": "Time: O(n log M), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "r={2,3,2}, m={3,5,7}",
+                "expectedOutput": "23",
+                "explanation": "23 mod 3=2, 23 mod 5=3, 23 mod 7=2"
+            },
+            {
+                "input": "r={1,2}, m={3,5}",
+                "expectedOutput": "7",
+                "explanation": "7 mod 3=1, 7 mod 5=2"
+            },
+            {
+                "input": "r={0,0}, m={2,3}",
+                "expectedOutput": "0",
+                "explanation": "0 satisfies both"
+            },
+            {
+                "input": "r={1,1,1}, m={2,3,5}",
+                "expectedOutput": "1",
+                "explanation": "1 mod 2=1, 1 mod 3=1, 1 mod 5=1"
+            }
+        ]
     }
 ]

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Camera, Save, User, Mail, AtSign, ArrowLeft } from 'lucide-react';
+import { Camera, Save, User, Mail, AtSign, ArrowLeft, Copy, CheckCircle } from 'lucide-react';
 import { updateProfile } from 'firebase/auth';
 import { auth } from '../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -18,6 +18,7 @@ const ProfilePage = () => {
     const [avatarFile, setAvatarFile] = useState(null);
     const [saving, setSaving] = useState(false);
     const [message, setMessage] = useState({ type: '', text: '' });
+    const [copied, setCopied] = useState(false);
 
     // Sync state when user data loads
     useEffect(() => {
@@ -253,6 +254,52 @@ const ProfilePage = () => {
                         </div>
                         <p style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginTop: '6px' }}>
                             Email cannot be changed
+                        </p>
+                    </div>
+
+                    {/* User ID (for Friends) */}
+                    <div style={{ marginBottom: '20px' }}>
+                        <label className="caption" style={{ display: 'block', marginBottom: '8px' }}>
+                            Your User ID
+                        </label>
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            padding: '12px 14px',
+                            background: 'var(--bg-secondary)',
+                            borderRadius: '10px',
+                            border: '1px solid var(--border)'
+                        }}>
+                            <code className="mono" style={{ flex: 1, fontSize: '12px', color: 'var(--text)', wordBreak: 'break-all' }}>
+                                {user?.id}
+                            </code>
+                            <button
+                                onClick={() => {
+                                    navigator.clipboard.writeText(user?.id);
+                                    setCopied(true);
+                                    setTimeout(() => setCopied(false), 2000);
+                                }}
+                                style={{
+                                    padding: '6px 12px',
+                                    background: copied ? 'var(--green)' : 'var(--accent)',
+                                    border: 'none',
+                                    borderRadius: '6px',
+                                    color: 'white',
+                                    cursor: 'pointer',
+                                    fontSize: '12px',
+                                    fontWeight: '500',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '4px'
+                                }}
+                            >
+                                {copied ? <CheckCircle size={12} /> : <Copy size={12} />}
+                                {copied ? 'Copied!' : 'Copy'}
+                            </button>
+                        </div>
+                        <p style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginTop: '6px' }}>
+                            Share this ID with friends so they can add you
                         </p>
                     </div>
 

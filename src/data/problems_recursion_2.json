@@ -16,7 +16,29 @@
                 "T(n)=T(n-1)+T(n-2)+T(n-3)"
             ],
             "complexity": "Time: O(3^n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=7",
+                "expectedOutput": "13",
+                "explanation": "T(7) = 13"
+            },
+            {
+                "input": "n=4",
+                "expectedOutput": "4",
+                "explanation": "T(4) = 0+1+1+2 = 4"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "0",
+                "explanation": "Base case T(0) = 0"
+            },
+            {
+                "input": "n=25",
+                "expectedOutput": "1389537",
+                "explanation": "Large Tribonacci number"
+            }
+        ]
     },
     {
         "id": "rec12",
@@ -35,7 +57,29 @@
                 "Recurse to next element"
             ],
             "complexity": "Time: O(2^n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,2}",
+                "expectedOutput": "{} {1} {2} {1,2}",
+                "explanation": "4 subsets"
+            },
+            {
+                "input": "{1}",
+                "expectedOutput": "{} {1}",
+                "explanation": "2 subsets"
+            },
+            {
+                "input": "{}",
+                "expectedOutput": "{}",
+                "explanation": "Only empty set"
+            },
+            {
+                "input": "{1,2,3}",
+                "expectedOutput": "8 subsets",
+                "explanation": "2^3 = 8 subsets"
+            }
+        ]
     },
     {
         "id": "rec13",
@@ -55,7 +99,29 @@
                 "Swap back"
             ],
             "complexity": "Time: O(n!), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"ABC\"",
+                "expectedOutput": "ABC ACB BAC BCA CBA CAB",
+                "explanation": "6 permutations"
+            },
+            {
+                "input": "\"AB\"",
+                "expectedOutput": "AB BA",
+                "explanation": "2 permutations"
+            },
+            {
+                "input": "\"A\"",
+                "expectedOutput": "A",
+                "explanation": "Single char"
+            },
+            {
+                "input": "\"ABCD\"",
+                "expectedOutput": "24 permutations",
+                "explanation": "4! = 24 permutations"
+            }
+        ]
     },
     {
         "id": "rec14",
@@ -74,7 +140,29 @@
                 "paths(r,c) = paths(r-1,c) + paths(r,c-1)"
             ],
             "complexity": "Time: O(2^(r+c)), Space: O(r+c)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "r=3, c=3",
+                "expectedOutput": "6",
+                "explanation": "6 paths in 3x3 grid"
+            },
+            {
+                "input": "r=2, c=2",
+                "expectedOutput": "2",
+                "explanation": "2 paths in 2x2 grid"
+            },
+            {
+                "input": "r=1, c=5",
+                "expectedOutput": "1",
+                "explanation": "Only 1 path along edge"
+            },
+            {
+                "input": "r=4, c=4",
+                "expectedOutput": "20",
+                "explanation": "C(6,3) = 20 paths"
+            }
+        ]
     },
     {
         "id": "rec15",
@@ -93,7 +181,29 @@
                 "Else try each palindrome prefix, cut, recurse"
             ],
             "complexity": "Time: O(n × 2^n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"aab\"",
+                "expectedOutput": "1",
+                "explanation": "aa|b - 1 cut"
+            },
+            {
+                "input": "\"a\"",
+                "expectedOutput": "0",
+                "explanation": "Already palindrome"
+            },
+            {
+                "input": "\"abc\"",
+                "expectedOutput": "2",
+                "explanation": "a|b|c - 2 cuts"
+            },
+            {
+                "input": "\"aba\"",
+                "expectedOutput": "0",
+                "explanation": "Already palindrome"
+            }
+        ]
     },
     {
         "id": "rec16",
@@ -112,7 +222,29 @@
                 "If match, recurse on rest"
             ],
             "complexity": "Time: O(2^n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"applepenapple\", dict=[apple,pen]",
+                "expectedOutput": "1",
+                "explanation": "apple+pen+apple"
+            },
+            {
+                "input": "\"catsandog\", dict=[cats,dog,sand,and,cat]",
+                "expectedOutput": "0",
+                "explanation": "Cannot segment"
+            },
+            {
+                "input": "\"abc\", dict=[a,b,c]",
+                "expectedOutput": "1",
+                "explanation": "a+b+c"
+            },
+            {
+                "input": "\"leetcode\", dict=[leet,code]",
+                "expectedOutput": "1",
+                "explanation": "leet+code"
+            }
+        ]
     },
     {
         "id": "rec17",
@@ -131,7 +263,29 @@
                 "Take two digits (10-26)"
             ],
             "complexity": "Time: O(2^n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"226\"",
+                "expectedOutput": "3",
+                "explanation": "2,2,6 OR 22,6 OR 2,26"
+            },
+            {
+                "input": "\"12\"",
+                "expectedOutput": "2",
+                "explanation": "1,2 OR 12"
+            },
+            {
+                "input": "\"06\"",
+                "expectedOutput": "0",
+                "explanation": "Leading 0 invalid"
+            },
+            {
+                "input": "\"11106\"",
+                "expectedOutput": "2",
+                "explanation": "1,1,10,6 OR 11,10,6"
+            }
+        ]
     },
     {
         "id": "rec18",
@@ -150,7 +304,29 @@
                 "Left has i-1 nodes, right has n-i"
             ],
             "complexity": "Time: O(3^n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=3",
+                "expectedOutput": "5",
+                "explanation": "5 unique BST structures"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Single node"
+            },
+            {
+                "input": "n=4",
+                "expectedOutput": "14",
+                "explanation": "Catalan(4) = 14"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "42",
+                "explanation": "Catalan(5) = 42"
+            }
+        ]
     },
     {
         "id": "rec19",
@@ -169,7 +345,29 @@
                 "If k odd, same as parent; else flip"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=4, k=5",
+                "expectedOutput": "1",
+                "explanation": "Row 4: 0110100110010110, k=5 is 1"
+            },
+            {
+                "input": "n=1, k=1",
+                "expectedOutput": "0",
+                "explanation": "First row is just 0"
+            },
+            {
+                "input": "n=2, k=2",
+                "expectedOutput": "1",
+                "explanation": "Row 2 is 01, k=2 is 1"
+            },
+            {
+                "input": "n=3, k=1",
+                "expectedOutput": "0",
+                "explanation": "Row 3 is 0110, k=1 is 0"
+            }
+        ]
     },
     {
         "id": "rec20",
@@ -188,6 +386,28 @@
                 "Combine results of subexpressions"
             ],
             "complexity": "Time: O(4^n/√n), Space: O(4^n/√n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"2*3-4*5\"",
+                "expectedOutput": "-34 -10 -14 -10 10",
+                "explanation": "5 different results"
+            },
+            {
+                "input": "\"2-1-1\"",
+                "expectedOutput": "0 2",
+                "explanation": "(2-1)-1=0 or 2-(1-1)=2"
+            },
+            {
+                "input": "\"2+3\"",
+                "expectedOutput": "5",
+                "explanation": "Single result"
+            },
+            {
+                "input": "\"2+3*4\"",
+                "expectedOutput": "14 20",
+                "explanation": "2+(3*4)=14 or (2+3)*4=20"
+            }
+        ]
     }
 ]

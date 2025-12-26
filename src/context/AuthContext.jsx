@@ -9,6 +9,7 @@ import {
     updateProfile
 } from 'firebase/auth';
 import { initUserStats } from '../services/userStats';
+import { setPlayerOnline } from '../services/onlinePlayers';
 
 const AuthContext = createContext();
 
@@ -48,6 +49,18 @@ export const AuthProvider = ({ children }) => {
 
         return () => unsubscribe();
     }, []);
+
+    // Global Online Presence
+    useEffect(() => {
+        if (user) {
+            const cleanup = setPlayerOnline({
+                id: user.id,
+                name: user.name,
+                avatar: user.avatar
+            });
+            return () => cleanup();
+        }
+    }, [user]);
 
     // Google Sign In
     const loginGoogle = async () => {

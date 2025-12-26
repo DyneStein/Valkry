@@ -2,181 +2,402 @@
     {
         "id": "ext21",
         "title": "Jump Game II",
-        "description": "Min jumps to end.",
+        "description": "Find minimum jumps to reach end of array.",
         "difficulty": "MEDIUM",
         "category": "Greedy",
         "starterCode": "#include <iostream>\nusing namespace std;\nint jump(int nums[], int n) { return 0; }\nint main() { int a[]={2,3,1,1,4}; cout<<jump(a,5); return 0; }",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\nint jump(int nums[], int n) { int jumps=0,cur=0,far=0; for(int i=0;i<n-1;i++) { far=max(far,i+nums[i]); if(i==cur) { jumps++; cur=far; } } return jumps; }\nint main() { int a[]={2,3,1,1,4}; cout<<jump(a,5); return 0; }",
         "explanation": {
-            "approach": "Greedy BFS.",
+            "approach": "Greedy BFS - track current level end.",
             "steps": [
-                "Track current level end",
+                "Track farthest reachable",
                 "Jump when reaching current end"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[2,3,1,1,4]",
+                "expectedOutput": "2",
+                "explanation": "Jump 0->1->4 (2 jumps)"
+            },
+            {
+                "input": "[2,3,0,1,4]",
+                "expectedOutput": "2",
+                "explanation": "Same path works"
+            },
+            {
+                "input": "[1,1,1,1]",
+                "expectedOutput": "3",
+                "explanation": "Must jump at each position"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "0",
+                "explanation": "Already at end"
+            }
+        ]
     },
     {
         "id": "ext22",
         "title": "Gas Station",
-        "description": "Starting station to complete circuit.",
+        "description": "Find starting station to complete circular route.",
         "difficulty": "MEDIUM",
         "category": "Greedy",
         "starterCode": "#include <iostream>\nusing namespace std;\nint canCompleteCircuit(int gas[], int cost[], int n) { return -1; }\nint main() { int g[]={1,2,3,4,5}; int c[]={3,4,5,1,2}; cout<<canCompleteCircuit(g,c,5); return 0; }",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint canCompleteCircuit(int gas[], int cost[], int n) { int total=0,tank=0,start=0; for(int i=0;i<n;i++) { total+=gas[i]-cost[i]; tank+=gas[i]-cost[i]; if(tank<0) { tank=0; start=i+1; } } return total>=0?start:-1; }\nint main() { int g[]={1,2,3,4,5}; int c[]={3,4,5,1,2}; cout<<canCompleteCircuit(g,c,5); return 0; }",
         "explanation": {
-            "approach": "Track tank and restart point.",
+            "approach": "Track tank and restart point when negative.",
             "steps": [
-                "If tank goes negative, restart from next",
-                "Check if total is non-negative"
+                "If tank negative, restart from next",
+                "Check total feasibility"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "gas=[1,2,3,4,5], cost=[3,4,5,1,2]",
+                "expectedOutput": "3",
+                "explanation": "Start at station 3"
+            },
+            {
+                "input": "gas=[2,3,4], cost=[3,4,3]",
+                "expectedOutput": "-1",
+                "explanation": "Not enough gas total"
+            },
+            {
+                "input": "gas=[5,1,2,3,4], cost=[4,4,1,5,1]",
+                "expectedOutput": "4",
+                "explanation": "Start at last station"
+            },
+            {
+                "input": "gas=[3], cost=[3]",
+                "expectedOutput": "0",
+                "explanation": "Single station, exact gas"
+            }
+        ]
     },
     {
         "id": "ext23",
-        "title": "Candy",
-        "description": "Min candies for ratings.",
+        "title": "Candy Distribution",
+        "description": "Minimum candies to satisfy rating constraints.",
         "difficulty": "HARD",
         "category": "Greedy",
         "starterCode": "#include <iostream>\nusing namespace std;\nint candy(int ratings[], int n) { return 0; }\nint main() { int r[]={1,0,2}; cout<<candy(r,3); return 0; }",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nint candy(int ratings[], int n) { int c[n]; for(int i=0;i<n;i++) c[i]=1; for(int i=1;i<n;i++) if(ratings[i]>ratings[i-1]) c[i]=c[i-1]+1; for(int i=n-2;i>=0;i--) if(ratings[i]>ratings[i+1]) c[i]=max(c[i],c[i+1]+1); int sum=0; for(int i=0;i<n;i++) sum+=c[i]; return sum; }\nint main() { int r[]={1,0,2}; cout<<candy(r,3); return 0; }",
         "explanation": {
-            "approach": "Two pass greedy.",
+            "approach": "Two-pass greedy: left-to-right then right-to-left.",
             "steps": [
-                "Left to right pass",
-                "Right to left pass"
+                "Left pass: higher rating gets more than left neighbor",
+                "Right pass: same for right"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[1,0,2]",
+                "expectedOutput": "5",
+                "explanation": "2+1+2=5 candies"
+            },
+            {
+                "input": "[1,2,2]",
+                "expectedOutput": "4",
+                "explanation": "1+2+1=4"
+            },
+            {
+                "input": "[1,3,2,2,1]",
+                "expectedOutput": "7",
+                "explanation": "1+2+1+2+1=7"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "1",
+                "explanation": "Single child"
+            }
+        ]
     },
     {
         "id": "ext24",
         "title": "Partition Labels",
-        "description": "Max partitions where each char appears once.",
+        "description": "Maximum partitions where each letter appears in one part.",
         "difficulty": "MEDIUM",
         "category": "Greedy",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid partitionLabels(char s[]) {}\nint main() { partitionLabels(\"ababcbacadefegdehijhklij\"); return 0; }",
         "expectedOutput": "9 7 8",
         "solution": "#include <iostream>\nusing namespace std;\nvoid partitionLabels(char s[]) { int last[26]={}; int n=0; while(s[n]) { last[s[n]-'a']=n; n++; } int start=0,end=0; for(int i=0;i<n;i++) { end=max(end,last[s[i]-'a']); if(i==end) { cout<<end-start+1<<\" \"; start=i+1; } } }\nint main() { partitionLabels(\"ababcbacadefegdehijhklij\"); return 0; }",
         "explanation": {
-            "approach": "Track last occurrence.",
+            "approach": "Track last occurrence, extend partition.",
             "steps": [
                 "Find last occurrence of each char",
-                "Extend partition to include all"
+                "Extend partition to include all occurrences"
             ],
             "complexity": "Time: O(n), Space: O(26)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"ababcbacadefegdehijhklij\"",
+                "expectedOutput": "9 7 8",
+                "explanation": "Three partitions"
+            },
+            {
+                "input": "\"eccbbbbdec\"",
+                "expectedOutput": "10",
+                "explanation": "One partition"
+            },
+            {
+                "input": "\"abcd\"",
+                "expectedOutput": "1 1 1 1",
+                "explanation": "Each letter unique"
+            },
+            {
+                "input": "\"a\"",
+                "expectedOutput": "1",
+                "explanation": "Single letter"
+            }
+        ]
     },
     {
         "id": "ext25",
         "title": "Task Scheduler",
-        "description": "Min time for tasks with cooldown.",
+        "description": "Minimum time to execute tasks with cooldown.",
         "difficulty": "MEDIUM",
         "category": "Greedy",
         "starterCode": "#include <iostream>\nusing namespace std;\nint leastInterval(char tasks[], int n, int k) { return 0; }\nint main() { char t[]={'A','A','A','B','B','B'}; cout<<leastInterval(t,6,2); return 0; }",
         "expectedOutput": "8",
         "solution": "#include <iostream>\nusing namespace std;\nint leastInterval(char tasks[], int n, int k) { int cnt[26]={}; for(int i=0;i<n;i++) cnt[tasks[i]-'A']++; int mx=0,mxCnt=0; for(int i=0;i<26;i++) { if(cnt[i]>mx) { mx=cnt[i]; mxCnt=1; } else if(cnt[i]==mx) mxCnt++; } return max(n,(mx-1)*(k+1)+mxCnt); }\nint main() { char t[]={'A','A','A','B','B','B'}; cout<<leastInterval(t,6,2); return 0; }",
         "explanation": {
-            "approach": "Calculate based on max frequency.",
+            "approach": "Calculate based on most frequent task.",
             "steps": [
-                "Find most frequent task",
+                "Find max frequency",
                 "Fill slots or use all tasks"
             ],
             "complexity": "Time: O(n), Space: O(26)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "['A','A','A','B','B','B'], k=2",
+                "expectedOutput": "8",
+                "explanation": "A_B_A_B_AB"
+            },
+            {
+                "input": "['A','A','A','B','B','B'], k=0",
+                "expectedOutput": "6",
+                "explanation": "No cooldown"
+            },
+            {
+                "input": "['A','A','A','A','A','A','B','C','D','E','F','G'], k=2",
+                "expectedOutput": "16",
+                "explanation": "Fill slots"
+            },
+            {
+                "input": "['A'], k=2",
+                "expectedOutput": "1",
+                "explanation": "Single task"
+            }
+        ]
     },
     {
         "id": "ext26",
-        "title": "Two Sum Hashing",
-        "description": "Two sum with hashing.",
+        "title": "Two Sum with Hashing",
+        "description": "Find two numbers that add to target.",
         "difficulty": "EASY",
         "category": "Hashing",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid twoSum(int nums[], int n, int target) {}\nint main() { int a[]={2,7,11,15}; twoSum(a,4,9); return 0; }",
         "expectedOutput": "0 1",
         "solution": "#include <iostream>\nusing namespace std;\nvoid twoSum(int nums[], int n, int target) { for(int i=0;i<n;i++) for(int j=i+1;j<n;j++) if(nums[i]+nums[j]==target) { cout<<i<<\" \"<<j; return; } }\nint main() { int a[]={2,7,11,15}; twoSum(a,4,9); return 0; }",
         "explanation": {
-            "approach": "Check all pairs.",
+            "approach": "Check all pairs for target sum.",
             "steps": [
                 "For each pair",
                 "Check if sum equals target"
             ],
             "complexity": "Time: O(n²), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[2,7,11,15], target=9",
+                "expectedOutput": "0 1",
+                "explanation": "2+7=9"
+            },
+            {
+                "input": "[3,2,4], target=6",
+                "expectedOutput": "1 2",
+                "explanation": "2+4=6"
+            },
+            {
+                "input": "[3,3], target=6",
+                "expectedOutput": "0 1",
+                "explanation": "Same values"
+            },
+            {
+                "input": "[1,2,3,4], target=7",
+                "expectedOutput": "2 3",
+                "explanation": "3+4=7"
+            }
+        ]
     },
     {
         "id": "ext27",
         "title": "Group Anagrams",
-        "description": "Group anagrams together.",
+        "description": "Group strings that are anagrams of each other.",
         "difficulty": "MEDIUM",
         "category": "Hashing",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid groupAnagrams(char* strs[], int n) {}\nint main() { char* s[]={\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"}; groupAnagrams(s,6); return 0; }",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nvoid groupAnagrams(char* strs[], int n) { int groups=0; bool used[100]={}; for(int i=0;i<n;i++) { if(used[i]) continue; groups++; used[i]=true; int cnt1[26]={}; for(int k=0;strs[i][k];k++) cnt1[strs[i][k]-'a']++; for(int j=i+1;j<n;j++) { if(used[j]) continue; int cnt2[26]={}; for(int k=0;strs[j][k];k++) cnt2[strs[j][k]-'a']++; bool eq=true; for(int k=0;k<26;k++) if(cnt1[k]!=cnt2[k]) { eq=false; break; } if(eq) used[j]=true; } } cout<<groups; }\nint main() { char* s[]={\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"}; groupAnagrams(s,6); return 0; }",
         "explanation": {
-            "approach": "Sort or count chars.",
+            "approach": "Compare character counts for anagrams.",
             "steps": [
-                "For each string, create signature",
-                "Group by signature"
+                "For each string, create frequency signature",
+                "Group by matching signatures"
             ],
             "complexity": "Time: O(n × k), Space: O(n × k)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[eat,tea,tan,ate,nat,bat]",
+                "expectedOutput": "3",
+                "explanation": "Three groups"
+            },
+            {
+                "input": "[\"\"]",
+                "expectedOutput": "1",
+                "explanation": "Empty string alone"
+            },
+            {
+                "input": "[a]",
+                "expectedOutput": "1",
+                "explanation": "Single string"
+            },
+            {
+                "input": "[abc,cba,bac,xyz]",
+                "expectedOutput": "2",
+                "explanation": "Two groups"
+            }
+        ]
     },
     {
         "id": "ext28",
         "title": "Valid Anagram",
-        "description": "Check if anagram.",
+        "description": "Check if two strings are anagrams.",
         "difficulty": "EASY",
         "category": "Hashing",
         "starterCode": "#include <iostream>\nusing namespace std;\nbool isAnagram(char s[], char t[]) { return false; }\nint main() { cout<<isAnagram(\"anagram\",\"nagaram\"); return 0; }",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isAnagram(char s[], char t[]) { int cnt[26]={}; int ls=0,lt=0; while(s[ls]) { cnt[s[ls]-'a']++; ls++; } while(t[lt]) { cnt[t[lt]-'a']--; lt++; } if(ls!=lt) return false; for(int i=0;i<26;i++) if(cnt[i]) return false; return true; }\nint main() { cout<<isAnagram(\"anagram\",\"nagaram\"); return 0; }",
         "explanation": {
-            "approach": "Count chars.",
+            "approach": "Count characters and compare.",
             "steps": [
-                "Count in s, decrement in t",
+                "Increment count for s",
+                "Decrement for t",
                 "All counts should be 0"
             ],
             "complexity": "Time: O(n), Space: O(26)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "anagram, nagaram",
+                "expectedOutput": "1",
+                "explanation": "Valid anagram"
+            },
+            {
+                "input": "rat, car",
+                "expectedOutput": "0",
+                "explanation": "Not anagram"
+            },
+            {
+                "input": "a, a",
+                "expectedOutput": "1",
+                "explanation": "Same single char"
+            },
+            {
+                "input": "ab, ba",
+                "expectedOutput": "1",
+                "explanation": "Swapped letters"
+            }
+        ]
     },
     {
         "id": "ext29",
-        "title": "Contains Duplicate II",
-        "description": "Duplicate within k distance.",
+        "title": "Contains Nearby Duplicate",
+        "description": "Check if duplicate exists within k distance.",
         "difficulty": "EASY",
         "category": "Hashing",
         "starterCode": "#include <iostream>\nusing namespace std;\nbool containsNearbyDuplicate(int nums[], int n, int k) { return false; }\nint main() { int a[]={1,2,3,1}; cout<<containsNearbyDuplicate(a,4,3); return 0; }",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool containsNearbyDuplicate(int nums[], int n, int k) { for(int i=0;i<n;i++) for(int j=i+1;j<n&&j<=i+k;j++) if(nums[i]==nums[j]) return true; return false; }\nint main() { int a[]={1,2,3,1}; cout<<containsNearbyDuplicate(a,4,3); return 0; }",
         "explanation": {
-            "approach": "Check pairs within k.",
+            "approach": "Check pairs within k distance.",
             "steps": [
                 "For each i, check i+1 to i+k",
                 "Return true if duplicate found"
             ],
             "complexity": "Time: O(nk), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[1,2,3,1], k=3",
+                "expectedOutput": "1",
+                "explanation": "index 0 and 3 within k=3"
+            },
+            {
+                "input": "[1,0,1,1], k=1",
+                "expectedOutput": "1",
+                "explanation": "index 2 and 3"
+            },
+            {
+                "input": "[1,2,3,1,2,3], k=2",
+                "expectedOutput": "0",
+                "explanation": "No duplicates within 2"
+            },
+            {
+                "input": "[1,2,1], k=1",
+                "expectedOutput": "0",
+                "explanation": "Distance is 2, not 1"
+            }
+        ]
     },
     {
         "id": "ext30",
-        "title": "Longest Consecutive",
-        "description": "Longest consecutive sequence.",
+        "title": "Longest Consecutive Sequence",
+        "description": "Find length of longest consecutive elements sequence.",
         "difficulty": "MEDIUM",
         "category": "Hashing",
         "starterCode": "#include <iostream>\nusing namespace std;\nint longestConsecutive(int nums[], int n) { return 0; }\nint main() { int a[]={100,4,200,1,3,2}; cout<<longestConsecutive(a,6); return 0; }",
         "expectedOutput": "4",
         "solution": "#include <iostream>\nusing namespace std;\nint longestConsecutive(int nums[], int n) { if(n==0) return 0; for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(nums[j]>nums[j+1]) swap(nums[j],nums[j+1]); int mx=1,cur=1; for(int i=1;i<n;i++) { if(nums[i]==nums[i-1]) continue; if(nums[i]==nums[i-1]+1) cur++; else cur=1; mx=max(mx,cur); } return mx; }\nint main() { int a[]={100,4,200,1,3,2}; cout<<longestConsecutive(a,6); return 0; }",
         "explanation": {
-            "approach": "Sort and count.",
+            "approach": "Sort and count consecutive runs.",
             "steps": [
                 "Sort array",
-                "Count consecutive runs"
+                "Count consecutive sequences"
             ],
             "complexity": "Time: O(n log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[100,4,200,1,3,2]",
+                "expectedOutput": "4",
+                "explanation": "1,2,3,4 = length 4"
+            },
+            {
+                "input": "[0,3,7,2,5,8,4,6,0,1]",
+                "expectedOutput": "9",
+                "explanation": "0-8 consecutive"
+            },
+            {
+                "input": "[]",
+                "expectedOutput": "0",
+                "explanation": "Empty array"
+            },
+            {
+                "input": "[1,2,0,1]",
+                "expectedOutput": "3",
+                "explanation": "0,1,2 with duplicate 1"
+            }
+        ]
     }
 ]

@@ -1,5 +1,5 @@
 // C++ Problems for Arena Battles - VALKRY Platform
-// 2000+ Programming Questions across all difficulty levels
+// Problem bank across all difficulty levels (count calculated dynamically)
 
 // ==================== EASY PROBLEMS (13 files x 50 = 650) ====================
 import problemsEasy1 from './problems_easy_1.json';
@@ -145,8 +145,24 @@ console.log(`
 
 // ==================== UTILITY FUNCTIONS ====================
 
-export function getRandomProblem() {
-    return problems[Math.floor(Math.random() * problems.length)];
+export function getRandomProblem(filters = {}) {
+    let filtered = problems;
+
+    if (filters.difficulty && filters.difficulty !== 'Random') {
+        filtered = filtered.filter(p => p.difficulty === filters.difficulty.toUpperCase());
+    }
+
+    if (filters.category && filters.category !== 'Random') {
+        filtered = filtered.filter(p => p.category === filters.category);
+    }
+
+    if (filtered.length === 0) {
+        // Fallback if no problems match filters (shouldn't happen with correct UI)
+        console.warn('No problems found with filters:', filters, 'returning random problem');
+        return problems[Math.floor(Math.random() * problems.length)];
+    }
+
+    return filtered[Math.floor(Math.random() * filtered.length)];
 }
 
 export function getProblemById(id) {

@@ -17,7 +17,7 @@ import {
 /**
  * Join the matchmaking queue
  */
-export async function joinQueue(player) {
+export async function joinQueue(player, filters = {}) {
     const queueRef = ref(database, 'matchmaking/queue');
     const newEntry = push(queueRef);
 
@@ -26,11 +26,40 @@ export async function joinQueue(player) {
         playerName: player.name,
         joinedAt: Date.now(),
         status: 'waiting',
-        battleId: null  // Will be set when matched
+        battleId: null,
+        filters: {
+            difficulty: filters.difficulty || 'Random',
+            category: filters.category || 'Random'
+        }
     });
 
-    console.log('Joined queue with key:', newEntry.key, 'player:', player.name);
+    console.log('Joined queue with key:', newEntry.key, 'player:', player.name, 'filters:', filters);
     return newEntry.key;
+}
+
+/**
+ * Helper to check if two players' filters are compatible
+ */
+function areFiltersCompatible(filters1, filters2) {
+    // Difficulty check
+    if (filters1.difficulty !== 'Random' && filters2.difficulty !== 'Random' && filters1.difficulty !== filters2.difficulty) {
+        return false;
+    }
+    // Category check
+    if (filters1.category !== 'Random' && filters2.category !== 'Random' && filters1.category !== filters2.category) {
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Helper to determine battle settings from two players
+ */
+function getBattleSettings(filters1, filters2) {
+    return {
+        difficulty: filters1.difficulty !== 'Random' ? filters1.difficulty : filters2.difficulty,
+        category: filters1.category !== 'Random' ? filters1.category : filters2.category
+    };
 }
 
 /**
@@ -76,7 +105,10 @@ export async function createBattle(player1, player2, problem) {
             difficulty: problem.difficulty,
             category: problem.category,
             starterCode: problem.starterCode,
-            expectedOutput: problem.expectedOutput
+            expectedOutput: problem.expectedOutput,
+            testCases: problem.testCases || [],
+            solution: problem.solution || '',
+            explanation: problem.explanation || {}
         },
         status: 'active',
         startedAt: serverTimestamp(),
@@ -153,9 +185,6 @@ export async function forfeitBattle(battleId, playerId) {
 
 /**
  * Subscribe to queue and handle matchmaking
- * This watches the queue and when 2 players are waiting:
- * - The first player (by joinedAt) creates the battle
- * - Both players get notified via their queue entry's battleId
  */
 export function subscribeToMatchmaking(myId, myKey, onBattleFound, onError) {
     const queueRef = ref(database, 'matchmaking/queue');
@@ -166,7 +195,6 @@ export function subscribeToMatchmaking(myId, myKey, onBattleFound, onError) {
         if (!snapshot.exists()) return;
 
         const myEntry = snapshot.val();
-        console.log('My entry updated:', myEntry);
 
         // If I've been matched to a battle, notify and unsubscribe
         if (myEntry.battleId && myEntry.status === 'matched') {
@@ -194,58 +222,69 @@ export function subscribeToMatchmaking(myId, myKey, onBattleFound, onError) {
         }
     });
 
-    // Watch the queue for potential matches (only first player creates battle)
+    // Watch the queue for potential matches
     const queueUnsubscribe = onValue(queueRef, async (snapshot) => {
         if (!snapshot.exists()) return;
 
         const queue = snapshot.val();
         const entries = Object.entries(queue);
 
-        // Filter waiting players
-        const waitingPlayers = entries
-            .filter(([key, entry]) => entry.status === 'waiting')
-            .sort((a, b) => a[1].joinedAt - b[1].joinedAt);  // Sort by join time
+        // Get my entry to know my filters
+        const myEntry = queue[myKey];
+        if (!myEntry || myEntry.status !== 'waiting') return;
 
-        console.log('Waiting players:', waitingPlayers.length);
+        // Find potential opponents
+        const potentialOpponents = entries
+            .filter(([key, entry]) =>
+                key !== myKey && // Not me
+                entry.status === 'waiting' && // Waiting
+                areFiltersCompatible(myEntry.filters, entry.filters) // Compatible
+            )
+            .sort((a, b) => a[1].joinedAt - b[1].joinedAt); // First come first served
 
-        if (waitingPlayers.length >= 2) {
-            // Am I the first player (earliest joinedAt)?
-            const [firstKey, firstPlayer] = waitingPlayers[0];
-            const [secondKey, secondPlayer] = waitingPlayers[1];
+        if (potentialOpponents.length > 0) {
+            const [opponentKey, opponent] = potentialOpponents[0];
 
-            // Only the first player creates the battle
-            if (firstKey === myKey) {
-                console.log('I am first player, creating battle...');
+            // Determination of who creates the battle:
+            // The one with the earlier join time creates it to avoid race conditions
+            const matches = [
+                { key: myKey, ...myEntry },
+                { key: opponentKey, ...opponent }
+            ].sort((a, b) => a.joinedAt - b.joinedAt);
+
+            // Only proceed if I am the earliest joined player in this pair
+            if (matches[0].key === myKey) {
+                console.log('I am the host, creating battle with:', opponent.playerName);
 
                 try {
                     // Import problem here to avoid circular dependency
                     const { getRandomProblem } = await import('../data/problems');
-                    const problem = getRandomProblem();
+
+                    // Determine common settings
+                    const battleSettings = getBattleSettings(myEntry.filters, opponent.filters);
+                    const problem = getRandomProblem(battleSettings);
 
                     // Create battle
                     const battleId = await createBattle(
-                        { id: firstPlayer.odplayerId, name: firstPlayer.playerName },
-                        { id: secondPlayer.odplayerId, name: secondPlayer.playerName },
+                        { id: myEntry.odplayerId, name: myEntry.playerName },
+                        { id: opponent.odplayerId, name: opponent.playerName },
                         problem
                     );
 
-                    // Update both queue entries with battleId
-                    await update(ref(database, `matchmaking/queue/${firstKey}`), {
+                    // Update both queue entries
+                    await update(ref(database, `matchmaking/queue/${myKey}`), {
                         status: 'matched',
                         battleId
                     });
-                    await update(ref(database, `matchmaking/queue/${secondKey}`), {
+                    await update(ref(database, `matchmaking/queue/${opponentKey}`), {
                         status: 'matched',
                         battleId
                     });
 
-                    console.log('Battle created and players matched!');
                 } catch (error) {
                     console.error('Error creating battle:', error);
                     onError(error);
                 }
-            } else {
-                console.log('Waiting for first player to create battle...');
             }
         }
     });

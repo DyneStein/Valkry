@@ -7,6 +7,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nint pivotIndex(int nums[], int n) { return -1; }\nint main() { int a[]={1,7,3,6,5,6}; cout<<pivotIndex(a,6); return 0; }",
         "expectedOutput": "3",
+        "testCases": [
+            {
+                "input": "6\n1 7 3 6 5 6",
+                "expectedOutput": "3",
+                "explanation": "Left sum 1+7+3=11, Right sum 5+6=11"
+            },
+            {
+                "input": "3\n1 2 3",
+                "expectedOutput": "-1",
+                "explanation": "No pivot exists"
+            },
+            {
+                "input": "1\n5",
+                "expectedOutput": "0",
+                "explanation": "Single element is pivot"
+            },
+            {
+                "input": "2\n1 0",
+                "expectedOutput": "0",
+                "explanation": "First element is pivot"
+            },
+            {
+                "input": "2\n0 1",
+                "expectedOutput": "1",
+                "explanation": "Last element is pivot"
+            },
+            {
+                "input": "5\n2 1 -1 1 2",
+                "expectedOutput": "2",
+                "explanation": "Negative number pivot"
+            },
+            {
+                "input": "3\n0 0 0",
+                "expectedOutput": "0",
+                "explanation": "All zeros, first is pivot"
+            },
+            {
+                "input": "4\n1 1 1 1",
+                "expectedOutput": "-1",
+                "explanation": "No valid pivot"
+            },
+            {
+                "input": "5\n-1 -1 -1 0 1",
+                "expectedOutput": "3",
+                "explanation": "Negatives balance"
+            },
+            {
+                "input": "3\n0 1 0",
+                "expectedOutput": "1",
+                "explanation": "Middle is pivot"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint pivotIndex(int nums[], int n) { int total=0,left=0; for(int i=0;i<n;i++) total+=nums[i]; for(int i=0;i<n;i++) { if(left==total-left-nums[i]) return i; left+=nums[i]; } return -1; }\nint main() { int a[]={1,7,3,6,5,6}; cout<<pivotIndex(a,6); return 0; }",
         "explanation": {
             "approach": "Track left sum.",
@@ -25,6 +77,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nint dominantIndex(int nums[], int n) { return -1; }\nint main() { int a[]={3,6,1,0}; cout<<dominantIndex(a,4); return 0; }",
         "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "4\n3 6 1 0",
+                "expectedOutput": "1",
+                "explanation": "6 >= 2*3, 2*1, 2*0"
+            },
+            {
+                "input": "2\n1 2",
+                "expectedOutput": "1",
+                "explanation": "2 >= 2*1"
+            },
+            {
+                "input": "2\n1 3",
+                "expectedOutput": "1",
+                "explanation": "3 > 2*1"
+            },
+            {
+                "input": "2\n2 3",
+                "expectedOutput": "-1",
+                "explanation": "3 < 2*2"
+            },
+            {
+                "input": "1\n5",
+                "expectedOutput": "0",
+                "explanation": "Single element"
+            },
+            {
+                "input": "3\n0 0 1",
+                "expectedOutput": "2",
+                "explanation": "1 >= 2*0"
+            },
+            {
+                "input": "4\n1 2 3 4",
+                "expectedOutput": "-1",
+                "explanation": "No dominant"
+            },
+            {
+                "input": "3\n10 5 2",
+                "expectedOutput": "0",
+                "explanation": "10 >= 2*5"
+            },
+            {
+                "input": "3\n5 10 2",
+                "expectedOutput": "1",
+                "explanation": "10 >= 2*5"
+            },
+            {
+                "input": "4\n0 0 0 1",
+                "expectedOutput": "3",
+                "explanation": "Any vs zeros"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint dominantIndex(int nums[], int n) { int mx=0; for(int i=1;i<n;i++) if(nums[i]>nums[mx]) mx=i; for(int i=0;i<n;i++) if(i!=mx && nums[mx]<2*nums[i]) return -1; return mx; }\nint main() { int a[]={3,6,1,0}; cout<<dominantIndex(a,4); return 0; }",
         "explanation": {
             "approach": "Find max, check condition.",
@@ -43,6 +147,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid plusOne(int digits[], int n) {}\nint main() { int d[]={1,2,3}; plusOne(d,3); return 0; }",
         "expectedOutput": "1 2 4",
+        "testCases": [
+            {
+                "input": "3\n1 2 3",
+                "expectedOutput": "1 2 4",
+                "explanation": "123 + 1 = 124"
+            },
+            {
+                "input": "3\n9 9 9",
+                "expectedOutput": "1 0 0 0",
+                "explanation": "999 + 1 = 1000"
+            },
+            {
+                "input": "1\n0",
+                "expectedOutput": "1",
+                "explanation": "0 + 1 = 1"
+            },
+            {
+                "input": "1\n9",
+                "expectedOutput": "1 0",
+                "explanation": "9 + 1 = 10"
+            },
+            {
+                "input": "2\n1 9",
+                "expectedOutput": "2 0",
+                "explanation": "19 + 1 = 20"
+            },
+            {
+                "input": "3\n1 9 9",
+                "expectedOutput": "2 0 0",
+                "explanation": "199 + 1 = 200"
+            },
+            {
+                "input": "2\n2 5",
+                "expectedOutput": "2 6",
+                "explanation": "25 + 1 = 26"
+            },
+            {
+                "input": "4\n1 2 3 4",
+                "expectedOutput": "1 2 3 5",
+                "explanation": "1234 + 1"
+            },
+            {
+                "input": "3\n0 0 1",
+                "expectedOutput": "0 0 2",
+                "explanation": "001 + 1 = 002"
+            },
+            {
+                "input": "2\n9 0",
+                "expectedOutput": "9 1",
+                "explanation": "90 + 1 = 91"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid plusOne(int digits[], int n) { for(int i=n-1;i>=0;i--) { if(digits[i]<9) { digits[i]++; for(int j=0;j<n;j++) cout<<digits[j]<<\" \"; return; } digits[i]=0; } cout<<1<<\" \"; for(int i=0;i<n;i++) cout<<0<<\" \"; }\nint main() { int d[]={1,2,3}; plusOne(d,3); return 0; }",
         "explanation": {
             "approach": "Add with carry.",
@@ -61,6 +217,58 @@
         "category": "Matrix",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid findDiagonalOrder(int m[][3], int r, int c) {}\nint main() { int m[][3]={{1,2,3},{4,5,6},{7,8,9}}; findDiagonalOrder(m,3,3); return 0; }",
         "expectedOutput": "1 2 4 7 5 3 6 8 9",
+        "testCases": [
+            {
+                "input": "3 3\n1 2 3\n4 5 6\n7 8 9",
+                "expectedOutput": "1 2 4 7 5 3 6 8 9",
+                "explanation": "Diagonal zigzag"
+            },
+            {
+                "input": "1 1\n5",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "2 2\n1 2\n3 4",
+                "expectedOutput": "1 2 3 4",
+                "explanation": "2x2 diagonal"
+            },
+            {
+                "input": "1 3\n1 2 3",
+                "expectedOutput": "1 2 3",
+                "explanation": "Single row"
+            },
+            {
+                "input": "3 1\n1\n2\n3",
+                "expectedOutput": "1 2 3",
+                "explanation": "Single column"
+            },
+            {
+                "input": "2 3\n1 2 3\n4 5 6",
+                "expectedOutput": "1 2 4 5 3 6",
+                "explanation": "2x3 matrix"
+            },
+            {
+                "input": "3 2\n1 2\n3 4\n5 6",
+                "expectedOutput": "1 2 3 5 4 6",
+                "explanation": "3x2 matrix"
+            },
+            {
+                "input": "2 2\n0 0\n0 0",
+                "expectedOutput": "0 0 0 0",
+                "explanation": "All zeros"
+            },
+            {
+                "input": "3 3\n9 8 7\n6 5 4\n3 2 1",
+                "expectedOutput": "9 8 6 3 5 7 4 2 1",
+                "explanation": "Descending values"
+            },
+            {
+                "input": "2 2\n1 3\n2 4",
+                "expectedOutput": "1 3 2 4",
+                "explanation": "Simple 2x2"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid findDiagonalOrder(int m[][3], int r, int c) { int row=0,col=0,d=1; for(int i=0;i<r*c;i++) { cout<<m[row][col]<<\" \"; row-=d; col+=d; if(row>=r) { row=r-1; col+=2; d=-d; } if(col>=c) { col=c-1; row+=2; d=-d; } if(row<0) { row=0; d=-d; } if(col<0) { col=0; d=-d; } } }\nint main() { int m[][3]={{1,2,3},{4,5,6},{7,8,9}}; findDiagonalOrder(m,3,3); return 0; }",
         "explanation": {
             "approach": "Track direction, handle bounds.",
@@ -79,6 +287,58 @@
         "category": "Matrix",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid generateMatrix(int n) {}\nint main() { generateMatrix(3); return 0; }",
         "expectedOutput": "1 2 3 8 9 4 7 6 5",
+        "testCases": [
+            {
+                "input": "3",
+                "expectedOutput": "1 2 3 8 9 4 7 6 5",
+                "explanation": "3x3 spiral"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "1 2 4 3",
+                "explanation": "2x2 spiral"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "1 2 3 4 12 13 14 5 11 16 15 6 10 9 8 7",
+                "explanation": "4x4 spiral"
+            },
+            {
+                "input": "5",
+                "expectedOutput": "1 2 3 4 5 16 17 18 19 6 15 24 25 20 7 14 23 22 21 8 13 12 11 10 9",
+                "explanation": "5x5 spiral"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "1 2 4 3",
+                "explanation": "Smallest spiral"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "1 2 3 8 9 4 7 6 5",
+                "explanation": "Standard case"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Edge case single"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "1 2 3 4 12 13 14 5 11 16 15 6 10 9 8 7",
+                "explanation": "Even size"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "1 2 3 8 9 4 7 6 5",
+                "explanation": "Odd size"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid generateMatrix(int n) { int m[10][10]={}; int t=0,b=n-1,l=0,r=n-1,v=1; while(t<=b&&l<=r) { for(int i=l;i<=r;i++) m[t][i]=v++; t++; for(int i=t;i<=b;i++) m[i][r]=v++; r--; for(int i=r;i>=l;i--) m[b][i]=v++; b--; for(int i=b;i>=t;i--) m[i][l]=v++; l++; } for(int i=0;i<n;i++) for(int j=0;j<n;j++) cout<<m[i][j]<<\" \"; }\nint main() { generateMatrix(3); return 0; }",
         "explanation": {
             "approach": "Fill layer by layer.",
@@ -97,6 +357,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid generate(int n) {}\nint main() { generate(5); return 0; }",
         "expectedOutput": "1 1 1 1 2 1 1 3 3 1 1 4 6 4 1",
+        "testCases": [
+            {
+                "input": "5",
+                "expectedOutput": "1 1 1 1 2 1 1 3 3 1 1 4 6 4 1",
+                "explanation": "5 rows of Pascal's triangle"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Single row"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "1 1 1",
+                "explanation": "Two rows"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "1 1 1 1 2 1",
+                "explanation": "Three rows"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "1 1 1 1 2 1 1 3 3 1",
+                "explanation": "Four rows"
+            },
+            {
+                "input": "6",
+                "expectedOutput": "1 1 1 1 2 1 1 3 3 1 1 4 6 4 1 1 5 10 10 5 1",
+                "explanation": "Six rows"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "1 1 1 1 2 1 1 3 3 1 1 4 6 4 1 1 5 10 10 5 1 1 6 15 20 15 6 1",
+                "explanation": "Seven rows"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Minimum input"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "1 1 1",
+                "explanation": "Small case"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "1 1 1 1 2 1",
+                "explanation": "First binomial"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid generate(int n) { int t[10][10]; for(int i=0;i<n;i++) { t[i][0]=t[i][i]=1; for(int j=1;j<i;j++) t[i][j]=t[i-1][j-1]+t[i-1][j]; for(int j=0;j<=i;j++) cout<<t[i][j]<<\" \"; } }\nint main() { generate(5); return 0; }",
         "explanation": {
             "approach": "Build row by row.",
@@ -115,6 +427,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid getRow(int k) {}\nint main() { getRow(3); return 0; }",
         "expectedOutput": "1 3 3 1",
+        "testCases": [
+            {
+                "input": "3",
+                "expectedOutput": "1 3 3 1",
+                "explanation": "Row 3 (0-indexed)"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "1",
+                "explanation": "First row"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1 1",
+                "explanation": "Second row"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "1 2 1",
+                "explanation": "Third row"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "1 4 6 4 1",
+                "explanation": "Fifth row"
+            },
+            {
+                "input": "5",
+                "expectedOutput": "1 5 10 10 5 1",
+                "explanation": "Sixth row"
+            },
+            {
+                "input": "6",
+                "expectedOutput": "1 6 15 20 15 6 1",
+                "explanation": "Seventh row"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "1 7 21 35 35 21 7 1",
+                "explanation": "Eighth row"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "1",
+                "explanation": "Edge case"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1 1",
+                "explanation": "Small row"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid getRow(int k) { int row[k+1]; row[0]=1; for(int i=1;i<=k;i++) { row[i]=1; for(int j=i-1;j>0;j--) row[j]+=row[j-1]; } for(int i=0;i<=k;i++) cout<<row[i]<<\" \"; }\nint main() { getRow(3); return 0; }",
         "explanation": {
             "approach": "Update row in place.",
@@ -133,6 +497,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid findMissingRanges(int nums[], int n, int lo, int hi) {}\nint main() { int a[]={0,1,3,50,75}; findMissingRanges(a,5,0,99); return 0; }",
         "expectedOutput": "2 4-49 51-74 76-99",
+        "testCases": [
+            {
+                "input": "5 0 99\n0 1 3 50 75",
+                "expectedOutput": "2 4-49 51-74 76-99",
+                "explanation": "Standard missing ranges"
+            },
+            {
+                "input": "0 0 5",
+                "expectedOutput": "0-5",
+                "explanation": "Empty array, full range"
+            },
+            {
+                "input": "1 0 10\n5",
+                "expectedOutput": "0-4 6-10",
+                "explanation": "Single element"
+            },
+            {
+                "input": "2 0 5\n0 5",
+                "expectedOutput": "1-4",
+                "explanation": "Boundaries present"
+            },
+            {
+                "input": "3 1 10\n1 5 10",
+                "expectedOutput": "2-4 6-9",
+                "explanation": "Start and end present"
+            },
+            {
+                "input": "5 0 10\n0 1 2 3 4",
+                "expectedOutput": "5-10",
+                "explanation": "Missing at end"
+            },
+            {
+                "input": "5 0 10\n6 7 8 9 10",
+                "expectedOutput": "0-5",
+                "explanation": "Missing at start"
+            },
+            {
+                "input": "1 0 0\n0",
+                "expectedOutput": "",
+                "explanation": "No missing"
+            },
+            {
+                "input": "2 0 2\n0 2",
+                "expectedOutput": "1",
+                "explanation": "Single missing"
+            },
+            {
+                "input": "3 0 5\n1 2 4",
+                "expectedOutput": "0 3 5",
+                "explanation": "Multiple singles"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid findMissingRanges(int nums[], int n, int lo, int hi) { int prev=lo-1; for(int i=0;i<=n;i++) { int cur=i<n?nums[i]:hi+1; if(cur-prev>=2) { if(cur-prev==2) cout<<prev+1<<\" \"; else cout<<prev+1<<\"-\"<<cur-1<<\" \"; } prev=cur; } }\nint main() { int a[]={0,1,3,50,75}; findMissingRanges(a,5,0,99); return 0; }",
         "explanation": {
             "approach": "Track gaps.",
@@ -151,6 +567,58 @@
         "category": "Strings",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid reverseVowels(char s[]) {}\nint main() { char s[]=\"hello\"; reverseVowels(s); cout<<s; return 0; }",
         "expectedOutput": "holle",
+        "testCases": [
+            {
+                "input": "hello",
+                "expectedOutput": "holle",
+                "explanation": "e and o swapped"
+            },
+            {
+                "input": "leetcode",
+                "expectedOutput": "leotcede",
+                "explanation": "Multiple vowels"
+            },
+            {
+                "input": "aA",
+                "expectedOutput": "Aa",
+                "explanation": "Case preserved"
+            },
+            {
+                "input": "bcdfg",
+                "expectedOutput": "bcdfg",
+                "explanation": "No vowels"
+            },
+            {
+                "input": "aeiou",
+                "expectedOutput": "uoiea",
+                "explanation": "All vowels reversed"
+            },
+            {
+                "input": "a",
+                "expectedOutput": "a",
+                "explanation": "Single vowel"
+            },
+            {
+                "input": "b",
+                "expectedOutput": "b",
+                "explanation": "Single consonant"
+            },
+            {
+                "input": "ab",
+                "expectedOutput": "ab",
+                "explanation": "One vowel stays"
+            },
+            {
+                "input": "ae",
+                "expectedOutput": "ea",
+                "explanation": "Two vowels swap"
+            },
+            {
+                "input": "AEIOU",
+                "expectedOutput": "UOIEA",
+                "explanation": "Uppercase vowels"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nbool isVowel(char c) { return c=='a'||c=='e'||c=='i'||c=='o'||c=='u'||c=='A'||c=='E'||c=='I'||c=='O'||c=='U'; }\nvoid reverseVowels(char s[]) { int n=0; while(s[n]) n++; int l=0,r=n-1; while(l<r) { while(l<r&&!isVowel(s[l])) l++; while(l<r&&!isVowel(s[r])) r--; swap(s[l++],s[r--]); } }\nint main() { char s[]=\"hello\"; reverseVowels(s); cout<<s; return 0; }",
         "explanation": {
             "approach": "Two pointers on vowels.",
@@ -169,6 +637,58 @@
         "category": "Strings",
         "starterCode": "#include <iostream>\nusing namespace std;\nbool canConstruct(char r[], char m[]) { return false; }\nint main() { cout<<canConstruct(\"aa\",\"aab\"); return 0; }",
         "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "aa aab",
+                "expectedOutput": "1",
+                "explanation": "Two a's available"
+            },
+            {
+                "input": "a b",
+                "expectedOutput": "0",
+                "explanation": "No 'a' in magazine"
+            },
+            {
+                "input": "aa ab",
+                "expectedOutput": "0",
+                "explanation": "Only one a available"
+            },
+            {
+                "input": "abc abc",
+                "expectedOutput": "1",
+                "explanation": "Exact match"
+            },
+            {
+                "input": " abc",
+                "expectedOutput": "1",
+                "explanation": "Empty ransom note"
+            },
+            {
+                "input": "a a",
+                "expectedOutput": "1",
+                "explanation": "Single char match"
+            },
+            {
+                "input": "ab ba",
+                "expectedOutput": "1",
+                "explanation": "Same chars different order"
+            },
+            {
+                "input": "aaa aaa",
+                "expectedOutput": "1",
+                "explanation": "All same"
+            },
+            {
+                "input": "aaab aaba",
+                "expectedOutput": "0",
+                "explanation": "Need more b's"
+            },
+            {
+                "input": "xyz xyzabc",
+                "expectedOutput": "1",
+                "explanation": "Subset available"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nbool canConstruct(char r[], char m[]) { int cnt[26]={}; for(int i=0;m[i];i++) cnt[m[i]-'a']++; for(int i=0;r[i];i++) if(--cnt[r[i]-'a']<0) return false; return true; }\nint main() { cout<<canConstruct(\"aa\",\"aab\"); return 0; }",
         "explanation": {
             "approach": "Count magazine chars.",

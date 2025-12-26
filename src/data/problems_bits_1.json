@@ -10,13 +10,34 @@
         "solution": "#include <iostream>\nusing namespace std;\nbool isEven(int n) { return (n & 1) == 0; }\nint main() { cout<<isEven(10); return 0; }",
         "explanation": {
             "approach": "Last bit is 0 for even numbers.",
-            "analogy": "In binary, even numbers always end in 0.",
             "steps": [
                 "AND with 1",
                 "If result is 0, it's even"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "1",
+                "explanation": "10 is even (binary 1010)"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "0",
+                "explanation": "7 is odd (binary 111)"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "1",
+                "explanation": "0 is even"
+            },
+            {
+                "input": "n=1024",
+                "expectedOutput": "1",
+                "explanation": "2^10 is even"
+            }
+        ]
     },
     {
         "id": "bit2",
@@ -29,13 +50,34 @@
         "solution": "#include <iostream>\nusing namespace std;\nbool isOdd(int n) { return (n & 1) == 1; }\nint main() { cout<<isOdd(7); return 0; }",
         "explanation": {
             "approach": "Last bit is 1 for odd numbers.",
-            "analogy": "In binary, odd numbers end in 1.",
             "steps": [
                 "AND with 1",
                 "If result is 1, it's odd"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=7",
+                "expectedOutput": "1",
+                "explanation": "7 is odd (binary 111)"
+            },
+            {
+                "input": "n=8",
+                "expectedOutput": "0",
+                "explanation": "8 is even"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "1 is odd"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "0",
+                "explanation": "0 is even"
+            }
+        ]
     },
     {
         "id": "bit3",
@@ -48,14 +90,35 @@
         "solution": "#include <iostream>\nusing namespace std;\nint countSetBits(int n) { int c = 0; while(n) { c += n & 1; n >>= 1; } return c; }\nint main() { cout<<countSetBits(13); return 0; }",
         "explanation": {
             "approach": "Check last bit, shift right, repeat.",
-            "analogy": "13 = 1101 in binary, has three 1s.",
             "steps": [
                 "Check last bit",
                 "Shift right",
                 "Count 1s"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=13",
+                "expectedOutput": "3",
+                "explanation": "13=1101 has three 1s"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "3",
+                "explanation": "7=111 has three 1s"
+            },
+            {
+                "input": "n=16",
+                "expectedOutput": "1",
+                "explanation": "16=10000 has one 1"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "0",
+                "explanation": "0 has no set bits"
+            }
+        ]
     },
     {
         "id": "bit4",
@@ -68,13 +131,34 @@
         "solution": "#include <iostream>\nusing namespace std;\nbool isPowerOf2(int n) { return n > 0 && (n & (n-1)) == 0; }\nint main() { cout<<isPowerOf2(16); return 0; }",
         "explanation": {
             "approach": "Power of 2 has exactly one 1 bit.",
-            "analogy": "16 = 10000, 16-1 = 01111, AND = 00000",
             "steps": [
                 "n & (n-1) removes lowest set bit",
-                "If result is 0, only one bit was set"
+                "If 0, only one bit was set"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=16",
+                "expectedOutput": "1",
+                "explanation": "16=10000, single bit"
+            },
+            {
+                "input": "n=15",
+                "expectedOutput": "0",
+                "explanation": "15=1111, multiple bits"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "2^0=1"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "0",
+                "explanation": "0 is not power of 2"
+            }
+        ]
     },
     {
         "id": "bit5",
@@ -87,13 +171,34 @@
         "solution": "#include <iostream>\nusing namespace std;\nint toggleBit(int n, int k) { return n ^ (1 << k); }\nint main() { cout<<toggleBit(13,1); return 0; }",
         "explanation": {
             "approach": "XOR with 1 at position k flips that bit.",
-            "analogy": "13=1101, toggle bit 1 → 1111=15",
             "steps": [
                 "Create mask: 1 << k",
                 "XOR with n"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=13, k=1",
+                "expectedOutput": "15",
+                "explanation": "1101→1111"
+            },
+            {
+                "input": "n=10, k=0",
+                "expectedOutput": "11",
+                "explanation": "1010→1011"
+            },
+            {
+                "input": "n=8, k=3",
+                "expectedOutput": "0",
+                "explanation": "1000→0000"
+            },
+            {
+                "input": "n=0, k=2",
+                "expectedOutput": "4",
+                "explanation": "0→100"
+            }
+        ]
     },
     {
         "id": "bit6",
@@ -106,13 +211,34 @@
         "solution": "#include <iostream>\nusing namespace std;\nint setBit(int n, int k) { return n | (1 << k); }\nint main() { cout<<setBit(10,0); return 0; }",
         "explanation": {
             "approach": "OR with 1 at position k sets that bit.",
-            "analogy": "10=1010, set bit 0 → 1011=11",
             "steps": [
                 "Create mask: 1 << k",
                 "OR with n"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=10, k=0",
+                "expectedOutput": "11",
+                "explanation": "1010→1011"
+            },
+            {
+                "input": "n=0, k=3",
+                "expectedOutput": "8",
+                "explanation": "0→1000"
+            },
+            {
+                "input": "n=15, k=2",
+                "expectedOutput": "15",
+                "explanation": "Already set"
+            },
+            {
+                "input": "n=1, k=4",
+                "expectedOutput": "17",
+                "explanation": "1→10001"
+            }
+        ]
     },
     {
         "id": "bit7",
@@ -125,13 +251,34 @@
         "solution": "#include <iostream>\nusing namespace std;\nint clearBit(int n, int k) { return n & ~(1 << k); }\nint main() { cout<<clearBit(15,1); return 0; }",
         "explanation": {
             "approach": "AND with inverted mask clears that bit.",
-            "analogy": "15=1111, clear bit 1 → 1101=13",
             "steps": [
                 "Create mask: ~(1 << k)",
                 "AND with n"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=15, k=1",
+                "expectedOutput": "13",
+                "explanation": "1111→1101"
+            },
+            {
+                "input": "n=8, k=3",
+                "expectedOutput": "0",
+                "explanation": "1000→0000"
+            },
+            {
+                "input": "n=10, k=0",
+                "expectedOutput": "10",
+                "explanation": "Already 0 at k=0"
+            },
+            {
+                "input": "n=7, k=2",
+                "expectedOutput": "3",
+                "explanation": "111→011"
+            }
+        ]
     },
     {
         "id": "bit8",
@@ -144,13 +291,34 @@
         "solution": "#include <iostream>\nusing namespace std;\nbool checkBit(int n, int k) { return (n >> k) & 1; }\nint main() { cout<<checkBit(13,2); return 0; }",
         "explanation": {
             "approach": "Shift right k positions, check last bit.",
-            "analogy": "13=1101, bit 2 is 1",
             "steps": [
                 "Shift n right by k",
                 "AND with 1"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=13, k=2",
+                "expectedOutput": "1",
+                "explanation": "1101, bit 2=1"
+            },
+            {
+                "input": "n=13, k=1",
+                "expectedOutput": "0",
+                "explanation": "1101, bit 1=0"
+            },
+            {
+                "input": "n=8, k=3",
+                "expectedOutput": "1",
+                "explanation": "1000, bit 3=1"
+            },
+            {
+                "input": "n=0, k=0",
+                "expectedOutput": "0",
+                "explanation": "No bits set"
+            }
+        ]
     },
     {
         "id": "bit9",
@@ -162,15 +330,36 @@
         "expectedOutput": "10 5",
         "solution": "#include <iostream>\nusing namespace std;\nvoid swap(int &a, int &b) { a = a ^ b; b = a ^ b; a = a ^ b; }\nint main() { int a=5, b=10; swap(a,b); cout<<a<<\" \"<<b; return 0; }",
         "explanation": {
-            "approach": "XOR trick: a^=b, b^=a, a^=b",
-            "analogy": "Magic math swap without extra variable!",
+            "approach": "XOR trick swaps without temp variable.",
             "steps": [
-                "a = a XOR b",
-                "b = a XOR b (now b = original a)",
-                "a = a XOR b"
+                "a ^= b",
+                "b ^= a",
+                "a ^= b"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "a=5, b=10",
+                "expectedOutput": "10 5",
+                "explanation": "Values swapped"
+            },
+            {
+                "input": "a=0, b=100",
+                "expectedOutput": "100 0",
+                "explanation": "Works with 0"
+            },
+            {
+                "input": "a=7, b=7",
+                "expectedOutput": "7 7",
+                "explanation": "Same values stay same"
+            },
+            {
+                "input": "a=1, b=2",
+                "expectedOutput": "2 1",
+                "explanation": "Simple swap"
+            }
+        ]
     },
     {
         "id": "bit10",
@@ -183,14 +372,34 @@
         "solution": "#include <iostream>\nusing namespace std;\nint singleNumber(int a[], int n) { int r = 0; for(int i = 0; i < n; i++) r ^= a[i]; return r; }\nint main() { int a[]={2,1,4,5,2,4,1}; cout<<singleNumber(a,7); return 0; }",
         "explanation": {
             "approach": "XOR all: pairs cancel, single remains.",
-            "analogy": "a^a=0, so duplicates vanish, unique stays.",
             "steps": [
                 "XOR all elements",
-                "Pairs cancel out",
-                "Unique number remains"
+                "Pairs cancel out"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[2,1,4,5,2,4,1]",
+                "expectedOutput": "5",
+                "explanation": "5 appears once"
+            },
+            {
+                "input": "[1,1,2]",
+                "expectedOutput": "2",
+                "explanation": "2 is unique"
+            },
+            {
+                "input": "[7]",
+                "expectedOutput": "7",
+                "explanation": "Single element"
+            },
+            {
+                "input": "[3,3,7,7,9]",
+                "expectedOutput": "9",
+                "explanation": "9 is unique"
+            }
+        ]
     },
     {
         "id": "bit11",
@@ -203,13 +412,34 @@
         "solution": "#include <iostream>\nusing namespace std;\nint rightmostSetBit(int n) { int pos = 0; while((n & 1) == 0) { n >>= 1; pos++; } return pos; }\nint main() { cout<<rightmostSetBit(12); return 0; }",
         "explanation": {
             "approach": "Shift right until last bit is 1.",
-            "analogy": "12=1100, first 1 from right is at position 2",
             "steps": [
                 "Shift until bit is 1",
                 "Count shifts"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=12",
+                "expectedOutput": "2",
+                "explanation": "1100, first 1 at pos 2"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "0",
+                "explanation": "1, first 1 at pos 0"
+            },
+            {
+                "input": "n=16",
+                "expectedOutput": "4",
+                "explanation": "10000, pos 4"
+            },
+            {
+                "input": "n=6",
+                "expectedOutput": "1",
+                "explanation": "110, pos 1"
+            }
+        ]
     },
     {
         "id": "bit12",
@@ -222,12 +452,33 @@
         "solution": "#include <iostream>\nusing namespace std;\nint turnOffRightmost(int n) { return n & (n - 1); }\nint main() { cout<<turnOffRightmost(12); return 0; }",
         "explanation": {
             "approach": "n & (n-1) clears rightmost set bit.",
-            "analogy": "12=1100, 11=1011, AND = 1000=8",
             "steps": [
                 "n-1 flips from rightmost 1",
                 "AND removes that bit"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=12",
+                "expectedOutput": "8",
+                "explanation": "1100→1000"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "6",
+                "explanation": "111→110"
+            },
+            {
+                "input": "n=8",
+                "expectedOutput": "0",
+                "explanation": "1000→0"
+            },
+            {
+                "input": "n=15",
+                "expectedOutput": "14",
+                "explanation": "1111→1110"
+            }
+        ]
     }
 ]

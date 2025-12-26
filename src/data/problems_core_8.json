@@ -2,226 +2,405 @@
     {
         "id": "core71",
         "title": "Level Order Traversal",
-        "description": "Given the root of a binary tree, return the level order traversal (visit nodes level by level, left to right).",
+        "description": "BFS level-by-level traversal of binary tree.",
         "difficulty": "MEDIUM",
         "category": "Trees",
         "starterCode": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nvoid levelOrder(TreeNode* root) {}\nint main() { TreeNode* r = new TreeNode(3); r->left = new TreeNode(9); r->right = new TreeNode(20); levelOrder(r); return 0; }",
         "expectedOutput": "3 9 20",
-        "solution": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nvoid levelOrder(TreeNode* root) {\n    if(!root) return;\n    \n    TreeNode* queue[100];\n    int front = 0, back = 0;\n    \n    queue[back++] = root;\n    \n    while(front < back) {\n        TreeNode* node = queue[front++];\n        cout << node->val << \" \";\n        \n        if(node->left) queue[back++] = node->left;\n        if(node->right) queue[back++] = node->right;\n    }\n}\nint main() { TreeNode* r = new TreeNode(3); r->left = new TreeNode(9); r->right = new TreeNode(20); levelOrder(r); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nvoid levelOrder(TreeNode* root) {\n    if(!root) return;\n    TreeNode* queue[100];\n    int front = 0, back = 0;\n    queue[back++] = root;\n    while(front < back) {\n        TreeNode* node = queue[front++];\n        cout << node->val << \" \";\n        if(node->left) queue[back++] = node->left;\n        if(node->right) queue[back++] = node->right;\n    }\n}\nint main() { TreeNode* r = new TreeNode(3); r->left = new TreeNode(9); r->right = new TreeNode(20); levelOrder(r); return 0; }",
         "explanation": {
-            "approach": "BFS using a queue. Process nodes level by level - dequeue a node, print it, enqueue its children. Repeat until queue is empty.",
-            "analogy": "Like reading a family tree generation by generation - meet all siblings before moving to the next generation.",
+            "approach": "BFS using queue, process level by level.",
             "steps": [
-                "Create a queue, add root",
-                "While queue not empty:",
-                "  Dequeue front node",
-                "  Process node (print value)",
-                "  Enqueue left child if exists",
-                "  Enqueue right child if exists"
+                "Enqueue root",
+                "Dequeue, print, enqueue children",
+                "Repeat"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "Tree: 3->9,20",
+                "expectedOutput": "3 9 20",
+                "explanation": "Level 0: 3, Level 1: 9,20"
+            },
+            {
+                "input": "Single node",
+                "expectedOutput": "1",
+                "explanation": "Only root"
+            },
+            {
+                "input": "Empty tree",
+                "expectedOutput": "",
+                "explanation": "Nothing to traverse"
+            },
+            {
+                "input": "Full binary tree",
+                "expectedOutput": "1 2 3 4 5 6 7",
+                "explanation": "All levels"
+            }
+        ]
     },
     {
         "id": "core72",
         "title": "Validate Binary Search Tree",
-        "description": "Determine if a binary tree is a valid BST. In a BST, all left descendants must be less than the node, and all right descendants must be greater.",
+        "description": "Check if tree is valid BST (left < root < right for all nodes).",
         "difficulty": "MEDIUM",
         "category": "Trees",
         "starterCode": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nbool isValidBST(TreeNode* root) { return false; }\nint main() { TreeNode* r = new TreeNode(2); r->left = new TreeNode(1); r->right = new TreeNode(3); cout << isValidBST(r); return 0; }",
         "expectedOutput": "1",
-        "solution": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nbool validate(TreeNode* node, long minVal, long maxVal) {\n    if(!node) return true;\n    \n    if(node->val <= minVal || node->val >= maxVal) {\n        return false;\n    }\n    \n    return validate(node->left, minVal, node->val) &&\n           validate(node->right, node->val, maxVal);\n}\n\nbool isValidBST(TreeNode* root) {\n    return validate(root, LONG_MIN, LONG_MAX);\n}\nint main() { TreeNode* r = new TreeNode(2); r->left = new TreeNode(1); r->right = new TreeNode(3); cout << isValidBST(r); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nbool validate(TreeNode* node, long minVal, long maxVal) {\n    if(!node) return true;\n    if(node->val <= minVal || node->val >= maxVal) return false;\n    return validate(node->left, minVal, node->val) &&\n           validate(node->right, node->val, maxVal);\n}\nbool isValidBST(TreeNode* root) {\n    return validate(root, LONG_MIN, LONG_MAX);\n}\nint main() { TreeNode* r = new TreeNode(2); r->left = new TreeNode(1); r->right = new TreeNode(3); cout << isValidBST(r); return 0; }",
         "explanation": {
-            "approach": "Recursive validation with bounds. Each node must be within (min, max) range. When going left, update max. When going right, update min.",
-            "analogy": "Like checking an organization chart - everyone in your left team must earn less than you, everyone on your right must earn more. And these constraints flow down.",
+            "approach": "Recursively validate with min/max bounds.",
             "steps": [
-                "Start with range (-∞, +∞) for root",
-                "Each node must be strictly within its range",
-                "Left child: range becomes (min, parent_val)",
-                "Right child: range becomes (parent_val, max)",
-                "If any node violates its range, not a valid BST"
+                "Node must be within (min, max)",
+                "Update bounds when going left/right"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "Valid BST: 2->1,3",
+                "expectedOutput": "1",
+                "explanation": "1<2<3, valid"
+            },
+            {
+                "input": "Invalid: 5->1,4->3,6",
+                "expectedOutput": "0",
+                "explanation": "6>5 in left subtree"
+            },
+            {
+                "input": "Single node",
+                "expectedOutput": "1",
+                "explanation": "Always valid"
+            },
+            {
+                "input": "Equal values",
+                "expectedOutput": "0",
+                "explanation": "BST requires strict inequality"
+            }
+        ]
     },
     {
         "id": "core73",
         "title": "Construct Binary Tree from Preorder and Inorder",
-        "description": "Given preorder and inorder traversal arrays, construct and return the binary tree.",
+        "description": "Build tree from preorder and inorder traversal arrays.",
         "difficulty": "MEDIUM",
         "category": "Trees",
         "starterCode": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nTreeNode* buildTree(int pre[], int in[], int n) { return nullptr; }\nint main() { int pre[] = {3, 9, 20}; int in[] = {9, 3, 20}; TreeNode* r = buildTree(pre, in, 3); cout << r->val; return 0; }",
         "expectedOutput": "3",
-        "solution": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nint preIdx;\n\nTreeNode* build(int pre[], int in[], int inStart, int inEnd) {\n    if(inStart > inEnd) return nullptr;\n    \n    int rootVal = pre[preIdx++];\n    TreeNode* root = new TreeNode(rootVal);\n    \n    // Find root in inorder array\n    int inIdx = inStart;\n    for(int i = inStart; i <= inEnd; i++) {\n        if(in[i] == rootVal) {\n            inIdx = i;\n            break;\n        }\n    }\n    \n    // Build left and right subtrees\n    root->left = build(pre, in, inStart, inIdx - 1);\n    root->right = build(pre, in, inIdx + 1, inEnd);\n    \n    return root;\n}\n\nTreeNode* buildTree(int pre[], int in[], int n) {\n    preIdx = 0;\n    return build(pre, in, 0, n - 1);\n}\nint main() { int pre[] = {3, 9, 20}; int in[] = {9, 3, 20}; TreeNode* r = buildTree(pre, in, 3); cout << r->val; return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nint preIdx;\nTreeNode* build(int pre[], int in[], int inStart, int inEnd) {\n    if(inStart > inEnd) return nullptr;\n    int rootVal = pre[preIdx++];\n    TreeNode* root = new TreeNode(rootVal);\n    int inIdx = inStart;\n    for(int i = inStart; i <= inEnd; i++)\n        if(in[i] == rootVal) { inIdx = i; break; }\n    root->left = build(pre, in, inStart, inIdx - 1);\n    root->right = build(pre, in, inIdx + 1, inEnd);\n    return root;\n}\nTreeNode* buildTree(int pre[], int in[], int n) {\n    preIdx = 0;\n    return build(pre, in, 0, n - 1);\n}\nint main() { int pre[] = {3, 9, 20}; int in[] = {9, 3, 20}; TreeNode* r = buildTree(pre, in, 3); cout << r->val; return 0; }",
         "explanation": {
-            "approach": "Preorder gives us the root first. Find this root in inorder - everything before it is left subtree, everything after is right subtree. Recursively build both.",
-            "analogy": "Like solving a puzzle - preorder tells you who's the boss, inorder tells you who's on the left team vs right team. Repeat for each team.",
+            "approach": "Preorder gives root, inorder splits left/right subtrees.",
             "steps": [
-                "Preorder: first element is always the root",
-                "Find root in inorder array",
-                "Elements before root in inorder = left subtree",
-                "Elements after root in inorder = right subtree",
-                "Recursively build left, then right subtrees"
+                "First preorder element is root",
+                "Find in inorder to split",
+                "Recurse"
             ],
             "complexity": "Time: O(n²), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "pre=[3,9,20], in=[9,3,20]",
+                "expectedOutput": "3",
+                "explanation": "Root is 3"
+            },
+            {
+                "input": "Single element",
+                "expectedOutput": "1",
+                "explanation": "Only root"
+            },
+            {
+                "input": "Left-skewed tree",
+                "expectedOutput": "Root value",
+                "explanation": "All nodes on left"
+            },
+            {
+                "input": "Right-skewed tree",
+                "expectedOutput": "Root value",
+                "explanation": "All nodes on right"
+            }
+        ]
     },
     {
         "id": "core74",
         "title": "Kth Smallest in BST",
-        "description": "Given the root of a BST and an integer k, return the kth smallest value in the tree (1-indexed).",
+        "description": "Find kth smallest element in BST (1-indexed).",
         "difficulty": "MEDIUM",
         "category": "Trees",
         "starterCode": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nint kthSmallest(TreeNode* root, int k) { return 0; }\nint main() { TreeNode* r = new TreeNode(3); r->left = new TreeNode(1); r->right = new TreeNode(4); r->left->right = new TreeNode(2); cout << kthSmallest(r, 1); return 0; }",
         "expectedOutput": "1",
-        "solution": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nint count, result;\n\nvoid inorder(TreeNode* node, int k) {\n    if(!node || count >= k) return;\n    \n    inorder(node->left, k);\n    \n    count++;\n    if(count == k) {\n        result = node->val;\n        return;\n    }\n    \n    inorder(node->right, k);\n}\n\nint kthSmallest(TreeNode* root, int k) {\n    count = 0;\n    result = 0;\n    inorder(root, k);\n    return result;\n}\nint main() { TreeNode* r = new TreeNode(3); r->left = new TreeNode(1); r->right = new TreeNode(4); r->left->right = new TreeNode(2); cout << kthSmallest(r, 1); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nint count, result;\nvoid inorder(TreeNode* node, int k) {\n    if(!node || count >= k) return;\n    inorder(node->left, k);\n    count++;\n    if(count == k) { result = node->val; return; }\n    inorder(node->right, k);\n}\nint kthSmallest(TreeNode* root, int k) {\n    count = 0; result = 0;\n    inorder(root, k);\n    return result;\n}\nint main() { TreeNode* r = new TreeNode(3); r->left = new TreeNode(1); r->right = new TreeNode(4); r->left->right = new TreeNode(2); cout << kthSmallest(r, 1); return 0; }",
         "explanation": {
-            "approach": "Inorder traversal of BST visits nodes in ascending order. Simply count during inorder traversal and stop at k.",
-            "analogy": "Inorder of BST is like reading a sorted list - the kth element in inorder is the kth smallest.",
+            "approach": "Inorder traversal gives sorted order in BST.",
             "steps": [
-                "BST property: inorder gives sorted order",
-                "Do inorder traversal",
-                "Count each node visited",
-                "When count reaches k, that's our answer",
-                "Stop early once found"
+                "Inorder visits nodes in ascending order",
+                "Count until k"
             ],
-            "complexity": "Time: O(h + k), Space: O(h)"
-        }
+            "complexity": "Time: O(h+k), Space: O(h)"
+        },
+        "testCases": [
+            {
+                "input": "BST, k=1",
+                "expectedOutput": "1",
+                "explanation": "Smallest element"
+            },
+            {
+                "input": "BST, k=3",
+                "expectedOutput": "3",
+                "explanation": "Third smallest"
+            },
+            {
+                "input": "Single node, k=1",
+                "expectedOutput": "5",
+                "explanation": "Only element"
+            },
+            {
+                "input": "BST, k=n",
+                "expectedOutput": "Largest",
+                "explanation": "Last in inorder"
+            }
+        ]
     },
     {
         "id": "core75",
         "title": "Binary Tree Maximum Path Sum",
-        "description": "Find the maximum sum path in a binary tree. A path can start and end at any node (doesn't need to go through root). Each node is visited at most once.",
+        "description": "Find maximum sum path in tree (can start/end anywhere).",
         "difficulty": "HARD",
         "category": "Trees",
         "starterCode": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nint maxPathSum(TreeNode* root) { return 0; }\nint main() { TreeNode* r = new TreeNode(-10); r->left = new TreeNode(9); r->right = new TreeNode(20); cout << maxPathSum(r); return 0; }",
         "expectedOutput": "29",
-        "solution": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nint maxSum;\n\nint maxGain(TreeNode* node) {\n    if(!node) return 0;\n    \n    // Max gain from left/right (ignore negative paths)\n    int leftGain = max(0, maxGain(node->left));\n    int rightGain = max(0, maxGain(node->right));\n    \n    // Path through this node\n    int pathSum = node->val + leftGain + rightGain;\n    maxSum = max(maxSum, pathSum);\n    \n    // Return max single-side contribution to parent\n    return node->val + max(leftGain, rightGain);\n}\n\nint maxPathSum(TreeNode* root) {\n    maxSum = -1000000000;\n    maxGain(root);\n    return maxSum;\n}\nint main() { TreeNode* r = new TreeNode(-10); r->left = new TreeNode(9); r->right = new TreeNode(20); cout << maxPathSum(r); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nint maxSum;\nint maxGain(TreeNode* node) {\n    if(!node) return 0;\n    int leftGain = max(0, maxGain(node->left));\n    int rightGain = max(0, maxGain(node->right));\n    int pathSum = node->val + leftGain + rightGain;\n    maxSum = max(maxSum, pathSum);\n    return node->val + max(leftGain, rightGain);\n}\nint maxPathSum(TreeNode* root) {\n    maxSum = -1000000000;\n    maxGain(root);\n    return maxSum;\n}\nint main() { TreeNode* r = new TreeNode(-10); r->left = new TreeNode(9); r->right = new TreeNode(20); cout << maxPathSum(r); return 0; }",
         "explanation": {
-            "approach": "For each node, calculate the best path passing through it (left + node + right). Track global maximum. Return to parent only the best single-side path (can't fork upward).",
-            "analogy": "Like finding the most scenic mountain trail - at each peak, check the best combined view left+right. But when reporting to a higher peak, you can only take one path up.",
+            "approach": "At each node, compute path through it, track global max.",
             "steps": [
-                "At each node, calculate left and right gains (0 if negative)",
-                "Path through this node = val + leftGain + rightGain",
-                "Update global max if this path is best",
-                "Return max single-side contribution: val + max(left, right)",
-                "Why single side? Can't branch when going to parent"
+                "Ignore negative paths (use 0)",
+                "Update global max",
+                "Return single-side gain to parent"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "-10->9,20->15,7",
+                "expectedOutput": "42",
+                "explanation": "15+20+7"
+            },
+            {
+                "input": "1->2,3",
+                "expectedOutput": "6",
+                "explanation": "2+1+3"
+            },
+            {
+                "input": "Single node -3",
+                "expectedOutput": "-3",
+                "explanation": "Only path"
+            },
+            {
+                "input": "All negative",
+                "expectedOutput": "Least negative",
+                "explanation": "Must include one node"
+            }
+        ]
     },
     {
         "id": "core76",
         "title": "Serialize and Deserialize Binary Tree",
-        "description": "Design an algorithm to serialize a binary tree to a string and deserialize it back to a tree.",
+        "description": "Convert tree to string and back.",
         "difficulty": "HARD",
         "category": "Trees",
         "starterCode": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nvoid serialize(TreeNode* root) {}\nint main() { TreeNode* r = new TreeNode(1); r->left = new TreeNode(2); r->right = new TreeNode(3); serialize(r); return 0; }",
         "expectedOutput": "1 2 # # 3 # #",
-        "solution": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nvoid serialize(TreeNode* root) {\n    if(!root) {\n        cout << \"# \";\n        return;\n    }\n    \n    cout << root->val << \" \";\n    serialize(root->left);\n    serialize(root->right);\n}\nint main() { TreeNode* r = new TreeNode(1); r->left = new TreeNode(2); r->right = new TreeNode(3); serialize(r); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nvoid serialize(TreeNode* root) {\n    if(!root) { cout << \"# \"; return; }\n    cout << root->val << \" \";\n    serialize(root->left);\n    serialize(root->right);\n}\nint main() { TreeNode* r = new TreeNode(1); r->left = new TreeNode(2); r->right = new TreeNode(3); serialize(r); return 0; }",
         "explanation": {
-            "approach": "Preorder traversal with null markers. Write each node's value, use '#' for null nodes. To deserialize, read in preorder and recursively build.",
-            "analogy": "Like writing directions to rebuild a Lego model - write each piece in order of assembly, with 'empty' markers for missing parts.",
+            "approach": "Preorder with null markers.",
             "steps": [
-                "Serialize:",
-                "  If null, output '#'",
-                "  Else output value, then serialize left, then right (preorder)",
-                "Deserialize:",
-                "  Read next token",
-                "  If '#', return null",
-                "  Else create node, recursively build left and right"
+                "Output value or # for null",
+                "Preorder traversal"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "Tree 1->2,3",
+                "expectedOutput": "1 2 # # 3 # #",
+                "explanation": "Preorder with nulls"
+            },
+            {
+                "input": "Empty tree",
+                "expectedOutput": "#",
+                "explanation": "Just null marker"
+            },
+            {
+                "input": "Single node",
+                "expectedOutput": "1 # #",
+                "explanation": "Root with null children"
+            },
+            {
+                "input": "Left-only tree",
+                "expectedOutput": "1 2 3 # # # #",
+                "explanation": "Chain left"
+            }
+        ]
     },
     {
         "id": "core77",
         "title": "Word Ladder",
-        "description": "Given two words and a dictionary, find the length of the shortest transformation sequence from beginWord to endWord, changing only one letter at a time. Each intermediate word must be in the dictionary.",
+        "description": "Shortest transformation from beginWord to endWord, changing one letter at a time.",
         "difficulty": "HARD",
         "category": "BFS",
         "starterCode": "#include <iostream>\nusing namespace std;\nint ladderLength(char beginWord[], char endWord[], char* wordList[], int n) { return 0; }\nint main() { char* words[] = {\"hot\", \"dot\", \"dog\", \"lot\", \"log\", \"cog\"}; cout << ladderLength(\"hit\", \"cog\", words, 6); return 0; }",
         "expectedOutput": "5",
-        "solution": "#include <iostream>\nusing namespace std;\nbool differs(char a[], char b[]) {\n    int diff = 0;\n    for(int i = 0; a[i] && b[i]; i++) {\n        if(a[i] != b[i]) diff++;\n    }\n    return diff == 1;\n}\n\nbool equals(char a[], char b[]) {\n    for(int i = 0; a[i] || b[i]; i++) {\n        if(a[i] != b[i]) return false;\n    }\n    return true;\n}\n\nint ladderLength(char beginWord[], char endWord[], char* wordList[], int n) {\n    char* queue[100];\n    int dist[100] = {};\n    bool visited[100] = {};\n    int front = 0, back = 0;\n    \n    queue[back] = beginWord;\n    dist[back++] = 1;\n    \n    while(front < back) {\n        char* curr = queue[front];\n        int d = dist[front++];\n        \n        if(equals(curr, endWord)) return d;\n        \n        for(int i = 0; i < n; i++) {\n            if(!visited[i] && differs(curr, wordList[i])) {\n                visited[i] = true;\n                queue[back] = wordList[i];\n                dist[back++] = d + 1;\n            }\n        }\n    }\n    return 0;\n}\nint main() { char* words[] = {\"hot\", \"dot\", \"dog\", \"lot\", \"log\", \"cog\"}; cout << ladderLength(\"hit\", \"cog\", words, 6); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nbool differs(char a[], char b[]) {\n    int diff = 0;\n    for(int i = 0; a[i] && b[i]; i++)\n        if(a[i] != b[i]) diff++;\n    return diff == 1;\n}\nbool equals(char a[], char b[]) {\n    for(int i = 0; a[i] || b[i]; i++)\n        if(a[i] != b[i]) return false;\n    return true;\n}\nint ladderLength(char beginWord[], char endWord[], char* wordList[], int n) {\n    char* queue[100]; int dist[100] = {}; bool visited[100] = {};\n    int front = 0, back = 0;\n    queue[back] = beginWord; dist[back++] = 1;\n    while(front < back) {\n        char* curr = queue[front]; int d = dist[front++];\n        if(equals(curr, endWord)) return d;\n        for(int i = 0; i < n; i++)\n            if(!visited[i] && differs(curr, wordList[i])) {\n                visited[i] = true;\n                queue[back] = wordList[i]; dist[back++] = d + 1;\n            }\n    }\n    return 0;\n}\nint main() { char* words[] = {\"hot\", \"dot\", \"dog\", \"lot\", \"log\", \"cog\"}; cout << ladderLength(\"hit\", \"cog\", words, 6); return 0; }",
         "explanation": {
-            "approach": "BFS where each node is a word and edges connect words that differ by exactly one letter. BFS gives the shortest path.",
-            "analogy": "Like finding the shortest route through a word maze - from each word, you can step to any word that differs by one letter.",
+            "approach": "BFS on word graph, edges connect words differing by one letter.",
             "steps": [
-                "Start BFS from beginWord",
-                "Queue stores (word, distance)",
-                "For each word, find all neighbors (differ by 1 letter)",
-                "Add unvisited neighbors to queue",
-                "When endWord found, return distance",
-                "If queue empties, return 0 (no path)"
+                "BFS from beginWord",
+                "Find words differing by 1 letter",
+                "Return distance when endWord found"
             ],
-            "complexity": "Time: O(n² × L), Space: O(n)"
-        }
+            "complexity": "Time: O(n²×L), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "hit->cog",
+                "expectedOutput": "5",
+                "explanation": "hit->hot->dot->dog->cog"
+            },
+            {
+                "input": "hit->cog, no cog in list",
+                "expectedOutput": "0",
+                "explanation": "No path"
+            },
+            {
+                "input": "Same start and end",
+                "expectedOutput": "1",
+                "explanation": "Already there"
+            },
+            {
+                "input": "Direct connection",
+                "expectedOutput": "2",
+                "explanation": "One step"
+            }
+        ]
     },
     {
         "id": "core78",
         "title": "Number of Islands",
-        "description": "Given a 2D grid of '1's (land) and '0's (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.",
+        "description": "Count connected components of '1's (land) in 2D grid.",
         "difficulty": "MEDIUM",
         "category": "DFS",
         "starterCode": "#include <iostream>\nusing namespace std;\nint numIslands(char grid[][5], int m, int n) { return 0; }\nint main() { char g[][5] = {{\"11110\"}, {\"11010\"}, {\"11000\"}, {\"00000\"}}; cout << numIslands(g, 4, 5); return 0; }",
         "expectedOutput": "1",
-        "solution": "#include <iostream>\nusing namespace std;\nvoid dfs(char grid[][5], int m, int n, int i, int j) {\n    if(i < 0 || i >= m || j < 0 || j >= n || grid[i][j] != '1') return;\n    \n    grid[i][j] = '0';  // Mark as visited\n    \n    dfs(grid, m, n, i + 1, j);  // Down\n    dfs(grid, m, n, i - 1, j);  // Up\n    dfs(grid, m, n, i, j + 1);  // Right\n    dfs(grid, m, n, i, j - 1);  // Left\n}\n\nint numIslands(char grid[][5], int m, int n) {\n    int count = 0;\n    \n    for(int i = 0; i < m; i++) {\n        for(int j = 0; j < n; j++) {\n            if(grid[i][j] == '1') {\n                count++;\n                dfs(grid, m, n, i, j);  // Sink this island\n            }\n        }\n    }\n    return count;\n}\nint main() { char g[][5] = {{\"11110\"}, {\"11010\"}, {\"11000\"}, {\"00000\"}}; cout << numIslands(g, 4, 5); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid dfs(char grid[][5], int m, int n, int i, int j) {\n    if(i < 0 || i >= m || j < 0 || j >= n || grid[i][j] != '1') return;\n    grid[i][j] = '0';\n    dfs(grid, m, n, i+1, j); dfs(grid, m, n, i-1, j);\n    dfs(grid, m, n, i, j+1); dfs(grid, m, n, i, j-1);\n}\nint numIslands(char grid[][5], int m, int n) {\n    int count = 0;\n    for(int i = 0; i < m; i++)\n        for(int j = 0; j < n; j++)\n            if(grid[i][j] == '1') { count++; dfs(grid, m, n, i, j); }\n    return count;\n}\nint main() { char g[][5] = {{\"11110\"}, {\"11010\"}, {\"11000\"}, {\"00000\"}}; cout << numIslands(g, 4, 5); return 0; }",
         "explanation": {
-            "approach": "Scan the grid. When you find land ('1'), increment island count, then DFS to 'sink' the entire island (mark all connected land as visited).",
-            "analogy": "Like counting puddles - when you find water, count it and absorb the whole puddle. Each new puddle you find is a new count.",
+            "approach": "DFS to sink each island when found.",
             "steps": [
-                "Scan grid cell by cell",
-                "When '1' found: found new island, count++",
-                "DFS from this cell to mark all connected '1's as visited ('0')",
-                "This ensures we don't count same island twice",
-                "Continue scanning for more islands"
+                "Find '1'",
+                "Count++, DFS to mark all connected as visited"
             ],
-            "complexity": "Time: O(m × n), Space: O(m × n) for recursion"
-        }
+            "complexity": "Time: O(m×n), Space: O(m×n)"
+        },
+        "testCases": [
+            {
+                "input": "One large island",
+                "expectedOutput": "1",
+                "explanation": "All connected"
+            },
+            {
+                "input": "3 separate islands",
+                "expectedOutput": "3",
+                "explanation": "Three components"
+            },
+            {
+                "input": "All water",
+                "expectedOutput": "0",
+                "explanation": "No land"
+            },
+            {
+                "input": "Diagonal doesn't connect",
+                "expectedOutput": "4",
+                "explanation": "Corners are separate"
+            }
+        ]
     },
     {
         "id": "core79",
         "title": "Course Schedule",
-        "description": "There are n courses labeled 0 to n-1. Some courses have prerequisites. Given the total and a list of prerequisites, determine if it's possible to finish all courses (no circular dependencies).",
+        "description": "Check if all courses can be completed (no circular dependencies).",
         "difficulty": "MEDIUM",
         "category": "Graph",
         "starterCode": "#include <iostream>\nusing namespace std;\nbool canFinish(int numCourses, int prereq[][2], int n) { return false; }\nint main() { int p[][2] = {{1, 0}}; cout << canFinish(2, p, 1); return 0; }",
         "expectedOutput": "1",
-        "solution": "#include <iostream>\nusing namespace std;\nint adj[10][10], adjSize[10] = {};\nint state[10];  // 0=unvisited, 1=visiting, 2=visited\n\nbool hasCycle(int node) {\n    if(state[node] == 1) return true;   // Currently visiting = cycle!\n    if(state[node] == 2) return false;  // Already processed\n    \n    state[node] = 1;  // Mark as visiting\n    \n    for(int i = 0; i < adjSize[node]; i++) {\n        if(hasCycle(adj[node][i])) return true;\n    }\n    \n    state[node] = 2;  // Done visiting\n    return false;\n}\n\nbool canFinish(int numCourses, int prereq[][2], int n) {\n    // Build adjacency list\n    for(int i = 0; i < numCourses; i++) adjSize[i] = 0;\n    for(int i = 0; i < n; i++) {\n        int a = prereq[i][0], b = prereq[i][1];  // b -> a\n        adj[b][adjSize[b]++] = a;\n    }\n    \n    for(int i = 0; i < numCourses; i++) state[i] = 0;\n    \n    for(int i = 0; i < numCourses; i++) {\n        if(hasCycle(i)) return false;\n    }\n    return true;\n}\nint main() { int p[][2] = {{1, 0}}; cout << canFinish(2, p, 1); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nint adj[10][10], adjSize[10] = {};\nint state[10];\nbool hasCycle(int node) {\n    if(state[node] == 1) return true;\n    if(state[node] == 2) return false;\n    state[node] = 1;\n    for(int i = 0; i < adjSize[node]; i++)\n        if(hasCycle(adj[node][i])) return true;\n    state[node] = 2;\n    return false;\n}\nbool canFinish(int numCourses, int prereq[][2], int n) {\n    for(int i = 0; i < numCourses; i++) adjSize[i] = 0;\n    for(int i = 0; i < n; i++) {\n        int a = prereq[i][0], b = prereq[i][1];\n        adj[b][adjSize[b]++] = a;\n    }\n    for(int i = 0; i < numCourses; i++) state[i] = 0;\n    for(int i = 0; i < numCourses; i++)\n        if(hasCycle(i)) return false;\n    return true;\n}\nint main() { int p[][2] = {{1, 0}}; cout << canFinish(2, p, 1); return 0; }",
         "explanation": {
-            "approach": "Detect cycle in directed graph using DFS. Use 3 states: unvisited, currently visiting, visited. If we visit a node that's currently being visited, we found a cycle.",
-            "analogy": "Like checking if a course catalog has impossible requirements - if taking Course A requires B, B requires C, and C requires A, it's impossible!",
+            "approach": "Detect cycle in directed graph using DFS with 3 states.",
             "steps": [
-                "Build directed graph: prerequisite → course",
-                "DFS with 3 states for each node",
-                "0 = not visited, 1 = in current path, 2 = fully processed",
-                "If we encounter a node with state 1: cycle detected!",
-                "If no cycles found, can complete all courses"
+                "0=unvisited, 1=visiting, 2=done",
+                "If hit node with state=1, cycle"
             ],
-            "complexity": "Time: O(V + E), Space: O(V)"
-        }
+            "complexity": "Time: O(V+E), Space: O(V)"
+        },
+        "testCases": [
+            {
+                "input": "2 courses, 1->0",
+                "expectedOutput": "1",
+                "explanation": "Take 0 then 1"
+            },
+            {
+                "input": "Cycle: 0->1->0",
+                "expectedOutput": "0",
+                "explanation": "Impossible"
+            },
+            {
+                "input": "No prerequisites",
+                "expectedOutput": "1",
+                "explanation": "All independent"
+            },
+            {
+                "input": "Chain: 0->1->2->3",
+                "expectedOutput": "1",
+                "explanation": "Valid order exists"
+            }
+        ]
     },
     {
         "id": "core80",
         "title": "Clone Graph",
-        "description": "Given a reference of a node in a connected undirected graph, return a deep copy (clone) of the graph. Each node contains a value and a list of neighbors.",
+        "description": "Deep copy an undirected graph.",
         "difficulty": "MEDIUM",
         "category": "Graph",
         "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* adj[10]; int n; Node(): val(0), n(0) {} Node(int v): val(v), n(0) {} };\nNode* cloneGraph(Node* node) { return nullptr; }\nint main() { Node* n = new Node(1); cout << \"Clone Graph\"; return 0; }",
         "expectedOutput": "Clone Graph",
-        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* adj[10]; int n; Node(): val(0), n(0) {} Node(int v): val(v), n(0) {} };\nNode* cloned[101] = {};  // Map original node value to cloned node\n\nNode* cloneGraph(Node* node) {\n    if(!node) return nullptr;\n    \n    if(cloned[node->val]) {\n        return cloned[node->val];  // Already cloned\n    }\n    \n    // Create clone\n    Node* copy = new Node(node->val);\n    cloned[node->val] = copy;\n    \n    // Clone neighbors\n    for(int i = 0; i < node->n; i++) {\n        copy->adj[copy->n++] = cloneGraph(node->adj[i]);\n    }\n    \n    return copy;\n}\nint main() { Node* n = new Node(1); cout << \"Clone Graph\"; return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* adj[10]; int n; Node(): val(0), n(0) {} Node(int v): val(v), n(0) {} };\nNode* cloned[101] = {};\nNode* cloneGraph(Node* node) {\n    if(!node) return nullptr;\n    if(cloned[node->val]) return cloned[node->val];\n    Node* copy = new Node(node->val);\n    cloned[node->val] = copy;\n    for(int i = 0; i < node->n; i++)\n        copy->adj[copy->n++] = cloneGraph(node->adj[i]);\n    return copy;\n}\nint main() { Node* n = new Node(1); cout << \"Clone Graph\"; return 0; }",
         "explanation": {
-            "approach": "DFS/BFS with a hash map to track original→clone mapping. When visiting a node, create its clone. Recursively clone neighbors, using map to avoid infinite loops.",
-            "analogy": "Like photocopying a social network - copy each person, and for their friends, either point to existing copies or create new ones.",
+            "approach": "DFS with hash map to track original→clone.",
             "steps": [
-                "Create a map: original node → cloned node",
-                "DFS from starting node",
-                "If already cloned (in map), return the clone",
-                "Create clone, add to map",
-                "Recursively clone each neighbor",
-                "Connect clone to cloned neighbors"
+                "If already cloned, return clone",
+                "Create clone, recurse on neighbors"
             ],
-            "complexity": "Time: O(V + E), Space: O(V)"
-        }
+            "complexity": "Time: O(V+E), Space: O(V)"
+        },
+        "testCases": [
+            {
+                "input": "4-node cycle graph",
+                "expectedOutput": "Cloned graph",
+                "explanation": "Deep copy with same structure"
+            },
+            {
+                "input": "Single node",
+                "expectedOutput": "Single node copy",
+                "explanation": "Clone 1 node"
+            },
+            {
+                "input": "Empty graph",
+                "expectedOutput": "null",
+                "explanation": "Nothing to clone"
+            },
+            {
+                "input": "Complete graph K4",
+                "expectedOutput": "Cloned K4",
+                "explanation": "All connections preserved"
+            }
+        ]
     }
 ]

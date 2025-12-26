@@ -10,14 +10,35 @@
         "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* adj[10]; int sz; Node(int x):v(x),sz(0){} };\nNode* visited[101]={};\nNode* cloneGraph(Node* n) { if(!n) return 0; if(visited[n->v]) return visited[n->v]; Node* c=new Node(n->v); visited[n->v]=c; for(int i=0;i<n->sz;i++) c->adj[c->sz++]=cloneGraph(n->adj[i]); return c; }\nint main() { cout<<\"Graph cloned\"; return 0; }",
         "explanation": {
             "approach": "DFS with visited map.",
-            "analogy": "Clone each node once.",
             "steps": [
                 "Check if already cloned",
                 "Create clone",
                 "Recurse on neighbors"
             ],
             "complexity": "Time: O(V+E), Space: O(V)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "adjList = [[2,4],[1,3],[2,4],[1,3]]",
+                "expectedOutput": "Graph cloned",
+                "explanation": "4-node graph cloned successfully"
+            },
+            {
+                "input": "adjList = [[]]",
+                "expectedOutput": "Graph cloned",
+                "explanation": "Single node with no neighbors"
+            },
+            {
+                "input": "adjList = []",
+                "expectedOutput": "null",
+                "explanation": "Empty graph returns null"
+            },
+            {
+                "input": "adjList = [[2],[1]]",
+                "expectedOutput": "Graph cloned",
+                "explanation": "Two connected nodes"
+            }
+        ]
     },
     {
         "id": "med42",
@@ -30,14 +51,35 @@
         "solution": "#include <iostream>\nusing namespace std;\nbool pac[10][10],atl[10][10];\nvoid dfs(int h[][5], int r, int c, int i, int j, bool vis[][10], int prev) { if(i<0||i>=r||j<0||j>=c||vis[i][j]||h[i][j]<prev) return; vis[i][j]=true; dfs(h,r,c,i+1,j,vis,h[i][j]); dfs(h,r,c,i-1,j,vis,h[i][j]); dfs(h,r,c,i,j+1,vis,h[i][j]); dfs(h,r,c,i,j-1,vis,h[i][j]); }\nvoid pacificAtlantic(int h[][5], int r, int c) { for(int i=0;i<r;i++) for(int j=0;j<c;j++) { pac[i][j]=atl[i][j]=false; } for(int i=0;i<r;i++) { dfs(h,r,c,i,0,pac,0); dfs(h,r,c,i,c-1,atl,0); } for(int j=0;j<c;j++) { dfs(h,r,c,0,j,pac,0); dfs(h,r,c,r-1,j,atl,0); } for(int i=0;i<r;i++) for(int j=0;j<c;j++) if(pac[i][j]&&atl[i][j]) cout<<i<<\",\"<<j<<\" \"; }\nint main() { int h[][5]={{1,2,2,3,5},{3,2,3,4,4},{2,4,5,3,1},{6,7,1,4,5},{5,1,1,2,4}}; pacificAtlantic(h,5,5); return 0; }",
         "explanation": {
             "approach": "DFS from ocean edges inward.",
-            "analogy": "Reverse flow from oceans.",
             "steps": [
                 "DFS from Pacific edges",
                 "DFS from Atlantic edges",
                 "Find intersection"
             ],
             "complexity": "Time: O(rc), Space: O(rc)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "5x5 height map",
+                "expectedOutput": "0,4 1,3 1,4 2,2 3,0 3,1 4,0",
+                "explanation": "7 cells can flow to both oceans"
+            },
+            {
+                "input": "1x1 grid [[1]]",
+                "expectedOutput": "0,0",
+                "explanation": "Single cell flows to both"
+            },
+            {
+                "input": "2x2 equal heights",
+                "expectedOutput": "0,0 0,1 1,0 1,1",
+                "explanation": "All cells at same height"
+            },
+            {
+                "input": "1x3 increasing [1,2,3]",
+                "expectedOutput": "0,2",
+                "explanation": "Only rightmost flows to both"
+            }
+        ]
     },
     {
         "id": "med43",
@@ -50,14 +92,35 @@
         "solution": "#include <iostream>\nusing namespace std;\nint orangesRotting(int g[][3], int r, int c) { int qr[100],qc[100],f=0,re=0,fresh=0; for(int i=0;i<r;i++) for(int j=0;j<c;j++) { if(g[i][j]==2) { qr[re]=i; qc[re++]=j; } else if(g[i][j]==1) fresh++; } if(fresh==0) return 0; int dx[]={1,-1,0,0},dy[]={0,0,1,-1},t=-1; while(f<re) { int sz=re-f; t++; for(int q=0;q<sz;q++) { int i=qr[f],j=qc[f++]; for(int d=0;d<4;d++) { int ni=i+dx[d],nj=j+dy[d]; if(ni>=0&&ni<r&&nj>=0&&nj<c&&g[ni][nj]==1) { g[ni][nj]=2; fresh--; qr[re]=ni; qc[re++]=nj; } } } } return fresh==0?t:-1; }\nint main() { int g[][3]={{2,1,1},{1,1,0},{0,1,1}}; cout<<orangesRotting(g,3,3); return 0; }",
         "explanation": {
             "approach": "Multi-source BFS.",
-            "analogy": "Rot spreads level by level.",
             "steps": [
                 "Add all rotten to queue",
                 "BFS, count levels",
                 "Check if all fresh rotted"
             ],
             "complexity": "Time: O(rc), Space: O(rc)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "grid=[[2,1,1],[1,1,0],[0,1,1]]",
+                "expectedOutput": "4",
+                "explanation": "4 minutes for rot to spread to all"
+            },
+            {
+                "input": "grid=[[2,1,1],[0,1,1],[1,0,1]]",
+                "expectedOutput": "-1",
+                "explanation": "Bottom-left isolated, impossible"
+            },
+            {
+                "input": "grid=[[0,2]]",
+                "expectedOutput": "0",
+                "explanation": "No fresh oranges"
+            },
+            {
+                "input": "grid=[[1]]",
+                "expectedOutput": "-1",
+                "explanation": "No rotten to start rotation"
+            }
+        ]
     },
     {
         "id": "med44",
@@ -70,14 +133,35 @@
         "solution": "#include <iostream>\nusing namespace std;\nbool diff1(char a[], char b[]) { int c=0; for(int i=0;a[i];i++) if(a[i]!=b[i]) c++; return c==1; }\nint ladderLength(char begin[], char end[], char words[][10], int n) { char q[100][10]; int f=0,r=0; bool vis[100]={}; int i=0; while(begin[i]) { q[r][i]=begin[i]; i++; } q[r][i]=0; r++; int lv=1; while(f<r) { int sz=r-f; for(int s=0;s<sz;s++) { char* cur=q[f++]; for(int w=0;w<n;w++) { if(!vis[w] && diff1(cur,words[w])) { bool eq=true; for(int k=0;end[k];k++) if(end[k]!=words[w][k]) eq=false; if(eq) return lv+1; vis[w]=true; int j=0; while(words[w][j]) { q[r][j]=words[w][j]; j++; } q[r][j]=0; r++; } } } lv++; } return 0; }\nint main() { char words[][10]={\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"}; cout<<ladderLength(\"hit\",\"cog\",words,6); return 0; }",
         "explanation": {
             "approach": "BFS to find shortest path.",
-            "analogy": "Transform one letter at a time.",
             "steps": [
                 "BFS from begin word",
                 "Try all 1-letter changes",
                 "Count levels"
             ],
             "complexity": "Time: O(n × m × 26), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "hit→cog via [hot,dot,dog,lot,log,cog]",
+                "expectedOutput": "5",
+                "explanation": "hit→hot→dot→dog→cog"
+            },
+            {
+                "input": "hit→cog via [hot,dot,dog,lot,log]",
+                "expectedOutput": "0",
+                "explanation": "cog not in wordList"
+            },
+            {
+                "input": "a→c via [a,b,c]",
+                "expectedOutput": "2",
+                "explanation": "a→b→c or a→c directly"
+            },
+            {
+                "input": "hot→dog via [hot,dog]",
+                "expectedOutput": "0",
+                "explanation": "No valid single-letter path"
+            }
+        ]
     },
     {
         "id": "med45",
@@ -90,13 +174,34 @@
         "solution": "#include <iostream>\nusing namespace std;\nint coinChange(int coins[], int n, int amt) { int dp[amt+1]; for(int i=0;i<=amt;i++) dp[i]=1e9; dp[0]=0; for(int i=1;i<=amt;i++) for(int j=0;j<n;j++) if(coins[j]<=i && dp[i-coins[j]]!=1e9) dp[i]=min(dp[i],dp[i-coins[j]]+1); return dp[amt]>=1e9?-1:dp[amt]; }\nint main() { int coins[]={1,2,5}; cout<<coinChange(coins,3,11); return 0; }",
         "explanation": {
             "approach": "DP - min coins for each amount.",
-            "analogy": "Build up from 0.",
             "steps": [
                 "dp[i] = min coins for i",
                 "Try each coin"
             ],
             "complexity": "Time: O(amt × n), Space: O(amt)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "coins=[1,2,5], amount=11",
+                "expectedOutput": "3",
+                "explanation": "11 = 5+5+1"
+            },
+            {
+                "input": "coins=[2], amount=3",
+                "expectedOutput": "-1",
+                "explanation": "Cannot make 3 with only 2s"
+            },
+            {
+                "input": "coins=[1], amount=0",
+                "expectedOutput": "0",
+                "explanation": "Zero amount needs 0 coins"
+            },
+            {
+                "input": "coins=[1,2,5], amount=5",
+                "expectedOutput": "1",
+                "explanation": "Single 5 coin"
+            }
+        ]
     },
     {
         "id": "med46",
@@ -109,13 +214,34 @@
         "solution": "#include <iostream>\nusing namespace std;\nint lengthOfLIS(int a[], int n) { int dp[n]; for(int i=0;i<n;i++) dp[i]=1; for(int i=1;i<n;i++) for(int j=0;j<i;j++) if(a[j]<a[i]) dp[i]=max(dp[i],dp[j]+1); int mx=0; for(int i=0;i<n;i++) mx=max(mx,dp[i]); return mx; }\nint main() { int a[]={10,9,2,5,3,7,101,18}; cout<<lengthOfLIS(a,8); return 0; }",
         "explanation": {
             "approach": "DP - LIS ending at each index.",
-            "analogy": "Extend previous subsequences.",
             "steps": [
                 "dp[i] = LIS ending at i",
                 "Check all j < i"
             ],
             "complexity": "Time: O(n²), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "nums=[10,9,2,5,3,7,101,18]",
+                "expectedOutput": "4",
+                "explanation": "LIS: 2,3,7,101 or 2,5,7,101"
+            },
+            {
+                "input": "nums=[0,1,0,3,2,3]",
+                "expectedOutput": "4",
+                "explanation": "LIS: 0,1,2,3"
+            },
+            {
+                "input": "nums=[7,7,7,7,7]",
+                "expectedOutput": "1",
+                "explanation": "All same, LIS is 1"
+            },
+            {
+                "input": "nums=[1,3,6,7,9,4,10,5,6]",
+                "expectedOutput": "6",
+                "explanation": "LIS: 1,3,6,7,9,10"
+            }
+        ]
     },
     {
         "id": "med47",
@@ -128,13 +254,34 @@
         "solution": "#include <iostream>\nusing namespace std;\nbool eq(char a[], int start, int end, char b[]) { int i=0; for(int j=start;j<end;j++,i++) if(a[j]!=b[i]) return false; return !b[i]; }\nbool wordBreak(char s[], char dict[][10], int n) { int len=0; while(s[len]) len++; bool dp[len+1]={}; dp[0]=true; for(int i=1;i<=len;i++) for(int j=0;j<i;j++) if(dp[j]) for(int k=0;k<n;k++) if(eq(s,j,i,dict[k])) { dp[i]=true; break; } return dp[len]; }\nint main() { char dict[][10]={\"apple\",\"pen\"}; cout<<wordBreak(\"applepenapple\",dict,2); return 0; }",
         "explanation": {
             "approach": "DP - can reach each position.",
-            "analogy": "Check if prefix + dict word works.",
             "steps": [
                 "dp[i] = can segment s[0..i]",
                 "Check all j < i with dict word"
             ],
             "complexity": "Time: O(n² × m), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "s=applepenapple, dict=[apple,pen]",
+                "expectedOutput": "1",
+                "explanation": "apple+pen+apple"
+            },
+            {
+                "input": "s=catsandog, dict=[cats,dog,sand,and,cat]",
+                "expectedOutput": "0",
+                "explanation": "Cannot segment completely"
+            },
+            {
+                "input": "s=leetcode, dict=[leet,code]",
+                "expectedOutput": "1",
+                "explanation": "leet+code"
+            },
+            {
+                "input": "s=a, dict=[a]",
+                "expectedOutput": "1",
+                "explanation": "Single char match"
+            }
+        ]
     },
     {
         "id": "med48",
@@ -147,12 +294,33 @@
         "solution": "#include <iostream>\nusing namespace std;\nint rob(int a[], int n) { if(n==0) return 0; if(n==1) return a[0]; int dp[n]; dp[0]=a[0]; dp[1]=max(a[0],a[1]); for(int i=2;i<n;i++) dp[i]=max(dp[i-1],dp[i-2]+a[i]); return dp[n-1]; }\nint main() { int a[]={2,7,9,3,1}; cout<<rob(a,5); return 0; }",
         "explanation": {
             "approach": "DP - max at each house.",
-            "analogy": "Rob or skip each house.",
             "steps": [
                 "dp[i] = max(skip, rob+dp[i-2])"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "nums=[2,7,9,3,1]",
+                "expectedOutput": "12",
+                "explanation": "Rob houses 0,2,4: 2+9+1=12"
+            },
+            {
+                "input": "nums=[1,2,3,1]",
+                "expectedOutput": "4",
+                "explanation": "Rob houses 0 and 2: 1+3=4"
+            },
+            {
+                "input": "nums=[2,1,1,2]",
+                "expectedOutput": "4",
+                "explanation": "Rob houses 0 and 3: 2+2=4"
+            },
+            {
+                "input": "nums=[0]",
+                "expectedOutput": "0",
+                "explanation": "Single house with 0 value"
+            }
+        ]
     },
     {
         "id": "med49",
@@ -165,13 +333,34 @@
         "solution": "#include <iostream>\nusing namespace std;\nint numDecodings(char s[]) { int n=0; while(s[n]) n++; if(n==0||s[0]=='0') return 0; int dp[n+1]={}; dp[0]=1; dp[1]=1; for(int i=2;i<=n;i++) { if(s[i-1]!='0') dp[i]=dp[i-1]; int two=(s[i-2]-'0')*10+(s[i-1]-'0'); if(two>=10&&two<=26) dp[i]+=dp[i-2]; } return dp[n]; }\nint main() { cout<<numDecodings(\"226\"); return 0; }",
         "explanation": {
             "approach": "DP - ways at each position.",
-            "analogy": "Single or pair digit decode.",
             "steps": [
                 "dp[i] = ways to decode s[0..i]",
                 "Try 1 and 2 digit decodings"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "s=226",
+                "expectedOutput": "3",
+                "explanation": "2,2,6 or 22,6 or 2,26"
+            },
+            {
+                "input": "s=12",
+                "expectedOutput": "2",
+                "explanation": "1,2 or 12"
+            },
+            {
+                "input": "s=06",
+                "expectedOutput": "0",
+                "explanation": "Leading zero invalid"
+            },
+            {
+                "input": "s=11106",
+                "expectedOutput": "2",
+                "explanation": "1,1,10,6 or 11,10,6"
+            }
+        ]
     },
     {
         "id": "med50",
@@ -184,11 +373,32 @@
         "solution": "#include <iostream>\nusing namespace std;\nint uniquePaths(int m, int n) { int dp[m][n]; for(int i=0;i<m;i++) dp[i][0]=1; for(int j=0;j<n;j++) dp[0][j]=1; for(int i=1;i<m;i++) for(int j=1;j<n;j++) dp[i][j]=dp[i-1][j]+dp[i][j-1]; return dp[m-1][n-1]; }\nint main() { cout<<uniquePaths(3,7); return 0; }",
         "explanation": {
             "approach": "DP - paths to each cell.",
-            "analogy": "Sum of paths from top and left.",
             "steps": [
                 "dp[i][j] = dp[i-1][j] + dp[i][j-1]"
             ],
             "complexity": "Time: O(mn), Space: O(mn)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "m=3, n=7",
+                "expectedOutput": "28",
+                "explanation": "28 unique paths in 3x7 grid"
+            },
+            {
+                "input": "m=3, n=2",
+                "expectedOutput": "3",
+                "explanation": "3 paths in 3x2 grid"
+            },
+            {
+                "input": "m=1, n=1",
+                "expectedOutput": "1",
+                "explanation": "Only one cell, one path"
+            },
+            {
+                "input": "m=5, n=5",
+                "expectedOutput": "70",
+                "explanation": "70 paths in 5x5 grid"
+            }
+        ]
     }
 ]

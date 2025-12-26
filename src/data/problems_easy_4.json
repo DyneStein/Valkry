@@ -7,6 +7,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid merge(int a[], int m, int b[], int n, int c[]) {}\nint main() { int a[]={1,3,5}, b[]={2,4,6}, c[6]; merge(a,3,b,3,c); for(int i=0;i<6;i++) cout<<c[i]<<\" \"; return 0; }",
         "expectedOutput": "1 2 3 4 5 6",
+        "testCases": [
+            {
+                "input": "3 3\n1 3 5\n2 4 6",
+                "expectedOutput": "1 2 3 4 5 6",
+                "explanation": "Interleaved merge"
+            },
+            {
+                "input": "3 3\n1 2 3\n4 5 6",
+                "expectedOutput": "1 2 3 4 5 6",
+                "explanation": "First array all smaller"
+            },
+            {
+                "input": "3 3\n4 5 6\n1 2 3",
+                "expectedOutput": "1 2 3 4 5 6",
+                "explanation": "Second array all smaller"
+            },
+            {
+                "input": "1 1\n1\n2",
+                "expectedOutput": "1 2",
+                "explanation": "Single elements"
+            },
+            {
+                "input": "0 3\n\n1 2 3",
+                "expectedOutput": "1 2 3",
+                "explanation": "First array empty"
+            },
+            {
+                "input": "3 0\n1 2 3\n",
+                "expectedOutput": "1 2 3",
+                "explanation": "Second array empty"
+            },
+            {
+                "input": "2 2\n1 1\n2 2",
+                "expectedOutput": "1 1 2 2",
+                "explanation": "Duplicate values"
+            },
+            {
+                "input": "3 2\n-5 -3 -1\n-4 -2",
+                "expectedOutput": "-5 -4 -3 -2 -1",
+                "explanation": "Negative numbers"
+            },
+            {
+                "input": "4 2\n1 2 3 4\n5 6",
+                "expectedOutput": "1 2 3 4 5 6",
+                "explanation": "Unequal sizes"
+            },
+            {
+                "input": "2 3\n10 30\n20 40 50",
+                "expectedOutput": "10 20 30 40 50",
+                "explanation": "Mixed merge"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid merge(int a[], int m, int b[], int n, int c[]) { int i=0,j=0,k=0; while(i<m && j<n) c[k++]=a[i]<b[j]?a[i++]:b[j++]; while(i<m) c[k++]=a[i++]; while(j<n) c[k++]=b[j++]; }\nint main() { int a[]={1,3,5}, b[]={2,4,6}, c[6]; merge(a,3,b,3,c); for(int i=0;i<6;i++) cout<<c[i]<<\" \"; return 0; }",
         "explanation": {
             "approach": "Two pointers, pick smaller.",
@@ -27,6 +79,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid intersection(int a[], int m, int b[], int n) {}\nint main() { int a[]={1,2,3,4,5}, b[]={3,4,5,6,7}; intersection(a,5,b,5); return 0; }",
         "expectedOutput": "3 4 5",
+        "testCases": [
+            {
+                "input": "5 5\n1 2 3 4 5\n3 4 5 6 7",
+                "expectedOutput": "3 4 5",
+                "explanation": "Three common elements"
+            },
+            {
+                "input": "3 3\n1 2 3\n4 5 6",
+                "expectedOutput": "",
+                "explanation": "No common elements"
+            },
+            {
+                "input": "3 3\n1 2 3\n1 2 3",
+                "expectedOutput": "1 2 3",
+                "explanation": "All same"
+            },
+            {
+                "input": "1 1\n5\n5",
+                "expectedOutput": "5",
+                "explanation": "Single common element"
+            },
+            {
+                "input": "1 1\n1\n2",
+                "expectedOutput": "",
+                "explanation": "Single no match"
+            },
+            {
+                "input": "4 3\n1 2 2 3\n2 2 4",
+                "expectedOutput": "2 2",
+                "explanation": "With duplicates"
+            },
+            {
+                "input": "5 5\n-2 -1 0 1 2\n-1 0 1",
+                "expectedOutput": "-1 0 1",
+                "explanation": "With negatives"
+            },
+            {
+                "input": "3 5\n10 20 30\n5 10 20 30 40",
+                "expectedOutput": "10 20 30",
+                "explanation": "Subset"
+            },
+            {
+                "input": "4 4\n1 3 5 7\n2 4 6 8",
+                "expectedOutput": "",
+                "explanation": "No overlap"
+            },
+            {
+                "input": "2 2\n0 0\n0 0",
+                "expectedOutput": "0 0",
+                "explanation": "All zeros"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid intersection(int a[], int m, int b[], int n) { for(int i=0;i<m;i++) for(int j=0;j<n;j++) if(a[i]==b[j]) { cout<<a[i]<<\" \"; break; } }\nint main() { int a[]={1,2,3,4,5}, b[]={3,4,5,6,7}; intersection(a,5,b,5); return 0; }",
         "explanation": {
             "approach": "Check each element in both.",
@@ -46,6 +150,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid unionArr(int a[], int m, int b[], int n) {}\nint main() { int a[]={1,2,3}, b[]={3,4,5}; unionArr(a,3,b,3); return 0; }",
         "expectedOutput": "1 2 3 4 5",
+        "testCases": [
+            {
+                "input": "3 3\n1 2 3\n3 4 5",
+                "expectedOutput": "1 2 3 4 5",
+                "explanation": "Overlapping arrays"
+            },
+            {
+                "input": "3 3\n1 2 3\n4 5 6",
+                "expectedOutput": "1 2 3 4 5 6",
+                "explanation": "No overlap"
+            },
+            {
+                "input": "3 3\n1 2 3\n1 2 3",
+                "expectedOutput": "1 2 3",
+                "explanation": "Identical arrays"
+            },
+            {
+                "input": "1 1\n5\n5",
+                "expectedOutput": "5",
+                "explanation": "Single same element"
+            },
+            {
+                "input": "1 1\n1\n2",
+                "expectedOutput": "1 2",
+                "explanation": "Single different"
+            },
+            {
+                "input": "2 3\n1 2\n2 3 4",
+                "expectedOutput": "1 2 3 4",
+                "explanation": "Partial overlap"
+            },
+            {
+                "input": "0 3\n\n1 2 3",
+                "expectedOutput": "1 2 3",
+                "explanation": "First empty"
+            },
+            {
+                "input": "3 0\n1 2 3\n",
+                "expectedOutput": "1 2 3",
+                "explanation": "Second empty"
+            },
+            {
+                "input": "4 4\n-2 -1 0 1\n0 1 2 3",
+                "expectedOutput": "-2 -1 0 1 2 3",
+                "explanation": "With negatives"
+            },
+            {
+                "input": "2 2\n5 10\n10 15",
+                "expectedOutput": "5 10 15",
+                "explanation": "Edge overlap"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid unionArr(int a[], int m, int b[], int n) { for(int i=0;i<m;i++) cout<<a[i]<<\" \"; for(int i=0;i<n;i++) { bool found=false; for(int j=0;j<m;j++) if(b[i]==a[j]) { found=true; break; } if(!found) cout<<b[i]<<\" \"; } }\nint main() { int a[]={1,2,3}, b[]={3,4,5}; unionArr(a,3,b,3); return 0; }",
         "explanation": {
             "approach": "Print a, then b elements not in a.",
@@ -65,6 +221,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid frequency(int a[], int n) {}\nint main() { int a[]={1,2,2,3,3,3,4,4,4,4}; frequency(a,10); return 0; }",
         "expectedOutput": "1:1 2:2 3:3 4:4",
+        "testCases": [
+            {
+                "input": "10\n1 2 2 3 3 3 4 4 4 4",
+                "expectedOutput": "1:1 2:2 3:3 4:4",
+                "explanation": "Increasing frequencies"
+            },
+            {
+                "input": "1\n5",
+                "expectedOutput": "5:1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "5\n3 3 3 3 3",
+                "expectedOutput": "3:5",
+                "explanation": "All same"
+            },
+            {
+                "input": "5\n1 2 3 4 5",
+                "expectedOutput": "1:1 2:1 3:1 4:1 5:1",
+                "explanation": "All unique"
+            },
+            {
+                "input": "4\n1 1 2 2",
+                "expectedOutput": "1:2 2:2",
+                "explanation": "Equal frequencies"
+            },
+            {
+                "input": "6\n5 5 5 1 1 1",
+                "expectedOutput": "5:3 1:3",
+                "explanation": "Two groups"
+            },
+            {
+                "input": "3\n0 0 0",
+                "expectedOutput": "0:3",
+                "explanation": "All zeros"
+            },
+            {
+                "input": "4\n-1 -1 -2 -2",
+                "expectedOutput": "-1:2 -2:2",
+                "explanation": "Negative numbers"
+            },
+            {
+                "input": "6\n1 2 1 2 1 2",
+                "expectedOutput": "1:3 2:3",
+                "explanation": "Alternating"
+            },
+            {
+                "input": "3\n100 200 100",
+                "expectedOutput": "100:2 200:1",
+                "explanation": "Larger values"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid frequency(int a[], int n) { int vis[n]={}; for(int i=0;i<n;i++) { if(vis[i]) continue; int c=1; for(int j=i+1;j<n;j++) if(a[i]==a[j]) { c++; vis[j]=1; } cout<<a[i]<<\":\"<<c<<\" \"; } }\nint main() { int a[]={1,2,2,3,3,3,4,4,4,4}; frequency(a,10); return 0; }",
         "explanation": {
             "approach": "Count occurrences of each.",
@@ -85,6 +293,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid rotateLeft(int a[], int n) {}\nint main() { int a[]={1,2,3,4,5}; rotateLeft(a,5); for(int i=0;i<5;i++) cout<<a[i]<<\" \"; return 0; }",
         "expectedOutput": "2 3 4 5 1",
+        "testCases": [
+            {
+                "input": "5\n1 2 3 4 5",
+                "expectedOutput": "2 3 4 5 1",
+                "explanation": "Basic left rotation"
+            },
+            {
+                "input": "1\n5",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "2\n1 2",
+                "expectedOutput": "2 1",
+                "explanation": "Two elements swap"
+            },
+            {
+                "input": "3\n1 2 3",
+                "expectedOutput": "2 3 1",
+                "explanation": "Three elements"
+            },
+            {
+                "input": "5\n5 5 5 5 5",
+                "expectedOutput": "5 5 5 5 5",
+                "explanation": "All same"
+            },
+            {
+                "input": "4\n-1 -2 -3 -4",
+                "expectedOutput": "-2 -3 -4 -1",
+                "explanation": "Negatives"
+            },
+            {
+                "input": "3\n0 1 2",
+                "expectedOutput": "1 2 0",
+                "explanation": "With zero"
+            },
+            {
+                "input": "4\n10 20 30 40",
+                "expectedOutput": "20 30 40 10",
+                "explanation": "Larger values"
+            },
+            {
+                "input": "6\n1 2 3 4 5 6",
+                "expectedOutput": "2 3 4 5 6 1",
+                "explanation": "Six elements"
+            },
+            {
+                "input": "3\n100 200 300",
+                "expectedOutput": "200 300 100",
+                "explanation": "Large numbers"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid rotateLeft(int a[], int n) { int t=a[0]; for(int i=0;i<n-1;i++) a[i]=a[i+1]; a[n-1]=t; }\nint main() { int a[]={1,2,3,4,5}; rotateLeft(a,5); for(int i=0;i<5;i++) cout<<a[i]<<\" \"; return 0; }",
         "explanation": {
             "approach": "Save first, shift left, put at end.",
@@ -105,6 +365,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid rotateRight(int a[], int n) {}\nint main() { int a[]={1,2,3,4,5}; rotateRight(a,5); for(int i=0;i<5;i++) cout<<a[i]<<\" \"; return 0; }",
         "expectedOutput": "5 1 2 3 4",
+        "testCases": [
+            {
+                "input": "5\n1 2 3 4 5",
+                "expectedOutput": "5 1 2 3 4",
+                "explanation": "Basic right rotation"
+            },
+            {
+                "input": "1\n5",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "2\n1 2",
+                "expectedOutput": "2 1",
+                "explanation": "Two elements swap"
+            },
+            {
+                "input": "3\n1 2 3",
+                "expectedOutput": "3 1 2",
+                "explanation": "Three elements"
+            },
+            {
+                "input": "5\n5 5 5 5 5",
+                "expectedOutput": "5 5 5 5 5",
+                "explanation": "All same"
+            },
+            {
+                "input": "4\n-1 -2 -3 -4",
+                "expectedOutput": "-4 -1 -2 -3",
+                "explanation": "Negatives"
+            },
+            {
+                "input": "3\n0 1 2",
+                "expectedOutput": "2 0 1",
+                "explanation": "With zero"
+            },
+            {
+                "input": "4\n10 20 30 40",
+                "expectedOutput": "40 10 20 30",
+                "explanation": "Larger values"
+            },
+            {
+                "input": "6\n1 2 3 4 5 6",
+                "expectedOutput": "6 1 2 3 4 5",
+                "explanation": "Six elements"
+            },
+            {
+                "input": "3\n100 200 300",
+                "expectedOutput": "300 100 200",
+                "explanation": "Large numbers"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid rotateRight(int a[], int n) { int t=a[n-1]; for(int i=n-1;i>0;i--) a[i]=a[i-1]; a[0]=t; }\nint main() { int a[]={1,2,3,4,5}; rotateRight(a,5); for(int i=0;i<5;i++) cout<<a[i]<<\" \"; return 0; }",
         "explanation": {
             "approach": "Save last, shift right, put at start.",
@@ -125,6 +437,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nint findPeak(int a[], int n) { return 0; }\nint main() { int a[]={1,3,20,4,1,0}; cout<<findPeak(a,6); return 0; }",
         "expectedOutput": "20",
+        "testCases": [
+            {
+                "input": "6\n1 3 20 4 1 0",
+                "expectedOutput": "20",
+                "explanation": "20 > 3 and 20 > 4"
+            },
+            {
+                "input": "1\n5",
+                "expectedOutput": "5",
+                "explanation": "Single element is peak"
+            },
+            {
+                "input": "2\n1 2",
+                "expectedOutput": "2",
+                "explanation": "Last element is peak"
+            },
+            {
+                "input": "2\n2 1",
+                "expectedOutput": "2",
+                "explanation": "First element is peak"
+            },
+            {
+                "input": "5\n1 2 3 4 5",
+                "expectedOutput": "5",
+                "explanation": "Ascending, last is peak"
+            },
+            {
+                "input": "5\n5 4 3 2 1",
+                "expectedOutput": "5",
+                "explanation": "Descending, first is peak"
+            },
+            {
+                "input": "5\n1 5 1 5 1",
+                "expectedOutput": "5",
+                "explanation": "Multiple peaks, returns first"
+            },
+            {
+                "input": "4\n10 20 15 5",
+                "expectedOutput": "20",
+                "explanation": "Peak in middle"
+            },
+            {
+                "input": "3\n1 1 1",
+                "expectedOutput": "1",
+                "explanation": "All same"
+            },
+            {
+                "input": "5\n-5 -3 -1 -2 -4",
+                "expectedOutput": "-1",
+                "explanation": "Negatives, -1 is peak"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint findPeak(int a[], int n) { for(int i=0;i<n;i++) { bool left = i==0 || a[i]>=a[i-1]; bool right = i==n-1 || a[i]>=a[i+1]; if(left && right) return a[i]; } return -1; }\nint main() { int a[]={1,3,20,4,1,0}; cout<<findPeak(a,6); return 0; }",
         "explanation": {
             "approach": "Find element >= both neighbors.",
@@ -144,6 +508,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nint findMin(int a[], int n) { return 0; }\nint main() { int a[]={3,1,4,1,5,9,2}; cout<<findMin(a,7); return 0; }",
         "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "7\n3 1 4 1 5 9 2",
+                "expectedOutput": "1",
+                "explanation": "1 is smallest"
+            },
+            {
+                "input": "1\n42",
+                "expectedOutput": "42",
+                "explanation": "Single element"
+            },
+            {
+                "input": "5\n5 5 5 5 5",
+                "expectedOutput": "5",
+                "explanation": "All same"
+            },
+            {
+                "input": "5\n1 2 3 4 5",
+                "expectedOutput": "1",
+                "explanation": "Min at start"
+            },
+            {
+                "input": "5\n5 4 3 2 1",
+                "expectedOutput": "1",
+                "explanation": "Min at end"
+            },
+            {
+                "input": "5\n2 3 1 4 5",
+                "expectedOutput": "1",
+                "explanation": "Min in middle"
+            },
+            {
+                "input": "4\n-1 -5 -2 -3",
+                "expectedOutput": "-5",
+                "explanation": "Negatives"
+            },
+            {
+                "input": "3\n0 -1 1",
+                "expectedOutput": "-1",
+                "explanation": "Around zero"
+            },
+            {
+                "input": "2\n100 50",
+                "expectedOutput": "50",
+                "explanation": "Two elements"
+            },
+            {
+                "input": "6\n10 20 5 30 40 50",
+                "expectedOutput": "5",
+                "explanation": "Min in array"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint findMin(int a[], int n) { int mn=a[0]; for(int i=1;i<n;i++) if(a[i]<mn) mn=a[i]; return mn; }\nint main() { int a[]={3,1,4,1,5,9,2}; cout<<findMin(a,7); return 0; }",
         "explanation": {
             "approach": "Track minimum while scanning.",
@@ -163,6 +579,58 @@
         "category": "Math",
         "starterCode": "#include <iostream>\nusing namespace std;\nint sumDigits(int n) { return 0; }\nint main() { cout<<sumDigits(12345); return 0; }",
         "expectedOutput": "15",
+        "testCases": [
+            {
+                "input": "12345",
+                "expectedOutput": "15",
+                "explanation": "1+2+3+4+5 = 15"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "Zero"
+            },
+            {
+                "input": "9",
+                "expectedOutput": "9",
+                "explanation": "Single digit"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "1",
+                "explanation": "1+0 = 1"
+            },
+            {
+                "input": "99",
+                "expectedOutput": "18",
+                "explanation": "9+9 = 18"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "1",
+                "explanation": "1+0+0 = 1"
+            },
+            {
+                "input": "111",
+                "expectedOutput": "3",
+                "explanation": "1+1+1 = 3"
+            },
+            {
+                "input": "999",
+                "expectedOutput": "27",
+                "explanation": "9+9+9 = 27"
+            },
+            {
+                "input": "1000000",
+                "expectedOutput": "1",
+                "explanation": "Large with zeros"
+            },
+            {
+                "input": "54321",
+                "expectedOutput": "15",
+                "explanation": "Reverse of 12345"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint sumDigits(int n) { int s=0; while(n>0) { s+=n%10; n/=10; } return s; }\nint main() { cout<<sumDigits(12345); return 0; }",
         "explanation": {
             "approach": "Extract and sum each digit.",
@@ -183,7 +651,59 @@
         "category": "Math",
         "starterCode": "#include <iostream>\nusing namespace std;\nint countDigits(int n) { return 0; }\nint main() { cout<<countDigits(12345); return 0; }",
         "expectedOutput": "5",
-        "solution": "#include <iostream>\nusing namespace std;\nint countDigits(int n) { int c=0; while(n>0) { c++; n/=10; } return c; }\nint main() { cout<<countDigits(12345); return 0; }",
+        "testCases": [
+            {
+                "input": "12345",
+                "expectedOutput": "5",
+                "explanation": "Five digits"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "1",
+                "explanation": "Zero has 1 digit"
+            },
+            {
+                "input": "9",
+                "expectedOutput": "1",
+                "explanation": "Single digit"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "2",
+                "explanation": "Two digits"
+            },
+            {
+                "input": "99",
+                "expectedOutput": "2",
+                "explanation": "Two nines"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "3",
+                "explanation": "Three digits"
+            },
+            {
+                "input": "1000",
+                "expectedOutput": "4",
+                "explanation": "Power of 10"
+            },
+            {
+                "input": "999999",
+                "expectedOutput": "6",
+                "explanation": "Six nines"
+            },
+            {
+                "input": "1000000000",
+                "expectedOutput": "10",
+                "explanation": "Ten digits"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Single 1"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint countDigits(int n) { if(n==0) return 1; int c=0; while(n>0) { c++; n/=10; } return c; }\nint main() { cout<<countDigits(12345); return 0; }",
         "explanation": {
             "approach": "Count divisions by 10.",
             "analogy": "How many times can we divide by 10?",
@@ -202,6 +722,58 @@
         "category": "Math",
         "starterCode": "#include <iostream>\nusing namespace std;\nint reverse(int n) { return 0; }\nint main() { cout<<reverse(12345); return 0; }",
         "expectedOutput": "54321",
+        "testCases": [
+            {
+                "input": "12345",
+                "expectedOutput": "54321",
+                "explanation": "Basic reversal"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "Zero stays zero"
+            },
+            {
+                "input": "9",
+                "expectedOutput": "9",
+                "explanation": "Single digit"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "1",
+                "explanation": "Trailing zero removed"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "1",
+                "explanation": "Multiple trailing zeros"
+            },
+            {
+                "input": "12321",
+                "expectedOutput": "12321",
+                "explanation": "Palindrome stays same"
+            },
+            {
+                "input": "1000",
+                "expectedOutput": "1",
+                "explanation": "Only trailing zeros"
+            },
+            {
+                "input": "120",
+                "expectedOutput": "21",
+                "explanation": "One trailing zero"
+            },
+            {
+                "input": "99999",
+                "expectedOutput": "99999",
+                "explanation": "All nines"
+            },
+            {
+                "input": "1020",
+                "expectedOutput": "201",
+                "explanation": "Middle zero preserved"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint reverse(int n) { int r=0; while(n>0) { r=r*10+n%10; n/=10; } return r; }\nint main() { cout<<reverse(12345); return 0; }",
         "explanation": {
             "approach": "Build reversed number digit by digit.",
@@ -222,6 +794,58 @@
         "category": "Math",
         "starterCode": "#include <iostream>\nusing namespace std;\nbool isPalindrome(int n) { return false; }\nint main() { cout<<isPalindrome(12321); return 0; }",
         "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "12321",
+                "expectedOutput": "1",
+                "explanation": "Reads same both ways"
+            },
+            {
+                "input": "12345",
+                "expectedOutput": "0",
+                "explanation": "Not palindrome"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "1",
+                "explanation": "Zero is palindrome"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Single digit"
+            },
+            {
+                "input": "11",
+                "expectedOutput": "1",
+                "explanation": "Two same digits"
+            },
+            {
+                "input": "12",
+                "expectedOutput": "0",
+                "explanation": "Two different"
+            },
+            {
+                "input": "121",
+                "expectedOutput": "1",
+                "explanation": "Three digit palindrome"
+            },
+            {
+                "input": "1221",
+                "expectedOutput": "1",
+                "explanation": "Even length palindrome"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "0",
+                "explanation": "10 reversed is 01"
+            },
+            {
+                "input": "1001",
+                "expectedOutput": "1",
+                "explanation": "With zeros"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nbool isPalindrome(int n) { int orig=n, r=0; while(n>0) { r=r*10+n%10; n/=10; } return r==orig; }\nint main() { cout<<isPalindrome(12321); return 0; }",
         "explanation": {
             "approach": "Reverse and compare.",

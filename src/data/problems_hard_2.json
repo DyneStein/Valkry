@@ -15,7 +15,29 @@
                 "Handle * for 0 or more"
             ],
             "complexity": "Time: O(mn), Space: O(mn)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "s=\"aa\", p=\"a*\"",
+                "expectedOutput": "1",
+                "explanation": "a* matches aa (zero or more a's)"
+            },
+            {
+                "input": "s=\"ab\", p=\".*\"",
+                "expectedOutput": "1",
+                "explanation": ".* matches any string"
+            },
+            {
+                "input": "s=\"aab\", p=\"c*a*b\"",
+                "expectedOutput": "1",
+                "explanation": "c* matches empty, a* matches aa"
+            },
+            {
+                "input": "s=\"mississippi\", p=\"mis*is*p*.\"",
+                "expectedOutput": "0",
+                "explanation": "Pattern cannot match full string"
+            }
+        ]
     },
     {
         "id": "h18",
@@ -33,7 +55,29 @@
                 "? matches one char"
             ],
             "complexity": "Time: O(mn), Space: O(mn)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "s=\"adceb\", p=\"*a*b\"",
+                "expectedOutput": "1",
+                "explanation": "* matches ad, a matches a, * matches ce, b matches b"
+            },
+            {
+                "input": "s=\"acdcb\", p=\"a*c?b\"",
+                "expectedOutput": "0",
+                "explanation": "Cannot match properly"
+            },
+            {
+                "input": "s=\"cb\", p=\"?a\"",
+                "expectedOutput": "0",
+                "explanation": "Second char doesn't match"
+            },
+            {
+                "input": "s=\"\", p=\"*\"",
+                "expectedOutput": "1",
+                "explanation": "Star matches empty string"
+            }
+        ]
     },
     {
         "id": "h19",
@@ -51,7 +95,29 @@
                 "Pop on ), calculate length"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"(()\"",
+                "expectedOutput": "2",
+                "explanation": "() at end is longest valid"
+            },
+            {
+                "input": "\")()())\"",
+                "expectedOutput": "4",
+                "explanation": "()() in middle is longest"
+            },
+            {
+                "input": "\"\"",
+                "expectedOutput": "0",
+                "explanation": "Empty string"
+            },
+            {
+                "input": "\"()(()\"",
+                "expectedOutput": "2",
+                "explanation": "Either () at start or () inside - both length 2"
+            }
+        ]
     },
     {
         "id": "h20",
@@ -69,7 +135,29 @@
                 "dp[i] = min cuts for s[0..i]"
             ],
             "complexity": "Time: O(n²), Space: O(n²)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"aab\"",
+                "expectedOutput": "1",
+                "explanation": "Cut between aa|b"
+            },
+            {
+                "input": "\"a\"",
+                "expectedOutput": "0",
+                "explanation": "Single char needs no cuts"
+            },
+            {
+                "input": "\"ab\"",
+                "expectedOutput": "1",
+                "explanation": "One cut needed: a|b"
+            },
+            {
+                "input": "\"aba\"",
+                "expectedOutput": "0",
+                "explanation": "Already a palindrome, no cuts needed"
+            }
+        ]
     },
     {
         "id": "h21",
@@ -87,7 +175,29 @@
                 "Try all split points"
             ],
             "complexity": "Time: O(4^n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "s1=\"great\", s2=\"rgeat\"",
+                "expectedOutput": "1",
+                "explanation": "rgeat is a scramble of great"
+            },
+            {
+                "input": "s1=\"abcde\", s2=\"caebd\"",
+                "expectedOutput": "0",
+                "explanation": "Not a valid scramble"
+            },
+            {
+                "input": "s1=\"a\", s2=\"a\"",
+                "expectedOutput": "1",
+                "explanation": "Same single char"
+            },
+            {
+                "input": "s1=\"abc\", s2=\"bca\"",
+                "expectedOutput": "1",
+                "explanation": "bca is a valid scramble of abc"
+            }
+        ]
     },
     {
         "id": "h22",
@@ -105,7 +215,29 @@
                 "Take minimum of 3 options"
             ],
             "complexity": "Time: O(mn), Space: O(mn)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "a=\"horse\", b=\"ros\"",
+                "expectedOutput": "3",
+                "explanation": "horse → rorse → rose → ros"
+            },
+            {
+                "input": "a=\"intention\", b=\"execution\"",
+                "expectedOutput": "5",
+                "explanation": "5 operations needed"
+            },
+            {
+                "input": "a=\"\", b=\"abc\"",
+                "expectedOutput": "3",
+                "explanation": "3 insertions"
+            },
+            {
+                "input": "a=\"abc\", b=\"abc\"",
+                "expectedOutput": "0",
+                "explanation": "Strings are identical"
+            }
+        ]
     },
     {
         "id": "h23",
@@ -123,7 +255,29 @@
                 "Shrink left while valid"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "s=\"ADOBECODEBANC\", t=\"ABC\"",
+                "expectedOutput": "BANC",
+                "explanation": "BANC contains A, B, C"
+            },
+            {
+                "input": "s=\"a\", t=\"a\"",
+                "expectedOutput": "a",
+                "explanation": "Single char match"
+            },
+            {
+                "input": "s=\"a\", t=\"aa\"",
+                "expectedOutput": "",
+                "explanation": "Not enough chars"
+            },
+            {
+                "input": "s=\"ab\", t=\"b\"",
+                "expectedOutput": "b",
+                "explanation": "Smallest window is just b"
+            }
+        ]
     },
     {
         "id": "h24",
@@ -141,6 +295,28 @@
                 "Track used words"
             ],
             "complexity": "Time: O(L × n × wl), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"barfoothefoobarman\", [\"foo\",\"bar\"]",
+                "expectedOutput": "0 9",
+                "explanation": "barfoo at 0, foobar at 9"
+            },
+            {
+                "input": "\"wordgoodgoodgoodbestword\", [\"word\",\"good\",\"best\",\"word\"]",
+                "expectedOutput": "",
+                "explanation": "No valid concatenation"
+            },
+            {
+                "input": "\"barfoofoobarthefoobarman\", [\"bar\",\"foo\",\"the\"]",
+                "expectedOutput": "6 9 12",
+                "explanation": "Multiple matches"
+            },
+            {
+                "input": "\"wordwordword\", [\"word\",\"word\"]",
+                "expectedOutput": "0 4",
+                "explanation": "Overlapping word matches"
+            }
+        ]
     }
 ]

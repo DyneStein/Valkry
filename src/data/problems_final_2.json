@@ -16,7 +16,29 @@
                 "Check all strings match"
             ],
             "complexity": "Time: O(S), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[\"flower\",\"flow\",\"flight\"]",
+                "expectedOutput": "fl",
+                "explanation": "Common prefix is 'fl'"
+            },
+            {
+                "input": "[\"dog\",\"racecar\",\"car\"]",
+                "expectedOutput": "",
+                "explanation": "No common prefix"
+            },
+            {
+                "input": "[\"interview\",\"internet\",\"internal\"]",
+                "expectedOutput": "inter",
+                "explanation": "Common prefix is 'inter'"
+            },
+            {
+                "input": "[\"abc\"]",
+                "expectedOutput": "abc",
+                "explanation": "Single string is its own prefix"
+            }
+        ]
     },
     {
         "id": "fin12",
@@ -35,7 +57,29 @@
                 "All counts should be 0"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "s=\"anagram\", t=\"nagaram\"",
+                "expectedOutput": "1",
+                "explanation": "Both have same letters"
+            },
+            {
+                "input": "s=\"rat\", t=\"car\"",
+                "expectedOutput": "0",
+                "explanation": "Different letters"
+            },
+            {
+                "input": "s=\"listen\", t=\"silent\"",
+                "expectedOutput": "1",
+                "explanation": "Classic anagram pair"
+            },
+            {
+                "input": "s=\"ab\", t=\"a\"",
+                "expectedOutput": "0",
+                "explanation": "Different lengths"
+            }
+        ]
     },
     {
         "id": "fin13",
@@ -54,7 +98,29 @@
                 "Copy if different"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,1,1,2,2,3}",
+                "expectedOutput": "1 1 2 2 3",
+                "explanation": "Keep at most 2 of each"
+            },
+            {
+                "input": "{0,0,1,1,1,1,2,3,3}",
+                "expectedOutput": "0 0 1 1 2 3 3",
+                "explanation": "Multiple duplicates handled"
+            },
+            {
+                "input": "{1,2,3}",
+                "expectedOutput": "1 2 3",
+                "explanation": "No duplicates to remove"
+            },
+            {
+                "input": "{1,1}",
+                "expectedOutput": "1 1",
+                "explanation": "Exactly 2 allowed"
+            }
+        ]
     },
     {
         "id": "fin14",
@@ -73,7 +139,29 @@
                 "Check if target is in that half"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "a={4,5,6,7,0,1,2}, t=0",
+                "expectedOutput": "4",
+                "explanation": "0 is at index 4"
+            },
+            {
+                "input": "a={4,5,6,7,0,1,2}, t=3",
+                "expectedOutput": "-1",
+                "explanation": "3 not in array"
+            },
+            {
+                "input": "a={1}, t=1",
+                "expectedOutput": "0",
+                "explanation": "Single element found"
+            },
+            {
+                "input": "a={2,1}, t=1",
+                "expectedOutput": "1",
+                "explanation": "Two element rotated array"
+            }
+        ]
     },
     {
         "id": "fin15",
@@ -92,7 +180,29 @@
                 "Else min is in left half (including mid)"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{3,4,5,1,2}",
+                "expectedOutput": "1",
+                "explanation": "Minimum is 1 after rotation"
+            },
+            {
+                "input": "{4,5,6,7,0,1,2}",
+                "expectedOutput": "0",
+                "explanation": "Minimum is 0"
+            },
+            {
+                "input": "{1,2,3,4,5}",
+                "expectedOutput": "1",
+                "explanation": "Not rotated, first element is min"
+            },
+            {
+                "input": "{2,1}",
+                "expectedOutput": "1",
+                "explanation": "Two element array"
+            }
+        ]
     },
     {
         "id": "fin16",
@@ -111,7 +221,29 @@
                 "Multiply by right products"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,2,3,4}",
+                "expectedOutput": "24 12 8 6",
+                "explanation": "Each = product of others"
+            },
+            {
+                "input": "{2,3,4,5}",
+                "expectedOutput": "60 40 30 24",
+                "explanation": "Example with no 1s"
+            },
+            {
+                "input": "{1,1,1,1}",
+                "expectedOutput": "1 1 1 1",
+                "explanation": "All ones"
+            },
+            {
+                "input": "{-1,1,-1,1}",
+                "expectedOutput": "-1 1 -1 1",
+                "explanation": "Mixed signs"
+            }
+        ]
     },
     {
         "id": "fin17",
@@ -130,7 +262,29 @@
                 "Track overall max"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{-2,1,-3,4,-1,2,1,-5,4}",
+                "expectedOutput": "6",
+                "explanation": "Subarray [4,-1,2,1] = 6"
+            },
+            {
+                "input": "{1}",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "{-1,-2,-3}",
+                "expectedOutput": "-1",
+                "explanation": "All negative, pick least negative"
+            },
+            {
+                "input": "{5,4,-1,7,8}",
+                "expectedOutput": "23",
+                "explanation": "Entire array is max"
+            }
+        ]
     },
     {
         "id": "fin18",
@@ -149,7 +303,29 @@
                 "Move smaller side"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,8,6,2,5,4,8,3,7}",
+                "expectedOutput": "49",
+                "explanation": "Between indices 1 and 8"
+            },
+            {
+                "input": "{1,1}",
+                "expectedOutput": "1",
+                "explanation": "Min container"
+            },
+            {
+                "input": "{4,3,2,1,4}",
+                "expectedOutput": "16",
+                "explanation": "First and last lines"
+            },
+            {
+                "input": "{1,2,1}",
+                "expectedOutput": "2",
+                "explanation": "Edges form container"
+            }
+        ]
     },
     {
         "id": "fin19",
@@ -168,7 +344,29 @@
                 "Merge if overlap"
             ],
             "complexity": "Time: O(n log n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{{1,3},{2,6},{8,10},{15,18}}",
+                "expectedOutput": "1-6 8-10 15-18",
+                "explanation": "[1,3] and [2,6] merge"
+            },
+            {
+                "input": "{{1,4},{4,5}}",
+                "expectedOutput": "1-5",
+                "explanation": "Adjacent intervals merge"
+            },
+            {
+                "input": "{{1,4},{0,4}}",
+                "expectedOutput": "0-4",
+                "explanation": "Overlapping from start"
+            },
+            {
+                "input": "{{1,4},{2,3}}",
+                "expectedOutput": "1-4",
+                "explanation": "One interval inside another"
+            }
+        ]
     },
     {
         "id": "fin20",
@@ -188,6 +386,28 @@
                 "Copy non-overlapping after"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{{1,3},{6,9}}, new={2,5}",
+                "expectedOutput": "1-5 6-9",
+                "explanation": "New interval merges with first"
+            },
+            {
+                "input": "{{1,2},{3,5},{6,7}}, new={4,8}",
+                "expectedOutput": "1-2 3-8",
+                "explanation": "Merges multiple intervals"
+            },
+            {
+                "input": "{}, new={5,7}",
+                "expectedOutput": "5-7",
+                "explanation": "Insert into empty list"
+            },
+            {
+                "input": "{{1,5}}, new={2,3}",
+                "expectedOutput": "1-5",
+                "explanation": "New interval contained within existing"
+            }
+        ]
     }
 ]

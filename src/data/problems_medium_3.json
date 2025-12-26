@@ -15,7 +15,29 @@
                 "Reverse each row"
             ],
             "complexity": "Time: O(n²), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{{1,2,3},{4,5,6},{7,8,9}}",
+                "expectedOutput": "7 4 1 8 5 2 9 6 3",
+                "explanation": "3x3 matrix rotated 90° clockwise"
+            },
+            {
+                "input": "{{1,2},{3,4}}",
+                "expectedOutput": "3 1 4 2",
+                "explanation": "2x2 matrix rotated 90° clockwise"
+            },
+            {
+                "input": "{{1}}",
+                "expectedOutput": "1",
+                "explanation": "Single element unchanged"
+            },
+            {
+                "input": "{{5,1,9,11},{2,4,8,10},{13,3,6,7},{15,14,12,16}}",
+                "expectedOutput": "15 13 2 5 14 3 4 1 12 6 8 9 16 7 10 11",
+                "explanation": "4x4 matrix rotation"
+            }
+        ]
     },
     {
         "id": "m32",
@@ -33,7 +55,29 @@
                 "Set marked rows/cols to zero"
             ],
             "complexity": "Time: O(mn), Space: O(m+n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{{1,1,1},{1,0,1},{1,1,1}}",
+                "expectedOutput": "1 0 1 0 0 0 1 0 1",
+                "explanation": "Zero at center zeros middle row and column"
+            },
+            {
+                "input": "{{0,1,2},{3,4,5},{6,7,8}}",
+                "expectedOutput": "0 0 0 0 4 5 0 7 8",
+                "explanation": "Zero at top-left zeros first row and column"
+            },
+            {
+                "input": "{{1,2,3},{4,5,6},{7,8,9}}",
+                "expectedOutput": "1 2 3 4 5 6 7 8 9",
+                "explanation": "No zeros, matrix unchanged"
+            },
+            {
+                "input": "{{0,0},{1,1}}",
+                "expectedOutput": "0 0 0 0",
+                "explanation": "Two zeros in first row"
+            }
+        ]
     },
     {
         "id": "m33",
@@ -51,7 +95,29 @@
                 "Process each layer"
             ],
             "complexity": "Time: O(mn), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{{1,2,3},{4,5,6},{7,8,9}}",
+                "expectedOutput": "1 2 3 6 9 8 7 4 5",
+                "explanation": "3x3 matrix spiral traversal"
+            },
+            {
+                "input": "{{1,2,3,4}}",
+                "expectedOutput": "1 2 3 4",
+                "explanation": "Single row, left to right"
+            },
+            {
+                "input": "{{1},{2},{3}}",
+                "expectedOutput": "1 2 3",
+                "explanation": "Single column, top to bottom"
+            },
+            {
+                "input": "{{1,2},{3,4},{5,6}}",
+                "expectedOutput": "1 2 4 6 5 3",
+                "explanation": "3x2 matrix spiral"
+            }
+        ]
     },
     {
         "id": "m34",
@@ -69,7 +135,29 @@
                 "Binary search"
             ],
             "complexity": "Time: O(log(mn)), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "matrix, target=3",
+                "expectedOutput": "1",
+                "explanation": "3 exists in first row"
+            },
+            {
+                "input": "matrix, target=13",
+                "expectedOutput": "0",
+                "explanation": "13 not in matrix"
+            },
+            {
+                "input": "matrix, target=1",
+                "expectedOutput": "1",
+                "explanation": "First element found"
+            },
+            {
+                "input": "matrix, target=60",
+                "expectedOutput": "1",
+                "explanation": "Last element found"
+            }
+        ]
     },
     {
         "id": "m35",
@@ -87,7 +175,29 @@
                 "DFS in 4 directions"
             ],
             "complexity": "Time: O(m×n×4^L), Space: O(L)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "board, word=SEE",
+                "expectedOutput": "1",
+                "explanation": "SEE found starting from S"
+            },
+            {
+                "input": "board, word=ABCCED",
+                "expectedOutput": "1",
+                "explanation": "Word exists in grid"
+            },
+            {
+                "input": "board, word=ABCB",
+                "expectedOutput": "0",
+                "explanation": "Cannot reuse cells"
+            },
+            {
+                "input": "board, word=A",
+                "expectedOutput": "1",
+                "explanation": "Single char found"
+            }
+        ]
     },
     {
         "id": "m36",
@@ -105,7 +215,29 @@
                 "Move each node to front"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "list=1,2,3,4,5 l=2 r=4",
+                "expectedOutput": "1 4 3 2 5",
+                "explanation": "Reverse positions 2-4"
+            },
+            {
+                "input": "list=5 l=1 r=1",
+                "expectedOutput": "5",
+                "explanation": "Single element, no change"
+            },
+            {
+                "input": "list=3,5 l=1 r=2",
+                "expectedOutput": "5 3",
+                "explanation": "Reverse entire 2-element list"
+            },
+            {
+                "input": "list=1,2,3,4,5 l=1 r=5",
+                "expectedOutput": "5 4 3 2 1",
+                "explanation": "Reverse entire list"
+            }
+        ]
     },
     {
         "id": "m37",
@@ -124,7 +256,29 @@
                 "Separate lists"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "list with random pointers",
+                "expectedOutput": "OK",
+                "explanation": "Deep copy preserves structure"
+            },
+            {
+                "input": "null list",
+                "expectedOutput": "OK",
+                "explanation": "Empty list returns null"
+            },
+            {
+                "input": "single node with self random",
+                "expectedOutput": "OK",
+                "explanation": "Handles self-referential random"
+            },
+            {
+                "input": "two nodes cycle",
+                "expectedOutput": "OK",
+                "explanation": "Handles cyclic random pointers"
+            }
+        ]
     },
     {
         "id": "m38",
@@ -143,7 +297,29 @@
                 "Create result node"
             ],
             "complexity": "Time: O(max(m,n)), Space: O(max(m,n))"
-        }
+        },
+        "testCases": [
+            {
+                "input": "l1=2,4,3 l2=5,6,4",
+                "expectedOutput": "708",
+                "explanation": "342+465=807, reversed: 708"
+            },
+            {
+                "input": "l1=0 l2=0",
+                "expectedOutput": "0",
+                "explanation": "0+0=0"
+            },
+            {
+                "input": "l1=9,9,9 l2=1",
+                "expectedOutput": "0001",
+                "explanation": "999+1=1000"
+            },
+            {
+                "input": "l1=1,8 l2=0",
+                "expectedOutput": "18",
+                "explanation": "81+0=81"
+            }
+        ]
     },
     {
         "id": "m39",
@@ -162,7 +338,29 @@
                 "Remove slow.next"
             ],
             "complexity": "Time: O(L), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "list=1,2,3,4,5 n=2",
+                "expectedOutput": "1 2 3 5",
+                "explanation": "Remove 4 (2nd from end)"
+            },
+            {
+                "input": "list=1 n=1",
+                "expectedOutput": "",
+                "explanation": "Remove only element"
+            },
+            {
+                "input": "list=1,2 n=1",
+                "expectedOutput": "1",
+                "explanation": "Remove last element"
+            },
+            {
+                "input": "list=1,2 n=2",
+                "expectedOutput": "2",
+                "explanation": "Remove first element"
+            }
+        ]
     },
     {
         "id": "m40",
@@ -180,6 +378,28 @@
                 "Connect less to greater"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "list=1,4,3,2,5,2 x=3",
+                "expectedOutput": "1 2 2 4 3 5",
+                "explanation": "Nodes <3 before nodes >=3"
+            },
+            {
+                "input": "list=2,1 x=2",
+                "expectedOutput": "1 2",
+                "explanation": "1<2 comes first"
+            },
+            {
+                "input": "list=1,2,3 x=4",
+                "expectedOutput": "1 2 3",
+                "explanation": "All less than x"
+            },
+            {
+                "input": "list=3,1 x=0",
+                "expectedOutput": "3 1",
+                "explanation": "All >= x, unchanged"
+            }
+        ]
     }
 ]

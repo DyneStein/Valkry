@@ -16,7 +16,29 @@
                 "Shrink left on duplicate"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"abcabcbb\"",
+                "expectedOutput": "3",
+                "explanation": "abc is longest unique substring"
+            },
+            {
+                "input": "\"bbbbb\"",
+                "expectedOutput": "1",
+                "explanation": "Only single char unique"
+            },
+            {
+                "input": "\"pwwkew\"",
+                "expectedOutput": "3",
+                "explanation": "wke is longest"
+            },
+            {
+                "input": "\"\"",
+                "expectedOutput": "0",
+                "explanation": "Empty string"
+            }
+        ]
     },
     {
         "id": "str12",
@@ -35,7 +57,29 @@
                 "Compare lowercase"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"A man a plan a canal Panama\"",
+                "expectedOutput": "1",
+                "explanation": "Valid palindrome ignoring spaces/case"
+            },
+            {
+                "input": "\"race a car\"",
+                "expectedOutput": "0",
+                "explanation": "Not a palindrome"
+            },
+            {
+                "input": "\" \"",
+                "expectedOutput": "1",
+                "explanation": "Empty after filtering is palindrome"
+            },
+            {
+                "input": "\"Was it a car or a cat I saw\"",
+                "expectedOutput": "1",
+                "explanation": "Another valid palindrome"
+            }
+        ]
     },
     {
         "id": "str13",
@@ -54,7 +98,29 @@
                 "Print char and count"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"aabcccccaaa\"",
+                "expectedOutput": "a2b1c5a3",
+                "explanation": "Compressed form"
+            },
+            {
+                "input": "\"abc\"",
+                "expectedOutput": "a1b1c1",
+                "explanation": "No compression benefit"
+            },
+            {
+                "input": "\"aaa\"",
+                "expectedOutput": "a3",
+                "explanation": "All same characters"
+            },
+            {
+                "input": "\"aaabbbccc\"",
+                "expectedOutput": "a3b3c3",
+                "explanation": "Three groups of three"
+            }
+        ]
     },
     {
         "id": "str14",
@@ -74,7 +140,29 @@
                 "Handle carries"
             ],
             "complexity": "Time: O(m×n), Space: O(m+n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"123\" × \"456\"",
+                "expectedOutput": "56088",
+                "explanation": "123 * 456 = 56088"
+            },
+            {
+                "input": "\"2\" × \"3\"",
+                "expectedOutput": "6",
+                "explanation": "Simple multiplication"
+            },
+            {
+                "input": "\"0\" × \"12345\"",
+                "expectedOutput": "0",
+                "explanation": "Zero times anything"
+            },
+            {
+                "input": "\"999\" × \"999\"",
+                "expectedOutput": "998001",
+                "explanation": "Large multiplication with carries"
+            }
+        ]
     },
     {
         "id": "str15",
@@ -93,7 +181,29 @@
                 "Store result in reverse"
             ],
             "complexity": "Time: O(max(m,n)), Space: O(max(m,n))"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"11\" + \"1\"",
+                "expectedOutput": "100",
+                "explanation": "3 + 1 = 4 in binary"
+            },
+            {
+                "input": "\"1010\" + \"1011\"",
+                "expectedOutput": "10101",
+                "explanation": "10 + 11 = 21"
+            },
+            {
+                "input": "\"0\" + \"0\"",
+                "expectedOutput": "0",
+                "explanation": "Zero plus zero"
+            },
+            {
+                "input": "\"1111\" + \"1111\"",
+                "expectedOutput": "11110",
+                "explanation": "15 + 15 = 30"
+            }
+        ]
     },
     {
         "id": "str16",
@@ -112,7 +222,29 @@
                 "Change direction at boundaries"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"PAYPALISHIRING\", numRows=3",
+                "expectedOutput": "PAHNAPLSIIGYIR",
+                "explanation": "3-row zigzag"
+            },
+            {
+                "input": "\"PAYPALISHIRING\", numRows=4",
+                "expectedOutput": "PINALSIGYAHRPI",
+                "explanation": "4-row zigzag"
+            },
+            {
+                "input": "\"A\", numRows=1",
+                "expectedOutput": "A",
+                "explanation": "Single char unchanged"
+            },
+            {
+                "input": "\"AB\", numRows=1",
+                "expectedOutput": "AB",
+                "explanation": "Single row unchanged"
+            }
+        ]
     },
     {
         "id": "str17",
@@ -131,7 +263,29 @@
                 "Check if all strings match"
             ],
             "complexity": "Time: O(S), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[flower,flow,flight]",
+                "expectedOutput": "fl",
+                "explanation": "Common prefix is fl"
+            },
+            {
+                "input": "[dog,racecar,car]",
+                "expectedOutput": "",
+                "explanation": "No common prefix"
+            },
+            {
+                "input": "[interspecies,interstellar,interstate]",
+                "expectedOutput": "inters",
+                "explanation": "Common prefix inters"
+            },
+            {
+                "input": "[abc,abc,abc]",
+                "expectedOutput": "abc",
+                "explanation": "Identical strings"
+            }
+        ]
     },
     {
         "id": "str18",
@@ -150,7 +304,29 @@
                 "Check consistency both ways"
             ],
             "complexity": "Time: O(n×m), Space: O(26)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "words, pattern=\"abb\"",
+                "expectedOutput": "mee aqq",
+                "explanation": "m->a,e->b and a->a,q->b"
+            },
+            {
+                "input": "[a,b,c], pattern=\"a\"",
+                "expectedOutput": "a b c",
+                "explanation": "All single chars match"
+            },
+            {
+                "input": "[aa,bb,cc], pattern=\"xy\"",
+                "expectedOutput": "",
+                "explanation": "No bijection possible"
+            },
+            {
+                "input": "[abc,xyz], pattern=\"abc\"",
+                "expectedOutput": "abc xyz",
+                "explanation": "Both have unique chars"
+            }
+        ]
     },
     {
         "id": "str19",
@@ -169,7 +345,29 @@
                 "Append symbol, subtract"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "1994",
+                "expectedOutput": "MCMXCIV",
+                "explanation": "M=1000, CM=900, XC=90, IV=4"
+            },
+            {
+                "input": "58",
+                "expectedOutput": "LVIII",
+                "explanation": "L=50, V=5, III=3"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "III",
+                "explanation": "Three I's"
+            },
+            {
+                "input": "3999",
+                "expectedOutput": "MMMCMXCIX",
+                "explanation": "Maximum valid Roman numeral"
+            }
+        ]
     },
     {
         "id": "str20",
@@ -188,6 +386,28 @@
                 "Else add"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"MCMXCIV\"",
+                "expectedOutput": "1994",
+                "explanation": "1000+900+90+4"
+            },
+            {
+                "input": "\"III\"",
+                "expectedOutput": "3",
+                "explanation": "1+1+1"
+            },
+            {
+                "input": "\"IV\"",
+                "expectedOutput": "4",
+                "explanation": "5-1=4"
+            },
+            {
+                "input": "\"MMMCMXCIX\"",
+                "expectedOutput": "3999",
+                "explanation": "Maximum Roman numeral value"
+            }
+        ]
     }
 ]

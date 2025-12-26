@@ -7,6 +7,58 @@
         "category": "Math",
         "starterCode": "#include <iostream>\nusing namespace std;\nint add(int a, int b) { return 0; }\nint main() { cout << add(5, 3); return 0; }",
         "expectedOutput": "8",
+        "testCases": [
+            {
+                "input": "5 3",
+                "expectedOutput": "8",
+                "explanation": "Basic addition: 5 + 3 = 8"
+            },
+            {
+                "input": "0 0",
+                "expectedOutput": "0",
+                "explanation": "Edge case: both zeros"
+            },
+            {
+                "input": "-5 5",
+                "expectedOutput": "0",
+                "explanation": "Edge case: negative + positive equals zero"
+            },
+            {
+                "input": "-3 -7",
+                "expectedOutput": "-10",
+                "explanation": "Edge case: adding two negatives"
+            },
+            {
+                "input": "1000000 1000000",
+                "expectedOutput": "2000000",
+                "explanation": "Large numbers addition"
+            },
+            {
+                "input": "1 0",
+                "expectedOutput": "1",
+                "explanation": "Adding zero returns same number"
+            },
+            {
+                "input": "2147483640 7",
+                "expectedOutput": "2147483647",
+                "explanation": "Near INT_MAX boundary"
+            },
+            {
+                "input": "100 -100",
+                "expectedOutput": "0",
+                "explanation": "Opposite numbers cancel out"
+            },
+            {
+                "input": "42 58",
+                "expectedOutput": "100",
+                "explanation": "Sum to round number"
+            },
+            {
+                "input": "-1 1",
+                "expectedOutput": "0",
+                "explanation": "Small opposite numbers"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint add(int a, int b) { return a + b; }\nint main() { cout << add(5, 3); return 0; }",
         "explanation": {
             "approach": "Simply use the + operator to add two numbers.",
@@ -25,6 +77,58 @@
         "category": "Math",
         "starterCode": "#include <iostream>\nusing namespace std;\nint multiply(int a, int b) { return 0; }\nint main() { cout << multiply(4, 7); return 0; }",
         "expectedOutput": "28",
+        "testCases": [
+            {
+                "input": "4 7",
+                "expectedOutput": "28",
+                "explanation": "Basic multiplication: 4 × 7 = 28"
+            },
+            {
+                "input": "0 5",
+                "expectedOutput": "0",
+                "explanation": "Edge case: multiply by zero"
+            },
+            {
+                "input": "1 999",
+                "expectedOutput": "999",
+                "explanation": "Edge case: multiply by one"
+            },
+            {
+                "input": "-3 4",
+                "expectedOutput": "-12",
+                "explanation": "Negative times positive"
+            },
+            {
+                "input": "-5 -6",
+                "expectedOutput": "30",
+                "explanation": "Two negatives make positive"
+            },
+            {
+                "input": "100 100",
+                "expectedOutput": "10000",
+                "explanation": "Square of 100"
+            },
+            {
+                "input": "2 2147483647",
+                "expectedOutput": "4294967294",
+                "explanation": "Large number multiplication"
+            },
+            {
+                "input": "11 11",
+                "expectedOutput": "121",
+                "explanation": "Square of 11"
+            },
+            {
+                "input": "0 0",
+                "expectedOutput": "0",
+                "explanation": "Both zeros"
+            },
+            {
+                "input": "25 4",
+                "expectedOutput": "100",
+                "explanation": "Product is round number"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint multiply(int a, int b) { return a * b; }\nint main() { cout << multiply(4, 7); return 0; }",
         "explanation": {
             "approach": "Use multiplication operator.",
@@ -43,6 +147,58 @@
         "category": "Math",
         "starterCode": "#include <iostream>\nusing namespace std;\nint maxOfTwo(int a, int b) { return 0; }\nint main() { cout << maxOfTwo(10, 25); return 0; }",
         "expectedOutput": "25",
+        "testCases": [
+            {
+                "input": "10 25",
+                "expectedOutput": "25",
+                "explanation": "Basic: 25 > 10"
+            },
+            {
+                "input": "25 10",
+                "expectedOutput": "25",
+                "explanation": "Reversed order, same result"
+            },
+            {
+                "input": "5 5",
+                "expectedOutput": "5",
+                "explanation": "Edge case: equal numbers"
+            },
+            {
+                "input": "-10 -5",
+                "expectedOutput": "-5",
+                "explanation": "Negatives: -5 > -10"
+            },
+            {
+                "input": "-100 0",
+                "expectedOutput": "0",
+                "explanation": "Zero vs negative"
+            },
+            {
+                "input": "0 0",
+                "expectedOutput": "0",
+                "explanation": "Both zeros"
+            },
+            {
+                "input": "2147483647 0",
+                "expectedOutput": "2147483647",
+                "explanation": "INT_MAX comparison"
+            },
+            {
+                "input": "-2147483648 0",
+                "expectedOutput": "0",
+                "explanation": "INT_MIN comparison"
+            },
+            {
+                "input": "1 2",
+                "expectedOutput": "2",
+                "explanation": "Consecutive numbers"
+            },
+            {
+                "input": "999999 1000000",
+                "expectedOutput": "1000000",
+                "explanation": "Large close numbers"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint maxOfTwo(int a, int b) { return a > b ? a : b; }\nint main() { cout << maxOfTwo(10, 25); return 0; }",
         "explanation": {
             "approach": "Compare and return larger.",
@@ -61,6 +217,58 @@
         "category": "Math",
         "starterCode": "#include <iostream>\nusing namespace std;\nint absolute(int n) { return 0; }\nint main() { cout << absolute(-15); return 0; }",
         "expectedOutput": "15",
+        "testCases": [
+            {
+                "input": "-15",
+                "expectedOutput": "15",
+                "explanation": "Basic: |-15| = 15"
+            },
+            {
+                "input": "15",
+                "expectedOutput": "15",
+                "explanation": "Already positive stays same"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "Edge case: |0| = 0"
+            },
+            {
+                "input": "-1",
+                "expectedOutput": "1",
+                "explanation": "Smallest negative"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Smallest positive"
+            },
+            {
+                "input": "-1000000",
+                "expectedOutput": "1000000",
+                "explanation": "Large negative"
+            },
+            {
+                "input": "2147483647",
+                "expectedOutput": "2147483647",
+                "explanation": "INT_MAX stays same"
+            },
+            {
+                "input": "-999",
+                "expectedOutput": "999",
+                "explanation": "Three digit negative"
+            },
+            {
+                "input": "-42",
+                "expectedOutput": "42",
+                "explanation": "Random negative"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "100",
+                "explanation": "Round positive number"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint absolute(int n) { return n < 0 ? -n : n; }\nint main() { cout << absolute(-15); return 0; }",
         "explanation": {
             "approach": "If negative, negate it.",
@@ -80,6 +288,58 @@
         "category": "Math",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid check(int n) {}\nint main() { check(7); return 0; }",
         "expectedOutput": "Odd",
+        "testCases": [
+            {
+                "input": "7",
+                "expectedOutput": "Odd",
+                "explanation": "7 is not divisible by 2"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "Even",
+                "explanation": "4 ÷ 2 = 2, no remainder"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "Even",
+                "explanation": "Edge case: 0 is even"
+            },
+            {
+                "input": "-2",
+                "expectedOutput": "Even",
+                "explanation": "Negative even number"
+            },
+            {
+                "input": "-7",
+                "expectedOutput": "Odd",
+                "explanation": "Negative odd number"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "Odd",
+                "explanation": "Smallest positive odd"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "Even",
+                "explanation": "Smallest positive even"
+            },
+            {
+                "input": "1000000",
+                "expectedOutput": "Even",
+                "explanation": "Large even number"
+            },
+            {
+                "input": "999999",
+                "expectedOutput": "Odd",
+                "explanation": "Large odd number"
+            },
+            {
+                "input": "2147483646",
+                "expectedOutput": "Even",
+                "explanation": "Near INT_MAX even"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid check(int n) { cout << (n % 2 == 0 ? \"Even\" : \"Odd\"); }\nint main() { check(7); return 0; }",
         "explanation": {
             "approach": "If divisible by 2, it's even.",
@@ -99,6 +359,58 @@
         "category": "Basics",
         "starterCode": "#include <iostream>\nusing namespace std;\nint main() { return 0; }",
         "expectedOutput": "Hello World",
+        "testCases": [
+            {
+                "input": "",
+                "expectedOutput": "Hello World",
+                "explanation": "Standard output test"
+            },
+            {
+                "input": "",
+                "expectedOutput": "Hello World",
+                "explanation": "No input required"
+            },
+            {
+                "input": "",
+                "expectedOutput": "Hello World",
+                "explanation": "Exact string match"
+            },
+            {
+                "input": "",
+                "expectedOutput": "Hello World",
+                "explanation": "Case sensitive check"
+            },
+            {
+                "input": "",
+                "expectedOutput": "Hello World",
+                "explanation": "Space between words"
+            },
+            {
+                "input": "",
+                "expectedOutput": "Hello World",
+                "explanation": "No trailing newline"
+            },
+            {
+                "input": "",
+                "expectedOutput": "Hello World",
+                "explanation": "No leading spaces"
+            },
+            {
+                "input": "",
+                "expectedOutput": "Hello World",
+                "explanation": "Consistent output"
+            },
+            {
+                "input": "",
+                "expectedOutput": "Hello World",
+                "explanation": "First program tradition"
+            },
+            {
+                "input": "",
+                "expectedOutput": "Hello World",
+                "explanation": "Basic cout usage"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint main() { cout << \"Hello World\"; return 0; }",
         "explanation": {
             "approach": "Use cout to print.",
@@ -117,6 +429,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nint sum(int arr[], int n) { return 0; }\nint main() { int a[] = {1,2,3,4,5}; cout << sum(a, 5); return 0; }",
         "expectedOutput": "15",
+        "testCases": [
+            {
+                "input": "5\n1 2 3 4 5",
+                "expectedOutput": "15",
+                "explanation": "Basic: 1+2+3+4+5 = 15"
+            },
+            {
+                "input": "1\n10",
+                "expectedOutput": "10",
+                "explanation": "Single element array"
+            },
+            {
+                "input": "3\n0 0 0",
+                "expectedOutput": "0",
+                "explanation": "All zeros"
+            },
+            {
+                "input": "4\n-1 -2 -3 -4",
+                "expectedOutput": "-10",
+                "explanation": "All negative numbers"
+            },
+            {
+                "input": "3\n-5 0 5",
+                "expectedOutput": "0",
+                "explanation": "Mixed: sum is zero"
+            },
+            {
+                "input": "2\n1000000 1000000",
+                "expectedOutput": "2000000",
+                "explanation": "Large numbers"
+            },
+            {
+                "input": "6\n1 1 1 1 1 1",
+                "expectedOutput": "6",
+                "explanation": "All same values"
+            },
+            {
+                "input": "5\n10 20 30 40 50",
+                "expectedOutput": "150",
+                "explanation": "Multiples of 10"
+            },
+            {
+                "input": "3\n100 -50 -50",
+                "expectedOutput": "0",
+                "explanation": "Positive equals negatives"
+            },
+            {
+                "input": "4\n7 3 5 9",
+                "expectedOutput": "24",
+                "explanation": "Random values"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint sum(int arr[], int n) { int s = 0; for(int i = 0; i < n; i++) s += arr[i]; return s; }\nint main() { int a[] = {1,2,3,4,5}; cout << sum(a, 5); return 0; }",
         "explanation": {
             "approach": "Loop through and add each element.",
@@ -136,6 +500,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nint findMax(int arr[], int n) { return 0; }\nint main() { int a[] = {3,1,4,1,5,9}; cout << findMax(a, 6); return 0; }",
         "expectedOutput": "9",
+        "testCases": [
+            {
+                "input": "6\n3 1 4 1 5 9",
+                "expectedOutput": "9",
+                "explanation": "Basic: 9 is largest"
+            },
+            {
+                "input": "1\n42",
+                "expectedOutput": "42",
+                "explanation": "Single element is max"
+            },
+            {
+                "input": "5\n5 5 5 5 5",
+                "expectedOutput": "5",
+                "explanation": "All same values"
+            },
+            {
+                "input": "4\n-1 -5 -2 -10",
+                "expectedOutput": "-1",
+                "explanation": "All negatives: -1 is largest"
+            },
+            {
+                "input": "3\n0 0 0",
+                "expectedOutput": "0",
+                "explanation": "All zeros"
+            },
+            {
+                "input": "5\n1 2 3 4 5",
+                "expectedOutput": "5",
+                "explanation": "Max at end"
+            },
+            {
+                "input": "5\n5 4 3 2 1",
+                "expectedOutput": "5",
+                "explanation": "Max at beginning"
+            },
+            {
+                "input": "5\n1 2 100 3 4",
+                "expectedOutput": "100",
+                "explanation": "Max in middle"
+            },
+            {
+                "input": "3\n-100 0 100",
+                "expectedOutput": "100",
+                "explanation": "Wide range"
+            },
+            {
+                "input": "2\n2147483647 0",
+                "expectedOutput": "2147483647",
+                "explanation": "INT_MAX test"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint findMax(int arr[], int n) { int m = arr[0]; for(int i = 1; i < n; i++) if(arr[i] > m) m = arr[i]; return m; }\nint main() { int a[] = {3,1,4,1,5,9}; cout << findMax(a, 6); return 0; }",
         "explanation": {
             "approach": "Track maximum while looping.",
@@ -155,6 +571,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nint findMin(int arr[], int n) { return 0; }\nint main() { int a[] = {3,1,4,1,5,9}; cout << findMin(a, 6); return 0; }",
         "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "6\n3 1 4 1 5 9",
+                "expectedOutput": "1",
+                "explanation": "Basic: 1 is smallest"
+            },
+            {
+                "input": "1\n42",
+                "expectedOutput": "42",
+                "explanation": "Single element is min"
+            },
+            {
+                "input": "5\n5 5 5 5 5",
+                "expectedOutput": "5",
+                "explanation": "All same values"
+            },
+            {
+                "input": "4\n-1 -5 -2 -10",
+                "expectedOutput": "-10",
+                "explanation": "All negatives: -10 is smallest"
+            },
+            {
+                "input": "3\n0 0 0",
+                "expectedOutput": "0",
+                "explanation": "All zeros"
+            },
+            {
+                "input": "5\n5 4 3 2 1",
+                "expectedOutput": "1",
+                "explanation": "Min at end"
+            },
+            {
+                "input": "5\n1 2 3 4 5",
+                "expectedOutput": "1",
+                "explanation": "Min at beginning"
+            },
+            {
+                "input": "5\n5 4 1 2 3",
+                "expectedOutput": "1",
+                "explanation": "Min in middle"
+            },
+            {
+                "input": "3\n-100 0 100",
+                "expectedOutput": "-100",
+                "explanation": "Wide range"
+            },
+            {
+                "input": "2\n-2147483648 0",
+                "expectedOutput": "-2147483648",
+                "explanation": "INT_MIN test"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint findMin(int arr[], int n) { int m = arr[0]; for(int i = 1; i < n; i++) if(arr[i] < m) m = arr[i]; return m; }\nint main() { int a[] = {3,1,4,1,5,9}; cout << findMin(a, 6); return 0; }",
         "explanation": {
             "approach": "Track minimum while looping.",
@@ -174,6 +642,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid reverse(int arr[], int n) {}\nint main() { int a[] = {1,2,3,4,5}; reverse(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
         "expectedOutput": "5 4 3 2 1",
+        "testCases": [
+            {
+                "input": "5\n1 2 3 4 5",
+                "expectedOutput": "5 4 3 2 1",
+                "explanation": "Basic reversal"
+            },
+            {
+                "input": "1\n7",
+                "expectedOutput": "7",
+                "explanation": "Single element unchanged"
+            },
+            {
+                "input": "2\n1 2",
+                "expectedOutput": "2 1",
+                "explanation": "Two elements swap"
+            },
+            {
+                "input": "4\n1 2 3 4",
+                "expectedOutput": "4 3 2 1",
+                "explanation": "Even length array"
+            },
+            {
+                "input": "3\n5 5 5",
+                "expectedOutput": "5 5 5",
+                "explanation": "All same stays same"
+            },
+            {
+                "input": "5\n-1 -2 -3 -4 -5",
+                "expectedOutput": "-5 -4 -3 -2 -1",
+                "explanation": "Negative numbers"
+            },
+            {
+                "input": "6\n1 0 0 0 0 2",
+                "expectedOutput": "2 0 0 0 0 1",
+                "explanation": "Zeros in middle"
+            },
+            {
+                "input": "3\n100 200 300",
+                "expectedOutput": "300 200 100",
+                "explanation": "Larger numbers"
+            },
+            {
+                "input": "4\n-5 0 5 10",
+                "expectedOutput": "10 5 0 -5",
+                "explanation": "Mixed values"
+            },
+            {
+                "input": "5\n9 8 7 6 5",
+                "expectedOutput": "5 6 7 8 9",
+                "explanation": "Descending to ascending"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid reverse(int arr[], int n) { int l=0, r=n-1; while(l<r) { int t=arr[l]; arr[l]=arr[r]; arr[r]=t; l++; r--; } }\nint main() { int a[] = {1,2,3,4,5}; reverse(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
         "explanation": {
             "approach": "Two pointers swap from ends.",
@@ -193,6 +713,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nint count(int arr[], int n, int x) { return 0; }\nint main() { int a[] = {1,2,2,3,2,4}; cout << count(a, 6, 2); return 0; }",
         "expectedOutput": "3",
+        "testCases": [
+            {
+                "input": "6 2\n1 2 2 3 2 4",
+                "expectedOutput": "3",
+                "explanation": "2 appears 3 times"
+            },
+            {
+                "input": "5 5\n1 2 3 4 6",
+                "expectedOutput": "0",
+                "explanation": "Element not found"
+            },
+            {
+                "input": "4 7\n7 7 7 7",
+                "expectedOutput": "4",
+                "explanation": "All elements match"
+            },
+            {
+                "input": "1 3\n3",
+                "expectedOutput": "1",
+                "explanation": "Single element matches"
+            },
+            {
+                "input": "1 5\n3",
+                "expectedOutput": "0",
+                "explanation": "Single element no match"
+            },
+            {
+                "input": "5 0\n0 0 0 0 0",
+                "expectedOutput": "5",
+                "explanation": "Count zeros"
+            },
+            {
+                "input": "6 -1\n-1 0 -1 1 -1 2",
+                "expectedOutput": "3",
+                "explanation": "Count negative number"
+            },
+            {
+                "input": "5 1\n1 2 1 2 1",
+                "expectedOutput": "3",
+                "explanation": "Alternating pattern"
+            },
+            {
+                "input": "3 10\n10 20 30",
+                "expectedOutput": "1",
+                "explanation": "First element only"
+            },
+            {
+                "input": "3 30\n10 20 30",
+                "expectedOutput": "1",
+                "explanation": "Last element only"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint count(int arr[], int n, int x) { int c = 0; for(int i = 0; i < n; i++) if(arr[i] == x) c++; return c; }\nint main() { int a[] = {1,2,2,3,2,4}; cout << count(a, 6, 2); return 0; }",
         "explanation": {
             "approach": "Loop and count matches.",
@@ -212,6 +784,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nint search(int arr[], int n, int x) { return -1; }\nint main() { int a[] = {5,3,7,1,9}; cout << search(a, 5, 7); return 0; }",
         "expectedOutput": "2",
+        "testCases": [
+            {
+                "input": "5 7\n5 3 7 1 9",
+                "expectedOutput": "2",
+                "explanation": "7 found at index 2"
+            },
+            {
+                "input": "5 5\n5 3 7 1 9",
+                "expectedOutput": "0",
+                "explanation": "Found at first position"
+            },
+            {
+                "input": "5 9\n5 3 7 1 9",
+                "expectedOutput": "4",
+                "explanation": "Found at last position"
+            },
+            {
+                "input": "5 10\n5 3 7 1 9",
+                "expectedOutput": "-1",
+                "explanation": "Element not in array"
+            },
+            {
+                "input": "1 5\n5",
+                "expectedOutput": "0",
+                "explanation": "Single element found"
+            },
+            {
+                "input": "1 3\n5",
+                "expectedOutput": "-1",
+                "explanation": "Single element not found"
+            },
+            {
+                "input": "5 3\n3 3 3 3 3",
+                "expectedOutput": "0",
+                "explanation": "Returns first occurrence"
+            },
+            {
+                "input": "4 0\n-1 0 1 2",
+                "expectedOutput": "1",
+                "explanation": "Searching for zero"
+            },
+            {
+                "input": "3 -5\n-5 -10 -15",
+                "expectedOutput": "0",
+                "explanation": "Negative number search"
+            },
+            {
+                "input": "6 6\n1 2 3 4 5 6",
+                "expectedOutput": "5",
+                "explanation": "Last element search"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint search(int arr[], int n, int x) { for(int i = 0; i < n; i++) if(arr[i] == x) return i; return -1; }\nint main() { int a[] = {5,3,7,1,9}; cout << search(a, 5, 7); return 0; }",
         "explanation": {
             "approach": "Check each element one by one.",

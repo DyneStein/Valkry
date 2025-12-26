@@ -15,7 +15,29 @@
                 "Print Hello, name, then !"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"Alice\"",
+                "expectedOutput": "Hello Alice!",
+                "explanation": "Standard greeting"
+            },
+            {
+                "input": "\"Bob\"",
+                "expectedOutput": "Hello Bob!",
+                "explanation": "Different name"
+            },
+            {
+                "input": "\"World\"",
+                "expectedOutput": "Hello World!",
+                "explanation": "Classic greeting"
+            },
+            {
+                "input": "\"X\"",
+                "expectedOutput": "Hello X!",
+                "explanation": "Single character name"
+            }
+        ]
     },
     {
         "id": "prac2",
@@ -33,7 +55,29 @@
                 "Multiply length by width"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "l=5, w=3",
+                "expectedOutput": "15",
+                "explanation": "5 × 3 = 15"
+            },
+            {
+                "input": "l=10, w=10",
+                "expectedOutput": "100",
+                "explanation": "Square 10×10"
+            },
+            {
+                "input": "l=1, w=1",
+                "expectedOutput": "1",
+                "explanation": "Unit square"
+            },
+            {
+                "input": "l=7, w=4",
+                "expectedOutput": "28",
+                "explanation": "7 × 4 = 28"
+            }
+        ]
     },
     {
         "id": "prac3",
@@ -51,7 +95,29 @@
                 "Multiply 2 × π × radius"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "r=5",
+                "expectedOutput": "31.42",
+                "explanation": "2 × π × 5"
+            },
+            {
+                "input": "r=1",
+                "expectedOutput": "6.28",
+                "explanation": "2 × π × 1"
+            },
+            {
+                "input": "r=10",
+                "expectedOutput": "62.83",
+                "explanation": "2 × π × 10"
+            },
+            {
+                "input": "r=0",
+                "expectedOutput": "0.00",
+                "explanation": "Zero radius"
+            }
+        ]
     },
     {
         "id": "prac4",
@@ -70,7 +136,29 @@
                 "Return corresponding grade"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "score=85",
+                "expectedOutput": "B",
+                "explanation": "80-89 is B"
+            },
+            {
+                "input": "score=95",
+                "expectedOutput": "A",
+                "explanation": "90+ is A"
+            },
+            {
+                "input": "score=55",
+                "expectedOutput": "F",
+                "explanation": "Below 60 is F"
+            },
+            {
+                "input": "score=70",
+                "expectedOutput": "C",
+                "explanation": "70-79 is C"
+            }
+        ]
     },
     {
         "id": "prac5",
@@ -88,7 +176,29 @@
                 "Multiply by 365"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "years=10",
+                "expectedOutput": "3650",
+                "explanation": "10 × 365"
+            },
+            {
+                "input": "years=1",
+                "expectedOutput": "365",
+                "explanation": "1 year"
+            },
+            {
+                "input": "years=0",
+                "expectedOutput": "0",
+                "explanation": "Zero years"
+            },
+            {
+                "input": "years=25",
+                "expectedOutput": "9125",
+                "explanation": "25 × 365"
+            }
+        ]
     },
     {
         "id": "prac6",
@@ -107,7 +217,29 @@
                 "Divide by 100"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "bill=50, percent=20",
+                "expectedOutput": "10",
+                "explanation": "50 × 20% = 10"
+            },
+            {
+                "input": "bill=100, percent=15",
+                "expectedOutput": "15",
+                "explanation": "100 × 15% = 15"
+            },
+            {
+                "input": "bill=0, percent=20",
+                "expectedOutput": "0",
+                "explanation": "No bill, no tip"
+            },
+            {
+                "input": "bill=80, percent=10",
+                "expectedOutput": "8",
+                "explanation": "80 × 10% = 8"
+            }
+        ]
     },
     {
         "id": "prac7",
@@ -125,7 +257,29 @@
                 "Divide weight by height squared"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "w=70, h=1.75",
+                "expectedOutput": "22.9",
+                "explanation": "70 / 1.75² ≈ 22.9"
+            },
+            {
+                "input": "w=80, h=1.80",
+                "expectedOutput": "24.7",
+                "explanation": "80 / 1.80² ≈ 24.7"
+            },
+            {
+                "input": "w=50, h=1.60",
+                "expectedOutput": "19.5",
+                "explanation": "50 / 1.60² ≈ 19.5"
+            },
+            {
+                "input": "w=100, h=2.00",
+                "expectedOutput": "25.0",
+                "explanation": "100 / 2.00² = 25.0"
+            }
+        ]
     },
     {
         "id": "prac8",
@@ -145,7 +299,29 @@
                 "Take square root"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "(0,0) to (3,4)",
+                "expectedOutput": "5",
+                "explanation": "3-4-5 right triangle"
+            },
+            {
+                "input": "(0,0) to (0,0)",
+                "expectedOutput": "0",
+                "explanation": "Same point"
+            },
+            {
+                "input": "(1,1) to (4,5)",
+                "expectedOutput": "5",
+                "explanation": "√(9+16) = 5"
+            },
+            {
+                "input": "(0,0) to (5,12)",
+                "expectedOutput": "13",
+                "explanation": "5-12-13 right triangle"
+            }
+        ]
     },
     {
         "id": "prac9",
@@ -164,7 +340,29 @@
                 "Apply quadratic formula"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "a=1, b=-5, c=6",
+                "expectedOutput": "3 2",
+                "explanation": "x²-5x+6 = (x-3)(x-2)"
+            },
+            {
+                "input": "a=1, b=-2, c=1",
+                "expectedOutput": "1 1",
+                "explanation": "Repeated root"
+            },
+            {
+                "input": "a=1, b=0, c=-4",
+                "expectedOutput": "2 -2",
+                "explanation": "x² = 4"
+            },
+            {
+                "input": "a=1, b=-7, c=12",
+                "expectedOutput": "4 3",
+                "explanation": "x²-7x+12 = (x-4)(x-3)"
+            }
+        ]
     },
     {
         "id": "prac10",
@@ -182,6 +380,28 @@
                 "Check all three combinations"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "a=3, b=4, c=5",
+                "expectedOutput": "1",
+                "explanation": "Valid triangle"
+            },
+            {
+                "input": "a=1, b=1, c=10",
+                "expectedOutput": "0",
+                "explanation": "1+1 < 10, invalid"
+            },
+            {
+                "input": "a=5, b=5, c=5",
+                "expectedOutput": "1",
+                "explanation": "Equilateral triangle"
+            },
+            {
+                "input": "a=1, b=2, c=3",
+                "expectedOutput": "0",
+                "explanation": "1+2 = 3, degenerate"
+            }
+        ]
     }
 ]

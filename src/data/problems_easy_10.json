@@ -7,6 +7,58 @@
         "category": "Bit Manipulation",
         "starterCode": "#include <iostream>\nusing namespace std;\nint singleNumber(int nums[], int n) { return 0; }\nint main() { int a[]={2,2,1}; cout<<singleNumber(a,3); return 0; }",
         "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "3\n2 2 1",
+                "expectedOutput": "1",
+                "explanation": "1 appears once"
+            },
+            {
+                "input": "5\n4 1 2 1 2",
+                "expectedOutput": "4",
+                "explanation": "4 appears once"
+            },
+            {
+                "input": "1\n5",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "3\n1 1 2",
+                "expectedOutput": "2",
+                "explanation": "2 at end"
+            },
+            {
+                "input": "5\n5 3 3 5 7",
+                "expectedOutput": "7",
+                "explanation": "7 in middle"
+            },
+            {
+                "input": "3\n0 0 1",
+                "expectedOutput": "1",
+                "explanation": "With zeros"
+            },
+            {
+                "input": "5\n-1 -1 -2 -2 -3",
+                "expectedOutput": "-3",
+                "explanation": "Negatives"
+            },
+            {
+                "input": "7\n1 2 3 1 2 3 4",
+                "expectedOutput": "4",
+                "explanation": "Multiple pairs"
+            },
+            {
+                "input": "3\n100 200 100",
+                "expectedOutput": "200",
+                "explanation": "Large values"
+            },
+            {
+                "input": "5\n9 8 9 8 7",
+                "expectedOutput": "7",
+                "explanation": "Last is single"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint singleNumber(int nums[], int n) { int r=0; for(int i=0;i<n;i++) r^=nums[i]; return r; }\nint main() { int a[]={2,2,1}; cout<<singleNumber(a,3); return 0; }",
         "explanation": {
             "approach": "XOR all elements.",
@@ -25,6 +77,58 @@
         "category": "Bit Manipulation",
         "starterCode": "#include <iostream>\nusing namespace std;\nint hammingWeight(unsigned int n) { return 0; }\nint main() { cout<<hammingWeight(11); return 0; }",
         "expectedOutput": "3",
+        "testCases": [
+            {
+                "input": "11",
+                "expectedOutput": "3",
+                "explanation": "1011 has 3 ones"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "No bits set"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Single bit"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "3",
+                "explanation": "111 = 3 ones"
+            },
+            {
+                "input": "8",
+                "expectedOutput": "1",
+                "explanation": "1000 = 1 one"
+            },
+            {
+                "input": "15",
+                "expectedOutput": "4",
+                "explanation": "1111 = 4 ones"
+            },
+            {
+                "input": "16",
+                "expectedOutput": "1",
+                "explanation": "10000 = 1 one"
+            },
+            {
+                "input": "255",
+                "expectedOutput": "8",
+                "explanation": "11111111 = 8 ones"
+            },
+            {
+                "input": "128",
+                "expectedOutput": "1",
+                "explanation": "10000000"
+            },
+            {
+                "input": "31",
+                "expectedOutput": "5",
+                "explanation": "11111 = 5 ones"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint hammingWeight(unsigned int n) { int c=0; while(n) { c+=n&1; n>>=1; } return c; }\nint main() { cout<<hammingWeight(11); return 0; }",
         "explanation": {
             "approach": "Check each bit.",
@@ -43,6 +147,58 @@
         "category": "Bit Manipulation",
         "starterCode": "#include <iostream>\nusing namespace std;\nunsigned int reverseBits(unsigned int n) { return 0; }\nint main() { cout<<reverseBits(43261596); return 0; }",
         "expectedOutput": "964176192",
+        "testCases": [
+            {
+                "input": "43261596",
+                "expectedOutput": "964176192",
+                "explanation": "Binary reversal"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "All zeros stay"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "2147483648",
+                "explanation": "LSB to MSB"
+            },
+            {
+                "input": "4294967295",
+                "expectedOutput": "4294967295",
+                "explanation": "All 1s stay same"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "1073741824",
+                "explanation": "Second bit"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "3221225472",
+                "explanation": "First two bits"
+            },
+            {
+                "input": "128",
+                "expectedOutput": "16777216",
+                "explanation": "Single 1 moves"
+            },
+            {
+                "input": "256",
+                "expectedOutput": "8388608",
+                "explanation": "Another single bit"
+            },
+            {
+                "input": "1024",
+                "expectedOutput": "2097152",
+                "explanation": "Power of 2"
+            },
+            {
+                "input": "65536",
+                "expectedOutput": "32768",
+                "explanation": "Middle position"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nunsigned int reverseBits(unsigned int n) { unsigned int r=0; for(int i=0;i<32;i++) { r=(r<<1)|(n&1); n>>=1; } return r; }\nint main() { cout<<reverseBits(43261596); return 0; }",
         "explanation": {
             "approach": "Build result bit by bit.",
@@ -62,6 +218,58 @@
         "category": "Bit Manipulation",
         "starterCode": "#include <iostream>\nusing namespace std;\nint missingNumber(int nums[], int n) { return 0; }\nint main() { int a[]={3,0,1}; cout<<missingNumber(a,3); return 0; }",
         "expectedOutput": "2",
+        "testCases": [
+            {
+                "input": "3\n3 0 1",
+                "expectedOutput": "2",
+                "explanation": "2 is missing"
+            },
+            {
+                "input": "2\n0 1",
+                "expectedOutput": "2",
+                "explanation": "Last missing"
+            },
+            {
+                "input": "2\n1 2",
+                "expectedOutput": "0",
+                "explanation": "First missing"
+            },
+            {
+                "input": "1\n0",
+                "expectedOutput": "1",
+                "explanation": "Missing 1"
+            },
+            {
+                "input": "1\n1",
+                "expectedOutput": "0",
+                "explanation": "Missing 0"
+            },
+            {
+                "input": "4\n0 1 3 4",
+                "expectedOutput": "2",
+                "explanation": "Middle missing"
+            },
+            {
+                "input": "5\n5 4 2 1 0",
+                "expectedOutput": "3",
+                "explanation": "Unordered"
+            },
+            {
+                "input": "3\n2 0 3",
+                "expectedOutput": "1",
+                "explanation": "1 missing"
+            },
+            {
+                "input": "6\n0 1 2 3 4 6",
+                "expectedOutput": "5",
+                "explanation": "5 missing"
+            },
+            {
+                "input": "4\n1 2 3 4",
+                "expectedOutput": "0",
+                "explanation": "0 missing"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint missingNumber(int nums[], int n) { int xr=n; for(int i=0;i<n;i++) xr^=i^nums[i]; return xr; }\nint main() { int a[]={3,0,1}; cout<<missingNumber(a,3); return 0; }",
         "explanation": {
             "approach": "XOR all values.",
@@ -80,6 +288,58 @@
         "category": "Bit Manipulation",
         "starterCode": "#include <iostream>\nusing namespace std;\nbool isPowerOfTwo(int n) { return false; }\nint main() { cout<<isPowerOfTwo(16); return 0; }",
         "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "16",
+                "expectedOutput": "1",
+                "explanation": "2^4 = 16"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "2^0 = 1"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "0 is not power of 2"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "1",
+                "explanation": "2^1 = 2"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "0",
+                "explanation": "Not a power of 2"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "1",
+                "explanation": "2^2 = 4"
+            },
+            {
+                "input": "8",
+                "expectedOutput": "1",
+                "explanation": "2^3 = 8"
+            },
+            {
+                "input": "6",
+                "expectedOutput": "0",
+                "explanation": "6 = 2×3"
+            },
+            {
+                "input": "-16",
+                "expectedOutput": "0",
+                "explanation": "Negative not valid"
+            },
+            {
+                "input": "1024",
+                "expectedOutput": "1",
+                "explanation": "2^10"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nbool isPowerOfTwo(int n) { return n>0 && (n&(n-1))==0; }\nint main() { cout<<isPowerOfTwo(16); return 0; }",
         "explanation": {
             "approach": "n & (n-1) clears lowest bit.",
@@ -97,6 +357,58 @@
         "category": "Bit Manipulation",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid countBits(int n) {}\nint main() { countBits(5); return 0; }",
         "expectedOutput": "0 1 1 2 1 2",
+        "testCases": [
+            {
+                "input": "5",
+                "expectedOutput": "0 1 1 2 1 2",
+                "explanation": "Bits for 0-5"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "Just 0"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "0 1",
+                "explanation": "0 and 1"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "0 1 1",
+                "explanation": "0, 1, 10"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "0 1 1 2",
+                "explanation": "0, 1, 10, 11"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "0 1 1 2 1",
+                "explanation": "Through 100"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "0 1 1 2 1 2 2 3",
+                "explanation": "Through 111"
+            },
+            {
+                "input": "8",
+                "expectedOutput": "0 1 1 2 1 2 2 3 1",
+                "explanation": "Through 1000"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "0 1 1 2 1 2 2 3 1 2 2",
+                "explanation": "Through 10"
+            },
+            {
+                "input": "15",
+                "expectedOutput": "0 1 1 2 1 2 2 3 1 2 2 3 2 3 3 4",
+                "explanation": "Through 1111"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid countBits(int n) { for(int i=0;i<=n;i++) { int c=0,x=i; while(x) { c+=x&1; x>>=1; } cout<<c<<\" \"; } }\nint main() { countBits(5); return 0; }",
         "explanation": {
             "approach": "Count for each.",
@@ -115,6 +427,58 @@
         "category": "Bit Manipulation",
         "starterCode": "#include <iostream>\nusing namespace std;\nint hammingDistance(int x, int y) { return 0; }\nint main() { cout<<hammingDistance(1,4); return 0; }",
         "expectedOutput": "2",
+        "testCases": [
+            {
+                "input": "1 4",
+                "expectedOutput": "2",
+                "explanation": "001 vs 100 = 2 diffs"
+            },
+            {
+                "input": "0 0",
+                "expectedOutput": "0",
+                "explanation": "Same bits"
+            },
+            {
+                "input": "3 1",
+                "expectedOutput": "1",
+                "explanation": "11 vs 01 = 1 diff"
+            },
+            {
+                "input": "7 0",
+                "expectedOutput": "3",
+                "explanation": "111 vs 000"
+            },
+            {
+                "input": "15 0",
+                "expectedOutput": "4",
+                "explanation": "1111 vs 0000"
+            },
+            {
+                "input": "5 5",
+                "expectedOutput": "0",
+                "explanation": "Same number"
+            },
+            {
+                "input": "1 2",
+                "expectedOutput": "2",
+                "explanation": "01 vs 10"
+            },
+            {
+                "input": "8 7",
+                "expectedOutput": "4",
+                "explanation": "1000 vs 0111"
+            },
+            {
+                "input": "255 0",
+                "expectedOutput": "8",
+                "explanation": "All 8 bits differ"
+            },
+            {
+                "input": "10 5",
+                "expectedOutput": "4",
+                "explanation": "1010 vs 0101"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint hammingDistance(int x, int y) { int xr=x^y,c=0; while(xr) { c+=xr&1; xr>>=1; } return c; }\nint main() { cout<<hammingDistance(1,4); return 0; }",
         "explanation": {
             "approach": "XOR and count.",
@@ -133,6 +497,58 @@
         "category": "Bit Manipulation",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid readBinaryWatch(int turnedOn) {}\nint main() { readBinaryWatch(1); return 0; }",
         "expectedOutput": "0:01 0:02 0:04 0:08 0:16 0:32 1:00 2:00 4:00 8:00",
+        "testCases": [
+            {
+                "input": "1",
+                "expectedOutput": "0:01 0:02 0:04 0:08 0:16 0:32 1:00 2:00 4:00 8:00",
+                "explanation": "1 LED on"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0:00",
+                "explanation": "No LEDs = midnight"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "0:03 0:05 0:06 0:09 0:10 0:12 0:17 0:18 0:20 0:24 0:33 0:34 0:36 0:40 0:48 1:01 1:02 1:04 1:08 1:16 1:32 2:01 2:02 2:04 2:08 2:16 2:32 3:00 4:01 4:02 4:04 4:08 4:16 4:32 5:00 6:00 8:01 8:02 8:04 8:08 8:16 8:32 9:00 10:00",
+                "explanation": "2 LEDs"
+            },
+            {
+                "input": "9",
+                "expectedOutput": "",
+                "explanation": "Impossible with 9 LEDs"
+            },
+            {
+                "input": "8",
+                "expectedOutput": "7:31 7:47 7:55 7:59 11:31 11:47 11:55 11:59",
+                "explanation": "8 LEDs"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "0:01 0:02 0:04 0:08 0:16 0:32 1:00 2:00 4:00 8:00",
+                "explanation": "Single LED"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0:00",
+                "explanation": "Zero LEDs"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "0:01 0:02 0:04 0:08 0:16 0:32 1:00 2:00 4:00 8:00",
+                "explanation": "One bit set"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "0:03 ...",
+                "explanation": "Two bits set"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0:00",
+                "explanation": "Base case"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint cnt(int n) { int c=0; while(n) { c+=n&1; n>>=1; } return c; }\nvoid readBinaryWatch(int num) { for(int h=0;h<12;h++) for(int m=0;m<60;m++) if(cnt(h)+cnt(m)==num) cout<<h<<\":\"<<(m<10?\"0\":\"\")<<m<<\" \"; }\nint main() { readBinaryWatch(1); return 0; }",
         "explanation": {
             "approach": "Enumerate all times.",
@@ -151,6 +567,58 @@
         "category": "Bit Manipulation",
         "starterCode": "#include <iostream>\nusing namespace std;\nint getSum(int a, int b) { return 0; }\nint main() { cout<<getSum(1,2); return 0; }",
         "expectedOutput": "3",
+        "testCases": [
+            {
+                "input": "1 2",
+                "expectedOutput": "3",
+                "explanation": "1+2=3"
+            },
+            {
+                "input": "0 0",
+                "expectedOutput": "0",
+                "explanation": "0+0=0"
+            },
+            {
+                "input": "5 3",
+                "expectedOutput": "8",
+                "explanation": "5+3=8"
+            },
+            {
+                "input": "-1 1",
+                "expectedOutput": "0",
+                "explanation": "-1+1=0"
+            },
+            {
+                "input": "10 20",
+                "expectedOutput": "30",
+                "explanation": "10+20=30"
+            },
+            {
+                "input": "-5 -3",
+                "expectedOutput": "-8",
+                "explanation": "-5+-3=-8"
+            },
+            {
+                "input": "0 5",
+                "expectedOutput": "5",
+                "explanation": "0+5=5"
+            },
+            {
+                "input": "7 0",
+                "expectedOutput": "7",
+                "explanation": "7+0=7"
+            },
+            {
+                "input": "100 200",
+                "expectedOutput": "300",
+                "explanation": "Large sum"
+            },
+            {
+                "input": "-10 5",
+                "expectedOutput": "-5",
+                "explanation": "-10+5=-5"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint getSum(int a, int b) { while(b) { int c=(unsigned)(a&b)<<1; a=a^b; b=c; } return a; }\nint main() { cout<<getSum(1,2); return 0; }",
         "explanation": {
             "approach": "Bit manipulation.",
@@ -169,6 +637,58 @@
         "category": "Bit Manipulation",
         "starterCode": "#include <iostream>\nusing namespace std;\nint bitwiseComplement(int n) { return 0; }\nint main() { cout<<bitwiseComplement(5); return 0; }",
         "expectedOutput": "2",
+        "testCases": [
+            {
+                "input": "5",
+                "expectedOutput": "2",
+                "explanation": "101 -> 010"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "1",
+                "explanation": "0 -> 1"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "0",
+                "explanation": "1 -> 0"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "0",
+                "explanation": "111 -> 000"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "5",
+                "explanation": "1010 -> 0101"
+            },
+            {
+                "input": "15",
+                "expectedOutput": "0",
+                "explanation": "1111 -> 0000"
+            },
+            {
+                "input": "8",
+                "expectedOutput": "7",
+                "explanation": "1000 -> 0111"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "0",
+                "explanation": "11 -> 00"
+            },
+            {
+                "input": "6",
+                "expectedOutput": "1",
+                "explanation": "110 -> 001"
+            },
+            {
+                "input": "9",
+                "expectedOutput": "6",
+                "explanation": "1001 -> 0110"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint bitwiseComplement(int n) { if(n==0) return 1; int mask=1; while(mask<n) mask=(mask<<1)|1; return n^mask; }\nint main() { cout<<bitwiseComplement(5); return 0; }",
         "explanation": {
             "approach": "XOR with all 1s mask.",

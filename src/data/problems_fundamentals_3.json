@@ -9,13 +9,34 @@
         "expectedOutput": "55",
         "solution": "#include <iostream>\nusing namespace std;\nint sumSquares(int n) {\n    return n * (n + 1) * (2 * n + 1) / 6;\n}\nint main() { cout<<sumSquares(5); return 0; }",
         "explanation": {
-            "approach": "Formula: n(n+1)(2n+1)/6 gives 1² + 2² + 3² + ... + n²",
-            "analogy": "Like stacking squares - there's a magic formula for the total.",
+            "approach": "Formula: n(n+1)(2n+1)/6",
             "steps": [
-                "Apply formula: n(n+1)(2n+1)/6"
+                "Apply formula directly"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "55",
+                "explanation": "1+4+9+16+25=55"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "14",
+                "explanation": "1+4+9=14"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "1²=1"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "385",
+                "explanation": "Sum first 10 squares"
+            }
+        ]
     },
     {
         "id": "fun52",
@@ -27,14 +48,35 @@
         "expectedOutput": "225",
         "solution": "#include <iostream>\nusing namespace std;\nint sumCubes(int n) {\n    int sum = n * (n + 1) / 2;\n    return sum * sum;\n}\nint main() { cout<<sumCubes(5); return 0; }",
         "explanation": {
-            "approach": "Formula: (n(n+1)/2)² = (sum of 1 to n)²",
-            "analogy": "Amazing: 1³+2³+3³+...+n³ = (1+2+3+...+n)²",
+            "approach": "Sum of cubes = (sum of n)²",
             "steps": [
-                "Calculate sum 1 to n",
+                "Calculate sum of 1 to n",
                 "Square it"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "225",
+                "explanation": "(1+2+3+4+5)²=15²=225"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "36",
+                "explanation": "6²=36"
+            },
+            {
+                "input": "n=4",
+                "expectedOutput": "100",
+                "explanation": "10²=100"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "1³=1"
+            }
+        ]
     },
     {
         "id": "fun53",
@@ -44,17 +86,36 @@
         "category": "Fundamentals",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid printOdd(int n) {}\nint main() { printOdd(10); return 0; }",
         "expectedOutput": "1 3 5 7 9",
-        "solution": "#include <iostream>\nusing namespace std;\nvoid printOdd(int n) {\n    for(int i = 1; i <= n; i += 2)\n        cout << i << (i + 2 <= n ? \" \" : \"\");\n}\nint main() { printOdd(10); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid printOdd(int n) {\n    for(int i = 1; i <= n; i += 2)\n        cout << i << \" \";\n}\nint main() { printOdd(10); return 0; }",
         "explanation": {
-            "approach": "Start from 1, increment by 2 each time.",
-            "analogy": "Skip every other number starting from 1.",
+            "approach": "Start from 1, increment by 2.",
             "steps": [
-                "Start at 1",
-                "Add 2 each step",
-                "Stop when > n"
+                "Loop i=1,3,5..."
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "1 3 5 7 9",
+                "explanation": "Odds up to 10"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "1 3 5",
+                "explanation": "Odds up to 5"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Just 1"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "1 3 5 7",
+                "explanation": "Odds to 7"
+            }
+        ]
     },
     {
         "id": "fun54",
@@ -64,17 +125,36 @@
         "category": "Fundamentals",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid printEven(int n) {}\nint main() { printEven(10); return 0; }",
         "expectedOutput": "2 4 6 8 10",
-        "solution": "#include <iostream>\nusing namespace std;\nvoid printEven(int n) {\n    for(int i = 2; i <= n; i += 2)\n        cout << i << (i + 2 <= n ? \" \" : \"\");\n}\nint main() { printEven(10); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid printEven(int n) {\n    for(int i = 2; i <= n; i += 2)\n        cout << i << \" \";\n}\nint main() { printEven(10); return 0; }",
         "explanation": {
             "approach": "Start from 2, increment by 2.",
-            "analogy": "Skip every other number starting from 2.",
             "steps": [
-                "Start at 2",
-                "Add 2 each step",
-                "Stop when > n"
+                "Loop i=2,4,6..."
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "2 4 6 8 10",
+                "explanation": "Evens up to 10"
+            },
+            {
+                "input": "n=6",
+                "expectedOutput": "2 4 6",
+                "explanation": "Evens up to 6"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "2",
+                "explanation": "Just 2"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "",
+                "explanation": "No evens below 2"
+            }
+        ]
     },
     {
         "id": "fun55",
@@ -86,14 +166,34 @@
         "expectedOutput": "30",
         "solution": "#include <iostream>\nusing namespace std;\nint sumEven(int n) {\n    int sum = 0;\n    for(int i = 2; i <= n; i += 2) sum += i;\n    return sum;\n}\nint main() { cout<<sumEven(10); return 0; }",
         "explanation": {
-            "approach": "Add all even numbers from 2 to n.",
-            "analogy": "2+4+6+8+10 = 30",
+            "approach": "Add all even numbers.",
             "steps": [
-                "Loop through even numbers",
-                "Add each to sum"
+                "Sum 2+4+6+..."
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "30",
+                "explanation": "2+4+6+8+10=30"
+            },
+            {
+                "input": "n=6",
+                "expectedOutput": "12",
+                "explanation": "2+4+6=12"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "2",
+                "explanation": "Just 2"
+            },
+            {
+                "input": "n=20",
+                "expectedOutput": "110",
+                "explanation": "Sum evens to 20"
+            }
+        ]
     },
     {
         "id": "fun56",
@@ -105,14 +205,34 @@
         "expectedOutput": "25",
         "solution": "#include <iostream>\nusing namespace std;\nint sumOdd(int n) {\n    int sum = 0;\n    for(int i = 1; i <= n; i += 2) sum += i;\n    return sum;\n}\nint main() { cout<<sumOdd(10); return 0; }",
         "explanation": {
-            "approach": "Add all odd numbers from 1 to n.",
-            "analogy": "1+3+5+7+9 = 25",
+            "approach": "Add all odd numbers.",
             "steps": [
-                "Loop through odd numbers",
-                "Add each to sum"
+                "Sum 1+3+5+..."
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "25",
+                "explanation": "1+3+5+7+9=25"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "9",
+                "explanation": "1+3+5=9"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Just 1"
+            },
+            {
+                "input": "n=9",
+                "expectedOutput": "25",
+                "explanation": "1+3+5+7+9=25"
+            }
+        ]
     },
     {
         "id": "fun57",
@@ -124,16 +244,35 @@
         "expectedOutput": "24",
         "solution": "#include <iostream>\nusing namespace std;\nint productDigits(int n) {\n    int prod = 1;\n    while(n > 0) {\n        prod *= n % 10;\n        n /= 10;\n    }\n    return prod;\n}\nint main() { cout<<productDigits(234); return 0; }",
         "explanation": {
-            "approach": "Extract each digit and multiply together.",
-            "analogy": "234 → 2×3×4 = 24",
+            "approach": "Extract and multiply each digit.",
             "steps": [
-                "Get last digit",
-                "Multiply to product",
-                "Remove last digit",
-                "Repeat"
+                "Get digit with %10",
+                "Multiply to product"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=234",
+                "expectedOutput": "24",
+                "explanation": "2×3×4=24"
+            },
+            {
+                "input": "n=123",
+                "expectedOutput": "6",
+                "explanation": "1×2×3=6"
+            },
+            {
+                "input": "n=105",
+                "expectedOutput": "0",
+                "explanation": "Contains 0"
+            },
+            {
+                "input": "n=999",
+                "expectedOutput": "729",
+                "explanation": "9×9×9=729"
+            }
+        ]
     },
     {
         "id": "fun58",
@@ -145,14 +284,34 @@
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nint firstDigit(int n) {\n    while(n >= 10) n /= 10;\n    return n;\n}\nint main() { cout<<firstDigit(12345); return 0; }",
         "explanation": {
-            "approach": "Keep dividing by 10 until single digit.",
-            "analogy": "12345 → 1234 → 123 → 12 → 1",
+            "approach": "Divide by 10 until single digit.",
             "steps": [
-                "Divide by 10 repeatedly",
-                "Until n < 10"
+                "Keep dividing until n<10"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=12345",
+                "expectedOutput": "1",
+                "explanation": "First digit is 1"
+            },
+            {
+                "input": "n=9876",
+                "expectedOutput": "9",
+                "explanation": "First digit is 9"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "5",
+                "explanation": "Single digit"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "1",
+                "explanation": "First digit is 1"
+            }
+        ]
     },
     {
         "id": "fun59",
@@ -165,12 +324,33 @@
         "solution": "#include <iostream>\nusing namespace std;\nint lastDigit(int n) {\n    return n % 10;\n}\nint main() { cout<<lastDigit(12345); return 0; }",
         "explanation": {
             "approach": "Modulo 10 gives last digit.",
-            "analogy": "12345 % 10 = 5",
             "steps": [
                 "Return n % 10"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=12345",
+                "expectedOutput": "5",
+                "explanation": "Last digit is 5"
+            },
+            {
+                "input": "n=9870",
+                "expectedOutput": "0",
+                "explanation": "Last digit is 0"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "7",
+                "explanation": "Single digit"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "0",
+                "explanation": "Ends in 0"
+            }
+        ]
     },
     {
         "id": "fun60",
@@ -182,15 +362,35 @@
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint sumFirstLast(int n) {\n    int last = n % 10;\n    while(n >= 10) n /= 10;\n    return n + last;\n}\nint main() { cout<<sumFirstLast(12345); return 0; }",
         "explanation": {
-            "approach": "Get last digit, then find first digit, add them.",
-            "analogy": "12345 → 1 + 5 = 6",
+            "approach": "Get first and last, add them.",
             "steps": [
-                "Get last digit (n%10)",
-                "Find first digit",
-                "Add them"
+                "Get last with %10",
+                "Get first by dividing"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=12345",
+                "expectedOutput": "6",
+                "explanation": "1+5=6"
+            },
+            {
+                "input": "n=98",
+                "expectedOutput": "17",
+                "explanation": "9+8=17"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "14",
+                "explanation": "7+7=14 (same digit)"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "1",
+                "explanation": "1+0=1"
+            }
+        ]
     },
     {
         "id": "fun61",
@@ -200,17 +400,37 @@
         "category": "Fundamentals",
         "starterCode": "#include <iostream>\nusing namespace std;\nint swapFirstLast(int n) { return 0; }\nint main() { cout<<swapFirstLast(12345); return 0; }",
         "expectedOutput": "52341",
-        "solution": "#include <iostream>\nusing namespace std;\nint swapFirstLast(int n) {\n    int digits = 0, temp = n;\n    while(temp > 0) { digits++; temp /= 10; }\n    int first = n, mult = 1;\n    while(first >= 10) { first /= 10; mult *= 10; }\n    int last = n % 10;\n    return n - first * mult - last + last * mult + first;\n}\nint main() { cout<<swapFirstLast(12345); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nint swapFirstLast(int n) {\n    int mult = 1, temp = n;\n    while(temp >= 10) { mult *= 10; temp /= 10; }\n    int first = temp, last = n % 10;\n    return n - first * mult - last + last * mult + first;\n}\nint main() { cout<<swapFirstLast(12345); return 0; }",
         "explanation": {
-            "approach": "Calculate positions, swap mathematically.",
-            "analogy": "12345 → swap 1 and 5 → 52341",
+            "approach": "Calculate positions and swap.",
             "steps": [
-                "Find first and last digits",
-                "Calculate their positions",
-                "Swap using math"
+                "Find first and last",
+                "Swap mathematically"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=12345",
+                "expectedOutput": "52341",
+                "explanation": "Swap 1 and 5"
+            },
+            {
+                "input": "n=98",
+                "expectedOutput": "89",
+                "explanation": "Swap 9 and 8"
+            },
+            {
+                "input": "n=1234",
+                "expectedOutput": "4231",
+                "explanation": "Swap 1 and 4"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "5",
+                "explanation": "Single digit unchanged"
+            }
+        ]
     },
     {
         "id": "fun62",
@@ -223,13 +443,34 @@
         "solution": "#include <iostream>\nusing namespace std;\nint removeFirst(int n) {\n    int mult = 1, temp = n;\n    while(temp >= 10) { mult *= 10; temp /= 10; }\n    return n % mult;\n}\nint main() { cout<<removeFirst(12345); return 0; }",
         "explanation": {
             "approach": "Use modulo to remove first digit.",
-            "analogy": "12345 % 10000 = 2345",
             "steps": [
-                "Find power of 10 equal to first digit position",
-                "Modulo by that"
+                "Find multiplier",
+                "Return n % mult"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=12345",
+                "expectedOutput": "2345",
+                "explanation": "Remove 1"
+            },
+            {
+                "input": "n=9876",
+                "expectedOutput": "876",
+                "explanation": "Remove 9"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "0",
+                "explanation": "100→00=0"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "0",
+                "explanation": "Single digit→0"
+            }
+        ]
     },
     {
         "id": "fun63",
@@ -241,154 +482,239 @@
         "expectedOutput": "1234",
         "solution": "#include <iostream>\nusing namespace std;\nint removeLast(int n) {\n    return n / 10;\n}\nint main() { cout<<removeLast(12345); return 0; }",
         "explanation": {
-            "approach": "Integer division by 10.",
-            "analogy": "12345 / 10 = 1234",
+            "approach": "Divide by 10 to remove last.",
             "steps": [
-                "Divide by 10"
+                "Return n / 10"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=12345",
+                "expectedOutput": "1234",
+                "explanation": "Remove 5"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "10",
+                "explanation": "Remove 0"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "0",
+                "explanation": "Single digit→0"
+            },
+            {
+                "input": "n=99",
+                "expectedOutput": "9",
+                "explanation": "Remove 9"
+            }
+        ]
     },
     {
         "id": "fun64",
-        "title": "Rotate Left Once",
-        "description": "Move first digit to end.",
+        "title": "Check Armstrong",
+        "description": "Is Armstrong number.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint rotateLeft(int n) { return 0; }\nint main() { cout<<rotateLeft(12345); return 0; }",
-        "expectedOutput": "23451",
-        "solution": "#include <iostream>\nusing namespace std;\nint rotateLeft(int n) {\n    int mult = 1, temp = n;\n    while(temp >= 10) { mult *= 10; temp /= 10; }\n    return (n % mult) * 10 + temp;\n}\nint main() { cout<<rotateLeft(12345); return 0; }",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isArmstrong(int n) { return false; }\nint main() { cout<<isArmstrong(153); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isArmstrong(int n) {\n    int sum = 0, temp = n;\n    int digits = 0, t = n;\n    while(t > 0) { digits++; t /= 10; }\n    while(temp > 0) {\n        int d = temp % 10;\n        int p = 1;\n        for(int i=0;i<digits;i++) p *= d;\n        sum += p;\n        temp /= 10;\n    }\n    return sum == n;\n}\nint main() { cout<<isArmstrong(153); return 0; }",
         "explanation": {
-            "approach": "Remove first digit, append it at end.",
-            "analogy": "12345 → 2345 × 10 + 1 = 23451",
+            "approach": "Sum of digits^(num digits) equals number.",
             "steps": [
-                "Find first digit",
-                "Remove it",
-                "Append to end"
+                "Count digits",
+                "Sum each digit^n",
+                "Compare to original"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=153",
+                "expectedOutput": "1",
+                "explanation": "1³+5³+3³=153"
+            },
+            {
+                "input": "n=370",
+                "expectedOutput": "1",
+                "explanation": "3³+7³+0³=370"
+            },
+            {
+                "input": "n=123",
+                "expectedOutput": "0",
+                "explanation": "1³+2³+3³=36≠123"
+            },
+            {
+                "input": "n=9474",
+                "expectedOutput": "1",
+                "explanation": "9⁴+4⁴+7⁴+4⁴=9474"
+            }
+        ]
     },
     {
         "id": "fun65",
-        "title": "Rotate Right Once",
-        "description": "Move last digit to start.",
+        "title": "Check Strong Number",
+        "description": "Sum of factorials of digits.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint rotateRight(int n) { return 0; }\nint main() { cout<<rotateRight(12345); return 0; }",
-        "expectedOutput": "51234",
-        "solution": "#include <iostream>\nusing namespace std;\nint rotateRight(int n) {\n    int last = n % 10;\n    int mult = 1, temp = n;\n    while(temp >= 10) { mult *= 10; temp /= 10; }\n    return last * mult + n / 10;\n}\nint main() { cout<<rotateRight(12345); return 0; }",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isStrong(int n) { return false; }\nint main() { cout<<isStrong(145); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint fact(int x) { int f=1; for(int i=2;i<=x;i++) f*=i; return f; }\nbool isStrong(int n) {\n    int sum = 0, temp = n;\n    while(temp > 0) {\n        sum += fact(temp % 10);\n        temp /= 10;\n    }\n    return sum == n;\n}\nint main() { cout<<isStrong(145); return 0; }",
         "explanation": {
-            "approach": "Remove last digit, prepend it at start.",
-            "analogy": "12345 → 5 × 10000 + 1234 = 51234",
+            "approach": "Sum of factorials of each digit equals number.",
             "steps": [
-                "Get last digit",
-                "Remove it",
-                "Prepend at start"
+                "Get each digit",
+                "Sum their factorials"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=145",
+                "expectedOutput": "1",
+                "explanation": "1!+4!+5!=1+24+120=145"
+            },
+            {
+                "input": "n=40585",
+                "expectedOutput": "1",
+                "explanation": "Only other strong number"
+            },
+            {
+                "input": "n=123",
+                "expectedOutput": "0",
+                "explanation": "1!+2!+3!=9≠123"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "1",
+                "explanation": "2!=2"
+            }
+        ]
     },
     {
         "id": "fun66",
-        "title": "Neon Number",
-        "description": "Sum of digits of square = n.",
+        "title": "Check Perfect Number",
+        "description": "Sum of divisors equals n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isNeon(int n) { return false; }\nint main() { cout<<isNeon(9); return 0; }",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPerfect(int n) { return false; }\nint main() { cout<<isPerfect(28); return 0; }",
         "expectedOutput": "1",
-        "solution": "#include <iostream>\nusing namespace std;\nbool isNeon(int n) {\n    int sq = n * n, sum = 0;\n    while(sq > 0) { sum += sq % 10; sq /= 10; }\n    return sum == n;\n}\nint main() { cout<<isNeon(9); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPerfect(int n) {\n    int sum = 1;\n    for(int i = 2; i * i <= n; i++) {\n        if(n % i == 0) {\n            sum += i;\n            if(i != n/i) sum += n/i;\n        }\n    }\n    return sum == n && n > 1;\n}\nint main() { cout<<isPerfect(28); return 0; }",
         "explanation": {
-            "approach": "Square n, sum its digits, check if equals n.",
-            "analogy": "9² = 81, 8+1 = 9 ✓",
+            "approach": "Sum of proper divisors equals number.",
             "steps": [
-                "Calculate n²",
-                "Sum digits of square",
-                "Check if equals n"
+                "Find all divisors",
+                "Sum them (excluding n)"
             ],
-            "complexity": "Time: O(log n), Space: O(1)"
-        }
+            "complexity": "Time: O(√n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=28",
+                "expectedOutput": "1",
+                "explanation": "1+2+4+7+14=28"
+            },
+            {
+                "input": "n=6",
+                "expectedOutput": "1",
+                "explanation": "1+2+3=6"
+            },
+            {
+                "input": "n=12",
+                "expectedOutput": "0",
+                "explanation": "1+2+3+4+6=16≠12"
+            },
+            {
+                "input": "n=496",
+                "expectedOutput": "1",
+                "explanation": "Third perfect number"
+            }
+        ]
     },
     {
         "id": "fun67",
-        "title": "Spy Number",
-        "description": "Sum of digits = product.",
+        "title": "Check Abundant Number",
+        "description": "Sum of divisors > n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isSpy(int n) { return false; }\nint main() { cout<<isSpy(1124); return 0; }",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isAbundant(int n) { return false; }\nint main() { cout<<isAbundant(12); return 0; }",
         "expectedOutput": "1",
-        "solution": "#include <iostream>\nusing namespace std;\nbool isSpy(int n) {\n    int sum = 0, prod = 1;\n    while(n > 0) {\n        int d = n % 10;\n        sum += d; prod *= d;\n        n /= 10;\n    }\n    return sum == prod;\n}\nint main() { cout<<isSpy(1124); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isAbundant(int n) {\n    int sum = 1;\n    for(int i = 2; i * i <= n; i++) {\n        if(n % i == 0) {\n            sum += i;\n            if(i != n/i) sum += n/i;\n        }\n    }\n    return sum > n;\n}\nint main() { cout<<isAbundant(12); return 0; }",
         "explanation": {
-            "approach": "Calculate sum and product of digits, compare.",
-            "analogy": "1124: sum=1+1+2+4=8, prod=1×1×2×4=8 ✓",
+            "approach": "Sum of proper divisors exceeds number.",
             "steps": [
-                "Calculate sum of digits",
-                "Calculate product of digits",
-                "Check if equal"
+                "Sum all divisors",
+                "Check if > n"
             ],
-            "complexity": "Time: O(log n), Space: O(1)"
-        }
+            "complexity": "Time: O(√n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=12",
+                "expectedOutput": "1",
+                "explanation": "1+2+3+4+6=16>12"
+            },
+            {
+                "input": "n=18",
+                "expectedOutput": "1",
+                "explanation": "1+2+3+6+9=21>18"
+            },
+            {
+                "input": "n=6",
+                "expectedOutput": "0",
+                "explanation": "Perfect, not abundant"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "0",
+                "explanation": "Prime, deficient"
+            }
+        ]
     },
     {
         "id": "fun68",
-        "title": "Automorphic Number",
-        "description": "Square ends with n.",
+        "title": "Check Deficient Number",
+        "description": "Sum of divisors < n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isAutomorphic(int n) { return false; }\nint main() { cout<<isAutomorphic(25); return 0; }",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isDeficient(int n) { return false; }\nint main() { cout<<isDeficient(15); return 0; }",
         "expectedOutput": "1",
-        "solution": "#include <iostream>\nusing namespace std;\nbool isAutomorphic(int n) {\n    int sq = n * n, mult = 1;\n    int temp = n;\n    while(temp > 0) { mult *= 10; temp /= 10; }\n    return sq % mult == n;\n}\nint main() { cout<<isAutomorphic(25); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isDeficient(int n) {\n    int sum = 1;\n    for(int i = 2; i * i <= n; i++) {\n        if(n % i == 0) {\n            sum += i;\n            if(i != n/i) sum += n/i;\n        }\n    }\n    return sum < n;\n}\nint main() { cout<<isDeficient(15); return 0; }",
         "explanation": {
-            "approach": "Check if n² ends with n.",
-            "analogy": "25² = 625, ends with 25 ✓",
+            "approach": "Sum of proper divisors less than number.",
             "steps": [
-                "Calculate n²",
-                "Check if last digits equal n"
+                "Sum all divisors",
+                "Check if < n"
             ],
-            "complexity": "Time: O(log n), Space: O(1)"
-        }
+            "complexity": "Time: O(√n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=15",
+                "expectedOutput": "1",
+                "explanation": "1+3+5=9<15"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "1",
+                "explanation": "Prime: 1<7"
+            },
+            {
+                "input": "n=12",
+                "expectedOutput": "0",
+                "explanation": "Abundant not deficient"
+            },
+            {
+                "input": "n=21",
+                "expectedOutput": "1",
+                "explanation": "1+3+7=11<21"
+            }
+        ]
     },
     {
         "id": "fun69",
-        "title": "Duck Number",
-        "description": "Has zero but not at start.",
-        "difficulty": "EASY",
-        "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isDuck(int n) { return false; }\nint main() { cout<<isDuck(1023); return 0; }",
-        "expectedOutput": "1",
-        "solution": "#include <iostream>\nusing namespace std;\nbool isDuck(int n) {\n    while(n > 0) {\n        if(n % 10 == 0 && n >= 10) return true;\n        n /= 10;\n    }\n    return false;\n}\nint main() { cout<<isDuck(1023); return 0; }",
-        "explanation": {
-            "approach": "Check if 0 appears (not at start).",
-            "analogy": "1023 has 0 not at start ✓",
-            "steps": [
-                "Check each digit",
-                "If 0 found (not first), it's duck"
-            ],
-            "complexity": "Time: O(log n), Space: O(1)"
-        }
-    },
-    {
-        "id": "fun70",
-        "title": "Buzz Number",
-        "description": "Ends in 7 or divisible by 7.",
-        "difficulty": "EASY",
-        "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isBuzz(int n) { return false; }\nint main() { cout<<isBuzz(14); return 0; }",
-        "expectedOutput": "1",
-        "solution": "#include <iostream>\nusing namespace std;\nbool isBuzz(int n) {\n    return n % 10 == 7 || n % 7 == 0;\n}\nint main() { cout<<isBuzz(14); return 0; }",
-        "explanation": {
-            "approach": "Check if ends in 7 OR divisible by 7.",
-            "analogy": "14 is divisible by 7 ✓, 27 ends in 7 ✓",
-            "steps": [
-                "Check if n % 10 == 7",
-                "OR check if n % 7 == 0"
-            ],
-            "complexity": "Time: O(1), Space: O(1)"
-        }
-    },
-    {
-        "id": "fun71",
-        "title": "Harshad Number",
+        "title": "Check Harshad Number",
         "description": "Divisible by sum of digits.",
         "difficulty": "EASY",
         "category": "Fundamentals",
@@ -396,91 +722,274 @@
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isHarshad(int n) {\n    int sum = 0, temp = n;\n    while(temp > 0) { sum += temp % 10; temp /= 10; }\n    return n % sum == 0;\n}\nint main() { cout<<isHarshad(18); return 0; }",
         "explanation": {
-            "approach": "Find digit sum, check if n divisible by it.",
-            "analogy": "18: sum=1+8=9, 18÷9=2 ✓",
+            "approach": "Number divisible by its digit sum.",
             "steps": [
                 "Calculate digit sum",
-                "Check if n % sum == 0"
+                "Check divisibility"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=18",
+                "expectedOutput": "1",
+                "explanation": "1+8=9, 18÷9=2"
+            },
+            {
+                "input": "n=12",
+                "expectedOutput": "1",
+                "explanation": "1+2=3, 12÷3=4"
+            },
+            {
+                "input": "n=11",
+                "expectedOutput": "0",
+                "explanation": "1+1=2, 11÷2≠int"
+            },
+            {
+                "input": "n=21",
+                "expectedOutput": "1",
+                "explanation": "2+1=3, 21÷3=7"
+            }
+        ]
+    },
+    {
+        "id": "fun70",
+        "title": "Check Automorphic",
+        "description": "Square ends with number.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isAutomorphic(int n) { return false; }\nint main() { cout<<isAutomorphic(25); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isAutomorphic(int n) {\n    int sq = n * n;\n    int mult = 1, temp = n;\n    while(temp > 0) { mult *= 10; temp /= 10; }\n    return sq % mult == n;\n}\nint main() { cout<<isAutomorphic(25); return 0; }",
+        "explanation": {
+            "approach": "Square of number ends with the number.",
+            "steps": [
+                "Calculate square",
+                "Check if ends with n"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=25",
+                "expectedOutput": "1",
+                "explanation": "25²=625 ends in 25"
+            },
+            {
+                "input": "n=76",
+                "expectedOutput": "1",
+                "explanation": "76²=5776 ends in 76"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "1",
+                "explanation": "5²=25 ends in 5"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "0",
+                "explanation": "7²=49 doesn't end in 7"
+            }
+        ]
+    },
+    {
+        "id": "fun71",
+        "title": "Nth Prime Number",
+        "description": "Find nth prime.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint nthPrime(int n) { return 0; }\nint main() { cout<<nthPrime(5); return 0; }",
+        "expectedOutput": "11",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPrime(int x) {\n    if(x<2) return false;\n    for(int i=2;i*i<=x;i++) if(x%i==0) return false;\n    return true;\n}\nint nthPrime(int n) {\n    int count = 0, num = 1;\n    while(count < n) { num++; if(isPrime(num)) count++; }\n    return num;\n}\nint main() { cout<<nthPrime(5); return 0; }",
+        "explanation": {
+            "approach": "Count primes until we reach nth.",
+            "steps": [
+                "Check each number for primality",
+                "Count until n primes found"
+            ],
+            "complexity": "Time: O(n√p), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "11",
+                "explanation": "2,3,5,7,11"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "2",
+                "explanation": "First prime"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "29",
+                "explanation": "10th prime"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "5",
+                "explanation": "2,3,5"
+            }
+        ]
     },
     {
         "id": "fun72",
-        "title": "Pronic Number",
-        "description": "Product of consecutive ints.",
+        "title": "Prime Factors",
+        "description": "Print prime factors.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPronic(int n) { return false; }\nint main() { cout<<isPronic(12); return 0; }",
-        "expectedOutput": "1",
-        "solution": "#include <iostream>\nusing namespace std;\nbool isPronic(int n) {\n    for(int i = 0; i * i <= n; i++)\n        if(i * (i + 1) == n) return true;\n    return false;\n}\nint main() { cout<<isPronic(12); return 0; }",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid primeFactors(int n) {}\nint main() { primeFactors(12); return 0; }",
+        "expectedOutput": "2 2 3",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid primeFactors(int n) {\n    for(int i = 2; i * i <= n; i++) {\n        while(n % i == 0) { cout << i << \" \"; n /= i; }\n    }\n    if(n > 1) cout << n;\n}\nint main() { primeFactors(12); return 0; }",
         "explanation": {
-            "approach": "Check if n = k × (k+1) for some k.",
-            "analogy": "12 = 3 × 4 ✓",
+            "approach": "Divide by smallest factors repeatedly.",
             "steps": [
-                "Try each k",
-                "Check if k × (k+1) = n"
+                "Try dividing by 2,3,5...",
+                "Print each factor"
             ],
             "complexity": "Time: O(√n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=12",
+                "expectedOutput": "2 2 3",
+                "explanation": "12=2×2×3"
+            },
+            {
+                "input": "n=15",
+                "expectedOutput": "3 5",
+                "explanation": "15=3×5"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "7",
+                "explanation": "Prime itself"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "2 2 5 5",
+                "explanation": "100=2²×5²"
+            }
+        ]
     },
     {
         "id": "fun73",
-        "title": "Happy Number",
-        "description": "Sum of digit squares reaches 1.",
+        "title": "Count Divisors",
+        "description": "Number of divisors.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isHappy(int n) { return false; }\nint main() { cout<<isHappy(19); return 0; }",
-        "expectedOutput": "1",
-        "solution": "#include <iostream>\nusing namespace std;\nint sumSq(int n) { int s=0; while(n>0){int d=n%10; s+=d*d; n/=10;} return s; }\nbool isHappy(int n) {\n    int slow = n, fast = n;\n    do { slow = sumSq(slow); fast = sumSq(sumSq(fast)); } while(slow != fast);\n    return slow == 1;\n}\nint main() { cout<<isHappy(19); return 0; }",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countDivisors(int n) { return 0; }\nint main() { cout<<countDivisors(12); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint countDivisors(int n) {\n    int count = 0;\n    for(int i = 1; i * i <= n; i++) {\n        if(n % i == 0) {\n            count++;\n            if(i != n/i) count++;\n        }\n    }\n    return count;\n}\nint main() { cout<<countDivisors(12); return 0; }",
         "explanation": {
-            "approach": "Keep replacing n with sum of digit squares. If reaches 1, it's happy.",
-            "analogy": "19→82→68→100→1 ✓ Happy!",
+            "approach": "Count divisors up to √n.",
             "steps": [
-                "Replace n with sum of digit²",
-                "Repeat until 1 or cycle",
-                "1 means happy"
+                "For each divisor i",
+                "Count i and n/i"
             ],
-            "complexity": "Time: O(log n), Space: O(1)"
-        }
+            "complexity": "Time: O(√n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=12",
+                "expectedOutput": "6",
+                "explanation": "1,2,3,4,6,12"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "2",
+                "explanation": "Prime: 1,7"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Only 1"
+            },
+            {
+                "input": "n=36",
+                "expectedOutput": "9",
+                "explanation": "1,2,3,4,6,9,12,18,36"
+            }
+        ]
     },
     {
         "id": "fun74",
-        "title": "Sad Number",
-        "description": "Not a happy number.",
+        "title": "Sum of Divisors",
+        "description": "Sum all divisors.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isSad(int n) { return false; }\nint main() { cout<<isSad(4); return 0; }",
-        "expectedOutput": "1",
-        "solution": "#include <iostream>\nusing namespace std;\nint sumSq(int n) { int s=0; while(n>0){int d=n%10; s+=d*d; n/=10;} return s; }\nbool isSad(int n) {\n    int slow = n, fast = n;\n    do { slow = sumSq(slow); fast = sumSq(sumSq(fast)); } while(slow != fast);\n    return slow != 1;\n}\nint main() { cout<<isSad(4); return 0; }",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumDivisors(int n) { return 0; }\nint main() { cout<<sumDivisors(12); return 0; }",
+        "expectedOutput": "28",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumDivisors(int n) {\n    int sum = 0;\n    for(int i = 1; i * i <= n; i++) {\n        if(n % i == 0) {\n            sum += i;\n            if(i != n/i) sum += n/i;\n        }\n    }\n    return sum;\n}\nint main() { cout<<sumDivisors(12); return 0; }",
         "explanation": {
-            "approach": "Not a happy number - gets stuck in a cycle.",
-            "analogy": "4→16→37→58→89→145→42→20→4 (cycle, never reaches 1)",
+            "approach": "Sum divisors up to √n.",
             "steps": [
-                "Same as happy",
-                "But return true if NOT 1"
+                "For each divisor i",
+                "Add i and n/i"
             ],
-            "complexity": "Time: O(log n), Space: O(1)"
-        }
+            "complexity": "Time: O(√n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=12",
+                "expectedOutput": "28",
+                "explanation": "1+2+3+4+6+12=28"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "8",
+                "explanation": "1+7=8"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Only 1"
+            },
+            {
+                "input": "n=6",
+                "expectedOutput": "12",
+                "explanation": "1+2+3+6=12"
+            }
+        ]
     },
     {
         "id": "fun75",
-        "title": "Abundant Number",
-        "description": "Sum of divisors > n.",
+        "title": "Product of Divisors",
+        "description": "Product of all divisors.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isAbundant(int n) { return false; }\nint main() { cout<<isAbundant(12); return 0; }",
-        "expectedOutput": "1",
-        "solution": "#include <iostream>\nusing namespace std;\nbool isAbundant(int n) {\n    int sum = 0;\n    for(int i = 1; i < n; i++)\n        if(n % i == 0) sum += i;\n    return sum > n;\n}\nint main() { cout<<isAbundant(12); return 0; }",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint productDivisors(int n) { return 0; }\nint main() { cout<<productDivisors(6); return 0; }",
+        "expectedOutput": "36",
+        "solution": "#include <iostream>\nusing namespace std;\nint productDivisors(int n) {\n    int prod = 1;\n    for(int i = 1; i * i <= n; i++) {\n        if(n % i == 0) {\n            prod *= i;\n            if(i != n/i) prod *= n/i;\n        }\n    }\n    return prod;\n}\nint main() { cout<<productDivisors(6); return 0; }",
         "explanation": {
-            "approach": "Sum proper divisors, check if > n.",
-            "analogy": "12: divisors 1+2+3+4+6=16 > 12 ✓",
+            "approach": "Multiply all divisors.",
             "steps": [
-                "Find all divisors except n",
-                "Sum them",
-                "Check if sum > n"
+                "Find divisors",
+                "Multiply together"
             ],
-            "complexity": "Time: O(n), Space: O(1)"
-        }
+            "complexity": "Time: O(√n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=6",
+                "expectedOutput": "36",
+                "explanation": "1×2×3×6=36"
+            },
+            {
+                "input": "n=4",
+                "expectedOutput": "8",
+                "explanation": "1×2×4=8"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Only 1"
+            },
+            {
+                "input": "n=12",
+                "expectedOutput": "1728",
+                "explanation": "Product of divisors"
+            }
+        ]
     }
 ]

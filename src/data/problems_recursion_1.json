@@ -17,7 +17,29 @@
                 "Move n-1 from aux to target"
             ],
             "complexity": "Time: O(2^n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=3, A->C",
+                "expectedOutput": "A->C A->B C->B A->C B->A B->C A->C",
+                "explanation": "7 moves for 3 disks"
+            },
+            {
+                "input": "n=2, A->C",
+                "expectedOutput": "A->B A->C B->C",
+                "explanation": "3 moves for 2 disks"
+            },
+            {
+                "input": "n=1, A->C",
+                "expectedOutput": "A->C",
+                "explanation": "1 move for 1 disk"
+            },
+            {
+                "input": "n=4, A->C",
+                "expectedOutput": "15 moves",
+                "explanation": "2^4 - 1 = 15 moves for 4 disks"
+            }
+        ]
     },
     {
         "id": "rec2",
@@ -36,7 +58,29 @@
                 "Exclude current, recurse"
             ],
             "complexity": "Time: O(2^n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,2,3}",
+                "expectedOutput": "{},{1},{2},{3},{1,2},{1,3},{2,3},{1,2,3}",
+                "explanation": "8 subsets including empty"
+            },
+            {
+                "input": "{1,2}",
+                "expectedOutput": "{},{1},{2},{1,2}",
+                "explanation": "4 subsets"
+            },
+            {
+                "input": "{1}",
+                "expectedOutput": "{},{1}",
+                "explanation": "2 subsets"
+            },
+            {
+                "input": "{}",
+                "expectedOutput": "{}",
+                "explanation": "Only empty subset"
+            }
+        ]
     },
     {
         "id": "rec3",
@@ -56,7 +100,29 @@
                 "Swap back"
             ],
             "complexity": "Time: O(n!), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,2,3}",
+                "expectedOutput": "123,132,213,231,312,321",
+                "explanation": "6 permutations (3!)"
+            },
+            {
+                "input": "{1,2}",
+                "expectedOutput": "12,21",
+                "explanation": "2 permutations (2!)"
+            },
+            {
+                "input": "{1}",
+                "expectedOutput": "1",
+                "explanation": "1 permutation (1!)"
+            },
+            {
+                "input": "{1,2,3,4}",
+                "expectedOutput": "24 permutations",
+                "explanation": "4! = 24 permutations"
+            }
+        ]
     },
     {
         "id": "rec4",
@@ -76,7 +142,29 @@
                 "If more, go right half"
             ],
             "complexity": "Time: O(log n), Space: O(log n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,3,5,7,9}, x=5",
+                "expectedOutput": "2",
+                "explanation": "Found at index 2"
+            },
+            {
+                "input": "{1,3,5,7,9}, x=1",
+                "expectedOutput": "0",
+                "explanation": "Found at index 0"
+            },
+            {
+                "input": "{1,3,5,7,9}, x=10",
+                "expectedOutput": "-1",
+                "explanation": "Not found"
+            },
+            {
+                "input": "{1,3,5,7,9}, x=9",
+                "expectedOutput": "4",
+                "explanation": "Found at last index"
+            }
+        ]
     },
     {
         "id": "rec5",
@@ -95,7 +183,29 @@
                 "Recurse on middle portion"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"hello\"",
+                "expectedOutput": "olleh",
+                "explanation": "Reversed string"
+            },
+            {
+                "input": "\"a\"",
+                "expectedOutput": "a",
+                "explanation": "Single char unchanged"
+            },
+            {
+                "input": "\"ab\"",
+                "expectedOutput": "ba",
+                "explanation": "Two chars swapped"
+            },
+            {
+                "input": "\"racecar\"",
+                "expectedOutput": "racecar",
+                "explanation": "Palindrome stays same"
+            }
+        ]
     },
     {
         "id": "rec6",
@@ -114,7 +224,29 @@
                 "Or skip to next index"
             ],
             "complexity": "Time: O(2^n), Space: O(target)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{2,3,6,7}, target=7",
+                "expectedOutput": "[2,2,3],[7]",
+                "explanation": "Two combinations sum to 7"
+            },
+            {
+                "input": "{2,3,5}, target=8",
+                "expectedOutput": "[2,2,2,2],[2,3,3],[3,5]",
+                "explanation": "Three combinations"
+            },
+            {
+                "input": "{2}, target=1",
+                "expectedOutput": "",
+                "explanation": "No combination possible"
+            },
+            {
+                "input": "{1}, target=3",
+                "expectedOutput": "[1,1,1]",
+                "explanation": "Only one way with 1s"
+            }
+        ]
     },
     {
         "id": "rec7",
@@ -133,7 +265,29 @@
                 "C(n) = sum over all splits"
             ],
             "complexity": "Time: O(4^n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "42",
+                "explanation": "C(5) = 42"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "5",
+                "explanation": "C(3) = 5"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "1",
+                "explanation": "C(0) = 1"
+            },
+            {
+                "input": "n=4",
+                "expectedOutput": "14",
+                "explanation": "C(4) = 14"
+            }
+        ]
     },
     {
         "id": "rec8",
@@ -152,7 +306,29 @@
                 "Add k and mod by n"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=7, k=3",
+                "expectedOutput": "3",
+                "explanation": "Survivor at position 3 (0-indexed)"
+            },
+            {
+                "input": "n=5, k=2",
+                "expectedOutput": "2",
+                "explanation": "Survivor at position 2"
+            },
+            {
+                "input": "n=1, k=1",
+                "expectedOutput": "0",
+                "explanation": "Only one person survives"
+            },
+            {
+                "input": "n=10, k=2",
+                "expectedOutput": "4",
+                "explanation": "Even skip pattern survivor"
+            }
+        ]
     },
     {
         "id": "rec9",
@@ -171,7 +347,29 @@
                 "Recurse to 4 neighbors"
             ],
             "complexity": "Time: O(r×c), Space: O(r×c)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "grid, start=(1,1), color=2",
+                "expectedOutput": "2",
+                "explanation": "Center cell filled with 2"
+            },
+            {
+                "input": "all 1s, start=(0,0), color=2",
+                "expectedOutput": "all 2s",
+                "explanation": "Entire grid filled"
+            },
+            {
+                "input": "same old and new color",
+                "expectedOutput": "unchanged",
+                "explanation": "No fill needed"
+            },
+            {
+                "input": "isolated cell, start=(0,0), color=3",
+                "expectedOutput": "3",
+                "explanation": "Only starting cell changes"
+            }
+        ]
     },
     {
         "id": "rec10",
@@ -191,6 +389,28 @@
                 "Backtrack if neither works"
             ],
             "complexity": "Time: O(2^(n²)), Space: O(n²)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "4x4 maze with path",
+                "expectedOutput": "1",
+                "explanation": "Path exists from (0,0) to (3,3)"
+            },
+            {
+                "input": "blocked maze",
+                "expectedOutput": "0",
+                "explanation": "No path exists"
+            },
+            {
+                "input": "1x1 with 1",
+                "expectedOutput": "1",
+                "explanation": "Already at destination"
+            },
+            {
+                "input": "direct diagonal path",
+                "expectedOutput": "1",
+                "explanation": "Staircase path exists"
+            }
+        ]
     }
 ]

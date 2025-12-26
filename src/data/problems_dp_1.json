@@ -16,7 +16,29 @@
                 "Try cutting at each position"
             ],
             "complexity": "Time: O(n²), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "prices={1,5,8,9,10,17,17,20}, n=8",
+                "expectedOutput": "22",
+                "explanation": "Cut into 2+6 for max profit"
+            },
+            {
+                "input": "prices={3,5,8,9,10,17,17,20}, n=4",
+                "expectedOutput": "12",
+                "explanation": "Four pieces of length 1"
+            },
+            {
+                "input": "prices={1,5}, n=2",
+                "expectedOutput": "5",
+                "explanation": "Keep whole rod"
+            },
+            {
+                "input": "prices={1,5,8}, n=3",
+                "expectedOutput": "8",
+                "explanation": "Keep rod of length 3"
+            }
+        ]
     },
     {
         "id": "dp12",
@@ -35,7 +57,29 @@
                 "Try all split points k"
             ],
             "complexity": "Time: O(n³), Space: O(n²)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "dims={10,30,5,60}",
+                "expectedOutput": "4500",
+                "explanation": "Optimal parenthesization"
+            },
+            {
+                "input": "dims={40,20,30,10,30}",
+                "expectedOutput": "26000",
+                "explanation": "5 matrices"
+            },
+            {
+                "input": "dims={1,2,3}",
+                "expectedOutput": "6",
+                "explanation": "Two 1xN matrices"
+            },
+            {
+                "input": "dims={10,20,30}",
+                "expectedOutput": "6000",
+                "explanation": "Two matrices: 10x20 * 20x30"
+            }
+        ]
     },
     {
         "id": "dp13",
@@ -54,7 +98,29 @@
                 "Try dropping from each floor x"
             ],
             "complexity": "Time: O(k × n²), Space: O(kn)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "k=2, n=10",
+                "expectedOutput": "4",
+                "explanation": "4 trials needed with 2 eggs"
+            },
+            {
+                "input": "k=1, n=5",
+                "expectedOutput": "5",
+                "explanation": "Linear search with 1 egg"
+            },
+            {
+                "input": "k=2, n=6",
+                "expectedOutput": "3",
+                "explanation": "3 trials for 6 floors"
+            },
+            {
+                "input": "k=3, n=14",
+                "expectedOutput": "4",
+                "explanation": "More eggs allow fewer trials"
+            }
+        ]
     },
     {
         "id": "dp14",
@@ -74,7 +140,29 @@
                 "Max of lis[i] + lds[i] - 1"
             ],
             "complexity": "Time: O(n²), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,11,2,10,4,5,2,1}",
+                "expectedOutput": "6",
+                "explanation": "1,2,10,4,2,1 or similar"
+            },
+            {
+                "input": "{1,2,3,4,5}",
+                "expectedOutput": "5",
+                "explanation": "Increasing only is valid"
+            },
+            {
+                "input": "{5,4,3,2,1}",
+                "expectedOutput": "5",
+                "explanation": "Decreasing only is valid"
+            },
+            {
+                "input": "{1,3,5,3,1}",
+                "expectedOutput": "5",
+                "explanation": "Perfect bitonic with peak at 5"
+            }
+        ]
     },
     {
         "id": "dp15",
@@ -93,7 +181,29 @@
                 "dp[i] = min cuts for s[0..i]"
             ],
             "complexity": "Time: O(n²), Space: O(n²)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"aab\"",
+                "expectedOutput": "1",
+                "explanation": "Cut: aa|b"
+            },
+            {
+                "input": "\"a\"",
+                "expectedOutput": "0",
+                "explanation": "Already palindrome"
+            },
+            {
+                "input": "\"ab\"",
+                "expectedOutput": "1",
+                "explanation": "Cut: a|b"
+            },
+            {
+                "input": "\"aba\"",
+                "expectedOutput": "0",
+                "explanation": "Already a palindrome, no cuts needed"
+            }
+        ]
     },
     {
         "id": "dp16",
@@ -112,7 +222,29 @@
                 "down[i] = zigzag ending down at i"
             ],
             "complexity": "Time: O(n²), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,7,4,9,2,5}",
+                "expectedOutput": "6",
+                "explanation": "Entire array is zigzag"
+            },
+            {
+                "input": "{1,2,3,4,5}",
+                "expectedOutput": "2",
+                "explanation": "Only pairs zigzag"
+            },
+            {
+                "input": "{10,22,9,33,49,50,31,60}",
+                "expectedOutput": "6",
+                "explanation": "Valid zigzag sequence"
+            },
+            {
+                "input": "{1,5,1,5,1}",
+                "expectedOutput": "5",
+                "explanation": "Perfect zigzag pattern"
+            }
+        ]
     },
     {
         "id": "dp17",
@@ -131,7 +263,29 @@
                 "Count all palindromes found"
             ],
             "complexity": "Time: O(n²), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"aaa\"",
+                "expectedOutput": "6",
+                "explanation": "a,a,a,aa,aa,aaa"
+            },
+            {
+                "input": "\"abc\"",
+                "expectedOutput": "3",
+                "explanation": "Only single chars"
+            },
+            {
+                "input": "\"aba\"",
+                "expectedOutput": "4",
+                "explanation": "a,b,a,aba"
+            },
+            {
+                "input": "\"abba\"",
+                "expectedOutput": "6",
+                "explanation": "a,b,b,a,bb,abba"
+            }
+        ]
     },
     {
         "id": "dp18",
@@ -150,7 +304,29 @@
                 "Try each key as root"
             ],
             "complexity": "Time: O(n³), Space: O(n²)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "keys={10,12,20}, freq={34,8,50}",
+                "expectedOutput": "142",
+                "explanation": "Optimal BST structure"
+            },
+            {
+                "input": "keys={10,12}, freq={50,25}",
+                "expectedOutput": "100",
+                "explanation": "Two keys"
+            },
+            {
+                "input": "keys={1}, freq={10}",
+                "expectedOutput": "10",
+                "explanation": "Single key"
+            },
+            {
+                "input": "keys={1,2,3}, freq={10,10,10}",
+                "expectedOutput": "50",
+                "explanation": "Equal frequencies"
+            }
+        ]
     },
     {
         "id": "dp19",
@@ -169,7 +345,29 @@
                 "Swap on negative"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{2,3,-2,4}",
+                "expectedOutput": "6",
+                "explanation": "2*3=6"
+            },
+            {
+                "input": "{-2,0,-1}",
+                "expectedOutput": "0",
+                "explanation": "Zero is maximum"
+            },
+            {
+                "input": "{-2,3,-4}",
+                "expectedOutput": "24",
+                "explanation": "-2*3*-4=24"
+            },
+            {
+                "input": "{-1,-2,-3}",
+                "expectedOutput": "6",
+                "explanation": "-2*-3=6"
+            }
+        ]
     },
     {
         "id": "dp20",
@@ -188,6 +386,28 @@
                 "Add ways using that coin"
             ],
             "complexity": "Time: O(n × amt), Space: O(amt)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "coins={1,2,5}, amt=5",
+                "expectedOutput": "4",
+                "explanation": "5=5,2+2+1,2+1+1+1,1+1+1+1+1"
+            },
+            {
+                "input": "coins={2}, amt=3",
+                "expectedOutput": "0",
+                "explanation": "Cannot make 3 with only 2"
+            },
+            {
+                "input": "coins={1}, amt=5",
+                "expectedOutput": "1",
+                "explanation": "Only one way with 1s"
+            },
+            {
+                "input": "coins={1,2}, amt=4",
+                "expectedOutput": "3",
+                "explanation": "4=2+2,2+1+1,1+1+1+1"
+            }
+        ]
     }
 ]

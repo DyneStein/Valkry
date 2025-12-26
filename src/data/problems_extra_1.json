@@ -2,7 +2,7 @@
     {
         "id": "extra1",
         "title": "Binary Search Left Bound",
-        "description": "First occurrence of target.",
+        "description": "Find first occurrence of target in sorted array.",
         "difficulty": "MEDIUM",
         "category": "Binary Search",
         "starterCode": "#include <iostream>\nusing namespace std;\nint leftBound(int a[], int n, int t) { return -1; }\nint main() { int a[]={1,2,2,2,3}; cout<<leftBound(a,5,2); return 0; }",
@@ -10,18 +10,39 @@
         "solution": "#include <iostream>\nusing namespace std;\nint leftBound(int a[], int n, int t) { int l=0, r=n; while(l<r) { int m=(l+r)/2; if(a[m]<t) l=m+1; else r=m; } return l<n && a[l]==t ? l : -1; }\nint main() { int a[]={1,2,2,2,3}; cout<<leftBound(a,5,2); return 0; }",
         "explanation": {
             "approach": "Binary search, keep going left when found.",
-            "analogy": "Find leftmost boundary.",
             "steps": [
                 "If a[m] < t, search right",
                 "Else search left (including m)"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[1,2,2,2,3], t=2",
+                "expectedOutput": "1",
+                "explanation": "First 2 is at index 1"
+            },
+            {
+                "input": "[1,2,3,4,5], t=3",
+                "expectedOutput": "2",
+                "explanation": "Unique element"
+            },
+            {
+                "input": "[1,2,3], t=4",
+                "expectedOutput": "-1",
+                "explanation": "Not found"
+            },
+            {
+                "input": "[2,2,2,2], t=2",
+                "expectedOutput": "0",
+                "explanation": "All same, first is 0"
+            }
+        ]
     },
     {
         "id": "extra2",
         "title": "Binary Search Right Bound",
-        "description": "Last occurrence of target.",
+        "description": "Find last occurrence of target in sorted array.",
         "difficulty": "MEDIUM",
         "category": "Binary Search",
         "starterCode": "#include <iostream>\nusing namespace std;\nint rightBound(int a[], int n, int t) { return -1; }\nint main() { int a[]={1,2,2,2,3}; cout<<rightBound(a,5,2); return 0; }",
@@ -29,57 +50,119 @@
         "solution": "#include <iostream>\nusing namespace std;\nint rightBound(int a[], int n, int t) { int l=0, r=n; while(l<r) { int m=(l+r)/2; if(a[m]<=t) l=m+1; else r=m; } return l-1>=0 && a[l-1]==t ? l-1 : -1; }\nint main() { int a[]={1,2,2,2,3}; cout<<rightBound(a,5,2); return 0; }",
         "explanation": {
             "approach": "Binary search, keep going right when found.",
-            "analogy": "Find rightmost boundary.",
             "steps": [
                 "If a[m] <= t, search right",
                 "Else search left"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[1,2,2,2,3], t=2",
+                "expectedOutput": "3",
+                "explanation": "Last 2 is at index 3"
+            },
+            {
+                "input": "[1,2,3,4,5], t=3",
+                "expectedOutput": "2",
+                "explanation": "Unique element"
+            },
+            {
+                "input": "[1,2,3], t=0",
+                "expectedOutput": "-1",
+                "explanation": "Not found"
+            },
+            {
+                "input": "[2,2,2,2], t=2",
+                "expectedOutput": "3",
+                "explanation": "All same, last is 3"
+            }
+        ]
     },
     {
         "id": "extra3",
         "title": "Peak Element",
-        "description": "Find local maximum.",
+        "description": "Find any local maximum in array.",
         "difficulty": "MEDIUM",
         "category": "Binary Search",
         "starterCode": "#include <iostream>\nusing namespace std;\nint findPeak(int a[], int n) { return -1; }\nint main() { int a[]={1,2,3,1}; cout<<findPeak(a,4); return 0; }",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\nint findPeak(int a[], int n) { int l=0, r=n-1; while(l<r) { int m=(l+r)/2; if(a[m]>a[m+1]) r=m; else l=m+1; } return l; }\nint main() { int a[]={1,2,3,1}; cout<<findPeak(a,4); return 0; }",
         "explanation": {
-            "approach": "Go towards larger neighbor.",
-            "analogy": "Climb the hill, peak is where you stop.",
+            "approach": "Binary search toward larger neighbor.",
             "steps": [
                 "If a[m] > a[m+1], go left",
                 "Else go right"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[1,2,3,1]",
+                "expectedOutput": "2",
+                "explanation": "Peak at index 2 (value 3)"
+            },
+            {
+                "input": "[1,2,1,3,5,6,4]",
+                "expectedOutput": "1 or 5",
+                "explanation": "Multiple peaks valid"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "0",
+                "explanation": "Single element is peak"
+            },
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "4",
+                "explanation": "Last element is peak"
+            }
+        ]
     },
     {
         "id": "extra4",
         "title": "Search in Rotated Array",
-        "description": "Search sorted rotated array.",
+        "description": "Binary search in rotated sorted array.",
         "difficulty": "MEDIUM",
         "category": "Binary Search",
         "starterCode": "#include <iostream>\nusing namespace std;\nint search(int a[], int n, int t) { return -1; }\nint main() { int a[]={4,5,6,7,0,1,2}; cout<<search(a,7,0); return 0; }",
         "expectedOutput": "4",
         "solution": "#include <iostream>\nusing namespace std;\nint search(int a[], int n, int t) { int l=0, r=n-1; while(l<=r) { int m=(l+r)/2; if(a[m]==t) return m; if(a[l]<=a[m]) { if(a[l]<=t && t<a[m]) r=m-1; else l=m+1; } else { if(a[m]<t && t<=a[r]) l=m+1; else r=m-1; } } return -1; }\nint main() { int a[]={4,5,6,7,0,1,2}; cout<<search(a,7,0); return 0; }",
         "explanation": {
-            "approach": "Determine which half is sorted, search there.",
-            "analogy": "One half is always sorted.",
+            "approach": "Identify sorted half, search in appropriate half.",
             "steps": [
                 "Check which half is sorted",
-                "If target in sorted half, search there",
-                "Else search other half"
+                "If target in sorted half, search there"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[4,5,6,7,0,1,2], t=0",
+                "expectedOutput": "4",
+                "explanation": "0 is at index 4"
+            },
+            {
+                "input": "[4,5,6,7,0,1,2], t=3",
+                "expectedOutput": "-1",
+                "explanation": "Not in array"
+            },
+            {
+                "input": "[1], t=1",
+                "expectedOutput": "0",
+                "explanation": "Single element found"
+            },
+            {
+                "input": "[3,1], t=1",
+                "expectedOutput": "1",
+                "explanation": "Two elements rotated"
+            }
+        ]
     },
     {
         "id": "extra5",
         "title": "Find Minimum in Rotated",
-        "description": "Min in rotated sorted array.",
+        "description": "Find minimum element in rotated sorted array.",
         "difficulty": "MEDIUM",
         "category": "Binary Search",
         "starterCode": "#include <iostream>\nusing namespace std;\nint findMin(int a[], int n) { return 0; }\nint main() { int a[]={3,4,5,1,2}; cout<<findMin(a,5); return 0; }",
@@ -87,18 +170,39 @@
         "solution": "#include <iostream>\nusing namespace std;\nint findMin(int a[], int n) { int l=0, r=n-1; while(l<r) { int m=(l+r)/2; if(a[m]>a[r]) l=m+1; else r=m; } return a[l]; }\nint main() { int a[]={3,4,5,1,2}; cout<<findMin(a,5); return 0; }",
         "explanation": {
             "approach": "Binary search for rotation point.",
-            "analogy": "Find where the break is.",
             "steps": [
-                "If a[m] > a[r], min is right",
-                "Else min is left or at m"
+                "If a[m] > a[r], min is in right half",
+                "Else in left half"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[3,4,5,1,2]",
+                "expectedOutput": "1",
+                "explanation": "Min is 1"
+            },
+            {
+                "input": "[4,5,6,7,0,1,2]",
+                "expectedOutput": "0",
+                "explanation": "Min is 0"
+            },
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "1",
+                "explanation": "Not rotated, first is min"
+            },
+            {
+                "input": "[2,1]",
+                "expectedOutput": "1",
+                "explanation": "Two elements"
+            }
+        ]
     },
     {
         "id": "extra6",
         "title": "Square Root Binary Search",
-        "description": "Integer square root.",
+        "description": "Calculate integer square root using binary search.",
         "difficulty": "EASY",
         "category": "Binary Search",
         "starterCode": "#include <iostream>\nusing namespace std;\nint mySqrt(int n) { return 0; }\nint main() { cout<<mySqrt(8); return 0; }",
@@ -106,92 +210,197 @@
         "solution": "#include <iostream>\nusing namespace std;\nint mySqrt(int n) { if(n==0) return 0; int l=1, r=n, ans=0; while(l<=r) { int m=l+(r-l)/2; if(m<=n/m) { ans=m; l=m+1; } else r=m-1; } return ans; }\nint main() { cout<<mySqrt(8); return 0; }",
         "explanation": {
             "approach": "Binary search for largest x where x*x <= n.",
-            "analogy": "Find the floor of square root.",
             "steps": [
                 "Check if m*m <= n",
                 "If yes, try larger",
                 "If no, try smaller"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=8",
+                "expectedOutput": "2",
+                "explanation": "floor(sqrt(8))=2"
+            },
+            {
+                "input": "n=16",
+                "expectedOutput": "4",
+                "explanation": "Perfect square"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "sqrt(1)=1"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "0",
+                "explanation": "sqrt(0)=0"
+            }
+        ]
     },
     {
         "id": "extra7",
         "title": "Search 2D Matrix",
-        "description": "Search in sorted matrix.",
+        "description": "Search in row-wise and column-wise sorted matrix.",
         "difficulty": "MEDIUM",
         "category": "Binary Search",
         "starterCode": "#include <iostream>\nusing namespace std;\nbool searchMatrix(int m[][4], int r, int c, int t) { return false; }\nint main() { int m[3][4]={{1,3,5,7},{10,11,16,20},{23,30,34,60}}; cout<<searchMatrix(m,3,4,3); return 0; }",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool searchMatrix(int m[][4], int r, int c, int t) { int lo=0, hi=r*c-1; while(lo<=hi) { int mid=(lo+hi)/2; int val=m[mid/c][mid%c]; if(val==t) return true; if(val<t) lo=mid+1; else hi=mid-1; } return false; }\nint main() { int m[3][4]={{1,3,5,7},{10,11,16,20},{23,30,34,60}}; cout<<searchMatrix(m,3,4,3); return 0; }",
         "explanation": {
-            "approach": "Treat matrix as 1D array.",
-            "analogy": "Row and column from single index.",
+            "approach": "Treat matrix as virtual 1D array.",
             "steps": [
-                "Binary search on virtual 1D",
-                "Index: row = mid/c, col = mid%c"
+                "Binary search on indices 0 to r*c-1",
+                "Convert to row/col: row=mid/c, col=mid%c"
             ],
             "complexity": "Time: O(log(r×c)), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "matrix, t=3",
+                "expectedOutput": "1",
+                "explanation": "3 found"
+            },
+            {
+                "input": "matrix, t=13",
+                "expectedOutput": "0",
+                "explanation": "13 not found"
+            },
+            {
+                "input": "[[1]], t=1",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "matrix, t=60",
+                "expectedOutput": "1",
+                "explanation": "Last element"
+            }
+        ]
     },
     {
         "id": "extra8",
-        "title": "Kth Smallest in Matrix",
-        "description": "Find kth smallest element.",
+        "title": "Kth Smallest in Sorted Matrix",
+        "description": "Find kth smallest element in row/col sorted matrix.",
         "difficulty": "MEDIUM",
         "category": "Binary Search",
         "starterCode": "#include <iostream>\nusing namespace std;\nint kthSmallest(int m[][3], int n, int k) { return 0; }\nint main() { int m[3][3]={{1,5,9},{10,11,13},{12,13,15}}; cout<<kthSmallest(m,3,5); return 0; }",
         "expectedOutput": "11",
         "solution": "#include <iostream>\nusing namespace std;\nint countLE(int m[][3], int n, int mid) { int c=0, col=n-1; for(int row=0;row<n;row++) { while(col>=0 && m[row][col]>mid) col--; c+=col+1; } return c; }\nint kthSmallest(int m[][3], int n, int k) { int lo=m[0][0], hi=m[n-1][n-1]; while(lo<hi) { int mid=lo+(hi-lo)/2; if(countLE(m,n,mid)>=k) hi=mid; else lo=mid+1; } return lo; }\nint main() { int m[3][3]={{1,5,9},{10,11,13},{12,13,15}}; cout<<kthSmallest(m,3,5); return 0; }",
         "explanation": {
-            "approach": "Binary search on value, count elements <= mid.",
-            "analogy": "Find value where exactly k elements are smaller.",
+            "approach": "Binary search on value range, count elements <= mid.",
             "steps": [
-                "Binary search on value range",
+                "Binary search between min and max",
                 "Count elements <= mid",
-                "Adjust search based on count"
+                "Adjust search"
             ],
             "complexity": "Time: O(n log(max-min)), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "matrix, k=5",
+                "expectedOutput": "11",
+                "explanation": "5th smallest is 11"
+            },
+            {
+                "input": "matrix, k=1",
+                "expectedOutput": "1",
+                "explanation": "Smallest is 1"
+            },
+            {
+                "input": "matrix, k=9",
+                "expectedOutput": "15",
+                "explanation": "Largest in 3x3"
+            },
+            {
+                "input": "[[1,2],[3,4]], k=3",
+                "expectedOutput": "3",
+                "explanation": "Third smallest"
+            }
+        ]
     },
     {
         "id": "extra9",
         "title": "Allocate Minimum Pages",
-        "description": "Min max pages per student.",
+        "description": "Minimize maximum pages allocated to any student.",
         "difficulty": "HARD",
         "category": "Binary Search",
         "starterCode": "#include <iostream>\nusing namespace std;\nint allocateBooks(int a[], int n, int k) { return 0; }\nint main() { int a[]={12,34,67,90}; cout<<allocateBooks(a,4,2); return 0; }",
         "expectedOutput": "113",
         "solution": "#include <iostream>\nusing namespace std;\nbool canAllocate(int a[], int n, int k, int mid) { int s=1, pages=0; for(int i=0;i<n;i++) { if(a[i]>mid) return false; if(pages+a[i]>mid) { s++; pages=a[i]; } else pages+=a[i]; } return s<=k; }\nint allocateBooks(int a[], int n, int k) { int lo=0, hi=0; for(int i=0;i<n;i++) { lo=max(lo,a[i]); hi+=a[i]; } while(lo<hi) { int mid=(lo+hi)/2; if(canAllocate(a,n,k,mid)) hi=mid; else lo=mid+1; } return lo; }\nint main() { int a[]={12,34,67,90}; cout<<allocateBooks(a,4,2); return 0; }",
         "explanation": {
-            "approach": "Binary search on answer (max pages).",
-            "analogy": "Find minimum possible maximum pages.",
+            "approach": "Binary search on answer (max pages per student).",
             "steps": [
-                "Binary search on max pages",
+                "Search range: max(a[i]) to sum(a)",
                 "Check if allocation possible",
-                "Minimize the maximum"
+                "Minimize maximum"
             ],
             "complexity": "Time: O(n log sum), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[12,34,67,90], k=2",
+                "expectedOutput": "113",
+                "explanation": "[12,34,67] & [90]"
+            },
+            {
+                "input": "[10,20,30,40], k=2",
+                "expectedOutput": "60",
+                "explanation": "[10,20,30] & [40]"
+            },
+            {
+                "input": "[100], k=1",
+                "expectedOutput": "100",
+                "explanation": "One book, one student"
+            },
+            {
+                "input": "[10,10,10,10], k=4",
+                "expectedOutput": "10",
+                "explanation": "One each"
+            }
+        ]
     },
     {
         "id": "extra10",
         "title": "Aggressive Cows",
-        "description": "Max minimum distance.",
+        "description": "Maximize minimum distance between cows.",
         "difficulty": "HARD",
         "category": "Binary Search",
         "starterCode": "#include <iostream>\nusing namespace std;\nint aggressiveCows(int pos[], int n, int c) { return 0; }\nint main() { int pos[]={1,2,4,8,9}; cout<<aggressiveCows(pos,5,3); return 0; }",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nbool canPlace(int pos[], int n, int c, int d) { int cows=1, last=pos[0]; for(int i=1;i<n;i++) if(pos[i]-last>=d) { cows++; last=pos[i]; } return cows>=c; }\nint aggressiveCows(int pos[], int n, int c) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(pos[j]>pos[j+1]) swap(pos[j],pos[j+1]); int lo=1, hi=pos[n-1]-pos[0], ans=0; while(lo<=hi) { int mid=(lo+hi)/2; if(canPlace(pos,n,c,mid)) { ans=mid; lo=mid+1; } else hi=mid-1; } return ans; }\nint main() { int pos[]={1,2,4,8,9}; cout<<aggressiveCows(pos,5,3); return 0; }",
         "explanation": {
-            "approach": "Binary search on answer (min distance).",
-            "analogy": "Maximize the minimum gap between cows.",
+            "approach": "Binary search on minimum distance between cows.",
             "steps": [
                 "Sort positions",
-                "Binary search on minimum distance",
-                "Check if placement possible"
+                "Binary search on distance",
+                "Check if placeable"
             ],
             "complexity": "Time: O(n log(max-min)), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[1,2,4,8,9], c=3",
+                "expectedOutput": "3",
+                "explanation": "Place at 1,4,8 or 1,4,9"
+            },
+            {
+                "input": "[1,2,3,4,5], c=2",
+                "expectedOutput": "4",
+                "explanation": "Place at 1,5"
+            },
+            {
+                "input": "[1,5,10], c=2",
+                "expectedOutput": "9",
+                "explanation": "Place at 1,10"
+            },
+            {
+                "input": "[1,2,3], c=3",
+                "expectedOutput": "1",
+                "explanation": "All stalls used"
+            }
+        ]
     }
 ]

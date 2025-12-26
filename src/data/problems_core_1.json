@@ -16,7 +16,29 @@
                 "Recursive: return n × factorial(n-1)"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "120",
+                "explanation": "5! = 5×4×3×2×1 = 120"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "1",
+                "explanation": "0! is defined as 1"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Base case: 1! = 1"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "3628800",
+                "explanation": "10! = 3,628,800"
+            }
+        ]
     },
     {
         "id": "core2",
@@ -35,7 +57,29 @@
                 "Return fib(n-1) + fib(n-2)"
             ],
             "complexity": "Time: O(2^n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "55",
+                "explanation": "Fibonacci sequence: 0,1,1,2,3,5,8,13,21,34,55"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "0",
+                "explanation": "F(0) = 0"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "13",
+                "explanation": "F(7) = 13"
+            },
+            {
+                "input": "n=20",
+                "expectedOutput": "6765",
+                "explanation": "F(20) = 6765"
+            }
+        ]
     },
     {
         "id": "core3",
@@ -54,7 +98,29 @@
                 "Return n + sum(n-1)"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "55",
+                "explanation": "1+2+3+...+10 = 55"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Sum of just 1"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "5050",
+                "explanation": "Classic Gauss sum"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "0",
+                "explanation": "Sum of nothing is 0"
+            }
+        ]
     },
     {
         "id": "core4",
@@ -73,7 +139,29 @@
                 "Return x × power(x, n-1)"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "x=2, n=10",
+                "expectedOutput": "1024",
+                "explanation": "2^10 = 1024"
+            },
+            {
+                "input": "x=3, n=4",
+                "expectedOutput": "81",
+                "explanation": "3^4 = 81"
+            },
+            {
+                "input": "x=5, n=0",
+                "expectedOutput": "1",
+                "explanation": "Any number^0 = 1"
+            },
+            {
+                "input": "x=2, n=1",
+                "expectedOutput": "2",
+                "explanation": "2^1 = 2"
+            }
+        ]
     },
     {
         "id": "core5",
@@ -92,7 +180,29 @@
                 "Return gcd(b, a%b)"
             ],
             "complexity": "Time: O(log n), Space: O(log n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "a=48, b=18",
+                "expectedOutput": "6",
+                "explanation": "GCD(48,18) = 6"
+            },
+            {
+                "input": "a=100, b=25",
+                "expectedOutput": "25",
+                "explanation": "GCD(100,25) = 25"
+            },
+            {
+                "input": "a=17, b=5",
+                "expectedOutput": "1",
+                "explanation": "Coprime numbers have GCD 1"
+            },
+            {
+                "input": "a=36, b=24",
+                "expectedOutput": "12",
+                "explanation": "GCD(36,24) = 12"
+            }
+        ]
     },
     {
         "id": "core6",
@@ -112,7 +222,29 @@
                 "Recurse on middle"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"hello\"",
+                "expectedOutput": "olleh",
+                "explanation": "Reversed string"
+            },
+            {
+                "input": "\"a\"",
+                "expectedOutput": "a",
+                "explanation": "Single char unchanged"
+            },
+            {
+                "input": "\"ab\"",
+                "expectedOutput": "ba",
+                "explanation": "Two chars swapped"
+            },
+            {
+                "input": "\"abcdef\"",
+                "expectedOutput": "fedcba",
+                "explanation": "Even length reversal"
+            }
+        ]
     },
     {
         "id": "core7",
@@ -132,7 +264,29 @@
                 "Recurse on middle"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"radar\"",
+                "expectedOutput": "1",
+                "explanation": "radar is a palindrome"
+            },
+            {
+                "input": "\"hello\"",
+                "expectedOutput": "0",
+                "explanation": "hello is not a palindrome"
+            },
+            {
+                "input": "\"a\"",
+                "expectedOutput": "1",
+                "explanation": "Single char is palindrome"
+            },
+            {
+                "input": "\"abba\"",
+                "expectedOutput": "1",
+                "explanation": "Even length palindrome"
+            }
+        ]
     },
     {
         "id": "core8",
@@ -151,7 +305,29 @@
                 "Then print n"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "1 2 3 4 5",
+                "explanation": "Print 1 through 5"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Single number"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "1 2 3",
+                "explanation": "Print 1 through 3"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "1 2 3 4 5 6 7 8 9 10",
+                "explanation": "Print 1 through 10"
+            }
+        ]
     },
     {
         "id": "core9",
@@ -170,7 +346,29 @@
                 "Then recurse to n-1"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "5 4 3 2 1",
+                "explanation": "Print 5 down to 1"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Single number"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "3 2 1",
+                "explanation": "Print 3 down to 1"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "10 9 8 7 6 5 4 3 2 1",
+                "explanation": "Print 10 down to 1"
+            }
+        ]
     },
     {
         "id": "core10",
@@ -189,7 +387,29 @@
                 "Return a[n-1] + sum(a, n-1)"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,2,3,4,5}",
+                "expectedOutput": "15",
+                "explanation": "1+2+3+4+5 = 15"
+            },
+            {
+                "input": "{10}",
+                "expectedOutput": "10",
+                "explanation": "Single element"
+            },
+            {
+                "input": "{1,1,1,1}",
+                "expectedOutput": "4",
+                "explanation": "Sum of four 1s"
+            },
+            {
+                "input": "{-1,1,-1,1}",
+                "expectedOutput": "0",
+                "explanation": "Sum of alternating signs"
+            }
+        ]
     },
     {
         "id": "core11",
@@ -209,7 +429,29 @@
                 "Compare with a[n-1]"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{3,7,1,9,2}",
+                "expectedOutput": "9",
+                "explanation": "Maximum is 9"
+            },
+            {
+                "input": "{5}",
+                "expectedOutput": "5",
+                "explanation": "Single element is max"
+            },
+            {
+                "input": "{1,2,3,4,5}",
+                "expectedOutput": "5",
+                "explanation": "Last element is max"
+            },
+            {
+                "input": "{5,4,3,2,1}",
+                "expectedOutput": "5",
+                "explanation": "First element is max"
+            }
+        ]
     },
     {
         "id": "core12",
@@ -228,6 +470,28 @@
                 "Return 1 + countDigits(n/10)"
             ],
             "complexity": "Time: O(log n), Space: O(log n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "12345",
+                "expectedOutput": "5",
+                "explanation": "5 digit number"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "3",
+                "explanation": "3 digit number"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "1",
+                "explanation": "Single digit"
+            },
+            {
+                "input": "999999",
+                "expectedOutput": "6",
+                "explanation": "6 digit number"
+            }
+        ]
     }
 ]

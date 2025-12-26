@@ -15,7 +15,29 @@
                 "Track buildable words"
             ],
             "complexity": "Time: O(n × L), Space: O(n × L)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "words=[w,wo,wor,worl,world]",
+                "expectedOutput": "world",
+                "explanation": "Each prefix exists, so 'world' is buildable"
+            },
+            {
+                "input": "words=[a,banana,app,appl,ap,apply,apple]",
+                "expectedOutput": "apple",
+                "explanation": "apple comes before apply alphabetically"
+            },
+            {
+                "input": "words=[cat]",
+                "expectedOutput": "",
+                "explanation": "No single letter prefix, no word buildable"
+            },
+            {
+                "input": "words=[a,b,ba,bca,bda,bdca]",
+                "expectedOutput": "bdca",
+                "explanation": "Longest chain: b→ba→bda→bdca"
+            }
+        ]
     },
     {
         "id": "m222",
@@ -33,7 +55,29 @@
                 "Replace each word with shortest matching root"
             ],
             "complexity": "Time: O(n × L), Space: O(d × L)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "dict=[cat,bat,rat], sentence='the cattle...'",
+                "expectedOutput": "the cat was rat by the bat",
+                "explanation": "cattle→cat, rattled→rat, battery→bat"
+            },
+            {
+                "input": "dict=[a,b,c], sentence='aadsfasf absbs bbab'",
+                "expectedOutput": "a a b",
+                "explanation": "Replace with shortest root"
+            },
+            {
+                "input": "dict=[catt,cat,bat], sentence='cattle'",
+                "expectedOutput": "cat",
+                "explanation": "Use shorter root 'cat' not 'catt'"
+            },
+            {
+                "input": "dict=[ac,ab], sentence='xyz'",
+                "expectedOutput": "xyz",
+                "explanation": "No matching prefix, keep original"
+            }
+        ]
     },
     {
         "id": "m223",
@@ -51,7 +95,29 @@
                 "Sum values with matching prefix"
             ],
             "complexity": "Time: O(n × L), Space: O(n × L)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "insert(apple,3), sum(ap)",
+                "expectedOutput": "3",
+                "explanation": "Only 'apple' with prefix 'ap'"
+            },
+            {
+                "input": "insert(apple,3), insert(app,2), sum(ap)",
+                "expectedOutput": "5",
+                "explanation": "Both have prefix 'ap': 3+2=5"
+            },
+            {
+                "input": "insert(apple,3), sum(b)",
+                "expectedOutput": "0",
+                "explanation": "No words with prefix 'b'"
+            },
+            {
+                "input": "insert(a,1), insert(ab,2), insert(abc,3), sum(a)",
+                "expectedOutput": "6",
+                "explanation": "All 3 match: 1+2+3=6"
+            }
+        ]
     },
     {
         "id": "m224",
@@ -69,7 +135,29 @@
                 "Track maximum"
             ],
             "complexity": "Time: O(n²), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "nums=[3,10,5,25,2,8]",
+                "expectedOutput": "28",
+                "explanation": "5 XOR 25 = 28"
+            },
+            {
+                "input": "nums=[14,70,53,83,49,91,36,80,92,51,66,70]",
+                "expectedOutput": "127",
+                "explanation": "Max XOR is 127"
+            },
+            {
+                "input": "nums=[1,2]",
+                "expectedOutput": "3",
+                "explanation": "1 XOR 2 = 3"
+            },
+            {
+                "input": "nums=[0,0]",
+                "expectedOutput": "0",
+                "explanation": "0 XOR 0 = 0"
+            }
+        ]
     },
     {
         "id": "m225",
@@ -87,6 +175,28 @@
                 "Count mismatches, accept if exactly 1"
             ],
             "complexity": "Time: O(n × L), Space: O(n × L)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "dict=[hello,leetcode], search(hhllo)",
+                "expectedOutput": "1",
+                "explanation": "hhllo differs from hello by 1 char"
+            },
+            {
+                "input": "dict=[hello,leetcode], search(hello)",
+                "expectedOutput": "0",
+                "explanation": "Exact match not allowed, need 1 change"
+            },
+            {
+                "input": "dict=[hello], search(hallo)",
+                "expectedOutput": "1",
+                "explanation": "One char difference"
+            },
+            {
+                "input": "dict=[hello], search(hell)",
+                "expectedOutput": "0",
+                "explanation": "Different length, not valid"
+            }
+        ]
     }
 ]

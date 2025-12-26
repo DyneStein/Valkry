@@ -14,21 +14,39 @@ import {
 } from 'firebase/database';
 
 /**
- * Set player as online and track presence
+ * Set player as online and track presence with heartbeat
  */
 export function setPlayerOnline(player) {
     const playerRef = ref(database, `online_players/${player.id}`);
 
+    const updatePresence = () => {
+        update(playerRef, {
+            name: player.name,
+            avatar: player.avatar || null,
+            status: 'available',
+            lastSeen: Date.now()
+        });
+    };
+
+    // Initial set
     set(playerRef, {
         name: player.name,
         avatar: player.avatar || null,
         status: 'available',
-        onlineSince: Date.now()
+        onlineSince: Date.now(),
+        lastSeen: Date.now()
     });
 
+    // Remove on disconnect (fallback)
     onDisconnect(playerRef).remove();
 
-    return () => remove(playerRef);
+    // Heartbeat every 60s
+    const interval = setInterval(updatePresence, 60000);
+
+    return () => {
+        clearInterval(interval);
+        remove(playerRef);
+    };
 }
 
 /**
@@ -36,11 +54,11 @@ export function setPlayerOnline(player) {
  */
 export async function setPlayerStatus(playerId, status) {
     const playerRef = ref(database, `online_players/${playerId}`);
-    await update(playerRef, { status });
+    await update(playerRef, { status, lastSeen: Date.now() });
 }
 
 /**
- * Subscribe to online players list
+ * Subscribe to online players list with stale filtering
  */
 export function subscribeToOnlinePlayers(myId, callback) {
     const playersRef = ref(database, 'online_players');
@@ -52,9 +70,28 @@ export function subscribeToOnlinePlayers(myId, callback) {
         }
 
         const players = [];
+        const now = Date.now();
+        const STALE_TIMEOUT = 120000; // 2 minutes
+
         snapshot.forEach((child) => {
             if (child.key !== myId) {
-                players.push({ id: child.key, ...child.val() });
+                const data = child.val();
+                // Only include if lastSeen is recent (or if it doesn't exist yet, give it a grace period - but better to require it)
+                // We'll allow players without lastSeen for now to avoid breaking existing sessions, 
+                // but realistically the stale ones probably don't have it or have old timestamps if we had it before.
+                // Since we are adding it now, old stale users won't have it.
+                // We will filter out anyone who HAS lastSeen and it's old, OR anyone who lacks it (assuming they are old stale data).
+
+                // STRICT MODE: If lastSeen is missing, it's considered stale (cached from before this update).
+                // However, legitimate other users might not have refreshed yet.
+                // For this specific bug fix ("stale users showing online"), we assume those stale records validly don't have invalid timestamps because they don't have timestamps at all?
+                // Actually the previous code didn't set lastSeen. So ALL existing records lack lastSeen.
+                // If I enforce 'lastSeen', everyone currently online (except me) will disappear until they refresh.
+                // This is Acceptable for a fix.
+
+                if (data.lastSeen && (now - data.lastSeen < STALE_TIMEOUT)) {
+                    players.push({ id: child.key, ...data });
+                }
             }
         });
         callback(players);
@@ -80,7 +117,9 @@ export async function sendChallenge(from, toPlayerId, problem) {
             category: problem.category || 'General',
             starterCode: problem.starterCode,
             expectedOutput: problem.expectedOutput,
-            testCases: problem.testCases || []
+            testCases: problem.testCases || [],
+            solution: problem.solution || '',
+            explanation: problem.explanation || {}
         },
         createdAt: Date.now(),
         status: 'pending',

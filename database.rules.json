@@ -1,0 +1,50 @@
+{
+    "rules": {
+        "leaderboard": {
+            ".read": true,
+            "$userId": {
+                ".write": "auth != null && auth.uid == $userId"
+            }
+        },
+        "globalStats": {
+            ".read": true,
+            ".write": "auth != null"
+        },
+        "users": {
+            "$userId": {
+                "stats": {
+                    ".read": "auth != null && auth.uid == $userId",
+                    ".write": "auth != null && auth.uid == $userId"
+                },
+                "friends": {
+                    ".read": "auth != null && auth.uid == $userId",
+                    ".write": "auth != null"
+                },
+                "friendRequests": {
+                    ".read": "auth != null && auth.uid == $userId",
+                    ".write": "auth != null"
+                },
+                "achievements": {
+                    ".read": "auth != null && auth.uid == $userId",
+                    ".write": "auth != null && auth.uid == $userId"
+                }
+            }
+        },
+        "online_players": {
+            ".read": "auth != null",
+            ".write": "auth != null"
+        },
+        "matchmaking": {
+            ".read": "auth != null",
+            ".write": "auth != null"
+        },
+        "battles": {
+            ".read": "auth != null",
+            ".write": "auth != null"
+        },
+        "challenges": {
+            ".read": "auth != null",
+            ".write": "auth != null"
+        }
+    }
+}

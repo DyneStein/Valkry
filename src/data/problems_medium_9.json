@@ -15,7 +15,29 @@
                 "Count subarrays ending at r"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{10,5,2,6}, k=100",
+                "expectedOutput": "8",
+                "explanation": "8 subarrays with product < 100"
+            },
+            {
+                "input": "{1,2,3}, k=0",
+                "expectedOutput": "0",
+                "explanation": "No valid subarrays when k<=1"
+            },
+            {
+                "input": "{1,1,1}, k=2",
+                "expectedOutput": "6",
+                "explanation": "All subarrays have product 1"
+            },
+            {
+                "input": "{10,9,10,4,3,8,3,3,6,2,10,10,9,3}, k=19",
+                "expectedOutput": "18",
+                "explanation": "Complex array with larger k"
+            }
+        ]
     },
     {
         "id": "m212",
@@ -33,7 +55,29 @@
                 "Move shorter line inward"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,8,6,2,5,4,8,3,7}",
+                "expectedOutput": "49",
+                "explanation": "max(min(8,7)*7) = 49"
+            },
+            {
+                "input": "{1,1}",
+                "expectedOutput": "1",
+                "explanation": "Minimum case"
+            },
+            {
+                "input": "{4,3,2,1,4}",
+                "expectedOutput": "16",
+                "explanation": "4 * 4 = 16"
+            },
+            {
+                "input": "{1,2,1}",
+                "expectedOutput": "2",
+                "explanation": "min(1,1)*2 = 2"
+            }
+        ]
     },
     {
         "id": "m213",
@@ -51,7 +95,29 @@
                 "Fix one, two-pointer for remaining"
             ],
             "complexity": "Time: O(n²), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{-1,0,1,2,-1,-4}",
+                "expectedOutput": "2",
+                "explanation": "[-1,-1,2] and [-1,0,1]"
+            },
+            {
+                "input": "{0,0,0}",
+                "expectedOutput": "1",
+                "explanation": "Only [0,0,0]"
+            },
+            {
+                "input": "{1,2,-3,4}",
+                "expectedOutput": "1",
+                "explanation": "[1,2,-3]"
+            },
+            {
+                "input": "{-2,0,1,1,2}",
+                "expectedOutput": "2",
+                "explanation": "[-2,0,2] and [-2,1,1]"
+            }
+        ]
     },
     {
         "id": "m214",
@@ -69,7 +135,29 @@
                 "Track closest sum"
             ],
             "complexity": "Time: O(n²), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{-1,2,1,-4}, target=1",
+                "expectedOutput": "2",
+                "explanation": "-1+2+1=2 is closest to 1"
+            },
+            {
+                "input": "{0,0,0}, target=1",
+                "expectedOutput": "0",
+                "explanation": "0 is closest to 1"
+            },
+            {
+                "input": "{1,1,1,0}, target=-100",
+                "expectedOutput": "2",
+                "explanation": "0+1+1=2 is closest"
+            },
+            {
+                "input": "{1,2,4,8,16,32,64,128}, target=82",
+                "expectedOutput": "82",
+                "explanation": "Exact match: 2+16+64=82"
+            }
+        ]
     },
     {
         "id": "m215",
@@ -87,7 +175,29 @@
                 "Two-pointer for remaining"
             ],
             "complexity": "Time: O(n³), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,0,-1,0,-2,2}, target=0",
+                "expectedOutput": "3",
+                "explanation": "3 unique quadruplets"
+            },
+            {
+                "input": "{2,2,2,2,2}, target=8",
+                "expectedOutput": "1",
+                "explanation": "Only [2,2,2,2]"
+            },
+            {
+                "input": "{0,0,0,0}, target=0",
+                "expectedOutput": "1",
+                "explanation": "All zeros"
+            },
+            {
+                "input": "{-3,-2,-1,0,0,1,2,3}, target=0",
+                "expectedOutput": "8",
+                "explanation": "Multiple quadruplet combinations"
+            }
+        ]
     },
     {
         "id": "m216",
@@ -105,7 +215,29 @@
                 "Swap accordingly"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{2,0,2,1,1,0}",
+                "expectedOutput": "0 0 1 1 2 2",
+                "explanation": "Sorted colors"
+            },
+            {
+                "input": "{2,0,1}",
+                "expectedOutput": "0 1 2",
+                "explanation": "Simple case"
+            },
+            {
+                "input": "{0}",
+                "expectedOutput": "0",
+                "explanation": "Single element"
+            },
+            {
+                "input": "{1,2,0,2,1,0}",
+                "expectedOutput": "0 0 1 1 2 2",
+                "explanation": "Different starting order"
+            }
+        ]
     },
     {
         "id": "m217",
@@ -123,7 +255,29 @@
                 "Try pairing l and r"
             ],
             "complexity": "Time: O(n log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{3,5,3,4}, limit=5",
+                "expectedOutput": "4",
+                "explanation": "Each person needs own boat"
+            },
+            {
+                "input": "{1,2}, limit=3",
+                "expectedOutput": "1",
+                "explanation": "Both fit in one boat"
+            },
+            {
+                "input": "{3,2,2,1}, limit=3",
+                "expectedOutput": "3",
+                "explanation": "(1,2), (2), (3)"
+            },
+            {
+                "input": "{1,1,1,1}, limit=2",
+                "expectedOutput": "2",
+                "explanation": "Two pairs of 1s"
+            }
+        ]
     },
     {
         "id": "m218",
@@ -140,7 +294,29 @@
                 "Match chars or accept repeats"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "name=\"alex\", typed=\"aaleex\"",
+                "expectedOutput": "1",
+                "explanation": "Valid long press"
+            },
+            {
+                "input": "name=\"saeed\", typed=\"ssaaedd\"",
+                "expectedOutput": "0",
+                "explanation": "Missing second 'e'"
+            },
+            {
+                "input": "name=\"a\", typed=\"aaaa\"",
+                "expectedOutput": "1",
+                "explanation": "Simple long press"
+            },
+            {
+                "input": "name=\"leelee\", typed=\"lleeelee\"",
+                "expectedOutput": "1",
+                "explanation": "Valid with multiple repeats"
+            }
+        ]
     },
     {
         "id": "m219",
@@ -158,7 +334,29 @@
                 "Binary search distance, count pairs"
             ],
             "complexity": "Time: O(n log n + n log W), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,3,1}, k=1",
+                "expectedOutput": "0",
+                "explanation": "Smallest distance is 0 (1-1)"
+            },
+            {
+                "input": "{1,6,1}, k=3",
+                "expectedOutput": "5",
+                "explanation": "Distances: 0, 5, 5"
+            },
+            {
+                "input": "{1,2,3}, k=2",
+                "expectedOutput": "1",
+                "explanation": "Distances: 1, 1, 2"
+            },
+            {
+                "input": "{1,2,3,4}, k=5",
+                "expectedOutput": "2",
+                "explanation": "Sorted distances: 1,1,1,2,2,3"
+            }
+        ]
     },
     {
         "id": "m220",
@@ -176,6 +374,28 @@
                 "Pair smallest with largest"
             ],
             "complexity": "Time: O(n log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{3,5,2,3}",
+                "expectedOutput": "7",
+                "explanation": "Pair (2,5) and (3,3) -> max is 7"
+            },
+            {
+                "input": "{3,5,4,2,4,6}",
+                "expectedOutput": "8",
+                "explanation": "Optimal pairing"
+            },
+            {
+                "input": "{1,1}",
+                "expectedOutput": "2",
+                "explanation": "Single pair"
+            },
+            {
+                "input": "{1,2,3,4,5,6}",
+                "expectedOutput": "7",
+                "explanation": "1+6=2+5=3+4=7"
+            }
+        ]
     }
 ]

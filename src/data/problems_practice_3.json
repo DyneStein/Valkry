@@ -17,7 +17,29 @@
                 "Assign saved to *b"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "x=5, y=10",
+                "expectedOutput": "10 5",
+                "explanation": "Swapped successfully"
+            },
+            {
+                "input": "x=0, y=0",
+                "expectedOutput": "0 0",
+                "explanation": "Same values unchanged"
+            },
+            {
+                "input": "x=-1, y=1",
+                "expectedOutput": "1 -1",
+                "explanation": "Negative and positive swapped"
+            },
+            {
+                "input": "x=100, y=200",
+                "expectedOutput": "200 100",
+                "explanation": "Larger values swapped"
+            }
+        ]
     },
     {
         "id": "prac22",
@@ -35,7 +57,29 @@
                 "*(a+i) gives value at index i"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,2,3,4,5}",
+                "expectedOutput": "1 2 3 4 5",
+                "explanation": "All elements printed"
+            },
+            {
+                "input": "{42}",
+                "expectedOutput": "42",
+                "explanation": "Single element"
+            },
+            {
+                "input": "{-1,0,1}",
+                "expectedOutput": "-1 0 1",
+                "explanation": "Mixed values"
+            },
+            {
+                "input": "{10,20,30,40}",
+                "expectedOutput": "10 20 30 40",
+                "explanation": "Multiple elements"
+            }
+        ]
     },
     {
         "id": "prac23",
@@ -54,7 +98,29 @@
                 "3-param adds 3"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "add2(1,2), add3(1,2,3)",
+                "expectedOutput": "3 6",
+                "explanation": "Both overloads work"
+            },
+            {
+                "input": "add2(0,0)",
+                "expectedOutput": "0",
+                "explanation": "Zero sum"
+            },
+            {
+                "input": "add3(10,20,30)",
+                "expectedOutput": "60",
+                "explanation": "Larger values"
+            },
+            {
+                "input": "add2(-5,5)",
+                "expectedOutput": "0",
+                "explanation": "Opposite numbers"
+            }
+        ]
     },
     {
         "id": "prac24",
@@ -73,7 +139,29 @@
                 "area() returns w×h"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "Box(5,3)",
+                "expectedOutput": "15",
+                "explanation": "5 × 3 = 15"
+            },
+            {
+                "input": "Box(10,10)",
+                "expectedOutput": "100",
+                "explanation": "Square box"
+            },
+            {
+                "input": "Box(1,1)",
+                "expectedOutput": "1",
+                "explanation": "Minimum size"
+            },
+            {
+                "input": "Box(7,4)",
+                "expectedOutput": "28",
+                "explanation": "7 × 4 = 28"
+            }
+        ]
     },
     {
         "id": "prac25",
@@ -92,7 +180,29 @@
                 "Dog overrides speak()"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "Dog d; d.speak()",
+                "expectedOutput": "Woof",
+                "explanation": "Dog speaks Woof"
+            },
+            {
+                "input": "Animal a; a.speak()",
+                "expectedOutput": "Sound",
+                "explanation": "Base class sound"
+            },
+            {
+                "input": "polymorphism test",
+                "expectedOutput": "Woof",
+                "explanation": "Virtual dispatch works"
+            },
+            {
+                "input": "Dog* dp; dp->speak()",
+                "expectedOutput": "Woof",
+                "explanation": "Pointer to Dog"
+            }
+        ]
     },
     {
         "id": "extra11",
@@ -111,7 +221,29 @@
                 "Track previous and diff"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[4,2,6,1,3]",
+                "expectedOutput": "1",
+                "explanation": "Min diff between consecutive nodes"
+            },
+            {
+                "input": "[1,null,3,2]",
+                "expectedOutput": "1",
+                "explanation": "Diff between 1-2 or 2-3"
+            },
+            {
+                "input": "[1,null,5]",
+                "expectedOutput": "4",
+                "explanation": "Only two nodes"
+            },
+            {
+                "input": "[10,5,15]",
+                "expectedOutput": "5",
+                "explanation": "Consecutive diffs of 5"
+            }
+        ]
     },
     {
         "id": "extra12",
@@ -130,7 +262,29 @@
                 "Recurse left then right"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[1,2,3,null,null,4,5]",
+                "expectedOutput": "1 2 # # 3 4 # # 5 # #",
+                "explanation": "Preorder with null markers"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "1 # #",
+                "explanation": "Single node"
+            },
+            {
+                "input": "[]",
+                "expectedOutput": "#",
+                "explanation": "Empty tree"
+            },
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "1 2 # # 3 # #",
+                "explanation": "Complete binary tree"
+            }
+        ]
     },
     {
         "id": "extra13",
@@ -150,7 +304,29 @@
                 "Front is max"
             ],
             "complexity": "Time: O(n), Space: O(k)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,3,-1,-3,5,3,6,7}, k=3",
+                "expectedOutput": "3 3 5 5 6 7",
+                "explanation": "Max in each window of 3"
+            },
+            {
+                "input": "{1,2,3,4,5}, k=2",
+                "expectedOutput": "2 3 4 5",
+                "explanation": "Increasing array"
+            },
+            {
+                "input": "{9,8,7,6}, k=2",
+                "expectedOutput": "9 8 7",
+                "explanation": "Decreasing array"
+            },
+            {
+                "input": "{1}, k=1",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            }
+        ]
     },
     {
         "id": "extra14",
@@ -168,7 +344,29 @@
                 "For each start, sum to each end"
             ],
             "complexity": "Time: O(n²), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "{1,1,1}, k=2",
+                "expectedOutput": "2",
+                "explanation": "[0:1] and [1:2] sum to 2"
+            },
+            {
+                "input": "{1,2,3}, k=3",
+                "expectedOutput": "2",
+                "explanation": "[0:1] and [2] sum to 3"
+            },
+            {
+                "input": "{1}, k=0",
+                "expectedOutput": "0",
+                "explanation": "No subarray sums to 0"
+            },
+            {
+                "input": "{3,-3,3}, k=3",
+                "expectedOutput": "2",
+                "explanation": "[0] and [0:2] and [2]"
+            }
+        ]
     },
     {
         "id": "extra15",
@@ -187,6 +385,28 @@
                 "Shrink left until unique"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"abcabcbb\"",
+                "expectedOutput": "3",
+                "explanation": "abc is longest unique"
+            },
+            {
+                "input": "\"bbbbb\"",
+                "expectedOutput": "1",
+                "explanation": "All same chars"
+            },
+            {
+                "input": "\"pwwkew\"",
+                "expectedOutput": "3",
+                "explanation": "wke is longest"
+            },
+            {
+                "input": "\"\"",
+                "expectedOutput": "0",
+                "explanation": "Empty string"
+            }
+        ]
     }
 ]

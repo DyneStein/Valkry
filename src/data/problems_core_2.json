@@ -17,7 +17,29 @@
                 "If any divides, not prime"
             ],
             "complexity": "Time: O(sqrt n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=17",
+                "expectedOutput": "1",
+                "explanation": "17 is prime"
+            },
+            {
+                "input": "n=4",
+                "expectedOutput": "0",
+                "explanation": "4 is divisible by 2"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "0",
+                "explanation": "1 is not prime"
+            },
+            {
+                "input": "n=97",
+                "expectedOutput": "1",
+                "explanation": "97 is a prime number"
+            }
+        ]
     },
     {
         "id": "core14",
@@ -37,7 +59,29 @@
                 "Add to result"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "1101",
+                "expectedOutput": "13",
+                "explanation": "Binary 1101 = 13"
+            },
+            {
+                "input": "1000",
+                "expectedOutput": "8",
+                "explanation": "Binary 1000 = 8"
+            },
+            {
+                "input": "111",
+                "expectedOutput": "7",
+                "explanation": "Binary 111 = 7"
+            },
+            {
+                "input": "10101",
+                "expectedOutput": "21",
+                "explanation": "Binary 10101 = 21"
+            }
+        ]
     },
     {
         "id": "core15",
@@ -57,7 +101,29 @@
                 "Print in reverse"
             ],
             "complexity": "Time: O(log n), Space: O(log n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "13",
+                "expectedOutput": "1101",
+                "explanation": "13 in binary is 1101"
+            },
+            {
+                "input": "8",
+                "expectedOutput": "1000",
+                "explanation": "8 in binary is 1000"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "0 in binary is 0"
+            },
+            {
+                "input": "255",
+                "expectedOutput": "11111111",
+                "explanation": "255 in binary is 8 ones"
+            }
+        ]
     },
     {
         "id": "core16",
@@ -75,7 +141,29 @@
                 "Multiply digits by powers of 8"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "17 (octal)",
+                "expectedOutput": "15",
+                "explanation": "17 in octal = 15 decimal"
+            },
+            {
+                "input": "10 (octal)",
+                "expectedOutput": "8",
+                "explanation": "10 in octal = 8 decimal"
+            },
+            {
+                "input": "77 (octal)",
+                "expectedOutput": "63",
+                "explanation": "77 in octal = 63 decimal"
+            },
+            {
+                "input": "100 (octal)",
+                "expectedOutput": "64",
+                "explanation": "100 in octal = 64 decimal"
+            }
+        ]
     },
     {
         "id": "core17",
@@ -95,7 +183,29 @@
                 "Add digit value"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "\"1A\"",
+                "expectedOutput": "26",
+                "explanation": "1A hex = 26 decimal"
+            },
+            {
+                "input": "\"FF\"",
+                "expectedOutput": "255",
+                "explanation": "FF hex = 255 decimal"
+            },
+            {
+                "input": "\"10\"",
+                "expectedOutput": "16",
+                "explanation": "10 hex = 16 decimal"
+            },
+            {
+                "input": "\"ABC\"",
+                "expectedOutput": "2748",
+                "explanation": "ABC hex = 2748 decimal"
+            }
+        ]
     },
     {
         "id": "core18",
@@ -114,7 +224,29 @@
                 "LCM = a×b / GCD"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "a=12, b=18",
+                "expectedOutput": "36",
+                "explanation": "LCM(12,18) = 36"
+            },
+            {
+                "input": "a=4, b=6",
+                "expectedOutput": "12",
+                "explanation": "LCM(4,6) = 12"
+            },
+            {
+                "input": "a=5, b=7",
+                "expectedOutput": "35",
+                "explanation": "Coprime, LCM = product"
+            },
+            {
+                "input": "a=3, b=9",
+                "expectedOutput": "9",
+                "explanation": "LCM when one divides other"
+            }
+        ]
     },
     {
         "id": "core19",
@@ -134,7 +266,29 @@
                 "Check if equals n"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "153",
+                "expectedOutput": "1",
+                "explanation": "1³+5³+3³ = 153"
+            },
+            {
+                "input": "370",
+                "expectedOutput": "1",
+                "explanation": "3³+7³+0³ = 370"
+            },
+            {
+                "input": "123",
+                "expectedOutput": "0",
+                "explanation": "1³+2³+3³ ≠ 123"
+            },
+            {
+                "input": "9474",
+                "expectedOutput": "1",
+                "explanation": "9⁴+4⁴+7⁴+4⁴ = 9474"
+            }
+        ]
     },
     {
         "id": "core20",
@@ -153,7 +307,29 @@
                 "Loop: c=a+b, shift values"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "55",
+                "explanation": "F(10) = 55"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "0",
+                "explanation": "F(0) = 0"
+            },
+            {
+                "input": "n=20",
+                "expectedOutput": "6765",
+                "explanation": "F(20) = 6765"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "F(1) = 1"
+            }
+        ]
     },
     {
         "id": "core21",
@@ -172,7 +348,29 @@
                 "If divides, add to sum"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "12",
+                "expectedOutput": "28",
+                "explanation": "1+2+3+4+6+12=28"
+            },
+            {
+                "input": "6",
+                "expectedOutput": "12",
+                "explanation": "1+2+3+6=12 (perfect number)"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "8",
+                "explanation": "Prime: 1+7=8"
+            },
+            {
+                "input": "28",
+                "expectedOutput": "56",
+                "explanation": "28 is a perfect number"
+            }
+        ]
     },
     {
         "id": "core22",
@@ -191,7 +389,29 @@
                 "Count divisors"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "12",
+                "expectedOutput": "6",
+                "explanation": "Divisors: 1,2,3,4,6,12"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "2",
+                "explanation": "Prime has only 2 divisors"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "1 has only itself"
+            },
+            {
+                "input": "36",
+                "expectedOutput": "9",
+                "explanation": "Divisors: 1,2,3,4,6,9,12,18,36"
+            }
+        ]
     },
     {
         "id": "core23",
@@ -211,7 +431,29 @@
                 "Print if yes"
             ],
             "complexity": "Time: O(n√n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=20",
+                "expectedOutput": "2 3 5 7 11 13 17 19",
+                "explanation": "Primes up to 20"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "2 3 5 7",
+                "explanation": "Primes up to 10"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "2",
+                "explanation": "Only 2 up to 2"
+            },
+            {
+                "input": "n=50",
+                "expectedOutput": "2 3 5 7 11 13 17 19 23 29 31 37 41 43 47",
+                "explanation": "Primes up to 50"
+            }
+        ]
     },
     {
         "id": "core24",
@@ -226,31 +468,33 @@
             "approach": "Keep incrementing and check primality.",
             "analogy": "Start after n, find first prime.",
             "steps": [
-                "Start at n+1",
+                "Increment n",
                 "Check if prime",
-                "If not, try next"
-            ],
-            "complexity": "Time: O(n√n), Space: O(1)"
-        }
-    },
-    {
-        "id": "core25",
-        "title": "Prime Factors",
-        "description": "List prime factors.",
-        "difficulty": "EASY",
-        "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid primeFactors(int n) {}\nint main() { primeFactors(60); return 0; }",
-        "expectedOutput": "2 2 3 5",
-        "solution": "#include <iostream>\nusing namespace std;\nvoid primeFactors(int n) { bool f=true; for(int i=2; i<=n; i++) while(n%i==0) { if(!f) cout<<\" \"; cout<<i; f=false; n/=i; } }\nint main() { primeFactors(60); return 0; }",
-        "explanation": {
-            "approach": "Divide by smallest prime repeatedly.",
-            "analogy": "60 = 2×2×3×5",
-            "steps": [
-                "Try dividing by 2",
-                "Then 3, 4, 5...",
-                "Print each factor"
+                "Return when found"
             ],
             "complexity": "Time: O(√n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "11",
+                "explanation": "Next prime after 10 is 11"
+            },
+            {
+                "input": "n=13",
+                "expectedOutput": "17",
+                "explanation": "Next prime after 13 is 17"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "2",
+                "explanation": "First prime is 2"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "101",
+                "explanation": "Next prime after 100 is 101"
+            }
+        ]
     }
 ]

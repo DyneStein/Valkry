@@ -2,155 +2,324 @@
     {
         "id": "hard25",
         "title": "LRU Cache",
-        "description": "Implement LRU cache.",
+        "description": "Implement Least Recently Used cache with O(1) operations.",
         "difficulty": "HARD",
         "category": "Design",
         "starterCode": "#include <iostream>\nusing namespace std;\nclass LRUCache { public: LRUCache(int cap) {} int get(int k) { return -1; } void put(int k, int v) {} };\nint main() { LRUCache c(2); c.put(1,1); c.put(2,2); cout<<c.get(1)<<\" \"; c.put(3,3); cout<<c.get(2); return 0; }",
         "expectedOutput": "1 -1",
         "solution": "#include <iostream>\nusing namespace std;\nclass LRUCache { int cap,sz; int keys[100],vals[100]; int find(int k) { for(int i=0;i<sz;i++) if(keys[i]==k) return i; return -1; } void moveToFront(int i) { int k=keys[i],v=vals[i]; for(int j=i;j>0;j--) { keys[j]=keys[j-1]; vals[j]=vals[j-1]; } keys[0]=k; vals[0]=v; } public: LRUCache(int c):cap(c),sz(0){} int get(int k) { int i=find(k); if(i<0) return -1; moveToFront(i); return vals[0]; } void put(int k, int v) { int i=find(k); if(i>=0) { vals[i]=v; moveToFront(i); return; } if(sz<cap) sz++; for(int j=sz-1;j>0;j--) { keys[j]=keys[j-1]; vals[j]=vals[j-1]; } keys[0]=k; vals[0]=v; } };\nint main() { LRUCache c(2); c.put(1,1); c.put(2,2); cout<<c.get(1)<<\" \"; c.put(3,3); cout<<c.get(2); return 0; }",
         "explanation": {
-            "approach": "Array with move to front.",
-            "analogy": "Most recently used at front.",
+            "approach": "Array with move-to-front for recency tracking.",
             "steps": [
-                "Find key, move to front",
-                "Evict last if full"
+                "Find key, move to front on access",
+                "Evict last when at capacity"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "cap=2, put(1,1), put(2,2), get(1), put(3,3), get(2)",
+                "expectedOutput": "1 -1",
+                "explanation": "2 evicted when 3 added"
+            },
+            {
+                "input": "cap=1, put(1,1), put(2,2), get(1)",
+                "expectedOutput": "-1",
+                "explanation": "1 evicted immediately"
+            },
+            {
+                "input": "cap=2, put(1,1), get(1), put(2,2), get(1)",
+                "expectedOutput": "1 1",
+                "explanation": "1 stays as most recent"
+            },
+            {
+                "input": "cap=2, put(1,1), put(1,2), get(1)",
+                "expectedOutput": "2",
+                "explanation": "Update existing key"
+            }
+        ]
     },
     {
         "id": "hard26",
-        "title": "Find Median Stream",
-        "description": "Median from data stream.",
+        "title": "Find Median from Data Stream",
+        "description": "Maintain running median as numbers are added.",
         "difficulty": "HARD",
         "category": "Design",
         "starterCode": "#include <iostream>\nusing namespace std;\nclass MedianFinder { public: void addNum(int n) {} double findMedian() { return 0; } };\nint main() { MedianFinder mf; mf.addNum(1); mf.addNum(2); cout<<mf.findMedian()<<\" \"; mf.addNum(3); cout<<mf.findMedian(); return 0; }",
         "expectedOutput": "1.5 2",
         "solution": "#include <iostream>\nusing namespace std;\nclass MedianFinder { int data[100],sz; public: MedianFinder():sz(0){} void addNum(int n) { int i=sz++; data[i]=n; while(i>0 && data[i]<data[i-1]) { swap(data[i],data[i-1]); i--; } } double findMedian() { if(sz%2) return data[sz/2]; return (data[sz/2-1]+data[sz/2])/2.0; } };\nint main() { MedianFinder mf; mf.addNum(1); mf.addNum(2); cout<<mf.findMedian()<<\" \"; mf.addNum(3); cout<<mf.findMedian(); return 0; }",
         "explanation": {
-            "approach": "Keep sorted array.",
-            "analogy": "Insert in sorted order.",
+            "approach": "Maintain sorted array, return middle elements.",
             "steps": [
-                "Insert and bubble to correct position",
-                "Return middle element(s)"
+                "Insert in sorted position",
+                "Return middle for odd, average for even"
             ],
-            "complexity": "Time: O(n), Space: O(n)"
-        }
+            "complexity": "Time: O(n) insert, Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "add(1), add(2), median(), add(3), median()",
+                "expectedOutput": "1.5 2",
+                "explanation": "Even count then odd"
+            },
+            {
+                "input": "add(5), median()",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "add(1), add(2), add(3), add(4), median()",
+                "expectedOutput": "2.5",
+                "explanation": "Even count average"
+            },
+            {
+                "input": "add(3), add(1), add(2), median()",
+                "expectedOutput": "2",
+                "explanation": "Middle after sorting"
+            }
+        ]
     },
     {
         "id": "hard27",
         "title": "Word Ladder",
-        "description": "Shortest transformation.",
+        "description": "Find shortest transformation sequence from begin to end word.",
         "difficulty": "HARD",
         "category": "BFS",
         "starterCode": "#include <iostream>\nusing namespace std;\nint ladderLength(char begin[], char end[], char words[][10], int n) { return 0; }\nint main() { char words[][10]={\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"}; cout<<ladderLength(\"hit\",\"cog\",words,6); return 0; }",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nbool diff1(char a[], char b[]) { int c=0; for(int i=0;a[i];i++) if(a[i]!=b[i]) c++; return c==1; }\nbool eq(char a[], char b[]) { int i=0; while(a[i] && a[i]==b[i]) i++; return !a[i] && !b[i]; }\nint ladderLength(char begin[], char end[], char words[][10], int n) { char q[100][10]; int f=0,r=0; bool vis[100]={}; int i=0; while(begin[i]) { q[r][i]=begin[i]; i++; } q[r++][i]=0; int lv=1; while(f<r) { int sz=r-f; for(int s=0;s<sz;s++) { for(int w=0;w<n;w++) { if(!vis[w] && diff1(q[f],words[w])) { if(eq(words[w],end)) return lv+1; vis[w]=true; int j=0; while(words[w][j]) { q[r][j]=words[w][j]; j++; } q[r++][j]=0; } } f++; } lv++; } return 0; }\nint main() { char words[][10]={\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"}; cout<<ladderLength(\"hit\",\"cog\",words,6); return 0; }",
         "explanation": {
-            "approach": "BFS shortest path.",
-            "analogy": "One letter change at a time.",
+            "approach": "BFS to find shortest path with one-letter changes.",
             "steps": [
-                "BFS from begin",
-                "Try all 1-letter changes",
+                "BFS from begin word",
+                "Try all valid one-letter transformations",
                 "Count levels"
             ],
             "complexity": "Time: O(n × m × 26), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "hit->cog, wordList",
+                "expectedOutput": "5",
+                "explanation": "hit->hot->dot->dog->cog"
+            },
+            {
+                "input": "hit->cog, no 'cog' in list",
+                "expectedOutput": "0",
+                "explanation": "End word not in list"
+            },
+            {
+                "input": "a->c, [a,b,c]",
+                "expectedOutput": "2",
+                "explanation": "Direct path a->c"
+            },
+            {
+                "input": "hot->dog, [hot,dog]",
+                "expectedOutput": "0",
+                "explanation": "Cannot transform"
+            }
+        ]
     },
     {
         "id": "hard28",
         "title": "Alien Dictionary",
-        "description": "Order of alien alphabet.",
+        "description": "Derive alien alphabet order from sorted words.",
         "difficulty": "HARD",
         "category": "Graph",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid alienOrder(char words[][10], int n) {}\nint main() { char words[][10]={\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"}; alienOrder(words,5); return 0; }",
         "expectedOutput": "wertf",
         "solution": "#include <iostream>\nusing namespace std;\nvoid alienOrder(char words[][10], int n) { int adj[26][26]={},deg[26]={},sz[26]={}; bool exists[26]={}; for(int i=0;i<n;i++) for(int j=0;words[i][j];j++) exists[words[i][j]-'a']=true; for(int i=0;i<n-1;i++) { int j=0; while(words[i][j] && words[i][j]==words[i+1][j]) j++; if(words[i][j] && words[i+1][j]) { int u=words[i][j]-'a',v=words[i+1][j]-'a'; adj[u][sz[u]++]=v; deg[v]++; } } int q[26],f=0,r=0; for(int i=0;i<26;i++) if(exists[i] && deg[i]==0) q[r++]=i; while(f<r) { int u=q[f++]; cout<<(char)('a'+u); for(int i=0;i<sz[u];i++) if(--deg[adj[u][i]]==0) q[r++]=adj[u][i]; } }\nint main() { char words[][10]={\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"}; alienOrder(words,5); return 0; }",
         "explanation": {
-            "approach": "Topological sort from comparisons.",
-            "analogy": "Build graph from word order.",
+            "approach": "Build graph from word comparisons, topological sort.",
             "steps": [
-                "Compare adjacent words for order",
-                "Build graph edges",
+                "Compare adjacent words for ordering info",
+                "Build directed graph",
                 "Topological sort"
             ],
             "complexity": "Time: O(C), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[wrt,wrf,er,ett,rftt]",
+                "expectedOutput": "wertf",
+                "explanation": "Valid alien order"
+            },
+            {
+                "input": "[z,x]",
+                "expectedOutput": "zx",
+                "explanation": "z comes before x"
+            },
+            {
+                "input": "[z,x,z]",
+                "expectedOutput": "",
+                "explanation": "Invalid - cycle detected"
+            },
+            {
+                "input": "[abc]",
+                "expectedOutput": "abc",
+                "explanation": "Single word, any order"
+            }
+        ]
     },
     {
         "id": "hard29",
         "title": "Critical Connections",
-        "description": "Find bridges in graph.",
+        "description": "Find bridges (critical edges) in a network.",
         "difficulty": "HARD",
         "category": "Graph",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid criticalConnections(int n, int edges[][2], int m) {}\nint main() { int edges[][2]={{0,1},{1,2},{2,0},{1,3}}; criticalConnections(4,edges,4); return 0; }",
         "expectedOutput": "1-3",
         "solution": "#include <iostream>\nusing namespace std;\nint adj[10][10],sz[10],disc[10],low[10],timer=0;\nvoid dfs(int u, int p) { disc[u]=low[u]=++timer; for(int i=0;i<sz[u];i++) { int v=adj[u][i]; if(!disc[v]) { dfs(v,u); low[u]=min(low[u],low[v]); if(low[v]>disc[u]) cout<<u<<\"-\"<<v<<\" \"; } else if(v!=p) low[u]=min(low[u],disc[v]); } }\nvoid criticalConnections(int n, int edges[][2], int m) { for(int i=0;i<n;i++) { sz[i]=0; disc[i]=0; low[i]=0; } for(int i=0;i<m;i++) { adj[edges[i][0]][sz[edges[i][0]]++]=edges[i][1]; adj[edges[i][1]][sz[edges[i][1]]++]=edges[i][0]; } for(int i=0;i<n;i++) if(!disc[i]) dfs(i,-1); }\nint main() { int edges[][2]={{0,1},{1,2},{2,0},{1,3}}; criticalConnections(4,edges,4); return 0; }",
         "explanation": {
-            "approach": "Tarjan's bridge finding.",
-            "analogy": "Edge is bridge if no back edge goes around.",
+            "approach": "Tarjan's algorithm for finding bridges.",
             "steps": [
                 "Track discovery and low times",
                 "Bridge if low[v] > disc[u]"
             ],
             "complexity": "Time: O(V+E), Space: O(V)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "4 nodes, edges including 1-3",
+                "expectedOutput": "1-3",
+                "explanation": "Only bridge is 1-3"
+            },
+            {
+                "input": "Complete graph K4",
+                "expectedOutput": "",
+                "explanation": "No bridges in complete graph"
+            },
+            {
+                "input": "Chain 0-1-2-3",
+                "expectedOutput": "0-1 1-2 2-3",
+                "explanation": "All edges are bridges"
+            },
+            {
+                "input": "Two triangles connected by 1 edge",
+                "expectedOutput": "connecting edge",
+                "explanation": "Single bridge"
+            }
+        ]
     },
     {
         "id": "hard30",
-        "title": "Count Smaller After",
-        "description": "Count smaller elements to right.",
+        "title": "Count Smaller Numbers After Self",
+        "description": "For each element, count smaller elements to its right.",
         "difficulty": "HARD",
         "category": "Divide and Conquer",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid countSmaller(int a[], int n) {}\nint main() { int a[]={5,2,6,1}; countSmaller(a,4); return 0; }",
         "expectedOutput": "2 1 1 0",
         "solution": "#include <iostream>\nusing namespace std;\nvoid countSmaller(int a[], int n) { int res[n]={}; for(int i=0;i<n;i++) for(int j=i+1;j<n;j++) if(a[j]<a[i]) res[i]++; for(int i=0;i<n;i++) cout<<res[i]<<\" \"; }\nint main() { int a[]={5,2,6,1}; countSmaller(a,4); return 0; }",
         "explanation": {
-            "approach": "Count smaller elements to right.",
-            "analogy": "Compare with all following elements.",
+            "approach": "Count all smaller elements to the right.",
             "steps": [
-                "For each element",
-                "Count smaller to the right"
+                "For each position",
+                "Count elements to right that are smaller"
             ],
             "complexity": "Time: O(n²), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[5,2,6,1]",
+                "expectedOutput": "2 1 1 0",
+                "explanation": "5>2,1; 2>1; 6>1; 1>none"
+            },
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "0 0 0",
+                "explanation": "Ascending array"
+            },
+            {
+                "input": "[3,2,1]",
+                "expectedOutput": "2 1 0",
+                "explanation": "Descending array"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "0",
+                "explanation": "Single element"
+            }
+        ]
     },
     {
         "id": "hard31",
-        "title": "Skyline Problem",
-        "description": "Building skyline outline.",
+        "title": "The Skyline Problem",
+        "description": "Compute building skyline silhouette.",
         "difficulty": "HARD",
         "category": "Divide and Conquer",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid getSkyline(int buildings[][3], int n) {}\nint main() { int b[][3]={{2,9,10},{3,7,15},{5,12,12},{15,20,10},{19,24,8}}; getSkyline(b,5); return 0; }",
         "expectedOutput": "2,10 3,15 7,12 12,0 15,10 20,8 24,0",
         "solution": "#include <iostream>\nusing namespace std;\nvoid getSkyline(int buildings[][3], int n) { int events[2*n][3], k=0; for(int i=0;i<n;i++) { events[k][0]=buildings[i][0]; events[k][1]=buildings[i][2]; events[k++][2]=1; events[k][0]=buildings[i][1]; events[k][1]=buildings[i][2]; events[k++][2]=0; } for(int i=0;i<2*n-1;i++) for(int j=0;j<2*n-i-1;j++) if(events[j][0]>events[j+1][0]) { swap(events[j][0],events[j+1][0]); swap(events[j][1],events[j+1][1]); swap(events[j][2],events[j+1][2]); } int active[100],az=0,lastH=-1; for(int i=0;i<2*n;i++) { if(events[i][2]) active[az++]=events[i][1]; else { for(int j=0;j<az;j++) if(active[j]==events[i][1]) { active[j]=active[--az]; break; } } int maxH=0; for(int j=0;j<az;j++) maxH=max(maxH,active[j]); if(maxH!=lastH) { cout<<events[i][0]<<\",\"<<maxH<<\" \"; lastH=maxH; } } }\nint main() { int b[][3]={{2,9,10},{3,7,15},{5,12,12},{15,20,10},{19,24,8}}; getSkyline(b,5); return 0; }",
         "explanation": {
-            "approach": "Line sweep with events.",
-            "analogy": "Track max height at each x.",
+            "approach": "Line sweep with start/end events.",
             "steps": [
-                "Create start/end events",
-                "Sweep and track active heights"
+                "Create events for building starts and ends",
+                "Sweep and track max active height"
             ],
             "complexity": "Time: O(n²), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "5 buildings",
+                "expectedOutput": "key points",
+                "explanation": "Skyline key points"
+            },
+            {
+                "input": "Single building [0,2,3]",
+                "expectedOutput": "0,3 2,0",
+                "explanation": "Start and end points"
+            },
+            {
+                "input": "Two same-height adjacent",
+                "expectedOutput": "merged outline",
+                "explanation": "No intermediate point"
+            },
+            {
+                "input": "Nested buildings",
+                "expectedOutput": "outer outline",
+                "explanation": "Taller hides shorter"
+            }
+        ]
     },
     {
         "id": "hard32",
-        "title": "Smallest Range",
-        "description": "Range covering all lists.",
+        "title": "Smallest Range Covering K Lists",
+        "description": "Find smallest range including at least one number from each list.",
         "difficulty": "HARD",
         "category": "Heap",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid smallestRange(int nums[][5], int k, int sizes[]) {}\nint main() { int nums[][5]={{4,10,15,24,26},{0,9,12,20},{5,18,22,30}}; int sizes[]={5,4,4}; smallestRange(nums,3,sizes); return 0; }",
         "expectedOutput": "20-24",
         "solution": "#include <iostream>\nusing namespace std;\nvoid smallestRange(int nums[][5], int k, int sizes[]) { int idx[k]={}; int minR=0,maxR=1e9; while(true) { int mi=0,mx=0; for(int i=0;i<k;i++) { if(nums[i][idx[i]]<nums[mi][idx[mi]]) mi=i; if(nums[i][idx[i]]>nums[mx][idx[mx]]) mx=i; } if(nums[mx][idx[mx]]-nums[mi][idx[mi]]<maxR-minR) { minR=nums[mi][idx[mi]]; maxR=nums[mx][idx[mx]]; } idx[mi]++; if(idx[mi]>=sizes[mi]) break; } cout<<minR<<\"-\"<<maxR; }\nint main() { int nums[][5]={{4,10,15,24,26},{0,9,12,20},{5,18,22,30}}; int sizes[]={5,4,4}; smallestRange(nums,3,sizes); return 0; }",
         "explanation": {
-            "approach": "Expand minimum pointer.",
-            "analogy": "Keep one from each list.",
+            "approach": "Keep one pointer per list, advance minimum.",
             "steps": [
-                "Track pointers to each list",
-                "Advance minimum each time"
+                "Track current element from each list",
+                "Advance minimum pointer",
+                "Track best range"
             ],
             "complexity": "Time: O(n × k), Space: O(k)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "3 sorted lists",
+                "expectedOutput": "20-24",
+                "explanation": "Range includes 20,22,24"
+            },
+            {
+                "input": "[[1,2,3],[1,2,3],[1,2,3]]",
+                "expectedOutput": "1-1",
+                "explanation": "All have 1"
+            },
+            {
+                "input": "[[1],[2],[3]]",
+                "expectedOutput": "1-3",
+                "explanation": "Must span all"
+            },
+            {
+                "input": "[[10,20],[11,21],[12,22]]",
+                "expectedOutput": "10-12",
+                "explanation": "Minimal range"
+            }
+        ]
     }
 ]

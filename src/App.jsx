@@ -9,6 +9,7 @@ import ArenaPage from './pages/ArenaPage';
 import LearningPage from './pages/LearningPage';
 import ProfilePage from './pages/ProfilePage';
 import AboutPage from './pages/AboutPage';
+import FriendsPage from './pages/FriendsPage';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/learn" element={<LearningPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/friends" element={<FriendsPage />} />
             <Route path="/features" element={<LandingPage />} />
           </Routes>
         </div>

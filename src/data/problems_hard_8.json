@@ -2,145 +2,321 @@
     {
         "id": "h161",
         "title": "Count of Range Sum",
-        "description": "Count range sums in [lo, hi].",
+        "description": "Count subarrays with sum in [lower, upper] range.",
         "difficulty": "HARD",
         "category": "Divide Conquer",
         "starterCode": "#include <iostream>\nusing namespace std;\nint countRangeSum(int nums[], int n, int lo, int hi) { return 0; }\nint main() { int a[]={-2,5,-1}; cout<<countRangeSum(a,3,-2,2); return 0; }",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint countRangeSum(int nums[], int n, int lo, int hi) { int cnt=0; for(int i=0;i<n;i++) { long sum=0; for(int j=i;j<n;j++) { sum+=nums[j]; if(sum>=lo&&sum<=hi) cnt++; } } return cnt; }\nint main() { int a[]={-2,5,-1}; cout<<countRangeSum(a,3,-2,2); return 0; }",
         "explanation": {
-            "approach": "Check all subarrays.",
+            "approach": "Check all subarray sums against range.",
             "steps": [
-                "For each start",
-                "Extend and check sum in range"
+                "For each starting index",
+                "Extend and check if sum in [lo, hi]"
             ],
             "complexity": "Time: O(n²), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[-2,5,-1], [-2,2]",
+                "expectedOutput": "3",
+                "explanation": "Three valid subarrays"
+            },
+            {
+                "input": "[0], [0,0]",
+                "expectedOutput": "1",
+                "explanation": "Single zero"
+            },
+            {
+                "input": "[1,2,3], [3,6]",
+                "expectedOutput": "3",
+                "explanation": "[3], [1,2], [1,2,3]"
+            },
+            {
+                "input": "[-1,-1], [-2,-1]",
+                "expectedOutput": "3",
+                "explanation": "Both singles and combined"
+            }
+        ]
     },
     {
         "id": "h162",
         "title": "Reverse Pairs",
-        "description": "Count i<j where nums[i]>2*nums[j].",
+        "description": "Count pairs where i < j and nums[i] > 2*nums[j].",
         "difficulty": "HARD",
         "category": "Divide Conquer",
         "starterCode": "#include <iostream>\nusing namespace std;\nint reversePairs(int nums[], int n) { return 0; }\nint main() { int a[]={1,3,2,3,1}; cout<<reversePairs(a,5); return 0; }",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\nint reversePairs(int nums[], int n) { int cnt=0; for(int i=0;i<n;i++) for(int j=i+1;j<n;j++) if(nums[i]>(long)2*nums[j]) cnt++; return cnt; }\nint main() { int a[]={1,3,2,3,1}; cout<<reversePairs(a,5); return 0; }",
         "explanation": {
-            "approach": "Check all pairs.",
+            "approach": "Check all valid pairs.",
             "steps": [
                 "For each pair (i,j) where i<j",
                 "Check if nums[i] > 2*nums[j]"
             ],
             "complexity": "Time: O(n²), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[1,3,2,3,1]",
+                "expectedOutput": "2",
+                "explanation": "3>2*1 twice"
+            },
+            {
+                "input": "[2,4,3,5,1]",
+                "expectedOutput": "3",
+                "explanation": "Three valid pairs"
+            },
+            {
+                "input": "[1,2,3,4]",
+                "expectedOutput": "0",
+                "explanation": "No reverse pairs"
+            },
+            {
+                "input": "[5,4,3,2,1]",
+                "expectedOutput": "4",
+                "explanation": "Descending has pairs"
+            }
+        ]
     },
     {
         "id": "h163",
         "title": "LRU Cache",
-        "description": "Implement LRU cache.",
+        "description": "Implement Least Recently Used cache with O(1) operations.",
         "difficulty": "HARD",
         "category": "Design",
         "starterCode": "#include <iostream>\nusing namespace std;\nclass LRUCache {\npublic:\n    LRUCache(int capacity) {}\n    int get(int key) { return -1; }\n    void put(int key, int value) {}\n};\nint main() { LRUCache c(2); c.put(1,1); c.put(2,2); cout<<c.get(1); c.put(3,3); cout<<c.get(2); return 0; }",
         "expectedOutput": "1-1",
         "solution": "#include <iostream>\nusing namespace std;\nclass LRUCache { int cap; int keys[10],vals[10],times[10],n,t; public: LRUCache(int c):cap(c),n(0),t(0){} int find(int k) { for(int i=0;i<n;i++) if(keys[i]==k) return i; return -1; } int get(int k) { int i=find(k); if(i<0) return -1; times[i]=++t; return vals[i]; } void put(int k, int v) { int i=find(k); if(i>=0) { vals[i]=v; times[i]=++t; return; } if(n<cap) { keys[n]=k; vals[n]=v; times[n++]=++t; } else { int mn=0; for(int j=1;j<n;j++) if(times[j]<times[mn]) mn=j; keys[mn]=k; vals[mn]=v; times[mn]=++t; } } };\nint main() { LRUCache c(2); c.put(1,1); c.put(2,2); cout<<c.get(1); c.put(3,3); cout<<c.get(2); return 0; }",
         "explanation": {
-            "approach": "Track access times.",
+            "approach": "Track access times to identify least recently used.",
             "steps": [
                 "On get/put, update access time",
-                "Evict least recently used"
+                "Evict entry with oldest access time"
             ],
             "complexity": "Time: O(n) per op, Space: O(cap)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "cap=2, operations",
+                "expectedOutput": "1-1",
+                "explanation": "2 evicted when 3 added"
+            },
+            {
+                "input": "cap=1, put(1,1), put(2,2), get(1)",
+                "expectedOutput": "-1",
+                "explanation": "1 evicted"
+            },
+            {
+                "input": "cap=2, put(1,1), get(1), put(2,2), get(1)",
+                "expectedOutput": "1 1",
+                "explanation": "1 stays recent"
+            },
+            {
+                "input": "cap=2, put(1,1), put(1,2), get(1)",
+                "expectedOutput": "2",
+                "explanation": "Update value"
+            }
+        ]
     },
     {
         "id": "h164",
         "title": "Min Stack",
-        "description": "Stack with getMin.",
+        "description": "Stack that supports getMin in O(1).",
         "difficulty": "HARD",
         "category": "Design",
         "starterCode": "#include <iostream>\nusing namespace std;\nclass MinStack {\npublic:\n    void push(int val) {}\n    void pop() {}\n    int top() { return 0; }\n    int getMin() { return 0; }\n};\nint main() { MinStack s; s.push(-2); s.push(0); s.push(-3); cout<<s.getMin(); s.pop(); cout<<s.top(); cout<<s.getMin(); return 0; }",
         "expectedOutput": "-30-2",
-        "solution": "#include <iostream>\nusing namespace std;\nclass MinStack { int stk[100],mstk[100],top,mtop; public: MinStack():top(-1),mtop(-1){} void push(int v) { stk[++top]=v; if(mtop<0||v<=mstk[mtop]) mstk[++mtop]=v; } void pop() { if(stk[top--]==mstk[mtop]) mtop--; } int top() { return stk[this->top]; } int getMin() { return mstk[mtop]; } };\nint main() { MinStack s; s.push(-2); s.push(0); s.push(-3); cout<<s.getMin(); s.pop(); cout<<s.top(); cout<<s.getMin(); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nclass MinStack { int stk[100],mstk[100],t,mt; public: MinStack():t(-1),mt(-1){} void push(int v) { stk[++t]=v; if(mt<0||v<=mstk[mt]) mstk[++mt]=v; } void pop() { if(stk[t--]==mstk[mt]) mt--; } int top() { return stk[t]; } int getMin() { return mstk[mt]; } };\nint main() { MinStack s; s.push(-2); s.push(0); s.push(-3); cout<<s.getMin(); s.pop(); cout<<s.top(); cout<<s.getMin(); return 0; }",
         "explanation": {
-            "approach": "Two stacks.",
+            "approach": "Two stacks - main and minimum tracking.",
             "steps": [
-                "Main stack for values",
-                "Min stack for running minimum"
+                "Push to min stack only when <= current min",
+                "Pop from min if top equals popped value"
             ],
             "complexity": "Time: O(1) all ops, Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "push(-2,0,-3), getMin, pop, top, getMin",
+                "expectedOutput": "-30-2",
+                "explanation": "Min changes after pop"
+            },
+            {
+                "input": "push(1), getMin",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "push(1,2,3), getMin",
+                "expectedOutput": "1",
+                "explanation": "First is min"
+            },
+            {
+                "input": "push(3,2,1), pop, getMin",
+                "expectedOutput": "2",
+                "explanation": "Min updates"
+            }
+        ]
     },
     {
         "id": "h165",
-        "title": "Find Median Data Stream",
-        "description": "Running median.",
+        "title": "Find Median from Data Stream",
+        "description": "Maintain running median as numbers are added.",
         "difficulty": "HARD",
         "category": "Design",
         "starterCode": "#include <iostream>\nusing namespace std;\nclass MedianFinder {\npublic:\n    void addNum(int num) {}\n    double findMedian() { return 0; }\n};\nint main() { MedianFinder m; m.addNum(1); m.addNum(2); cout<<m.findMedian(); m.addNum(3); cout<<m.findMedian(); return 0; }",
         "expectedOutput": "1.52",
         "solution": "#include <iostream>\nusing namespace std;\nclass MedianFinder { int a[100],n; public: MedianFinder():n(0){} void addNum(int v) { int i=n++; a[i]=v; while(i>0&&a[i]<a[i-1]) { swap(a[i],a[i-1]); i--; } } double findMedian() { if(n%2) return a[n/2]; return (a[n/2-1]+a[n/2])/2.0; } };\nint main() { MedianFinder m; m.addNum(1); m.addNum(2); cout<<m.findMedian(); m.addNum(3); cout<<m.findMedian(); return 0; }",
         "explanation": {
-            "approach": "Sorted array.",
+            "approach": "Maintain sorted array, return middle element(s).",
             "steps": [
-                "Insert and maintain sorted order",
-                "Return middle element(s)"
+                "Insert and bubble to maintain sorted order",
+                "Odd count: middle, Even: average of two middle"
             ],
             "complexity": "Time: O(n) insert, O(1) median"
-        }
+        },
+        "testCases": [
+            {
+                "input": "add(1,2), median, add(3), median",
+                "expectedOutput": "1.52",
+                "explanation": "1.5 then 2"
+            },
+            {
+                "input": "add(5), median",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "add(1,2,3,4), median",
+                "expectedOutput": "2.5",
+                "explanation": "Average of 2 and 3"
+            },
+            {
+                "input": "add(3,1,2), median",
+                "expectedOutput": "2",
+                "explanation": "Middle after sorting"
+            }
+        ]
     },
     {
         "id": "h166",
-        "title": "Serialize Deserialize BST",
-        "description": "Convert tree to string and back.",
+        "title": "Serialize and Deserialize BST",
+        "description": "Convert BST to string and reconstruct it.",
         "difficulty": "HARD",
         "category": "Design",
         "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid serialize(Node* r) {}\nNode* deserialize() { return nullptr; }\nint main() { Node* r=new Node(2); r->l=new Node(1); r->r=new Node(3); serialize(r); cout<<\"OK\"; return 0; }",
         "expectedOutput": "OK",
         "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid serialize(Node* r) { if(!r) { cout<<\"# \"; return; } cout<<r->v<<\" \"; serialize(r->l); serialize(r->r); }\nNode* deserialize() { return nullptr; }\nint main() { Node* r=new Node(2); r->l=new Node(1); r->r=new Node(3); serialize(r); cout<<\"OK\"; return 0; }",
         "explanation": {
-            "approach": "Preorder with null markers.",
+            "approach": "Preorder traversal with null markers.",
             "steps": [
                 "Output value or # for null",
-                "Reconstruct using preorder"
+                "Reconstruct using same order"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "BST [2,1,3]",
+                "expectedOutput": "OK",
+                "explanation": "Serialization works"
+            },
+            {
+                "input": "Single node [5]",
+                "expectedOutput": "OK",
+                "explanation": "Single node tree"
+            },
+            {
+                "input": "Empty tree",
+                "expectedOutput": "OK",
+                "explanation": "Empty outputs #"
+            },
+            {
+                "input": "Left-skewed [3,2,1]",
+                "expectedOutput": "OK",
+                "explanation": "Linear tree"
+            }
+        ]
     },
     {
         "id": "h167",
-        "title": "All Oone Data Structure",
-        "description": "Inc/dec with getMax/getMin.",
+        "title": "All O(1) Data Structure",
+        "description": "Inc/dec operations with getMax/getMin keys.",
         "difficulty": "HARD",
         "category": "Design",
         "starterCode": "#include <iostream>\nusing namespace std;\nclass AllOne {\npublic:\n    void inc(char key[]) {}\n    void dec(char key[]) {}\n    void getMaxKey() {}\n    void getMinKey() {}\n};\nint main() { AllOne a; cout<<\"OK\"; return 0; }",
         "expectedOutput": "OK",
-        "solution": "#include <iostream>\nusing namespace std;\nclass AllOne { char keys[100][20]; int cnt[100]; int n; public: AllOne():n(0){} int find(char k[]) { for(int i=0;i<n;i++) { bool eq=true; for(int j=0;k[j]||keys[i][j];j++) if(k[j]!=keys[i][j]) { eq=false; break; } if(eq) return i; } return -1; } void inc(char k[]) { int i=find(k); if(i<0) { for(int j=0;k[j];j++) keys[n][j]=k[j]; keys[n][strlen(k)]=0; cnt[n++]=1; } else cnt[i]++; } void dec(char k[]) { int i=find(k); if(i>=0) cnt[i]--; } void getMaxKey() { int mx=0; for(int i=1;i<n;i++) if(cnt[i]>cnt[mx]) mx=i; if(n>0) cout<<keys[mx]; } void getMinKey() { int mn=0; for(int i=1;i<n;i++) if(cnt[i]>0&&cnt[i]<cnt[mn]) mn=i; if(n>0) cout<<keys[mn]; } };\nint main() { AllOne a; cout<<\"OK\"; return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nclass AllOne { char keys[100][20]; int cnt[100]; int n; public: AllOne():n(0){} int find(char k[]) { for(int i=0;i<n;i++) { bool eq=true; for(int j=0;k[j]||keys[i][j];j++) if(k[j]!=keys[i][j]) { eq=false; break; } if(eq) return i; } return -1; } void inc(char k[]) { int i=find(k); if(i<0) { int j=0; while(k[j]) { keys[n][j]=k[j]; j++; } keys[n][j]=0; cnt[n++]=1; } else cnt[i]++; } void dec(char k[]) { int i=find(k); if(i>=0) cnt[i]--; } void getMaxKey() { int mx=0; for(int i=1;i<n;i++) if(cnt[i]>cnt[mx]) mx=i; if(n>0) cout<<keys[mx]; } void getMinKey() { int mn=0; for(int i=1;i<n;i++) if(cnt[i]>0&&cnt[i]<cnt[mn]) mn=i; if(n>0) cout<<keys[mn]; } };\nint main() { AllOne a; cout<<\"OK\"; return 0; }",
         "explanation": {
-            "approach": "Track key-count pairs.",
+            "approach": "Track key-count pairs, scan for max/min.",
             "steps": [
                 "Store keys and their counts",
-                "Find max/min by scanning"
+                "Linear scan for max/min"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "inc(a), inc(b), inc(a), getMaxKey",
+                "expectedOutput": "a",
+                "explanation": "a has count 2"
+            },
+            {
+                "input": "inc(a), getMinKey",
+                "expectedOutput": "a",
+                "explanation": "Only key"
+            },
+            {
+                "input": "inc(a), dec(a), getMaxKey",
+                "expectedOutput": "",
+                "explanation": "Count is 0"
+            },
+            {
+                "input": "inc(a), inc(b), getMinKey",
+                "expectedOutput": "a or b",
+                "explanation": "Both count 1"
+            }
+        ]
     },
     {
         "id": "h168",
-        "title": "Max Frequency Stack",
-        "description": "Pop most frequent element.",
+        "title": "Maximum Frequency Stack",
+        "description": "Pop the most frequent element, with recency as tiebreaker.",
         "difficulty": "HARD",
         "category": "Design",
         "starterCode": "#include <iostream>\nusing namespace std;\nclass FreqStack {\npublic:\n    void push(int val) {}\n    int pop() { return 0; }\n};\nint main() { FreqStack f; f.push(5); f.push(7); f.push(5); f.push(7); f.push(4); f.push(5); cout<<f.pop(); return 0; }",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nclass FreqStack { int stk[100][100],stkSz[100],freq[101],maxFreq,n; public: FreqStack():maxFreq(0),n(0){ for(int i=0;i<100;i++) stkSz[i]=0; for(int i=0;i<101;i++) freq[i]=0; } void push(int v) { freq[v]++; int f=freq[v]; stk[f][stkSz[f]++]=v; maxFreq=max(maxFreq,f); } int pop() { int v=stk[maxFreq][--stkSz[maxFreq]]; freq[v]--; if(stkSz[maxFreq]==0) maxFreq--; return v; } };\nint main() { FreqStack f; f.push(5); f.push(7); f.push(5); f.push(7); f.push(4); f.push(5); cout<<f.pop(); return 0; }",
         "explanation": {
-            "approach": "Stack per frequency.",
+            "approach": "Separate stack for each frequency level.",
             "steps": [
-                "Push to stack[freq]",
+                "Push to stack at current frequency",
                 "Pop from highest frequency stack"
             ],
             "complexity": "Time: O(1), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "push(5,7,5,7,4,5), pop()",
+                "expectedOutput": "5",
+                "explanation": "5 most frequent, most recent"
+            },
+            {
+                "input": "push(1,1,1), pop,pop,pop",
+                "expectedOutput": "1 1 1",
+                "explanation": "All same"
+            },
+            {
+                "input": "push(1,2,3), pop",
+                "expectedOutput": "3",
+                "explanation": "Tie, most recent wins"
+            },
+            {
+                "input": "push(4,0,9,3,4,2), pop",
+                "expectedOutput": "4",
+                "explanation": "4 appears twice, most recent 4"
+            }
+        ]
     }
 ]

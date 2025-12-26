@@ -2,147 +2,323 @@
     {
         "id": "h136",
         "title": "Island Perimeter",
-        "description": "Calculate island perimeter.",
+        "description": "Calculate perimeter of island in grid where 1 is land and 0 is water.",
         "difficulty": "EASY",
         "category": "Matrix",
         "starterCode": "#include <iostream>\nusing namespace std;\nint islandPerimeter(int grid[][4], int r, int c) { return 0; }\nint main() { int g[][4]={{0,1,0,0},{1,1,1,0},{0,1,0,0},{1,1,0,0}}; cout<<islandPerimeter(g,4,4); return 0; }",
         "expectedOutput": "16",
         "solution": "#include <iostream>\nusing namespace std;\nint islandPerimeter(int grid[][4], int r, int c) { int p=0; for(int i=0;i<r;i++) for(int j=0;j<c;j++) if(grid[i][j]) { p+=4; if(i>0&&grid[i-1][j]) p-=2; if(j>0&&grid[i][j-1]) p-=2; } return p; }\nint main() { int g[][4]={{0,1,0,0},{1,1,1,0},{0,1,0,0},{1,1,0,0}}; cout<<islandPerimeter(g,4,4); return 0; }",
         "explanation": {
-            "approach": "Count edges minus shared.",
+            "approach": "Count 4 edges per land cell, subtract 2 for each adjacent land.",
             "steps": [
-                "Each land adds 4 edges",
-                "Subtract 2 for each adjacent land"
+                "Each land cell contributes 4 edges",
+                "Subtract 2 for each neighbor"
             ],
             "complexity": "Time: O(mn), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "4x4 grid with island",
+                "expectedOutput": "16",
+                "explanation": "Island perimeter is 16"
+            },
+            {
+                "input": "Single cell [[1]]",
+                "expectedOutput": "4",
+                "explanation": "Square has 4 sides"
+            },
+            {
+                "input": "[[1,1],[1,1]]",
+                "expectedOutput": "8",
+                "explanation": "2x2 square perimeter"
+            },
+            {
+                "input": "Line [[1,1,1,1]]",
+                "expectedOutput": "10",
+                "explanation": "Horizontal line perimeter"
+            }
+        ]
     },
     {
         "id": "h137",
-        "title": "Best Time Buy Sell III",
-        "description": "Max profit with 2 transactions.",
+        "title": "Best Time to Buy and Sell Stock III",
+        "description": "Maximum profit with at most 2 transactions.",
         "difficulty": "HARD",
         "category": "DP",
         "starterCode": "#include <iostream>\nusing namespace std;\nint maxProfit(int prices[], int n) { return 0; }\nint main() { int p[]={3,3,5,0,0,3,1,4}; cout<<maxProfit(p,8); return 0; }",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint maxProfit(int prices[], int n) { int b1=1e9,b2=1e9,p1=0,p2=0; for(int i=0;i<n;i++) { b1=min(b1,prices[i]); p1=max(p1,prices[i]-b1); b2=min(b2,prices[i]-p1); p2=max(p2,prices[i]-b2); } return p2; }\nint main() { int p[]={3,3,5,0,0,3,1,4}; cout<<maxProfit(p,8); return 0; }",
         "explanation": {
-            "approach": "Track two transactions.",
+            "approach": "Track two transactions with running min buy and max profit.",
             "steps": [
                 "b1, p1 for first transaction",
-                "b2, p2 for second using p1"
+                "b2, p2 for second using p1 as 'discount'"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[3,3,5,0,0,3,1,4]",
+                "expectedOutput": "6",
+                "explanation": "Buy at 0, sell at 3, buy at 1, sell at 4"
+            },
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "4",
+                "explanation": "Single transaction 1->5"
+            },
+            {
+                "input": "[7,6,4,3,1]",
+                "expectedOutput": "0",
+                "explanation": "Prices only decrease"
+            },
+            {
+                "input": "[1,2,4,2,5,7,2,4,9,0]",
+                "expectedOutput": "13",
+                "explanation": "Two optimal transactions"
+            }
+        ]
     },
     {
         "id": "h138",
-        "title": "Best Time Buy Sell IV",
-        "description": "Max profit with k transactions.",
+        "title": "Best Time to Buy and Sell Stock IV",
+        "description": "Maximum profit with at most k transactions.",
         "difficulty": "HARD",
         "category": "DP",
         "starterCode": "#include <iostream>\nusing namespace std;\nint maxProfit(int k, int prices[], int n) { return 0; }\nint main() { int p[]={2,4,1}; cout<<maxProfit(2,p,3); return 0; }",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\nint maxProfit(int k, int prices[], int n) { if(n==0||k==0) return 0; if(k>=n/2) { int p=0; for(int i=1;i<n;i++) if(prices[i]>prices[i-1]) p+=prices[i]-prices[i-1]; return p; } int dp[k+1][n]; for(int i=0;i<=k;i++) dp[i][0]=0; for(int j=0;j<n;j++) dp[0][j]=0; for(int i=1;i<=k;i++) { int mx=-prices[0]; for(int j=1;j<n;j++) { dp[i][j]=max(dp[i][j-1],prices[j]+mx); mx=max(mx,dp[i-1][j-1]-prices[j]); } } return dp[k][n-1]; }\nint main() { int p[]={2,4,1}; cout<<maxProfit(2,p,3); return 0; }",
         "explanation": {
-            "approach": "DP with k transactions.",
+            "approach": "DP with state for number of transactions used.",
             "steps": [
                 "dp[i][j] = max profit with i transactions up to day j",
-                "Optimize with running max"
+                "Optimize with running max difference"
             ],
             "complexity": "Time: O(kn), Space: O(kn)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "k=2, [2,4,1]",
+                "expectedOutput": "2",
+                "explanation": "Buy at 2, sell at 4"
+            },
+            {
+                "input": "k=2, [3,2,6,5,0,3]",
+                "expectedOutput": "7",
+                "explanation": "2->6 and 0->3"
+            },
+            {
+                "input": "k=1, [1,2,3]",
+                "expectedOutput": "2",
+                "explanation": "Single transaction 1->3"
+            },
+            {
+                "input": "k=0, [1,2,3]",
+                "expectedOutput": "0",
+                "explanation": "No transactions allowed"
+            }
+        ]
     },
     {
         "id": "h139",
         "title": "Distinct Subsequences",
-        "description": "Count subsequences matching t.",
+        "description": "Count distinct subsequences of s that equal t.",
         "difficulty": "HARD",
         "category": "DP",
         "starterCode": "#include <iostream>\nusing namespace std;\nint numDistinct(char s[], char t[]) { return 0; }\nint main() { cout<<numDistinct(\"rabbbit\",\"rabbit\"); return 0; }",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint numDistinct(char s[], char t[]) { int m=0,n=0; while(s[m]) m++; while(t[n]) n++; int dp[m+1][n+1]; for(int i=0;i<=m;i++) dp[i][0]=1; for(int j=1;j<=n;j++) dp[0][j]=0; for(int i=1;i<=m;i++) for(int j=1;j<=n;j++) dp[i][j]=dp[i-1][j]+(s[i-1]==t[j-1]?dp[i-1][j-1]:0); return dp[m][n]; }\nint main() { cout<<numDistinct(\"rabbbit\",\"rabbit\"); return 0; }",
         "explanation": {
-            "approach": "DP counting subsequences.",
+            "approach": "DP counting subsequences matching target.",
             "steps": [
-                "dp[i][j] = ways to form t[0..j] from s[0..i]",
+                "dp[i][j] = ways to form t[0..j-1] from s[0..i-1]",
                 "Add dp[i-1][j-1] if chars match"
             ],
             "complexity": "Time: O(mn), Space: O(mn)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "rabbbit, rabbit",
+                "expectedOutput": "3",
+                "explanation": "3 ways to select 'rabbit'"
+            },
+            {
+                "input": "babgbag, bag",
+                "expectedOutput": "5",
+                "explanation": "5 distinct subsequences"
+            },
+            {
+                "input": "a, a",
+                "expectedOutput": "1",
+                "explanation": "Single match"
+            },
+            {
+                "input": "ab, b",
+                "expectedOutput": "1",
+                "explanation": "One way"
+            }
+        ]
     },
     {
         "id": "h140",
         "title": "Interleaving String",
-        "description": "Can s3 be formed by interleaving s1 and s2.",
+        "description": "Check if s3 is formed by interleaving s1 and s2.",
         "difficulty": "HARD",
         "category": "DP",
         "starterCode": "#include <iostream>\nusing namespace std;\nbool isInterleave(char s1[], char s2[], char s3[]) { return false; }\nint main() { cout<<isInterleave(\"aabcc\",\"dbbca\",\"aadbbcbcac\"); return 0; }",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isInterleave(char s1[], char s2[], char s3[]) { int m=0,n=0,l=0; while(s1[m]) m++; while(s2[n]) n++; while(s3[l]) l++; if(m+n!=l) return false; bool dp[m+1][n+1]; dp[0][0]=true; for(int i=1;i<=m;i++) dp[i][0]=dp[i-1][0]&&s1[i-1]==s3[i-1]; for(int j=1;j<=n;j++) dp[0][j]=dp[0][j-1]&&s2[j-1]==s3[j-1]; for(int i=1;i<=m;i++) for(int j=1;j<=n;j++) dp[i][j]=(dp[i-1][j]&&s1[i-1]==s3[i+j-1])||(dp[i][j-1]&&s2[j-1]==s3[i+j-1]); return dp[m][n]; }\nint main() { cout<<isInterleave(\"aabcc\",\"dbbca\",\"aadbbcbcac\"); return 0; }",
         "explanation": {
-            "approach": "DP for interleaving.",
+            "approach": "DP for interleaving validation.",
             "steps": [
-                "dp[i][j] = s1[0..i] and s2[0..j] can form s3[0..i+j]",
-                "Check if next char matches s1 or s2"
+                "dp[i][j] = can s1[0..i) + s2[0..j) interleave to s3[0..i+j)",
+                "Check if next char from s1 or s2 matches"
             ],
             "complexity": "Time: O(mn), Space: O(mn)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "aabcc, dbbca, aadbbcbcac",
+                "expectedOutput": "1",
+                "explanation": "Valid interleaving"
+            },
+            {
+                "input": "aabcc, dbbca, aadbbbaccc",
+                "expectedOutput": "0",
+                "explanation": "Invalid interleaving"
+            },
+            {
+                "input": "a, b, ab",
+                "expectedOutput": "1",
+                "explanation": "Simple interleave"
+            },
+            {
+                "input": "\"\", \"\", \"\"",
+                "expectedOutput": "1",
+                "explanation": "Empty strings"
+            }
+        ]
     },
     {
         "id": "h141",
-        "title": "Largest Rectangle Histogram",
-        "description": "Max rectangle area.",
+        "title": "Largest Rectangle in Histogram",
+        "description": "Find largest rectangle that can be formed in histogram.",
         "difficulty": "HARD",
         "category": "Stack",
         "starterCode": "#include <iostream>\nusing namespace std;\nint largestRectangleArea(int heights[], int n) { return 0; }\nint main() { int h[]={2,1,5,6,2,3}; cout<<largestRectangleArea(h,6); return 0; }",
         "expectedOutput": "10",
         "solution": "#include <iostream>\nusing namespace std;\nint largestRectangleArea(int h[], int n) { int stk[n+1],top=-1,mx=0; for(int i=0;i<=n;i++) { int cur=i==n?0:h[i]; while(top>=0&&cur<h[stk[top]]) { int ht=h[stk[top--]]; int w=top<0?i:i-stk[top]-1; mx=max(mx,ht*w); } stk[++top]=i; } return mx; }\nint main() { int h[]={2,1,5,6,2,3}; cout<<largestRectangleArea(h,6); return 0; }",
         "explanation": {
-            "approach": "Stack for nearest smaller.",
+            "approach": "Stack to find nearest smaller on both sides.",
             "steps": [
-                "Stack stores increasing indices",
+                "Maintain increasing stack",
                 "Pop when smaller found",
-                "Calculate area with popped as height"
+                "Calculate area with popped bar as height"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[2,1,5,6,2,3]",
+                "expectedOutput": "10",
+                "explanation": "5x2 rectangle"
+            },
+            {
+                "input": "[2,4]",
+                "expectedOutput": "4",
+                "explanation": "Either 2x2 or 1x4"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "1",
+                "explanation": "Single bar"
+            },
+            {
+                "input": "[3,3,3,3]",
+                "expectedOutput": "12",
+                "explanation": "3x4 rectangle"
+            }
+        ]
     },
     {
         "id": "h142",
         "title": "Maximal Rectangle",
-        "description": "Max rectangle of 1s in matrix.",
+        "description": "Find largest rectangle containing only 1s in binary matrix.",
         "difficulty": "HARD",
         "category": "Stack",
         "starterCode": "#include <iostream>\nusing namespace std;\nint maximalRectangle(char m[][5], int r, int c) { return 0; }\nint main() { char m[][5]={{\"10100\"},{\"10111\"},{\"11111\"},{\"10010\"}}; cout<<maximalRectangle(m,4,5); return 0; }",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint largestRect(int h[], int n) { int stk[n+1],top=-1,mx=0; for(int i=0;i<=n;i++) { int cur=i==n?0:h[i]; while(top>=0&&cur<h[stk[top]]) { int ht=h[stk[top--]]; int w=top<0?i:i-stk[top]-1; mx=max(mx,ht*w); } stk[++top]=i; } return mx; }\nint maximalRectangle(char m[][5], int r, int c) { int h[c]={}; int mx=0; for(int i=0;i<r;i++) { for(int j=0;j<c;j++) h[j]=m[i][j]=='1'?h[j]+1:0; mx=max(mx,largestRect(h,c)); } return mx; }\nint main() { char m[][5]={{\"10100\"},{\"10111\"},{\"11111\"},{\"10010\"}}; cout<<maximalRectangle(m,4,5); return 0; }",
         "explanation": {
-            "approach": "Reduce to histogram problem.",
+            "approach": "Convert each row to histogram, apply largest rectangle.",
             "steps": [
-                "Build histogram heights row by row",
-                "Apply largest rectangle in histogram"
+                "Build cumulative heights row by row",
+                "Apply histogram algorithm per row"
             ],
             "complexity": "Time: O(mn), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "4x5 binary matrix",
+                "expectedOutput": "6",
+                "explanation": "3x2 rectangle of 1s"
+            },
+            {
+                "input": "[[1]]",
+                "expectedOutput": "1",
+                "explanation": "Single cell"
+            },
+            {
+                "input": "[[1,1],[1,1]]",
+                "expectedOutput": "4",
+                "explanation": "2x2 square"
+            },
+            {
+                "input": "[[0,0],[0,0]]",
+                "expectedOutput": "0",
+                "explanation": "No 1s"
+            }
+        ]
     },
     {
         "id": "h143",
         "title": "Trapping Rain Water",
-        "description": "Water trapped between bars.",
+        "description": "Calculate water trapped between elevation bars.",
         "difficulty": "HARD",
         "category": "Stack",
         "starterCode": "#include <iostream>\nusing namespace std;\nint trap(int h[], int n) { return 0; }\nint main() { int h[]={0,1,0,2,1,0,1,3,2,1,2,1}; cout<<trap(h,12); return 0; }",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint trap(int h[], int n) { int l=0,r=n-1,lm=0,rm=0,w=0; while(l<r) { if(h[l]<h[r]) { if(h[l]>=lm) lm=h[l]; else w+=lm-h[l]; l++; } else { if(h[r]>=rm) rm=h[r]; else w+=rm-h[r]; r--; } } return w; }\nint main() { int h[]={0,1,0,2,1,0,1,3,2,1,2,1}; cout<<trap(h,12); return 0; }",
         "explanation": {
-            "approach": "Two pointers with max tracking.",
+            "approach": "Two pointers tracking max heights from each side.",
             "steps": [
-                "Track left and right max",
-                "Move smaller side",
-                "Add water = max - current"
+                "Track leftMax and rightMax",
+                "Process shorter side",
+                "Add water = max - current height"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[0,1,0,2,1,0,1,3,2,1,2,1]",
+                "expectedOutput": "6",
+                "explanation": "Water in valleys"
+            },
+            {
+                "input": "[4,2,0,3,2,5]",
+                "expectedOutput": "9",
+                "explanation": "Larger opening"
+            },
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "0",
+                "explanation": "Ascending, no trap"
+            },
+            {
+                "input": "[5,4,3,2,1]",
+                "expectedOutput": "0",
+                "explanation": "Descending, no trap"
+            }
+        ]
     }
 ]

@@ -7,6 +7,58 @@
         "category": "Two Pointers",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid twoSum(int a[], int n, int t) {}\nint main() { int a[]={2,7,11,15}; twoSum(a,4,9); return 0; }",
         "expectedOutput": "0 1",
+        "testCases": [
+            {
+                "input": "4 9\n2 7 11 15",
+                "expectedOutput": "0 1",
+                "explanation": "2+7=9"
+            },
+            {
+                "input": "3 6\n2 3 4",
+                "expectedOutput": "0 2",
+                "explanation": "2+4=6"
+            },
+            {
+                "input": "2 3\n1 2",
+                "expectedOutput": "0 1",
+                "explanation": "1+2=3"
+            },
+            {
+                "input": "4 18\n2 7 11 15",
+                "expectedOutput": "1 2",
+                "explanation": "7+11=18"
+            },
+            {
+                "input": "5 10\n1 2 3 4 6",
+                "expectedOutput": "2 4",
+                "explanation": "4+6=10"
+            },
+            {
+                "input": "4 26\n2 7 11 15",
+                "expectedOutput": "2 3",
+                "explanation": "11+15=26"
+            },
+            {
+                "input": "5 5\n1 2 2 3 4",
+                "expectedOutput": "1 2",
+                "explanation": "2+3=5 or 1+4=5"
+            },
+            {
+                "input": "3 100\n10 50 90",
+                "expectedOutput": "0 2",
+                "explanation": "10+90=100"
+            },
+            {
+                "input": "4 -1\n-3 0 2 5",
+                "expectedOutput": "0 2",
+                "explanation": "-3+2=-1"
+            },
+            {
+                "input": "5 0\n-5 -3 1 2 5",
+                "expectedOutput": "0 4",
+                "explanation": "-5+5=0"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid twoSum(int a[], int n, int t) { int l=0, r=n-1; while(l<r) { int s=a[l]+a[r]; if(s==t) { cout<<l<<\" \"<<r; return; } if(s<t) l++; else r--; } }\nint main() { int a[]={2,7,11,15}; twoSum(a,4,9); return 0; }",
         "explanation": {
             "approach": "Two pointers from both ends, adjust based on sum.",
@@ -26,6 +78,58 @@
         "category": "Two Pointers",
         "starterCode": "#include <iostream>\nusing namespace std;\nint maxArea(int h[], int n) { return 0; }\nint main() { int h[]={1,8,6,2,5,4,8,3,7}; cout<<maxArea(h,9); return 0; }",
         "expectedOutput": "49",
+        "testCases": [
+            {
+                "input": "9\n1 8 6 2 5 4 8 3 7",
+                "expectedOutput": "49",
+                "explanation": "Between index 1 and 8"
+            },
+            {
+                "input": "2\n1 1",
+                "expectedOutput": "1",
+                "explanation": "1×1=1"
+            },
+            {
+                "input": "4\n1 2 1 2",
+                "expectedOutput": "4",
+                "explanation": "2×2=4"
+            },
+            {
+                "input": "3\n4 3 2",
+                "expectedOutput": "4",
+                "explanation": "2×2=4"
+            },
+            {
+                "input": "5\n1 2 3 4 5",
+                "expectedOutput": "6",
+                "explanation": "Best container"
+            },
+            {
+                "input": "5\n5 4 3 2 1",
+                "expectedOutput": "6",
+                "explanation": "Decreasing heights"
+            },
+            {
+                "input": "6\n2 3 4 5 18 17",
+                "expectedOutput": "17",
+                "explanation": "Tall bars at end"
+            },
+            {
+                "input": "4\n1 8 8 1",
+                "expectedOutput": "8",
+                "explanation": "Two tall bars"
+            },
+            {
+                "input": "9\n1 1 1 1 1 1 1 1 1",
+                "expectedOutput": "8",
+                "explanation": "All same height"
+            },
+            {
+                "input": "3\n10 1 10",
+                "expectedOutput": "20",
+                "explanation": "Wide span"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint maxArea(int h[], int n) { int l=0, r=n-1, mx=0; while(l<r) { int area=(r-l)*min(h[l],h[r]); mx=max(mx,area); if(h[l]<h[r]) l++; else r--; } return mx; }\nint main() { int h[]={1,8,6,2,5,4,8,3,7}; cout<<maxArea(h,9); return 0; }",
         "explanation": {
             "approach": "Two pointers, move shorter line inward.",
@@ -45,6 +149,58 @@
         "category": "Two Pointers",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid threeSum(int a[], int n, int t) {}\nint main() { int a[]={-1,0,1,2,-1,-4}; threeSum(a,6,0); return 0; }",
         "expectedOutput": "-1 -1 2 -1 0 1",
+        "testCases": [
+            {
+                "input": "6 0\n-1 0 1 2 -1 -4",
+                "expectedOutput": "-1 -1 2 -1 0 1",
+                "explanation": "Two unique triplets"
+            },
+            {
+                "input": "3 0\n0 0 0",
+                "expectedOutput": "0 0 0",
+                "explanation": "All zeros"
+            },
+            {
+                "input": "4 0\n0 1 1 1",
+                "expectedOutput": "",
+                "explanation": "No triplet"
+            },
+            {
+                "input": "4 6\n1 2 3 4",
+                "expectedOutput": "1 2 3",
+                "explanation": "Single triplet"
+            },
+            {
+                "input": "5 0\n-2 -1 0 1 2",
+                "expectedOutput": "-2 0 2 -1 0 1",
+                "explanation": "Two triplets"
+            },
+            {
+                "input": "6 9\n1 2 3 4 5 6",
+                "expectedOutput": "1 2 6 1 3 5 2 3 4",
+                "explanation": "Multiple triplets"
+            },
+            {
+                "input": "3 10\n1 2 3",
+                "expectedOutput": "",
+                "explanation": "Sum too small"
+            },
+            {
+                "input": "4 -6\n-5 -3 1 2",
+                "expectedOutput": "-5 -3 2",
+                "explanation": "Negative sum"
+            },
+            {
+                "input": "5 0\n-1 -1 -1 2 2",
+                "expectedOutput": "-1 -1 2",
+                "explanation": "Duplicate handling"
+            },
+            {
+                "input": "6 3\n-1 0 1 2 -1 -4",
+                "expectedOutput": "-1 2 2",
+                "explanation": "Different target"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid threeSum(int a[], int n, int t) { for(int i=0;i<n-2;i++) for(int j=i+1;j<n-1;j++) for(int k=j+1;k<n;k++) if(a[i]+a[j]+a[k]==t) cout<<a[i]<<\" \"<<a[j]<<\" \"<<a[k]<<\" \"; }\nint main() { int a[]={-1,0,1,2,-1,-4}; threeSum(a,6,0); return 0; }",
         "explanation": {
             "approach": "Fix one element, use two sum on rest.",
@@ -63,6 +219,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid merge(int a[], int m, int b[], int n, int c[]) {}\nint main() { int a[]={1,3,5}, b[]={2,4,6}, c[6]; merge(a,3,b,3,c); for(int i=0;i<6;i++) cout<<c[i]<<(i<5?\" \":\"\"); return 0; }",
         "expectedOutput": "1 2 3 4 5 6",
+        "testCases": [
+            {
+                "input": "3 3\n1 3 5\n2 4 6",
+                "expectedOutput": "1 2 3 4 5 6",
+                "explanation": "Interleaved merge"
+            },
+            {
+                "input": "3 3\n1 2 3\n4 5 6",
+                "expectedOutput": "1 2 3 4 5 6",
+                "explanation": "First all smaller"
+            },
+            {
+                "input": "3 3\n4 5 6\n1 2 3",
+                "expectedOutput": "1 2 3 4 5 6",
+                "explanation": "Second all smaller"
+            },
+            {
+                "input": "1 1\n1\n2",
+                "expectedOutput": "1 2",
+                "explanation": "Single elements"
+            },
+            {
+                "input": "2 3\n1 5\n2 3 4",
+                "expectedOutput": "1 2 3 4 5",
+                "explanation": "Different sizes"
+            },
+            {
+                "input": "4 2\n1 2 3 4\n5 6",
+                "expectedOutput": "1 2 3 4 5 6",
+                "explanation": "No interleave"
+            },
+            {
+                "input": "3 3\n1 1 1\n2 2 2",
+                "expectedOutput": "1 1 1 2 2 2",
+                "explanation": "Duplicates"
+            },
+            {
+                "input": "3 3\n1 2 3\n1 2 3",
+                "expectedOutput": "1 1 2 2 3 3",
+                "explanation": "Same arrays"
+            },
+            {
+                "input": "2 4\n3 7\n1 2 5 8",
+                "expectedOutput": "1 2 3 5 7 8",
+                "explanation": "Mixed"
+            },
+            {
+                "input": "3 3\n-3 -1 0\n-2 1 2",
+                "expectedOutput": "-3 -2 -1 0 1 2",
+                "explanation": "Negative values"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid merge(int a[], int m, int b[], int n, int c[]) { int i=0,j=0,k=0; while(i<m && j<n) c[k++]= a[i]<b[j] ? a[i++] : b[j++]; while(i<m) c[k++]=a[i++]; while(j<n) c[k++]=b[j++]; }\nint main() { int a[]={1,3,5}, b[]={2,4,6}, c[6]; merge(a,3,b,3,c); for(int i=0;i<6;i++) cout<<c[i]<<(i<5?\" \":\"\"); return 0; }",
         "explanation": {
             "approach": "Two pointers, pick smaller each time.",
@@ -83,6 +291,58 @@
         "category": "Sorting",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid quickSort(int a[], int l, int r) {}\nint main() { int a[]={10,7,8,9,1,5}; quickSort(a,0,5); for(int i=0;i<6;i++) cout<<a[i]<<(i<5?\" \":\"\"); return 0; }",
         "expectedOutput": "1 5 7 8 9 10",
+        "testCases": [
+            {
+                "input": "6\n10 7 8 9 1 5",
+                "expectedOutput": "1 5 7 8 9 10",
+                "explanation": "Sorted array"
+            },
+            {
+                "input": "5\n5 4 3 2 1",
+                "expectedOutput": "1 2 3 4 5",
+                "explanation": "Reverse sorted"
+            },
+            {
+                "input": "5\n1 2 3 4 5",
+                "expectedOutput": "1 2 3 4 5",
+                "explanation": "Already sorted"
+            },
+            {
+                "input": "1\n5",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "2\n2 1",
+                "expectedOutput": "1 2",
+                "explanation": "Two elements"
+            },
+            {
+                "input": "4\n4 4 4 4",
+                "expectedOutput": "4 4 4 4",
+                "explanation": "All same"
+            },
+            {
+                "input": "6\n3 1 4 1 5 9",
+                "expectedOutput": "1 1 3 4 5 9",
+                "explanation": "With duplicates"
+            },
+            {
+                "input": "7\n64 25 12 22 11 90 45",
+                "expectedOutput": "11 12 22 25 45 64 90",
+                "explanation": "Larger example"
+            },
+            {
+                "input": "5\n-5 -2 0 3 1",
+                "expectedOutput": "-5 -2 0 1 3",
+                "explanation": "With negatives"
+            },
+            {
+                "input": "8\n100 50 25 12 6 3 1 0",
+                "expectedOutput": "0 1 3 6 12 25 50 100",
+                "explanation": "Powers of 2ish"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint partition(int a[], int l, int r) { int p=a[r], i=l-1; for(int j=l;j<r;j++) if(a[j]<p) { i++; swap(a[i],a[j]); } swap(a[i+1],a[r]); return i+1; }\nvoid quickSort(int a[], int l, int r) { if(l<r) { int p=partition(a,l,r); quickSort(a,l,p-1); quickSort(a,p+1,r); } }\nint main() { int a[]={10,7,8,9,1,5}; quickSort(a,0,5); for(int i=0;i<6;i++) cout<<a[i]<<(i<5?\" \":\"\"); return 0; }",
         "explanation": {
             "approach": "Pick pivot, partition, recurse on halves.",
@@ -103,6 +363,58 @@
         "category": "Sorting",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid mergeSort(int a[], int l, int r) {}\nint main() { int a[]={12,11,13,5,6,7}; mergeSort(a,0,5); for(int i=0;i<6;i++) cout<<a[i]<<(i<5?\" \":\"\"); return 0; }",
         "expectedOutput": "5 6 7 11 12 13",
+        "testCases": [
+            {
+                "input": "6\n12 11 13 5 6 7",
+                "expectedOutput": "5 6 7 11 12 13",
+                "explanation": "Sorted output"
+            },
+            {
+                "input": "5\n5 4 3 2 1",
+                "expectedOutput": "1 2 3 4 5",
+                "explanation": "Reverse sorted"
+            },
+            {
+                "input": "5\n1 2 3 4 5",
+                "expectedOutput": "1 2 3 4 5",
+                "explanation": "Already sorted"
+            },
+            {
+                "input": "1\n5",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "2\n2 1",
+                "expectedOutput": "1 2",
+                "explanation": "Two elements"
+            },
+            {
+                "input": "4\n4 4 4 4",
+                "expectedOutput": "4 4 4 4",
+                "explanation": "All same"
+            },
+            {
+                "input": "7\n38 27 43 3 9 82 10",
+                "expectedOutput": "3 9 10 27 38 43 82",
+                "explanation": "Larger example"
+            },
+            {
+                "input": "8\n5 3 8 4 2 7 1 6",
+                "expectedOutput": "1 2 3 4 5 6 7 8",
+                "explanation": "Mixed order"
+            },
+            {
+                "input": "5\n-5 -2 0 3 1",
+                "expectedOutput": "-5 -2 0 1 3",
+                "explanation": "With negatives"
+            },
+            {
+                "input": "6\n100 1 50 25 75 10",
+                "expectedOutput": "1 10 25 50 75 100",
+                "explanation": "Wide range"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid merge(int a[], int l, int m, int r) { int n1=m-l+1, n2=r-m; int L[n1], R[n2]; for(int i=0;i<n1;i++) L[i]=a[l+i]; for(int i=0;i<n2;i++) R[i]=a[m+1+i]; int i=0,j=0,k=l; while(i<n1 && j<n2) a[k++]= L[i]<=R[j] ? L[i++] : R[j++]; while(i<n1) a[k++]=L[i++]; while(j<n2) a[k++]=R[j++]; }\nvoid mergeSort(int a[], int l, int r) { if(l<r) { int m=(l+r)/2; mergeSort(a,l,m); mergeSort(a,m+1,r); merge(a,l,m,r); } }\nint main() { int a[]={12,11,13,5,6,7}; mergeSort(a,0,5); for(int i=0;i<6;i++) cout<<a[i]<<(i<5?\" \":\"\"); return 0; }",
         "explanation": {
             "approach": "Split in half, sort each, merge.",
@@ -123,6 +435,58 @@
         "category": "DP",
         "starterCode": "#include <iostream>\nusing namespace std;\nint maxSubArray(int a[], int n) { return 0; }\nint main() { int a[]={-2,1,-3,4,-1,2,1,-5,4}; cout<<maxSubArray(a,9); return 0; }",
         "expectedOutput": "6",
+        "testCases": [
+            {
+                "input": "9\n-2 1 -3 4 -1 2 1 -5 4",
+                "expectedOutput": "6",
+                "explanation": "[4,-1,2,1] = 6"
+            },
+            {
+                "input": "1\n1",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "5\n5 4 -1 7 8",
+                "expectedOutput": "23",
+                "explanation": "Entire array"
+            },
+            {
+                "input": "5\n-1 -2 -3 -4 -5",
+                "expectedOutput": "-1",
+                "explanation": "Least negative"
+            },
+            {
+                "input": "3\n-2 1 -1",
+                "expectedOutput": "1",
+                "explanation": "Single positive"
+            },
+            {
+                "input": "6\n1 2 3 4 5 6",
+                "expectedOutput": "21",
+                "explanation": "All positive"
+            },
+            {
+                "input": "4\n-2 -1 2 3",
+                "expectedOutput": "5",
+                "explanation": "End subarray"
+            },
+            {
+                "input": "5\n3 -1 -1 -1 3",
+                "expectedOutput": "3",
+                "explanation": "First or last"
+            },
+            {
+                "input": "6\n1 -1 1 -1 1 -1",
+                "expectedOutput": "1",
+                "explanation": "Alternating"
+            },
+            {
+                "input": "4\n-1 4 -2 5",
+                "expectedOutput": "7",
+                "explanation": "Skip first negative"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint maxSubArray(int a[], int n) { int mx=a[0], cur=a[0]; for(int i=1;i<n;i++) { cur=max(a[i], cur+a[i]); mx=max(mx, cur); } return mx; }\nint main() { int a[]={-2,1,-3,4,-1,2,1,-5,4}; cout<<maxSubArray(a,9); return 0; }",
         "explanation": {
             "approach": "Either start fresh or extend previous.",
@@ -142,6 +506,58 @@
         "category": "DP",
         "starterCode": "#include <iostream>\nusing namespace std;\nint lis(int a[], int n) { return 0; }\nint main() { int a[]={10,9,2,5,3,7,101,18}; cout<<lis(a,8); return 0; }",
         "expectedOutput": "4",
+        "testCases": [
+            {
+                "input": "8\n10 9 2 5 3 7 101 18",
+                "expectedOutput": "4",
+                "explanation": "[2,3,7,101] or [2,5,7,18]"
+            },
+            {
+                "input": "6\n0 1 0 3 2 3",
+                "expectedOutput": "4",
+                "explanation": "[0,1,2,3]"
+            },
+            {
+                "input": "7\n7 7 7 7 7 7 7",
+                "expectedOutput": "1",
+                "explanation": "All same"
+            },
+            {
+                "input": "1\n5",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "5\n1 2 3 4 5",
+                "expectedOutput": "5",
+                "explanation": "Already increasing"
+            },
+            {
+                "input": "5\n5 4 3 2 1",
+                "expectedOutput": "1",
+                "explanation": "Decreasing"
+            },
+            {
+                "input": "8\n3 10 2 1 20 4 6 7",
+                "expectedOutput": "4",
+                "explanation": "[1,4,6,7]"
+            },
+            {
+                "input": "9\n1 3 6 7 9 4 10 5 6",
+                "expectedOutput": "6",
+                "explanation": "[1,3,6,7,9,10]"
+            },
+            {
+                "input": "6\n2 5 3 7 11 8",
+                "expectedOutput": "4",
+                "explanation": "[2,3,7,11] or [2,5,7,11]"
+            },
+            {
+                "input": "4\n1 101 2 3",
+                "expectedOutput": "3",
+                "explanation": "[1,2,3]"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint lis(int a[], int n) { int dp[n]; for(int i=0;i<n;i++) dp[i]=1; for(int i=1;i<n;i++) for(int j=0;j<i;j++) if(a[j]<a[i]) dp[i]=max(dp[i], dp[j]+1); int mx=0; for(int i=0;i<n;i++) mx=max(mx,dp[i]); return mx; }\nint main() { int a[]={10,9,2,5,3,7,101,18}; cout<<lis(a,8); return 0; }",
         "explanation": {
             "approach": "dp[i] = longest ending at i.",
@@ -161,6 +577,58 @@
         "category": "DP",
         "starterCode": "#include <iostream>\nusing namespace std;\nint coinChange(int coins[], int n, int amount) { return -1; }\nint main() { int c[]={1,2,5}; cout<<coinChange(c,3,11); return 0; }",
         "expectedOutput": "3",
+        "testCases": [
+            {
+                "input": "3 11\n1 2 5",
+                "expectedOutput": "3",
+                "explanation": "5+5+1=11"
+            },
+            {
+                "input": "1 3\n2",
+                "expectedOutput": "-1",
+                "explanation": "Impossible"
+            },
+            {
+                "input": "1 0\n1",
+                "expectedOutput": "0",
+                "explanation": "Zero amount"
+            },
+            {
+                "input": "3 6\n1 3 4",
+                "expectedOutput": "2",
+                "explanation": "3+3=6"
+            },
+            {
+                "input": "3 100\n1 5 10",
+                "expectedOutput": "10",
+                "explanation": "10×10=100"
+            },
+            {
+                "input": "4 15\n1 5 10 25",
+                "expectedOutput": "2",
+                "explanation": "10+5=15"
+            },
+            {
+                "input": "3 7\n2 3 5",
+                "expectedOutput": "2",
+                "explanation": "2+5=7 or 2+2+3=7"
+            },
+            {
+                "input": "2 10\n3 7",
+                "expectedOutput": "-1",
+                "explanation": "No combination"
+            },
+            {
+                "input": "4 23\n1 5 10 21",
+                "expectedOutput": "3",
+                "explanation": "21+1+1=23"
+            },
+            {
+                "input": "3 30\n1 3 5",
+                "expectedOutput": "6",
+                "explanation": "5×6=30"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint coinChange(int coins[], int n, int amount) { int dp[amount+1]; for(int i=0;i<=amount;i++) dp[i]=amount+1; dp[0]=0; for(int i=1;i<=amount;i++) for(int j=0;j<n;j++) if(coins[j]<=i) dp[i]=min(dp[i], dp[i-coins[j]]+1); return dp[amount]>amount ? -1 : dp[amount]; }\nint main() { int c[]={1,2,5}; cout<<coinChange(c,3,11); return 0; }",
         "explanation": {
             "approach": "dp[i] = min coins for amount i.",
@@ -180,6 +648,58 @@
         "category": "DP",
         "starterCode": "#include <iostream>\nusing namespace std;\nint climbStairs(int n) { return 0; }\nint main() { cout<<climbStairs(5); return 0; }",
         "expectedOutput": "8",
+        "testCases": [
+            {
+                "input": "5",
+                "expectedOutput": "8",
+                "explanation": "8 ways to climb 5 stairs"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Only 1 way"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "2",
+                "explanation": "1+1 or 2"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "3",
+                "explanation": "1+1+1, 1+2, 2+1"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "5",
+                "explanation": "Fibonacci pattern"
+            },
+            {
+                "input": "6",
+                "expectedOutput": "13",
+                "explanation": "F(7) = 13"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "21",
+                "explanation": "F(8) = 21"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "89",
+                "explanation": "F(11) = 89"
+            },
+            {
+                "input": "8",
+                "expectedOutput": "34",
+                "explanation": "F(9) = 34"
+            },
+            {
+                "input": "9",
+                "expectedOutput": "55",
+                "explanation": "F(10) = 55"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint climbStairs(int n) { if(n<=2) return n; int a=1, b=2; for(int i=3;i<=n;i++) { int c=a+b; a=b; b=c; } return b; }\nint main() { cout<<climbStairs(5); return 0; }",
         "explanation": {
             "approach": "Fibonacci pattern - ways(n) = ways(n-1) + ways(n-2).",

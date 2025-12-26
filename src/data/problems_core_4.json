@@ -2,227 +2,397 @@
     {
         "id": "core31",
         "title": "Climbing Stairs",
-        "description": "You are climbing a staircase with n steps. Each time you can climb either 1 or 2 steps. In how many distinct ways can you climb to the top?",
+        "description": "You are climbing a staircase with n steps. Each time you can climb 1 or 2 steps. How many distinct ways can you climb to the top?",
         "difficulty": "EASY",
         "category": "Dynamic Programming",
         "starterCode": "#include <iostream>\nusing namespace std;\nint climbStairs(int n) { return 0; }\nint main() { cout << climbStairs(4); return 0; }",
         "expectedOutput": "5",
-        "solution": "#include <iostream>\nusing namespace std;\nint climbStairs(int n) {\n    if(n <= 2) return n;\n    \n    int prev2 = 1;  // Ways to reach step 1\n    int prev1 = 2;  // Ways to reach step 2\n    \n    for(int i = 3; i <= n; i++) {\n        int curr = prev1 + prev2;  // Can come from step i-1 or i-2\n        prev2 = prev1;\n        prev1 = curr;\n    }\n    return prev1;\n}\nint main() { cout << climbStairs(4); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nint climbStairs(int n) {\n    if(n <= 2) return n;\n    int prev2 = 1, prev1 = 2;\n    for(int i = 3; i <= n; i++) {\n        int curr = prev1 + prev2;\n        prev2 = prev1;\n        prev1 = curr;\n    }\n    return prev1;\n}\nint main() { cout << climbStairs(4); return 0; }",
         "explanation": {
-            "approach": "Dynamic programming (Fibonacci-like). To reach step n, you either came from step n-1 (took 1 step) or step n-2 (took 2 steps). So ways(n) = ways(n-1) + ways(n-2).",
-            "analogy": "Like the Fibonacci sequence! Each position is the sum of the two before it. You can reach step 4 from step 3 (1 jump) or step 2 (2 jumps).",
+            "approach": "Fibonacci-like DP. ways(n) = ways(n-1) + ways(n-2).",
             "steps": [
-                "Base cases: 1 way to reach step 1, 2 ways to reach step 2",
-                "For each step i from 3 to n:",
-                "  ways[i] = ways[i-1] + ways[i-2]",
-                "Optimize space: only keep last two values",
-                "Return ways to reach step n"
+                "Base: 1 way for step 1, 2 ways for step 2",
+                "Each step = sum of prev two"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "n=4",
+                "expectedOutput": "5",
+                "explanation": "1+1+1+1, 1+1+2, 1+2+1, 2+1+1, 2+2"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "2",
+                "explanation": "1+1 or 2"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Only 1 step"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "8",
+                "explanation": "Fibonacci pattern"
+            }
+        ]
     },
     {
         "id": "core32",
         "title": "Coin Change",
-        "description": "Given an array of coin denominations and a target amount, return the fewest number of coins needed to make that amount. Return -1 if it's impossible.",
+        "description": "Given coin denominations and target amount, find minimum coins needed. Return -1 if impossible.",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
         "starterCode": "#include <iostream>\nusing namespace std;\nint coinChange(int coins[], int n, int amount) { return -1; }\nint main() { int c[] = {1, 2, 5}; cout << coinChange(c, 3, 11); return 0; }",
         "expectedOutput": "3",
-        "solution": "#include <iostream>\nusing namespace std;\nint coinChange(int coins[], int n, int amount) {\n    int dp[amount + 1];\n    for(int i = 0; i <= amount; i++) dp[i] = amount + 1;  // Initialize to \"impossible\"\n    dp[0] = 0;  // 0 coins needed for amount 0\n    \n    for(int a = 1; a <= amount; a++) {\n        for(int i = 0; i < n; i++) {\n            if(coins[i] <= a) {\n                dp[a] = min(dp[a], dp[a - coins[i]] + 1);\n            }\n        }\n    }\n    \n    return dp[amount] > amount ? -1 : dp[amount];\n}\nint main() { int c[] = {1, 2, 5}; cout << coinChange(c, 3, 11); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nint coinChange(int coins[], int n, int amount) {\n    int dp[amount + 1];\n    for(int i = 0; i <= amount; i++) dp[i] = amount + 1;\n    dp[0] = 0;\n    for(int a = 1; a <= amount; a++) {\n        for(int i = 0; i < n; i++) {\n            if(coins[i] <= a)\n                dp[a] = min(dp[a], dp[a - coins[i]] + 1);\n        }\n    }\n    return dp[amount] > amount ? -1 : dp[amount];\n}\nint main() { int c[] = {1, 2, 5}; cout << coinChange(c, 3, 11); return 0; }",
         "explanation": {
-            "approach": "Bottom-up DP. dp[a] = minimum coins to make amount a. For each amount, try using each coin and take the minimum.",
-            "analogy": "Like a cashier making change - for each dollar amount, figure out the best combination of coins. Use the solution for smaller amounts to build up.",
+            "approach": "DP. dp[a] = min coins for amount a.",
             "steps": [
-                "dp[i] = minimum coins to make amount i",
-                "Initialize dp[0] = 0 (no coins for $0)",
-                "For each amount from 1 to target:",
-                "  For each coin denomination:",
-                "    If coin <= amount: dp[amount] = min(dp[amount], dp[amount - coin] + 1)",
-                "Return dp[target] or -1 if impossible"
+                "dp[0] = 0",
+                "For each amount, try each coin"
             ],
             "complexity": "Time: O(amount × n), Space: O(amount)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "coins=[1,2,5], amount=11",
+                "expectedOutput": "3",
+                "explanation": "5+5+1=11"
+            },
+            {
+                "input": "coins=[2], amount=3",
+                "expectedOutput": "-1",
+                "explanation": "Impossible"
+            },
+            {
+                "input": "coins=[1], amount=0",
+                "expectedOutput": "0",
+                "explanation": "No coins needed"
+            },
+            {
+                "input": "coins=[1,5,10], amount=10",
+                "expectedOutput": "1",
+                "explanation": "Use one 10"
+            }
+        ]
     },
     {
         "id": "core33",
         "title": "Longest Common Subsequence",
-        "description": "Given two strings, find the length of their longest common subsequence (characters appearing in the same order, but not necessarily contiguous).",
+        "description": "Find length of longest common subsequence of two strings.",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
         "starterCode": "#include <iostream>\nusing namespace std;\nint longestCommonSubsequence(char a[], char b[]) { return 0; }\nint main() { cout << longestCommonSubsequence(\"abcde\", \"ace\"); return 0; }",
         "expectedOutput": "3",
-        "solution": "#include <iostream>\nusing namespace std;\nint longestCommonSubsequence(char a[], char b[]) {\n    int m = 0, n = 0;\n    while(a[m]) m++;\n    while(b[n]) n++;\n    \n    int dp[m + 1][n + 1];\n    \n    // Base cases: empty string has LCS 0\n    for(int i = 0; i <= m; i++) dp[i][0] = 0;\n    for(int j = 0; j <= n; j++) dp[0][j] = 0;\n    \n    for(int i = 1; i <= m; i++) {\n        for(int j = 1; j <= n; j++) {\n            if(a[i - 1] == b[j - 1]) {\n                dp[i][j] = dp[i - 1][j - 1] + 1;\n            } else {\n                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);\n            }\n        }\n    }\n    return dp[m][n];\n}\nint main() { cout << longestCommonSubsequence(\"abcde\", \"ace\"); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nint longestCommonSubsequence(char a[], char b[]) {\n    int m = 0, n = 0;\n    while(a[m]) m++;\n    while(b[n]) n++;\n    int dp[m + 1][n + 1];\n    for(int i = 0; i <= m; i++) dp[i][0] = 0;\n    for(int j = 0; j <= n; j++) dp[0][j] = 0;\n    for(int i = 1; i <= m; i++) {\n        for(int j = 1; j <= n; j++) {\n            if(a[i-1] == b[j-1]) dp[i][j] = dp[i-1][j-1] + 1;\n            else dp[i][j] = max(dp[i-1][j], dp[i][j-1]);\n        }\n    }\n    return dp[m][n];\n}\nint main() { cout << longestCommonSubsequence(\"abcde\", \"ace\"); return 0; }",
         "explanation": {
-            "approach": "2D DP. dp[i][j] = LCS of first i chars of a and first j chars of b. If current chars match, extend previous LCS. Otherwise, take max of excluding each char.",
-            "analogy": "Like finding common DNA between two species. If letters match, great - add 1. If not, try dropping a letter from either string and see which gives longer match.",
+            "approach": "2D DP. Match chars or take max of skipping either.",
             "steps": [
-                "dp[i][j] = LCS of a[0..i-1] and b[0..j-1]",
-                "If a[i-1] == b[j-1]: dp[i][j] = dp[i-1][j-1] + 1 (extend match)",
-                "Else: dp[i][j] = max(dp[i-1][j], dp[i][j-1]) (skip one char)",
-                "Answer is dp[m][n]"
+                "If chars match, extend",
+                "Else max of skipping one"
             ],
             "complexity": "Time: O(m × n), Space: O(m × n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "a='abcde', b='ace'",
+                "expectedOutput": "3",
+                "explanation": "LCS is 'ace'"
+            },
+            {
+                "input": "a='abc', b='abc'",
+                "expectedOutput": "3",
+                "explanation": "Identical strings"
+            },
+            {
+                "input": "a='abc', b='def'",
+                "expectedOutput": "0",
+                "explanation": "No common chars"
+            },
+            {
+                "input": "a='', b='abc'",
+                "expectedOutput": "0",
+                "explanation": "Empty string"
+            }
+        ]
     },
     {
         "id": "core34",
         "title": "Word Break",
-        "description": "Given a string and a dictionary of words, can you segment the string into a space-separated sequence of dictionary words?",
+        "description": "Can string be segmented into dictionary words?",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
         "starterCode": "#include <iostream>\nusing namespace std;\nbool wordBreak(char s[], char* dict[], int n) { return false; }\nint main() { char* d[] = {\"leet\", \"code\"}; cout << wordBreak(\"leetcode\", d, 2); return 0; }",
         "expectedOutput": "1",
-        "solution": "#include <iostream>\nusing namespace std;\nbool match(char s[], int start, int end, char word[]) {\n    int i = 0;\n    for(int j = start; j < end; j++, i++) {\n        if(word[i] == 0 || s[j] != word[i]) return false;\n    }\n    return word[i] == 0;\n}\n\nbool wordBreak(char s[], char* dict[], int n) {\n    int len = 0;\n    while(s[len]) len++;\n    \n    bool dp[len + 1];\n    for(int i = 0; i <= len; i++) dp[i] = false;\n    dp[0] = true;  // Empty string can be segmented\n    \n    for(int i = 1; i <= len; i++) {\n        for(int j = 0; j < i; j++) {\n            if(dp[j]) {\n                // Check if s[j..i-1] is in dictionary\n                for(int w = 0; w < n; w++) {\n                    if(match(s, j, i, dict[w])) {\n                        dp[i] = true;\n                        break;\n                    }\n                }\n            }\n        }\n    }\n    return dp[len];\n}\nint main() { char* d[] = {\"leet\", \"code\"}; cout << wordBreak(\"leetcode\", d, 2); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nbool match(char s[], int start, int end, char word[]) {\n    int i = 0;\n    for(int j = start; j < end; j++, i++)\n        if(word[i] == 0 || s[j] != word[i]) return false;\n    return word[i] == 0;\n}\nbool wordBreak(char s[], char* dict[], int n) {\n    int len = 0; while(s[len]) len++;\n    bool dp[len + 1];\n    for(int i = 0; i <= len; i++) dp[i] = false;\n    dp[0] = true;\n    for(int i = 1; i <= len; i++) {\n        for(int j = 0; j < i; j++) {\n            if(dp[j]) {\n                for(int w = 0; w < n; w++)\n                    if(match(s, j, i, dict[w])) dp[i] = true;\n            }\n        }\n    }\n    return dp[len];\n}\nint main() { char* d[] = {\"leet\", \"code\"}; cout << wordBreak(\"leetcode\", d, 2); return 0; }",
         "explanation": {
-            "approach": "DP. dp[i] = can s[0..i-1] be segmented? For each position i, check if there's a j where dp[j] is true AND s[j..i-1] is a dictionary word.",
-            "analogy": "Like solving a puzzle - can you cover the whole string with dictionary word tiles without gaps or overlaps?",
+            "approach": "DP. dp[i] = can s[0..i-1] be segmented?",
             "steps": [
-                "dp[i] = true if s[0..i-1] can be segmented",
-                "dp[0] = true (empty string)",
-                "For each position i:",
-                "  For each earlier position j where dp[j] is true:",
-                "    If s[j..i-1] is in dictionary, dp[i] = true",
-                "Return dp[length]"
+                "Check all positions",
+                "Match dictionary words"
             ],
             "complexity": "Time: O(n² × m × L), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "s='leetcode', dict=['leet','code']",
+                "expectedOutput": "1",
+                "explanation": "leet+code"
+            },
+            {
+                "input": "s='applepenapple', dict=['apple','pen']",
+                "expectedOutput": "1",
+                "explanation": "apple+pen+apple"
+            },
+            {
+                "input": "s='catsandog', dict=['cats','dog','sand']",
+                "expectedOutput": "0",
+                "explanation": "Cannot segment"
+            },
+            {
+                "input": "s='', dict=['a']",
+                "expectedOutput": "1",
+                "explanation": "Empty string valid"
+            }
+        ]
     },
     {
         "id": "core35",
         "title": "House Robber",
-        "description": "You're a robber planning to rob houses along a street. Each house has money, but you can't rob two adjacent houses (alarms are connected). Find the maximum money you can rob.",
+        "description": "Max money from houses, can't rob adjacent.",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
         "starterCode": "#include <iostream>\nusing namespace std;\nint rob(int nums[], int n) { return 0; }\nint main() { int h[] = {2, 7, 9, 3, 1}; cout << rob(h, 5); return 0; }",
         "expectedOutput": "12",
-        "solution": "#include <iostream>\nusing namespace std;\nint rob(int nums[], int n) {\n    if(n == 0) return 0;\n    if(n == 1) return nums[0];\n    \n    int prev2 = nums[0];  // Max if we only had first house\n    int prev1 = max(nums[0], nums[1]);  // Max for first two houses\n    \n    for(int i = 2; i < n; i++) {\n        int curr = max(prev1, prev2 + nums[i]);\n        prev2 = prev1;\n        prev1 = curr;\n    }\n    return prev1;\n}\nint main() { int h[] = {2, 7, 9, 3, 1}; cout << rob(h, 5); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nint rob(int nums[], int n) {\n    if(n == 0) return 0;\n    if(n == 1) return nums[0];\n    int prev2 = nums[0];\n    int prev1 = max(nums[0], nums[1]);\n    for(int i = 2; i < n; i++) {\n        int curr = max(prev1, prev2 + nums[i]);\n        prev2 = prev1;\n        prev1 = curr;\n    }\n    return prev1;\n}\nint main() { int h[] = {2, 7, 9, 3, 1}; cout << rob(h, 5); return 0; }",
         "explanation": {
-            "approach": "DP. For each house, you have two choices: skip it (take max from previous house) or rob it (add its value to max from two houses ago). Take the better option.",
-            "analogy": "Like choosing which pizzas to eat at a buffet where you must skip every other slice. At each slice: eat this one plus your best from 2 ago, or skip and keep your previous best.",
+            "approach": "DP. Skip or rob current house.",
             "steps": [
-                "dp[i] = max money from houses 0 to i",
-                "dp[0] = nums[0], dp[1] = max(nums[0], nums[1])",
-                "For each house i from 2:",
-                "  Option 1: Skip house i, take dp[i-1]",
-                "  Option 2: Rob house i, take nums[i] + dp[i-2]",
-                "  dp[i] = max of both options"
+                "Either skip (prev1) or rob (prev2 + nums[i])"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[2,7,9,3,1]",
+                "expectedOutput": "12",
+                "explanation": "2+9+1=12"
+            },
+            {
+                "input": "[1,2,3,1]",
+                "expectedOutput": "4",
+                "explanation": "1+3=4"
+            },
+            {
+                "input": "[5]",
+                "expectedOutput": "5",
+                "explanation": "Single house"
+            },
+            {
+                "input": "[2,1,1,2]",
+                "expectedOutput": "4",
+                "explanation": "2+2=4"
+            }
+        ]
     },
     {
         "id": "core36",
         "title": "Maximum Product Subarray",
-        "description": "Find the contiguous subarray within an array (containing at least one number) which has the largest product. Watch out for negative numbers!",
+        "description": "Find contiguous subarray with largest product.",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
         "starterCode": "#include <iostream>\nusing namespace std;\nint maxProduct(int nums[], int n) { return 0; }\nint main() { int a[] = {2, 3, -2, 4}; cout << maxProduct(a, 4); return 0; }",
         "expectedOutput": "6",
-        "solution": "#include <iostream>\nusing namespace std;\nint maxProduct(int nums[], int n) {\n    int maxProd = nums[0];\n    int currMax = nums[0];\n    int currMin = nums[0];  // Track minimum too (for negative × negative)\n    \n    for(int i = 1; i < n; i++) {\n        if(nums[i] < 0) {\n            // Negative number flips max and min\n            int temp = currMax;\n            currMax = currMin;\n            currMin = temp;\n        }\n        \n        currMax = max(nums[i], currMax * nums[i]);\n        currMin = min(nums[i], currMin * nums[i]);\n        \n        maxProd = max(maxProd, currMax);\n    }\n    return maxProd;\n}\nint main() { int a[] = {2, 3, -2, 4}; cout << maxProduct(a, 4); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nint maxProduct(int nums[], int n) {\n    int maxProd = nums[0], currMax = nums[0], currMin = nums[0];\n    for(int i = 1; i < n; i++) {\n        if(nums[i] < 0) { int t = currMax; currMax = currMin; currMin = t; }\n        currMax = max(nums[i], currMax * nums[i]);\n        currMin = min(nums[i], currMin * nums[i]);\n        maxProd = max(maxProd, currMax);\n    }\n    return maxProd;\n}\nint main() { int a[] = {2, 3, -2, 4}; cout << maxProduct(a, 4); return 0; }",
         "explanation": {
-            "approach": "Track both maximum AND minimum product ending at each position. Why minimum? Because a negative times a negative (minimum) can become maximum! When you hit a negative number, swap max and min.",
-            "analogy": "Like riding a roller coaster of multiplications - negative numbers flip your trajectory. What was lowest becomes highest when you hit another negative.",
+            "approach": "Track both max and min (for negative × negative).",
             "steps": [
-                "Track currMax and currMin at each position",
-                "When nums[i] is negative, swap max and min",
-                "currMax = max(nums[i], currMax × nums[i])",
-                "currMin = min(nums[i], currMin × nums[i])",
-                "Update global maximum",
-                "Why track min? -10 × -2 = 20 (min becomes max)"
+                "Swap max/min on negative",
+                "Update both"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[2,3,-2,4]",
+                "expectedOutput": "6",
+                "explanation": "2×3=6"
+            },
+            {
+                "input": "[-2,0,-1]",
+                "expectedOutput": "0",
+                "explanation": "0 breaks product"
+            },
+            {
+                "input": "[-2,3,-4]",
+                "expectedOutput": "24",
+                "explanation": "-2×3×-4=24"
+            },
+            {
+                "input": "[2]",
+                "expectedOutput": "2",
+                "explanation": "Single element"
+            }
+        ]
     },
     {
         "id": "core37",
         "title": "Longest Increasing Subsequence",
-        "description": "Given an unsorted array of integers, find the length of the longest increasing subsequence (doesn't need to be contiguous, but must maintain relative order).",
+        "description": "Find length of LIS (not contiguous).",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
         "starterCode": "#include <iostream>\nusing namespace std;\nint lengthOfLIS(int nums[], int n) { return 0; }\nint main() { int a[] = {10, 9, 2, 5, 3, 7, 101, 18}; cout << lengthOfLIS(a, 8); return 0; }",
         "expectedOutput": "4",
-        "solution": "#include <iostream>\nusing namespace std;\nint lengthOfLIS(int nums[], int n) {\n    if(n == 0) return 0;\n    \n    int dp[n];\n    for(int i = 0; i < n; i++) dp[i] = 1;  // Each element is a subsequence of length 1\n    \n    for(int i = 1; i < n; i++) {\n        for(int j = 0; j < i; j++) {\n            if(nums[j] < nums[i]) {\n                dp[i] = max(dp[i], dp[j] + 1);\n            }\n        }\n    }\n    \n    int maxLen = 0;\n    for(int i = 0; i < n; i++) {\n        maxLen = max(maxLen, dp[i]);\n    }\n    return maxLen;\n}\nint main() { int a[] = {10, 9, 2, 5, 3, 7, 101, 18}; cout << lengthOfLIS(a, 8); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nint lengthOfLIS(int nums[], int n) {\n    if(n == 0) return 0;\n    int dp[n];\n    for(int i = 0; i < n; i++) dp[i] = 1;\n    for(int i = 1; i < n; i++) {\n        for(int j = 0; j < i; j++) {\n            if(nums[j] < nums[i])\n                dp[i] = max(dp[i], dp[j] + 1);\n        }\n    }\n    int maxLen = 0;\n    for(int i = 0; i < n; i++) maxLen = max(maxLen, dp[i]);\n    return maxLen;\n}\nint main() { int a[] = {10, 9, 2, 5, 3, 7, 101, 18}; cout << lengthOfLIS(a, 8); return 0; }",
         "explanation": {
-            "approach": "DP. dp[i] = length of LIS ending at index i. For each element, check all previous elements - if smaller, we can extend that subsequence.",
-            "analogy": "Like building the tallest tower by stacking blocks, but each block must be bigger than the one below. For each block, find the tallest tower you can build on.",
+            "approach": "dp[i] = LIS ending at i.",
             "steps": [
-                "dp[i] = LIS length ending at index i",
-                "Initialize all dp[i] = 1 (single element)",
-                "For each element i:",
-                "  For each earlier element j:",
-                "    If nums[j] < nums[i]: dp[i] = max(dp[i], dp[j] + 1)",
-                "Return max of all dp values"
+                "Check all previous smaller elements"
             ],
             "complexity": "Time: O(n²), Space: O(n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[10,9,2,5,3,7,101,18]",
+                "expectedOutput": "4",
+                "explanation": "2,3,7,101 or 2,5,7,101"
+            },
+            {
+                "input": "[0,1,0,3,2,3]",
+                "expectedOutput": "4",
+                "explanation": "0,1,2,3"
+            },
+            {
+                "input": "[7,7,7,7]",
+                "expectedOutput": "1",
+                "explanation": "All same"
+            },
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "3",
+                "explanation": "Already sorted"
+            }
+        ]
     },
     {
         "id": "core38",
         "title": "0/1 Knapsack",
-        "description": "Given weights and values of n items, put items in a knapsack of capacity W to get the maximum total value. Each item can only be used once.",
+        "description": "Max value in knapsack with capacity W.",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
         "starterCode": "#include <iostream>\nusing namespace std;\nint knapsack(int W, int wt[], int val[], int n) { return 0; }\nint main() { int w[] = {1, 2, 3}; int v[] = {10, 15, 40}; cout << knapsack(5, w, v, 3); return 0; }",
         "expectedOutput": "55",
-        "solution": "#include <iostream>\nusing namespace std;\nint knapsack(int W, int wt[], int val[], int n) {\n    int dp[n + 1][W + 1];\n    \n    for(int i = 0; i <= n; i++) {\n        for(int w = 0; w <= W; w++) {\n            if(i == 0 || w == 0) {\n                dp[i][w] = 0;\n            } else if(wt[i - 1] <= w) {\n                // Can include item i-1\n                dp[i][w] = max(\n                    val[i - 1] + dp[i - 1][w - wt[i - 1]],  // Include\n                    dp[i - 1][w]                            // Exclude\n                );\n            } else {\n                // Item too heavy, must exclude\n                dp[i][w] = dp[i - 1][w];\n            }\n        }\n    }\n    return dp[n][W];\n}\nint main() { int w[] = {1, 2, 3}; int v[] = {10, 15, 40}; cout << knapsack(5, w, v, 3); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nint knapsack(int W, int wt[], int val[], int n) {\n    int dp[n + 1][W + 1];\n    for(int i = 0; i <= n; i++) {\n        for(int w = 0; w <= W; w++) {\n            if(i == 0 || w == 0) dp[i][w] = 0;\n            else if(wt[i-1] <= w)\n                dp[i][w] = max(val[i-1] + dp[i-1][w - wt[i-1]], dp[i-1][w]);\n            else dp[i][w] = dp[i-1][w];\n        }\n    }\n    return dp[n][W];\n}\nint main() { int w[] = {1, 2, 3}; int v[] = {10, 15, 40}; cout << knapsack(5, w, v, 3); return 0; }",
         "explanation": {
-            "approach": "2D DP. dp[i][w] = max value using first i items with capacity w. For each item, choose: include it (if it fits) or exclude it.",
-            "analogy": "Like packing for a trip with a weight limit. For each item: either pack it (add value, use weight) or leave it (keep previous best).",
+            "approach": "2D DP. Include or exclude each item.",
             "steps": [
-                "dp[i][w] = max value with first i items and capacity w",
-                "For each item i and capacity w:",
-                "  If item too heavy: dp[i][w] = dp[i-1][w]",
-                "  Else: dp[i][w] = max(",
-                "    dp[i-1][w],                        // Skip item",
-                "    val[i] + dp[i-1][w - weight[i]]    // Take item",
-                "  )"
+                "For each item and capacity, take max of include/exclude"
             ],
             "complexity": "Time: O(n × W), Space: O(n × W)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "W=5, w=[1,2,3], v=[10,15,40]",
+                "expectedOutput": "55",
+                "explanation": "Items 0,2 (10+40+15 capacity fit)"
+            },
+            {
+                "input": "W=0, w=[1], v=[10]",
+                "expectedOutput": "0",
+                "explanation": "No capacity"
+            },
+            {
+                "input": "W=10, w=[5,4,6], v=[10,40,30]",
+                "expectedOutput": "50",
+                "explanation": "Items 1,0"
+            },
+            {
+                "input": "W=3, w=[4], v=[100]",
+                "expectedOutput": "0",
+                "explanation": "Item too heavy"
+            }
+        ]
     },
     {
         "id": "core39",
         "title": "Unique Paths",
-        "description": "A robot is at the top-left corner of an m×n grid. It can only move right or down. How many unique paths are there to reach the bottom-right corner?",
+        "description": "Count paths in m×n grid (only right/down).",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
         "starterCode": "#include <iostream>\nusing namespace std;\nint uniquePaths(int m, int n) { return 0; }\nint main() { cout << uniquePaths(3, 7); return 0; }",
         "expectedOutput": "28",
-        "solution": "#include <iostream>\nusing namespace std;\nint uniquePaths(int m, int n) {\n    int dp[m][n];\n    \n    // First row: only one way (all right moves)\n    for(int j = 0; j < n; j++) dp[0][j] = 1;\n    \n    // First column: only one way (all down moves)\n    for(int i = 0; i < m; i++) dp[i][0] = 1;\n    \n    // Fill rest: paths from top + paths from left\n    for(int i = 1; i < m; i++) {\n        for(int j = 1; j < n; j++) {\n            dp[i][j] = dp[i - 1][j] + dp[i][j - 1];\n        }\n    }\n    \n    return dp[m - 1][n - 1];\n}\nint main() { cout << uniquePaths(3, 7); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nint uniquePaths(int m, int n) {\n    int dp[m][n];\n    for(int j = 0; j < n; j++) dp[0][j] = 1;\n    for(int i = 0; i < m; i++) dp[i][0] = 1;\n    for(int i = 1; i < m; i++)\n        for(int j = 1; j < n; j++)\n            dp[i][j] = dp[i-1][j] + dp[i][j-1];\n    return dp[m-1][n-1];\n}\nint main() { cout << uniquePaths(3, 7); return 0; }",
         "explanation": {
-            "approach": "DP. Each cell can be reached from above or from the left. So paths to cell (i,j) = paths to (i-1,j) + paths to (i,j-1).",
-            "analogy": "Like counting routes on a city grid where you can only go south or east. Each intersection's route count is the sum of routes from the two directions you could have come from.",
+            "approach": "dp[i][j] = paths from top + paths from left.",
             "steps": [
-                "dp[i][j] = number of paths to cell (i, j)",
-                "First row and column: only 1 path each (straight line)",
-                "For each other cell: dp[i][j] = dp[i-1][j] + dp[i][j-1]",
-                "Return dp[m-1][n-1]"
+                "First row/col = 1",
+                "Each cell = sum of above and left"
             ],
             "complexity": "Time: O(m × n), Space: O(m × n)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "m=3, n=7",
+                "expectedOutput": "28",
+                "explanation": "Combinatorial"
+            },
+            {
+                "input": "m=3, n=2",
+                "expectedOutput": "3",
+                "explanation": "RRD, RDR, DRR"
+            },
+            {
+                "input": "m=1, n=1",
+                "expectedOutput": "1",
+                "explanation": "Already at end"
+            },
+            {
+                "input": "m=2, n=2",
+                "expectedOutput": "2",
+                "explanation": "RD or DR"
+            }
+        ]
     },
     {
         "id": "core40",
         "title": "Jump Game",
-        "description": "Given an array of non-negative integers, you start at the first index. Each element represents your maximum jump length at that position. Determine if you can reach the last index.",
+        "description": "Can you reach last index?",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
         "starterCode": "#include <iostream>\nusing namespace std;\nbool canJump(int nums[], int n) { return false; }\nint main() { int a[] = {2, 3, 1, 1, 4}; cout << canJump(a, 5); return 0; }",
         "expectedOutput": "1",
-        "solution": "#include <iostream>\nusing namespace std;\nbool canJump(int nums[], int n) {\n    int maxReach = 0;  // Furthest index we can reach\n    \n    for(int i = 0; i < n; i++) {\n        if(i > maxReach) return false;  // Can't reach this index\n        maxReach = max(maxReach, i + nums[i]);  // Update furthest reach\n        if(maxReach >= n - 1) return true;  // Can reach end\n    }\n    return true;\n}\nint main() { int a[] = {2, 3, 1, 1, 4}; cout << canJump(a, 5); return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nbool canJump(int nums[], int n) {\n    int maxReach = 0;\n    for(int i = 0; i < n; i++) {\n        if(i > maxReach) return false;\n        maxReach = max(maxReach, i + nums[i]);\n        if(maxReach >= n - 1) return true;\n    }\n    return true;\n}\nint main() { int a[] = {2, 3, 1, 1, 4}; cout << canJump(a, 5); return 0; }",
         "explanation": {
-            "approach": "Greedy. Track the furthest index you can reach. At each position, if you can reach it, update max reach. If max reach ever goes past the end, return true.",
-            "analogy": "Like a long jump competition - at each position, see how far you can jump. If you can jump past the finish line from anywhere you can reach, you win!",
+            "approach": "Greedy. Track max reachable index.",
             "steps": [
-                "maxReach = 0 (furthest reachable index)",
-                "For each index i:",
-                "  If i > maxReach: can't reach this position, return false",
-                "  Update maxReach = max(maxReach, i + nums[i])",
-                "  If maxReach >= n-1: return true",
-                "Return true (reached the end)"
+                "Update max reach at each position"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "testCases": [
+            {
+                "input": "[2,3,1,1,4]",
+                "expectedOutput": "1",
+                "explanation": "Jump 1→2→end"
+            },
+            {
+                "input": "[3,2,1,0,4]",
+                "expectedOutput": "0",
+                "explanation": "Stuck at index 3"
+            },
+            {
+                "input": "[0]",
+                "expectedOutput": "1",
+                "explanation": "Already at end"
+            },
+            {
+                "input": "[2,0,0]",
+                "expectedOutput": "1",
+                "explanation": "Jump directly"
+            }
+        ]
     }
 ]

@@ -7,6 +7,58 @@
         "category": "Patterns",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid hollowDiamond(int n) {}\nint main() { hollowDiamond(3); return 0; }",
         "expectedOutput": "  *\n * *\n*   *\n * *\n  *",
+        "testCases": [
+            {
+                "input": "3",
+                "expectedOutput": "  *\n * *\n*   *\n * *\n  *",
+                "explanation": "Hollow diamond with n=3"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "*",
+                "explanation": "n=1 is just a single star"
+            },
+            {
+                "input": "2",
+                "expectedOutput": " *\n* *\n *",
+                "explanation": "Minimal hollow diamond"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "   *\n  * *\n *   *\n*     *\n *   *\n  * *\n   *",
+                "explanation": "Larger hollow diamond"
+            },
+            {
+                "input": "5",
+                "expectedOutput": "    *\n   * *\n  *   *\n *     *\n*       *\n *     *\n  *   *\n   * *\n    *",
+                "explanation": "n=5 hollow diamond"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "  *\n * *\n*   *\n * *\n  *",
+                "explanation": "Standard case"
+            },
+            {
+                "input": "2",
+                "expectedOutput": " *\n* *\n *",
+                "explanation": "Small diamond"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "   *\n  * *\n *   *\n*     *\n *   *\n  * *\n   *",
+                "explanation": "Medium diamond"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "*",
+                "explanation": "Edge case single"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "  *\n * *\n*   *\n * *\n  *",
+                "explanation": "Hollow outline"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid hollowDiamond(int n) { for(int i=1;i<=n;i++) { for(int j=0;j<n-i;j++) cout<<\" \"; cout<<\"*\"; if(i>1) { for(int j=0;j<2*i-3;j++) cout<<\" \"; cout<<\"*\"; } cout<<\"\\n\"; } for(int i=n-1;i>=1;i--) { for(int j=0;j<n-i;j++) cout<<\" \"; cout<<\"*\"; if(i>1) { for(int j=0;j<2*i-3;j++) cout<<\" \"; cout<<\"*\"; } if(i>1) cout<<\"\\n\"; } }\nint main() { hollowDiamond(3); return 0; }",
         "explanation": {
             "approach": "Only edges of diamond.",
@@ -25,6 +77,58 @@
         "category": "Patterns",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid alphabetPattern(int n) {}\nint main() { alphabetPattern(4); return 0; }",
         "expectedOutput": "A\nA B\nA B C\nA B C D",
+        "testCases": [
+            {
+                "input": "4",
+                "expectedOutput": "A\nA B\nA B C\nA B C D",
+                "explanation": "4 rows of increasing letters"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "A",
+                "explanation": "Single A"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "A\nA B",
+                "explanation": "Two rows"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "A\nA B\nA B C",
+                "explanation": "Three rows"
+            },
+            {
+                "input": "5",
+                "expectedOutput": "A\nA B\nA B C\nA B C D\nA B C D E",
+                "explanation": "Five rows"
+            },
+            {
+                "input": "6",
+                "expectedOutput": "A\nA B\nA B C\nA B C D\nA B C D E\nA B C D E F",
+                "explanation": "Six rows"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "A",
+                "explanation": "Minimum input"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "A\nA B",
+                "explanation": "Edge case"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "A\nA B\nA B C",
+                "explanation": "Standard case"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "A\nA B\nA B C\nA B C D",
+                "explanation": "Typical pattern"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid alphabetPattern(int n) { for(int i=0;i<n;i++) { for(int j=0;j<=i;j++) cout<<(char)('A'+j)<<\" \"; if(i<n-1) cout<<\"\\n\"; } }\nint main() { alphabetPattern(4); return 0; }",
         "explanation": {
             "approach": "Letters increasing per row.",
@@ -43,6 +147,58 @@
         "category": "Patterns",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid butterfly(int n) {}\nint main() { butterfly(3); return 0; }",
         "expectedOutput": "*    *\n**  **\n******\n**  **\n*    *",
+        "testCases": [
+            {
+                "input": "3",
+                "expectedOutput": "*    *\n**  **\n******\n**  **\n*    *",
+                "explanation": "Butterfly with n=3"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "**\n**",
+                "explanation": "Minimal butterfly"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "*  *\n****\n****\n*  *",
+                "explanation": "Small butterfly"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "*      *\n**    **\n***  ***\n********\n***  ***\n**    **\n*      *",
+                "explanation": "Larger butterfly"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "*    *\n**  **\n******\n**  **\n*    *",
+                "explanation": "Standard butterfly"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "*  *\n****\n****\n*  *",
+                "explanation": "Two-wide wings"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "*      *\n**    **\n***  ***\n********\n***  ***\n**    **\n*      *",
+                "explanation": "Four-wide wings"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "**\n**",
+                "explanation": "Edge case"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "*    *\n**  **\n******\n**  **\n*    *",
+                "explanation": "Symmetric pattern"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "*  *\n****\n****\n*  *",
+                "explanation": "Mirror image"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid butterfly(int n) { for(int i=1;i<=n;i++) { for(int j=0;j<i;j++) cout<<\"*\"; for(int j=0;j<2*(n-i);j++) cout<<\" \"; for(int j=0;j<i;j++) cout<<\"*\"; cout<<\"\\n\"; } for(int i=n-1;i>=1;i--) { for(int j=0;j<i;j++) cout<<\"*\"; for(int j=0;j<2*(n-i);j++) cout<<\" \"; for(int j=0;j<i;j++) cout<<\"*\"; if(i>1) cout<<\"\\n\"; } }\nint main() { butterfly(3); return 0; }",
         "explanation": {
             "approach": "Two triangles mirrored.",
@@ -62,6 +218,58 @@
         "category": "Basic",
         "starterCode": "#include <iostream>\nusing namespace std;\nint smallest(int a, int b, int c) { return 0; }\nint main() { cout<<smallest(5,3,8); return 0; }",
         "expectedOutput": "3",
+        "testCases": [
+            {
+                "input": "5 3 8",
+                "expectedOutput": "3",
+                "explanation": "3 is smallest"
+            },
+            {
+                "input": "1 2 3",
+                "expectedOutput": "1",
+                "explanation": "First is smallest"
+            },
+            {
+                "input": "3 2 1",
+                "expectedOutput": "1",
+                "explanation": "Last is smallest"
+            },
+            {
+                "input": "2 1 3",
+                "expectedOutput": "1",
+                "explanation": "Middle is smallest"
+            },
+            {
+                "input": "5 5 5",
+                "expectedOutput": "5",
+                "explanation": "All equal"
+            },
+            {
+                "input": "-1 -2 -3",
+                "expectedOutput": "-3",
+                "explanation": "Negatives: -3 smallest"
+            },
+            {
+                "input": "0 1 -1",
+                "expectedOutput": "-1",
+                "explanation": "Mixed signs"
+            },
+            {
+                "input": "100 200 50",
+                "expectedOutput": "50",
+                "explanation": "Larger values"
+            },
+            {
+                "input": "1 1 2",
+                "expectedOutput": "1",
+                "explanation": "Two same smallest"
+            },
+            {
+                "input": "-5 0 5",
+                "expectedOutput": "-5",
+                "explanation": "Wide range"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint smallest(int a, int b, int c) { int m=a; if(b<m) m=b; if(c<m) m=c; return m; }\nint main() { cout<<smallest(5,3,8); return 0; }",
         "explanation": {
             "approach": "Compare and track minimum.",
@@ -81,6 +289,58 @@
         "category": "Basic",
         "starterCode": "#include <iostream>\nusing namespace std;\nint largest(int a, int b, int c) { return 0; }\nint main() { cout<<largest(5,3,8); return 0; }",
         "expectedOutput": "8",
+        "testCases": [
+            {
+                "input": "5 3 8",
+                "expectedOutput": "8",
+                "explanation": "8 is largest"
+            },
+            {
+                "input": "1 2 3",
+                "expectedOutput": "3",
+                "explanation": "Last is largest"
+            },
+            {
+                "input": "3 2 1",
+                "expectedOutput": "3",
+                "explanation": "First is largest"
+            },
+            {
+                "input": "2 3 1",
+                "expectedOutput": "3",
+                "explanation": "Middle is largest"
+            },
+            {
+                "input": "5 5 5",
+                "expectedOutput": "5",
+                "explanation": "All equal"
+            },
+            {
+                "input": "-1 -2 -3",
+                "expectedOutput": "-1",
+                "explanation": "Negatives: -1 largest"
+            },
+            {
+                "input": "0 1 -1",
+                "expectedOutput": "1",
+                "explanation": "Mixed signs"
+            },
+            {
+                "input": "100 200 150",
+                "expectedOutput": "200",
+                "explanation": "Larger values"
+            },
+            {
+                "input": "1 2 2",
+                "expectedOutput": "2",
+                "explanation": "Two same largest"
+            },
+            {
+                "input": "-5 0 5",
+                "expectedOutput": "5",
+                "explanation": "Wide range"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint largest(int a, int b, int c) { int m=a; if(b>m) m=b; if(c>m) m=c; return m; }\nint main() { cout<<largest(5,3,8); return 0; }",
         "explanation": {
             "approach": "Compare and track maximum.",
@@ -100,6 +360,58 @@
         "category": "Basic",
         "starterCode": "#include <iostream>\nusing namespace std;\nvoid swap(int &a, int &b) {}\nint main() { int a=5,b=10; swap(a,b); cout<<a<<\" \"<<b; return 0; }",
         "expectedOutput": "10 5",
+        "testCases": [
+            {
+                "input": "5 10",
+                "expectedOutput": "10 5",
+                "explanation": "Swap 5 and 10"
+            },
+            {
+                "input": "1 2",
+                "expectedOutput": "2 1",
+                "explanation": "Swap 1 and 2"
+            },
+            {
+                "input": "0 0",
+                "expectedOutput": "0 0",
+                "explanation": "Both zero"
+            },
+            {
+                "input": "-1 1",
+                "expectedOutput": "1 -1",
+                "explanation": "Opposite signs"
+            },
+            {
+                "input": "100 200",
+                "expectedOutput": "200 100",
+                "explanation": "Larger values"
+            },
+            {
+                "input": "5 5",
+                "expectedOutput": "5 5",
+                "explanation": "Same values"
+            },
+            {
+                "input": "-10 -20",
+                "expectedOutput": "-20 -10",
+                "explanation": "Both negative"
+            },
+            {
+                "input": "0 100",
+                "expectedOutput": "100 0",
+                "explanation": "Zero and positive"
+            },
+            {
+                "input": "999 1",
+                "expectedOutput": "1 999",
+                "explanation": "Large difference"
+            },
+            {
+                "input": "7 3",
+                "expectedOutput": "3 7",
+                "explanation": "Simple swap"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nvoid myswap(int &a, int &b) { a=a+b; b=a-b; a=a-b; }\nint main() { int a=5,b=10; myswap(a,b); cout<<a<<\" \"<<b; return 0; }",
         "explanation": {
             "approach": "Use arithmetic to swap.",
@@ -120,6 +432,58 @@
         "category": "Basic",
         "starterCode": "#include <iostream>\nusing namespace std;\nint middle(int a, int b, int c) { return 0; }\nint main() { cout<<middle(5,8,3); return 0; }",
         "expectedOutput": "5",
+        "testCases": [
+            {
+                "input": "5 8 3",
+                "expectedOutput": "5",
+                "explanation": "3<5<8, so 5"
+            },
+            {
+                "input": "1 2 3",
+                "expectedOutput": "2",
+                "explanation": "Middle is 2"
+            },
+            {
+                "input": "3 2 1",
+                "expectedOutput": "2",
+                "explanation": "Still 2"
+            },
+            {
+                "input": "1 3 2",
+                "expectedOutput": "2",
+                "explanation": "2 in middle"
+            },
+            {
+                "input": "5 5 5",
+                "expectedOutput": "5",
+                "explanation": "All equal"
+            },
+            {
+                "input": "-1 0 1",
+                "expectedOutput": "0",
+                "explanation": "Zero is middle"
+            },
+            {
+                "input": "10 5 7",
+                "expectedOutput": "7",
+                "explanation": "5<7<10"
+            },
+            {
+                "input": "100 50 75",
+                "expectedOutput": "75",
+                "explanation": "50<75<100"
+            },
+            {
+                "input": "-5 -10 -7",
+                "expectedOutput": "-7",
+                "explanation": "-10<-7<-5"
+            },
+            {
+                "input": "1 1 2",
+                "expectedOutput": "1",
+                "explanation": "Duplicate min"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint middle(int a, int b, int c) { if((a>=b && a<=c)||(a<=b && a>=c)) return a; if((b>=a && b<=c)||(b<=a && b>=c)) return b; return c; }\nint main() { cout<<middle(5,8,3); return 0; }",
         "explanation": {
             "approach": "Check which is between others.",
@@ -140,6 +504,58 @@
         "category": "Basic",
         "starterCode": "#include <iostream>\nusing namespace std;\nint absolute(int n) { return 0; }\nint main() { cout<<absolute(-5); return 0; }",
         "expectedOutput": "5",
+        "testCases": [
+            {
+                "input": "-5",
+                "expectedOutput": "5",
+                "explanation": "|-5| = 5"
+            },
+            {
+                "input": "5",
+                "expectedOutput": "5",
+                "explanation": "|5| = 5"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "|0| = 0"
+            },
+            {
+                "input": "-1",
+                "expectedOutput": "1",
+                "explanation": "|-1| = 1"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "|1| = 1"
+            },
+            {
+                "input": "-100",
+                "expectedOutput": "100",
+                "explanation": "Large negative"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "100",
+                "explanation": "Large positive"
+            },
+            {
+                "input": "-999",
+                "expectedOutput": "999",
+                "explanation": "Three digit negative"
+            },
+            {
+                "input": "-1000000",
+                "expectedOutput": "1000000",
+                "explanation": "Very large"
+            },
+            {
+                "input": "42",
+                "expectedOutput": "42",
+                "explanation": "Positive unchanged"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint absolute(int n) { return n<0?-n:n; }\nint main() { cout<<absolute(-5); return 0; }",
         "explanation": {
             "approach": "Negate if negative.",
@@ -158,6 +574,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\ndouble average(int a[], int n) { return 0; }\nint main() { int a[]={10,20,30,40,50}; cout<<average(a,5); return 0; }",
         "expectedOutput": "30",
+        "testCases": [
+            {
+                "input": "5\n10 20 30 40 50",
+                "expectedOutput": "30",
+                "explanation": "150/5 = 30"
+            },
+            {
+                "input": "1\n10",
+                "expectedOutput": "10",
+                "explanation": "Single element"
+            },
+            {
+                "input": "2\n0 0",
+                "expectedOutput": "0",
+                "explanation": "All zeros"
+            },
+            {
+                "input": "3\n1 2 3",
+                "expectedOutput": "2",
+                "explanation": "Exact average"
+            },
+            {
+                "input": "4\n2 4 6 8",
+                "expectedOutput": "5",
+                "explanation": "20/4 = 5"
+            },
+            {
+                "input": "5\n5 5 5 5 5",
+                "expectedOutput": "5",
+                "explanation": "All same"
+            },
+            {
+                "input": "3\n-3 0 3",
+                "expectedOutput": "0",
+                "explanation": "Cancel to zero"
+            },
+            {
+                "input": "2\n1 3",
+                "expectedOutput": "2",
+                "explanation": "Simple average"
+            },
+            {
+                "input": "4\n100 200 300 400",
+                "expectedOutput": "250",
+                "explanation": "Large values"
+            },
+            {
+                "input": "3\n10 20 30",
+                "expectedOutput": "20",
+                "explanation": "Arithmetic mean"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\ndouble average(int a[], int n) { int s=0; for(int i=0;i<n;i++) s+=a[i]; return (double)s/n; }\nint main() { int a[]={10,20,30,40,50}; cout<<average(a,5); return 0; }",
         "explanation": {
             "approach": "Sum divided by count.",
@@ -177,6 +645,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nint product(int a[], int n) { return 0; }\nint main() { int a[]={1,2,3,4,5}; cout<<product(a,5); return 0; }",
         "expectedOutput": "120",
+        "testCases": [
+            {
+                "input": "5\n1 2 3 4 5",
+                "expectedOutput": "120",
+                "explanation": "5! = 120"
+            },
+            {
+                "input": "1\n7",
+                "expectedOutput": "7",
+                "explanation": "Single element"
+            },
+            {
+                "input": "3\n2 3 4",
+                "expectedOutput": "24",
+                "explanation": "2×3×4 = 24"
+            },
+            {
+                "input": "4\n1 1 1 1",
+                "expectedOutput": "1",
+                "explanation": "All ones"
+            },
+            {
+                "input": "3\n0 5 10",
+                "expectedOutput": "0",
+                "explanation": "Zero makes product 0"
+            },
+            {
+                "input": "2\n10 10",
+                "expectedOutput": "100",
+                "explanation": "10×10 = 100"
+            },
+            {
+                "input": "4\n2 2 2 2",
+                "expectedOutput": "16",
+                "explanation": "2^4 = 16"
+            },
+            {
+                "input": "3\n-1 2 3",
+                "expectedOutput": "-6",
+                "explanation": "Negative result"
+            },
+            {
+                "input": "2\n-2 -3",
+                "expectedOutput": "6",
+                "explanation": "Two negatives"
+            },
+            {
+                "input": "5\n1 2 1 2 1",
+                "expectedOutput": "4",
+                "explanation": "Mixed 1s and 2s"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint product(int a[], int n) { int p=1; for(int i=0;i<n;i++) p*=a[i]; return p; }\nint main() { int a[]={1,2,3,4,5}; cout<<product(a,5); return 0; }",
         "explanation": {
             "approach": "Multiply all elements.",
@@ -196,6 +716,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nint countEvens(int a[], int n) { return 0; }\nint main() { int a[]={1,2,3,4,5,6}; cout<<countEvens(a,6); return 0; }",
         "expectedOutput": "3",
+        "testCases": [
+            {
+                "input": "6\n1 2 3 4 5 6",
+                "expectedOutput": "3",
+                "explanation": "2, 4, 6 are even"
+            },
+            {
+                "input": "5\n1 3 5 7 9",
+                "expectedOutput": "0",
+                "explanation": "No evens"
+            },
+            {
+                "input": "5\n2 4 6 8 10",
+                "expectedOutput": "5",
+                "explanation": "All even"
+            },
+            {
+                "input": "1\n2",
+                "expectedOutput": "1",
+                "explanation": "Single even"
+            },
+            {
+                "input": "1\n1",
+                "expectedOutput": "0",
+                "explanation": "Single odd"
+            },
+            {
+                "input": "4\n0 0 0 0",
+                "expectedOutput": "4",
+                "explanation": "Zero is even"
+            },
+            {
+                "input": "3\n-2 -4 -6",
+                "expectedOutput": "3",
+                "explanation": "Negative evens"
+            },
+            {
+                "input": "4\n-1 -2 1 2",
+                "expectedOutput": "2",
+                "explanation": "Mixed signs"
+            },
+            {
+                "input": "6\n1 1 1 1 1 1",
+                "expectedOutput": "0",
+                "explanation": "All odd"
+            },
+            {
+                "input": "3\n100 200 301",
+                "expectedOutput": "2",
+                "explanation": "Large values"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint countEvens(int a[], int n) { int c=0; for(int i=0;i<n;i++) if(a[i]%2==0) c++; return c; }\nint main() { int a[]={1,2,3,4,5,6}; cout<<countEvens(a,6); return 0; }",
         "explanation": {
             "approach": "Count elements divisible by 2.",
@@ -214,6 +786,58 @@
         "category": "Arrays",
         "starterCode": "#include <iostream>\nusing namespace std;\nint countOdds(int a[], int n) { return 0; }\nint main() { int a[]={1,2,3,4,5,6}; cout<<countOdds(a,6); return 0; }",
         "expectedOutput": "3",
+        "testCases": [
+            {
+                "input": "6\n1 2 3 4 5 6",
+                "expectedOutput": "3",
+                "explanation": "1, 3, 5 are odd"
+            },
+            {
+                "input": "5\n1 3 5 7 9",
+                "expectedOutput": "5",
+                "explanation": "All odd"
+            },
+            {
+                "input": "5\n2 4 6 8 10",
+                "expectedOutput": "0",
+                "explanation": "No odds"
+            },
+            {
+                "input": "1\n1",
+                "expectedOutput": "1",
+                "explanation": "Single odd"
+            },
+            {
+                "input": "1\n2",
+                "expectedOutput": "0",
+                "explanation": "Single even"
+            },
+            {
+                "input": "4\n0 0 0 0",
+                "expectedOutput": "0",
+                "explanation": "Zero is even"
+            },
+            {
+                "input": "3\n-1 -3 -5",
+                "expectedOutput": "3",
+                "explanation": "Negative odds"
+            },
+            {
+                "input": "4\n-1 -2 1 2",
+                "expectedOutput": "2",
+                "explanation": "Mixed signs"
+            },
+            {
+                "input": "6\n2 2 2 2 2 2",
+                "expectedOutput": "0",
+                "explanation": "All even"
+            },
+            {
+                "input": "3\n101 201 301",
+                "expectedOutput": "3",
+                "explanation": "Large odd values"
+            }
+        ],
         "solution": "#include <iostream>\nusing namespace std;\nint countOdds(int a[], int n) { int c=0; for(int i=0;i<n;i++) if(a[i]%2!=0) c++; return c; }\nint main() { int a[]={1,2,3,4,5,6}; cout<<countOdds(a,6); return 0; }",
         "explanation": {
             "approach": "Count elements not divisible by 2.",
