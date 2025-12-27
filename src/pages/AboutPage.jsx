@@ -70,11 +70,14 @@ const AboutPage = () => {
                         src="/creator.jpg"
                         alt="Muhammad Dyen Asif"
                         style={{
-                            width: '140px',
-                            height: '140px',
-                            borderRadius: '50%',
+                            width: '280px',
+                            height: '300px',
+                            borderRadius: '20px',
                             objectFit: 'cover',
-                            marginBottom: '32px'
+                            objectPosition: 'center top',
+                            marginBottom: '40px',
+                            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)',
+                            border: '1px solid var(--border)'
                         }}
                     />
 
@@ -214,7 +217,7 @@ const AboutPage = () => {
                 borderTop: '1px solid var(--border)'
             }}>
                 <span className="caption">
-                    Valkry © 2024 · Built with React & Firebase
+                    Valkry © 2025 · Built with React & Firebase
                 </span>
             </footer>
         </div>
