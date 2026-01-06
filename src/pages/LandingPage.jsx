@@ -164,7 +164,7 @@ const LandingPage = () => {
                 borderTop: '1px solid var(--border)'
             }}>
                 <span className="caption">
-                    Valkry © 2024
+                    Valkry © 2025 · Built with React & Firebase
                 </span>
             </footer>
         </div>
