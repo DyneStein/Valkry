@@ -1,0 +1,327 @@
+[
+    {
+        "id": "h126",
+        "title": "Longest Substring with At Least K Repeating",
+        "description": "Find length of longest substring where every character appears at least k times.",
+        "difficulty": "HARD",
+        "category": "Divide Conquer",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint longestSubstring(char s[], int k) { return 0; }\nint main() { cout << longestSubstring(\"aaabb\", 3); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint longestSubstring(char s[], int k) {\n    int n = 0;\n    while(s[n]) n++;\n    if(n == 0) return 0;\n    int count[26] = {};\n    for(int i = 0; i < n; i++) count[s[i] - 'a']++;\n    for(int i = 0; i < n; i++) {\n        if(count[s[i] - 'a'] < k) {\n            int maxLen = 0;\n            int start = 0;\n            for(int j = 0; j <= n; j++) {\n                if(j == n || count[s[j] - 'a'] < k) {\n                    if(j > start) {\n                        char sub[j - start + 1];\n                        for(int t = start; t < j; t++) sub[t - start] = s[t];\n                        sub[j - start] = 0;\n                        int len = longestSubstring(sub, k);\n                        if(len > maxLen) maxLen = len;\n                    }\n                    start = j + 1;\n                }\n            }\n            return maxLen;\n        }\n    }\n    return n;\n}\nint main() { cout << longestSubstring(\"aaabb\", 3); return 0; }",
+        "explanation": {
+            "approach": "Divide and conquer - split at characters appearing less than k times.",
+            "steps": [
+                "Count character frequencies",
+                "If any char appears <k times, split there",
+                "Recursively solve each piece"
+            ],
+            "complexity": "Time: O(26 × n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "\"aaabb\", k=3",
+                "expectedOutput": "3",
+                "explanation": "\"aaa\" is the longest valid substring"
+            },
+            {
+                "input": "\"ababbc\", k=2",
+                "expectedOutput": "5",
+                "explanation": "\"ababb\" - all chars appear ≥2 times"
+            },
+            {
+                "input": "\"a\", k=1",
+                "expectedOutput": "1",
+                "explanation": "Single char with k=1"
+            },
+            {
+                "input": "\"abcde\", k=2",
+                "expectedOutput": "0",
+                "explanation": "No char appears twice"
+            }
+        ]
+    },
+    {
+        "id": "h127",
+        "title": "IPO",
+        "description": "Maximize capital by completing at most k projects, each requiring minimum capital.",
+        "difficulty": "HARD",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint findMaximizedCapital(int k, int w, int profits[], int capital[], int n) { return 0; }\nint main() { int p[] = {1, 2, 3}; int c[] = {0, 1, 1}; cout << findMaximizedCapital(2, 0, p, c, 3); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint findMaximizedCapital(int k, int w, int profits[], int capital[], int n) {\n    for(int i = 0; i < k; i++) {\n        int bestIdx = -1;\n        int bestProfit = 0;\n        for(int j = 0; j < n; j++) {\n            if(capital[j] <= w && profits[j] > bestProfit) {\n                bestProfit = profits[j];\n                bestIdx = j;\n            }\n        }\n        if(bestIdx == -1) break;\n        w += profits[bestIdx];\n        capital[bestIdx] = 1e9;\n    }\n    return w;\n}\nint main() { int p[] = {1, 2, 3}; int c[] = {0, 1, 1}; cout << findMaximizedCapital(2, 0, p, c, 3); return 0; }",
+        "explanation": {
+            "approach": "Greedy - always pick most profitable affordable project.",
+            "steps": [
+                "Find all affordable projects",
+                "Pick the most profitable",
+                "Add profit to capital",
+                "Repeat k times"
+            ],
+            "complexity": "Time: O(k × n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "k=2, w=0, profits=[1,2,3], capital=[0,1,1]",
+                "expectedOutput": "4",
+                "explanation": "Do project 0 (profit 1), then project 2 (profit 3)"
+            },
+            {
+                "input": "k=3, w=0, profits=[1,2,3], capital=[0,1,2]",
+                "expectedOutput": "6",
+                "explanation": "Can do all three projects"
+            },
+            {
+                "input": "k=1, w=0, profits=[1,2,3], capital=[1,1,2]",
+                "expectedOutput": "0",
+                "explanation": "No affordable project"
+            },
+            {
+                "input": "k=2, w=1, profits=[1,2,3], capital=[1,1,1]",
+                "expectedOutput": "6",
+                "explanation": "All affordable, pick best twice"
+            }
+        ]
+    },
+    {
+        "id": "h128",
+        "title": "Sliding Window Median",
+        "description": "Return median of each sliding window of size k.",
+        "difficulty": "HARD",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid medianSlidingWindow(int nums[], int n, int k) {}\nint main() { int n[] = {1, 3, -1, -3, 5, 3, 6, 7}; medianSlidingWindow(n, 8, 3); return 0; }",
+        "expectedOutput": "1 -1 -1 3 5 6",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid medianSlidingWindow(int nums[], int n, int k) {\n    for(int i = 0; i <= n - k; i++) {\n        int window[k];\n        for(int j = 0; j < k; j++) window[j] = nums[i + j];\n        for(int a = 0; a < k - 1; a++)\n            for(int b = 0; b < k - a - 1; b++)\n                if(window[b] > window[b + 1]) swap(window[b], window[b + 1]);\n        cout << window[k / 2] << \" \";\n    }\n}\nint main() { int n[] = {1, 3, -1, -3, 5, 3, 6, 7}; medianSlidingWindow(n, 8, 3); return 0; }",
+        "explanation": {
+            "approach": "Sort each window and return middle element.",
+            "steps": [
+                "Extract k elements",
+                "Sort the window",
+                "Median is middle element (for odd k)"
+            ],
+            "complexity": "Time: O(n × k log k), Space: O(k)"
+        },
+        "testCases": [
+            {
+                "input": "[1,3,-1,-3,5,3,6,7], k=3",
+                "expectedOutput": "1 -1 -1 3 5 6",
+                "explanation": "Median of each window"
+            },
+            {
+                "input": "[1,2,3,4,5], k=1",
+                "expectedOutput": "1 2 3 4 5",
+                "explanation": "k=1, each element is its own median"
+            },
+            {
+                "input": "[5,5,5,5], k=2",
+                "expectedOutput": "5 5 5",
+                "explanation": "All same values"
+            },
+            {
+                "input": "[1,2], k=2",
+                "expectedOutput": "2",
+                "explanation": "Single window, upper median"
+            }
+        ]
+    },
+    {
+        "id": "h129",
+        "title": "Find Median from Data Stream",
+        "description": "Design structure to find running median as numbers are added.",
+        "difficulty": "HARD",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass MedianFinder {\npublic:\n    void addNum(int num) {}\n    double findMedian() { return 0; }\n};\nint main() { MedianFinder m; m.addNum(1); m.addNum(2); cout << m.findMedian(); return 0; }",
+        "expectedOutput": "1.5",
+        "solution": "#include <iostream>\nusing namespace std;\nclass MedianFinder {\n    int arr[100]; int n;\npublic:\n    MedianFinder() : n(0) {}\n    void addNum(int num) {\n        arr[n] = num;\n        int i = n;\n        while(i > 0 && arr[i] < arr[i - 1]) { swap(arr[i], arr[i - 1]); i--; }\n        n++;\n    }\n    double findMedian() {\n        if(n % 2 == 1) return arr[n / 2];\n        return (arr[n / 2 - 1] + arr[n / 2]) / 2.0;\n    }\n};\nint main() { MedianFinder m; m.addNum(1); m.addNum(2); cout << m.findMedian(); return 0; }",
+        "explanation": {
+            "approach": "Maintain sorted array, return middle element(s).",
+            "steps": [
+                "Insert in sorted position",
+                "Odd count: return middle",
+                "Even count: average of two middle"
+            ],
+            "complexity": "Time: O(n) insert, O(1) median, Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "add(1), add(2), findMedian()",
+                "expectedOutput": "1.5",
+                "explanation": "Average of 1 and 2"
+            },
+            {
+                "input": "add(1), add(2), add(3), findMedian()",
+                "expectedOutput": "2",
+                "explanation": "Middle of sorted 1,2,3"
+            },
+            {
+                "input": "add(5), findMedian()",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "add(1), add(2), add(3), add(4), findMedian()",
+                "expectedOutput": "2.5",
+                "explanation": "Average of 2 and 3"
+            }
+        ]
+    },
+    {
+        "id": "h130",
+        "title": "Critical Connections in a Network",
+        "description": "Find all bridges (edges whose removal disconnects the graph).",
+        "difficulty": "HARD",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint criticalConnections(int n, int connections[][2], int c) { return 0; }\nint main() { int conn[][2] = {{0,1}, {1,2}, {2,0}, {1,3}}; cout << criticalConnections(4, conn, 4); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint disc[10], low[10], timer_val = 0;\nvoid dfs(int adj[][10], int sz[], int u, int parent) {\n    disc[u] = low[u] = ++timer_val;\n    for(int i = 0; i < sz[u]; i++) {\n        int v = adj[u][i];\n        if(disc[v] == 0) { dfs(adj, sz, v, u); low[u] = min(low[u], low[v]); }\n        else if(v != parent) low[u] = min(low[u], disc[v]);\n    }\n}\nint criticalConnections(int n, int connections[][2], int c) {\n    int adj[10][10], sz[10] = {};\n    for(int i = 0; i < c; i++) {\n        int u = connections[i][0], v = connections[i][1];\n        adj[u][sz[u]++] = v; adj[v][sz[v]++] = u;\n    }\n    dfs(adj, sz, 0, -1);\n    int bridges = 0;\n    for(int i = 0; i < c; i++) {\n        int u = connections[i][0], v = connections[i][1];\n        if(low[v] > disc[u] || low[u] > disc[v]) bridges++;\n    }\n    return bridges;\n}\nint main() { int conn[][2] = {{0,1}, {1,2}, {2,0}, {1,3}}; cout << criticalConnections(4, conn, 4); return 0; }",
+        "explanation": {
+            "approach": "Tarjan's algorithm - track discovery time and lowest reachable.",
+            "steps": [
+                "DFS tracking disc[u] and low[u]",
+                "Edge (u,v) is bridge if low[v] > disc[u]"
+            ],
+            "complexity": "Time: O(V + E), Space: O(V)"
+        },
+        "testCases": [
+            {
+                "input": "4 nodes, cycle + edge",
+                "expectedOutput": "1",
+                "explanation": "Only edge 1-3 is bridge"
+            },
+            {
+                "input": "Complete graph K3",
+                "expectedOutput": "0",
+                "explanation": "No bridges in complete graph"
+            },
+            {
+                "input": "Chain 0-1-2",
+                "expectedOutput": "2",
+                "explanation": "Both edges are bridges"
+            },
+            {
+                "input": "Two cycles connected",
+                "expectedOutput": "1",
+                "explanation": "Connecting edge is bridge"
+            }
+        ]
+    },
+    {
+        "id": "h131",
+        "title": "Edit Distance",
+        "description": "Minimum operations (insert/delete/replace) to convert word1 to word2.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint minDistance(char a[], char b[]) { return 0; }\nint main() { cout << minDistance(\"horse\", \"ros\"); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint minDistance(char a[], char b[]) {\n    int m = 0, n = 0;\n    while(a[m]) m++; while(b[n]) n++;\n    int dp[m + 1][n + 1];\n    for(int i = 0; i <= m; i++) dp[i][0] = i;\n    for(int j = 0; j <= n; j++) dp[0][j] = j;\n    for(int i = 1; i <= m; i++) {\n        for(int j = 1; j <= n; j++) {\n            if(a[i - 1] == b[j - 1]) dp[i][j] = dp[i - 1][j - 1];\n            else dp[i][j] = 1 + min(dp[i - 1][j], min(dp[i][j - 1], dp[i - 1][j - 1]));\n        }\n    }\n    return dp[m][n];\n}\nint main() { cout << minDistance(\"horse\", \"ros\"); return 0; }",
+        "explanation": {
+            "approach": "DP where dp[i][j] = min ops to convert a[0..i-1] to b[0..j-1].",
+            "steps": [
+                "If chars match: no op needed",
+                "Else: min of insert/delete/replace"
+            ],
+            "complexity": "Time: O(m × n), Space: O(m × n)"
+        },
+        "testCases": [
+            {
+                "input": "horse, ros",
+                "expectedOutput": "3",
+                "explanation": "horse->rorse->rose->ros"
+            },
+            {
+                "input": "intention, execution",
+                "expectedOutput": "5",
+                "explanation": "5 operations needed"
+            },
+            {
+                "input": "abc, abc",
+                "expectedOutput": "0",
+                "explanation": "Already equal"
+            },
+            {
+                "input": "\"\", abc",
+                "expectedOutput": "3",
+                "explanation": "Insert all 3 chars"
+            }
+        ]
+    },
+    {
+        "id": "h132",
+        "title": "Regular Expression Matching",
+        "description": "Match string with pattern containing '.' and '*'.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isMatch(char s[], char p[]) { return false; }\nint main() { cout << isMatch(\"aa\", \"a*\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isMatch(char s[], char p[]) {\n    int m = 0, n = 0;\n    while(s[m]) m++; while(p[n]) n++;\n    bool dp[m + 1][n + 1];\n    for(int i = 0; i <= m; i++) for(int j = 0; j <= n; j++) dp[i][j] = false;\n    dp[0][0] = true;\n    for(int j = 2; j <= n; j++) if(p[j - 1] == '*') dp[0][j] = dp[0][j - 2];\n    for(int i = 1; i <= m; i++) {\n        for(int j = 1; j <= n; j++) {\n            if(p[j - 1] == '*') {\n                dp[i][j] = dp[i][j - 2];\n                if(p[j - 2] == '.' || p[j - 2] == s[i - 1]) dp[i][j] = dp[i][j] || dp[i - 1][j];\n            } else if(p[j - 1] == '.' || p[j - 1] == s[i - 1]) dp[i][j] = dp[i - 1][j - 1];\n        }\n    }\n    return dp[m][n];\n}\nint main() { cout << isMatch(\"aa\", \"a*\"); return 0; }",
+        "explanation": {
+            "approach": "DP handling '.' as wildcard and '*' as zero or more of preceding.",
+            "steps": [
+                "dp[i][j] = s[0..i-1] matches p[0..j-1]",
+                "'*' can mean 0 or more occurrences"
+            ],
+            "complexity": "Time: O(m × n), Space: O(m × n)"
+        },
+        "testCases": [
+            {
+                "input": "aa, a*",
+                "expectedOutput": "1",
+                "explanation": "a* matches aa"
+            },
+            {
+                "input": "aa, a",
+                "expectedOutput": "0",
+                "explanation": "No match"
+            },
+            {
+                "input": "ab, .*",
+                "expectedOutput": "1",
+                "explanation": ".* matches anything"
+            },
+            {
+                "input": "aab, c*a*b",
+                "expectedOutput": "1",
+                "explanation": "c* matches 0 c's, a* matches aa, b matches b"
+            }
+        ]
+    },
+    {
+        "id": "h133",
+        "title": "Trapping Rain Water",
+        "description": "Calculate total water trapped between bars after raining.",
+        "difficulty": "HARD",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint trap(int h[], int n) { return 0; }\nint main() { int h[] = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}; cout << trap(h, 12); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint trap(int h[], int n) {\n    int left = 0, right = n - 1;\n    int leftMax = 0, rightMax = 0, water = 0;\n    while(left < right) {\n        if(h[left] < h[right]) {\n            if(h[left] >= leftMax) leftMax = h[left];\n            else water += leftMax - h[left];\n            left++;\n        } else {\n            if(h[right] >= rightMax) rightMax = h[right];\n            else water += rightMax - h[right];\n            right--;\n        }\n    }\n    return water;\n}\nint main() { int h[] = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}; cout << trap(h, 12); return 0; }",
+        "explanation": {
+            "approach": "Two pointers tracking max height from each side.",
+            "steps": [
+                "Water at position = min(leftMax, rightMax) - height",
+                "Process from shorter side"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "[0,1,0,2,1,0,1,3,2,1,2,1]",
+                "expectedOutput": "6",
+                "explanation": "Water trapped in valleys"
+            },
+            {
+                "input": "[4,2,0,3,2,5]",
+                "expectedOutput": "9",
+                "explanation": "Water between walls"
+            },
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "0",
+                "explanation": "Ascending, no water"
+            },
+            {
+                "input": "[5,4,3,2,1]",
+                "expectedOutput": "0",
+                "explanation": "Descending, no water"
+            }
+        ]
+    }
+]

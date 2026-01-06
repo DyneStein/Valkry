@@ -5,7 +5,7 @@
         "description": "Max profit from rod pieces.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint cutRod(int prices[], int n) { return 0; }\nint main() { int prices[]={1,5,8,9,10,17,17,20}; cout<<cutRod(prices,8); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint cutRod(vector<int>& prices, int n) {\n    return 0;\n}\n\nint main() {\n    int prices_size;\n    cin >> prices_size;\n    vector<int> prices(prices_size);\n    for (int i = 0; i < prices_size; i++) cin >> prices[i];\n    int n;\n    cin >> n;\n    cout << cutRod(prices, n);\n    return 0;\n}\n",
         "expectedOutput": "22",
         "solution": "#include <iostream>\nusing namespace std;\nint cutRod(int prices[], int n) { int dp[n+1]={}; for(int i=1;i<=n;i++) for(int j=1;j<=i;j++) dp[i]=max(dp[i],prices[j-1]+dp[i-j]); return dp[n]; }\nint main() { int prices[]={1,5,8,9,10,17,17,20}; cout<<cutRod(prices,8); return 0; }",
         "explanation": {
@@ -46,7 +46,7 @@
         "description": "Min operations to multiply matrices.",
         "difficulty": "HARD",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint matrixChain(int dims[], int n) { return 0; }\nint main() { int dims[]={10,30,5,60}; cout<<matrixChain(dims,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint matrixChain(vector<int>& dims, int n) {\n    return 0;\n}\n\nint main() {\n    int dims_size;\n    cin >> dims_size;\n    vector<int> dims(dims_size);\n    for (int i = 0; i < dims_size; i++) cin >> dims[i];\n    int n;\n    cin >> n;\n    cout << matrixChain(dims, n);\n    return 0;\n}\n",
         "expectedOutput": "4500",
         "solution": "#include <iostream>\nusing namespace std;\nint matrixChain(int dims[], int n) { int m=n-1; int dp[m][m]; for(int i=0;i<m;i++) dp[i][i]=0; for(int len=2;len<=m;len++) for(int i=0;i<=m-len;i++) { int j=i+len-1; dp[i][j]=1e9; for(int k=i;k<j;k++) dp[i][j]=min(dp[i][j],dp[i][k]+dp[k+1][j]+dims[i]*dims[k+1]*dims[j+1]); } return dp[0][m-1]; }\nint main() { int dims[]={10,30,5,60}; cout<<matrixChain(dims,4); return 0; }",
         "explanation": {
@@ -87,7 +87,7 @@
         "description": "Min trials for k eggs, n floors.",
         "difficulty": "HARD",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint eggDrop(int k, int n) { return 0; }\nint main() { cout<<eggDrop(2,10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint eggDrop(int k, int n) {\n    return 0;\n}\n\nint main() {\n    int k;\n    cin >> k;\n    int n;\n    cin >> n;\n    cout << eggDrop(k, n);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "solution": "#include <iostream>\nusing namespace std;\nint eggDrop(int k, int n) { int dp[k+1][n+1]; for(int i=0;i<=k;i++) { dp[i][0]=0; dp[i][1]=1; } for(int j=0;j<=n;j++) dp[1][j]=j; for(int i=2;i<=k;i++) for(int j=2;j<=n;j++) { dp[i][j]=j; for(int x=1;x<=j;x++) dp[i][j]=min(dp[i][j],1+max(dp[i-1][x-1],dp[i][j-x])); } return dp[k][n]; }\nint main() { cout<<eggDrop(2,10); return 0; }",
         "explanation": {
@@ -128,7 +128,7 @@
         "description": "Longest increasing then decreasing.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint longestBitonic(int a[], int n) { return 0; }\nint main() { int a[]={1,11,2,10,4,5,2,1}; cout<<longestBitonic(a,8); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint longestBitonic(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << longestBitonic(a, n);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint longestBitonic(int a[], int n) { int lis[n],lds[n]; for(int i=0;i<n;i++) { lis[i]=1; for(int j=0;j<i;j++) if(a[j]<a[i]) lis[i]=max(lis[i],lis[j]+1); } for(int i=n-1;i>=0;i--) { lds[i]=1; for(int j=n-1;j>i;j--) if(a[j]<a[i]) lds[i]=max(lds[i],lds[j]+1); } int mx=0; for(int i=0;i<n;i++) mx=max(mx,lis[i]+lds[i]-1); return mx; }\nint main() { int a[]={1,11,2,10,4,5,2,1}; cout<<longestBitonic(a,8); return 0; }",
         "explanation": {
@@ -170,7 +170,7 @@
         "description": "Min cuts for palindrome partition.",
         "difficulty": "HARD",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint minCut(char s[]) { return 0; }\nint main() { cout<<minCut(\"aab\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint minCut(vector<int>& s) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << minCut(s);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nint minCut(char s[]) { int n=0; while(s[n]) n++; bool isPalin[n][n]={}; for(int i=0;i<n;i++) isPalin[i][i]=true; for(int len=2;len<=n;len++) for(int i=0;i<=n-len;i++) { int j=i+len-1; if(s[i]==s[j]) isPalin[i][j]=(len==2)|isPalin[i+1][j-1]; } int dp[n]; for(int i=0;i<n;i++) { if(isPalin[0][i]) dp[i]=0; else { dp[i]=i; for(int j=1;j<=i;j++) if(isPalin[j][i]) dp[i]=min(dp[i],dp[j-1]+1); } } return dp[n-1]; }\nint main() { cout<<minCut(\"aab\"); return 0; }",
         "explanation": {
@@ -211,7 +211,7 @@
         "description": "Longest alternating subsequence.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint longestZigzag(int a[], int n) { return 0; }\nint main() { int a[]={1,7,4,9,2,5}; cout<<longestZigzag(a,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint longestZigzag(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << longestZigzag(a, n);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint longestZigzag(int a[], int n) { int up[n],down[n]; up[0]=down[0]=1; for(int i=1;i<n;i++) { up[i]=down[i]=1; for(int j=0;j<i;j++) { if(a[i]>a[j]) up[i]=max(up[i],down[j]+1); if(a[i]<a[j]) down[i]=max(down[i],up[j]+1); } } int mx=1; for(int i=0;i<n;i++) mx=max(mx,max(up[i],down[i])); return mx; }\nint main() { int a[]={1,7,4,9,2,5}; cout<<longestZigzag(a,6); return 0; }",
         "explanation": {
@@ -252,7 +252,7 @@
         "description": "Count all palindromic substrings.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countSubstrings(char s[]) { return 0; }\nint main() { cout<<countSubstrings(\"aaa\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countSubstrings(vector<int>& s) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << countSubstrings(s);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint countSubstrings(char s[]) { int n=0; while(s[n]) n++; int cnt=0; for(int i=0;i<n;i++) { int l=i,r=i; while(l>=0 && r<n && s[l]==s[r]) { cnt++; l--; r++; } l=i; r=i+1; while(l>=0 && r<n && s[l]==s[r]) { cnt++; l--; r++; } } return cnt; }\nint main() { cout<<countSubstrings(\"aaa\"); return 0; }",
         "explanation": {
@@ -293,7 +293,7 @@
         "description": "Min search cost BST.",
         "difficulty": "HARD",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint optimalBST(int keys[], int freq[], int n) { return 0; }\nint main() { int keys[]={10,12,20}; int freq[]={34,8,50}; cout<<optimalBST(keys,freq,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint optimalBST(vector<int>& keys, vector<int>& freq, int n) {\n    return 0;\n}\n\nint main() {\n    int keys_size;\n    cin >> keys_size;\n    vector<int> keys(keys_size);\n    for (int i = 0; i < keys_size; i++) cin >> keys[i];\n    int freq_size;\n    cin >> freq_size;\n    vector<int> freq(freq_size);\n    for (int i = 0; i < freq_size; i++) cin >> freq[i];\n    int n;\n    cin >> n;\n    cout << optimalBST(keys, freq, n);\n    return 0;\n}\n",
         "expectedOutput": "142",
         "solution": "#include <iostream>\nusing namespace std;\nint optimalBST(int keys[], int freq[], int n) { int dp[n][n], sum[n][n]; for(int i=0;i<n;i++) { dp[i][i]=freq[i]; sum[i][i]=freq[i]; } for(int len=2;len<=n;len++) for(int i=0;i<=n-len;i++) { int j=i+len-1; dp[i][j]=1e9; sum[i][j]=sum[i][j-1]+freq[j]; for(int r=i;r<=j;r++) { int c=sum[i][j]+(r>i?dp[i][r-1]:0)+(r<j?dp[r+1][j]:0); dp[i][j]=min(dp[i][j],c); } } return dp[0][n-1]; }\nint main() { int keys[]={10,12,20}; int freq[]={34,8,50}; cout<<optimalBST(keys,freq,3); return 0; }",
         "explanation": {
@@ -334,7 +334,7 @@
         "description": "Max product contiguous.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint maxProduct(int a[], int n) { return 0; }\nint main() { int a[]={2,3,-2,4}; cout<<maxProduct(a,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint maxProduct(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << maxProduct(a, n);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint maxProduct(int a[], int n) { int mx=a[0],mn=a[0],res=a[0]; for(int i=1;i<n;i++) { if(a[i]<0) swap(mx,mn); mx=max(a[i],mx*a[i]); mn=min(a[i],mn*a[i]); res=max(res,mx); } return res; }\nint main() { int a[]={2,3,-2,4}; cout<<maxProduct(a,4); return 0; }",
         "explanation": {
@@ -375,7 +375,7 @@
         "description": "Number of ways to make amount.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint coinChangeWays(int coins[], int n, int amt) { return 0; }\nint main() { int coins[]={1,2,5}; cout<<coinChangeWays(coins,3,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint coinChangeWays(vector<int>& coins, int n, int amt) {\n    return 0;\n}\n\nint main() {\n    int coins_size;\n    cin >> coins_size;\n    vector<int> coins(coins_size);\n    for (int i = 0; i < coins_size; i++) cin >> coins[i];\n    int n;\n    cin >> n;\n    int amt;\n    cin >> amt;\n    cout << coinChangeWays(coins, n, amt);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "solution": "#include <iostream>\nusing namespace std;\nint coinChangeWays(int coins[], int n, int amt) { int dp[amt+1]={}; dp[0]=1; for(int i=0;i<n;i++) for(int j=coins[i];j<=amt;j++) dp[j]+=dp[j-coins[i]]; return dp[amt]; }\nint main() { int coins[]={1,2,5}; cout<<coinChangeWays(coins,3,5); return 0; }",
         "explanation": {

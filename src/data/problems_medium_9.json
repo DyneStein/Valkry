@@ -5,7 +5,7 @@
         "description": "Count subarrays with product < k.",
         "difficulty": "MEDIUM",
         "category": "Sliding Window",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint numSubarrayProductLessThanK(int nums[], int n, int k) { return 0; }\nint main() { int nu[]={10,5,2,6}; cout << numSubarrayProductLessThanK(nu,4,100); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint numSubarrayProductLessThanK(vector<int>& nums, int n, int k) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    int k;\n    cin >> k;\n    cout << numSubarrayProductLessThanK(nums, n, k);\n    return 0;\n}\n",
         "expectedOutput": "8",
         "solution": "#include <iostream>\nusing namespace std;\nint numSubarrayProductLessThanK(int nums[], int n, int k) { if(k<=1) return 0; int l=0,p=1,c=0; for(int r=0;r<n;r++) { p*=nums[r]; while(p>=k) p/=nums[l++]; c+=r-l+1; } return c; }\nint main() { int nu[]={10,5,2,6}; cout << numSubarrayProductLessThanK(nu,4,100); return 0; }",
         "explanation": {
@@ -45,7 +45,7 @@
         "description": "Max water between two lines.",
         "difficulty": "MEDIUM",
         "category": "Two Pointers",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint maxArea(int height[], int n) { return 0; }\nint main() { int h[]={1,8,6,2,5,4,8,3,7}; cout << maxArea(h,9); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint maxArea(vector<int>& height, int n) {\n    return 0;\n}\n\nint main() {\n    int height_size;\n    cin >> height_size;\n    vector<int> height(height_size);\n    for (int i = 0; i < height_size; i++) cin >> height[i];\n    int n;\n    cin >> n;\n    cout << maxArea(height, n);\n    return 0;\n}\n",
         "expectedOutput": "49",
         "solution": "#include <iostream>\nusing namespace std;\nint maxArea(int height[], int n) { int l=0,r=n-1,mx=0; while(l<r) { mx=max(mx,min(height[l],height[r])*(r-l)); if(height[l]<height[r]) l++; else r--; } return mx; }\nint main() { int h[]={1,8,6,2,5,4,8,3,7}; cout << maxArea(h,9); return 0; }",
         "explanation": {
@@ -85,7 +85,7 @@
         "description": "Find all triplets summing to 0.",
         "difficulty": "MEDIUM",
         "category": "Two Pointers",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint threeSum(int nums[], int n) { return 0; }\nint main() { int nu[]={-1,0,1,2,-1,-4}; cout << threeSum(nu,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint threeSum(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << threeSum(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\nint threeSum(int nums[], int n) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(nums[j]>nums[j+1]) swap(nums[j],nums[j+1]); int c=0; for(int i=0;i<n-2;i++) { if(i>0&&nums[i]==nums[i-1]) continue; int l=i+1,r=n-1; while(l<r) { int s=nums[i]+nums[l]+nums[r]; if(s==0) { c++; while(l<r&&nums[l]==nums[l+1]) l++; while(l<r&&nums[r]==nums[r-1]) r--; l++; r--; } else if(s<0) l++; else r--; } } return c; }\nint main() { int nu[]={-1,0,1,2,-1,-4}; cout << threeSum(nu,6); return 0; }",
         "explanation": {
@@ -125,7 +125,7 @@
         "description": "Triplet sum closest to target.",
         "difficulty": "MEDIUM",
         "category": "Two Pointers",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint threeSumClosest(int nums[], int n, int target) { return 0; }\nint main() { int nu[]={-1,2,1,-4}; cout << threeSumClosest(nu,4,1); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint threeSumClosest(vector<int>& nums, int n, int target) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    int target;\n    cin >> target;\n    cout << threeSumClosest(nums, n, target);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\nint threeSumClosest(int nums[], int n, int target) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(nums[j]>nums[j+1]) swap(nums[j],nums[j+1]); int closest=nums[0]+nums[1]+nums[2]; for(int i=0;i<n-2;i++) { int l=i+1,r=n-1; while(l<r) { int s=nums[i]+nums[l]+nums[r]; if(abs(s-target)<abs(closest-target)) closest=s; if(s<target) l++; else r--; } } return closest; }\nint main() { int nu[]={-1,2,1,-4}; cout << threeSumClosest(nu,4,1); return 0; }",
         "explanation": {
@@ -165,7 +165,7 @@
         "description": "Find quadruplets summing to target.",
         "difficulty": "MEDIUM",
         "category": "Two Pointers",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint fourSum(int nums[], int n, int target) { return 0; }\nint main() { int nu[]={1,0,-1,0,-2,2}; cout << fourSum(nu,6,0); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint fourSum(vector<int>& nums, int n, int target) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    int target;\n    cin >> target;\n    cout << fourSum(nums, n, target);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint fourSum(int nums[], int n, int target) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(nums[j]>nums[j+1]) swap(nums[j],nums[j+1]); int c=0; for(int i=0;i<n-3;i++) { if(i>0&&nums[i]==nums[i-1]) continue; for(int j=i+1;j<n-2;j++) { if(j>i+1&&nums[j]==nums[j-1]) continue; int l=j+1,r=n-1; while(l<r) { long s=(long)nums[i]+nums[j]+nums[l]+nums[r]; if(s==target) { c++; while(l<r&&nums[l]==nums[l+1]) l++; while(l<r&&nums[r]==nums[r-1]) r--; l++; r--; } else if(s<target) l++; else r--; } } } return c; }\nint main() { int nu[]={1,0,-1,0,-2,2}; cout << fourSum(nu,6,0); return 0; }",
         "explanation": {
@@ -205,7 +205,7 @@
         "description": "Dutch national flag.",
         "difficulty": "MEDIUM",
         "category": "Two Pointers",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid sortColors(int nums[], int n) {}\nint main() { int nu[]={2,0,2,1,1,0}; sortColors(nu,6); for(int i=0;i<6;i++) cout<<nu[i]<<\" \"; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid sortColors(vector<int>& nums, int n) {\n    // TODO\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    sortColors(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "0 0 1 1 2 2",
         "solution": "#include <iostream>\nusing namespace std;\nvoid sortColors(int nums[], int n) { int l=0,m=0,r=n-1; while(m<=r) { if(nums[m]==0) swap(nums[l++],nums[m++]); else if(nums[m]==1) m++; else swap(nums[m],nums[r--]); } }\nint main() { int nu[]={2,0,2,1,1,0}; sortColors(nu,6); for(int i=0;i<6;i++) cout<<nu[i]<<\" \"; return 0; }",
         "explanation": {
@@ -245,7 +245,7 @@
         "description": "Min boats needed.",
         "difficulty": "MEDIUM",
         "category": "Two Pointers",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint numRescueBoats(int people[], int n, int limit) { return 0; }\nint main() { int p[]={3,5,3,4}; cout << numRescueBoats(p,4,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint numRescueBoats(vector<int>& people, int n, int limit) {\n    return 0;\n}\n\nint main() {\n    int people_size;\n    cin >> people_size;\n    vector<int> people(people_size);\n    for (int i = 0; i < people_size; i++) cin >> people[i];\n    int n;\n    cin >> n;\n    int limit;\n    cin >> limit;\n    cout << numRescueBoats(people, n, limit);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "solution": "#include <iostream>\nusing namespace std;\nint numRescueBoats(int people[], int n, int limit) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(people[j]>people[j+1]) swap(people[j],people[j+1]); int l=0,r=n-1,boats=0; while(l<=r) { if(people[l]+people[r]<=limit) l++; r--; boats++; } return boats; }\nint main() { int p[]={3,5,3,4}; cout << numRescueBoats(p,4,5); return 0; }",
         "explanation": {
@@ -285,7 +285,7 @@
         "description": "Check long pressed typing.",
         "difficulty": "MEDIUM",
         "category": "Two Pointers",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isLongPressedName(char name[], char typed[]) { return false; }\nint main() { cout << isLongPressedName(\"alex\",\"aaleex\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isLongPressedName(vector<int>& name, vector<int>& typed) {\n    return false;\n}\n\nint main() {\n    int name_size;\n    cin >> name_size;\n    vector<int> name(name_size);\n    for (int i = 0; i < name_size; i++) cin >> name[i];\n    int typed_size;\n    cin >> typed_size;\n    vector<int> typed(typed_size);\n    for (int i = 0; i < typed_size; i++) cin >> typed[i];\n    cout << isLongPressedName(name, typed);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isLongPressedName(char name[], char typed[]) { int i=0,j=0; while(typed[j]) { if(name[i]&&name[i]==typed[j]) { i++; j++; } else if(j>0&&typed[j]==typed[j-1]) j++; else return false; } return !name[i]; }\nint main() { cout << isLongPressedName(\"alex\",\"aaleex\"); return 0; }",
         "explanation": {
@@ -324,7 +324,7 @@
         "description": "Kth smallest distance.",
         "difficulty": "MEDIUM",
         "category": "Binary Search",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint smallestDistancePair(int nums[], int n, int k) { return 0; }\nint main() { int nu[]={1,3,1}; cout << smallestDistancePair(nu,3,1); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint smallestDistancePair(vector<int>& nums, int n, int k) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    int k;\n    cin >> k;\n    cout << smallestDistancePair(nums, n, k);\n    return 0;\n}\n",
         "expectedOutput": "0",
         "solution": "#include <iostream>\nusing namespace std;\nint countPairs(int nums[], int n, int d) { int c=0; for(int i=0,j=0;i<n;i++) { while(j<n&&nums[j]-nums[i]<=d) j++; c+=j-i-1; } return c; }\nint smallestDistancePair(int nums[], int n, int k) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(nums[j]>nums[j+1]) swap(nums[j],nums[j+1]); int l=0,r=nums[n-1]-nums[0]; while(l<r) { int m=(l+r)/2; if(countPairs(nums,n,m)>=k) r=m; else l=m+1; } return l; }\nint main() { int nu[]={1,3,1}; cout << smallestDistancePair(nu,3,1); return 0; }",
         "explanation": {
@@ -364,7 +364,7 @@
         "description": "Min of max pair sums.",
         "difficulty": "MEDIUM",
         "category": "Two Pointers",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint minPairSum(int nums[], int n) { return 0; }\nint main() { int nu[]={3,5,2,3}; cout << minPairSum(nu,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint minPairSum(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << minPairSum(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "7",
         "solution": "#include <iostream>\nusing namespace std;\nint minPairSum(int nums[], int n) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(nums[j]>nums[j+1]) swap(nums[j],nums[j+1]); int mx=0; for(int i=0;i<n/2;i++) mx=max(mx,nums[i]+nums[n-1-i]); return mx; }\nint main() { int nu[]={3,5,2,3}; cout << minPairSum(nu,4); return 0; }",
         "explanation": {

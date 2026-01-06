@@ -5,7 +5,7 @@
         "description": "Index where left sum equals right sum.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint pivotIndex(int nums[], int n) { return -1; }\nint main() { int a[]={1,7,3,6,5,6}; cout<<pivotIndex(a,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint pivotIndex(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << pivotIndex(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "testCases": [
             {
@@ -75,7 +75,7 @@
         "description": "Index of largest if >= 2x others.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint dominantIndex(int nums[], int n) { return -1; }\nint main() { int a[]={3,6,1,0}; cout<<dominantIndex(a,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint dominantIndex(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << dominantIndex(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -145,7 +145,7 @@
         "description": "Add one to number as array.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid plusOne(int digits[], int n) {}\nint main() { int d[]={1,2,3}; plusOne(d,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid plusOne(vector<int>& digits, int n) {\n    // TODO\n}\n\nint main() {\n    int digits_size;\n    cin >> digits_size;\n    vector<int> digits(digits_size);\n    for (int i = 0; i < digits_size; i++) cin >> digits[i];\n    int n;\n    cin >> n;\n    plusOne(digits, n);\n    return 0;\n}\n",
         "expectedOutput": "1 2 4",
         "testCases": [
             {
@@ -215,7 +215,7 @@
         "description": "Traverse matrix diagonally.",
         "difficulty": "MEDIUM",
         "category": "Matrix",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid findDiagonalOrder(int m[][3], int r, int c) {}\nint main() { int m[][3]={{1,2,3},{4,5,6},{7,8,9}}; findDiagonalOrder(m,3,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid findDiagonalOrder(vector<vector<int>>& m, int r, int c) {\n    // TODO\n}\n\nint main() {\n    int m_rows, m_cols;\n    cin >> m_rows >> m_cols;\n    vector<vector<int>> m(m_rows, vector<int>(m_cols));\n    for (int i = 0; i < m_rows; i++)\n        for (int j = 0; j < m_cols; j++)\n            cin >> m[i][j];\n    int r;\n    cin >> r;\n    int c;\n    cin >> c;\n    findDiagonalOrder(m, r, c);\n    return 0;\n}\n",
         "expectedOutput": "1 2 4 7 5 3 6 8 9",
         "testCases": [
             {
@@ -285,7 +285,7 @@
         "description": "Generate spiral matrix.",
         "difficulty": "MEDIUM",
         "category": "Matrix",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid generateMatrix(int n) {}\nint main() { generateMatrix(3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid generateMatrix(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    generateMatrix(n);\n    return 0;\n}\n",
         "expectedOutput": "1 2 3 8 9 4 7 6 5",
         "testCases": [
             {
@@ -355,7 +355,7 @@
         "description": "Generate Pascal's triangle.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid generate(int n) {}\nint main() { generate(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid generate(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    generate(n);\n    return 0;\n}\n",
         "expectedOutput": "1 1 1 1 2 1 1 3 3 1 1 4 6 4 1",
         "testCases": [
             {
@@ -425,7 +425,7 @@
         "description": "Get kth row.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid getRow(int k) {}\nint main() { getRow(3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid getRow(int k) {\n    // TODO\n}\n\nint main() {\n    int k;\n    cin >> k;\n    getRow(k);\n    return 0;\n}\n",
         "expectedOutput": "1 3 3 1",
         "testCases": [
             {
@@ -495,7 +495,7 @@
         "description": "Find missing number ranges.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid findMissingRanges(int nums[], int n, int lo, int hi) {}\nint main() { int a[]={0,1,3,50,75}; findMissingRanges(a,5,0,99); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid findMissingRanges(vector<int>& nums, int n, int lo, int hi) {\n    // TODO\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    int lo;\n    cin >> lo;\n    int hi;\n    cin >> hi;\n    findMissingRanges(nums, n, lo, hi);\n    return 0;\n}\n",
         "expectedOutput": "2 4-49 51-74 76-99",
         "testCases": [
             {
@@ -565,7 +565,7 @@
         "description": "Reverse only vowels.",
         "difficulty": "EASY",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid reverseVowels(char s[]) {}\nint main() { char s[]=\"hello\"; reverseVowels(s); cout<<s; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid reverseVowels(vector<int>& s) {\n    // TODO\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    reverseVowels(s);\n    return 0;\n}\n",
         "expectedOutput": "holle",
         "testCases": [
             {
@@ -635,7 +635,7 @@
         "description": "Can construct from magazine.",
         "difficulty": "EASY",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool canConstruct(char r[], char m[]) { return false; }\nint main() { cout<<canConstruct(\"aa\",\"aab\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool canConstruct(vector<int>& r, vector<int>& m) {\n    return false;\n}\n\nint main() {\n    int r_size;\n    cin >> r_size;\n    vector<int> r(r_size);\n    for (int i = 0; i < r_size; i++) cin >> r[i];\n    int m_size;\n    cin >> m_size;\n    vector<int> m(m_size);\n    for (int i = 0; i < m_size; i++) cin >> m[i];\n    cout << canConstruct(r, m);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {

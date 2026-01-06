@@ -5,7 +5,7 @@
         "description": "Given a non-negative integer num, return the number of steps to reduce it to zero. If the current number is even, divide it by 2. If odd, subtract 1 from it.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint numberOfSteps(int num) { return 0; }\nint main() { cout << numberOfSteps(14); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint numberOfSteps(int num) {\n    return 0;\n}\n\nint main() {\n    int num;\n    cin >> num;\n    cout << numberOfSteps(num);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "testCases": [
             {
@@ -79,7 +79,7 @@
         "description": "Given an integer n, return the difference between the product of its digits and the sum of its digits.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint subtractProductAndSum(int n) { return 0; }\nint main() { cout << subtractProductAndSum(234); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint subtractProductAndSum(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << subtractProductAndSum(n);\n    return 0;\n}\n",
         "expectedOutput": "15",
         "testCases": [
             {
@@ -153,7 +153,7 @@
         "description": "Convert an integer to a Roman numeral.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid intToRoman(int num) {}\nint main() { intToRoman(3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid intToRoman(int num) {\n    // TODO\n}\n\nint main() {\n    int num;\n    cin >> num;\n    intToRoman(num);\n    return 0;\n}\n",
         "expectedOutput": "III",
         "testCases": [
             {
@@ -226,7 +226,7 @@
         "description": "Convert a Roman numeral string to an integer.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint romanToInt(char s[]) { return 0; }\nint main() { cout << romanToInt(\"III\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint romanToInt(vector<int>& s) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << romanToInt(s);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "testCases": [
             {
@@ -299,7 +299,7 @@
         "description": "Given a date string in format YYYY-MM-DD, return which day of the year it is.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint dayOfYear(char date[]) { return 0; }\nint main() { cout << dayOfYear(\"2019-01-09\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint dayOfYear(vector<int>& date) {\n    return 0;\n}\n\nint main() {\n    int date_size;\n    cin >> date_size;\n    vector<int> date(date_size);\n    for (int i = 0; i < date_size; i++) cin >> date[i];\n    cout << dayOfYear(date);\n    return 0;\n}\n",
         "expectedOutput": "9",
         "testCases": [
             {
@@ -372,7 +372,7 @@
         "description": "Given a date, return the name of the day using Zeller's congruence.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid dayOfTheWeek(int day, int month, int year) {}\nint main() { dayOfTheWeek(31, 8, 2019); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid dayOfTheWeek(int day, int month, int year) {\n    // TODO\n}\n\nint main() {\n    int day;\n    cin >> day;\n    int month;\n    cin >> month;\n    int year;\n    cin >> year;\n    dayOfTheWeek(day, month, year);\n    return 0;\n}\n",
         "expectedOutput": "Saturday",
         "testCases": [
             {
@@ -445,7 +445,7 @@
         "description": "Given matrix and increment operations, count cells with odd values.",
         "difficulty": "EASY",
         "category": "Matrix",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint oddCells(int m, int n, int indices[][2], int k) { return 0; }\nint main() { int ind[][2] = {{0,1}, {1,1}}; cout << oddCells(2, 3, ind, 2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint oddCells(int m, int n, vector<vector<int>>& indices, int k) {\n    return 0;\n}\n\nint main() {\n    int m;\n    cin >> m;\n    int n;\n    cin >> n;\n    int indices_rows, indices_cols;\n    cin >> indices_rows >> indices_cols;\n    vector<vector<int>> indices(indices_rows, vector<int>(indices_cols));\n    for (int i = 0; i < indices_rows; i++)\n        for (int j = 0; j < indices_cols; j++)\n            cin >> indices[i][j];\n    int k;\n    cin >> k;\n    cout << oddCells(m, n, indices, k);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "testCases": [
             {
@@ -517,7 +517,7 @@
         "description": "Shift all elements k times circularly.",
         "difficulty": "EASY",
         "category": "Matrix",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid shiftGrid(int grid[][3], int m, int n, int k) {}\nint main() { int g[][3] = {{1,2,3}, {4,5,6}, {7,8,9}}; shiftGrid(g, 3, 3, 1); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid shiftGrid(vector<vector<int>>& grid, int m, int n, int k) {\n    // TODO\n}\n\nint main() {\n    int grid_rows, grid_cols;\n    cin >> grid_rows >> grid_cols;\n    vector<vector<int>> grid(grid_rows, vector<int>(grid_cols));\n    for (int i = 0; i < grid_rows; i++)\n        for (int j = 0; j < grid_cols; j++)\n            cin >> grid[i][j];\n    int m;\n    cin >> m;\n    int n;\n    cin >> n;\n    int k;\n    cin >> k;\n    shiftGrid(grid, m, n, k);\n    return 0;\n}\n",
         "expectedOutput": "9 1 2 3 4 5 6 7 8",
         "testCases": [
             {
@@ -589,7 +589,7 @@
         "description": "Replace each element with the greatest element to its right.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid replaceElements(int arr[], int n) {}\nint main() { int a[] = {17, 18, 5, 4, 6, 1}; replaceElements(a, 6); for(int i = 0; i < 6; i++) cout << a[i] << \" \"; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid replaceElements(vector<int>& arr, int n) {\n    // TODO\n}\n\nint main() {\n    int arr_size;\n    cin >> arr_size;\n    vector<int> arr(arr_size);\n    for (int i = 0; i < arr_size; i++) cin >> arr[i];\n    int n;\n    cin >> n;\n    replaceElements(arr, n);\n    return 0;\n}\n",
         "expectedOutput": "18 6 6 6 1 -1",
         "testCases": [
             {
@@ -662,7 +662,7 @@
         "description": "Sort array by number of 1s in binary. If tied, sort by value.",
         "difficulty": "EASY",
         "category": "Sorting",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid sortByBits(int arr[], int n) {}\nint main() { int a[] = {0, 1, 2, 3, 4, 5, 6, 7, 8}; sortByBits(a, 9); for(int i = 0; i < 9; i++) cout << a[i] << \" \"; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid sortByBits(vector<int>& arr, int n) {\n    // TODO\n}\n\nint main() {\n    int arr_size;\n    cin >> arr_size;\n    vector<int> arr(arr_size);\n    for (int i = 0; i < arr_size; i++) cin >> arr[i];\n    int n;\n    cin >> n;\n    sortByBits(arr, n);\n    return 0;\n}\n",
         "expectedOutput": "0 1 2 4 8 3 5 6 7",
         "testCases": [
             {

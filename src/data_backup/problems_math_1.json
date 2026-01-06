@@ -1,0 +1,402 @@
+[
+    {
+        "id": "math1",
+        "title": "Fibonacci Series",
+        "description": "Print first n Fibonacci numbers.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid fibonacci(int n) {}\nint main() { fibonacci(10); return 0; }",
+        "expectedOutput": "0 1 1 2 3 5 8 13 21 34",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid fibonacci(int n) { int a=0, b=1; for(int i=0;i<n;i++) { cout<<a<<\" \"; int c=a+b; a=b; b=c; } }\nint main() { fibonacci(10); return 0; }",
+        "explanation": {
+            "approach": "Each number is sum of previous two.",
+            "steps": [
+                "Start with 0, 1",
+                "Each next = sum of previous two"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "0 1 1 2 3 5 8 13 21 34",
+                "explanation": "First 10 Fibonacci"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "0",
+                "explanation": "Just first number"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "0 1 1 2 3",
+                "explanation": "First 5"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "0 1 1 2 3 5 8",
+                "explanation": "First 7"
+            }
+        ]
+    },
+    {
+        "id": "math2",
+        "title": "Pascal's Triangle Row",
+        "description": "Generate nth row of Pascal's triangle.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid pascalRow(int n) {}\nint main() { pascalRow(5); return 0; }",
+        "expectedOutput": "1 4 6 4 1",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid pascalRow(int n) { int c=1; for(int i=0;i<n;i++) { cout<<c<<\" \"; c=c*(n-1-i)/(i+1); } }\nint main() { pascalRow(5); return 0; }",
+        "explanation": {
+            "approach": "Compute binomial coefficients iteratively.",
+            "steps": [
+                "Start with 1",
+                "Multiply by (n-1-i)/(i+1)"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "1 4 6 4 1",
+                "explanation": "5th row (1-indexed)"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "First row"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "1 2 1",
+                "explanation": "Third row"
+            },
+            {
+                "input": "n=6",
+                "expectedOutput": "1 5 10 10 5 1",
+                "explanation": "Sixth row"
+            }
+        ]
+    },
+    {
+        "id": "math3",
+        "title": "Catalan Number",
+        "description": "Calculate nth Catalan number.",
+        "difficulty": "MEDIUM",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nlong long catalan(int n) { return 0; }\nint main() { cout<<catalan(5); return 0; }",
+        "expectedOutput": "42",
+        "solution": "#include <iostream>\nusing namespace std;\nlong long catalan(int n) { long long dp[n+1]={}; dp[0]=dp[1]=1; for(int i=2;i<=n;i++) for(int j=0;j<i;j++) dp[i]+=dp[j]*dp[i-1-j]; return dp[n]; }\nint main() { cout<<catalan(5); return 0; }",
+        "explanation": {
+            "approach": "Dynamic programming: C(n) = sum of C(i) * C(n-1-i).",
+            "steps": [
+                "Base: C(0)=C(1)=1",
+                "Sum all splits for larger n"
+            ],
+            "complexity": "Time: O(n²), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "42",
+                "explanation": "5th Catalan number"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "1",
+                "explanation": "C(0)=1"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "5",
+                "explanation": "C(3)=5"
+            },
+            {
+                "input": "n=4",
+                "expectedOutput": "14",
+                "explanation": "C(4)=14"
+            }
+        ]
+    },
+    {
+        "id": "math4",
+        "title": "nCr Calculation",
+        "description": "Calculate binomial coefficient n choose r.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nlong long nCr(int n, int r) { return 0; }\nint main() { cout<<nCr(10,3); return 0; }",
+        "expectedOutput": "120",
+        "solution": "#include <iostream>\nusing namespace std;\nlong long nCr(int n, int r) { if(r>n-r) r=n-r; long long res=1; for(int i=0;i<r;i++) { res*=(n-i); res/=(i+1); } return res; }\nint main() { cout<<nCr(10,3); return 0; }",
+        "explanation": {
+            "approach": "Compute nCr = n!/(r!(n-r)!) iteratively.",
+            "steps": [
+                "Use smaller of r, n-r",
+                "Multiply/divide progressively"
+            ],
+            "complexity": "Time: O(r), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=10, r=3",
+                "expectedOutput": "120",
+                "explanation": "10!/(3!*7!)=120"
+            },
+            {
+                "input": "n=5, r=2",
+                "expectedOutput": "10",
+                "explanation": "5!/(2!*3!)=10"
+            },
+            {
+                "input": "n=6, r=0",
+                "expectedOutput": "1",
+                "explanation": "Choose 0 = 1 way"
+            },
+            {
+                "input": "n=4, r=4",
+                "expectedOutput": "1",
+                "explanation": "Choose all = 1 way"
+            }
+        ]
+    },
+    {
+        "id": "math5",
+        "title": "Power Set Size",
+        "description": "Calculate number of subsets of n elements.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint powerSetSize(int n) { return 0; }\nint main() { cout<<powerSetSize(4); return 0; }",
+        "expectedOutput": "16",
+        "solution": "#include <iostream>\nusing namespace std;\nint powerSetSize(int n) { return 1<<n; }\nint main() { cout<<powerSetSize(4); return 0; }",
+        "explanation": {
+            "approach": "Power set has 2^n subsets.",
+            "steps": [
+                "Each element: include or exclude",
+                "Total = 2^n"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=4",
+                "expectedOutput": "16",
+                "explanation": "2^4=16 subsets"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "1",
+                "explanation": "Empty set has 1 subset"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "8",
+                "explanation": "2^3=8"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "1024",
+                "explanation": "2^10=1024"
+            }
+        ]
+    },
+    {
+        "id": "math6",
+        "title": "Count Set Bits 1 to N",
+        "description": "Count total set bits in all numbers from 1 to n.",
+        "difficulty": "MEDIUM",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countSetBits(int n) { return 0; }\nint main() { cout<<countSetBits(7); return 0; }",
+        "expectedOutput": "12",
+        "solution": "#include <iostream>\nusing namespace std;\nint countSetBits(int n) { int total=0; for(int i=1;i<=n;i++) { int x=i; while(x) { total+=x&1; x>>=1; } } return total; }\nint main() { cout<<countSetBits(7); return 0; }",
+        "explanation": {
+            "approach": "Count bits in each number and sum.",
+            "steps": [
+                "For each 1 to n",
+                "Count its set bits",
+                "Sum all"
+            ],
+            "complexity": "Time: O(n log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=7",
+                "expectedOutput": "12",
+                "explanation": "1+1+2+1+2+2+3=12"
+            },
+            {
+                "input": "n=4",
+                "expectedOutput": "5",
+                "explanation": "1+1+2+1=5"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Just 1"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "4",
+                "explanation": "1+1+2=4"
+            }
+        ]
+    },
+    {
+        "id": "math7",
+        "title": "Sum of Multiples",
+        "description": "Sum all multiples of 3 or 5 below n.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumMultiples(int n) { return 0; }\nint main() { cout<<sumMultiples(10); return 0; }",
+        "expectedOutput": "23",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumMultiples(int n) { int sum=0; for(int i=1;i<n;i++) if(i%3==0||i%5==0) sum+=i; return sum; }\nint main() { cout<<sumMultiples(10); return 0; }",
+        "explanation": {
+            "approach": "Check each number for divisibility by 3 or 5.",
+            "steps": [
+                "For each i < n",
+                "Add if divisible by 3 or 5"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "23",
+                "explanation": "3+5+6+9=23"
+            },
+            {
+                "input": "n=20",
+                "expectedOutput": "78",
+                "explanation": "Sum of 3,5,6,9,10,12,15,18"
+            },
+            {
+                "input": "n=6",
+                "expectedOutput": "8",
+                "explanation": "3+5=8"
+            },
+            {
+                "input": "n=16",
+                "expectedOutput": "60",
+                "explanation": "Multiples below 16"
+            }
+        ]
+    },
+    {
+        "id": "math8",
+        "title": "Digital Root",
+        "description": "Find single-digit sum of all digits (repeated).",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint digitalRoot(int n) { return 0; }\nint main() { cout<<digitalRoot(12345); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint digitalRoot(int n) { if(n==0) return 0; return 1+(n-1)%9; }\nint main() { cout<<digitalRoot(12345); return 0; }",
+        "explanation": {
+            "approach": "Formula: 1 + (n-1) mod 9.",
+            "steps": [
+                "Keep summing digits until single digit",
+                "Or use mod 9 trick"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=12345",
+                "expectedOutput": "6",
+                "explanation": "1+2+3+4+5=15, 1+5=6"
+            },
+            {
+                "input": "n=9",
+                "expectedOutput": "9",
+                "explanation": "Already single digit"
+            },
+            {
+                "input": "n=99",
+                "expectedOutput": "9",
+                "explanation": "9+9=18, 1+8=9"
+            },
+            {
+                "input": "n=38",
+                "expectedOutput": "2",
+                "explanation": "3+8=11, 1+1=2"
+            }
+        ]
+    },
+    {
+        "id": "math9",
+        "title": "Trailing Zeros in Factorial",
+        "description": "Count trailing zeros in n factorial.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint trailingZeros(int n) { return 0; }\nint main() { cout<<trailingZeros(25); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint trailingZeros(int n) { int c=0; while(n>=5) { n/=5; c+=n; } return c; }\nint main() { cout<<trailingZeros(25); return 0; }",
+        "explanation": {
+            "approach": "Count factors of 5 (plenty of 2s available).",
+            "steps": [
+                "Count n/5 + n/25 + n/125 + ..."
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=25",
+                "expectedOutput": "6",
+                "explanation": "25/5+25/25=5+1=6"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "2",
+                "explanation": "10/5=2"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "24",
+                "explanation": "20+4=24"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "1",
+                "explanation": "5/5=1"
+            }
+        ]
+    },
+    {
+        "id": "math10",
+        "title": "Smallest Prime Factor",
+        "description": "Find smallest prime factor for each number 0 to n.",
+        "difficulty": "MEDIUM",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid smallestPrimeFactor(int n) {}\nint main() { smallestPrimeFactor(10); return 0; }",
+        "expectedOutput": "0 1 2 3 2 5 2 7 2 3 2",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid smallestPrimeFactor(int n) { int spf[n+1]; for(int i=0;i<=n;i++) spf[i]=i; for(int i=2;i*i<=n;i++) if(spf[i]==i) for(int j=i*i;j<=n;j+=i) if(spf[j]==j) spf[j]=i; for(int i=0;i<=n;i++) cout<<spf[i]<<\" \"; }\nint main() { smallestPrimeFactor(10); return 0; }",
+        "explanation": {
+            "approach": "Sieve-like approach to find SPF.",
+            "steps": [
+                "Initialize spf[i] = i",
+                "For each prime, mark multiples"
+            ],
+            "complexity": "Time: O(n log log n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "0 1 2 3 2 5 2 7 2 3 2",
+                "explanation": "SPF for 0-10"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "0 1 2 3 2 5",
+                "explanation": "SPF for 0-5"
+            },
+            {
+                "input": "n=15",
+                "expectedOutput": "0 1 2 3 2 5 2 7 2 3 2 11 2 13 2 3",
+                "explanation": "SPF for 0-15"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "0 1",
+                "explanation": "Just 0 and 1"
+            }
+        ]
+    }
+]

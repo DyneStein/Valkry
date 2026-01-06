@@ -1,0 +1,414 @@
+[
+    {
+        "id": "tree11",
+        "title": "Same Tree",
+        "description": "Check if two trees are same.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nbool isSame(Node* p, Node* q) { return false; }\nint main() { Node* p=new Node(1); p->l=new Node(2); p->r=new Node(3); Node* q=new Node(1); q->l=new Node(2); q->r=new Node(3); cout<<isSame(p,q); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nbool isSame(Node* p, Node* q) { if(!p && !q) return true; if(!p || !q) return false; return p->v==q->v && isSame(p->l,q->l) && isSame(p->r,q->r); }\nint main() { Node* p=new Node(1); p->l=new Node(2); p->r=new Node(3); Node* q=new Node(1); q->l=new Node(2); q->r=new Node(3); cout<<isSame(p,q); return 0; }",
+        "explanation": {
+            "approach": "Recursive comparison.",
+            "analogy": "Both null or both equal.",
+            "steps": [
+                "Base: both null = same",
+                "Check value and recurse on children"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        },
+        "testCases": [
+            {
+                "input": "p=[1,2,3], q=[1,2,3]",
+                "expectedOutput": "1",
+                "explanation": "Identical trees"
+            },
+            {
+                "input": "p=[1,2], q=[1,null,2]",
+                "expectedOutput": "0",
+                "explanation": "Different structure"
+            },
+            {
+                "input": "p=[], q=[]",
+                "expectedOutput": "1",
+                "explanation": "Both empty"
+            },
+            {
+                "input": "p=[1,2,1], q=[1,1,2]",
+                "expectedOutput": "0",
+                "explanation": "Same values, different positions"
+            }
+        ]
+    },
+    {
+        "id": "tree12",
+        "title": "Subtree of Another",
+        "description": "Is t a subtree of s.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nbool isSubtree(Node* s, Node* t) { return false; }\nint main() { Node* s=new Node(3); s->l=new Node(4); s->r=new Node(5); s->l->l=new Node(1); s->l->r=new Node(2); Node* t=new Node(4); t->l=new Node(1); t->r=new Node(2); cout<<isSubtree(s,t); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nbool same(Node* a, Node* b) { if(!a && !b) return true; if(!a || !b) return false; return a->v==b->v && same(a->l,b->l) && same(a->r,b->r); }\nbool isSubtree(Node* s, Node* t) { if(!s) return false; if(same(s,t)) return true; return isSubtree(s->l,t) || isSubtree(s->r,t); }\nint main() { Node* s=new Node(3); s->l=new Node(4); s->r=new Node(5); s->l->l=new Node(1); s->l->r=new Node(2); Node* t=new Node(4); t->l=new Node(1); t->r=new Node(2); cout<<isSubtree(s,t); return 0; }",
+        "explanation": {
+            "approach": "Check each node as root.",
+            "analogy": "Find matching subtree.",
+            "steps": [
+                "If trees same, return true",
+                "Check left and right subtrees"
+            ],
+            "complexity": "Time: O(m×n), Space: O(h)"
+        },
+        "testCases": [
+            {
+                "input": "s=[3,4,5,1,2], t=[4,1,2]",
+                "expectedOutput": "1",
+                "explanation": "t is subtree of s"
+            },
+            {
+                "input": "s=[3,4,5,1,2,null,null,null,null,0], t=[4,1,2]",
+                "expectedOutput": "0",
+                "explanation": "Not exact match"
+            },
+            {
+                "input": "s=[1], t=[1]",
+                "expectedOutput": "1",
+                "explanation": "Single node match"
+            },
+            {
+                "input": "s=[1,2,3], t=[2]",
+                "expectedOutput": "1",
+                "explanation": "t is a leaf in s"
+            }
+        ]
+    },
+    {
+        "id": "tree13",
+        "title": "Invert Binary Tree",
+        "description": "Mirror the tree.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* invertTree(Node* r) { return nullptr; }\nvoid print(Node* r) { if(!r) return; cout<<r->v<<\" \"; print(r->l); print(r->r); }\nint main() { Node* r=new Node(4); r->l=new Node(2); r->r=new Node(7); r->l->l=new Node(1); r->l->r=new Node(3); r=invertTree(r); print(r); return 0; }",
+        "expectedOutput": "4 7 2 3 1",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* invertTree(Node* r) { if(!r) return 0; Node* t=r->l; r->l=invertTree(r->r); r->r=invertTree(t); return r; }\nvoid print(Node* r) { if(!r) return; cout<<r->v<<\" \"; print(r->l); print(r->r); }\nint main() { Node* r=new Node(4); r->l=new Node(2); r->r=new Node(7); r->l->l=new Node(1); r->l->r=new Node(3); r=invertTree(r); print(r); return 0; }",
+        "explanation": {
+            "approach": "Swap children recursively.",
+            "analogy": "Mirror image.",
+            "steps": [
+                "Swap left and right",
+                "Recurse on children"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        },
+        "testCases": [
+            {
+                "input": "[4,2,7,1,3]",
+                "expectedOutput": "4 7 2 3 1",
+                "explanation": "Tree mirrored"
+            },
+            {
+                "input": "[2,1,3]",
+                "expectedOutput": "2 3 1",
+                "explanation": "Simple inversion"
+            },
+            {
+                "input": "[]",
+                "expectedOutput": "",
+                "explanation": "Empty tree"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "1",
+                "explanation": "Single node unchanged"
+            }
+        ]
+    },
+    {
+        "id": "tree14",
+        "title": "Max Path Sum",
+        "description": "Maximum path sum in tree.",
+        "difficulty": "HARD",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint maxPathSum(Node* r) { return 0; }\nint main() { Node* r=new Node(-10); r->l=new Node(9); r->r=new Node(20); r->r->l=new Node(15); r->r->r=new Node(7); cout<<maxPathSum(r); return 0; }",
+        "expectedOutput": "42",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint maxSum;\nint solve(Node* r) { if(!r) return 0; int l=max(0,solve(r->l)); int ri=max(0,solve(r->r)); maxSum=max(maxSum,l+ri+r->v); return r->v+max(l,ri); }\nint maxPathSum(Node* r) { maxSum=-1e9; solve(r); return maxSum; }\nint main() { Node* r=new Node(-10); r->l=new Node(9); r->r=new Node(20); r->r->l=new Node(15); r->r->r=new Node(7); cout<<maxPathSum(r); return 0; }",
+        "explanation": {
+            "approach": "DFS returning max single path.",
+            "analogy": "Path through node as turning point.",
+            "steps": [
+                "Return max path going up",
+                "Update global with path through node"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        },
+        "testCases": [
+            {
+                "input": "[-10,9,20,null,null,15,7]",
+                "expectedOutput": "42",
+                "explanation": "15+20+7=42"
+            },
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "6",
+                "explanation": "2+1+3=6"
+            },
+            {
+                "input": "[-3]",
+                "expectedOutput": "-3",
+                "explanation": "Single negative node"
+            },
+            {
+                "input": "[5,4,8,11,null,13,4]",
+                "expectedOutput": "48",
+                "explanation": "11+4+5+8+13+4 or similar path"
+            }
+        ]
+    },
+    {
+        "id": "tree15",
+        "title": "Build Tree from Preorder Inorder",
+        "description": "Construct tree from traversals.",
+        "difficulty": "MEDIUM",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* buildTree(int pre[], int in[], int n) { return nullptr; }\nvoid post(Node* r) { if(!r) return; post(r->l); post(r->r); cout<<r->v<<\" \"; }\nint main() { int pre[]={3,9,20,15,7}; int in[]={9,3,15,20,7}; Node* r=buildTree(pre,in,5); post(r); return 0; }",
+        "expectedOutput": "9 15 7 20 3",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint idx=0;\nNode* build(int pre[], int in[], int l, int r) { if(l>r) return 0; Node* root=new Node(pre[idx++]); int mid=l; while(in[mid]!=root->v) mid++; root->l=build(pre,in,l,mid-1); root->r=build(pre,in,mid+1,r); return root; }\nNode* buildTree(int pre[], int in[], int n) { idx=0; return build(pre,in,0,n-1); }\nvoid post(Node* r) { if(!r) return; post(r->l); post(r->r); cout<<r->v<<\" \"; }\nint main() { int pre[]={3,9,20,15,7}; int in[]={9,3,15,20,7}; Node* r=buildTree(pre,in,5); post(r); return 0; }",
+        "explanation": {
+            "approach": "Root from preorder, split inorder.",
+            "analogy": "Preorder gives root, inorder splits.",
+            "steps": [
+                "First preorder element is root",
+                "Find in inorder to get left and right subtrees"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "pre=[3,9,20,15,7], in=[9,3,15,20,7]",
+                "expectedOutput": "9 15 7 20 3",
+                "explanation": "Reconstructed tree postorder"
+            },
+            {
+                "input": "pre=[1,2], in=[2,1]",
+                "expectedOutput": "2 1",
+                "explanation": "Left child only"
+            },
+            {
+                "input": "pre=[1], in=[1]",
+                "expectedOutput": "1",
+                "explanation": "Single node"
+            },
+            {
+                "input": "pre=[1,2,3], in=[2,1,3]",
+                "expectedOutput": "2 3 1",
+                "explanation": "Balanced tree"
+            }
+        ]
+    },
+    {
+        "id": "tree16",
+        "title": "Populating Next Right",
+        "description": "Connect same level nodes.",
+        "difficulty": "MEDIUM",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r,*next; Node(int x):v(x),l(0),r(0),next(0){} };\nNode* connect(Node* root) { return nullptr; }\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->l->l=new Node(4); r->l->r=new Node(5); r->r->r=new Node(7); connect(r); cout<<r->l->next->v<<\" \"<<r->l->r->next->v; return 0; }",
+        "expectedOutput": "3 7",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r,*next; Node(int x):v(x),l(0),r(0),next(0){} };\nNode* connect(Node* root) { Node* cur=root; while(cur) { Node dummy(0), *tail=&dummy; while(cur) { if(cur->l) { tail->next=cur->l; tail=tail->next; } if(cur->r) { tail->next=cur->r; tail=tail->next; } cur=cur->next; } cur=dummy.next; } return root; }\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->l->l=new Node(4); r->l->r=new Node(5); r->r->r=new Node(7); connect(r); cout<<r->l->next->v<<\" \"<<r->l->r->next->v; return 0; }",
+        "explanation": {
+            "approach": "Level by level linking.",
+            "analogy": "Use next pointers for traversal.",
+            "steps": [
+                "Process each level using next",
+                "Link children as you go"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "[1,2,3,4,5,null,7]",
+                "expectedOutput": "3 7",
+                "explanation": "2->next=3, 5->next=7"
+            },
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "3",
+                "explanation": "2->next=3"
+            },
+            {
+                "input": "[]",
+                "expectedOutput": "",
+                "explanation": "Empty tree"
+            },
+            {
+                "input": "[1,2,3,4,5,6,7]",
+                "expectedOutput": "3 5",
+                "explanation": "Perfect binary tree linking"
+            }
+        ]
+    },
+    {
+        "id": "tree17",
+        "title": "Count Good Nodes",
+        "description": "Nodes >= all ancestors.",
+        "difficulty": "MEDIUM",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint goodNodes(Node* r) { return 0; }\nint main() { Node* r=new Node(3); r->l=new Node(1); r->r=new Node(4); r->l->l=new Node(3); r->r->l=new Node(1); r->r->r=new Node(5); cout<<goodNodes(r); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint cnt=0;\nvoid dfs(Node* r, int mx) { if(!r) return; if(r->v>=mx) cnt++; mx=max(mx,r->v); dfs(r->l,mx); dfs(r->r,mx); }\nint goodNodes(Node* r) { cnt=0; dfs(r,-1e9); return cnt; }\nint main() { Node* r=new Node(3); r->l=new Node(1); r->r=new Node(4); r->l->l=new Node(3); r->r->l=new Node(1); r->r->r=new Node(5); cout<<goodNodes(r); return 0; }",
+        "explanation": {
+            "approach": "DFS tracking max ancestor.",
+            "analogy": "Good if >= all above.",
+            "steps": [
+                "Track max on path",
+                "Count if current >= max"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        },
+        "testCases": [
+            {
+                "input": "[3,1,4,3,null,1,5]",
+                "expectedOutput": "4",
+                "explanation": "Nodes 3,3,4,5 are good"
+            },
+            {
+                "input": "[3,3,null,4,2]",
+                "expectedOutput": "3",
+                "explanation": "3,3,4 are good"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "1",
+                "explanation": "Root is always good"
+            },
+            {
+                "input": "[2,null,4,null,6]",
+                "expectedOutput": "3",
+                "explanation": "Increasing path, all good"
+            }
+        ]
+    },
+    {
+        "id": "tree18",
+        "title": "Binary Tree Paths",
+        "description": "All root-to-leaf paths.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid binaryTreePaths(Node* r) {}\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->l->r=new Node(5); binaryTreePaths(r); return 0; }",
+        "expectedOutput": "1->2->5 1->3",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid dfs(Node* r, int path[], int len) { if(!r) return; path[len++]=r->v; if(!r->l && !r->r) { for(int i=0;i<len;i++) cout<<(i?\"->\":\"\")<<path[i]; cout<<\" \"; } dfs(r->l,path,len); dfs(r->r,path,len); }\nvoid binaryTreePaths(Node* r) { int path[100]; dfs(r,path,0); }\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->l->r=new Node(5); binaryTreePaths(r); return 0; }",
+        "explanation": {
+            "approach": "DFS building path.",
+            "analogy": "Collect nodes on path to leaf.",
+            "steps": [
+                "Add current to path",
+                "At leaf, print path",
+                "Recurse on children"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        },
+        "testCases": [
+            {
+                "input": "[1,2,3,null,5]",
+                "expectedOutput": "1->2->5 1->3",
+                "explanation": "Two paths"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "1",
+                "explanation": "Single node is a path"
+            },
+            {
+                "input": "[1,2,null]",
+                "expectedOutput": "1->2",
+                "explanation": "Left-only path"
+            },
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "1->2->4 1->2->5 1->3",
+                "explanation": "Three paths"
+            }
+        ]
+    },
+    {
+        "id": "tree19",
+        "title": "Diameter of Binary Tree",
+        "description": "Longest path between nodes.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint diameterOfBinaryTree(Node* r) { return 0; }\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->l->l=new Node(4); r->l->r=new Node(5); cout<<diameterOfBinaryTree(r); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint diam=0;\nint height(Node* r) { if(!r) return 0; int l=height(r->l); int ri=height(r->r); diam=max(diam,l+ri); return 1+max(l,ri); }\nint diameterOfBinaryTree(Node* r) { diam=0; height(r); return diam; }\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->l->l=new Node(4); r->l->r=new Node(5); cout<<diameterOfBinaryTree(r); return 0; }",
+        "explanation": {
+            "approach": "Diameter = left height + right height.",
+            "analogy": "Path through each node.",
+            "steps": [
+                "Compute height recursively",
+                "Track max left + right heights"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        },
+        "testCases": [
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "3",
+                "explanation": "Path 4-2-1-3 or 5-2-1-3"
+            },
+            {
+                "input": "[1,2]",
+                "expectedOutput": "1",
+                "explanation": "Just one edge"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "0",
+                "explanation": "No edges"
+            },
+            {
+                "input": "[1,2,null,3,null,4]",
+                "expectedOutput": "3",
+                "explanation": "Chain path 4-3-2-1"
+            }
+        ]
+    },
+    {
+        "id": "tree20",
+        "title": "Sum Root to Leaf",
+        "description": "Sum of all root-to-leaf numbers.",
+        "difficulty": "MEDIUM",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint sumNumbers(Node* r) { return 0; }\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); cout<<sumNumbers(r); return 0; }",
+        "expectedOutput": "25",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint dfs(Node* r, int num) { if(!r) return 0; num=num*10+r->v; if(!r->l && !r->r) return num; return dfs(r->l,num)+dfs(r->r,num); }\nint sumNumbers(Node* r) { return dfs(r,0); }\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); cout<<sumNumbers(r); return 0; }",
+        "explanation": {
+            "approach": "Build number on path.",
+            "analogy": "Path 1->2 = number 12.",
+            "steps": [
+                "num = num × 10 + node value",
+                "At leaf, return num",
+                "Sum all leaf numbers"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        },
+        "testCases": [
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "25",
+                "explanation": "12+13=25"
+            },
+            {
+                "input": "[4,9,0,5,1]",
+                "expectedOutput": "1026",
+                "explanation": "495+491+40=1026"
+            },
+            {
+                "input": "[0]",
+                "expectedOutput": "0",
+                "explanation": "Single zero"
+            },
+            {
+                "input": "[1,0,1,0,1,0,1]",
+                "expectedOutput": "422",
+                "explanation": "100+101+100+101=402"
+            }
+        ]
+    }
+]

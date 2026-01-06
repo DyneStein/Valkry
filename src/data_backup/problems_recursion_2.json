@@ -1,0 +1,413 @@
+[
+    {
+        "id": "rec11",
+        "title": "N-th Tribonacci",
+        "description": "T(n) = T(n-1)+T(n-2)+T(n-3).",
+        "difficulty": "EASY",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint tribonacci(int n) { return 0; }\nint main() { cout<<tribonacci(7); return 0; }",
+        "expectedOutput": "13",
+        "solution": "#include <iostream>\nusing namespace std;\nint tribonacci(int n) { if(n==0) return 0; if(n<=2) return 1; return tribonacci(n-1)+tribonacci(n-2)+tribonacci(n-3); }\nint main() { cout<<tribonacci(7); return 0; }",
+        "explanation": {
+            "approach": "Like Fibonacci but with 3 terms.",
+            "analogy": "Sum of previous three.",
+            "steps": [
+                "Base: T(0)=0, T(1)=T(2)=1",
+                "T(n)=T(n-1)+T(n-2)+T(n-3)"
+            ],
+            "complexity": "Time: O(3^n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=7",
+                "expectedOutput": "13",
+                "explanation": "T(7) = 13"
+            },
+            {
+                "input": "n=4",
+                "expectedOutput": "4",
+                "explanation": "T(4) = 0+1+1+2 = 4"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "0",
+                "explanation": "Base case T(0) = 0"
+            },
+            {
+                "input": "n=25",
+                "expectedOutput": "1389537",
+                "explanation": "Large Tribonacci number"
+            }
+        ]
+    },
+    {
+        "id": "rec12",
+        "title": "Power Set Recursive",
+        "description": "Generate all subsets recursively.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid powerSet(int a[], int n) {}\nint main() { int a[]={1,2}; powerSet(a,2); return 0; }",
+        "expectedOutput": "{} {1} {1 2} {2}",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid gen(int a[], int n, int i, int cur[], int k) { if(i==n) { cout<<\"{\"; for(int j=0;j<k;j++) cout<<(j?\" \":\"\")<<cur[j]; cout<<\"} \"; return; } gen(a,n,i+1,cur,k); cur[k]=a[i]; gen(a,n,i+1,cur,k+1); }\nvoid powerSet(int a[], int n) { int cur[10]; gen(a,n,0,cur,0); }\nint main() { int a[]={1,2}; powerSet(a,2); return 0; }",
+        "explanation": {
+            "approach": "Include or exclude each element.",
+            "analogy": "Binary choice for each.",
+            "steps": [
+                "For each element, choose include or not",
+                "Recurse to next element"
+            ],
+            "complexity": "Time: O(2^n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "{1,2}",
+                "expectedOutput": "{} {1} {2} {1,2}",
+                "explanation": "4 subsets"
+            },
+            {
+                "input": "{1}",
+                "expectedOutput": "{} {1}",
+                "explanation": "2 subsets"
+            },
+            {
+                "input": "{}",
+                "expectedOutput": "{}",
+                "explanation": "Only empty set"
+            },
+            {
+                "input": "{1,2,3}",
+                "expectedOutput": "8 subsets",
+                "explanation": "2^3 = 8 subsets"
+            }
+        ]
+    },
+    {
+        "id": "rec13",
+        "title": "String Permutations",
+        "description": "All permutations of string.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid permute(char s[]) {}\nint main() { char s[]=\"ABC\"; permute(s); return 0; }",
+        "expectedOutput": "ABC ACB BAC BCA CBA CAB",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid perm(char s[], int l, int r) { if(l==r) { cout<<s<<\" \"; return; } for(int i=l;i<=r;i++) { swap(s[l],s[i]); perm(s,l+1,r); swap(s[l],s[i]); } }\nvoid permute(char s[]) { int n=0; while(s[n]) n++; perm(s,0,n-1); }\nint main() { char s[]=\"ABC\"; permute(s); return 0; }",
+        "explanation": {
+            "approach": "Swap each char to front, permute rest.",
+            "analogy": "Try each as first letter.",
+            "steps": [
+                "Swap current with each position",
+                "Recurse",
+                "Swap back"
+            ],
+            "complexity": "Time: O(n!), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "\"ABC\"",
+                "expectedOutput": "ABC ACB BAC BCA CBA CAB",
+                "explanation": "6 permutations"
+            },
+            {
+                "input": "\"AB\"",
+                "expectedOutput": "AB BA",
+                "explanation": "2 permutations"
+            },
+            {
+                "input": "\"A\"",
+                "expectedOutput": "A",
+                "explanation": "Single char"
+            },
+            {
+                "input": "\"ABCD\"",
+                "expectedOutput": "24 permutations",
+                "explanation": "4! = 24 permutations"
+            }
+        ]
+    },
+    {
+        "id": "rec14",
+        "title": "Count Paths in Maze",
+        "description": "Paths from top-left to bottom-right.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countPaths(int r, int c) { return 0; }\nint main() { cout<<countPaths(3,3); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint countPaths(int r, int c) { if(r==1||c==1) return 1; return countPaths(r-1,c)+countPaths(r,c-1); }\nint main() { cout<<countPaths(3,3); return 0; }",
+        "explanation": {
+            "approach": "Sum of paths from left and above.",
+            "analogy": "Can only move right or down.",
+            "steps": [
+                "Base: edge has 1 path",
+                "paths(r,c) = paths(r-1,c) + paths(r,c-1)"
+            ],
+            "complexity": "Time: O(2^(r+c)), Space: O(r+c)"
+        },
+        "testCases": [
+            {
+                "input": "r=3, c=3",
+                "expectedOutput": "6",
+                "explanation": "6 paths in 3x3 grid"
+            },
+            {
+                "input": "r=2, c=2",
+                "expectedOutput": "2",
+                "explanation": "2 paths in 2x2 grid"
+            },
+            {
+                "input": "r=1, c=5",
+                "expectedOutput": "1",
+                "explanation": "Only 1 path along edge"
+            },
+            {
+                "input": "r=4, c=4",
+                "expectedOutput": "20",
+                "explanation": "C(6,3) = 20 paths"
+            }
+        ]
+    },
+    {
+        "id": "rec15",
+        "title": "Palindrome Partition Count",
+        "description": "Min cuts for palindrome partition.",
+        "difficulty": "HARD",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint minCut(char s[]) { return 0; }\nint main() { cout<<minCut(\"aab\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPalin(char s[], int l, int r) { while(l<r) if(s[l++]!=s[r--]) return false; return true; }\nint solve(char s[], int i, int n) { if(i>=n||isPalin(s,i,n-1)) return 0; int mn=1e9; for(int j=i;j<n-1;j++) if(isPalin(s,i,j)) mn=min(mn,1+solve(s,j+1,n)); return mn; }\nint minCut(char s[]) { int n=0; while(s[n]) n++; return solve(s,0,n); }\nint main() { cout<<minCut(\"aab\"); return 0; }",
+        "explanation": {
+            "approach": "Try all palindrome prefixes.",
+            "analogy": "Cut after each palindrome prefix.",
+            "steps": [
+                "If rest is palindrome, no more cuts",
+                "Else try each palindrome prefix, cut, recurse"
+            ],
+            "complexity": "Time: O(n × 2^n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "\"aab\"",
+                "expectedOutput": "1",
+                "explanation": "aa|b - 1 cut"
+            },
+            {
+                "input": "\"a\"",
+                "expectedOutput": "0",
+                "explanation": "Already palindrome"
+            },
+            {
+                "input": "\"abc\"",
+                "expectedOutput": "2",
+                "explanation": "a|b|c - 2 cuts"
+            },
+            {
+                "input": "\"aba\"",
+                "expectedOutput": "0",
+                "explanation": "Already palindrome"
+            }
+        ]
+    },
+    {
+        "id": "rec16",
+        "title": "Word Break Recursive",
+        "description": "Can string be segmented.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool wordBreak(char s[], char dict[][10], int n) { return false; }\nint main() { char dict[][10]={\"apple\",\"pen\"}; cout<<wordBreak(\"applepenapple\",dict,2); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool eq(char a[], char b[], int len) { for(int i=0;i<len;i++) if(a[i]!=b[i]) return false; return !b[len]; }\nbool solve(char s[], int start, char dict[][10], int n, int slen) { if(start==slen) return true; for(int end=start+1;end<=slen;end++) for(int i=0;i<n;i++) if(eq(s+start,dict[i],end-start)) if(solve(s,end,dict,n,slen)) return true; return false; }\nbool wordBreak(char s[], char dict[][10], int n) { int slen=0; while(s[slen]) slen++; return solve(s,0,dict,n,slen); }\nint main() { char dict[][10]={\"apple\",\"pen\"}; cout<<wordBreak(\"applepenapple\",dict,2); return 0; }",
+        "explanation": {
+            "approach": "Try matching each dictionary word.",
+            "analogy": "Spell out with dictionary words.",
+            "steps": [
+                "Try each word as prefix",
+                "If match, recurse on rest"
+            ],
+            "complexity": "Time: O(2^n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "\"applepenapple\", dict=[apple,pen]",
+                "expectedOutput": "1",
+                "explanation": "apple+pen+apple"
+            },
+            {
+                "input": "\"catsandog\", dict=[cats,dog,sand,and,cat]",
+                "expectedOutput": "0",
+                "explanation": "Cannot segment"
+            },
+            {
+                "input": "\"abc\", dict=[a,b,c]",
+                "expectedOutput": "1",
+                "explanation": "a+b+c"
+            },
+            {
+                "input": "\"leetcode\", dict=[leet,code]",
+                "expectedOutput": "1",
+                "explanation": "leet+code"
+            }
+        ]
+    },
+    {
+        "id": "rec17",
+        "title": "Decode Ways Recursive",
+        "description": "Number of decodings.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint numDecodings(char s[]) { return 0; }\nint main() { cout<<numDecodings(\"226\"); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint solve(char s[], int i, int n) { if(i==n) return 1; if(s[i]=='0') return 0; int ways=solve(s,i+1,n); if(i+1<n) { int two=(s[i]-'0')*10+(s[i+1]-'0'); if(two>=10 && two<=26) ways+=solve(s,i+2,n); } return ways; }\nint numDecodings(char s[]) { int n=0; while(s[n]) n++; return solve(s,0,n); }\nint main() { cout<<numDecodings(\"226\"); return 0; }",
+        "explanation": {
+            "approach": "Take 1 or 2 digits.",
+            "analogy": "Decode as single or pair.",
+            "steps": [
+                "Take single digit (1-9)",
+                "Take two digits (10-26)"
+            ],
+            "complexity": "Time: O(2^n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "\"226\"",
+                "expectedOutput": "3",
+                "explanation": "2,2,6 OR 22,6 OR 2,26"
+            },
+            {
+                "input": "\"12\"",
+                "expectedOutput": "2",
+                "explanation": "1,2 OR 12"
+            },
+            {
+                "input": "\"06\"",
+                "expectedOutput": "0",
+                "explanation": "Leading 0 invalid"
+            },
+            {
+                "input": "\"11106\"",
+                "expectedOutput": "2",
+                "explanation": "1,1,10,6 OR 11,10,6"
+            }
+        ]
+    },
+    {
+        "id": "rec18",
+        "title": "Unique BSTs Count",
+        "description": "Number of unique BSTs.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint numTrees(int n) { return 0; }\nint main() { cout<<numTrees(3); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint numTrees(int n) { if(n<=1) return 1; int total=0; for(int i=1;i<=n;i++) total+=numTrees(i-1)*numTrees(n-i); return total; }\nint main() { cout<<numTrees(3); return 0; }",
+        "explanation": {
+            "approach": "Each node as root, count subtrees.",
+            "analogy": "Catalan number structure.",
+            "steps": [
+                "For each root i",
+                "Left has i-1 nodes, right has n-i"
+            ],
+            "complexity": "Time: O(3^n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=3",
+                "expectedOutput": "5",
+                "explanation": "5 unique BST structures"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Single node"
+            },
+            {
+                "input": "n=4",
+                "expectedOutput": "14",
+                "explanation": "Catalan(4) = 14"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "42",
+                "explanation": "Catalan(5) = 42"
+            }
+        ]
+    },
+    {
+        "id": "rec19",
+        "title": "Kth Symbol in Grammar",
+        "description": "Find kth symbol in row n.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint kthGrammar(int n, int k) { return 0; }\nint main() { cout<<kthGrammar(4,5); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint kthGrammar(int n, int k) { if(n==1) return 0; int parent=kthGrammar(n-1,(k+1)/2); return k%2==1 ? parent : 1-parent; }\nint main() { cout<<kthGrammar(4,5); return 0; }",
+        "explanation": {
+            "approach": "Find parent symbol, flip if needed.",
+            "analogy": "0→01, 1→10.",
+            "steps": [
+                "Find parent at position (k+1)/2",
+                "If k odd, same as parent; else flip"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=4, k=5",
+                "expectedOutput": "1",
+                "explanation": "Row 4: 0110100110010110, k=5 is 1"
+            },
+            {
+                "input": "n=1, k=1",
+                "expectedOutput": "0",
+                "explanation": "First row is just 0"
+            },
+            {
+                "input": "n=2, k=2",
+                "expectedOutput": "1",
+                "explanation": "Row 2 is 01, k=2 is 1"
+            },
+            {
+                "input": "n=3, k=1",
+                "expectedOutput": "0",
+                "explanation": "Row 3 is 0110, k=1 is 0"
+            }
+        ]
+    },
+    {
+        "id": "rec20",
+        "title": "Different Ways to Add Parens",
+        "description": "All possible results.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid diffWays(char e[]) {}\nint main() { diffWays(\"2*3-4*5\"); return 0; }",
+        "expectedOutput": "-34 -10 -14 -10 10",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid solve(char e[], int l, int r, int res[], int *k) { bool hasOp=false; for(int i=l;i<=r;i++) { if(e[i]=='+'||e[i]=='-'||e[i]=='*') { hasOp=true; int left[100],right[100],lk=0,rk=0; solve(e,l,i-1,left,&lk); solve(e,i+1,r,right,&rk); for(int a=0;a<lk;a++) for(int b=0;b<rk;b++) { int v; if(e[i]=='+') v=left[a]+right[b]; else if(e[i]=='-') v=left[a]-right[b]; else v=left[a]*right[b]; res[(*k)++]=v; } } } if(!hasOp) { int v=0; for(int i=l;i<=r;i++) v=v*10+(e[i]-'0'); res[(*k)++]=v; } }\nvoid diffWays(char e[]) { int n=0; while(e[n]) n++; int res[100], k=0; solve(e,0,n-1,res,&k); for(int i=0;i<k;i++) cout<<res[i]<<\" \"; }\nint main() { diffWays(\"2*3-4*5\"); return 0; }",
+        "explanation": {
+            "approach": "Split at each operator.",
+            "analogy": "Divide and conquer at operators.",
+            "steps": [
+                "For each operator, split",
+                "Combine results of subexpressions"
+            ],
+            "complexity": "Time: O(4^n/√n), Space: O(4^n/√n)"
+        },
+        "testCases": [
+            {
+                "input": "\"2*3-4*5\"",
+                "expectedOutput": "-34 -10 -14 -10 10",
+                "explanation": "5 different results"
+            },
+            {
+                "input": "\"2-1-1\"",
+                "expectedOutput": "0 2",
+                "explanation": "(2-1)-1=0 or 2-(1-1)=2"
+            },
+            {
+                "input": "\"2+3\"",
+                "expectedOutput": "5",
+                "explanation": "Single result"
+            },
+            {
+                "input": "\"2+3*4\"",
+                "expectedOutput": "14 20",
+                "explanation": "2+(3*4)=14 or (2+3)*4=20"
+            }
+        ]
+    }
+]

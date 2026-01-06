@@ -1,0 +1,416 @@
+[
+    {
+        "id": "rec1",
+        "title": "Tower of Hanoi",
+        "description": "Move n disks.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid hanoi(int n, char from, char to, char aux) {}\nint main() { hanoi(3,'A','C','B'); return 0; }",
+        "expectedOutput": "A->C A->B C->B A->C B->A B->C A->C",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid hanoi(int n, char from, char to, char aux) { if(n==1) { cout<<from<<\"->\"<<to<<\" \"; return; } hanoi(n-1,from,aux,to); cout<<from<<\"->\"<<to<<\" \"; hanoi(n-1,aux,to,from); }\nint main() { hanoi(3,'A','C','B'); return 0; }",
+        "explanation": {
+            "approach": "Move n-1 disks to aux, move biggest to target, move n-1 from aux to target.",
+            "analogy": "Move all but biggest aside, move biggest, put others back.",
+            "steps": [
+                "Move n-1 to auxiliary",
+                "Move largest to target",
+                "Move n-1 from aux to target"
+            ],
+            "complexity": "Time: O(2^n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=3, A->C",
+                "expectedOutput": "A->C A->B C->B A->C B->A B->C A->C",
+                "explanation": "7 moves for 3 disks"
+            },
+            {
+                "input": "n=2, A->C",
+                "expectedOutput": "A->B A->C B->C",
+                "explanation": "3 moves for 2 disks"
+            },
+            {
+                "input": "n=1, A->C",
+                "expectedOutput": "A->C",
+                "explanation": "1 move for 1 disk"
+            },
+            {
+                "input": "n=4, A->C",
+                "expectedOutput": "15 moves",
+                "explanation": "2^4 - 1 = 15 moves for 4 disks"
+            }
+        ]
+    },
+    {
+        "id": "rec2",
+        "title": "Subsets",
+        "description": "Generate all subsets.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid subsets(int a[], int n, int i, int sub[], int k) {}\nint main() { int a[]={1,2,3}, s[10]; subsets(a,3,0,s,0); return 0; }",
+        "expectedOutput": "1 2 3 1 2 1 3 2 3 1 2 3",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid subsets(int a[], int n, int i, int sub[], int k) { if(i==n) { for(int j=0;j<k;j++) cout<<sub[j]<<\" \"; return; } sub[k]=a[i]; subsets(a,n,i+1,sub,k+1); subsets(a,n,i+1,sub,k); }\nint main() { int a[]={1,2,3}, s[10]; subsets(a,3,0,s,0); return 0; }",
+        "explanation": {
+            "approach": "For each element: include or exclude.",
+            "analogy": "Binary choice for each item.",
+            "steps": [
+                "Include current, recurse",
+                "Exclude current, recurse"
+            ],
+            "complexity": "Time: O(2^n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "{1,2,3}",
+                "expectedOutput": "{},{1},{2},{3},{1,2},{1,3},{2,3},{1,2,3}",
+                "explanation": "8 subsets including empty"
+            },
+            {
+                "input": "{1,2}",
+                "expectedOutput": "{},{1},{2},{1,2}",
+                "explanation": "4 subsets"
+            },
+            {
+                "input": "{1}",
+                "expectedOutput": "{},{1}",
+                "explanation": "2 subsets"
+            },
+            {
+                "input": "{}",
+                "expectedOutput": "{}",
+                "explanation": "Only empty subset"
+            }
+        ]
+    },
+    {
+        "id": "rec3",
+        "title": "Permutations",
+        "description": "Generate all permutations.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid permute(int a[], int l, int r) {}\nint main() { int a[]={1,2,3}; permute(a,0,2); return 0; }",
+        "expectedOutput": "1 2 3 1 3 2 2 1 3 2 3 1 3 2 1 3 1 2",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid permute(int a[], int l, int r) { if(l==r) { for(int i=0;i<=r;i++) cout<<a[i]<<\" \"; return; } for(int i=l;i<=r;i++) { swap(a[l],a[i]); permute(a,l+1,r); swap(a[l],a[i]); } }\nint main() { int a[]={1,2,3}; permute(a,0,2); return 0; }",
+        "explanation": {
+            "approach": "Swap each element to first position, recurse on rest.",
+            "analogy": "Try each person as leader, arrange rest.",
+            "steps": [
+                "Swap current with each after",
+                "Recurse on remaining",
+                "Swap back"
+            ],
+            "complexity": "Time: O(n!), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "{1,2,3}",
+                "expectedOutput": "123,132,213,231,312,321",
+                "explanation": "6 permutations (3!)"
+            },
+            {
+                "input": "{1,2}",
+                "expectedOutput": "12,21",
+                "explanation": "2 permutations (2!)"
+            },
+            {
+                "input": "{1}",
+                "expectedOutput": "1",
+                "explanation": "1 permutation (1!)"
+            },
+            {
+                "input": "{1,2,3,4}",
+                "expectedOutput": "24 permutations",
+                "explanation": "4! = 24 permutations"
+            }
+        ]
+    },
+    {
+        "id": "rec4",
+        "title": "Binary Search Recursive",
+        "description": "Binary search using recursion.",
+        "difficulty": "EASY",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint bSearch(int a[], int l, int r, int x) { return -1; }\nint main() { int a[]={1,3,5,7,9}; cout<<bSearch(a,0,4,5); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint bSearch(int a[], int l, int r, int x) { if(l>r) return -1; int m=(l+r)/2; if(a[m]==x) return m; if(a[m]>x) return bSearch(a,l,m-1,x); return bSearch(a,m+1,r,x); }\nint main() { int a[]={1,3,5,7,9}; cout<<bSearch(a,0,4,5); return 0; }",
+        "explanation": {
+            "approach": "Check middle, recurse on appropriate half.",
+            "analogy": "Divide and conquer search.",
+            "steps": [
+                "Check middle",
+                "If less, go left half",
+                "If more, go right half"
+            ],
+            "complexity": "Time: O(log n), Space: O(log n)"
+        },
+        "testCases": [
+            {
+                "input": "{1,3,5,7,9}, x=5",
+                "expectedOutput": "2",
+                "explanation": "Found at index 2"
+            },
+            {
+                "input": "{1,3,5,7,9}, x=1",
+                "expectedOutput": "0",
+                "explanation": "Found at index 0"
+            },
+            {
+                "input": "{1,3,5,7,9}, x=10",
+                "expectedOutput": "-1",
+                "explanation": "Not found"
+            },
+            {
+                "input": "{1,3,5,7,9}, x=9",
+                "expectedOutput": "4",
+                "explanation": "Found at last index"
+            }
+        ]
+    },
+    {
+        "id": "rec5",
+        "title": "String Reversal Recursive",
+        "description": "Reverse string recursively.",
+        "difficulty": "EASY",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid reverse(char s[], int l, int r) {}\nint main() { char s[]=\"hello\"; reverse(s,0,4); cout<<s; return 0; }",
+        "expectedOutput": "olleh",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid reverse(char s[], int l, int r) { if(l>=r) return; swap(s[l],s[r]); reverse(s,l+1,r-1); }\nint main() { char s[]=\"hello\"; reverse(s,0,4); cout<<s; return 0; }",
+        "explanation": {
+            "approach": "Swap ends, recurse on middle.",
+            "analogy": "Mirror the outer, then inner.",
+            "steps": [
+                "Swap first and last",
+                "Recurse on middle portion"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "\"hello\"",
+                "expectedOutput": "olleh",
+                "explanation": "Reversed string"
+            },
+            {
+                "input": "\"a\"",
+                "expectedOutput": "a",
+                "explanation": "Single char unchanged"
+            },
+            {
+                "input": "\"ab\"",
+                "expectedOutput": "ba",
+                "explanation": "Two chars swapped"
+            },
+            {
+                "input": "\"racecar\"",
+                "expectedOutput": "racecar",
+                "explanation": "Palindrome stays same"
+            }
+        ]
+    },
+    {
+        "id": "rec6",
+        "title": "Combination Sum",
+        "description": "Find combinations summing to target.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid combSum(int a[], int n, int t, int i, int cur[], int k) {}\nint main() { int a[]={2,3,6,7}, c[10]; combSum(a,4,7,0,c,0); return 0; }",
+        "expectedOutput": "2 2 3 7",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid combSum(int a[], int n, int t, int i, int cur[], int k) { if(t==0) { for(int j=0;j<k;j++) cout<<cur[j]<<\" \"; return; } if(t<0||i>=n) return; cur[k]=a[i]; combSum(a,n,t-a[i],i,cur,k+1); combSum(a,n,t,i+1,cur,k); }\nint main() { int a[]={2,3,6,7}, c[10]; combSum(a,4,7,0,c,0); return 0; }",
+        "explanation": {
+            "approach": "Include current (possibly multiple times) or move to next.",
+            "analogy": "Try using each coin repeatedly.",
+            "steps": [
+                "Include current, stay at same index",
+                "Or skip to next index"
+            ],
+            "complexity": "Time: O(2^n), Space: O(target)"
+        },
+        "testCases": [
+            {
+                "input": "{2,3,6,7}, target=7",
+                "expectedOutput": "[2,2,3],[7]",
+                "explanation": "Two combinations sum to 7"
+            },
+            {
+                "input": "{2,3,5}, target=8",
+                "expectedOutput": "[2,2,2,2],[2,3,3],[3,5]",
+                "explanation": "Three combinations"
+            },
+            {
+                "input": "{2}, target=1",
+                "expectedOutput": "",
+                "explanation": "No combination possible"
+            },
+            {
+                "input": "{1}, target=3",
+                "expectedOutput": "[1,1,1]",
+                "explanation": "Only one way with 1s"
+            }
+        ]
+    },
+    {
+        "id": "rec7",
+        "title": "N-th Catalan",
+        "description": "Calculate Catalan number.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint catalan(int n) { return 0; }\nint main() { cout<<catalan(5); return 0; }",
+        "expectedOutput": "42",
+        "solution": "#include <iostream>\nusing namespace std;\nint catalan(int n) { if(n<=1) return 1; int c=0; for(int i=0;i<n;i++) c+=catalan(i)*catalan(n-1-i); return c; }\nint main() { cout<<catalan(5); return 0; }",
+        "explanation": {
+            "approach": "C(n) = sum of C(i) × C(n-1-i) for all i.",
+            "analogy": "Count valid parentheses combinations.",
+            "steps": [
+                "Base: C(0)=C(1)=1",
+                "C(n) = sum over all splits"
+            ],
+            "complexity": "Time: O(4^n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "42",
+                "explanation": "C(5) = 42"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "5",
+                "explanation": "C(3) = 5"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "1",
+                "explanation": "C(0) = 1"
+            },
+            {
+                "input": "n=4",
+                "expectedOutput": "14",
+                "explanation": "C(4) = 14"
+            }
+        ]
+    },
+    {
+        "id": "rec8",
+        "title": "Josephus Problem",
+        "description": "Find survivor position.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint josephus(int n, int k) { return 0; }\nint main() { cout<<josephus(7,3); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint josephus(int n, int k) { if(n==1) return 0; return (josephus(n-1,k)+k)%n; }\nint main() { cout<<josephus(7,3); return 0; }",
+        "explanation": {
+            "approach": "f(n,k) = (f(n-1,k)+k) mod n.",
+            "analogy": "After elimination, positions shift.",
+            "steps": [
+                "Base: 1 person, position 0",
+                "Add k and mod by n"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=7, k=3",
+                "expectedOutput": "3",
+                "explanation": "Survivor at position 3 (0-indexed)"
+            },
+            {
+                "input": "n=5, k=2",
+                "expectedOutput": "2",
+                "explanation": "Survivor at position 2"
+            },
+            {
+                "input": "n=1, k=1",
+                "expectedOutput": "0",
+                "explanation": "Only one person survives"
+            },
+            {
+                "input": "n=10, k=2",
+                "expectedOutput": "4",
+                "explanation": "Even skip pattern survivor"
+            }
+        ]
+    },
+    {
+        "id": "rec9",
+        "title": "Flood Fill",
+        "description": "Fill connected region.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid floodFill(int img[][5], int r, int c, int sr, int sc, int nc) {}\nint main() { int img[][5]={{1,1,1},{1,1,0},{1,0,1}}; floodFill(img,3,3,1,1,2); cout<<img[1][1]; return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid fill(int img[][5], int r, int c, int i, int j, int oc, int nc) { if(i<0||i>=r||j<0||j>=c||img[i][j]!=oc) return; img[i][j]=nc; fill(img,r,c,i+1,j,oc,nc); fill(img,r,c,i-1,j,oc,nc); fill(img,r,c,i,j+1,oc,nc); fill(img,r,c,i,j-1,oc,nc); }\nvoid floodFill(int img[][5], int r, int c, int sr, int sc, int nc) { int oc=img[sr][sc]; if(oc!=nc) fill(img,r,c,sr,sc,oc,nc); }\nint main() { int img[][5]={{1,1,1},{1,1,0},{1,0,1}}; floodFill(img,3,3,1,1,2); cout<<img[1][1]; return 0; }",
+        "explanation": {
+            "approach": "DFS to fill all connected same-color cells.",
+            "analogy": "Paint bucket tool in image editor.",
+            "steps": [
+                "Change current cell",
+                "Recurse to 4 neighbors"
+            ],
+            "complexity": "Time: O(r×c), Space: O(r×c)"
+        },
+        "testCases": [
+            {
+                "input": "grid, start=(1,1), color=2",
+                "expectedOutput": "2",
+                "explanation": "Center cell filled with 2"
+            },
+            {
+                "input": "all 1s, start=(0,0), color=2",
+                "expectedOutput": "all 2s",
+                "explanation": "Entire grid filled"
+            },
+            {
+                "input": "same old and new color",
+                "expectedOutput": "unchanged",
+                "explanation": "No fill needed"
+            },
+            {
+                "input": "isolated cell, start=(0,0), color=3",
+                "expectedOutput": "3",
+                "explanation": "Only starting cell changes"
+            }
+        ]
+    },
+    {
+        "id": "rec10",
+        "title": "Rat in a Maze",
+        "description": "Find path through maze.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool solveMaze(int m[][4], int n) { return false; }\nint main() { int m[][4]={{1,0,0,0},{1,1,0,1},{0,1,0,0},{1,1,1,1}}; cout<<solveMaze(m,4); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool solve(int m[][4], int n, int x, int y, int sol[][4]) { if(x==n-1&&y==n-1&&m[x][y]==1){sol[x][y]=1;return true;} if(x>=0&&x<n&&y>=0&&y<n&&m[x][y]==1&&sol[x][y]==0) { sol[x][y]=1; if(solve(m,n,x+1,y,sol)) return true; if(solve(m,n,x,y+1,sol)) return true; sol[x][y]=0; } return false; }\nbool solveMaze(int m[][4], int n) { int sol[4][4]={}; return solve(m,n,0,0,sol); }\nint main() { int m[][4]={{1,0,0,0},{1,1,0,1},{0,1,0,0},{1,1,1,1}}; cout<<solveMaze(m,4); return 0; }",
+        "explanation": {
+            "approach": "Try down and right, backtrack if stuck.",
+            "analogy": "Try each path, undo and try another if blocked.",
+            "steps": [
+                "Mark current as part of path",
+                "Try down, then right",
+                "Backtrack if neither works"
+            ],
+            "complexity": "Time: O(2^(n²)), Space: O(n²)"
+        },
+        "testCases": [
+            {
+                "input": "4x4 maze with path",
+                "expectedOutput": "1",
+                "explanation": "Path exists from (0,0) to (3,3)"
+            },
+            {
+                "input": "blocked maze",
+                "expectedOutput": "0",
+                "explanation": "No path exists"
+            },
+            {
+                "input": "1x1 with 1",
+                "expectedOutput": "1",
+                "explanation": "Already at destination"
+            },
+            {
+                "input": "direct diagonal path",
+                "expectedOutput": "1",
+                "explanation": "Staircase path exists"
+            }
+        ]
+    }
+]

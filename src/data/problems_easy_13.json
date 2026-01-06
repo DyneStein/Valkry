@@ -67,7 +67,10 @@
                 "Recurse"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "e602",
@@ -137,7 +140,10 @@
                 "Compare values and children"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "e603",
@@ -207,7 +213,10 @@
                 "Recurse on children"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "e604",
@@ -277,7 +286,10 @@
                 "If more go right"
             ],
             "complexity": "Time: O(h), Space: O(h)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "e605",
@@ -347,7 +359,10 @@
                 "Skip subtrees outside range"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "e606",
@@ -417,7 +432,10 @@
                 "Else take minimum"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "e607",
@@ -486,7 +504,10 @@
                 "Count left + right + 1"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "e608",
@@ -556,7 +577,10 @@
                 "Recurse on children"
             ],
             "complexity": "Time: O(n), Space: O(h)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     },
     {
         "id": "e609",
@@ -626,7 +650,10 @@
                 "Find max frequency"
             ],
             "complexity": "Time: O(n), Space: O(n)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "e610",
@@ -697,6 +724,9 @@
                 "Else current is LCA"
             ],
             "complexity": "Time: O(h), Space: O(h)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     }
 ]

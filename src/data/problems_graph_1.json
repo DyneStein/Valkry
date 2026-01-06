@@ -38,7 +38,10 @@
                 "expectedOutput": "Graph cloned",
                 "explanation": "Two nodes connected"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "graph",
+        "inputInstructions": "This problem uses a graph structure. Parse the adjacency list or edge list from the input to build your graph."
     },
     {
         "id": "graph12",
@@ -46,7 +49,7 @@
         "description": "Return course order.",
         "difficulty": "MEDIUM",
         "category": "Graph",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid findOrder(int n, int pre[][2], int m) {}\nint main() { int pre[][2]={{1,0},{2,0},{3,1},{3,2}}; findOrder(4,pre,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid findOrder(int n, vector<vector<int>>& pre, int m) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int pre_rows, pre_cols;\n    cin >> pre_rows >> pre_cols;\n    vector<vector<int>> pre(pre_rows, vector<int>(pre_cols));\n    for (int i = 0; i < pre_rows; i++)\n        for (int j = 0; j < pre_cols; j++)\n            cin >> pre[i][j];\n    int m;\n    cin >> m;\n    findOrder(n, pre, m);\n    return 0;\n}\n",
         "expectedOutput": "0 1 2 3",
         "solution": "#include <iostream>\nusing namespace std;\nint adj[100][100],deg[100],sz[100];\nvoid findOrder(int n, int pre[][2], int m) { for(int i=0;i<n;i++) { sz[i]=0; deg[i]=0; } for(int i=0;i<m;i++) { adj[pre[i][1]][sz[pre[i][1]]++]=pre[i][0]; deg[pre[i][0]]++; } int q[100],f=0,r=0; for(int i=0;i<n;i++) if(deg[i]==0) q[r++]=i; while(f<r) { int u=q[f++]; cout<<u<<\" \"; for(int i=0;i<sz[u];i++) if(--deg[adj[u][i]]==0) q[r++]=adj[u][i]; } }\nint main() { int pre[][2]={{1,0},{2,0},{3,1},{3,2}}; findOrder(4,pre,4); return 0; }",
         "explanation": {
@@ -87,7 +90,7 @@
         "description": "Remove edge to make tree.",
         "difficulty": "MEDIUM",
         "category": "Graph",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid findRedundant(int edges[][2], int n) {}\nint main() { int edges[][2]={{1,2},{1,3},{2,3}}; findRedundant(edges,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid findRedundant(vector<vector<int>>& edges, int n) {\n    // TODO\n}\n\nint main() {\n    int edges_rows, edges_cols;\n    cin >> edges_rows >> edges_cols;\n    vector<vector<int>> edges(edges_rows, vector<int>(edges_cols));\n    for (int i = 0; i < edges_rows; i++)\n        for (int j = 0; j < edges_cols; j++)\n            cin >> edges[i][j];\n    int n;\n    cin >> n;\n    findRedundant(edges, n);\n    return 0;\n}\n",
         "expectedOutput": "2 3",
         "solution": "#include <iostream>\nusing namespace std;\nint parent[100];\nint find(int x) { if(parent[x]!=x) parent[x]=find(parent[x]); return parent[x]; }\nvoid findRedundant(int edges[][2], int n) { for(int i=0;i<=n;i++) parent[i]=i; for(int i=0;i<n;i++) { int u=edges[i][0],v=edges[i][1]; int pu=find(u),pv=find(v); if(pu==pv) { cout<<u<<\" \"<<v; return; } parent[pu]=pv; } }\nint main() { int edges[][2]={{1,2},{1,3},{2,3}}; findRedundant(edges,3); return 0; }",
         "explanation": {
@@ -128,7 +131,7 @@
         "description": "Find roots for min height.",
         "difficulty": "MEDIUM",
         "category": "Graph",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid findMinHeightTrees(int n, int edges[][2], int m) {}\nint main() { int edges[][2]={{1,0},{1,2},{1,3}}; findMinHeightTrees(4,edges,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid findMinHeightTrees(int n, vector<vector<int>>& edges, int m) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int edges_rows, edges_cols;\n    cin >> edges_rows >> edges_cols;\n    vector<vector<int>> edges(edges_rows, vector<int>(edges_cols));\n    for (int i = 0; i < edges_rows; i++)\n        for (int j = 0; j < edges_cols; j++)\n            cin >> edges[i][j];\n    int m;\n    cin >> m;\n    findMinHeightTrees(n, edges, m);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nvoid findMinHeightTrees(int n, int edges[][2], int m) { if(n==1) { cout<<0; return; } int adj[100][100],sz[100]={},deg[100]={}; for(int i=0;i<m;i++) { adj[edges[i][0]][sz[edges[i][0]]++]=edges[i][1]; adj[edges[i][1]][sz[edges[i][1]]++]=edges[i][0]; deg[edges[i][0]]++; deg[edges[i][1]]++; } int q[100],f=0,r=0; for(int i=0;i<n;i++) if(deg[i]==1) q[r++]=i; int rem=n; while(rem>2) { int size=r-f; rem-=size; for(int i=0;i<size;i++) { int u=q[f++]; for(int j=0;j<sz[u];j++) if(--deg[adj[u][j]]==1) q[r++]=adj[u][j]; } } while(f<r) cout<<q[f++]<<\" \"; }\nint main() { int edges[][2]={{1,0},{1,2},{1,3}}; findMinHeightTrees(4,edges,3); return 0; }",
         "explanation": {
@@ -169,7 +172,7 @@
         "description": "Check if valid tree.",
         "difficulty": "MEDIUM",
         "category": "Graph",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool validTree(int n, int edges[][2], int m) { return false; }\nint main() { int edges[][2]={{0,1},{0,2},{0,3},{1,4}}; cout<<validTree(5,edges,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool validTree(int n, vector<vector<int>>& edges, int m) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int edges_rows, edges_cols;\n    cin >> edges_rows >> edges_cols;\n    vector<vector<int>> edges(edges_rows, vector<int>(edges_cols));\n    for (int i = 0; i < edges_rows; i++)\n        for (int j = 0; j < edges_cols; j++)\n            cin >> edges[i][j];\n    int m;\n    cin >> m;\n    cout << validTree(n, edges, m);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nint parent[100];\nint find(int x) { if(parent[x]!=x) parent[x]=find(parent[x]); return parent[x]; }\nbool validTree(int n, int edges[][2], int m) { if(m!=n-1) return false; for(int i=0;i<n;i++) parent[i]=i; for(int i=0;i<m;i++) { int pu=find(edges[i][0]),pv=find(edges[i][1]); if(pu==pv) return false; parent[pu]=pv; } return true; }\nint main() { int edges[][2]={{0,1},{0,2},{0,3},{1,4}}; cout<<validTree(5,edges,4); return 0; }",
         "explanation": {
@@ -210,7 +213,7 @@
         "description": "Time for all nodes to receive signal.",
         "difficulty": "MEDIUM",
         "category": "Graph",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint networkDelay(int times[][3], int n, int m, int k) { return -1; }\nint main() { int times[][3]={{2,1,1},{2,3,1},{3,4,1}}; cout<<networkDelay(times,4,3,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint networkDelay(vector<vector<int>>& times, int n, int m, int k) {\n    return 0;\n}\n\nint main() {\n    int times_rows, times_cols;\n    cin >> times_rows >> times_cols;\n    vector<vector<int>> times(times_rows, vector<int>(times_cols));\n    for (int i = 0; i < times_rows; i++)\n        for (int j = 0; j < times_cols; j++)\n            cin >> times[i][j];\n    int n;\n    cin >> n;\n    int m;\n    cin >> m;\n    int k;\n    cin >> k;\n    cout << networkDelay(times, n, m, k);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\nint networkDelay(int times[][3], int n, int m, int k) { int dist[n+1]; for(int i=0;i<=n;i++) dist[i]=1e9; dist[k]=0; for(int i=0;i<n-1;i++) for(int j=0;j<m;j++) if(dist[times[j][0]]!=1e9) dist[times[j][1]]=min(dist[times[j][1]],dist[times[j][0]]+times[j][2]); int mx=0; for(int i=1;i<=n;i++) mx=max(mx,dist[i]); return mx>=1e9?-1:mx; }\nint main() { int times[][3]={{2,1,1},{2,3,1},{3,4,1}}; cout<<networkDelay(times,4,3,2); return 0; }",
         "explanation": {
@@ -251,7 +254,7 @@
         "description": "Cheapest path with at most k stops.",
         "difficulty": "MEDIUM",
         "category": "Graph",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint findCheapest(int n, int flights[][3], int m, int src, int dst, int k) { return -1; }\nint main() { int flights[][3]={{0,1,100},{1,2,100},{0,2,500}}; cout<<findCheapest(3,flights,3,0,2,1); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint findCheapest(int n, vector<vector<int>>& flights, int m, int src, int dst, int k) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int flights_rows, flights_cols;\n    cin >> flights_rows >> flights_cols;\n    vector<vector<int>> flights(flights_rows, vector<int>(flights_cols));\n    for (int i = 0; i < flights_rows; i++)\n        for (int j = 0; j < flights_cols; j++)\n            cin >> flights[i][j];\n    int m;\n    cin >> m;\n    int src;\n    cin >> src;\n    int dst;\n    cin >> dst;\n    int k;\n    cin >> k;\n    cout << findCheapest(n, flights, m, src, dst, k);\n    return 0;\n}\n",
         "expectedOutput": "200",
         "solution": "#include <iostream>\nusing namespace std;\nint findCheapest(int n, int flights[][3], int m, int src, int dst, int k) { int dist[n]; for(int i=0;i<n;i++) dist[i]=1e9; dist[src]=0; for(int i=0;i<=k;i++) { int temp[n]; for(int j=0;j<n;j++) temp[j]=dist[j]; for(int j=0;j<m;j++) if(dist[flights[j][0]]!=1e9) temp[flights[j][1]]=min(temp[flights[j][1]],dist[flights[j][0]]+flights[j][2]); for(int j=0;j<n;j++) dist[j]=temp[j]; } return dist[dst]>=1e9?-1:dist[dst]; }\nint main() { int flights[][3]={{0,1,100},{1,2,100},{0,2,500}}; cout<<findCheapest(3,flights,3,0,2,1); return 0; }",
         "explanation": {
@@ -325,7 +328,10 @@
                 "expectedOutput": "JFK LAX SFO",
                 "explanation": "Two connected tickets"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     },
     {
         "id": "graph19",
@@ -333,7 +339,7 @@
         "description": "Min time to reach bottom-right.",
         "difficulty": "HARD",
         "category": "Graph",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint swimInWater(int grid[][3], int n) { return 0; }\nint main() { int grid[][3]={{0,2,1},{1,3,4},{2,5,0}}; cout<<swimInWater(grid,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint swimInWater(vector<vector<int>>& grid, int n) {\n    return 0;\n}\n\nint main() {\n    int grid_rows, grid_cols;\n    cin >> grid_rows >> grid_cols;\n    vector<vector<int>> grid(grid_rows, vector<int>(grid_cols));\n    for (int i = 0; i < grid_rows; i++)\n        for (int j = 0; j < grid_cols; j++)\n            cin >> grid[i][j];\n    int n;\n    cin >> n;\n    cout << swimInWater(grid, n);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nint swimInWater(int grid[][3], int n) { int dist[n][n]; bool vis[n][n]={}; for(int i=0;i<n;i++) for(int j=0;j<n;j++) dist[i][j]=1e9; dist[0][0]=grid[0][0]; int dx[]={1,-1,0,0},dy[]={0,0,1,-1}; while(!vis[n-1][n-1]) { int mi=-1,mj=-1,mn=1e9; for(int i=0;i<n;i++) for(int j=0;j<n;j++) if(!vis[i][j] && dist[i][j]<mn) { mn=dist[i][j]; mi=i; mj=j; } vis[mi][mj]=true; for(int d=0;d<4;d++) { int ni=mi+dx[d],nj=mj+dy[d]; if(ni>=0 && ni<n && nj>=0 && nj<n && !vis[ni][nj]) dist[ni][nj]=min(dist[ni][nj],max(dist[mi][mj],grid[ni][nj])); } } return dist[n-1][n-1]; }\nint main() { int grid[][3]={{0,2,1},{1,3,4},{2,5,0}}; cout<<swimInWater(grid,3); return 0; }",
         "explanation": {
@@ -374,7 +380,7 @@
         "description": "Order of alien alphabet.",
         "difficulty": "HARD",
         "category": "Graph",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid alienOrder(char words[][10], int n) {}\nint main() { char words[][10]={\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"}; alienOrder(words,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid alienOrder(vector<vector<int>>& words, int n) {\n    // TODO\n}\n\nint main() {\n    int words_rows, words_cols;\n    cin >> words_rows >> words_cols;\n    vector<vector<int>> words(words_rows, vector<int>(words_cols));\n    for (int i = 0; i < words_rows; i++)\n        for (int j = 0; j < words_cols; j++)\n            cin >> words[i][j];\n    int n;\n    cin >> n;\n    alienOrder(words, n);\n    return 0;\n}\n",
         "expectedOutput": "wertf",
         "solution": "#include <iostream>\nusing namespace std;\nvoid alienOrder(char words[][10], int n) { int adj[26][26]={},deg[26]={},sz[26]={}; bool exists[26]={}; for(int i=0;i<n;i++) for(int j=0;words[i][j];j++) exists[words[i][j]-'a']=true; for(int i=0;i<n-1;i++) { int j=0; while(words[i][j] && words[i][j]==words[i+1][j]) j++; if(words[i][j] && words[i+1][j]) { int u=words[i][j]-'a',v=words[i+1][j]-'a'; adj[u][sz[u]++]=v; deg[v]++; } } int q[26],f=0,r=0; for(int i=0;i<26;i++) if(exists[i] && deg[i]==0) q[r++]=i; while(f<r) { int u=q[f++]; cout<<(char)('a'+u); for(int i=0;i<sz[u];i++) if(--deg[adj[u][i]]==0) q[r++]=adj[u][i]; } }\nint main() { char words[][10]={\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"}; alienOrder(words,5); return 0; }",
         "explanation": {

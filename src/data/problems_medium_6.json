@@ -5,7 +5,7 @@
         "description": "Paths with obstacles.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint uniquePathsWithObstacles(int g[][3], int m, int n) { return 0; }\nint main() { int g[][3]={{0,0,0},{0,1,0},{0,0,0}}; cout<<uniquePathsWithObstacles(g,3,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint uniquePathsWithObstacles(vector<vector<int>>& g, int m, int n) {\n    return 0;\n}\n\nint main() {\n    int g_rows, g_cols;\n    cin >> g_rows >> g_cols;\n    vector<vector<int>> g(g_rows, vector<int>(g_cols));\n    for (int i = 0; i < g_rows; i++)\n        for (int j = 0; j < g_cols; j++)\n            cin >> g[i][j];\n    int m;\n    cin >> m;\n    int n;\n    cin >> n;\n    cout << uniquePathsWithObstacles(g, m, n);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\nint uniquePathsWithObstacles(int g[][3], int m, int n) { if(g[0][0]==1) return 0; int dp[m][n]={}; dp[0][0]=1; for(int i=1;i<m;i++) dp[i][0]=g[i][0]?0:dp[i-1][0]; for(int j=1;j<n;j++) dp[0][j]=g[0][j]?0:dp[0][j-1]; for(int i=1;i<m;i++) for(int j=1;j<n;j++) dp[i][j]=g[i][j]?0:dp[i-1][j]+dp[i][j-1]; return dp[m-1][n-1]; }\nint main() { int g[][3]={{0,0,0},{0,1,0},{0,0,0}}; cout<<uniquePathsWithObstacles(g,3,3); return 0; }",
         "explanation": {
@@ -45,7 +45,7 @@
         "description": "Min sum path to bottom-right.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint minPathSum(int g[][3], int m, int n) { return 0; }\nint main() { int g[][3]={{1,3,1},{1,5,1},{4,2,1}}; cout<<minPathSum(g,3,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint minPathSum(vector<vector<int>>& g, int m, int n) {\n    return 0;\n}\n\nint main() {\n    int g_rows, g_cols;\n    cin >> g_rows >> g_cols;\n    vector<vector<int>> g(g_rows, vector<int>(g_cols));\n    for (int i = 0; i < g_rows; i++)\n        for (int j = 0; j < g_cols; j++)\n            cin >> g[i][j];\n    int m;\n    cin >> m;\n    int n;\n    cin >> n;\n    cout << minPathSum(g, m, n);\n    return 0;\n}\n",
         "expectedOutput": "7",
         "solution": "#include <iostream>\nusing namespace std;\nint minPathSum(int g[][3], int m, int n) { int dp[m][n]; dp[0][0]=g[0][0]; for(int i=1;i<m;i++) dp[i][0]=dp[i-1][0]+g[i][0]; for(int j=1;j<n;j++) dp[0][j]=dp[0][j-1]+g[0][j]; for(int i=1;i<m;i++) for(int j=1;j<n;j++) dp[i][j]=min(dp[i-1][j],dp[i][j-1])+g[i][j]; return dp[m-1][n-1]; }\nint main() { int g[][3]={{1,3,1},{1,5,1},{4,2,1}}; cout<<minPathSum(g,3,3); return 0; }",
         "explanation": {
@@ -84,7 +84,7 @@
         "description": "Can reach last index.",
         "difficulty": "MEDIUM",
         "category": "Greedy",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool canJump(int a[], int n) { return false; }\nint main() { int a[]={2,3,1,1,4}; cout<<canJump(a,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool canJump(vector<int>& a, int n) {\n    return false;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << canJump(a, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool canJump(int a[], int n) { int reach=0; for(int i=0;i<n && i<=reach;i++) reach=max(reach,i+a[i]); return reach>=n-1; }\nint main() { int a[]={2,3,1,1,4}; cout<<canJump(a,5); return 0; }",
         "explanation": {
@@ -124,7 +124,7 @@
         "description": "Min operations to convert.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint minDistance(char a[], char b[]) { return 0; }\nint main() { cout<<minDistance(\"horse\",\"ros\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint minDistance(vector<int>& a, vector<int>& b) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int b_size;\n    cin >> b_size;\n    vector<int> b(b_size);\n    for (int i = 0; i < b_size; i++) cin >> b[i];\n    cout << minDistance(a, b);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint minDistance(char a[], char b[]) { int m=0,n=0; while(a[m]) m++; while(b[n]) n++; int dp[m+1][n+1]; for(int i=0;i<=m;i++) dp[i][0]=i; for(int j=0;j<=n;j++) dp[0][j]=j; for(int i=1;i<=m;i++) for(int j=1;j<=n;j++) if(a[i-1]==b[j-1]) dp[i][j]=dp[i-1][j-1]; else dp[i][j]=1+min(dp[i-1][j],min(dp[i][j-1],dp[i-1][j-1])); return dp[m][n]; }\nint main() { cout<<minDistance(\"horse\",\"ros\"); return 0; }",
         "explanation": {
@@ -164,9 +164,9 @@
         "description": "LCS length.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint lcs(char a[], char b[]) { return 0; }\nint main() { cout<<lcs(\"abcde\",\"ace\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint lcs(string text1, string text2) {\n    return 0;\n}\n\nint main() {\n    string s1, s2;\n    if (cin >> s1 >> s2) {\n        cout << lcs(s1, s2);\n    }\n    return 0;\n}",
         "expectedOutput": "3",
-        "solution": "#include <iostream>\nusing namespace std;\nint lcs(char a[], char b[]) { int m=0,n=0; while(a[m]) m++; while(b[n]) n++; int dp[m+1][n+1]={}; for(int i=1;i<=m;i++) for(int j=1;j<=n;j++) if(a[i-1]==b[j-1]) dp[i][j]=dp[i-1][j-1]+1; else dp[i][j]=max(dp[i-1][j],dp[i][j-1]); return dp[m][n]; }\nint main() { cout<<lcs(\"abcde\",\"ace\"); return 0; }",
+        "solution": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint lcs(string text1, string text2) {\n    int m = text1.length(), n = text2.length();\n    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));\n    \n    for(int i = 1; i <= m; i++) {\n        for(int j = 1; j <= n; j++) {\n            if (text1[i - 1] == text2[j - 1])\n                dp[i][j] = dp[i - 1][j - 1] + 1;\n            else\n                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);\n        }\n    }\n    return dp[m][n];\n}\n\nint main() {\n    string s1, s2;\n    if (cin >> s1 >> s2) {\n        cout << lcs(s1, s2);\n    }\n    return 0;\n}",
         "explanation": {
             "approach": "DP - LCS for each prefix pair.",
             "steps": [
@@ -177,22 +177,22 @@
         },
         "testCases": [
             {
-                "input": "text1=abcde, text2=ace",
+                "input": "abcde ace",
                 "expectedOutput": "3",
                 "explanation": "LCS is 'ace'"
             },
             {
-                "input": "text1=abc, text2=abc",
+                "input": "abc abc",
                 "expectedOutput": "3",
                 "explanation": "Same strings, LCS=3"
             },
             {
-                "input": "text1=abc, text2=def",
+                "input": "abc def",
                 "expectedOutput": "0",
                 "explanation": "No common chars"
             },
             {
-                "input": "text1=bl, text2=yby",
+                "input": "bl yby",
                 "expectedOutput": "1",
                 "explanation": "LCS is 'b'"
             }
@@ -204,7 +204,7 @@
         "description": "Max value in capacity.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint knapsack(int w[], int v[], int n, int W) { return 0; }\nint main() { int w[]={1,2,3}, v[]={60,100,120}; cout<<knapsack(w,v,3,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint knapsack(vector<int>& w, vector<int>& v, int n, int W) {\n    return 0;\n}\n\nint main() {\n    int w_size;\n    cin >> w_size;\n    vector<int> w(w_size);\n    for (int i = 0; i < w_size; i++) cin >> w[i];\n    int v_size;\n    cin >> v_size;\n    vector<int> v(v_size);\n    for (int i = 0; i < v_size; i++) cin >> v[i];\n    int n;\n    cin >> n;\n    int W;\n    cin >> W;\n    cout << knapsack(w, v, n, W);\n    return 0;\n}\n",
         "expectedOutput": "220",
         "solution": "#include <iostream>\nusing namespace std;\nint knapsack(int w[], int v[], int n, int W) { int dp[n+1][W+1]={}; for(int i=1;i<=n;i++) for(int j=0;j<=W;j++) { dp[i][j]=dp[i-1][j]; if(w[i-1]<=j) dp[i][j]=max(dp[i][j],dp[i-1][j-w[i-1]]+v[i-1]); } return dp[n][W]; }\nint main() { int w[]={1,2,3}, v[]={60,100,120}; cout<<knapsack(w,v,3,5); return 0; }",
         "explanation": {
@@ -244,7 +244,7 @@
         "description": "Can split into equal sums.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool canPartition(int a[], int n) { return false; }\nint main() { int a[]={1,5,11,5}; cout<<canPartition(a,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool canPartition(vector<int>& a, int n) {\n    return false;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << canPartition(a, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool canPartition(int a[], int n) { int sum=0; for(int i=0;i<n;i++) sum+=a[i]; if(sum%2) return false; int t=sum/2; bool dp[t+1]={}; dp[0]=true; for(int i=0;i<n;i++) for(int j=t;j>=a[i];j--) dp[j]=dp[j]||dp[j-a[i]]; return dp[t]; }\nint main() { int a[]={1,5,11,5}; cout<<canPartition(a,4); return 0; }",
         "explanation": {
@@ -284,7 +284,7 @@
         "description": "Number of ways to make amount.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint coinWays(int coins[], int n, int amt) { return 0; }\nint main() { int coins[]={1,2,5}; cout<<coinWays(coins,3,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint coinWays(vector<int>& coins, int n, int amt) {\n    return 0;\n}\n\nint main() {\n    int coins_size;\n    cin >> coins_size;\n    vector<int> coins(coins_size);\n    for (int i = 0; i < coins_size; i++) cin >> coins[i];\n    int n;\n    cin >> n;\n    int amt;\n    cin >> amt;\n    cout << coinWays(coins, n, amt);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "solution": "#include <iostream>\nusing namespace std;\nint coinWays(int coins[], int n, int amt) { int dp[amt+1]={}; dp[0]=1; for(int i=0;i<n;i++) for(int j=coins[i];j<=amt;j++) dp[j]+=dp[j-coins[i]]; return dp[amt]; }\nint main() { int coins[]={1,2,5}; cout<<coinWays(coins,3,5); return 0; }",
         "explanation": {
@@ -324,7 +324,7 @@
         "description": "Ways to reach target with +/-.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint findTargetSumWays(int a[], int n, int t) { return 0; }\nint main() { int a[]={1,1,1,1,1}; cout<<findTargetSumWays(a,5,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint findTargetSumWays(vector<int>& a, int n, int t) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    int t;\n    cin >> t;\n    cout << findTargetSumWays(a, n, t);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nint solve(int a[], int n, int i, int sum) { if(i==n) return sum==0?1:0; return solve(a,n,i+1,sum-a[i])+solve(a,n,i+1,sum+a[i]); }\nint findTargetSumWays(int a[], int n, int t) { return solve(a,n,0,t); }\nint main() { int a[]={1,1,1,1,1}; cout<<findTargetSumWays(a,5,3); return 0; }",
         "explanation": {
@@ -364,7 +364,7 @@
         "description": "LPS length.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint lps(char s[]) { return 0; }\nint main() { cout<<lps(\"bbbab\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint lps(vector<int>& s) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << lps(s);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "solution": "#include <iostream>\nusing namespace std;\nint lps(char s[]) { int n=0; while(s[n]) n++; int dp[n][n]={}; for(int i=0;i<n;i++) dp[i][i]=1; for(int len=2;len<=n;len++) for(int i=0;i<=n-len;i++) { int j=i+len-1; if(s[i]==s[j]) dp[i][j]=dp[i+1][j-1]+2; else dp[i][j]=max(dp[i+1][j],dp[i][j-1]); } return dp[0][n-1]; }\nint main() { cout<<lps(\"bbbab\"); return 0; }",
         "explanation": {

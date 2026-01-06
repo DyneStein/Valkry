@@ -5,7 +5,7 @@
         "description": "Find minimum initial health to reach bottom-right from top-left.",
         "difficulty": "HARD",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint calculateMinimumHP(int d[][3], int r, int c) { return 0; }\nint main() { int d[][3]={{-2,-3,3},{-5,-10,1},{10,30,-5}}; cout<<calculateMinimumHP(d,3,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint calculateMinimumHP(vector<vector<int>>& d, int r, int c) {\n    return 0;\n}\n\nint main() {\n    int d_rows, d_cols;\n    cin >> d_rows >> d_cols;\n    vector<vector<int>> d(d_rows, vector<int>(d_cols));\n    for (int i = 0; i < d_rows; i++)\n        for (int j = 0; j < d_cols; j++)\n            cin >> d[i][j];\n    int r;\n    cin >> r;\n    int c;\n    cin >> c;\n    cout << calculateMinimumHP(d, r, c);\n    return 0;\n}\n",
         "expectedOutput": "7",
         "solution": "#include <iostream>\nusing namespace std;\nint calculateMinimumHP(int d[][3], int r, int c) { int dp[r][c]; dp[r-1][c-1]=max(1,1-d[r-1][c-1]); for(int i=r-2;i>=0;i--) dp[i][c-1]=max(1,dp[i+1][c-1]-d[i][c-1]); for(int j=c-2;j>=0;j--) dp[r-1][j]=max(1,dp[r-1][j+1]-d[r-1][j]); for(int i=r-2;i>=0;i--) for(int j=c-2;j>=0;j--) dp[i][j]=max(1,min(dp[i+1][j],dp[i][j+1])-d[i][j]); return dp[0][0]; }\nint main() { int d[][3]={{-2,-3,3},{-5,-10,1},{10,30,-5}}; cout<<calculateMinimumHP(d,3,3); return 0; }",
         "explanation": {
@@ -45,7 +45,7 @@
         "description": "Maximum cherries collected on round trip in grid.",
         "difficulty": "HARD",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint cherryPickup(int g[][3], int n) { return 0; }\nint main() { int g[][3]={{0,1,-1},{1,0,-1},{1,1,1}}; cout<<cherryPickup(g,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint cherryPickup(vector<vector<int>>& g, int n) {\n    return 0;\n}\n\nint main() {\n    int g_rows, g_cols;\n    cin >> g_rows >> g_cols;\n    vector<vector<int>> g(g_rows, vector<int>(g_cols));\n    for (int i = 0; i < g_rows; i++)\n        for (int j = 0; j < g_cols; j++)\n            cin >> g[i][j];\n    int n;\n    cin >> n;\n    cout << cherryPickup(g, n);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nint cherryPickup(int g[][3], int n) { int dp[n][n][n]; for(int i=0;i<n;i++) for(int j=0;j<n;j++) for(int k=0;k<n;k++) dp[i][j][k]=-1e9; dp[0][0][0]=g[0][0]; for(int r1=0;r1<n;r1++) for(int c1=0;c1<n;c1++) for(int r2=0;r2<n;r2++) { int c2=r1+c1-r2; if(c2<0||c2>=n||g[r1][c1]==-1||g[r2][c2]==-1) continue; int v=dp[r1][c1][r2]; if(r1>0) v=max(v,dp[r1-1][c1][r2]); if(c1>0) v=max(v,dp[r1][c1-1][r2]); if(r2>0) v=max(v,dp[r1][c1][r2-1]); if(r1>0&&r2>0) v=max(v,dp[r1-1][c1][r2-1]); if(v<0) continue; v+=g[r1][c1]; if(r1!=r2) v+=g[r2][c2]; dp[r1][c1][r2]=v; } return max(0,dp[n-1][n-1][n-1]); }\nint main() { int g[][3]={{0,1,-1},{1,0,-1},{1,1,1}}; cout<<cherryPickup(g,3); return 0; }",
         "explanation": {
@@ -85,7 +85,7 @@
         "description": "Minimum moves to find critical floor with k eggs and n floors.",
         "difficulty": "HARD",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint superEggDrop(int k, int n) { return 0; }\nint main() { cout<<superEggDrop(2,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint superEggDrop(int k, int n) {\n    return 0;\n}\n\nint main() {\n    int k;\n    cin >> k;\n    int n;\n    cin >> n;\n    cout << superEggDrop(k, n);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint superEggDrop(int k, int n) { int dp[n+1][k+1]; for(int i=0;i<=n;i++) for(int j=0;j<=k;j++) dp[i][j]=0; for(int m=1;m<=n;m++) { for(int j=1;j<=k;j++) dp[m][j]=dp[m-1][j-1]+dp[m-1][j]+1; if(dp[m][k]>=n) return m; } return n; }\nint main() { cout<<superEggDrop(2,6); return 0; }",
         "explanation": {
@@ -125,7 +125,7 @@
         "description": "Count distinct palindromic subsequences in string.",
         "difficulty": "HARD",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countPalindromicSubsequences(char s[]) { return 0; }\nint main() { cout<<countPalindromicSubsequences(\"bccb\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countPalindromicSubsequences(vector<int>& s) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << countPalindromicSubsequences(s);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint countPalindromicSubsequences(char s[]) { int n=0; while(s[n]) n++; int dp[n][n]; for(int i=0;i<n;i++) { dp[i][i]=1; for(int j=0;j<i;j++) dp[i][j]=0; } for(int len=2;len<=n;len++) for(int i=0;i<=n-len;i++) { int j=i+len-1; if(s[i]==s[j]) { int l=i+1,r=j-1; while(l<=r&&s[l]!=s[i]) l++; while(l<=r&&s[r]!=s[i]) r--; if(l>r) dp[i][j]=dp[i+1][j-1]*2+2; else if(l==r) dp[i][j]=dp[i+1][j-1]*2+1; else dp[i][j]=dp[i+1][j-1]*2-dp[l+1][r-1]; } else dp[i][j]=dp[i+1][j]+dp[i][j-1]-dp[i+1][j-1]; } return dp[0][n-1]; }\nint main() { cout<<countPalindromicSubsequences(\"bccb\"); return 0; }",
         "explanation": {
@@ -165,7 +165,7 @@
         "description": "Can frog cross river by jumping on stones?",
         "difficulty": "HARD",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool canCross(int stones[], int n) { return false; }\nint main() { int s[]={0,1,3,5,6,8,12,17}; cout<<canCross(s,8); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool canCross(vector<int>& stones, int n) {\n    return false;\n}\n\nint main() {\n    int stones_size;\n    cin >> stones_size;\n    vector<int> stones(stones_size);\n    for (int i = 0; i < stones_size; i++) cin >> stones[i];\n    int n;\n    cin >> n;\n    cout << canCross(stones, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool canCross(int stones[], int n) { if(n<2) return true; if(stones[1]!=1) return false; bool dp[n][n+1]; for(int i=0;i<n;i++) for(int k=0;k<=n;k++) dp[i][k]=false; dp[0][0]=true; for(int i=0;i<n;i++) for(int k=0;k<=n;k++) if(dp[i][k]) for(int j=i+1;j<n;j++) { int jump=stones[j]-stones[i]; if(jump>=k-1&&jump<=k+1&&jump<=n) dp[j][jump]=true; } for(int k=0;k<=n;k++) if(dp[n-1][k]) return true; return false; }\nint main() { int s[]={0,1,3,5,6,8,12,17}; cout<<canCross(s,8); return 0; }",
         "explanation": {
@@ -205,7 +205,7 @@
         "description": "Minimize the largest sum when splitting array into m parts.",
         "difficulty": "HARD",
         "category": "Binary Search",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint splitArray(int nums[], int n, int m) { return 0; }\nint main() { int a[]={7,2,5,10,8}; cout<<splitArray(a,5,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint splitArray(vector<int>& nums, int n, int m) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    int m;\n    cin >> m;\n    cout << splitArray(nums, n, m);\n    return 0;\n}\n",
         "expectedOutput": "18",
         "solution": "#include <iostream>\nusing namespace std;\nbool canSplit(int nums[], int n, int m, int mx) { int cnt=1; long sum=0; for(int i=0;i<n;i++) { if(nums[i]>mx) return false; if(sum+nums[i]<=mx) sum+=nums[i]; else { cnt++; sum=nums[i]; } } return cnt<=m; }\nint splitArray(int nums[], int n, int m) { long l=0,r=0; for(int i=0;i<n;i++) { l=max(l,(long)nums[i]); r+=nums[i]; } while(l<r) { long mid=(l+r)/2; if(canSplit(nums,n,m,mid)) r=mid; else l=mid+1; } return l; }\nint main() { int a[]={7,2,5,10,8}; cout<<splitArray(a,5,2); return 0; }",
         "explanation": {
@@ -245,7 +245,7 @@
         "description": "Minimum eating speed to finish all piles in h hours.",
         "difficulty": "MEDIUM",
         "category": "Binary Search",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint minEatingSpeed(int piles[], int n, int h) { return 0; }\nint main() { int p[]={3,6,7,11}; cout<<minEatingSpeed(p,4,8); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint minEatingSpeed(vector<int>& piles, int n, int h) {\n    return 0;\n}\n\nint main() {\n    int piles_size;\n    cin >> piles_size;\n    vector<int> piles(piles_size);\n    for (int i = 0; i < piles_size; i++) cin >> piles[i];\n    int n;\n    cin >> n;\n    int h;\n    cin >> h;\n    cout << minEatingSpeed(piles, n, h);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "solution": "#include <iostream>\nusing namespace std;\nbool canEat(int p[], int n, int h, int k) { int time=0; for(int i=0;i<n;i++) time+=(p[i]+k-1)/k; return time<=h; }\nint minEatingSpeed(int p[], int n, int h) { int l=1,r=0; for(int i=0;i<n;i++) r=max(r,p[i]); while(l<r) { int m=(l+r)/2; if(canEat(p,n,h,m)) r=m; else l=m+1; } return l; }\nint main() { int p[]={3,6,7,11}; cout<<minEatingSpeed(p,4,8); return 0; }",
         "explanation": {
@@ -285,7 +285,7 @@
         "description": "Find median of two sorted arrays in O(log(m+n)).",
         "difficulty": "HARD",
         "category": "Binary Search",
-        "starterCode": "#include <iostream>\nusing namespace std;\ndouble findMedianSortedArrays(int a[], int m, int b[], int n) { return 0; }\nint main() { int a[]={1,3}; int b[]={2}; cout<<findMedianSortedArrays(a,2,b,1); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble findMedianSortedArrays(vector<int>& a, int m, vector<int>& b, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int m;\n    cin >> m;\n    int b_size;\n    cin >> b_size;\n    vector<int> b(b_size);\n    for (int i = 0; i < b_size; i++) cin >> b[i];\n    int n;\n    cin >> n;\n    cout << findMedianSortedArrays(a, m, b, n);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\ndouble findMedianSortedArrays(int a[], int m, int b[], int n) { if(m>n) return findMedianSortedArrays(b,n,a,m); int l=0,r=m; while(l<=r) { int i=(l+r)/2; int j=(m+n+1)/2-i; int al=i==0?-1e9:a[i-1]; int ar=i==m?1e9:a[i]; int bl=j==0?-1e9:b[j-1]; int br=j==n?1e9:b[j]; if(al<=br&&bl<=ar) { if((m+n)%2) return max(al,bl); return (max(al,bl)+min(ar,br))/2.0; } if(al>br) r=i-1; else l=i+1; } return 0; }\nint main() { int a[]={1,3}; int b[]={2}; cout<<findMedianSortedArrays(a,2,b,1); return 0; }",
         "explanation": {

@@ -38,7 +38,10 @@
                 "expectedOutput": "Graph cloned",
                 "explanation": "Two connected nodes"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "graph",
+        "inputInstructions": "This problem uses a graph structure. Parse the adjacency list or edge list from the input to build your graph."
     },
     {
         "id": "med42",
@@ -46,7 +49,7 @@
         "description": "Cells flowing to both oceans.",
         "difficulty": "MEDIUM",
         "category": "Graph",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid pacificAtlantic(int h[][5], int r, int c) {}\nint main() { int h[][5]={{1,2,2,3,5},{3,2,3,4,4},{2,4,5,3,1},{6,7,1,4,5},{5,1,1,2,4}}; pacificAtlantic(h,5,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid pacificAtlantic(vector<vector<int>>& h, int r, int c) {\n    // TODO\n}\n\nint main() {\n    int h_rows, h_cols;\n    cin >> h_rows >> h_cols;\n    vector<vector<int>> h(h_rows, vector<int>(h_cols));\n    for (int i = 0; i < h_rows; i++)\n        for (int j = 0; j < h_cols; j++)\n            cin >> h[i][j];\n    int r;\n    cin >> r;\n    int c;\n    cin >> c;\n    pacificAtlantic(h, r, c);\n    return 0;\n}\n",
         "expectedOutput": "0,4 1,3 1,4 2,2 3,0 3,1 4,0",
         "solution": "#include <iostream>\nusing namespace std;\nbool pac[10][10],atl[10][10];\nvoid dfs(int h[][5], int r, int c, int i, int j, bool vis[][10], int prev) { if(i<0||i>=r||j<0||j>=c||vis[i][j]||h[i][j]<prev) return; vis[i][j]=true; dfs(h,r,c,i+1,j,vis,h[i][j]); dfs(h,r,c,i-1,j,vis,h[i][j]); dfs(h,r,c,i,j+1,vis,h[i][j]); dfs(h,r,c,i,j-1,vis,h[i][j]); }\nvoid pacificAtlantic(int h[][5], int r, int c) { for(int i=0;i<r;i++) for(int j=0;j<c;j++) { pac[i][j]=atl[i][j]=false; } for(int i=0;i<r;i++) { dfs(h,r,c,i,0,pac,0); dfs(h,r,c,i,c-1,atl,0); } for(int j=0;j<c;j++) { dfs(h,r,c,0,j,pac,0); dfs(h,r,c,r-1,j,atl,0); } for(int i=0;i<r;i++) for(int j=0;j<c;j++) if(pac[i][j]&&atl[i][j]) cout<<i<<\",\"<<j<<\" \"; }\nint main() { int h[][5]={{1,2,2,3,5},{3,2,3,4,4},{2,4,5,3,1},{6,7,1,4,5},{5,1,1,2,4}}; pacificAtlantic(h,5,5); return 0; }",
         "explanation": {
@@ -87,7 +90,7 @@
         "description": "Time for all oranges to rot.",
         "difficulty": "MEDIUM",
         "category": "BFS",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint orangesRotting(int g[][3], int r, int c) { return 0; }\nint main() { int g[][3]={{2,1,1},{1,1,0},{0,1,1}}; cout<<orangesRotting(g,3,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint orangesRotting(vector<vector<int>>& g, int r, int c) {\n    return 0;\n}\n\nint main() {\n    int g_rows, g_cols;\n    cin >> g_rows >> g_cols;\n    vector<vector<int>> g(g_rows, vector<int>(g_cols));\n    for (int i = 0; i < g_rows; i++)\n        for (int j = 0; j < g_cols; j++)\n            cin >> g[i][j];\n    int r;\n    cin >> r;\n    int c;\n    cin >> c;\n    cout << orangesRotting(g, r, c);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "solution": "#include <iostream>\nusing namespace std;\nint orangesRotting(int g[][3], int r, int c) { int qr[100],qc[100],f=0,re=0,fresh=0; for(int i=0;i<r;i++) for(int j=0;j<c;j++) { if(g[i][j]==2) { qr[re]=i; qc[re++]=j; } else if(g[i][j]==1) fresh++; } if(fresh==0) return 0; int dx[]={1,-1,0,0},dy[]={0,0,1,-1},t=-1; while(f<re) { int sz=re-f; t++; for(int q=0;q<sz;q++) { int i=qr[f],j=qc[f++]; for(int d=0;d<4;d++) { int ni=i+dx[d],nj=j+dy[d]; if(ni>=0&&ni<r&&nj>=0&&nj<c&&g[ni][nj]==1) { g[ni][nj]=2; fresh--; qr[re]=ni; qc[re++]=nj; } } } } return fresh==0?t:-1; }\nint main() { int g[][3]={{2,1,1},{1,1,0},{0,1,1}}; cout<<orangesRotting(g,3,3); return 0; }",
         "explanation": {
@@ -128,7 +131,7 @@
         "description": "Min transformations.",
         "difficulty": "MEDIUM",
         "category": "BFS",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint ladderLength(char begin[], char end[], char words[][10], int n) { return 0; }\nint main() { char words[][10]={\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"}; cout<<ladderLength(\"hit\",\"cog\",words,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint ladderLength(vector<int>& begin, vector<int>& end, vector<vector<int>>& words, int n) {\n    return 0;\n}\n\nint main() {\n    int begin_size;\n    cin >> begin_size;\n    vector<int> begin(begin_size);\n    for (int i = 0; i < begin_size; i++) cin >> begin[i];\n    int end_size;\n    cin >> end_size;\n    vector<int> end(end_size);\n    for (int i = 0; i < end_size; i++) cin >> end[i];\n    int words_rows, words_cols;\n    cin >> words_rows >> words_cols;\n    vector<vector<int>> words(words_rows, vector<int>(words_cols));\n    for (int i = 0; i < words_rows; i++)\n        for (int j = 0; j < words_cols; j++)\n            cin >> words[i][j];\n    int n;\n    cin >> n;\n    cout << ladderLength(begin, end, words, n);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nbool diff1(char a[], char b[]) { int c=0; for(int i=0;a[i];i++) if(a[i]!=b[i]) c++; return c==1; }\nint ladderLength(char begin[], char end[], char words[][10], int n) { char q[100][10]; int f=0,r=0; bool vis[100]={}; int i=0; while(begin[i]) { q[r][i]=begin[i]; i++; } q[r][i]=0; r++; int lv=1; while(f<r) { int sz=r-f; for(int s=0;s<sz;s++) { char* cur=q[f++]; for(int w=0;w<n;w++) { if(!vis[w] && diff1(cur,words[w])) { bool eq=true; for(int k=0;end[k];k++) if(end[k]!=words[w][k]) eq=false; if(eq) return lv+1; vis[w]=true; int j=0; while(words[w][j]) { q[r][j]=words[w][j]; j++; } q[r][j]=0; r++; } } } lv++; } return 0; }\nint main() { char words[][10]={\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"}; cout<<ladderLength(\"hit\",\"cog\",words,6); return 0; }",
         "explanation": {
@@ -169,7 +172,7 @@
         "description": "Min coins for amount.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint coinChange(int coins[], int n, int amt) { return 0; }\nint main() { int coins[]={1,2,5}; cout<<coinChange(coins,3,11); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint coinChange(vector<int>& coins, int n, int amt) {\n    return 0;\n}\n\nint main() {\n    int coins_size;\n    cin >> coins_size;\n    vector<int> coins(coins_size);\n    for (int i = 0; i < coins_size; i++) cin >> coins[i];\n    int n;\n    cin >> n;\n    int amt;\n    cin >> amt;\n    cout << coinChange(coins, n, amt);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint coinChange(int coins[], int n, int amt) { int dp[amt+1]; for(int i=0;i<=amt;i++) dp[i]=1e9; dp[0]=0; for(int i=1;i<=amt;i++) for(int j=0;j<n;j++) if(coins[j]<=i && dp[i-coins[j]]!=1e9) dp[i]=min(dp[i],dp[i-coins[j]]+1); return dp[amt]>=1e9?-1:dp[amt]; }\nint main() { int coins[]={1,2,5}; cout<<coinChange(coins,3,11); return 0; }",
         "explanation": {
@@ -209,7 +212,7 @@
         "description": "LIS length.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint lengthOfLIS(int a[], int n) { return 0; }\nint main() { int a[]={10,9,2,5,3,7,101,18}; cout<<lengthOfLIS(a,8); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint lengthOfLIS(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << lengthOfLIS(a, n);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "solution": "#include <iostream>\nusing namespace std;\nint lengthOfLIS(int a[], int n) { int dp[n]; for(int i=0;i<n;i++) dp[i]=1; for(int i=1;i<n;i++) for(int j=0;j<i;j++) if(a[j]<a[i]) dp[i]=max(dp[i],dp[j]+1); int mx=0; for(int i=0;i<n;i++) mx=max(mx,dp[i]); return mx; }\nint main() { int a[]={10,9,2,5,3,7,101,18}; cout<<lengthOfLIS(a,8); return 0; }",
         "explanation": {
@@ -249,7 +252,7 @@
         "description": "Can segment into dict words.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool wordBreak(char s[], char dict[][10], int n) { return false; }\nint main() { char dict[][10]={\"apple\",\"pen\"}; cout<<wordBreak(\"applepenapple\",dict,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool wordBreak(vector<int>& s, vector<vector<int>>& dict, int n) {\n    return false;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    int dict_rows, dict_cols;\n    cin >> dict_rows >> dict_cols;\n    vector<vector<int>> dict(dict_rows, vector<int>(dict_cols));\n    for (int i = 0; i < dict_rows; i++)\n        for (int j = 0; j < dict_cols; j++)\n            cin >> dict[i][j];\n    int n;\n    cin >> n;\n    cout << wordBreak(s, dict, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool eq(char a[], int start, int end, char b[]) { int i=0; for(int j=start;j<end;j++,i++) if(a[j]!=b[i]) return false; return !b[i]; }\nbool wordBreak(char s[], char dict[][10], int n) { int len=0; while(s[len]) len++; bool dp[len+1]={}; dp[0]=true; for(int i=1;i<=len;i++) for(int j=0;j<i;j++) if(dp[j]) for(int k=0;k<n;k++) if(eq(s,j,i,dict[k])) { dp[i]=true; break; } return dp[len]; }\nint main() { char dict[][10]={\"apple\",\"pen\"}; cout<<wordBreak(\"applepenapple\",dict,2); return 0; }",
         "explanation": {
@@ -289,7 +292,7 @@
         "description": "Max money without adjacent.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint rob(int a[], int n) { return 0; }\nint main() { int a[]={2,7,9,3,1}; cout<<rob(a,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint rob(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << rob(a, n);\n    return 0;\n}\n",
         "expectedOutput": "12",
         "solution": "#include <iostream>\nusing namespace std;\nint rob(int a[], int n) { if(n==0) return 0; if(n==1) return a[0]; int dp[n]; dp[0]=a[0]; dp[1]=max(a[0],a[1]); for(int i=2;i<n;i++) dp[i]=max(dp[i-1],dp[i-2]+a[i]); return dp[n-1]; }\nint main() { int a[]={2,7,9,3,1}; cout<<rob(a,5); return 0; }",
         "explanation": {
@@ -328,7 +331,7 @@
         "description": "Number of decodings.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint numDecodings(char s[]) { return 0; }\nint main() { cout<<numDecodings(\"226\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint numDecodings(vector<int>& s) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << numDecodings(s);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint numDecodings(char s[]) { int n=0; while(s[n]) n++; if(n==0||s[0]=='0') return 0; int dp[n+1]={}; dp[0]=1; dp[1]=1; for(int i=2;i<=n;i++) { if(s[i-1]!='0') dp[i]=dp[i-1]; int two=(s[i-2]-'0')*10+(s[i-1]-'0'); if(two>=10&&two<=26) dp[i]+=dp[i-2]; } return dp[n]; }\nint main() { cout<<numDecodings(\"226\"); return 0; }",
         "explanation": {
@@ -368,7 +371,7 @@
         "description": "Paths from top-left to bottom-right.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint uniquePaths(int m, int n) { return 0; }\nint main() { cout<<uniquePaths(3,7); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint uniquePaths(int m, int n) {\n    return 0;\n}\n\nint main() {\n    int m;\n    cin >> m;\n    int n;\n    cin >> n;\n    cout << uniquePaths(m, n);\n    return 0;\n}\n",
         "expectedOutput": "28",
         "solution": "#include <iostream>\nusing namespace std;\nint uniquePaths(int m, int n) { int dp[m][n]; for(int i=0;i<m;i++) dp[i][0]=1; for(int j=0;j<n;j++) dp[0][j]=1; for(int i=1;i<m;i++) for(int j=1;j<n;j++) dp[i][j]=dp[i-1][j]+dp[i][j-1]; return dp[m-1][n-1]; }\nint main() { cout<<uniquePaths(3,7); return 0; }",
         "explanation": {

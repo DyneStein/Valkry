@@ -1,0 +1,333 @@
+[
+    {
+        "id": "hard17",
+        "title": "Merge K Sorted Lists",
+        "description": "Merge k sorted linked lists.",
+        "difficulty": "HARD",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* mergeKLists(Node* lists[], int k) { return nullptr; }\nint main() { Node* l1=new Node(1); l1->n=new Node(4); l1->n->n=new Node(5); Node* l2=new Node(1); l2->n=new Node(3); l2->n->n=new Node(4); Node* l3=new Node(2); l3->n=new Node(6); Node* lists[]={l1,l2,l3}; Node* r=mergeKLists(lists,3); while(r) { cout<<r->v<<\" \"; r=r->n; } return 0; }",
+        "expectedOutput": "1 1 2 3 4 4 5 6",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* mergeTwo(Node* a, Node* b) { Node d(0),*t=&d; while(a&&b) { if(a->v<b->v) { t->n=a; a=a->n; } else { t->n=b; b=b->n; } t=t->n; } t->n=a?a:b; return d.n; }\nNode* mergeKLists(Node* lists[], int k) { if(k==0) return 0; while(k>1) { int i=0,j=k-1; while(i<j) { lists[i]=mergeTwo(lists[i],lists[j]); i++; j--; } k=(k+1)/2; } return lists[0]; }\nint main() { Node* l1=new Node(1); l1->n=new Node(4); l1->n->n=new Node(5); Node* l2=new Node(1); l2->n=new Node(3); l2->n->n=new Node(4); Node* l3=new Node(2); l3->n=new Node(6); Node* lists[]={l1,l2,l3}; Node* r=mergeKLists(lists,3); while(r) { cout<<r->v<<\" \"; r=r->n; } return 0; }",
+        "explanation": {
+            "approach": "Divide and conquer merge.",
+            "analogy": "Pair up and merge.",
+            "steps": [
+                "Merge pairs of lists",
+                "Repeat until one list"
+            ],
+            "complexity": "Time: O(n log k), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "3 lists: [1,4,5], [1,3,4], [2,6]",
+                "expectedOutput": "1 1 2 3 4 4 5 6",
+                "explanation": "Merged sorted output"
+            },
+            {
+                "input": "Single list [1,2,3]",
+                "expectedOutput": "1 2 3",
+                "explanation": "Single list unchanged"
+            },
+            {
+                "input": "Empty lists",
+                "expectedOutput": "",
+                "explanation": "No elements to merge"
+            },
+            {
+                "input": "Lists with same values [1,1], [1,1]",
+                "expectedOutput": "1 1 1 1",
+                "explanation": "Duplicate values merged correctly"
+            }
+        ]
+    },
+    {
+        "id": "hard18",
+        "title": "Reverse Nodes in K-Group",
+        "description": "Reverse every k nodes.",
+        "difficulty": "HARD",
+        "category": "Linked List",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* reverseKGroup(Node* h, int k) { return nullptr; }\nint main() { Node* h=new Node(1); h->n=new Node(2); h->n->n=new Node(3); h->n->n->n=new Node(4); h->n->n->n->n=new Node(5); h=reverseKGroup(h,2); while(h) { cout<<h->v<<\" \"; h=h->n; } return 0; }",
+        "expectedOutput": "2 1 4 3 5",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* n; Node(int x):v(x),n(0){} };\nNode* reverseKGroup(Node* h, int k) { Node* c=h; int cnt=0; while(c && cnt<k) { c=c->n; cnt++; } if(cnt<k) return h; Node* p=0,*cur=h; for(int i=0;i<k;i++) { Node* t=cur->n; cur->n=p; p=cur; cur=t; } h->n=reverseKGroup(cur,k); return p; }\nint main() { Node* h=new Node(1); h->n=new Node(2); h->n->n=new Node(3); h->n->n->n=new Node(4); h->n->n->n->n=new Node(5); h=reverseKGroup(h,2); while(h) { cout<<h->v<<\" \"; h=h->n; } return 0; }",
+        "explanation": {
+            "approach": "Reverse k nodes, recurse.",
+            "analogy": "Reverse group, connect to next group.",
+            "steps": [
+                "Check if k nodes exist",
+                "Reverse k nodes",
+                "Recurse on rest"
+            ],
+            "complexity": "Time: O(n), Space: O(n/k)"
+        },
+        "testCases": [
+            {
+                "input": "[1,2,3,4,5], k=2",
+                "expectedOutput": "2 1 4 3 5",
+                "explanation": "Reverse pairs, 5 left alone"
+            },
+            {
+                "input": "[1,2,3,4,5], k=3",
+                "expectedOutput": "3 2 1 4 5",
+                "explanation": "Reverse first 3, last 2 unchanged"
+            },
+            {
+                "input": "[1], k=1",
+                "expectedOutput": "1",
+                "explanation": "Single node unchanged"
+            },
+            {
+                "input": "[1,2,3,4], k=4",
+                "expectedOutput": "4 3 2 1",
+                "explanation": "Entire list reversed"
+            }
+        ]
+    },
+    {
+        "id": "hard19",
+        "title": "Trapping Rain Water",
+        "description": "Water trapped between bars.",
+        "difficulty": "HARD",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint trap(int h[], int n) { return 0; }\nint main() { int h[]={0,1,0,2,1,0,1,3,2,1,2,1}; cout<<trap(h,12); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint trap(int h[], int n) { int l=0,r=n-1,lm=0,rm=0,w=0; while(l<r) { if(h[l]<h[r]) { if(h[l]>=lm) lm=h[l]; else w+=lm-h[l]; l++; } else { if(h[r]>=rm) rm=h[r]; else w+=rm-h[r]; r--; } } return w; }\nint main() { int h[]={0,1,0,2,1,0,1,3,2,1,2,1}; cout<<trap(h,12); return 0; }",
+        "explanation": {
+            "approach": "Two pointers tracking max from each side.",
+            "analogy": "Water at each bar = min(leftMax, rightMax) - height.",
+            "steps": [
+                "Track left and right max",
+                "Move smaller side inward",
+                "Add water difference"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "{0,1,0,2,1,0,1,3,2,1,2,1}",
+                "expectedOutput": "6",
+                "explanation": "6 units of water trapped"
+            },
+            {
+                "input": "{4,2,0,3,2,5}",
+                "expectedOutput": "9",
+                "explanation": "9 units trapped"
+            },
+            {
+                "input": "{0,1,2,3}",
+                "expectedOutput": "0",
+                "explanation": "Ascending, no water"
+            },
+            {
+                "input": "{3,0,3}",
+                "expectedOutput": "3",
+                "explanation": "Simple valley traps 3 units"
+            }
+        ]
+    },
+    {
+        "id": "hard20",
+        "title": "N-Queens",
+        "description": "Place n queens on board.",
+        "difficulty": "HARD",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint solveNQueens(int n) { return 0; }\nint main() { cout<<solveNQueens(4); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint cnt; bool col[20],d1[40],d2[40];\nvoid solve(int r, int n) { if(r==n) { cnt++; return; } for(int c=0;c<n;c++) if(!col[c]&&!d1[r-c+n]&&!d2[r+c]) { col[c]=d1[r-c+n]=d2[r+c]=true; solve(r+1,n); col[c]=d1[r-c+n]=d2[r+c]=false; } }\nint solveNQueens(int n) { cnt=0; solve(0,n); return cnt; }\nint main() { cout<<solveNQueens(4); return 0; }",
+        "explanation": {
+            "approach": "Backtracking with conflict tracking.",
+            "analogy": "Place queen if safe, backtrack if not.",
+            "steps": [
+                "Track columns and diagonals",
+                "Try each column in row",
+                "Backtrack if conflict"
+            ],
+            "complexity": "Time: O(n!), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=4",
+                "expectedOutput": "2",
+                "explanation": "4-queens has 2 solutions"
+            },
+            {
+                "input": "n=8",
+                "expectedOutput": "92",
+                "explanation": "Classic 8-queens has 92 solutions"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "1-queen has 1 solution"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "10",
+                "explanation": "5-queens has 10 solutions"
+            }
+        ]
+    },
+    {
+        "id": "hard21",
+        "title": "Word Search II",
+        "description": "Find all words in grid.",
+        "difficulty": "HARD",
+        "category": "Trie",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid findWords(char b[][4], int r, int c, char words[][10], int n) {}\nint main() { char b[][4]={{'o','a','a','n'},{'e','t','a','e'},{'i','h','k','r'},{'i','f','l','v'}}; char words[][10]={\"oath\",\"pea\",\"eat\",\"rain\"}; findWords(b,4,4,words,4); return 0; }",
+        "expectedOutput": "eat oath",
+        "solution": "#include <iostream>\nusing namespace std;\nbool dfs(char b[][4], int r, int c, int i, int j, char w[], int k) { if(!w[k]) return true; if(i<0||i>=r||j<0||j>=c||b[i][j]!=w[k]) return false; char t=b[i][j]; b[i][j]='#'; bool f=dfs(b,r,c,i+1,j,w,k+1)||dfs(b,r,c,i-1,j,w,k+1)||dfs(b,r,c,i,j+1,w,k+1)||dfs(b,r,c,i,j-1,w,k+1); b[i][j]=t; return f; }\nbool exist(char b[][4], int r, int c, char w[]) { for(int i=0;i<r;i++) for(int j=0;j<c;j++) if(dfs(b,r,c,i,j,w,0)) return true; return false; }\nvoid findWords(char b[][4], int r, int c, char words[][10], int n) { for(int w=0;w<n;w++) if(exist(b,r,c,words[w])) cout<<words[w]<<\" \"; }\nint main() { char b[][4]={{'o','a','a','n'},{'e','t','a','e'},{'i','h','k','r'},{'i','f','l','v'}}; char words[][10]={\"oath\",\"pea\",\"eat\",\"rain\"}; findWords(b,4,4,words,4); return 0; }",
+        "explanation": {
+            "approach": "DFS for each word.",
+            "analogy": "Search each word in grid.",
+            "steps": [
+                "For each word, try DFS from each cell"
+            ],
+            "complexity": "Time: O(m × n × words × 4^L), Space: O(L)"
+        },
+        "testCases": [
+            {
+                "input": "grid, words=[oath,pea,eat,rain]",
+                "expectedOutput": "eat oath",
+                "explanation": "eat and oath found"
+            },
+            {
+                "input": "[[a,b],[c,d]], [abcb]",
+                "expectedOutput": "",
+                "explanation": "Can't reuse cells"
+            },
+            {
+                "input": "[[a]], [a]",
+                "expectedOutput": "a",
+                "explanation": "Single cell match"
+            },
+            {
+                "input": "grid, words=[oat]",
+                "expectedOutput": "oat",
+                "explanation": "Partial word found in grid"
+            }
+        ]
+    },
+    {
+        "id": "hard22",
+        "title": "Minimum Window Substring",
+        "description": "Smallest window containing all chars.",
+        "difficulty": "HARD",
+        "category": "Sliding Window",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid minWindow(char s[], char t[]) {}\nint main() { minWindow(\"ADOBECODEBANC\",\"ABC\"); return 0; }",
+        "expectedOutput": "BANC",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid minWindow(char s[], char t[]) { int need[256]={},have[256]={}; int req=0; for(int i=0;t[i];i++) if(need[(int)t[i]]++==0) req++; int l=0,minL=1e9,start=0,formed=0; for(int r=0;s[r];r++) { have[(int)s[r]]++; if(need[(int)s[r]] && have[(int)s[r]]==need[(int)s[r]]) formed++; while(formed==req) { if(r-l+1<minL) { minL=r-l+1; start=l; } have[(int)s[l]]--; if(need[(int)s[l]] && have[(int)s[l]]<need[(int)s[l]]) formed--; l++; } } if(minL<1e9) for(int i=start;i<start+minL;i++) cout<<s[i]; }\nint main() { minWindow(\"ADOBECODEBANC\",\"ABC\"); return 0; }",
+        "explanation": {
+            "approach": "Sliding window with char counts.",
+            "analogy": "Expand until valid, shrink while valid.",
+            "steps": [
+                "Expand right until all chars found",
+                "Shrink left while still valid",
+                "Track minimum window"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "s=ADOBECODEBANC, t=ABC",
+                "expectedOutput": "BANC",
+                "explanation": "Smallest window with A,B,C"
+            },
+            {
+                "input": "s=a, t=a",
+                "expectedOutput": "a",
+                "explanation": "Single char match"
+            },
+            {
+                "input": "s=a, t=aa",
+                "expectedOutput": "",
+                "explanation": "Not enough chars"
+            },
+            {
+                "input": "s=ABC, t=ABC",
+                "expectedOutput": "ABC",
+                "explanation": "Exact match is minimum window"
+            }
+        ]
+    },
+    {
+        "id": "hard23",
+        "title": "Serialize Deserialize BT",
+        "description": "Encode/decode binary tree.",
+        "difficulty": "HARD",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid serialize(Node* r) {}\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->r->l=new Node(4); r->r->r=new Node(5); serialize(r); return 0; }",
+        "expectedOutput": "1 2 # # 3 4 # # 5 # #",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid serialize(Node* r) { if(!r) { cout<<\"# \"; return; } cout<<r->v<<\" \"; serialize(r->l); serialize(r->r); }\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->r->l=new Node(4); r->r->r=new Node(5); serialize(r); return 0; }",
+        "explanation": {
+            "approach": "Preorder with null markers.",
+            "analogy": "Encode structure with placeholders.",
+            "steps": [
+                "Print value or # for null",
+                "Recurse left then right"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "Tree: 1->2,3->4,5",
+                "expectedOutput": "1 2 # # 3 4 # # 5 # #",
+                "explanation": "Preorder with nulls"
+            },
+            {
+                "input": "Single node 1",
+                "expectedOutput": "1 # #",
+                "explanation": "Root with null children"
+            },
+            {
+                "input": "Empty tree",
+                "expectedOutput": "#",
+                "explanation": "Null marker only"
+            },
+            {
+                "input": "Left-only tree: 1->2->3",
+                "expectedOutput": "1 2 3 # # # #",
+                "explanation": "Chain going left only"
+            }
+        ]
+    },
+    {
+        "id": "hard24",
+        "title": "Binary Tree Max Path Sum",
+        "description": "Maximum path sum.",
+        "difficulty": "HARD",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint maxPathSum(Node* r) { return 0; }\nint main() { Node* r=new Node(-10); r->l=new Node(9); r->r=new Node(20); r->r->l=new Node(15); r->r->r=new Node(7); cout<<maxPathSum(r); return 0; }",
+        "expectedOutput": "42",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint maxSum;\nint solve(Node* r) { if(!r) return 0; int l=max(0,solve(r->l)); int ri=max(0,solve(r->r)); maxSum=max(maxSum,l+ri+r->v); return r->v+max(l,ri); }\nint maxPathSum(Node* r) { maxSum=-1e9; solve(r); return maxSum; }\nint main() { Node* r=new Node(-10); r->l=new Node(9); r->r=new Node(20); r->r->l=new Node(15); r->r->r=new Node(7); cout<<maxPathSum(r); return 0; }",
+        "explanation": {
+            "approach": "DFS returning max single path.",
+            "analogy": "At each node, consider path through it.",
+            "steps": [
+                "Return max path going up",
+                "Update global with path through node"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        },
+        "testCases": [
+            {
+                "input": "Tree: -10->9,20->15,7",
+                "expectedOutput": "42",
+                "explanation": "15+20+7=42"
+            },
+            {
+                "input": "Single node: 5",
+                "expectedOutput": "5",
+                "explanation": "Just the node value"
+            },
+            {
+                "input": "All negative: -3->-2,-1",
+                "expectedOutput": "-1",
+                "explanation": "Best single path"
+            },
+            {
+                "input": "Positive chain: 1->2->3",
+                "expectedOutput": "6",
+                "explanation": "Sum of all nodes 1+2+3=6"
+            }
+        ]
+    }
+]

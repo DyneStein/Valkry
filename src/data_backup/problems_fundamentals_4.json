@@ -1,0 +1,482 @@
+[
+    {
+        "id": "fun76",
+        "title": "Deficient Number",
+        "description": "Sum of divisors < n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isDeficient(int n) { return false; }\nint main() { cout<<isDeficient(8); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isDeficient(int n) {\n    int sum = 0;\n    for(int i = 1; i < n; i++)\n        if(n % i == 0) sum += i;\n    return sum < n;\n}\nint main() { cout<<isDeficient(8); return 0; }",
+        "explanation": {
+            "approach": "Sum proper divisors, check if < n.",
+            "steps": [
+                "Find all divisors",
+                "Sum them",
+                "Check if < n"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=8",
+                "expectedOutput": "1",
+                "explanation": "1+2+4=7<8"
+            },
+            {
+                "input": "n=15",
+                "expectedOutput": "1",
+                "explanation": "1+3+5=9<15"
+            },
+            {
+                "input": "n=12",
+                "expectedOutput": "0",
+                "explanation": "Abundant: 1+2+3+4+6=16>12"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "1",
+                "explanation": "Prime: 1<7"
+            }
+        ]
+    },
+    {
+        "id": "fun77",
+        "title": "Perfect Number",
+        "description": "Sum of divisors = n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPerfect(int n) { return false; }\nint main() { cout<<isPerfect(28); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPerfect(int n) {\n    int sum = 0;\n    for(int i = 1; i < n; i++)\n        if(n % i == 0) sum += i;\n    return sum == n;\n}\nint main() { cout<<isPerfect(28); return 0; }",
+        "explanation": {
+            "approach": "Sum proper divisors, check if = n.",
+            "steps": [
+                "Find all divisors",
+                "Sum them"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=28",
+                "expectedOutput": "1",
+                "explanation": "1+2+4+7+14=28"
+            },
+            {
+                "input": "n=6",
+                "expectedOutput": "1",
+                "explanation": "1+2+3=6"
+            },
+            {
+                "input": "n=12",
+                "expectedOutput": "0",
+                "explanation": "Sum=16≠12"
+            },
+            {
+                "input": "n=496",
+                "expectedOutput": "1",
+                "explanation": "Third perfect number"
+            }
+        ]
+    },
+    {
+        "id": "fun78",
+        "title": "Amicable Numbers",
+        "description": "Check amicable pair.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool areAmicable(int a, int b) { return false; }\nint main() { cout<<areAmicable(220,284); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumDiv(int n) { int s=0; for(int i=1;i<n;i++) if(n%i==0) s+=i; return s; }\nbool areAmicable(int a, int b) { return sumDiv(a)==b && sumDiv(b)==a; }\nint main() { cout<<areAmicable(220,284); return 0; }",
+        "explanation": {
+            "approach": "Sum of a's divisors = b AND vice versa.",
+            "steps": [
+                "Calculate divisor sums"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "a=220, b=284",
+                "expectedOutput": "1",
+                "explanation": "Classic amicable pair"
+            },
+            {
+                "input": "a=1184, b=1210",
+                "expectedOutput": "1",
+                "explanation": "Another amicable pair"
+            },
+            {
+                "input": "a=10, b=20",
+                "expectedOutput": "0",
+                "explanation": "Not amicable"
+            },
+            {
+                "input": "a=6, b=6",
+                "expectedOutput": "0",
+                "explanation": "Perfect but not amicable"
+            }
+        ]
+    },
+    {
+        "id": "fun79",
+        "title": "Twin Primes",
+        "description": "Check twin primes.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool areTwinPrimes(int a, int b) { return false; }\nint main() { cout<<areTwinPrimes(11,13); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPrime(int n) { if(n<2) return false; for(int i=2;i*i<=n;i++) if(n%i==0) return false; return true; }\nbool areTwinPrimes(int a, int b) { return isPrime(a) && isPrime(b) && abs(b-a)==2; }\nint main() { cout<<areTwinPrimes(11,13); return 0; }",
+        "explanation": {
+            "approach": "Both prime and differ by 2.",
+            "steps": [
+                "Check if both prime",
+                "Differ by 2"
+            ],
+            "complexity": "Time: O(sqrt n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "a=11, b=13",
+                "expectedOutput": "1",
+                "explanation": "Both prime, differ by 2"
+            },
+            {
+                "input": "a=3, b=5",
+                "expectedOutput": "1",
+                "explanation": "Twin primes"
+            },
+            {
+                "input": "a=7, b=11",
+                "expectedOutput": "0",
+                "explanation": "Differ by 4, not 2"
+            },
+            {
+                "input": "a=4, b=6",
+                "expectedOutput": "0",
+                "explanation": "Neither is prime"
+            }
+        ]
+    },
+    {
+        "id": "fun80",
+        "title": "Co-Prime Numbers",
+        "description": "GCD is 1.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool areCoPrime(int a, int b) { return false; }\nint main() { cout<<areCoPrime(14,15); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) { return b==0 ? a : gcd(b,a%b); }\nbool areCoPrime(int a, int b) { return gcd(a,b)==1; }\nint main() { cout<<areCoPrime(14,15); return 0; }",
+        "explanation": {
+            "approach": "GCD = 1 means no common factors.",
+            "steps": [
+                "Calculate GCD"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "a=14, b=15",
+                "expectedOutput": "1",
+                "explanation": "No common factor"
+            },
+            {
+                "input": "a=8, b=9",
+                "expectedOutput": "1",
+                "explanation": "Consecutive, coprime"
+            },
+            {
+                "input": "a=12, b=18",
+                "expectedOutput": "0",
+                "explanation": "GCD=6≠1"
+            },
+            {
+                "input": "a=1, b=100",
+                "expectedOutput": "1",
+                "explanation": "1 is coprime to all"
+            }
+        ]
+    },
+    {
+        "id": "fun81",
+        "title": "Kaprekar Number",
+        "description": "Parts of square sum to n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isKaprekar(int n) { return false; }\nint main() { cout<<isKaprekar(45); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isKaprekar(int n) {\n    long sq = (long)n * n; int d = 0, t = n;\n    while(t > 0) { d++; t /= 10; }\n    int div = 1; for(int i=0;i<d;i++) div *= 10;\n    return (sq%div + sq/div) == n && sq%div > 0;\n}\nint main() { cout<<isKaprekar(45); return 0; }",
+        "explanation": {
+            "approach": "Split n^2, parts sum to n.",
+            "steps": [
+                "Square n",
+                "Split",
+                "Sum parts"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=45",
+                "expectedOutput": "1",
+                "explanation": "45²=2025, 20+25=45"
+            },
+            {
+                "input": "n=9",
+                "expectedOutput": "1",
+                "explanation": "9²=81, 8+1=9"
+            },
+            {
+                "input": "n=297",
+                "expectedOutput": "1",
+                "explanation": "297²=88209, 88+209=297"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "0",
+                "explanation": "100: 10+0=10 but right part is 0"
+            }
+        ]
+    },
+    {
+        "id": "fun82",
+        "title": "Tech Number",
+        "description": "Even digits, halves sum² = n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isTech(int n) { return false; }\nint main() { cout<<isTech(2025); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isTech(int n) {\n    int d = 0, t = n; while(t > 0) { d++; t /= 10; }\n    if(d % 2 != 0) return false;\n    int div = 1; for(int i=0;i<d/2;i++) div *= 10;\n    int l = n/div, r = n%div;\n    return (l+r)*(l+r) == n;\n}\nint main() { cout<<isTech(2025); return 0; }",
+        "explanation": {
+            "approach": "(half1 + half2)² = n.",
+            "steps": [
+                "Split in half",
+                "Sum and square"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=2025",
+                "expectedOutput": "1",
+                "explanation": "(20+25)²=45²=2025"
+            },
+            {
+                "input": "n=3025",
+                "expectedOutput": "1",
+                "explanation": "(30+25)²=55²=3025"
+            },
+            {
+                "input": "n=1234",
+                "expectedOutput": "0",
+                "explanation": "(12+34)²=46²=2116≠1234"
+            },
+            {
+                "input": "n=9801",
+                "expectedOutput": "1",
+                "explanation": "(98+01)²=99²=9801"
+            }
+        ]
+    },
+    {
+        "id": "fun83",
+        "title": "Strontio Number",
+        "description": "n*4 has same middle digits.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isStrontio(int n) { return false; }\nint main() { cout<<isStrontio(1111); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isStrontio(int n) {\n    if(n < 1000 || n > 9999) return false;\n    int r = n * 4;\n    return (r/100%10) == (r/10%10);\n}\nint main() { cout<<isStrontio(1111); return 0; }",
+        "explanation": {
+            "approach": "4-digit, n*4 has same middle digits.",
+            "steps": [
+                "Multiply by 4",
+                "Check middle"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=1111",
+                "expectedOutput": "1",
+                "explanation": "1111*4=4444, middle=44"
+            },
+            {
+                "input": "n=2222",
+                "expectedOutput": "1",
+                "explanation": "2222*4=8888, middle=88"
+            },
+            {
+                "input": "n=1234",
+                "expectedOutput": "0",
+                "explanation": "1234*4=4936, middle≠"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "0",
+                "explanation": "Not 4 digits"
+            }
+        ]
+    },
+    {
+        "id": "fun84",
+        "title": "Xylem Phloem",
+        "description": "Sum edge = sum middle.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isXylemPhloem(int n) { return false; }\nint main() { cout<<isXylemPhloem(1234); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isXylemPhloem(int n) {\n    int f = n; while(f >= 10) f /= 10;\n    int l = n % 10, d2 = (n/100)%10, d3 = (n/10)%10;\n    return f + l == d2 + d3;\n}\nint main() { cout<<isXylemPhloem(1234); return 0; }",
+        "explanation": {
+            "approach": "Edge digits sum = middle digits sum.",
+            "steps": [
+                "Get edges",
+                "Get middle",
+                "Compare"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=1234",
+                "expectedOutput": "1",
+                "explanation": "1+4=5, 2+3=5"
+            },
+            {
+                "input": "n=2332",
+                "expectedOutput": "1",
+                "explanation": "2+2=4, 3+3=6? No, 2+2=4, 3+3=6"
+            },
+            {
+                "input": "n=1111",
+                "expectedOutput": "1",
+                "explanation": "1+1=2, 1+1=2"
+            },
+            {
+                "input": "n=1235",
+                "expectedOutput": "0",
+                "explanation": "1+5=6, 2+3=5"
+            }
+        ]
+    },
+    {
+        "id": "fun85",
+        "title": "Trimorphic Number",
+        "description": "Cube ends with n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isTrimorphic(int n) { return false; }\nint main() { cout<<isTrimorphic(4); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isTrimorphic(int n) {\n    long cube = (long)n*n*n;\n    int m = 1, t = n; while(t > 0) { m *= 10; t /= 10; }\n    return cube % m == n;\n}\nint main() { cout<<isTrimorphic(4); return 0; }",
+        "explanation": {
+            "approach": "n³ ends with n.",
+            "steps": [
+                "Cube n",
+                "Check ending"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=4",
+                "expectedOutput": "1",
+                "explanation": "4³=64 ends in 4"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "1",
+                "explanation": "5³=125 ends in 5"
+            },
+            {
+                "input": "n=24",
+                "expectedOutput": "1",
+                "explanation": "24³=13824 ends in 24"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "0",
+                "explanation": "3³=27 doesn't end in 3"
+            }
+        ]
+    },
+    {
+        "id": "fun86",
+        "title": "Peterson Number",
+        "description": "Sum of digit factorials = n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPeterson(int n) { return false; }\nint main() { cout<<isPeterson(145); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint fact(int x) { int f=1; for(int i=2;i<=x;i++) f*=i; return f; }\nbool isPeterson(int n) { int s=0, t=n; while(t>0){s+=fact(t%10); t/=10;} return s==n; }\nint main() { cout<<isPeterson(145); return 0; }",
+        "explanation": {
+            "approach": "Sum of digit! = n.",
+            "steps": [
+                "Factorial each digit",
+                "Sum"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=145",
+                "expectedOutput": "1",
+                "explanation": "1!+4!+5!=1+24+120=145"
+            },
+            {
+                "input": "n=40585",
+                "expectedOutput": "1",
+                "explanation": "Only other Peterson number"
+            },
+            {
+                "input": "n=123",
+                "expectedOutput": "0",
+                "explanation": "1!+2!+3!=9≠123"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "1",
+                "explanation": "2!=2"
+            }
+        ]
+    },
+    {
+        "id": "fun87",
+        "title": "Sunny Number",
+        "description": "n+1 is perfect square.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isSunny(int n) { return false; }\nint main() { cout<<isSunny(24); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isSunny(int n) { int r=1; while(r*r<n+1) r++; return r*r==n+1; }\nint main() { cout<<isSunny(24); return 0; }",
+        "explanation": {
+            "approach": "n+1 is perfect square.",
+            "steps": [
+                "Check if n+1 is square"
+            ],
+            "complexity": "Time: O(sqrt n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=24",
+                "expectedOutput": "1",
+                "explanation": "24+1=25=5²"
+            },
+            {
+                "input": "n=8",
+                "expectedOutput": "1",
+                "explanation": "8+1=9=3²"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "0",
+                "explanation": "11 is not square"
+            },
+            {
+                "input": "n=80",
+                "expectedOutput": "1",
+                "explanation": "80+1=81=9²"
+            }
+        ]
+    }
+]

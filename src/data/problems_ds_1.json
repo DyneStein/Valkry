@@ -248,7 +248,7 @@
         "description": "Check if brackets are balanced.",
         "difficulty": "EASY",
         "category": "Data Structures",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isValid(char s[]) { return false; }\nint main() { cout<<isValid(\"([{}])\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isValid(vector<int>& s) {\n    return false;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << isValid(s);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isValid(char s[]) { char stk[100]; int t=-1; for(int i=0;s[i];i++) { if(s[i]=='('||s[i]=='['||s[i]=='{') stk[++t]=s[i]; else { if(t<0) return false; if(s[i]==')' && stk[t]!='(') return false; if(s[i]==']' && stk[t]!='[') return false; if(s[i]=='}' && stk[t]!='{') return false; t--; } } return t==-1; }\nint main() { cout<<isValid(\"([{}])\"); return 0; }",
         "explanation": {

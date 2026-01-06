@@ -5,7 +5,7 @@
         "description": "Sum all matrix elements.",
         "difficulty": "EASY",
         "category": "Matrix",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint matSum(int m[][3], int r, int c) { return 0; }\nint main() { int m[][3] = {{1,2,3},{4,5,6},{7,8,9}}; cout << matSum(m,3,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint matSum(vector<vector<int>>& m, int r, int c) {\n    return 0;\n}\n\nint main() {\n    int m_rows, m_cols;\n    cin >> m_rows >> m_cols;\n    vector<vector<int>> m(m_rows, vector<int>(m_cols));\n    for (int i = 0; i < m_rows; i++)\n        for (int j = 0; j < m_cols; j++)\n            cin >> m[i][j];\n    int r;\n    cin >> r;\n    int c;\n    cin >> c;\n    cout << matSum(m, r, c);\n    return 0;\n}\n",
         "expectedOutput": "45",
         "testCases": [
             {
@@ -76,7 +76,7 @@
         "description": "Transpose a matrix.",
         "difficulty": "EASY",
         "category": "Matrix",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid transpose(int m[][3], int r, int c) {}\nint main() { int m[][3]={{1,2,3},{4,5,6}}; transpose(m,2,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid transpose(vector<vector<int>>& m, int r, int c) {\n    // TODO\n}\n\nint main() {\n    int m_rows, m_cols;\n    cin >> m_rows >> m_cols;\n    vector<vector<int>> m(m_rows, vector<int>(m_cols));\n    for (int i = 0; i < m_rows; i++)\n        for (int j = 0; j < m_cols; j++)\n            cin >> m[i][j];\n    int r;\n    cin >> r;\n    int c;\n    cin >> c;\n    transpose(m, r, c);\n    return 0;\n}\n",
         "expectedOutput": "1 4 2 5 3 6",
         "testCases": [
             {
@@ -146,7 +146,7 @@
         "description": "Sum of main diagonal.",
         "difficulty": "EASY",
         "category": "Matrix",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint diagSum(int m[][3], int n) { return 0; }\nint main() { int m[][3]={{1,2,3},{4,5,6},{7,8,9}}; cout<<diagSum(m,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint diagSum(vector<vector<int>>& m, int n) {\n    return 0;\n}\n\nint main() {\n    int m_rows, m_cols;\n    cin >> m_rows >> m_cols;\n    vector<vector<int>> m(m_rows, vector<int>(m_cols));\n    for (int i = 0; i < m_rows; i++)\n        for (int j = 0; j < m_cols; j++)\n            cin >> m[i][j];\n    int n;\n    cin >> n;\n    cout << diagSum(m, n);\n    return 0;\n}\n",
         "expectedOutput": "15",
         "testCases": [
             {
@@ -216,7 +216,7 @@
         "description": "Sum of each row.",
         "difficulty": "EASY",
         "category": "Matrix",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid rowSum(int m[][3], int r, int c) {}\nint main() { int m[][3]={{1,2,3},{4,5,6}}; rowSum(m,2,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid rowSum(vector<vector<int>>& m, int r, int c) {\n    // TODO\n}\n\nint main() {\n    int m_rows, m_cols;\n    cin >> m_rows >> m_cols;\n    vector<vector<int>> m(m_rows, vector<int>(m_cols));\n    for (int i = 0; i < m_rows; i++)\n        for (int j = 0; j < m_cols; j++)\n            cin >> m[i][j];\n    int r;\n    cin >> r;\n    int c;\n    cin >> c;\n    rowSum(m, r, c);\n    return 0;\n}\n",
         "expectedOutput": "6 15",
         "testCases": [
             {
@@ -286,7 +286,7 @@
         "description": "Sum of each column.",
         "difficulty": "EASY",
         "category": "Matrix",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid colSum(int m[][3], int r, int c) {}\nint main() { int m[][3]={{1,2,3},{4,5,6}}; colSum(m,2,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid colSum(vector<vector<int>>& m, int r, int c) {\n    // TODO\n}\n\nint main() {\n    int m_rows, m_cols;\n    cin >> m_rows >> m_cols;\n    vector<vector<int>> m(m_rows, vector<int>(m_cols));\n    for (int i = 0; i < m_rows; i++)\n        for (int j = 0; j < m_cols; j++)\n            cin >> m[i][j];\n    int r;\n    cin >> r;\n    int c;\n    cin >> c;\n    colSum(m, r, c);\n    return 0;\n}\n",
         "expectedOutput": "5 7 9",
         "testCases": [
             {
@@ -356,7 +356,7 @@
         "description": "Find second largest element.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint secondLargest(int a[], int n) { return 0; }\nint main() { int a[]={12,35,1,10,34,1}; cout<<secondLargest(a,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint secondLargest(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << secondLargest(a, n);\n    return 0;\n}\n",
         "expectedOutput": "34",
         "testCases": [
             {
@@ -427,7 +427,7 @@
         "description": "Remove duplicates from sorted array.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint removeDups(int a[], int n) { return 0; }\nint main() { int a[]={1,1,2,2,3,4,4,5}; int k=removeDups(a,8); for(int i=0;i<k;i++) cout<<a[i]<<(i<k-1?\" \":\"\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint removeDups(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << removeDups(a, n);\n    return 0;\n}\n",
         "expectedOutput": "1 2 3 4 5",
         "testCases": [
             {
@@ -498,7 +498,7 @@
         "description": "Move all zeros to end.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid moveZeros(int a[], int n) {}\nint main() { int a[]={0,1,0,3,12}; moveZeros(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid moveZeros(vector<int>& a, int n) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    moveZeros(a, n);\n    return 0;\n}\n",
         "expectedOutput": "1 3 12 0 0",
         "testCases": [
             {
@@ -569,7 +569,7 @@
         "description": "Rotate array left by k.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid rotateLeft(int a[], int n, int k) {}\nint main() { int a[]={1,2,3,4,5}; rotateLeft(a,5,2); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid rotateLeft(vector<int>& a, int n, int k) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    int k;\n    cin >> k;\n    rotateLeft(a, n, k);\n    return 0;\n}\n",
         "expectedOutput": "3 4 5 1 2",
         "testCases": [
             {
@@ -641,7 +641,7 @@
         "description": "Rotate array right by k.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid rotateRight(int a[], int n, int k) {}\nint main() { int a[]={1,2,3,4,5}; rotateRight(a,5,2); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid rotateRight(vector<int>& a, int n, int k) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    int k;\n    cin >> k;\n    rotateRight(a, n, k);\n    return 0;\n}\n",
         "expectedOutput": "4 5 1 2 3",
         "testCases": [
             {
@@ -713,7 +713,7 @@
         "description": "Is array sorted.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isSorted(int a[], int n) { return false; }\nint main() { int a[]={1,2,3,4,5}; cout<<isSorted(a,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isSorted(vector<int>& a, int n) {\n    return false;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << isSorted(a, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {

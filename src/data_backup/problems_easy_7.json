@@ -1,0 +1,701 @@
+[
+    {
+        "id": "e301",
+        "title": "Count Primes",
+        "description": "Count primes less than n.",
+        "difficulty": "MEDIUM",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countPrimes(int n) { return 0; }\nint main() { cout<<countPrimes(10); return 0; }",
+        "expectedOutput": "4",
+        "testCases": [
+            {
+                "input": "10",
+                "expectedOutput": "4",
+                "explanation": "Primes: 2, 3, 5, 7"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "No primes below 0"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "0",
+                "explanation": "No primes below 1"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "0",
+                "explanation": "No primes below 2"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "1",
+                "explanation": "Only 2"
+            },
+            {
+                "input": "5",
+                "expectedOutput": "2",
+                "explanation": "2 and 3"
+            },
+            {
+                "input": "20",
+                "expectedOutput": "8",
+                "explanation": "2,3,5,7,11,13,17,19"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "25",
+                "explanation": "25 primes below 100"
+            },
+            {
+                "input": "11",
+                "expectedOutput": "4",
+                "explanation": "2,3,5,7"
+            },
+            {
+                "input": "13",
+                "expectedOutput": "5",
+                "explanation": "2,3,5,7,11"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint countPrimes(int n) { if(n<=2) return 0; bool np[n]={}; int cnt=0; for(int i=2;i<n;i++) { if(!np[i]) { cnt++; for(int j=i*2;j<n;j+=i) np[j]=true; } } return cnt; }\nint main() { cout<<countPrimes(10); return 0; }",
+        "explanation": {
+            "approach": "Sieve of Eratosthenes.",
+            "steps": [
+                "Mark multiples as not prime",
+                "Count unmarked"
+            ],
+            "complexity": "Time: O(n log log n), Space: O(n)"
+        }
+    },
+    {
+        "id": "e302",
+        "title": "Power of Three",
+        "description": "Check if power of 3.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPowerOfThree(int n) { return false; }\nint main() { cout<<isPowerOfThree(27); return 0; }",
+        "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "27",
+                "expectedOutput": "1",
+                "explanation": "3^3 = 27"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "0 is not power of 3"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "3^0 = 1"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "1",
+                "explanation": "3^1 = 3"
+            },
+            {
+                "input": "9",
+                "expectedOutput": "1",
+                "explanation": "3^2 = 9"
+            },
+            {
+                "input": "81",
+                "expectedOutput": "1",
+                "explanation": "3^4 = 81"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "0",
+                "explanation": "Not a power of 3"
+            },
+            {
+                "input": "12",
+                "expectedOutput": "0",
+                "explanation": "12 = 3*4"
+            },
+            {
+                "input": "-3",
+                "expectedOutput": "0",
+                "explanation": "Negative not valid"
+            },
+            {
+                "input": "243",
+                "expectedOutput": "1",
+                "explanation": "3^5 = 243"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPowerOfThree(int n) { if(n<=0) return false; while(n%3==0) n/=3; return n==1; }\nint main() { cout<<isPowerOfThree(27); return 0; }",
+        "explanation": {
+            "approach": "Divide repeatedly.",
+            "steps": [
+                "While divisible by 3, divide",
+                "Check if result is 1"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e303",
+        "title": "Power of Four",
+        "description": "Check if power of 4.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPowerOfFour(int n) { return false; }\nint main() { cout<<isPowerOfFour(16); return 0; }",
+        "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "16",
+                "expectedOutput": "1",
+                "explanation": "4^2 = 16"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "0 is not power of 4"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "4^0 = 1"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "1",
+                "explanation": "4^1 = 4"
+            },
+            {
+                "input": "64",
+                "expectedOutput": "1",
+                "explanation": "4^3 = 64"
+            },
+            {
+                "input": "256",
+                "expectedOutput": "1",
+                "explanation": "4^4 = 256"
+            },
+            {
+                "input": "8",
+                "expectedOutput": "0",
+                "explanation": "8 = 2^3, not power of 4"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "0",
+                "explanation": "2 is not power of 4"
+            },
+            {
+                "input": "-4",
+                "expectedOutput": "0",
+                "explanation": "Negative not valid"
+            },
+            {
+                "input": "1024",
+                "expectedOutput": "1",
+                "explanation": "4^5 = 1024"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPowerOfFour(int n) { return n>0 && (n&(n-1))==0 && (n&0x55555555)!=0; }\nint main() { cout<<isPowerOfFour(16); return 0; }",
+        "explanation": {
+            "approach": "Bit manipulation.",
+            "steps": [
+                "Must be power of 2",
+                "1 bit must be in odd position"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "e304",
+        "title": "Add Digits",
+        "description": "Add digits until single.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint addDigits(int num) { return 0; }\nint main() { cout<<addDigits(38); return 0; }",
+        "expectedOutput": "2",
+        "testCases": [
+            {
+                "input": "38",
+                "expectedOutput": "2",
+                "explanation": "3+8=11, 1+1=2"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "Already single digit"
+            },
+            {
+                "input": "9",
+                "expectedOutput": "9",
+                "explanation": "Already single digit"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "1",
+                "explanation": "1+0=1"
+            },
+            {
+                "input": "18",
+                "expectedOutput": "9",
+                "explanation": "1+8=9"
+            },
+            {
+                "input": "99",
+                "expectedOutput": "9",
+                "explanation": "9+9=18, 1+8=9"
+            },
+            {
+                "input": "123",
+                "expectedOutput": "6",
+                "explanation": "1+2+3=6"
+            },
+            {
+                "input": "999",
+                "expectedOutput": "9",
+                "explanation": "Digital root of 9"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Single digit"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "1",
+                "explanation": "1+0+0=1"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint addDigits(int num) { if(num==0) return 0; if(num%9==0) return 9; return num%9; }\nint main() { cout<<addDigits(38); return 0; }",
+        "explanation": {
+            "approach": "Digital root formula.",
+            "steps": [
+                "Result is num % 9",
+                "Special case for 0 and multiples of 9"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "e305",
+        "title": "Ugly Number",
+        "description": "Check if ugly (2,3,5 factors only).",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isUgly(int n) { return false; }\nint main() { cout<<isUgly(6); return 0; }",
+        "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "6",
+                "expectedOutput": "1",
+                "explanation": "6 = 2 × 3"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "1 is ugly"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "0 is not ugly"
+            },
+            {
+                "input": "14",
+                "expectedOutput": "0",
+                "explanation": "14 = 2 × 7"
+            },
+            {
+                "input": "8",
+                "expectedOutput": "1",
+                "explanation": "8 = 2^3"
+            },
+            {
+                "input": "9",
+                "expectedOutput": "1",
+                "explanation": "9 = 3^2"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "1",
+                "explanation": "10 = 2 × 5"
+            },
+            {
+                "input": "30",
+                "expectedOutput": "1",
+                "explanation": "30 = 2 × 3 × 5"
+            },
+            {
+                "input": "-1",
+                "expectedOutput": "0",
+                "explanation": "Negative not ugly"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "0",
+                "explanation": "7 is prime, not 2,3,5"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nbool isUgly(int n) { if(n<=0) return false; while(n%2==0) n/=2; while(n%3==0) n/=3; while(n%5==0) n/=5; return n==1; }\nint main() { cout<<isUgly(6); return 0; }",
+        "explanation": {
+            "approach": "Divide by 2,3,5.",
+            "steps": [
+                "Remove all 2s, 3s, 5s",
+                "Check if result is 1"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e306",
+        "title": "Happy Number",
+        "description": "Check if reaches 1.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isHappy(int n) { return false; }\nint main() { cout<<isHappy(19); return 0; }",
+        "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "19",
+                "expectedOutput": "1",
+                "explanation": "1²+9²=82→...→1"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "0",
+                "explanation": "Enters cycle, never 1"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Already 1"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "1",
+                "explanation": "7 is happy"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "1",
+                "explanation": "1²+0²=1"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "1",
+                "explanation": "1+0+0=1"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "0",
+                "explanation": "Enters cycle"
+            },
+            {
+                "input": "13",
+                "expectedOutput": "1",
+                "explanation": "1+9=10→1"
+            },
+            {
+                "input": "23",
+                "expectedOutput": "1",
+                "explanation": "Happy number"
+            },
+            {
+                "input": "20",
+                "expectedOutput": "0",
+                "explanation": "Not happy"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint sumSquares(int n) { int s=0; while(n) { int d=n%10; s+=d*d; n/=10; } return s; }\nbool isHappy(int n) { int slow=n,fast=n; do { slow=sumSquares(slow); fast=sumSquares(sumSquares(fast)); } while(slow!=fast); return slow==1; }\nint main() { cout<<isHappy(19); return 0; }",
+        "explanation": {
+            "approach": "Floyd's cycle detection.",
+            "steps": [
+                "Sum squares of digits",
+                "Detect cycle or reach 1"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e307",
+        "title": "Excel Sheet Column",
+        "description": "Column title to number.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint titleToNumber(char s[]) { return 0; }\nint main() { cout<<titleToNumber(\"AB\"); return 0; }",
+        "expectedOutput": "28",
+        "testCases": [
+            {
+                "input": "AB",
+                "expectedOutput": "28",
+                "explanation": "A=1, B=2 → 1×26+2=28"
+            },
+            {
+                "input": "A",
+                "expectedOutput": "1",
+                "explanation": "Single A = 1"
+            },
+            {
+                "input": "Z",
+                "expectedOutput": "26",
+                "explanation": "Z = 26"
+            },
+            {
+                "input": "AA",
+                "expectedOutput": "27",
+                "explanation": "26+1 = 27"
+            },
+            {
+                "input": "AZ",
+                "expectedOutput": "52",
+                "explanation": "26+26 = 52"
+            },
+            {
+                "input": "ZZ",
+                "expectedOutput": "702",
+                "explanation": "26×26+26"
+            },
+            {
+                "input": "BA",
+                "expectedOutput": "53",
+                "explanation": "2×26+1 = 53"
+            },
+            {
+                "input": "AAA",
+                "expectedOutput": "703",
+                "explanation": "26²+26+1"
+            },
+            {
+                "input": "B",
+                "expectedOutput": "2",
+                "explanation": "Single B = 2"
+            },
+            {
+                "input": "ZA",
+                "expectedOutput": "677",
+                "explanation": "26×26+1"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint titleToNumber(char s[]) { int r=0; for(int i=0;s[i];i++) r=r*26+(s[i]-'A'+1); return r; }\nint main() { cout<<titleToNumber(\"AB\"); return 0; }",
+        "explanation": {
+            "approach": "Base 26 conversion.",
+            "steps": [
+                "Process each character",
+                "Multiply by 26 and add value"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e308",
+        "title": "Excel Column Title",
+        "description": "Number to column title.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid convertToTitle(int n) {}\nint main() { convertToTitle(28); return 0; }",
+        "expectedOutput": "AB",
+        "testCases": [
+            {
+                "input": "28",
+                "expectedOutput": "AB",
+                "explanation": "28 → AB"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "A",
+                "explanation": "1 → A"
+            },
+            {
+                "input": "26",
+                "expectedOutput": "Z",
+                "explanation": "26 → Z"
+            },
+            {
+                "input": "27",
+                "expectedOutput": "AA",
+                "explanation": "27 → AA"
+            },
+            {
+                "input": "52",
+                "expectedOutput": "AZ",
+                "explanation": "52 → AZ"
+            },
+            {
+                "input": "701",
+                "expectedOutput": "ZY",
+                "explanation": "701 → ZY"
+            },
+            {
+                "input": "702",
+                "expectedOutput": "ZZ",
+                "explanation": "702 → ZZ"
+            },
+            {
+                "input": "703",
+                "expectedOutput": "AAA",
+                "explanation": "703 → AAA"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "B",
+                "explanation": "2 → B"
+            },
+            {
+                "input": "53",
+                "expectedOutput": "BA",
+                "explanation": "53 → BA"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nvoid convertToTitle(int n) { char res[10]; int i=0; while(n>0) { n--; res[i++]='A'+n%26; n/=26; } for(int j=i-1;j>=0;j--) cout<<res[j]; }\nint main() { convertToTitle(28); return 0; }",
+        "explanation": {
+            "approach": "Base 26 conversion.",
+            "steps": [
+                "Extract remainder",
+                "Build string in reverse"
+            ],
+            "complexity": "Time: O(log n), Space: O(log n)"
+        }
+    },
+    {
+        "id": "e309",
+        "title": "Factorial Trailing Zeroes",
+        "description": "Count trailing zeros in n!.",
+        "difficulty": "MEDIUM",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint trailingZeroes(int n) { return 0; }\nint main() { cout<<trailingZeroes(25); return 0; }",
+        "expectedOutput": "6",
+        "testCases": [
+            {
+                "input": "25",
+                "expectedOutput": "6",
+                "explanation": "25/5=5, 25/25=1 → 5+1=6"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "0! = 1, no zeros"
+            },
+            {
+                "input": "5",
+                "expectedOutput": "1",
+                "explanation": "5! = 120, one zero"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "2",
+                "explanation": "10! has 2 trailing zeros"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "0",
+                "explanation": "4! = 24, no zeros"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "24",
+                "explanation": "100/5+100/25=24"
+            },
+            {
+                "input": "125",
+                "expectedOutput": "31",
+                "explanation": "25+5+1=31"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "0",
+                "explanation": "1! = 1"
+            },
+            {
+                "input": "20",
+                "expectedOutput": "4",
+                "explanation": "20/5=4"
+            },
+            {
+                "input": "50",
+                "expectedOutput": "12",
+                "explanation": "10+2=12"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint trailingZeroes(int n) { int cnt=0; while(n>=5) { n/=5; cnt+=n; } return cnt; }\nint main() { cout<<trailingZeroes(25); return 0; }",
+        "explanation": {
+            "approach": "Count factors of 5.",
+            "steps": [
+                "Each 5 contributes to a 0",
+                "Count n/5 + n/25 + ..."
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e310",
+        "title": "Sqrt(x)",
+        "description": "Integer square root.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint mySqrt(int x) { return 0; }\nint main() { cout<<mySqrt(8); return 0; }",
+        "expectedOutput": "2",
+        "testCases": [
+            {
+                "input": "8",
+                "expectedOutput": "2",
+                "explanation": "√8 ≈ 2.83, floor = 2"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "√0 = 0"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "√1 = 1"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "2",
+                "explanation": "√4 = 2 exactly"
+            },
+            {
+                "input": "9",
+                "expectedOutput": "3",
+                "explanation": "√9 = 3 exactly"
+            },
+            {
+                "input": "16",
+                "expectedOutput": "4",
+                "explanation": "√16 = 4"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "1",
+                "explanation": "√2 ≈ 1.41"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "10",
+                "explanation": "√100 = 10"
+            },
+            {
+                "input": "15",
+                "expectedOutput": "3",
+                "explanation": "√15 ≈ 3.87"
+            },
+            {
+                "input": "2147395600",
+                "expectedOutput": "46340",
+                "explanation": "Large perfect square"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint mySqrt(int x) { if(x==0) return 0; long l=1,r=x; while(l<=r) { long m=(l+r)/2; if(m*m==x) return m; if(m*m<x) l=m+1; else r=m-1; } return r; }\nint main() { cout<<mySqrt(8); return 0; }",
+        "explanation": {
+            "approach": "Binary search.",
+            "steps": [
+                "Search for largest m where m²≤x"
+            ],
+            "complexity": "Time: O(log x), Space: O(1)"
+        }
+    }
+]

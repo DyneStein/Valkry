@@ -45,6 +45,10 @@
         "challenges": {
             ".read": "auth != null",
             ".write": "auth != null"
+        },
+        "groupLobbies": {
+            ".read": "auth != null",
+            ".write": "auth != null"
         }
     }
 }

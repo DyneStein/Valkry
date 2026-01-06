@@ -1,0 +1,996 @@
+[
+    {
+        "id": "fun26",
+        "title": "Nth Term AP",
+        "description": "Find nth term of AP.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint nthAP(int a, int d, int n) { return 0; }\nint main() { cout<<nthAP(2,3,5); return 0; }",
+        "expectedOutput": "14",
+        "solution": "#include <iostream>\nusing namespace std;\nint nthAP(int a, int d, int n) {\n    return a + (n-1) * d;\n}\nint main() { cout<<nthAP(2,3,5); return 0; }",
+        "explanation": {
+            "approach": "Use formula: nth term = a + (n-1)×d",
+            "steps": [
+                "First term + (n-1) * common difference"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "a=2, d=3, n=5",
+                "expectedOutput": "14",
+                "explanation": "2,5,8,11,14 - 5th term is 14"
+            },
+            {
+                "input": "a=1, d=1, n=10",
+                "expectedOutput": "10",
+                "explanation": "1,2,3...10"
+            },
+            {
+                "input": "a=5, d=0, n=3",
+                "expectedOutput": "5",
+                "explanation": "All terms same when d=0"
+            },
+            {
+                "input": "a=10, d=-2, n=4",
+                "expectedOutput": "4",
+                "explanation": "10,8,6,4"
+            }
+        ]
+    },
+    {
+        "id": "fun27",
+        "title": "Nth Term GP",
+        "description": "Find nth term of GP.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint nthGP(int a, int r, int n) { return 0; }\nint main() { cout<<nthGP(2,3,4); return 0; }",
+        "expectedOutput": "54",
+        "solution": "#include <iostream>\nusing namespace std;\nint nthGP(int a, int r, int n) {\n    int result = a;\n    for(int i = 1; i < n; i++) result *= r;\n    return result;\n}\nint main() { cout<<nthGP(2,3,4); return 0; }",
+        "explanation": {
+            "approach": "Multiply first term by ratio (n-1) times.",
+            "steps": [
+                "nth term = a × r^(n-1)"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "a=2, r=3, n=4",
+                "expectedOutput": "54",
+                "explanation": "2,6,18,54"
+            },
+            {
+                "input": "a=1, r=2, n=5",
+                "expectedOutput": "16",
+                "explanation": "1,2,4,8,16"
+            },
+            {
+                "input": "a=5, r=1, n=10",
+                "expectedOutput": "5",
+                "explanation": "All terms same when r=1"
+            },
+            {
+                "input": "a=3, r=2, n=1",
+                "expectedOutput": "3",
+                "explanation": "First term is a"
+            }
+        ]
+    },
+    {
+        "id": "fun28",
+        "title": "Power Function",
+        "description": "Calculate x^n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint power(int x, int n) { return 0; }\nint main() { cout<<power(2,10); return 0; }",
+        "expectedOutput": "1024",
+        "solution": "#include <iostream>\nusing namespace std;\nint power(int x, int n) {\n    int result = 1;\n    for(int i = 0; i < n; i++) result *= x;\n    return result;\n}\nint main() { cout<<power(2,10); return 0; }",
+        "explanation": {
+            "approach": "Multiply x by itself n times.",
+            "steps": [
+                "Start with 1",
+                "Multiply by x, n times"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "x=2, n=10",
+                "expectedOutput": "1024",
+                "explanation": "2^10=1024"
+            },
+            {
+                "input": "x=3, n=4",
+                "expectedOutput": "81",
+                "explanation": "3^4=81"
+            },
+            {
+                "input": "x=5, n=0",
+                "expectedOutput": "1",
+                "explanation": "Any^0=1"
+            },
+            {
+                "input": "x=10, n=3",
+                "expectedOutput": "1000",
+                "explanation": "10^3=1000"
+            }
+        ]
+    },
+    {
+        "id": "fun29",
+        "title": "Cube of Number",
+        "description": "Calculate n^3.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint cube(int n) { return 0; }\nint main() { cout<<cube(5); return 0; }",
+        "expectedOutput": "125",
+        "solution": "#include <iostream>\nusing namespace std;\nint cube(int n) {\n    return n * n * n;\n}\nint main() { cout<<cube(5); return 0; }",
+        "explanation": {
+            "approach": "Multiply n by itself 3 times.",
+            "steps": [
+                "Return n × n × n"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "125",
+                "explanation": "5³=125"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "8",
+                "explanation": "2³=8"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "0",
+                "explanation": "0³=0"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "1000",
+                "explanation": "10³=1000"
+            }
+        ]
+    },
+    {
+        "id": "fun30",
+        "title": "Square Root Integer",
+        "description": "Floor of square root.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint mySqrt(int n) { return 0; }\nint main() { cout<<mySqrt(26); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint mySqrt(int n) {\n    int i = 1;\n    while(i * i <= n) i++;\n    return i - 1;\n}\nint main() { cout<<mySqrt(26); return 0; }",
+        "explanation": {
+            "approach": "Find largest i where i² ≤ n.",
+            "steps": [
+                "Increment i while i² ≤ n",
+                "Return i-1"
+            ],
+            "complexity": "Time: O(√n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=26",
+                "expectedOutput": "5",
+                "explanation": "5²=25, 6²=36, so floor is 5"
+            },
+            {
+                "input": "n=16",
+                "expectedOutput": "4",
+                "explanation": "Perfect square"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "√1=1"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "10",
+                "explanation": "√100=10"
+            }
+        ]
+    },
+    {
+        "id": "fun31",
+        "title": "Calculate Percentage",
+        "description": "Find percentage.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble percentage(int obtained, int total) { return 0; }\nint main() { cout<<percentage(45,50); return 0; }",
+        "expectedOutput": "90",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble percentage(int obtained, int total) {\n    return (obtained * 100.0) / total;\n}\nint main() { cout<<percentage(45,50); return 0; }",
+        "explanation": {
+            "approach": "(Obtained/Total) × 100",
+            "steps": [
+                "Divide obtained by total",
+                "Multiply by 100"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "obtained=45, total=50",
+                "expectedOutput": "90",
+                "explanation": "45/50*100=90%"
+            },
+            {
+                "input": "obtained=50, total=100",
+                "expectedOutput": "50",
+                "explanation": "Half is 50%"
+            },
+            {
+                "input": "obtained=100, total=100",
+                "expectedOutput": "100",
+                "explanation": "100%"
+            },
+            {
+                "input": "obtained=25, total=50",
+                "expectedOutput": "50",
+                "explanation": "Half"
+            }
+        ]
+    },
+    {
+        "id": "fun32",
+        "title": "Simple Interest",
+        "description": "Calculate SI.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble simpleInterest(int p, int r, int t) { return 0; }\nint main() { cout<<simpleInterest(1000,5,2); return 0; }",
+        "expectedOutput": "100",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble simpleInterest(int p, int r, int t) {\n    return (p * r * t) / 100.0;\n}\nint main() { cout<<simpleInterest(1000,5,2); return 0; }",
+        "explanation": {
+            "approach": "SI = (P × R × T) / 100",
+            "steps": [
+                "Multiply P×R×T",
+                "Divide by 100"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "p=1000, r=5, t=2",
+                "expectedOutput": "100",
+                "explanation": "1000*5*2/100=100"
+            },
+            {
+                "input": "p=5000, r=10, t=1",
+                "expectedOutput": "500",
+                "explanation": "5000*10*1/100=500"
+            },
+            {
+                "input": "p=1000, r=0, t=5",
+                "expectedOutput": "0",
+                "explanation": "0% rate=0 interest"
+            },
+            {
+                "input": "p=2000, r=5, t=3",
+                "expectedOutput": "300",
+                "explanation": "2000*5*3/100=300"
+            }
+        ]
+    },
+    {
+        "id": "fun33",
+        "title": "Celsius to Fahrenheit",
+        "description": "Temperature conversion.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble toFahrenheit(double c) { return 0; }\nint main() { cout<<toFahrenheit(0); return 0; }",
+        "expectedOutput": "32",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble toFahrenheit(double c) {\n    return c * 9.0/5.0 + 32;\n}\nint main() { cout<<toFahrenheit(0); return 0; }",
+        "explanation": {
+            "approach": "F = C × (9/5) + 32",
+            "steps": [
+                "Multiply by 9/5",
+                "Add 32"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "c=0",
+                "expectedOutput": "32",
+                "explanation": "0°C = 32°F (freezing)"
+            },
+            {
+                "input": "c=100",
+                "expectedOutput": "212",
+                "explanation": "100°C = 212°F (boiling)"
+            },
+            {
+                "input": "c=-40",
+                "expectedOutput": "-40",
+                "explanation": "-40°C = -40°F (same!)"
+            },
+            {
+                "input": "c=37",
+                "expectedOutput": "98.6",
+                "explanation": "Body temperature"
+            }
+        ]
+    },
+    {
+        "id": "fun34",
+        "title": "Fahrenheit to Celsius",
+        "description": "Temperature conversion.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble toCelsius(double f) { return 0; }\nint main() { cout<<toCelsius(32); return 0; }",
+        "expectedOutput": "0",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble toCelsius(double f) {\n    return (f - 32) * 5.0/9.0;\n}\nint main() { cout<<toCelsius(32); return 0; }",
+        "explanation": {
+            "approach": "C = (F - 32) × (5/9)",
+            "steps": [
+                "Subtract 32",
+                "Multiply by 5/9"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "f=32",
+                "expectedOutput": "0",
+                "explanation": "32°F = 0°C"
+            },
+            {
+                "input": "f=212",
+                "expectedOutput": "100",
+                "explanation": "212°F = 100°C"
+            },
+            {
+                "input": "f=-40",
+                "expectedOutput": "-40",
+                "explanation": "-40°F = -40°C"
+            },
+            {
+                "input": "f=98.6",
+                "expectedOutput": "37",
+                "explanation": "Body temp"
+            }
+        ]
+    },
+    {
+        "id": "fun35",
+        "title": "Area of Circle",
+        "description": "Calculate area.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble areaCircle(double r) { return 0; }\nint main() { cout<<fixed<<setprecision(2)<<areaCircle(7); return 0; }",
+        "expectedOutput": "153.94",
+        "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble areaCircle(double r) {\n    return 3.14159 * r * r;\n}\nint main() { cout<<fixed<<setprecision(2)<<areaCircle(7); return 0; }",
+        "explanation": {
+            "approach": "Area = π × r²",
+            "steps": [
+                "Square radius",
+                "Multiply by π"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "r=7",
+                "expectedOutput": "153.94",
+                "explanation": "π×7²=153.94"
+            },
+            {
+                "input": "r=1",
+                "expectedOutput": "3.14",
+                "explanation": "π×1²=3.14"
+            },
+            {
+                "input": "r=10",
+                "expectedOutput": "314.16",
+                "explanation": "π×100"
+            },
+            {
+                "input": "r=0",
+                "expectedOutput": "0",
+                "explanation": "Zero radius"
+            }
+        ]
+    },
+    {
+        "id": "fun36",
+        "title": "Area of Triangle",
+        "description": "Using base and height.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble areaTriangle(double b, double h) { return 0; }\nint main() { cout<<areaTriangle(10,5); return 0; }",
+        "expectedOutput": "25",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble areaTriangle(double b, double h) {\n    return 0.5 * b * h;\n}\nint main() { cout<<areaTriangle(10,5); return 0; }",
+        "explanation": {
+            "approach": "Area = ½ × base × height",
+            "steps": [
+                "Multiply base by height",
+                "Divide by 2"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "b=10, h=5",
+                "expectedOutput": "25",
+                "explanation": "½×10×5=25"
+            },
+            {
+                "input": "b=6, h=8",
+                "expectedOutput": "24",
+                "explanation": "½×6×8=24"
+            },
+            {
+                "input": "b=3, h=4",
+                "expectedOutput": "6",
+                "explanation": "½×3×4=6"
+            },
+            {
+                "input": "b=0, h=10",
+                "expectedOutput": "0",
+                "explanation": "Zero base"
+            }
+        ]
+    },
+    {
+        "id": "fun37",
+        "title": "Area of Rectangle",
+        "description": "Length times width.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint areaRect(int l, int w) { return 0; }\nint main() { cout<<areaRect(10,5); return 0; }",
+        "expectedOutput": "50",
+        "solution": "#include <iostream>\nusing namespace std;\nint areaRect(int l, int w) {\n    return l * w;\n}\nint main() { cout<<areaRect(10,5); return 0; }",
+        "explanation": {
+            "approach": "Area = length × width",
+            "steps": [
+                "Multiply length by width"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "l=10, w=5",
+                "expectedOutput": "50",
+                "explanation": "10×5=50"
+            },
+            {
+                "input": "l=7, w=7",
+                "expectedOutput": "49",
+                "explanation": "Square: 7×7=49"
+            },
+            {
+                "input": "l=1, w=100",
+                "expectedOutput": "100",
+                "explanation": "1×100=100"
+            },
+            {
+                "input": "l=0, w=10",
+                "expectedOutput": "0",
+                "explanation": "Zero length"
+            }
+        ]
+    },
+    {
+        "id": "fun38",
+        "title": "Perimeter of Rectangle",
+        "description": "Sum of all sides.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint perimeterRect(int l, int w) { return 0; }\nint main() { cout<<perimeterRect(10,5); return 0; }",
+        "expectedOutput": "30",
+        "solution": "#include <iostream>\nusing namespace std;\nint perimeterRect(int l, int w) {\n    return 2 * (l + w);\n}\nint main() { cout<<perimeterRect(10,5); return 0; }",
+        "explanation": {
+            "approach": "Perimeter = 2 × (length + width)",
+            "steps": [
+                "Add length and width",
+                "Multiply by 2"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "l=10, w=5",
+                "expectedOutput": "30",
+                "explanation": "2×(10+5)=30"
+            },
+            {
+                "input": "l=7, w=7",
+                "expectedOutput": "28",
+                "explanation": "Square: 4×7=28"
+            },
+            {
+                "input": "l=1, w=1",
+                "expectedOutput": "4",
+                "explanation": "Unit square"
+            },
+            {
+                "input": "l=0, w=5",
+                "expectedOutput": "10",
+                "explanation": "2×5=10"
+            }
+        ]
+    },
+    {
+        "id": "fun39",
+        "title": "Check Leap Year",
+        "description": "Is year a leap year.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isLeapYear(int y) { return false; }\nint main() { cout<<isLeapYear(2024); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isLeapYear(int y) {\n    return (y%4==0 && y%100!=0) || y%400==0;\n}\nint main() { cout<<isLeapYear(2024); return 0; }",
+        "explanation": {
+            "approach": "Divisible by 4 but not 100, or divisible by 400.",
+            "steps": [
+                "Check if divisible by 400",
+                "Or divisible by 4 but not 100"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "y=2024",
+                "expectedOutput": "1",
+                "explanation": "Divisible by 4, not by 100"
+            },
+            {
+                "input": "y=2000",
+                "expectedOutput": "1",
+                "explanation": "Divisible by 400"
+            },
+            {
+                "input": "y=1900",
+                "expectedOutput": "0",
+                "explanation": "Divisible by 100 but not 400"
+            },
+            {
+                "input": "y=2023",
+                "expectedOutput": "0",
+                "explanation": "Not divisible by 4"
+            }
+        ]
+    },
+    {
+        "id": "fun40",
+        "title": "Days in Month",
+        "description": "Number of days.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint daysInMonth(int m) { return 0; }\nint main() { cout<<daysInMonth(2); return 0; }",
+        "expectedOutput": "28",
+        "solution": "#include <iostream>\nusing namespace std;\nint daysInMonth(int m) {\n    int days[]={31,28,31,30,31,30,31,31,30,31,30,31};\n    return days[m-1];\n}\nint main() { cout<<daysInMonth(2); return 0; }",
+        "explanation": {
+            "approach": "Lookup table for days in each month.",
+            "steps": [
+                "Use array with days per month",
+                "Return days[month-1]"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "m=2",
+                "expectedOutput": "28",
+                "explanation": "February (non-leap)"
+            },
+            {
+                "input": "m=1",
+                "expectedOutput": "31",
+                "explanation": "January"
+            },
+            {
+                "input": "m=4",
+                "expectedOutput": "30",
+                "explanation": "April has 30"
+            },
+            {
+                "input": "m=12",
+                "expectedOutput": "31",
+                "explanation": "December"
+            }
+        ]
+    },
+    {
+        "id": "fun41",
+        "title": "LCM of Two",
+        "description": "Least Common Multiple.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint lcm(int a, int b) { return 0; }\nint main() { cout<<lcm(4,6); return 0; }",
+        "expectedOutput": "12",
+        "solution": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) {\n    while(b) { int t=b; b=a%b; a=t; }\n    return a;\n}\nint lcm(int a, int b) {\n    return (a / gcd(a,b)) * b;\n}\nint main() { cout<<lcm(4,6); return 0; }",
+        "explanation": {
+            "approach": "LCM = (a × b) / GCD(a,b)",
+            "steps": [
+                "Find GCD",
+                "LCM = a/gcd * b"
+            ],
+            "complexity": "Time: O(log min(a,b)), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "a=4, b=6",
+                "expectedOutput": "12",
+                "explanation": "LCM(4,6)=12"
+            },
+            {
+                "input": "a=3, b=5",
+                "expectedOutput": "15",
+                "explanation": "Coprime: 3×5=15"
+            },
+            {
+                "input": "a=12, b=8",
+                "expectedOutput": "24",
+                "explanation": "LCM(12,8)=24"
+            },
+            {
+                "input": "a=7, b=7",
+                "expectedOutput": "7",
+                "explanation": "Same numbers"
+            }
+        ]
+    },
+    {
+        "id": "fun42",
+        "title": "HCF of Two",
+        "description": "Highest Common Factor.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint hcf(int a, int b) { return 0; }\nint main() { cout<<hcf(48,18); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint hcf(int a, int b) {\n    while(b) { int t=b; b=a%b; a=t; }\n    return a;\n}\nint main() { cout<<hcf(48,18); return 0; }",
+        "explanation": {
+            "approach": "Euclidean algorithm.",
+            "steps": [
+                "Replace (a,b) with (b, a%b)",
+                "Repeat until b=0"
+            ],
+            "complexity": "Time: O(log min(a,b)), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "a=48, b=18",
+                "expectedOutput": "6",
+                "explanation": "GCD(48,18)=6"
+            },
+            {
+                "input": "a=100, b=25",
+                "expectedOutput": "25",
+                "explanation": "25 divides 100"
+            },
+            {
+                "input": "a=17, b=13",
+                "expectedOutput": "1",
+                "explanation": "Coprime"
+            },
+            {
+                "input": "a=12, b=12",
+                "expectedOutput": "12",
+                "explanation": "Same numbers"
+            }
+        ]
+    },
+    {
+        "id": "fun43",
+        "title": "Sum First N Natural",
+        "description": "1+2+3+...+n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumN(int n) { return 0; }\nint main() { cout<<sumN(10); return 0; }",
+        "expectedOutput": "55",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumN(int n) {\n    return n * (n + 1) / 2;\n}\nint main() { cout<<sumN(10); return 0; }",
+        "explanation": {
+            "approach": "Formula: n(n+1)/2",
+            "steps": [
+                "Use Gauss formula"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "55",
+                "explanation": "1+2+...+10=55"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Just 1"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "5050",
+                "explanation": "Famous result"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "15",
+                "explanation": "1+2+3+4+5=15"
+            }
+        ]
+    },
+    {
+        "id": "fun44",
+        "title": "Sum of Squares",
+        "description": "1²+2²+...+n².",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumSquares(int n) { return 0; }\nint main() { cout<<sumSquares(5); return 0; }",
+        "expectedOutput": "55",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumSquares(int n) {\n    return n * (n + 1) * (2*n + 1) / 6;\n}\nint main() { cout<<sumSquares(5); return 0; }",
+        "explanation": {
+            "approach": "Formula: n(n+1)(2n+1)/6",
+            "steps": [
+                "Apply formula"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "55",
+                "explanation": "1+4+9+16+25=55"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "14",
+                "explanation": "1+4+9=14"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Just 1²=1"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "385",
+                "explanation": "Sum of first 10 squares"
+            }
+        ]
+    },
+    {
+        "id": "fun45",
+        "title": "Sum of Cubes",
+        "description": "1³+2³+...+n³.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumCubes(int n) { return 0; }\nint main() { cout<<sumCubes(4); return 0; }",
+        "expectedOutput": "100",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumCubes(int n) {\n    int s = n * (n + 1) / 2;\n    return s * s;\n}\nint main() { cout<<sumCubes(4); return 0; }",
+        "explanation": {
+            "approach": "Sum of cubes = (sum of n)²",
+            "steps": [
+                "Calculate sum of n first",
+                "Square it"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=4",
+                "expectedOutput": "100",
+                "explanation": "1+8+27+64=100=(1+2+3+4)²"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "36",
+                "explanation": "1+8+27=36=6²"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "1³=1"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "225",
+                "explanation": "(1+2+3+4+5)²=225"
+            }
+        ]
+    },
+    {
+        "id": "fun46",
+        "title": "Print 1 to N",
+        "description": "Print numbers 1 to n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid printN(int n) {}\nint main() { printN(5); return 0; }",
+        "expectedOutput": "1 2 3 4 5",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid printN(int n) {\n    for(int i=1;i<=n;i++) cout<<i<<\" \";\n}\nint main() { printN(5); return 0; }",
+        "explanation": {
+            "approach": "Simple loop from 1 to n.",
+            "steps": [
+                "Loop i from 1 to n",
+                "Print i"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "1 2 3 4 5",
+                "explanation": "Print 1 to 5"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Single number"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "1 2 3 4 5 6 7 8 9 10",
+                "explanation": "1 to 10"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "1 2 3",
+                "explanation": "Print 1 to 3"
+            }
+        ]
+    },
+    {
+        "id": "fun47",
+        "title": "Print N to 1",
+        "description": "Print countdown.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid printReverse(int n) {}\nint main() { printReverse(5); return 0; }",
+        "expectedOutput": "5 4 3 2 1",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid printReverse(int n) {\n    for(int i=n;i>=1;i--) cout<<i<<\" \";\n}\nint main() { printReverse(5); return 0; }",
+        "explanation": {
+            "approach": "Loop from n down to 1.",
+            "steps": [
+                "Loop i from n to 1",
+                "Print i"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "5 4 3 2 1",
+                "explanation": "Countdown from 5"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Single number"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "10 9 8 7 6 5 4 3 2 1",
+                "explanation": "10 to 1"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "3 2 1",
+                "explanation": "3 to 1"
+            }
+        ]
+    },
+    {
+        "id": "fun48",
+        "title": "Print Odd Numbers",
+        "description": "Odd numbers 1 to n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid printOdds(int n) {}\nint main() { printOdds(10); return 0; }",
+        "expectedOutput": "1 3 5 7 9",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid printOdds(int n) {\n    for(int i=1;i<=n;i+=2) cout<<i<<\" \";\n}\nint main() { printOdds(10); return 0; }",
+        "explanation": {
+            "approach": "Start at 1, increment by 2.",
+            "steps": [
+                "Start i=1",
+                "Print i, then i+=2"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "1 3 5 7 9",
+                "explanation": "Odds up to 10"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "1 3 5",
+                "explanation": "Odds up to 5"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Just 1"
+            },
+            {
+                "input": "n=15",
+                "expectedOutput": "1 3 5 7 9 11 13 15",
+                "explanation": "Odds to 15"
+            }
+        ]
+    },
+    {
+        "id": "fun49",
+        "title": "Print Even Numbers",
+        "description": "Even numbers 2 to n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid printEvens(int n) {}\nint main() { printEvens(10); return 0; }",
+        "expectedOutput": "2 4 6 8 10",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid printEvens(int n) {\n    for(int i=2;i<=n;i+=2) cout<<i<<\" \";\n}\nint main() { printEvens(10); return 0; }",
+        "explanation": {
+            "approach": "Start at 2, increment by 2.",
+            "steps": [
+                "Start i=2",
+                "Print i, then i+=2"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "2 4 6 8 10",
+                "explanation": "Evens up to 10"
+            },
+            {
+                "input": "n=6",
+                "expectedOutput": "2 4 6",
+                "explanation": "Evens up to 6"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "2",
+                "explanation": "Just 2"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "",
+                "explanation": "No evens"
+            }
+        ]
+    },
+    {
+        "id": "fun50",
+        "title": "Multiplication Table",
+        "description": "Print table of n.",
+        "difficulty": "EASY",
+        "category": "Fundamentals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid table(int n) {}\nint main() { table(5); return 0; }",
+        "expectedOutput": "5 10 15 20 25 30 35 40 45 50",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid table(int n) {\n    for(int i=1;i<=10;i++) cout<<n*i<<\" \";\n}\nint main() { table(5); return 0; }",
+        "explanation": {
+            "approach": "Loop 1 to 10, print n×i.",
+            "steps": [
+                "For i from 1 to 10",
+                "Print n×i"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "5 10 15 20 25 30 35 40 45 50",
+                "explanation": "5's table"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "7 14 21 28 35 42 49 56 63 70",
+                "explanation": "7's table"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1 2 3 4 5 6 7 8 9 10",
+                "explanation": "1's table"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "10 20 30 40 50 60 70 80 90 100",
+                "explanation": "10's table"
+            }
+        ]
+    }
+]

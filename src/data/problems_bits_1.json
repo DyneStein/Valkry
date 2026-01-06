@@ -5,7 +5,7 @@
         "description": "Using bit operation.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isEven(int n) { return false; }\nint main() { cout<<isEven(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isEven(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isEven(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isEven(int n) { return (n & 1) == 0; }\nint main() { cout<<isEven(10); return 0; }",
         "explanation": {
@@ -45,7 +45,7 @@
         "description": "Using bit operation.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isOdd(int n) { return false; }\nint main() { cout<<isOdd(7); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isOdd(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isOdd(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isOdd(int n) { return (n & 1) == 1; }\nint main() { cout<<isOdd(7); return 0; }",
         "explanation": {
@@ -85,7 +85,7 @@
         "description": "Count 1s in binary.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countSetBits(int n) { return 0; }\nint main() { cout<<countSetBits(13); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countSetBits(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << countSetBits(n);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint countSetBits(int n) { int c = 0; while(n) { c += n & 1; n >>= 1; } return c; }\nint main() { cout<<countSetBits(13); return 0; }",
         "explanation": {
@@ -126,7 +126,7 @@
         "description": "Is number power of 2.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPowerOf2(int n) { return false; }\nint main() { cout<<isPowerOf2(16); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPowerOf2(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isPowerOf2(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isPowerOf2(int n) { return n > 0 && (n & (n-1)) == 0; }\nint main() { cout<<isPowerOf2(16); return 0; }",
         "explanation": {
@@ -166,7 +166,7 @@
         "description": "Flip the kth bit.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint toggleBit(int n, int k) { return 0; }\nint main() { cout<<toggleBit(13,1); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint toggleBit(int n, int k) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int k;\n    cin >> k;\n    cout << toggleBit(n, k);\n    return 0;\n}\n",
         "expectedOutput": "15",
         "solution": "#include <iostream>\nusing namespace std;\nint toggleBit(int n, int k) { return n ^ (1 << k); }\nint main() { cout<<toggleBit(13,1); return 0; }",
         "explanation": {
@@ -206,7 +206,7 @@
         "description": "Set kth bit to 1.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint setBit(int n, int k) { return 0; }\nint main() { cout<<setBit(10,0); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint setBit(int n, int k) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int k;\n    cin >> k;\n    cout << setBit(n, k);\n    return 0;\n}\n",
         "expectedOutput": "11",
         "solution": "#include <iostream>\nusing namespace std;\nint setBit(int n, int k) { return n | (1 << k); }\nint main() { cout<<setBit(10,0); return 0; }",
         "explanation": {
@@ -246,7 +246,7 @@
         "description": "Set kth bit to 0.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint clearBit(int n, int k) { return 0; }\nint main() { cout<<clearBit(15,1); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint clearBit(int n, int k) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int k;\n    cin >> k;\n    cout << clearBit(n, k);\n    return 0;\n}\n",
         "expectedOutput": "13",
         "solution": "#include <iostream>\nusing namespace std;\nint clearBit(int n, int k) { return n & ~(1 << k); }\nint main() { cout<<clearBit(15,1); return 0; }",
         "explanation": {
@@ -286,7 +286,7 @@
         "description": "Is kth bit set.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool checkBit(int n, int k) { return false; }\nint main() { cout<<checkBit(13,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool checkBit(int n, int k) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int k;\n    cin >> k;\n    cout << checkBit(n, k);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool checkBit(int n, int k) { return (n >> k) & 1; }\nint main() { cout<<checkBit(13,2); return 0; }",
         "explanation": {
@@ -367,7 +367,7 @@
         "description": "One appears once, others twice.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint singleNumber(int a[], int n) { return 0; }\nint main() { int a[]={2,1,4,5,2,4,1}; cout<<singleNumber(a,7); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint singleNumber(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << singleNumber(a, n);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nint singleNumber(int a[], int n) { int r = 0; for(int i = 0; i < n; i++) r ^= a[i]; return r; }\nint main() { int a[]={2,1,4,5,2,4,1}; cout<<singleNumber(a,7); return 0; }",
         "explanation": {
@@ -407,7 +407,7 @@
         "description": "Position of rightmost 1.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint rightmostSetBit(int n) { return 0; }\nint main() { cout<<rightmostSetBit(12); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint rightmostSetBit(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << rightmostSetBit(n);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\nint rightmostSetBit(int n) { int pos = 0; while((n & 1) == 0) { n >>= 1; pos++; } return pos; }\nint main() { cout<<rightmostSetBit(12); return 0; }",
         "explanation": {
@@ -447,7 +447,7 @@
         "description": "Clear rightmost 1.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint turnOffRightmost(int n) { return 0; }\nint main() { cout<<turnOffRightmost(12); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint turnOffRightmost(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << turnOffRightmost(n);\n    return 0;\n}\n",
         "expectedOutput": "8",
         "solution": "#include <iostream>\nusing namespace std;\nint turnOffRightmost(int n) { return n & (n - 1); }\nint main() { cout<<turnOffRightmost(12); return 0; }",
         "explanation": {

@@ -24,21 +24,43 @@ const LandingPage = () => {
                 justifyContent: 'center',
                 minHeight: 'calc(100vh - 52px)',
                 textAlign: 'center',
-                padding: '0 22px'
+                padding: '0 22px',
+                position: 'relative'
             }}>
-                <p className="caption" style={{ marginBottom: '16px', color: 'var(--accent)' }}>
+                {/* Subtle gradient background */}
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    width: '100%',
+                    maxWidth: '900px',
+                    height: '500px',
+                    background: 'radial-gradient(ellipse at center, rgba(99, 102, 241, 0.12) 0%, transparent 70%)',
+                    pointerEvents: 'none',
+                    animation: 'gradientFadeIn 4s ease-out forwards',
+                    opacity: 0
+                }} />
+                <style>{`
+                    @keyframes gradientFadeIn {
+                        from { opacity: 0; transform: translateX(-50%) scale(0.9); }
+                        to { opacity: 1; transform: translateX(-50%) scale(1); }
+                    }
+                `}</style>
+
+                <p className="caption" style={{ marginBottom: '16px', color: 'var(--accent)', position: 'relative' }}>
                     Introducing Valkry
                 </p>
 
-                <h1 className="headline-super" style={{ maxWidth: '800px', marginBottom: '16px' }}>
-                    Code. Battle. Dominate.
+                <h1 className="headline-super" style={{ maxWidth: '800px', marginBottom: '16px', position: 'relative' }}>
+                    Where Legends Are Forged.
                 </h1>
 
-                <p className="body-large" style={{ maxWidth: '500px', marginBottom: '32px' }}>
-                    Solve. Debug. Compete. Climb the global leaderboard.
+                <p className="body-large" style={{ maxWidth: '500px', marginBottom: '32px', position: 'relative' }}>
+                    Real-time battles. Global rankings. Prove your worth.
                 </p>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '24px', position: 'relative' }}>
                     <Link to={user ? "/arena" : "/signin"}>
                         <button className="btn btn-primary">
                             {user ? 'Enter Arena' : 'Get started'}
@@ -142,7 +164,7 @@ const LandingPage = () => {
                 borderTop: '1px solid var(--border)'
             }}>
                 <span className="caption">
-                    Valkry © 2025
+                    Valkry © 2024
                 </span>
             </footer>
         </div>

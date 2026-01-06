@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, RotateCcw, Clock, Loader, Swords, Flag, Target, UserPlus, X, Check, Users, Code, CheckCircle, XCircle, AlertCircle, LogIn, Eye, AlertTriangle, Zap, Info, Trophy, ChevronDown, Filter } from 'lucide-react';
+import { Play, RotateCcw, Clock, Loader, Swords, Flag, Target, UserPlus, X, Check, Users, Code, CheckCircle, XCircle, AlertCircle, LogIn, Eye, AlertTriangle, Zap, Info, Trophy, ChevronDown, Filter, Crown, ShieldAlert, FlagOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Editor from '@monaco-editor/react';
 import { executeCode } from '../services/judge0';
 import { joinQueue, leaveQueue, subscribeToMatchmaking, subscribeToBattle, updatePlayerProgress, forfeitBattle } from '../services/matchmaking';
@@ -15,6 +15,7 @@ const MATCHMAKING_TIMEOUT = 30000; // 30 seconds
 const ArenaPage = () => {
     const { user } = useAuth();
     const location = useLocation();
+    const navigate = useNavigate();
     const [gameState, setGameState] = useState('lobby');
     const [isRunning, setIsRunning] = useState(false);
     const [output, setOutput] = useState({ type: 'info', content: 'Click "Run" to execute your code' });
@@ -286,20 +287,59 @@ const ArenaPage = () => {
 
     const handleRun = async () => {
         setIsRunning(true);
-        setOutput({ type: 'info', content: 'Compiling...' });
+        setOutput(null);
+
         try {
-            const result = await executeCode(code);
-            if (result.compile_output) {
-                setOutput({ type: 'error', content: `Compile Error:\n${result.compile_output}` });
-            } else if (result.stderr) {
-                setOutput({ type: 'error', content: `Runtime Error:\n${result.stderr}` });
-            } else {
-                const passed = result.stdout?.trim() === currentProblem.expectedOutput?.trim();
-                setOutput({ type: passed ? 'success' : 'warning', content: passed ? `All tests passed!\n${result.stdout}` : `Wrong answer\nExpected: ${currentProblem.expectedOutput}\nGot: ${result.stdout}` });
-                if (passed && battleId) await updatePlayerProgress(battleId, user.id, 1, true);
+            // Determine test cases - supporting legacy single case
+            const cases = (currentProblem.testCases && currentProblem.testCases.length > 0)
+                ? currentProblem.testCases
+                : [{
+                    input: '',
+                    expectedOutput: currentProblem.expectedOutput,
+                    isPublic: true
+                }];
+
+            for (let i = 0; i < cases.length; i++) {
+                const tc = cases[i];
+                // Show progress without trailing dots as requested
+                setOutput({ type: 'info', content: `Running Test Case ${i + 1} / ${cases.length}` });
+
+                // Small delay to prevent rate limiting
+                if (i > 0) await new Promise(r => setTimeout(r, 200));
+
+                const result = await executeCode(code, tc.input || '');
+
+                if (result.compile_output) {
+                    setOutput({ type: 'error', content: `Compile Error:\n${result.compile_output}` });
+                    setIsRunning(false);
+                    return;
+                } else if (result.stderr) {
+                    setOutput({ type: 'error', content: `Runtime Error (Case ${i + 1}):\n${result.stderr}` });
+                    setIsRunning(false);
+                    return;
+                }
+
+                const expected = (tc.expectedOutput || '').trim();
+                const actual = (result.stdout || '').trim();
+                // Normalize newlines and spaces
+                const normalize = (str) => str.replace(/\s+/g, ' ').trim();
+
+                if (normalize(actual) !== normalize(expected)) {
+                    setOutput({
+                        type: 'warning',
+                        content: `Wrong Answer on Case ${i + 1}/${cases.length}\nExpected: "${expected}"\nGot: "${actual.substring(0, 50)}${actual.length > 50 ? '...' : ''}"`
+                    });
+                    setIsRunning(false);
+                    return;
+                }
             }
+
+            // If we get here, ALL passed
+            setOutput({ type: 'success', content: 'All passed! Perfect solution.' });
+            if (battleId) await updatePlayerProgress(battleId, user.id, 1, true);
+
         } catch (e) {
-            setOutput({ type: 'error', content: e.message });
+            setOutput({ type: 'error', content: e.message || 'Execution failed' });
         }
         setIsRunning(false);
     };
@@ -320,7 +360,7 @@ const ArenaPage = () => {
 
 
 
-    const ResultIcon = battleResult === 'win' ? CheckCircle : XCircle;
+    const ResultIcon = battleResult === 'win' ? Crown : ShieldAlert;
 
     // Modal component
     const Modal = ({ children, onClose }) => (
@@ -620,6 +660,12 @@ const ArenaPage = () => {
                                 borderRadius: '980px', color: 'var(--text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
                             }}>
                                 <UserPlus size={18} /> Challenge Friend
+                            </button>
+                            <button onClick={() => user ? navigate('/group-battle') : setShowAuthModal(true)} style={{
+                                width: '100%', padding: '14px', background: 'var(--bg-elevated)', border: '1px solid var(--border)',
+                                borderRadius: '980px', color: 'var(--text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
+                            }}>
+                                <Users size={18} /> Group Battle
                             </button>
                             <button onClick={() => setShowSoloSettings(true)} style={{
                                 width: '100%', padding: '14px', background: 'transparent', border: 'none',

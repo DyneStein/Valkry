@@ -5,7 +5,7 @@
         "description": "Sum of divisors < n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isDeficient(int n) { return false; }\nint main() { cout<<isDeficient(8); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isDeficient(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isDeficient(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isDeficient(int n) {\n    int sum = 0;\n    for(int i = 1; i < n; i++)\n        if(n % i == 0) sum += i;\n    return sum < n;\n}\nint main() { cout<<isDeficient(8); return 0; }",
         "explanation": {
@@ -46,7 +46,7 @@
         "description": "Sum of divisors = n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPerfect(int n) { return false; }\nint main() { cout<<isPerfect(28); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPerfect(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isPerfect(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isPerfect(int n) {\n    int sum = 0;\n    for(int i = 1; i < n; i++)\n        if(n % i == 0) sum += i;\n    return sum == n;\n}\nint main() { cout<<isPerfect(28); return 0; }",
         "explanation": {
@@ -86,7 +86,7 @@
         "description": "Check amicable pair.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool areAmicable(int a, int b) { return false; }\nint main() { cout<<areAmicable(220,284); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool areAmicable(int a, int b) {\n    return false;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    cout << areAmicable(a, b);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nint sumDiv(int n) { int s=0; for(int i=1;i<n;i++) if(n%i==0) s+=i; return s; }\nbool areAmicable(int a, int b) { return sumDiv(a)==b && sumDiv(b)==a; }\nint main() { cout<<areAmicable(220,284); return 0; }",
         "explanation": {
@@ -125,7 +125,7 @@
         "description": "Check twin primes.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool areTwinPrimes(int a, int b) { return false; }\nint main() { cout<<areTwinPrimes(11,13); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool areTwinPrimes(int a, int b) {\n    return false;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    cout << areTwinPrimes(a, b);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isPrime(int n) { if(n<2) return false; for(int i=2;i*i<=n;i++) if(n%i==0) return false; return true; }\nbool areTwinPrimes(int a, int b) { return isPrime(a) && isPrime(b) && abs(b-a)==2; }\nint main() { cout<<areTwinPrimes(11,13); return 0; }",
         "explanation": {
@@ -165,7 +165,7 @@
         "description": "GCD is 1.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool areCoPrime(int a, int b) { return false; }\nint main() { cout<<areCoPrime(14,15); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool areCoPrime(int a, int b) {\n    return false;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    cout << areCoPrime(a, b);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) { return b==0 ? a : gcd(b,a%b); }\nbool areCoPrime(int a, int b) { return gcd(a,b)==1; }\nint main() { cout<<areCoPrime(14,15); return 0; }",
         "explanation": {
@@ -204,7 +204,7 @@
         "description": "Parts of square sum to n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isKaprekar(int n) { return false; }\nint main() { cout<<isKaprekar(45); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isKaprekar(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isKaprekar(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isKaprekar(int n) {\n    long sq = (long)n * n; int d = 0, t = n;\n    while(t > 0) { d++; t /= 10; }\n    int div = 1; for(int i=0;i<d;i++) div *= 10;\n    return (sq%div + sq/div) == n && sq%div > 0;\n}\nint main() { cout<<isKaprekar(45); return 0; }",
         "explanation": {
@@ -245,7 +245,7 @@
         "description": "Even digits, halves sum² = n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isTech(int n) { return false; }\nint main() { cout<<isTech(2025); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isTech(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isTech(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isTech(int n) {\n    int d = 0, t = n; while(t > 0) { d++; t /= 10; }\n    if(d % 2 != 0) return false;\n    int div = 1; for(int i=0;i<d/2;i++) div *= 10;\n    int l = n/div, r = n%div;\n    return (l+r)*(l+r) == n;\n}\nint main() { cout<<isTech(2025); return 0; }",
         "explanation": {
@@ -285,7 +285,7 @@
         "description": "n*4 has same middle digits.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isStrontio(int n) { return false; }\nint main() { cout<<isStrontio(1111); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isStrontio(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isStrontio(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isStrontio(int n) {\n    if(n < 1000 || n > 9999) return false;\n    int r = n * 4;\n    return (r/100%10) == (r/10%10);\n}\nint main() { cout<<isStrontio(1111); return 0; }",
         "explanation": {
@@ -325,7 +325,7 @@
         "description": "Sum edge = sum middle.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isXylemPhloem(int n) { return false; }\nint main() { cout<<isXylemPhloem(1234); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isXylemPhloem(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isXylemPhloem(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isXylemPhloem(int n) {\n    int f = n; while(f >= 10) f /= 10;\n    int l = n % 10, d2 = (n/100)%10, d3 = (n/10)%10;\n    return f + l == d2 + d3;\n}\nint main() { cout<<isXylemPhloem(1234); return 0; }",
         "explanation": {
@@ -366,7 +366,7 @@
         "description": "Cube ends with n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isTrimorphic(int n) { return false; }\nint main() { cout<<isTrimorphic(4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isTrimorphic(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isTrimorphic(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isTrimorphic(int n) {\n    long cube = (long)n*n*n;\n    int m = 1, t = n; while(t > 0) { m *= 10; t /= 10; }\n    return cube % m == n;\n}\nint main() { cout<<isTrimorphic(4); return 0; }",
         "explanation": {
@@ -406,7 +406,7 @@
         "description": "Sum of digit factorials = n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPeterson(int n) { return false; }\nint main() { cout<<isPeterson(145); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPeterson(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isPeterson(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nint fact(int x) { int f=1; for(int i=2;i<=x;i++) f*=i; return f; }\nbool isPeterson(int n) { int s=0, t=n; while(t>0){s+=fact(t%10); t/=10;} return s==n; }\nint main() { cout<<isPeterson(145); return 0; }",
         "explanation": {
@@ -446,7 +446,7 @@
         "description": "n+1 is perfect square.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isSunny(int n) { return false; }\nint main() { cout<<isSunny(24); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isSunny(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isSunny(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isSunny(int n) { int r=1; while(r*r<n+1) r++; return r*r==n+1; }\nint main() { cout<<isSunny(24); return 0; }",
         "explanation": {

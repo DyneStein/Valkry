@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { problems, getAllCategories, getCountByDifficulty } from '../data/problems';
-import { ChevronDown, ChevronRight, Eye, EyeOff, ChevronLeft, ChevronsLeft, ChevronsRight, Search, Info } from 'lucide-react';
+import { getAllCategories } from '../data/problems';
+import { ChevronDown, ChevronRight, Eye, EyeOff, ChevronLeft, ChevronsLeft, ChevronsRight, Info } from 'lucide-react';
 import Editor from '@monaco-editor/react';
+import SmartSearch from '../components/SmartSearch';
+import { searchProblems } from '../services/searchService';
 
 const ITEMS_PER_PAGE = 20;
 
@@ -15,15 +17,11 @@ const LearningPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
     const categories = useMemo(() => ['ALL', ...getAllCategories()], []);
-    const counts = useMemo(() => getCountByDifficulty(), []);
 
     const filteredProblems = useMemo(() => {
-        return problems.filter(p => {
-            const matchesDifficulty = selectedDifficulty === 'ALL' || p.difficulty === selectedDifficulty;
-            const matchesCategory = selectedCategory === 'ALL' || p.category === selectedCategory;
-            const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                p.description.toLowerCase().includes(searchQuery.toLowerCase());
-            return matchesDifficulty && matchesCategory && matchesSearch;
+        return searchProblems(searchQuery, {
+            difficulty: selectedDifficulty,
+            category: selectedCategory
         });
     }, [selectedDifficulty, selectedCategory, searchQuery]);
 
@@ -70,33 +68,21 @@ const LearningPage = () => {
                     </p>
                 </div>
 
-
-
                 {/* Filters */}
                 <div className="card" style={{ padding: '20px', marginBottom: '24px' }}>
                     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
-                        <div style={{ flex: 1, minWidth: '200px', position: 'relative' }}>
-                            <Search size={16} style={{
-                                position: 'absolute',
-                                left: '14px',
-                                top: '50%',
-                                transform: 'translateY(-50%)',
-                                color: 'var(--text-tertiary)'
-                            }} />
-                            <input
-                                type="text"
-                                placeholder="Search problems..."
+                        <div style={{ flex: 1, minWidth: '300px' }}>
+                            <SmartSearch
                                 value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="input"
-                                style={{ paddingLeft: '40px' }}
+                                onChange={setSearchQuery}
+                                placeholder="Try 'hard array problems' or 'dynamic programming'..."
                             />
                         </div>
                         <select
                             value={selectedDifficulty}
                             onChange={(e) => setSelectedDifficulty(e.target.value)}
                             className="input"
-                            style={{ width: 'auto', cursor: 'pointer', fontFamily: 'inherit' }}
+                            style={{ width: 'auto', cursor: 'pointer', fontFamily: 'inherit', height: '48px' }}
                         >
                             <option value="ALL">All Levels</option>
                             <option value="EASY">Easy</option>
@@ -107,7 +93,7 @@ const LearningPage = () => {
                             value={selectedCategory}
                             onChange={(e) => setSelectedCategory(e.target.value)}
                             className="input"
-                            style={{ width: 'auto', cursor: 'pointer', fontFamily: 'inherit' }}
+                            style={{ width: 'auto', cursor: 'pointer', fontFamily: 'inherit', height: '48px' }}
                         >
                             {categories.map(cat => (
                                 <option key={cat} value={cat}>{cat === 'ALL' ? 'All Categories' : cat}</option>
@@ -115,6 +101,9 @@ const LearningPage = () => {
                         </select>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '16px' }}>
+                        <span className="caption">
+                            Found {filteredProblems.length} results
+                        </span>
                         <span className="caption">
                             Showing {startIndex + 1}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredProblems.length)} of {filteredProblems.length}
                         </span>
@@ -428,7 +417,7 @@ const LearningPage = () => {
                 {filteredProblems.length === 0 && (
                     <div className="empty">
                         <p style={{ fontSize: '17px', marginBottom: '8px' }}>No problems found</p>
-                        <p style={{ fontSize: '14px' }}>Try adjusting your filters</p>
+                        <p style={{ fontSize: '14px' }}>Try adjusting your filters or search query</p>
                     </div>
                 )}
             </div>

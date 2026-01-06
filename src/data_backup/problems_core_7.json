@@ -1,0 +1,408 @@
+[
+    {
+        "id": "core61",
+        "title": "Merge Intervals",
+        "description": "Merge all overlapping intervals into non-overlapping intervals.",
+        "difficulty": "MEDIUM",
+        "category": "Intervals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint merge(int intervals[][2], int n) { return 0; }\nint main() { int in[][2] = {{1,3}, {2,6}, {8,10}, {15,18}}; cout << merge(in, 4); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint merge(int intervals[][2], int n) {\n    for(int i = 0; i < n - 1; i++)\n        for(int j = 0; j < n - i - 1; j++)\n            if(intervals[j][0] > intervals[j+1][0]) {\n                swap(intervals[j][0], intervals[j+1][0]);\n                swap(intervals[j][1], intervals[j+1][1]);\n            }\n    int merged = 1, lastEnd = intervals[0][1];\n    for(int i = 1; i < n; i++) {\n        if(intervals[i][0] <= lastEnd)\n            lastEnd = max(lastEnd, intervals[i][1]);\n        else { merged++; lastEnd = intervals[i][1]; }\n    }\n    return merged;\n}\nint main() { int in[][2] = {{1,3}, {2,6}, {8,10}, {15,18}}; cout << merge(in, 4); return 0; }",
+        "explanation": {
+            "approach": "Sort by start, merge overlapping by extending end.",
+            "steps": [
+                "Sort by start time",
+                "Extend end if overlap, else new interval"
+            ],
+            "complexity": "Time: O(n log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "[[1,3],[2,6],[8,10],[15,18]]",
+                "expectedOutput": "3",
+                "explanation": "[1,6],[8,10],[15,18]"
+            },
+            {
+                "input": "[[1,4],[4,5]]",
+                "expectedOutput": "1",
+                "explanation": "Adjacent intervals merge"
+            },
+            {
+                "input": "[[1,4],[0,4]]",
+                "expectedOutput": "1",
+                "explanation": "Overlapping merge to [0,4]"
+            },
+            {
+                "input": "[[1,2],[3,4]]",
+                "expectedOutput": "2",
+                "explanation": "No overlap"
+            }
+        ]
+    },
+    {
+        "id": "core62",
+        "title": "Insert Interval",
+        "description": "Insert new interval into sorted non-overlapping list, merge if needed.",
+        "difficulty": "MEDIUM",
+        "category": "Intervals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint insert(int intervals[][2], int n, int newI[]) { return 0; }\nint main() { int in[][2] = {{1,2}, {3,5}, {6,7}, {8,10}, {12,16}}; int ni[] = {4, 8}; cout << insert(in, 5, ni); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint insert(int intervals[][2], int n, int newI[]) {\n    int result[20][2], k = 0, i = 0;\n    while(i < n && intervals[i][1] < newI[0]) {\n        result[k][0] = intervals[i][0]; result[k][1] = intervals[i][1]; k++; i++;\n    }\n    while(i < n && intervals[i][0] <= newI[1]) {\n        newI[0] = min(newI[0], intervals[i][0]);\n        newI[1] = max(newI[1], intervals[i][1]); i++;\n    }\n    result[k][0] = newI[0]; result[k][1] = newI[1]; k++;\n    while(i < n) {\n        result[k][0] = intervals[i][0]; result[k][1] = intervals[i][1]; k++; i++;\n    }\n    return k;\n}\nint main() { int in[][2] = {{1,2}, {3,5}, {6,7}, {8,10}, {12,16}}; int ni[] = {4, 8}; cout << insert(in, 5, ni); return 0; }",
+        "explanation": {
+            "approach": "Three phases: before, merge overlapping, after.",
+            "steps": [
+                "Add intervals ending before new starts",
+                "Merge overlapping",
+                "Add remaining"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "intervals + [4,8]",
+                "expectedOutput": "4",
+                "explanation": "Merges [3,5],[6,7],[8,10] into [3,10]"
+            },
+            {
+                "input": "intervals + [0,0]",
+                "expectedOutput": "6",
+                "explanation": "Insert at beginning"
+            },
+            {
+                "input": "[[1,5]] + [2,3]",
+                "expectedOutput": "1",
+                "explanation": "Fully contained"
+            },
+            {
+                "input": "[[1,5]] + [6,8]",
+                "expectedOutput": "2",
+                "explanation": "No overlap"
+            }
+        ]
+    },
+    {
+        "id": "core63",
+        "title": "Meeting Rooms II",
+        "description": "Find minimum conference rooms needed for all meetings.",
+        "difficulty": "MEDIUM",
+        "category": "Intervals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint minMeetingRooms(int intervals[][2], int n) { return 0; }\nint main() { int in[][2] = {{0,30}, {5,10}, {15,20}}; cout << minMeetingRooms(in, 3); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint minMeetingRooms(int intervals[][2], int n) {\n    int starts[n], ends[n];\n    for(int i = 0; i < n; i++) { starts[i] = intervals[i][0]; ends[i] = intervals[i][1]; }\n    for(int i = 0; i < n-1; i++) for(int j = 0; j < n-i-1; j++) {\n        if(starts[j] > starts[j+1]) swap(starts[j], starts[j+1]);\n        if(ends[j] > ends[j+1]) swap(ends[j], ends[j+1]);\n    }\n    int rooms = 0, endPtr = 0;\n    for(int i = 0; i < n; i++) {\n        if(starts[i] < ends[endPtr]) rooms++;\n        else endPtr++;\n    }\n    return rooms;\n}\nint main() { int in[][2] = {{0,30}, {5,10}, {15,20}}; cout << minMeetingRooms(in, 3); return 0; }",
+        "explanation": {
+            "approach": "Sort starts and ends separately, count overlapping.",
+            "steps": [
+                "Sort both arrays",
+                "Two pointers to count max concurrent"
+            ],
+            "complexity": "Time: O(n log n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "[[0,30],[5,10],[15,20]]",
+                "expectedOutput": "2",
+                "explanation": "Two meetings overlap at time 5"
+            },
+            {
+                "input": "[[7,10],[2,4]]",
+                "expectedOutput": "1",
+                "explanation": "No overlap, one room"
+            },
+            {
+                "input": "[[0,5],[5,10],[10,15]]",
+                "expectedOutput": "1",
+                "explanation": "Sequential meetings"
+            },
+            {
+                "input": "[[0,10],[0,10],[0,10]]",
+                "expectedOutput": "3",
+                "explanation": "All overlap"
+            }
+        ]
+    },
+    {
+        "id": "core64",
+        "title": "Non-overlapping Intervals",
+        "description": "Find minimum intervals to remove to make rest non-overlapping.",
+        "difficulty": "MEDIUM",
+        "category": "Intervals",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint eraseOverlapIntervals(int intervals[][2], int n) { return 0; }\nint main() { int in[][2] = {{1,2}, {2,3}, {3,4}, {1,3}}; cout << eraseOverlapIntervals(in, 4); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint eraseOverlapIntervals(int intervals[][2], int n) {\n    if(n == 0) return 0;\n    for(int i = 0; i < n-1; i++) for(int j = 0; j < n-i-1; j++)\n        if(intervals[j][1] > intervals[j+1][1]) {\n            swap(intervals[j][0], intervals[j+1][0]);\n            swap(intervals[j][1], intervals[j+1][1]);\n        }\n    int keep = 1, lastEnd = intervals[0][1];\n    for(int i = 1; i < n; i++)\n        if(intervals[i][0] >= lastEnd) { keep++; lastEnd = intervals[i][1]; }\n    return n - keep;\n}\nint main() { int in[][2] = {{1,2}, {2,3}, {3,4}, {1,3}}; cout << eraseOverlapIntervals(in, 4); return 0; }",
+        "explanation": {
+            "approach": "Greedy: sort by end, keep non-overlapping.",
+            "steps": [
+                "Sort by end time",
+                "Keep intervals ending earliest"
+            ],
+            "complexity": "Time: O(n log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "[[1,2],[2,3],[3,4],[1,3]]",
+                "expectedOutput": "1",
+                "explanation": "Remove [1,3]"
+            },
+            {
+                "input": "[[1,2],[1,2],[1,2]]",
+                "expectedOutput": "2",
+                "explanation": "Keep only one"
+            },
+            {
+                "input": "[[1,2],[2,3]]",
+                "expectedOutput": "0",
+                "explanation": "Already non-overlapping"
+            },
+            {
+                "input": "[[1,100],[11,22],[1,11],[2,12]]",
+                "expectedOutput": "2",
+                "explanation": "Remove two"
+            }
+        ]
+    },
+    {
+        "id": "core65",
+        "title": "Linked List Cycle Detection",
+        "description": "Detect if linked list has a cycle using O(1) space.",
+        "difficulty": "EASY",
+        "category": "Linked Lists",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x): val(x), next(0) {} };\nbool hasCycle(Node* head) { return false; }\nint main() { Node* h = new Node(1); h->next = new Node(2); h->next->next = h; cout << hasCycle(h); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x): val(x), next(0) {} };\nbool hasCycle(Node* head) {\n    if(!head || !head->next) return false;\n    Node* slow = head;\n    Node* fast = head;\n    while(fast && fast->next) {\n        slow = slow->next;\n        fast = fast->next->next;\n        if(slow == fast) return true;\n    }\n    return false;\n}\nint main() { Node* h = new Node(1); h->next = new Node(2); h->next->next = h; cout << hasCycle(h); return 0; }",
+        "explanation": {
+            "approach": "Floyd's Tortoise and Hare: slow and fast pointers meet in cycle.",
+            "steps": [
+                "Slow moves 1 step, fast moves 2 steps",
+                "If they meet, cycle exists"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "Cycle: 1->2->1",
+                "expectedOutput": "1",
+                "explanation": "Cycle detected"
+            },
+            {
+                "input": "No cycle: 1->2->3",
+                "expectedOutput": "0",
+                "explanation": "No cycle"
+            },
+            {
+                "input": "Single node, no cycle",
+                "expectedOutput": "0",
+                "explanation": "No next"
+            },
+            {
+                "input": "Self loop: 1->1",
+                "expectedOutput": "1",
+                "explanation": "Node points to itself"
+            }
+        ]
+    },
+    {
+        "id": "core66",
+        "title": "Reverse Linked List",
+        "description": "Reverse a singly linked list in-place.",
+        "difficulty": "EASY",
+        "category": "Linked Lists",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x): val(x), next(0) {} };\nNode* reverseList(Node* head) { return nullptr; }\nvoid print(Node* h) { while(h) { cout << h->val << \" \"; h = h->next; } }\nint main() { Node* h = new Node(1); h->next = new Node(2); h->next->next = new Node(3); h = reverseList(h); print(h); return 0; }",
+        "expectedOutput": "3 2 1",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x): val(x), next(0) {} };\nNode* reverseList(Node* head) {\n    Node* prev = nullptr;\n    Node* curr = head;\n    while(curr) {\n        Node* next = curr->next;\n        curr->next = prev;\n        prev = curr;\n        curr = next;\n    }\n    return prev;\n}\nvoid print(Node* h) { while(h) { cout << h->val << \" \"; h = h->next; } }\nint main() { Node* h = new Node(1); h->next = new Node(2); h->next->next = new Node(3); h = reverseList(h); print(h); return 0; }",
+        "explanation": {
+            "approach": "Iteratively reverse each link.",
+            "steps": [
+                "Save next",
+                "Reverse link",
+                "Move pointers forward"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "1->2->3",
+                "expectedOutput": "3 2 1",
+                "explanation": "Reversed"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Single node unchanged"
+            },
+            {
+                "input": "1->2",
+                "expectedOutput": "2 1",
+                "explanation": "Two nodes swapped"
+            },
+            {
+                "input": "null",
+                "expectedOutput": "null",
+                "explanation": "Empty list"
+            }
+        ]
+    },
+    {
+        "id": "core67",
+        "title": "Merge Two Sorted Lists",
+        "description": "Merge two sorted linked lists into one sorted list.",
+        "difficulty": "EASY",
+        "category": "Linked Lists",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x): val(x), next(0) {} };\nNode* mergeTwoLists(Node* l1, Node* l2) { return nullptr; }\nvoid print(Node* h) { while(h) { cout << h->val << \" \"; h = h->next; } }\nint main() { Node* a = new Node(1); a->next = new Node(3); Node* b = new Node(2); b->next = new Node(4); print(mergeTwoLists(a, b)); return 0; }",
+        "expectedOutput": "1 2 3 4",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x): val(x), next(0) {} };\nNode* mergeTwoLists(Node* l1, Node* l2) {\n    Node dummy(0);\n    Node* tail = &dummy;\n    while(l1 && l2) {\n        if(l1->val <= l2->val) { tail->next = l1; l1 = l1->next; }\n        else { tail->next = l2; l2 = l2->next; }\n        tail = tail->next;\n    }\n    tail->next = l1 ? l1 : l2;\n    return dummy.next;\n}\nvoid print(Node* h) { while(h) { cout << h->val << \" \"; h = h->next; } }\nint main() { Node* a = new Node(1); a->next = new Node(3); Node* b = new Node(2); b->next = new Node(4); print(mergeTwoLists(a, b)); return 0; }",
+        "explanation": {
+            "approach": "Compare heads, take smaller, attach remaining.",
+            "steps": [
+                "Use dummy head",
+                "Compare and link smaller",
+                "Attach rest"
+            ],
+            "complexity": "Time: O(m+n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "1->3, 2->4",
+                "expectedOutput": "1 2 3 4",
+                "explanation": "Interleaved merge"
+            },
+            {
+                "input": "null, 1->2",
+                "expectedOutput": "1 2",
+                "explanation": "One empty"
+            },
+            {
+                "input": "1->2, 3->4",
+                "expectedOutput": "1 2 3 4",
+                "explanation": "No interleaving"
+            },
+            {
+                "input": "2->4, 1->3",
+                "expectedOutput": "1 2 3 4",
+                "explanation": "Order doesn't matter"
+            }
+        ]
+    },
+    {
+        "id": "core68",
+        "title": "Remove Nth Node From End",
+        "description": "Remove nth node from end of linked list in one pass.",
+        "difficulty": "MEDIUM",
+        "category": "Linked Lists",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x): val(x), next(0) {} };\nNode* removeNthFromEnd(Node* head, int n) { return nullptr; }\nvoid print(Node* h) { while(h) { cout << h->val << \" \"; h = h->next; } }\nint main() { Node* h = new Node(1); h->next = new Node(2); h->next->next = new Node(3); h->next->next->next = new Node(4); h = removeNthFromEnd(h, 2); print(h); return 0; }",
+        "expectedOutput": "1 2 4",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int val; Node* next; Node(int x): val(x), next(0) {} };\nNode* removeNthFromEnd(Node* head, int n) {\n    Node dummy(0); dummy.next = head;\n    Node* first = &dummy;\n    Node* second = &dummy;\n    for(int i = 0; i <= n; i++) first = first->next;\n    while(first) { first = first->next; second = second->next; }\n    second->next = second->next->next;\n    return dummy.next;\n}\nvoid print(Node* h) { while(h) { cout << h->val << \" \"; h = h->next; } }\nint main() { Node* h = new Node(1); h->next = new Node(2); h->next->next = new Node(3); h->next->next->next = new Node(4); h = removeNthFromEnd(h, 2); print(h); return 0; }",
+        "explanation": {
+            "approach": "Two pointers with n-gap between them.",
+            "steps": [
+                "Move first n+1 steps ahead",
+                "Move both until first reaches end",
+                "Remove"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "1->2->3->4, n=2",
+                "expectedOutput": "1 2 4",
+                "explanation": "Remove 3rd node (2nd from end)"
+            },
+            {
+                "input": "1, n=1",
+                "expectedOutput": "null",
+                "explanation": "Remove only node"
+            },
+            {
+                "input": "1->2, n=1",
+                "expectedOutput": "1",
+                "explanation": "Remove last"
+            },
+            {
+                "input": "1->2, n=2",
+                "expectedOutput": "2",
+                "explanation": "Remove first"
+            }
+        ]
+    },
+    {
+        "id": "core69",
+        "title": "Flatten Binary Tree to Linked List",
+        "description": "Flatten binary tree to linked list using right pointers (pre-order).",
+        "difficulty": "MEDIUM",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nvoid flatten(TreeNode* root) {}\nvoid print(TreeNode* r) { while(r) { cout << r->val << \" \"; r = r->right; } }\nint main() { TreeNode* r = new TreeNode(1); r->left = new TreeNode(2); r->right = new TreeNode(5); flatten(r); print(r); return 0; }",
+        "expectedOutput": "1 2 5",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nvoid flatten(TreeNode* root) {\n    TreeNode* curr = root;\n    while(curr) {\n        if(curr->left) {\n            TreeNode* rightmost = curr->left;\n            while(rightmost->right) rightmost = rightmost->right;\n            rightmost->right = curr->right;\n            curr->right = curr->left;\n            curr->left = nullptr;\n        }\n        curr = curr->right;\n    }\n}\nvoid print(TreeNode* r) { while(r) { cout << r->val << \" \"; r = r->right; } }\nint main() { TreeNode* r = new TreeNode(1); r->left = new TreeNode(2); r->right = new TreeNode(5); flatten(r); print(r); return 0; }",
+        "explanation": {
+            "approach": "Move left subtree to right, connect old right to end of left.",
+            "steps": [
+                "Find rightmost of left subtree",
+                "Connect to right",
+                "Move left to right"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "Tree with left and right",
+                "expectedOutput": "1 2 5",
+                "explanation": "Pre-order flattening"
+            },
+            {
+                "input": "Single node",
+                "expectedOutput": "1",
+                "explanation": "Already flat"
+            },
+            {
+                "input": "Only left children",
+                "expectedOutput": "Pre-order list",
+                "explanation": "Linked list of lefts"
+            },
+            {
+                "input": "Only right children",
+                "expectedOutput": "Same list",
+                "explanation": "Already linked via right"
+            }
+        ]
+    },
+    {
+        "id": "core70",
+        "title": "Lowest Common Ancestor",
+        "description": "Find LCA of two nodes in binary tree.",
+        "difficulty": "MEDIUM",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nTreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) { return nullptr; }\nint main() { TreeNode* r = new TreeNode(3); r->left = new TreeNode(5); r->right = new TreeNode(1); cout << lowestCommonAncestor(r, r->left, r->right)->val; return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct TreeNode { int val; TreeNode *left, *right; TreeNode(int x): val(x), left(0), right(0) {} };\nTreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {\n    if(!root || root == p || root == q) return root;\n    TreeNode* left = lowestCommonAncestor(root->left, p, q);\n    TreeNode* right = lowestCommonAncestor(root->right, p, q);\n    if(left && right) return root;\n    return left ? left : right;\n}\nint main() { TreeNode* r = new TreeNode(3); r->left = new TreeNode(5); r->right = new TreeNode(1); cout << lowestCommonAncestor(r, r->left, r->right)->val; return 0; }",
+        "explanation": {
+            "approach": "Recursive: if both found on different sides, current is LCA.",
+            "steps": [
+                "If root is p/q, return root",
+                "Search both subtrees",
+                "If both found, root is LCA"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        },
+        "testCases": [
+            {
+                "input": "p=5, q=1",
+                "expectedOutput": "3",
+                "explanation": "Root is LCA"
+            },
+            {
+                "input": "p=5, q=4 (4 is child of 5)",
+                "expectedOutput": "5",
+                "explanation": "5 is LCA"
+            },
+            {
+                "input": "Same node p=q=5",
+                "expectedOutput": "5",
+                "explanation": "Node is its own ancestor"
+            },
+            {
+                "input": "Deep nodes",
+                "expectedOutput": "Their common ancestor",
+                "explanation": "Find deepest common"
+            }
+        ]
+    }
+]

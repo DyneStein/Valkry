@@ -5,7 +5,7 @@
         "description": "Find target in sorted array.",
         "difficulty": "EASY",
         "category": "Binary Search",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint search(int nums[], int n, int target) { return -1; }\nint main() { int a[]={-1,0,3,5,9,12}; cout<<search(a,6,9); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint search(vector<int>& nums, int n, int target) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    int target;\n    cin >> target;\n    cout << search(nums, n, target);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "testCases": [
             {
@@ -75,7 +75,7 @@
         "description": "Find first bad version.",
         "difficulty": "EASY",
         "category": "Binary Search",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isBadVersion(int v) { return v>=4; }\nint firstBadVersion(int n) { return 0; }\nint main() { cout<<firstBadVersion(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isBadVersion(int v) {\n    return false;\n}\n\nint main() {\n    int v;\n    cin >> v;\n    cout << isBadVersion(v);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "testCases": [
             {
@@ -145,7 +145,7 @@
         "description": "Find insert position.",
         "difficulty": "EASY",
         "category": "Binary Search",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint searchInsert(int nums[], int n, int target) { return 0; }\nint main() { int a[]={1,3,5,6}; cout<<searchInsert(a,4,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint searchInsert(vector<int>& nums, int n, int target) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    int target;\n    cin >> target;\n    cout << searchInsert(nums, n, target);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "testCases": [
             {
@@ -214,7 +214,7 @@
         "description": "Guess the picked number.",
         "difficulty": "EASY",
         "category": "Binary Search",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint pick=6;\nint guess(int n) { return n<pick?1:n>pick?-1:0; }\nint guessNumber(int n) { return 0; }\nint main() { cout<<guessNumber(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint guess(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << guess(n);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "testCases": [
             {
@@ -283,7 +283,7 @@
         "description": "Find peak index.",
         "difficulty": "EASY",
         "category": "Binary Search",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint peakIndexInMountainArray(int arr[], int n) { return 0; }\nint main() { int a[]={0,2,1,0}; cout<<peakIndexInMountainArray(a,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint peakIndexInMountainArray(vector<int>& arr, int n) {\n    return 0;\n}\n\nint main() {\n    int arr_size;\n    cin >> arr_size;\n    vector<int> arr(arr_size);\n    for (int i = 0; i < arr_size; i++) cin >> arr[i];\n    int n;\n    cin >> n;\n    cout << peakIndexInMountainArray(arr, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -353,7 +353,7 @@
         "description": "Check if perfect square.",
         "difficulty": "EASY",
         "category": "Binary Search",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPerfectSquare(int num) { return false; }\nint main() { cout<<isPerfectSquare(16); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPerfectSquare(int num) {\n    return false;\n}\n\nint main() {\n    int num;\n    cin >> num;\n    cout << isPerfectSquare(num);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -422,7 +422,7 @@
         "description": "Find common elements.",
         "difficulty": "EASY",
         "category": "Searching",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid intersection(int a[], int m, int b[], int n) {}\nint main() { int a[]={1,2,2,1}; int b[]={2,2}; intersection(a,4,b,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid intersection(vector<int>& a, int m, vector<int>& b, int n) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int m;\n    cin >> m;\n    int b_size;\n    cin >> b_size;\n    vector<int> b(b_size);\n    for (int i = 0; i < b_size; i++) cin >> b[i];\n    int n;\n    cin >> n;\n    intersection(a, m, b, n);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "testCases": [
             {
@@ -492,7 +492,7 @@
         "description": "Common elements with duplicates.",
         "difficulty": "EASY",
         "category": "Searching",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid intersect(int a[], int m, int b[], int n) {}\nint main() { int a[]={1,2,2,1}; int b[]={2,2}; intersect(a,4,b,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid intersect(vector<int>& a, int m, vector<int>& b, int n) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int m;\n    cin >> m;\n    int b_size;\n    cin >> b_size;\n    vector<int> b(b_size);\n    for (int i = 0; i < b_size; i++) cin >> b[i];\n    int n;\n    cin >> n;\n    intersect(a, m, b, n);\n    return 0;\n}\n",
         "expectedOutput": "2 2",
         "testCases": [
             {
@@ -562,7 +562,7 @@
         "description": "Two sum in sorted array.",
         "difficulty": "MEDIUM",
         "category": "Searching",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid twoSum(int nums[], int n, int target) {}\nint main() { int a[]={2,7,11,15}; twoSum(a,4,9); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid twoSum(vector<int>& nums, int n, int target) {\n    // TODO\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    int target;\n    cin >> target;\n    twoSum(nums, n, target);\n    return 0;\n}\n",
         "expectedOutput": "1 2",
         "testCases": [
             {
@@ -694,6 +694,9 @@
                 "Wrap around if needed"
             ],
             "complexity": "Time: O(log n), Space: O(1)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     }
 ]

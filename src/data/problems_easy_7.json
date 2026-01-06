@@ -5,7 +5,7 @@
         "description": "Count primes less than n.",
         "difficulty": "MEDIUM",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countPrimes(int n) { return 0; }\nint main() { cout<<countPrimes(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countPrimes(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << countPrimes(n);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "testCases": [
             {
@@ -75,7 +75,7 @@
         "description": "Check if power of 3.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPowerOfThree(int n) { return false; }\nint main() { cout<<isPowerOfThree(27); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPowerOfThree(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isPowerOfThree(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -145,7 +145,7 @@
         "description": "Check if power of 4.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPowerOfFour(int n) { return false; }\nint main() { cout<<isPowerOfFour(16); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPowerOfFour(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isPowerOfFour(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -215,7 +215,7 @@
         "description": "Add digits until single.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint addDigits(int num) { return 0; }\nint main() { cout<<addDigits(38); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint addDigits(int num) {\n    return 0;\n}\n\nint main() {\n    int num;\n    cin >> num;\n    cout << addDigits(num);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "testCases": [
             {
@@ -285,7 +285,7 @@
         "description": "Check if ugly (2,3,5 factors only).",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isUgly(int n) { return false; }\nint main() { cout<<isUgly(6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isUgly(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isUgly(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -355,7 +355,7 @@
         "description": "Check if reaches 1.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isHappy(int n) { return false; }\nint main() { cout<<isHappy(19); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isHappy(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isHappy(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -425,7 +425,7 @@
         "description": "Column title to number.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint titleToNumber(char s[]) { return 0; }\nint main() { cout<<titleToNumber(\"AB\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint titleToNumber(vector<int>& s) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << titleToNumber(s);\n    return 0;\n}\n",
         "expectedOutput": "28",
         "testCases": [
             {
@@ -495,7 +495,7 @@
         "description": "Number to column title.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid convertToTitle(int n) {}\nint main() { convertToTitle(28); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid convertToTitle(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    convertToTitle(n);\n    return 0;\n}\n",
         "expectedOutput": "AB",
         "testCases": [
             {
@@ -565,7 +565,7 @@
         "description": "Count trailing zeros in n!.",
         "difficulty": "MEDIUM",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint trailingZeroes(int n) { return 0; }\nint main() { cout<<trailingZeroes(25); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint trailingZeroes(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << trailingZeroes(n);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "testCases": [
             {
@@ -635,7 +635,7 @@
         "description": "Integer square root.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint mySqrt(int x) { return 0; }\nint main() { cout<<mySqrt(8); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint mySqrt(int x) {\n    return 0;\n}\n\nint main() {\n    int x;\n    cin >> x;\n    cout << mySqrt(x);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "testCases": [
             {

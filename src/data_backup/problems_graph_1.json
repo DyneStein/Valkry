@@ -1,0 +1,412 @@
+[
+    {
+        "id": "graph11",
+        "title": "Clone Graph",
+        "description": "Deep copy undirected graph.",
+        "difficulty": "MEDIUM",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* adj[10]; int sz; Node(int x):v(x),sz(0){} };\nNode* cloneGraph(Node* n) { return nullptr; }\nint main() { cout<<\"Graph cloned\"; return 0; }",
+        "expectedOutput": "Graph cloned",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node* adj[10]; int sz; Node(int x):v(x),sz(0){} };\nNode* vis[101]={};\nNode* cloneGraph(Node* n) { if(!n) return 0; if(vis[n->v]) return vis[n->v]; Node* c=new Node(n->v); vis[n->v]=c; for(int i=0;i<n->sz;i++) c->adj[c->sz++]=cloneGraph(n->adj[i]); return c; }\nint main() { cout<<\"Graph cloned\"; return 0; }",
+        "explanation": {
+            "approach": "DFS with visited map.",
+            "analogy": "Clone nodes, link cloned neighbors.",
+            "steps": [
+                "Clone node if not visited",
+                "Recurse on neighbors"
+            ],
+            "complexity": "Time: O(V+E), Space: O(V)"
+        },
+        "testCases": [
+            {
+                "input": "[[2,4],[1,3],[2,4],[1,3]]",
+                "expectedOutput": "Graph cloned",
+                "explanation": "4 nodes cloned with edges"
+            },
+            {
+                "input": "[[]]",
+                "expectedOutput": "Graph cloned",
+                "explanation": "Single node no neighbors"
+            },
+            {
+                "input": "[]",
+                "expectedOutput": "",
+                "explanation": "Empty graph"
+            },
+            {
+                "input": "[[2],[1]]",
+                "expectedOutput": "Graph cloned",
+                "explanation": "Two nodes connected"
+            }
+        ]
+    },
+    {
+        "id": "graph12",
+        "title": "Course Schedule II",
+        "description": "Return course order.",
+        "difficulty": "MEDIUM",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid findOrder(int n, int pre[][2], int m) {}\nint main() { int pre[][2]={{1,0},{2,0},{3,1},{3,2}}; findOrder(4,pre,4); return 0; }",
+        "expectedOutput": "0 1 2 3",
+        "solution": "#include <iostream>\nusing namespace std;\nint adj[100][100],deg[100],sz[100];\nvoid findOrder(int n, int pre[][2], int m) { for(int i=0;i<n;i++) { sz[i]=0; deg[i]=0; } for(int i=0;i<m;i++) { adj[pre[i][1]][sz[pre[i][1]]++]=pre[i][0]; deg[pre[i][0]]++; } int q[100],f=0,r=0; for(int i=0;i<n;i++) if(deg[i]==0) q[r++]=i; while(f<r) { int u=q[f++]; cout<<u<<\" \"; for(int i=0;i<sz[u];i++) if(--deg[adj[u][i]]==0) q[r++]=adj[u][i]; } }\nint main() { int pre[][2]={{1,0},{2,0},{3,1},{3,2}}; findOrder(4,pre,4); return 0; }",
+        "explanation": {
+            "approach": "Topological sort.",
+            "analogy": "Process courses with satisfied prereqs.",
+            "steps": [
+                "Build graph and in-degrees",
+                "BFS from zero-degree nodes"
+            ],
+            "complexity": "Time: O(V+E), Space: O(V+E)"
+        },
+        "testCases": [
+            {
+                "input": "n=4, prereqs=[[1,0],[2,0],[3,1],[3,2]]",
+                "expectedOutput": "0 1 2 3",
+                "explanation": "Valid topological order"
+            },
+            {
+                "input": "n=2, prereqs=[[1,0]]",
+                "expectedOutput": "0 1",
+                "explanation": "Simple dependency"
+            },
+            {
+                "input": "n=1, prereqs=[]",
+                "expectedOutput": "0",
+                "explanation": "No prerequisites"
+            },
+            {
+                "input": "n=3, prereqs=[[1,0],[2,1]]",
+                "expectedOutput": "0 1 2",
+                "explanation": "Linear dependency chain"
+            }
+        ]
+    },
+    {
+        "id": "graph13",
+        "title": "Redundant Connection",
+        "description": "Remove edge to make tree.",
+        "difficulty": "MEDIUM",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid findRedundant(int edges[][2], int n) {}\nint main() { int edges[][2]={{1,2},{1,3},{2,3}}; findRedundant(edges,3); return 0; }",
+        "expectedOutput": "2 3",
+        "solution": "#include <iostream>\nusing namespace std;\nint parent[100];\nint find(int x) { if(parent[x]!=x) parent[x]=find(parent[x]); return parent[x]; }\nvoid findRedundant(int edges[][2], int n) { for(int i=0;i<=n;i++) parent[i]=i; for(int i=0;i<n;i++) { int u=edges[i][0],v=edges[i][1]; int pu=find(u),pv=find(v); if(pu==pv) { cout<<u<<\" \"<<v; return; } parent[pu]=pv; } }\nint main() { int edges[][2]={{1,2},{1,3},{2,3}}; findRedundant(edges,3); return 0; }",
+        "explanation": {
+            "approach": "Union-Find for cycle detection.",
+            "analogy": "Edge creating cycle is redundant.",
+            "steps": [
+                "Union edges",
+                "If same parent, cycle found"
+            ],
+            "complexity": "Time: O(n α(n)), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "[[1,2],[1,3],[2,3]]",
+                "expectedOutput": "2 3",
+                "explanation": "Edge 2-3 creates cycle"
+            },
+            {
+                "input": "[[1,2],[2,3],[3,4],[1,4],[1,5]]",
+                "expectedOutput": "1 4",
+                "explanation": "Edge 1-4 creates cycle"
+            },
+            {
+                "input": "[[1,2],[1,3]]",
+                "expectedOutput": "",
+                "explanation": "No redundant edge"
+            },
+            {
+                "input": "[[1,2],[2,3],[3,1]]",
+                "expectedOutput": "3 1",
+                "explanation": "Triangle cycle"
+            }
+        ]
+    },
+    {
+        "id": "graph14",
+        "title": "Min Height Trees",
+        "description": "Find roots for min height.",
+        "difficulty": "MEDIUM",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid findMinHeightTrees(int n, int edges[][2], int m) {}\nint main() { int edges[][2]={{1,0},{1,2},{1,3}}; findMinHeightTrees(4,edges,3); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid findMinHeightTrees(int n, int edges[][2], int m) { if(n==1) { cout<<0; return; } int adj[100][100],sz[100]={},deg[100]={}; for(int i=0;i<m;i++) { adj[edges[i][0]][sz[edges[i][0]]++]=edges[i][1]; adj[edges[i][1]][sz[edges[i][1]]++]=edges[i][0]; deg[edges[i][0]]++; deg[edges[i][1]]++; } int q[100],f=0,r=0; for(int i=0;i<n;i++) if(deg[i]==1) q[r++]=i; int rem=n; while(rem>2) { int size=r-f; rem-=size; for(int i=0;i<size;i++) { int u=q[f++]; for(int j=0;j<sz[u];j++) if(--deg[adj[u][j]]==1) q[r++]=adj[u][j]; } } while(f<r) cout<<q[f++]<<\" \"; }\nint main() { int edges[][2]={{1,0},{1,2},{1,3}}; findMinHeightTrees(4,edges,3); return 0; }",
+        "explanation": {
+            "approach": "Peel leaves layer by layer.",
+            "analogy": "Center nodes are min height roots.",
+            "steps": [
+                "Remove leaves iteratively",
+                "Remaining 1-2 nodes are roots"
+            ],
+            "complexity": "Time: O(V+E), Space: O(V)"
+        },
+        "testCases": [
+            {
+                "input": "n=4, edges=[[1,0],[1,2],[1,3]]",
+                "expectedOutput": "1",
+                "explanation": "Node 1 is center"
+            },
+            {
+                "input": "n=6, edges=[[0,3],[1,3],[2,3],[4,3],[5,4]]",
+                "expectedOutput": "3 4",
+                "explanation": "Two center nodes"
+            },
+            {
+                "input": "n=1, edges=[]",
+                "expectedOutput": "0",
+                "explanation": "Single node"
+            },
+            {
+                "input": "n=2, edges=[[0,1]]",
+                "expectedOutput": "0 1",
+                "explanation": "Both nodes are centers"
+            }
+        ]
+    },
+    {
+        "id": "graph15",
+        "title": "Graph Valid Tree",
+        "description": "Check if valid tree.",
+        "difficulty": "MEDIUM",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool validTree(int n, int edges[][2], int m) { return false; }\nint main() { int edges[][2]={{0,1},{0,2},{0,3},{1,4}}; cout<<validTree(5,edges,4); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint parent[100];\nint find(int x) { if(parent[x]!=x) parent[x]=find(parent[x]); return parent[x]; }\nbool validTree(int n, int edges[][2], int m) { if(m!=n-1) return false; for(int i=0;i<n;i++) parent[i]=i; for(int i=0;i<m;i++) { int pu=find(edges[i][0]),pv=find(edges[i][1]); if(pu==pv) return false; parent[pu]=pv; } return true; }\nint main() { int edges[][2]={{0,1},{0,2},{0,3},{1,4}}; cout<<validTree(5,edges,4); return 0; }",
+        "explanation": {
+            "approach": "n-1 edges and no cycle.",
+            "analogy": "Tree = connected acyclic.",
+            "steps": [
+                "Must have n-1 edges",
+                "No cycle (Union-Find)"
+            ],
+            "complexity": "Time: O(n α(n)), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=5, edges=[[0,1],[0,2],[0,3],[1,4]]",
+                "expectedOutput": "1",
+                "explanation": "Valid tree"
+            },
+            {
+                "input": "n=5, edges=[[0,1],[1,2],[2,3],[1,3],[1,4]]",
+                "expectedOutput": "0",
+                "explanation": "Has cycle"
+            },
+            {
+                "input": "n=1, edges=[]",
+                "expectedOutput": "1",
+                "explanation": "Single node is tree"
+            },
+            {
+                "input": "n=4, edges=[[0,1],[2,3]]",
+                "expectedOutput": "0",
+                "explanation": "Not connected"
+            }
+        ]
+    },
+    {
+        "id": "graph16",
+        "title": "Network Delay Time",
+        "description": "Time for all nodes to receive signal.",
+        "difficulty": "MEDIUM",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint networkDelay(int times[][3], int n, int m, int k) { return -1; }\nint main() { int times[][3]={{2,1,1},{2,3,1},{3,4,1}}; cout<<networkDelay(times,4,3,2); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint networkDelay(int times[][3], int n, int m, int k) { int dist[n+1]; for(int i=0;i<=n;i++) dist[i]=1e9; dist[k]=0; for(int i=0;i<n-1;i++) for(int j=0;j<m;j++) if(dist[times[j][0]]!=1e9) dist[times[j][1]]=min(dist[times[j][1]],dist[times[j][0]]+times[j][2]); int mx=0; for(int i=1;i<=n;i++) mx=max(mx,dist[i]); return mx>=1e9?-1:mx; }\nint main() { int times[][3]={{2,1,1},{2,3,1},{3,4,1}}; cout<<networkDelay(times,4,3,2); return 0; }",
+        "explanation": {
+            "approach": "Bellman-Ford shortest paths.",
+            "analogy": "Signal propagation time.",
+            "steps": [
+                "Relax all edges n-1 times",
+                "Return max distance"
+            ],
+            "complexity": "Time: O(VE), Space: O(V)"
+        },
+        "testCases": [
+            {
+                "input": "times=[[2,1,1],[2,3,1],[3,4,1]], n=4, k=2",
+                "expectedOutput": "2",
+                "explanation": "Max time to reach node 4"
+            },
+            {
+                "input": "times=[[1,2,1]], n=2, k=1",
+                "expectedOutput": "1",
+                "explanation": "Direct edge"
+            },
+            {
+                "input": "times=[[1,2,1]], n=2, k=2",
+                "expectedOutput": "-1",
+                "explanation": "Cannot reach node 1"
+            },
+            {
+                "input": "times=[[1,2,1],[2,3,2],[1,3,4]], n=3, k=1",
+                "expectedOutput": "3",
+                "explanation": "Shorter path via node 2"
+            }
+        ]
+    },
+    {
+        "id": "graph17",
+        "title": "Cheapest Flights K Stops",
+        "description": "Cheapest path with at most k stops.",
+        "difficulty": "MEDIUM",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint findCheapest(int n, int flights[][3], int m, int src, int dst, int k) { return -1; }\nint main() { int flights[][3]={{0,1,100},{1,2,100},{0,2,500}}; cout<<findCheapest(3,flights,3,0,2,1); return 0; }",
+        "expectedOutput": "200",
+        "solution": "#include <iostream>\nusing namespace std;\nint findCheapest(int n, int flights[][3], int m, int src, int dst, int k) { int dist[n]; for(int i=0;i<n;i++) dist[i]=1e9; dist[src]=0; for(int i=0;i<=k;i++) { int temp[n]; for(int j=0;j<n;j++) temp[j]=dist[j]; for(int j=0;j<m;j++) if(dist[flights[j][0]]!=1e9) temp[flights[j][1]]=min(temp[flights[j][1]],dist[flights[j][0]]+flights[j][2]); for(int j=0;j<n;j++) dist[j]=temp[j]; } return dist[dst]>=1e9?-1:dist[dst]; }\nint main() { int flights[][3]={{0,1,100},{1,2,100},{0,2,500}}; cout<<findCheapest(3,flights,3,0,2,1); return 0; }",
+        "explanation": {
+            "approach": "Bellman-Ford with k+1 relaxations.",
+            "analogy": "At most k+1 edges allowed.",
+            "steps": [
+                "Relax k+1 times",
+                "Use temp array to avoid extra hops"
+            ],
+            "complexity": "Time: O(kE), Space: O(V)"
+        },
+        "testCases": [
+            {
+                "input": "flights, src=0, dst=2, k=1",
+                "expectedOutput": "200",
+                "explanation": "0->1->2 costs 200"
+            },
+            {
+                "input": "flights, src=0, dst=2, k=0",
+                "expectedOutput": "500",
+                "explanation": "Direct flight only"
+            },
+            {
+                "input": "no path to dst",
+                "expectedOutput": "-1",
+                "explanation": "Unreachable"
+            },
+            {
+                "input": "flights, src=0, dst=0, k=0",
+                "expectedOutput": "0",
+                "explanation": "Already at destination"
+            }
+        ]
+    },
+    {
+        "id": "graph18",
+        "title": "Reconstruct Itinerary",
+        "description": "Build itinerary from tickets.",
+        "difficulty": "HARD",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid findItinerary(char tickets[][2][4], int n) {}\nint main() { char tickets[][2][4]={{\"MUC\",\"LHR\"},{\"JFK\",\"MUC\"},{\"SFO\",\"SJC\"},{\"LHR\",\"SFO\"}}; findItinerary(tickets,4); return 0; }",
+        "expectedOutput": "JFK MUC LHR SFO SJC",
+        "solution": "#include <iostream>\nusing namespace std;\nchar result[10][4]; int ri=0;\nvoid dfs(char cur[], char tickets[][2][4], bool used[], int n) { result[ri][0]=cur[0]; result[ri][1]=cur[1]; result[ri][2]=cur[2]; result[ri++][3]=0; for(int i=0;i<n;i++) if(!used[i] && tickets[i][0][0]==cur[0] && tickets[i][0][1]==cur[1] && tickets[i][0][2]==cur[2]) { used[i]=true; dfs(tickets[i][1],tickets,used,n); } }\nvoid findItinerary(char tickets[][2][4], int n) { bool used[n]={}; ri=0; dfs(\"JFK\",tickets,used,n); for(int i=0;i<ri;i++) cout<<result[i]<<\" \"; }\nint main() { char tickets[][2][4]={{\"MUC\",\"LHR\"},{\"JFK\",\"MUC\"},{\"SFO\",\"SJC\"},{\"LHR\",\"SFO\"}}; findItinerary(tickets,4); return 0; }",
+        "explanation": {
+            "approach": "DFS from JFK.",
+            "analogy": "Use all tickets in order.",
+            "steps": [
+                "Start from JFK",
+                "DFS using each ticket once"
+            ],
+            "complexity": "Time: O(E²), Space: O(E)"
+        },
+        "testCases": [
+            {
+                "input": "[[MUC,LHR],[JFK,MUC],[SFO,SJC],[LHR,SFO]]",
+                "expectedOutput": "JFK MUC LHR SFO SJC",
+                "explanation": "Valid itinerary"
+            },
+            {
+                "input": "[[JFK,SFO],[JFK,ATL],[SFO,ATL],[ATL,JFK],[ATL,SFO]]",
+                "expectedOutput": "JFK ATL JFK SFO ATL SFO",
+                "explanation": "Multiple paths, lexical order"
+            },
+            {
+                "input": "[[JFK,NYC]]",
+                "expectedOutput": "JFK NYC",
+                "explanation": "Single ticket"
+            },
+            {
+                "input": "[[JFK,LAX],[LAX,SFO]]",
+                "expectedOutput": "JFK LAX SFO",
+                "explanation": "Two connected tickets"
+            }
+        ]
+    },
+    {
+        "id": "graph19",
+        "title": "Swim in Rising Water",
+        "description": "Min time to reach bottom-right.",
+        "difficulty": "HARD",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint swimInWater(int grid[][3], int n) { return 0; }\nint main() { int grid[][3]={{0,2,1},{1,3,4},{2,5,0}}; cout<<swimInWater(grid,3); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint swimInWater(int grid[][3], int n) { int dist[n][n]; bool vis[n][n]={}; for(int i=0;i<n;i++) for(int j=0;j<n;j++) dist[i][j]=1e9; dist[0][0]=grid[0][0]; int dx[]={1,-1,0,0},dy[]={0,0,1,-1}; while(!vis[n-1][n-1]) { int mi=-1,mj=-1,mn=1e9; for(int i=0;i<n;i++) for(int j=0;j<n;j++) if(!vis[i][j] && dist[i][j]<mn) { mn=dist[i][j]; mi=i; mj=j; } vis[mi][mj]=true; for(int d=0;d<4;d++) { int ni=mi+dx[d],nj=mj+dy[d]; if(ni>=0 && ni<n && nj>=0 && nj<n && !vis[ni][nj]) dist[ni][nj]=min(dist[ni][nj],max(dist[mi][mj],grid[ni][nj])); } } return dist[n-1][n-1]; }\nint main() { int grid[][3]={{0,2,1},{1,3,4},{2,5,0}}; cout<<swimInWater(grid,3); return 0; }",
+        "explanation": {
+            "approach": "Dijkstra with max along path.",
+            "analogy": "Wait for water to reach max cell.",
+            "steps": [
+                "Min of max heights on path",
+                "Dijkstra-like approach"
+            ],
+            "complexity": "Time: O(n² log n), Space: O(n²)"
+        },
+        "testCases": [
+            {
+                "input": "[[0,2,1],[1,3,4],[2,5,0]]",
+                "expectedOutput": "5",
+                "explanation": "Wait until water level 5"
+            },
+            {
+                "input": "[[0,1],[2,3]]",
+                "expectedOutput": "3",
+                "explanation": "Must pass through 3"
+            },
+            {
+                "input": "[[0]]",
+                "expectedOutput": "0",
+                "explanation": "Already at destination"
+            },
+            {
+                "input": "[[0,1,2],[3,4,5],[6,7,8]]",
+                "expectedOutput": "8",
+                "explanation": "Must reach corner with value 8"
+            }
+        ]
+    },
+    {
+        "id": "graph20",
+        "title": "Alien Dictionary",
+        "description": "Order of alien alphabet.",
+        "difficulty": "HARD",
+        "category": "Graph",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid alienOrder(char words[][10], int n) {}\nint main() { char words[][10]={\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"}; alienOrder(words,5); return 0; }",
+        "expectedOutput": "wertf",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid alienOrder(char words[][10], int n) { int adj[26][26]={},deg[26]={},sz[26]={}; bool exists[26]={}; for(int i=0;i<n;i++) for(int j=0;words[i][j];j++) exists[words[i][j]-'a']=true; for(int i=0;i<n-1;i++) { int j=0; while(words[i][j] && words[i][j]==words[i+1][j]) j++; if(words[i][j] && words[i+1][j]) { int u=words[i][j]-'a',v=words[i+1][j]-'a'; adj[u][sz[u]++]=v; deg[v]++; } } int q[26],f=0,r=0; for(int i=0;i<26;i++) if(exists[i] && deg[i]==0) q[r++]=i; while(f<r) { int u=q[f++]; cout<<(char)('a'+u); for(int i=0;i<sz[u];i++) if(--deg[adj[u][i]]==0) q[r++]=adj[u][i]; } }\nint main() { char words[][10]={\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"}; alienOrder(words,5); return 0; }",
+        "explanation": {
+            "approach": "Topological sort from comparisons.",
+            "analogy": "Letter order from word order.",
+            "steps": [
+                "Build graph from adjacent word differences",
+                "Topological sort"
+            ],
+            "complexity": "Time: O(C), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "[wrt,wrf,er,ett,rftt]",
+                "expectedOutput": "wertf",
+                "explanation": "Valid alien order"
+            },
+            {
+                "input": "[z,x]",
+                "expectedOutput": "zx",
+                "explanation": "z comes before x"
+            },
+            {
+                "input": "[z,x,z]",
+                "expectedOutput": "",
+                "explanation": "Invalid order (cycle)"
+            },
+            {
+                "input": "[abc,ab]",
+                "expectedOutput": "",
+                "explanation": "Invalid - longer word before shorter prefix"
+            }
+        ]
+    }
+]

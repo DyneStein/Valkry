@@ -5,7 +5,7 @@
         "description": "Merge sorted arrays.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid merge(int a[], int m, int b[], int n, int c[]) {}\nint main() { int a[]={1,3,5}, b[]={2,4,6}, c[6]; merge(a,3,b,3,c); for(int i=0;i<6;i++) cout<<c[i]<<\" \"; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid merge(vector<int>& a, int m, vector<int>& b, int n, vector<int>& c) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int m;\n    cin >> m;\n    int b_size;\n    cin >> b_size;\n    vector<int> b(b_size);\n    for (int i = 0; i < b_size; i++) cin >> b[i];\n    int n;\n    cin >> n;\n    int c_size;\n    cin >> c_size;\n    vector<int> c(c_size);\n    for (int i = 0; i < c_size; i++) cin >> c[i];\n    merge(a, m, b, n, c);\n    return 0;\n}\n",
         "expectedOutput": "1 2 3 4 5 6",
         "testCases": [
             {
@@ -77,7 +77,7 @@
         "description": "Common elements.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid intersection(int a[], int m, int b[], int n) {}\nint main() { int a[]={1,2,3,4,5}, b[]={3,4,5,6,7}; intersection(a,5,b,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid intersection(vector<int>& a, int m, vector<int>& b, int n) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int m;\n    cin >> m;\n    int b_size;\n    cin >> b_size;\n    vector<int> b(b_size);\n    for (int i = 0; i < b_size; i++) cin >> b[i];\n    int n;\n    cin >> n;\n    intersection(a, m, b, n);\n    return 0;\n}\n",
         "expectedOutput": "3 4 5",
         "testCases": [
             {
@@ -148,7 +148,7 @@
         "description": "All unique elements.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid unionArr(int a[], int m, int b[], int n) {}\nint main() { int a[]={1,2,3}, b[]={3,4,5}; unionArr(a,3,b,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid unionArr(vector<int>& a, int m, vector<int>& b, int n) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int m;\n    cin >> m;\n    int b_size;\n    cin >> b_size;\n    vector<int> b(b_size);\n    for (int i = 0; i < b_size; i++) cin >> b[i];\n    int n;\n    cin >> n;\n    unionArr(a, m, b, n);\n    return 0;\n}\n",
         "expectedOutput": "1 2 3 4 5",
         "testCases": [
             {
@@ -219,7 +219,7 @@
         "description": "Count each element.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid frequency(int a[], int n) {}\nint main() { int a[]={1,2,2,3,3,3,4,4,4,4}; frequency(a,10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid frequency(vector<int>& a, int n) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    frequency(a, n);\n    return 0;\n}\n",
         "expectedOutput": "1:1 2:2 3:3 4:4",
         "testCases": [
             {
@@ -291,7 +291,7 @@
         "description": "Rotate left by 1.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid rotateLeft(int a[], int n) {}\nint main() { int a[]={1,2,3,4,5}; rotateLeft(a,5); for(int i=0;i<5;i++) cout<<a[i]<<\" \"; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid rotateLeft(vector<int>& a, int n) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    rotateLeft(a, n);\n    return 0;\n}\n",
         "expectedOutput": "2 3 4 5 1",
         "testCases": [
             {
@@ -363,7 +363,7 @@
         "description": "Rotate right by 1.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid rotateRight(int a[], int n) {}\nint main() { int a[]={1,2,3,4,5}; rotateRight(a,5); for(int i=0;i<5;i++) cout<<a[i]<<\" \"; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid rotateRight(vector<int>& a, int n) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    rotateRight(a, n);\n    return 0;\n}\n",
         "expectedOutput": "5 1 2 3 4",
         "testCases": [
             {
@@ -435,7 +435,7 @@
         "description": "Find local maximum.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint findPeak(int a[], int n) { return 0; }\nint main() { int a[]={1,3,20,4,1,0}; cout<<findPeak(a,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint findPeak(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << findPeak(a, n);\n    return 0;\n}\n",
         "expectedOutput": "20",
         "testCases": [
             {
@@ -506,7 +506,7 @@
         "description": "Minimum element.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint findMin(int a[], int n) { return 0; }\nint main() { int a[]={3,1,4,1,5,9,2}; cout<<findMin(a,7); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint findMin(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << findMin(a, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -577,7 +577,7 @@
         "description": "Sum all digits.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumDigits(int n) { return 0; }\nint main() { cout<<sumDigits(12345); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sumDigits(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumDigits(n);\n    return 0;\n}\n",
         "expectedOutput": "15",
         "testCases": [
             {
@@ -649,7 +649,7 @@
         "description": "Number of digits.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countDigits(int n) { return 0; }\nint main() { cout<<countDigits(12345); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countDigits(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << countDigits(n);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "testCases": [
             {
@@ -720,7 +720,7 @@
         "description": "Reverse digit order.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint reverse(int n) { return 0; }\nint main() { cout<<reverse(12345); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint reverse(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << reverse(n);\n    return 0;\n}\n",
         "expectedOutput": "54321",
         "testCases": [
             {
@@ -792,7 +792,7 @@
         "description": "Number reads same forwards and backwards.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPalindrome(int n) { return false; }\nint main() { cout<<isPalindrome(12321); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPalindrome(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isPalindrome(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {

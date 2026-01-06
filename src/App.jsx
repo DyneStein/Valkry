@@ -10,6 +10,10 @@ import LearningPage from './pages/LearningPage';
 import ProfilePage from './pages/ProfilePage';
 import AboutPage from './pages/AboutPage';
 import FriendsPage from './pages/FriendsPage';
+import VisualizerPage from './pages/VisualizerPage';
+import GroupBattlePage from './pages/GroupBattlePage';
+import TeamBattleArena from './pages/TeamBattleArena';
+import DocsPage from './pages/DocsPage';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
@@ -29,6 +33,11 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/friends" element={<FriendsPage />} />
             <Route path="/features" element={<LandingPage />} />
+            <Route path="/visualizer" element={<VisualizerPage />} />
+            <Route path="/group-battle" element={<GroupBattlePage />} />
+            <Route path="/group-battle/:lobbyId" element={<GroupBattlePage />} />
+            <Route path="/team-battle/:lobbyId/:groupId" element={<TeamBattleArena />} />
+            <Route path="/docs" element={<DocsPage />} />
           </Routes>
         </div>
       </Router>

@@ -1,0 +1,500 @@
+[
+    {
+        "id": "core13",
+        "title": "Check Prime",
+        "description": "Check if prime.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPrime(int n) { return false; }\nint main() { cout<<isPrime(17); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPrime(int n) { if(n < 2) return false; for(int i = 2; i*i <= n; i++) if(n%i == 0) return false; return true; }\nint main() { cout<<isPrime(17); return 0; }",
+        "explanation": {
+            "approach": "Check divisibility from 2 to sqrt(n).",
+            "analogy": "Try dividing by all possible factors. If none work, it's prime.",
+            "steps": [
+                "If n<2, not prime",
+                "Check 2 to sqrt(n)",
+                "If any divides, not prime"
+            ],
+            "complexity": "Time: O(sqrt n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=17",
+                "expectedOutput": "1",
+                "explanation": "17 is prime"
+            },
+            {
+                "input": "n=4",
+                "expectedOutput": "0",
+                "explanation": "4 is divisible by 2"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "0",
+                "explanation": "1 is not prime"
+            },
+            {
+                "input": "n=97",
+                "expectedOutput": "1",
+                "explanation": "97 is a prime number"
+            }
+        ]
+    },
+    {
+        "id": "core14",
+        "title": "Binary to Decimal",
+        "description": "Convert binary to decimal.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint toDecimal(int bin) { return 0; }\nint main() { cout<<toDecimal(1101); return 0; }",
+        "expectedOutput": "13",
+        "solution": "#include <iostream>\nusing namespace std;\nint toDecimal(int bin) { int dec = 0, base = 1; while(bin > 0) { dec += (bin%10) * base; base *= 2; bin /= 10; } return dec; }\nint main() { cout<<toDecimal(1101); return 0; }",
+        "explanation": {
+            "approach": "Multiply each digit by 2^position.",
+            "analogy": "1101 = 1×8 + 1×4 + 0×2 + 1×1 = 13",
+            "steps": [
+                "Take last digit",
+                "Multiply by power of 2",
+                "Add to result"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "1101",
+                "expectedOutput": "13",
+                "explanation": "Binary 1101 = 13"
+            },
+            {
+                "input": "1000",
+                "expectedOutput": "8",
+                "explanation": "Binary 1000 = 8"
+            },
+            {
+                "input": "111",
+                "expectedOutput": "7",
+                "explanation": "Binary 111 = 7"
+            },
+            {
+                "input": "10101",
+                "expectedOutput": "21",
+                "explanation": "Binary 10101 = 21"
+            }
+        ]
+    },
+    {
+        "id": "core15",
+        "title": "Decimal to Binary",
+        "description": "Convert decimal to binary.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid toBinary(int n) {}\nint main() { toBinary(13); return 0; }",
+        "expectedOutput": "1101",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid toBinary(int n) { if(n == 0) { cout<<0; return; } int b[32], i = 0; while(n > 0) { b[i++] = n%2; n /= 2; } for(int j = i-1; j >= 0; j--) cout << b[j]; }\nint main() { toBinary(13); return 0; }",
+        "explanation": {
+            "approach": "Divide by 2, collect remainders, print reverse.",
+            "analogy": "13 ÷ 2 = 6 r1, 6 ÷ 2 = 3 r0, 3 ÷ 2 = 1 r1, 1 ÷ 2 = 0 r1 → 1101",
+            "steps": [
+                "Divide by 2",
+                "Store remainder",
+                "Print in reverse"
+            ],
+            "complexity": "Time: O(log n), Space: O(log n)"
+        },
+        "testCases": [
+            {
+                "input": "13",
+                "expectedOutput": "1101",
+                "explanation": "13 in binary is 1101"
+            },
+            {
+                "input": "8",
+                "expectedOutput": "1000",
+                "explanation": "8 in binary is 1000"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "0 in binary is 0"
+            },
+            {
+                "input": "255",
+                "expectedOutput": "11111111",
+                "explanation": "255 in binary is 8 ones"
+            }
+        ]
+    },
+    {
+        "id": "core16",
+        "title": "Octal to Decimal",
+        "description": "Convert octal to decimal.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint toDecimal(int oct) { return 0; }\nint main() { cout<<toDecimal(17); return 0; }",
+        "expectedOutput": "15",
+        "solution": "#include <iostream>\nusing namespace std;\nint toDecimal(int oct) { int dec = 0, base = 1; while(oct > 0) { dec += (oct%10) * base; base *= 8; oct /= 10; } return dec; }\nint main() { cout<<toDecimal(17); return 0; }",
+        "explanation": {
+            "approach": "Each digit multiplied by 8^position.",
+            "analogy": "17₈ = 1×8 + 7×1 = 15",
+            "steps": [
+                "Multiply digits by powers of 8"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "17 (octal)",
+                "expectedOutput": "15",
+                "explanation": "17 in octal = 15 decimal"
+            },
+            {
+                "input": "10 (octal)",
+                "expectedOutput": "8",
+                "explanation": "10 in octal = 8 decimal"
+            },
+            {
+                "input": "77 (octal)",
+                "expectedOutput": "63",
+                "explanation": "77 in octal = 63 decimal"
+            },
+            {
+                "input": "100 (octal)",
+                "expectedOutput": "64",
+                "explanation": "100 in octal = 64 decimal"
+            }
+        ]
+    },
+    {
+        "id": "core17",
+        "title": "Hexadecimal to Decimal",
+        "description": "Hex string to decimal.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint toDecimal(char hex[]) { return 0; }\nint main() { cout<<toDecimal(\"1A\"); return 0; }",
+        "expectedOutput": "26",
+        "solution": "#include <iostream>\nusing namespace std;\nint toDecimal(char h[]) { int d=0; for(int i=0; h[i]; i++) { d *= 16; if(h[i]>='0'&&h[i]<='9') d += h[i]-'0'; else d += h[i]-'A'+10; } return d; }\nint main() { cout<<toDecimal(\"1A\"); return 0; }",
+        "explanation": {
+            "approach": "Each digit/letter × 16^position. A=10, B=11, etc.",
+            "analogy": "1A = 1×16 + 10 = 26",
+            "steps": [
+                "Parse each char",
+                "Multiply by 16",
+                "Add digit value"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "\"1A\"",
+                "expectedOutput": "26",
+                "explanation": "1A hex = 26 decimal"
+            },
+            {
+                "input": "\"FF\"",
+                "expectedOutput": "255",
+                "explanation": "FF hex = 255 decimal"
+            },
+            {
+                "input": "\"10\"",
+                "expectedOutput": "16",
+                "explanation": "10 hex = 16 decimal"
+            },
+            {
+                "input": "\"ABC\"",
+                "expectedOutput": "2748",
+                "explanation": "ABC hex = 2748 decimal"
+            }
+        ]
+    },
+    {
+        "id": "core18",
+        "title": "LCM of Two Numbers",
+        "description": "Find LCM.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint lcm(int a, int b) { return 0; }\nint main() { cout<<lcm(12,18); return 0; }",
+        "expectedOutput": "36",
+        "solution": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) { return b==0 ? a : gcd(b, a%b); }\nint lcm(int a, int b) { return (a * b) / gcd(a, b); }\nint main() { cout<<lcm(12,18); return 0; }",
+        "explanation": {
+            "approach": "LCM = (a × b) / GCD(a, b)",
+            "analogy": "LCM is smallest number both divide into.",
+            "steps": [
+                "Find GCD",
+                "LCM = a×b / GCD"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "a=12, b=18",
+                "expectedOutput": "36",
+                "explanation": "LCM(12,18) = 36"
+            },
+            {
+                "input": "a=4, b=6",
+                "expectedOutput": "12",
+                "explanation": "LCM(4,6) = 12"
+            },
+            {
+                "input": "a=5, b=7",
+                "expectedOutput": "35",
+                "explanation": "Coprime, LCM = product"
+            },
+            {
+                "input": "a=3, b=9",
+                "expectedOutput": "9",
+                "explanation": "LCM when one divides other"
+            }
+        ]
+    },
+    {
+        "id": "core19",
+        "title": "Armstrong Number",
+        "description": "Sum of digit^n = number.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isArmstrong(int n) { return false; }\nint main() { cout<<isArmstrong(153); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\n#include <cmath>\nbool isArmstrong(int n) { int t=n, d=0, s=0; while(t>0){d++;t/=10;} t=n; while(t>0){s+=pow(t%10,d);t/=10;} return s==n; }\nint main() { cout<<isArmstrong(153); return 0; }",
+        "explanation": {
+            "approach": "Each digit raised to power of total digits, sum = n.",
+            "analogy": "153 = 1³ + 5³ + 3³ = 1+125+27 = 153",
+            "steps": [
+                "Count digits",
+                "Sum each digit^count",
+                "Check if equals n"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "153",
+                "expectedOutput": "1",
+                "explanation": "1³+5³+3³ = 153"
+            },
+            {
+                "input": "370",
+                "expectedOutput": "1",
+                "explanation": "3³+7³+0³ = 370"
+            },
+            {
+                "input": "123",
+                "expectedOutput": "0",
+                "explanation": "1³+2³+3³ ≠ 123"
+            },
+            {
+                "input": "9474",
+                "expectedOutput": "1",
+                "explanation": "9⁴+4⁴+7⁴+4⁴ = 9474"
+            }
+        ]
+    },
+    {
+        "id": "core20",
+        "title": "Fibonacci Iterative",
+        "description": "Nth Fibonacci iteratively.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint fib(int n) { return 0; }\nint main() { cout<<fib(10); return 0; }",
+        "expectedOutput": "55",
+        "solution": "#include <iostream>\nusing namespace std;\nint fib(int n) { if(n <= 1) return n; int a=0, b=1; for(int i=2; i<=n; i++) { int c = a+b; a=b; b=c; } return b; }\nint main() { cout<<fib(10); return 0; }",
+        "explanation": {
+            "approach": "Keep two variables, update each iteration.",
+            "analogy": "Like climbing stairs - remember last two steps.",
+            "steps": [
+                "Start a=0, b=1",
+                "Loop: c=a+b, shift values"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "55",
+                "explanation": "F(10) = 55"
+            },
+            {
+                "input": "n=0",
+                "expectedOutput": "0",
+                "explanation": "F(0) = 0"
+            },
+            {
+                "input": "n=20",
+                "expectedOutput": "6765",
+                "explanation": "F(20) = 6765"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "F(1) = 1"
+            }
+        ]
+    },
+    {
+        "id": "core21",
+        "title": "Sum of Divisors",
+        "description": "Sum all divisors.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumDivisors(int n) { return 0; }\nint main() { cout<<sumDivisors(12); return 0; }",
+        "expectedOutput": "28",
+        "solution": "#include <iostream>\nusing namespace std;\nint sumDivisors(int n) { int sum = 0; for(int i = 1; i <= n; i++) if(n % i == 0) sum += i; return sum; }\nint main() { cout<<sumDivisors(12); return 0; }",
+        "explanation": {
+            "approach": "Check each number 1 to n, add if divides evenly.",
+            "analogy": "12: 1+2+3+4+6+12 = 28",
+            "steps": [
+                "Loop 1 to n",
+                "If divides, add to sum"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "12",
+                "expectedOutput": "28",
+                "explanation": "1+2+3+4+6+12=28"
+            },
+            {
+                "input": "6",
+                "expectedOutput": "12",
+                "explanation": "1+2+3+6=12 (perfect number)"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "8",
+                "explanation": "Prime: 1+7=8"
+            },
+            {
+                "input": "28",
+                "expectedOutput": "56",
+                "explanation": "28 is a perfect number"
+            }
+        ]
+    },
+    {
+        "id": "core22",
+        "title": "Count Divisors",
+        "description": "Number of divisors.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countDivisors(int n) { return 0; }\nint main() { cout<<countDivisors(12); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint countDivisors(int n) { int c = 0; for(int i = 1; i <= n; i++) if(n % i == 0) c++; return c; }\nint main() { cout<<countDivisors(12); return 0; }",
+        "explanation": {
+            "approach": "Count numbers that divide n evenly.",
+            "analogy": "12 has 6 divisors: 1,2,3,4,6,12",
+            "steps": [
+                "Loop 1 to n",
+                "Count divisors"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "12",
+                "expectedOutput": "6",
+                "explanation": "Divisors: 1,2,3,4,6,12"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "2",
+                "explanation": "Prime has only 2 divisors"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "1 has only itself"
+            },
+            {
+                "input": "36",
+                "expectedOutput": "9",
+                "explanation": "Divisors: 1,2,3,4,6,9,12,18,36"
+            }
+        ]
+    },
+    {
+        "id": "core23",
+        "title": "Print Primes to N",
+        "description": "All primes up to N.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid primes(int n) {}\nint main() { primes(20); return 0; }",
+        "expectedOutput": "2 3 5 7 11 13 17 19",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPrime(int n) { if(n<2) return false; for(int i=2;i*i<=n;i++) if(n%i==0) return false; return true; }\nvoid primes(int n) { bool first=true; for(int i=2;i<=n;i++) if(isPrime(i)) { if(!first) cout<<\" \"; cout<<i; first=false; } }\nint main() { primes(20); return 0; }",
+        "explanation": {
+            "approach": "Check each number for primality.",
+            "analogy": "Filter out non-primes one by one.",
+            "steps": [
+                "Loop 2 to n",
+                "Check if prime",
+                "Print if yes"
+            ],
+            "complexity": "Time: O(n√n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=20",
+                "expectedOutput": "2 3 5 7 11 13 17 19",
+                "explanation": "Primes up to 20"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "2 3 5 7",
+                "explanation": "Primes up to 10"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "2",
+                "explanation": "Only 2 up to 2"
+            },
+            {
+                "input": "n=50",
+                "expectedOutput": "2 3 5 7 11 13 17 19 23 29 31 37 41 43 47",
+                "explanation": "Primes up to 50"
+            }
+        ]
+    },
+    {
+        "id": "core24",
+        "title": "Next Prime",
+        "description": "Find next prime after n.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint nextPrime(int n) { return 0; }\nint main() { cout<<nextPrime(10); return 0; }",
+        "expectedOutput": "11",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPrime(int n) { if(n<2) return false; for(int i=2;i*i<=n;i++) if(n%i==0) return false; return true; }\nint nextPrime(int n) { n++; while(!isPrime(n)) n++; return n; }\nint main() { cout<<nextPrime(10); return 0; }",
+        "explanation": {
+            "approach": "Keep incrementing and check primality.",
+            "analogy": "Start after n, find first prime.",
+            "steps": [
+                "Increment n",
+                "Check if prime",
+                "Return when found"
+            ],
+            "complexity": "Time: O(√n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "11",
+                "explanation": "Next prime after 10 is 11"
+            },
+            {
+                "input": "n=13",
+                "expectedOutput": "17",
+                "explanation": "Next prime after 13 is 17"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "2",
+                "explanation": "First prime is 2"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "101",
+                "explanation": "Next prime after 100 is 101"
+            }
+        ]
+    }
+]

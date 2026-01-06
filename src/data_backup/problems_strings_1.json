@@ -1,0 +1,413 @@
+[
+    {
+        "id": "str11",
+        "title": "Longest Substring Without Repeat",
+        "description": "Longest unique char substring.",
+        "difficulty": "MEDIUM",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint lengthOfLongestSubstring(char s[]) { return 0; }\nint main() { cout<<lengthOfLongestSubstring(\"abcabcbb\"); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint lengthOfLongestSubstring(char s[]) { int seen[256]={}; int mx=0,l=0; for(int r=0;s[r];r++) { while(seen[(int)s[r]]) { seen[(int)s[l]]=0; l++; } seen[(int)s[r]]=1; mx=max(mx,r-l+1); } return mx; }\nint main() { cout<<lengthOfLongestSubstring(\"abcabcbb\"); return 0; }",
+        "explanation": {
+            "approach": "Sliding window with char set.",
+            "analogy": "Shrink when duplicate found.",
+            "steps": [
+                "Expand right",
+                "Shrink left on duplicate"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "\"abcabcbb\"",
+                "expectedOutput": "3",
+                "explanation": "abc is longest unique substring"
+            },
+            {
+                "input": "\"bbbbb\"",
+                "expectedOutput": "1",
+                "explanation": "Only single char unique"
+            },
+            {
+                "input": "\"pwwkew\"",
+                "expectedOutput": "3",
+                "explanation": "wke is longest"
+            },
+            {
+                "input": "\"\"",
+                "expectedOutput": "0",
+                "explanation": "Empty string"
+            }
+        ]
+    },
+    {
+        "id": "str12",
+        "title": "Valid Palindrome",
+        "description": "Check if palindrome ignoring non-alnum.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPalindrome(char s[]) { return false; }\nint main() { cout<<isPalindrome(\"A man a plan a canal Panama\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isAlnum(char c) { return (c>='a'&&c<='z')||(c>='A'&&c<='Z')||(c>='0'&&c<='9'); }\nchar lower(char c) { return c>='A'&&c<='Z'?c+32:c; }\nbool isPalindrome(char s[]) { int n=0; while(s[n]) n++; int l=0,r=n-1; while(l<r) { while(l<r && !isAlnum(s[l])) l++; while(l<r && !isAlnum(s[r])) r--; if(lower(s[l])!=lower(s[r])) return false; l++; r--; } return true; }\nint main() { cout<<isPalindrome(\"A man a plan a canal Panama\"); return 0; }",
+        "explanation": {
+            "approach": "Two pointers, skip non-alphanumeric.",
+            "analogy": "Compare letters only.",
+            "steps": [
+                "Skip non-alnum characters",
+                "Compare lowercase"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "\"A man a plan a canal Panama\"",
+                "expectedOutput": "1",
+                "explanation": "Valid palindrome ignoring spaces/case"
+            },
+            {
+                "input": "\"race a car\"",
+                "expectedOutput": "0",
+                "explanation": "Not a palindrome"
+            },
+            {
+                "input": "\" \"",
+                "expectedOutput": "1",
+                "explanation": "Empty after filtering is palindrome"
+            },
+            {
+                "input": "\"Was it a car or a cat I saw\"",
+                "expectedOutput": "1",
+                "explanation": "Another valid palindrome"
+            }
+        ]
+    },
+    {
+        "id": "str13",
+        "title": "String Compression",
+        "description": "Compress consecutive chars.",
+        "difficulty": "MEDIUM",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid compress(char s[]) {}\nint main() { char s[]=\"aabcccccaaa\"; compress(s); return 0; }",
+        "expectedOutput": "a2b1c5a3",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid compress(char s[]) { int n=0; while(s[n]) n++; int i=0; while(i<n) { char c=s[i]; int cnt=0; while(i<n && s[i]==c) { cnt++; i++; } cout<<c<<cnt; } }\nint main() { char s[]=\"aabcccccaaa\"; compress(s); return 0; }",
+        "explanation": {
+            "approach": "Count consecutive characters.",
+            "analogy": "Run-length encoding.",
+            "steps": [
+                "Count same character runs",
+                "Print char and count"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "\"aabcccccaaa\"",
+                "expectedOutput": "a2b1c5a3",
+                "explanation": "Compressed form"
+            },
+            {
+                "input": "\"abc\"",
+                "expectedOutput": "a1b1c1",
+                "explanation": "No compression benefit"
+            },
+            {
+                "input": "\"aaa\"",
+                "expectedOutput": "a3",
+                "explanation": "All same characters"
+            },
+            {
+                "input": "\"aaabbbccc\"",
+                "expectedOutput": "a3b3c3",
+                "explanation": "Three groups of three"
+            }
+        ]
+    },
+    {
+        "id": "str14",
+        "title": "Multiply Strings",
+        "description": "Multiply two number strings.",
+        "difficulty": "MEDIUM",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid multiply(char n1[], char n2[]) {}\nint main() { multiply(\"123\",\"456\"); return 0; }",
+        "expectedOutput": "56088",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid multiply(char n1[], char n2[]) { int l1=0,l2=0; while(n1[l1]) l1++; while(n2[l2]) l2++; int res[l1+l2]={}; for(int i=l1-1;i>=0;i--) for(int j=l2-1;j>=0;j--) { int mul=(n1[i]-'0')*(n2[j]-'0'); int p1=i+j,p2=i+j+1; int sum=mul+res[p2]; res[p2]=sum%10; res[p1]+=sum/10; } int i=0; while(i<l1+l2 && res[i]==0) i++; if(i==l1+l2) { cout<<0; return; } while(i<l1+l2) cout<<res[i++]; }\nint main() { multiply(\"123\",\"456\"); return 0; }",
+        "explanation": {
+            "approach": "Digit by digit multiplication.",
+            "analogy": "Grade school multiplication.",
+            "steps": [
+                "Multiply each pair of digits",
+                "Position result correctly",
+                "Handle carries"
+            ],
+            "complexity": "Time: O(m×n), Space: O(m+n)"
+        },
+        "testCases": [
+            {
+                "input": "\"123\" × \"456\"",
+                "expectedOutput": "56088",
+                "explanation": "123 * 456 = 56088"
+            },
+            {
+                "input": "\"2\" × \"3\"",
+                "expectedOutput": "6",
+                "explanation": "Simple multiplication"
+            },
+            {
+                "input": "\"0\" × \"12345\"",
+                "expectedOutput": "0",
+                "explanation": "Zero times anything"
+            },
+            {
+                "input": "\"999\" × \"999\"",
+                "expectedOutput": "998001",
+                "explanation": "Large multiplication with carries"
+            }
+        ]
+    },
+    {
+        "id": "str15",
+        "title": "Add Binary",
+        "description": "Add two binary strings.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid addBinary(char a[], char b[]) {}\nint main() { addBinary(\"11\",\"1\"); return 0; }",
+        "expectedOutput": "100",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid addBinary(char a[], char b[]) { int la=0,lb=0; while(a[la]) la++; while(b[lb]) lb++; char res[la+lb+2]; int k=0,c=0; int i=la-1,j=lb-1; while(i>=0 || j>=0 || c) { int sum=c; if(i>=0) sum+=a[i--]-'0'; if(j>=0) sum+=b[j--]-'0'; res[k++]='0'+sum%2; c=sum/2; } for(int t=k-1;t>=0;t--) cout<<res[t]; }\nint main() { addBinary(\"11\",\"1\"); return 0; }",
+        "explanation": {
+            "approach": "Add with carry from right.",
+            "analogy": "Binary addition.",
+            "steps": [
+                "Add bits and carry",
+                "Store result in reverse"
+            ],
+            "complexity": "Time: O(max(m,n)), Space: O(max(m,n))"
+        },
+        "testCases": [
+            {
+                "input": "\"11\" + \"1\"",
+                "expectedOutput": "100",
+                "explanation": "3 + 1 = 4 in binary"
+            },
+            {
+                "input": "\"1010\" + \"1011\"",
+                "expectedOutput": "10101",
+                "explanation": "10 + 11 = 21"
+            },
+            {
+                "input": "\"0\" + \"0\"",
+                "expectedOutput": "0",
+                "explanation": "Zero plus zero"
+            },
+            {
+                "input": "\"1111\" + \"1111\"",
+                "expectedOutput": "11110",
+                "explanation": "15 + 15 = 30"
+            }
+        ]
+    },
+    {
+        "id": "str16",
+        "title": "ZigZag Conversion",
+        "description": "Rearrange in zigzag pattern.",
+        "difficulty": "MEDIUM",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid convert(char s[], int numRows) {}\nint main() { convert(\"PAYPALISHIRING\",3); return 0; }",
+        "expectedOutput": "PAHNAPLSIIGYIR",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid convert(char s[], int numRows) { if(numRows==1) { cout<<s; return; } char rows[numRows][100]; int len[numRows]={}; int row=0,dir=1; for(int i=0;s[i];i++) { rows[row][len[row]++]=s[i]; if(row==0) dir=1; else if(row==numRows-1) dir=-1; row+=dir; } for(int i=0;i<numRows;i++) for(int j=0;j<len[i];j++) cout<<rows[i][j]; }\nint main() { convert(\"PAYPALISHIRING\",3); return 0; }",
+        "explanation": {
+            "approach": "Simulate zigzag placement.",
+            "analogy": "Move down then up cyclically.",
+            "steps": [
+                "Place chars in rows",
+                "Change direction at boundaries"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "\"PAYPALISHIRING\", numRows=3",
+                "expectedOutput": "PAHNAPLSIIGYIR",
+                "explanation": "3-row zigzag"
+            },
+            {
+                "input": "\"PAYPALISHIRING\", numRows=4",
+                "expectedOutput": "PINALSIGYAHRPI",
+                "explanation": "4-row zigzag"
+            },
+            {
+                "input": "\"A\", numRows=1",
+                "expectedOutput": "A",
+                "explanation": "Single char unchanged"
+            },
+            {
+                "input": "\"AB\", numRows=1",
+                "expectedOutput": "AB",
+                "explanation": "Single row unchanged"
+            }
+        ]
+    },
+    {
+        "id": "str17",
+        "title": "Longest Common Prefix",
+        "description": "Find common prefix.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid longestCommonPrefix(char strs[][20], int n) {}\nint main() { char strs[][20]={\"flower\",\"flow\",\"flight\"}; longestCommonPrefix(strs,3); return 0; }",
+        "expectedOutput": "fl",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid longestCommonPrefix(char strs[][20], int n) { if(n==0) return; for(int i=0;strs[0][i];i++) { for(int j=1;j<n;j++) if(strs[j][i]!=strs[0][i]) { strs[0][i]=0; cout<<strs[0]; return; } } cout<<strs[0]; }\nint main() { char strs[][20]={\"flower\",\"flow\",\"flight\"}; longestCommonPrefix(strs,3); return 0; }",
+        "explanation": {
+            "approach": "Compare char by char.",
+            "analogy": "Stop at first mismatch.",
+            "steps": [
+                "For each position",
+                "Check if all strings match"
+            ],
+            "complexity": "Time: O(S), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "[flower,flow,flight]",
+                "expectedOutput": "fl",
+                "explanation": "Common prefix is fl"
+            },
+            {
+                "input": "[dog,racecar,car]",
+                "expectedOutput": "",
+                "explanation": "No common prefix"
+            },
+            {
+                "input": "[interspecies,interstellar,interstate]",
+                "expectedOutput": "inters",
+                "explanation": "Common prefix inters"
+            },
+            {
+                "input": "[abc,abc,abc]",
+                "expectedOutput": "abc",
+                "explanation": "Identical strings"
+            }
+        ]
+    },
+    {
+        "id": "str18",
+        "title": "Find and Replace Pattern",
+        "description": "Words matching pattern.",
+        "difficulty": "MEDIUM",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid findAndReplacePattern(char words[][10], int n, char pattern[]) {}\nint main() { char words[][10]={\"abc\",\"deq\",\"mee\",\"aqq\",\"dkd\",\"ccc\"}; findAndReplacePattern(words,6,\"abb\"); return 0; }",
+        "expectedOutput": "mee aqq",
+        "solution": "#include <iostream>\nusing namespace std;\nbool match(char w[], char p[]) { int w2p[26]={},p2w[26]={}; for(int i=0;i<26;i++) { w2p[i]=-1; p2w[i]=-1; } for(int i=0;w[i];i++) { int wc=w[i]-'a',pc=p[i]-'a'; if(w2p[wc]==-1) w2p[wc]=pc; if(p2w[pc]==-1) p2w[pc]=wc; if(w2p[wc]!=pc || p2w[pc]!=wc) return false; } return true; }\nvoid findAndReplacePattern(char words[][10], int n, char pattern[]) { for(int i=0;i<n;i++) if(match(words[i],pattern)) cout<<words[i]<<\" \"; }\nint main() { char words[][10]={\"abc\",\"deq\",\"mee\",\"aqq\",\"dkd\",\"ccc\"}; findAndReplacePattern(words,6,\"abb\"); return 0; }",
+        "explanation": {
+            "approach": "Bijection mapping check.",
+            "analogy": "One-to-one correspondence.",
+            "steps": [
+                "Map word chars to pattern chars",
+                "Check consistency both ways"
+            ],
+            "complexity": "Time: O(n×m), Space: O(26)"
+        },
+        "testCases": [
+            {
+                "input": "words, pattern=\"abb\"",
+                "expectedOutput": "mee aqq",
+                "explanation": "m->a,e->b and a->a,q->b"
+            },
+            {
+                "input": "[a,b,c], pattern=\"a\"",
+                "expectedOutput": "a b c",
+                "explanation": "All single chars match"
+            },
+            {
+                "input": "[aa,bb,cc], pattern=\"xy\"",
+                "expectedOutput": "",
+                "explanation": "No bijection possible"
+            },
+            {
+                "input": "[abc,xyz], pattern=\"abc\"",
+                "expectedOutput": "abc xyz",
+                "explanation": "Both have unique chars"
+            }
+        ]
+    },
+    {
+        "id": "str19",
+        "title": "Integer to Roman",
+        "description": "Convert int to roman numeral.",
+        "difficulty": "MEDIUM",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid intToRoman(int num) {}\nint main() { intToRoman(1994); return 0; }",
+        "expectedOutput": "MCMXCIV",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid intToRoman(int num) { int vals[]={1000,900,500,400,100,90,50,40,10,9,5,4,1}; char* syms[]={\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"}; for(int i=0;i<13;i++) while(num>=vals[i]) { cout<<syms[i]; num-=vals[i]; } }\nint main() { intToRoman(1994); return 0; }",
+        "explanation": {
+            "approach": "Greedy from largest value.",
+            "analogy": "Subtract largest possible each time.",
+            "steps": [
+                "Match largest value",
+                "Append symbol, subtract"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "1994",
+                "expectedOutput": "MCMXCIV",
+                "explanation": "M=1000, CM=900, XC=90, IV=4"
+            },
+            {
+                "input": "58",
+                "expectedOutput": "LVIII",
+                "explanation": "L=50, V=5, III=3"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "III",
+                "explanation": "Three I's"
+            },
+            {
+                "input": "3999",
+                "expectedOutput": "MMMCMXCIX",
+                "explanation": "Maximum valid Roman numeral"
+            }
+        ]
+    },
+    {
+        "id": "str20",
+        "title": "Roman to Integer",
+        "description": "Convert roman to int.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint romanToInt(char s[]) { return 0; }\nint main() { cout<<romanToInt(\"MCMXCIV\"); return 0; }",
+        "expectedOutput": "1994",
+        "solution": "#include <iostream>\nusing namespace std;\nint val(char c) { if(c=='M') return 1000; if(c=='D') return 500; if(c=='C') return 100; if(c=='L') return 50; if(c=='X') return 10; if(c=='V') return 5; if(c=='I') return 1; return 0; }\nint romanToInt(char s[]) { int res=0; for(int i=0;s[i];i++) { if(s[i+1] && val(s[i])<val(s[i+1])) res-=val(s[i]); else res+=val(s[i]); } return res; }\nint main() { cout<<romanToInt(\"MCMXCIV\"); return 0; }",
+        "explanation": {
+            "approach": "Subtract if smaller before larger.",
+            "analogy": "IV = 5 - 1 = 4.",
+            "steps": [
+                "If current < next, subtract",
+                "Else add"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "\"MCMXCIV\"",
+                "expectedOutput": "1994",
+                "explanation": "1000+900+90+4"
+            },
+            {
+                "input": "\"III\"",
+                "expectedOutput": "3",
+                "explanation": "1+1+1"
+            },
+            {
+                "input": "\"IV\"",
+                "expectedOutput": "4",
+                "explanation": "5-1=4"
+            },
+            {
+                "input": "\"MMMCMXCIX\"",
+                "expectedOutput": "3999",
+                "explanation": "Maximum Roman numeral value"
+            }
+        ]
+    }
+]

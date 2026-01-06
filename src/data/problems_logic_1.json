@@ -5,7 +5,7 @@
         "description": "Find the position of the last survivor in elimination game.",
         "difficulty": "MEDIUM",
         "category": "Logic",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint josephus(int n, int k) { return 0; }\nint main() { cout<<josephus(5,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint josephus(int n, int k) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int k;\n    cin >> k;\n    cout << josephus(n, k);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\nint josephus(int n, int k) { if(n==1) return 0; return (josephus(n-1,k)+k)%n; }\nint main() { cout<<josephus(5,2); return 0; }",
         "explanation": {
@@ -45,7 +45,7 @@
         "description": "Calculate minimum moves to solve Tower of Hanoi.",
         "difficulty": "EASY",
         "category": "Logic",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint hanoiMoves(int n) { return 0; }\nint main() { cout<<hanoiMoves(3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint hanoiMoves(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << hanoiMoves(n);\n    return 0;\n}\n",
         "expectedOutput": "7",
         "solution": "#include <iostream>\nusing namespace std;\nint hanoiMoves(int n) { return (1<<n)-1; }\nint main() { cout<<hanoiMoves(3); return 0; }",
         "explanation": {
@@ -85,7 +85,7 @@
         "description": "Find minimum tries needed with 2 eggs for n floors.",
         "difficulty": "MEDIUM",
         "category": "Logic",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint eggDrop(int n) { return 0; }\nint main() { cout<<eggDrop(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint eggDrop(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << eggDrop(n);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "solution": "#include <iostream>\nusing namespace std;\nint eggDrop(int n) { int tries=1; while(tries*(tries+1)/2<n) tries++; return tries; }\nint main() { cout<<eggDrop(10); return 0; }",
         "explanation": {
@@ -125,7 +125,7 @@
         "description": "Check if target liters can be measured with two jugs.",
         "difficulty": "MEDIUM",
         "category": "Logic",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool canMeasure(int x, int y, int z) { return false; }\nint main() { cout<<canMeasure(3,5,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool canMeasure(int x, int y, int z) {\n    return false;\n}\n\nint main() {\n    int x;\n    cin >> x;\n    int y;\n    cin >> y;\n    int z;\n    cin >> z;\n    cout << canMeasure(x, y, z);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) { return b==0?a:gcd(b,a%b); }\nbool canMeasure(int x, int y, int z) { return z<=x+y && z%gcd(x,y)==0; }\nint main() { cout<<canMeasure(3,5,4); return 0; }",
         "explanation": {
@@ -198,7 +198,10 @@
                 "expectedOutput": "Switch",
                 "explanation": "Math always favors switch"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     },
     {
         "id": "logic6",
@@ -238,7 +241,10 @@
                 "expectedOutput": "23",
                 "explanation": "Birthday paradox constant"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     },
     {
         "id": "logic7",
@@ -246,7 +252,7 @@
         "description": "Maximum prisoners saved with optimal strategy.",
         "difficulty": "EASY",
         "category": "Logic",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint maxSaves(int n) { return 0; }\nint main() { cout<<maxSaves(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint maxSaves(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << maxSaves(n);\n    return 0;\n}\n",
         "expectedOutput": "9",
         "solution": "#include <iostream>\nusing namespace std;\nint maxSaves(int n) { return n-1; }\nint main() { cout<<maxSaves(10); return 0; }",
         "explanation": {
@@ -286,7 +292,7 @@
         "description": "Minimum time for 4 people to cross bridge at night.",
         "difficulty": "MEDIUM",
         "category": "Logic",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint bridgeCrossing(int a, int b, int c, int d) { return 0; }\nint main() { cout<<bridgeCrossing(1,2,5,10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint bridgeCrossing(int a, int b, int c, int d) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    int c;\n    cin >> c;\n    int d;\n    cin >> d;\n    cout << bridgeCrossing(a, b, c, d);\n    return 0;\n}\n",
         "expectedOutput": "17",
         "solution": "#include <iostream>\nusing namespace std;\nint bridgeCrossing(int a, int b, int c, int d) { int t[4]={a,b,c,d}; for(int i=0;i<4;i++) for(int j=i+1;j<4;j++) if(t[i]>t[j]) swap(t[i],t[j]); return min(2*t[1]+t[0]+t[3], t[0]+2*t[1]+t[2]+t[3]); }\nint main() { cout<<bridgeCrossing(1,2,5,10); return 0; }",
         "explanation": {
@@ -326,7 +332,7 @@
         "description": "Minimum weighings to find one fake ball among n.",
         "difficulty": "EASY",
         "category": "Logic",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint minWeighings(int n) { return 0; }\nint main() { cout<<minWeighings(9); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint minWeighings(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << minWeighings(n);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\nint minWeighings(int n) { int w=0; while(n>1) { n=(n+2)/3; w++; } return w; }\nint main() { cout<<minWeighings(9); return 0; }",
         "explanation": {
@@ -366,7 +372,7 @@
         "description": "Total rice grains on chessboard (doubling each square).",
         "difficulty": "EASY",
         "category": "Logic",
-        "starterCode": "#include <iostream>\nusing namespace std;\nlong long totalRice(int n) { return 0; }\nint main() { cout<<totalRice(8); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nlong long totalRice(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << totalRice(n);\n    return 0;\n}\n",
         "expectedOutput": "255",
         "solution": "#include <iostream>\nusing namespace std;\nlong long totalRice(int n) { return (1LL<<n)-1; }\nint main() { cout<<totalRice(8); return 0; }",
         "explanation": {

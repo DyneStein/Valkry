@@ -38,7 +38,10 @@
                 "expectedOutput": "2 1",
                 "explanation": "One pair swapped"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "linkedList",
+        "inputInstructions": "This problem uses a linked list. The input is given as an array [1,2,3,4,5]. Build your linked list from this array before processing."
     },
     {
         "id": "med32",
@@ -80,7 +83,10 @@
                 "expectedOutput": "1 2",
                 "explanation": "Two elements swapped"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "linkedList",
+        "inputInstructions": "This problem uses a linked list. The input is given as an array [1,2,3,4,5]. Build your linked list from this array before processing."
     },
     {
         "id": "med33",
@@ -121,7 +127,10 @@
                 "expectedOutput": "1 2",
                 "explanation": "Two elements unchanged"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "linkedList",
+        "inputInstructions": "This problem uses a linked list. The input is given as an array [1,2,3,4,5]. Build your linked list from this array before processing."
     },
     {
         "id": "med34",
@@ -161,7 +170,10 @@
                 "expectedOutput": "0",
                 "explanation": "3 in right subtree but <5"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "med35",
@@ -202,7 +214,10 @@
                 "expectedOutput": "1 2",
                 "explanation": "Right-only tree unchanged"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "med36",
@@ -243,7 +258,10 @@
                 "expectedOutput": "1 3",
                 "explanation": "Root and right child"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "med37",
@@ -283,7 +301,10 @@
                 "expectedOutput": "4",
                 "explanation": "4th smallest (largest)"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "med38",
@@ -323,7 +344,10 @@
                 "expectedOutput": "5",
                 "explanation": "Single node"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "med39",
@@ -331,7 +355,7 @@
         "description": "Can finish all courses.",
         "difficulty": "MEDIUM",
         "category": "Graph",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool canFinish(int n, int pre[][2], int m) { return false; }\nint main() { int pre[][2]={{1,0},{0,1}}; cout<<canFinish(2,pre,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool canFinish(int n, vector<vector<int>>& pre, int m) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int pre_rows, pre_cols;\n    cin >> pre_rows >> pre_cols;\n    vector<vector<int>> pre(pre_rows, vector<int>(pre_cols));\n    for (int i = 0; i < pre_rows; i++)\n        for (int j = 0; j < pre_cols; j++)\n            cin >> pre[i][j];\n    int m;\n    cin >> m;\n    cout << canFinish(n, pre, m);\n    return 0;\n}\n",
         "expectedOutput": "0",
         "solution": "#include <iostream>\nusing namespace std;\nint adj[100][100],deg[100],sz[100];\nbool canFinish(int n, int pre[][2], int m) { for(int i=0;i<n;i++) { sz[i]=0; deg[i]=0; } for(int i=0;i<m;i++) { adj[pre[i][1]][sz[pre[i][1]]++]=pre[i][0]; deg[pre[i][0]]++; } int q[100],f=0,r=0,cnt=0; for(int i=0;i<n;i++) if(deg[i]==0) q[r++]=i; while(f<r) { int u=q[f++]; cnt++; for(int i=0;i<sz[u];i++) if(--deg[adj[u][i]]==0) q[r++]=adj[u][i]; } return cnt==n; }\nint main() { int pre[][2]={{1,0},{0,1}}; cout<<canFinish(2,pre,2); return 0; }",
         "explanation": {
@@ -372,7 +396,7 @@
         "description": "Count connected 1s.",
         "difficulty": "MEDIUM",
         "category": "Graph",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint numIslands(int g[][5], int r, int c) { return 0; }\nint main() { int g[][5]={{1,1,0,0,0},{1,1,0,0,0},{0,0,1,0,0},{0,0,0,1,1}}; cout<<numIslands(g,4,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint numIslands(vector<vector<int>>& g, int r, int c) {\n    return 0;\n}\n\nint main() {\n    int g_rows, g_cols;\n    cin >> g_rows >> g_cols;\n    vector<vector<int>> g(g_rows, vector<int>(g_cols));\n    for (int i = 0; i < g_rows; i++)\n        for (int j = 0; j < g_cols; j++)\n            cin >> g[i][j];\n    int r;\n    cin >> r;\n    int c;\n    cin >> c;\n    cout << numIslands(g, r, c);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nvoid dfs(int g[][5], int r, int c, int i, int j) { if(i<0||i>=r||j<0||j>=c||g[i][j]!=1) return; g[i][j]=0; dfs(g,r,c,i+1,j); dfs(g,r,c,i-1,j); dfs(g,r,c,i,j+1); dfs(g,r,c,i,j-1); }\nint numIslands(int g[][5], int r, int c) { int cnt=0; for(int i=0;i<r;i++) for(int j=0;j<c;j++) if(g[i][j]==1) { cnt++; dfs(g,r,c,i,j); } return cnt; }\nint main() { int g[][5]={{1,1,0,0,0},{1,1,0,0,0},{0,0,1,0,0},{0,0,0,1,1}}; cout<<numIslands(g,4,5); return 0; }",
         "explanation": {

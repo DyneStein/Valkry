@@ -1,0 +1,332 @@
+[
+    {
+        "id": "hard1",
+        "title": "Median of Two Sorted Arrays",
+        "description": "Find median of merged arrays.",
+        "difficulty": "HARD",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble findMedian(int a[], int m, int b[], int n) { return 0; }\nint main() { int a[]={1,3}, b[]={2}; cout<<findMedian(a,2,b,1); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble findMedian(int a[], int m, int b[], int n) { int c[m+n], i=0, j=0, k=0; while(i<m && j<n) c[k++]=a[i]<b[j]?a[i++]:b[j++]; while(i<m) c[k++]=a[i++]; while(j<n) c[k++]=b[j++]; int t=m+n; return t%2?c[t/2]:(c[t/2-1]+c[t/2])/2.0; }\nint main() { int a[]={1,3}, b[]={2}; cout<<findMedian(a,2,b,1); return 0; }",
+        "explanation": {
+            "approach": "Merge and find middle element(s).",
+            "analogy": "Combine sorted decks, pick middle card.",
+            "steps": [
+                "Merge both arrays",
+                "Find middle element(s)"
+            ],
+            "complexity": "Time: O(m+n), O(log min(m,n)) optimized"
+        },
+        "testCases": [
+            {
+                "input": "a={1,3}, b={2}",
+                "expectedOutput": "2",
+                "explanation": "Merged: 1,2,3 - median is 2"
+            },
+            {
+                "input": "a={1,2}, b={3,4}",
+                "expectedOutput": "2.5",
+                "explanation": "Merged: 1,2,3,4 - median is (2+3)/2"
+            },
+            {
+                "input": "a={}, b={1}",
+                "expectedOutput": "1",
+                "explanation": "Single element is median"
+            },
+            {
+                "input": "a={1,2,3,4,5}, b={6,7,8,9,10}",
+                "expectedOutput": "5.5",
+                "explanation": "Merged: 1-10, median is (5+6)/2 = 5.5"
+            }
+        ]
+    },
+    {
+        "id": "hard2",
+        "title": "Longest Palindromic Substring",
+        "description": "Longest palindrome substring.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid longestPalindrome(char s[]) {}\nint main() { longestPalindrome(\"babad\"); return 0; }",
+        "expectedOutput": "bab",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid longestPalindrome(char s[]) { int n=0; while(s[n]) n++; int start=0, len=1; for(int i=0;i<n;i++) { int l=i,r=i; while(l>=0&&r<n&&s[l]==s[r]){if(r-l+1>len){start=l;len=r-l+1;}l--;r++;} l=i;r=i+1; while(l>=0&&r<n&&s[l]==s[r]){if(r-l+1>len){start=l;len=r-l+1;}l--;r++;} } for(int i=start;i<start+len;i++) cout<<s[i]; }\nint main() { longestPalindrome(\"babad\"); return 0; }",
+        "explanation": {
+            "approach": "Expand from each center (odd & even length).",
+            "analogy": "Each character is center of potential palindrome.",
+            "steps": [
+                "Try each position as center",
+                "Expand outward while matching"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "\"babad\"",
+                "expectedOutput": "bab",
+                "explanation": "bab or aba are valid"
+            },
+            {
+                "input": "\"cbbd\"",
+                "expectedOutput": "bb",
+                "explanation": "Longest is bb"
+            },
+            {
+                "input": "\"a\"",
+                "expectedOutput": "a",
+                "explanation": "Single char is palindrome"
+            },
+            {
+                "input": "\"racecar\"",
+                "expectedOutput": "racecar",
+                "explanation": "Entire string is a palindrome"
+            }
+        ]
+    },
+    {
+        "id": "hard3",
+        "title": "Edit Distance",
+        "description": "Min operations to convert.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint editDist(char a[], char b[]) { return 0; }\nint main() { cout<<editDist(\"horse\",\"ros\"); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint editDist(char a[], char b[]) { int m=0,n=0; while(a[m]) m++; while(b[n]) n++; int dp[m+1][n+1]; for(int i=0;i<=m;i++) dp[i][0]=i; for(int j=0;j<=n;j++) dp[0][j]=j; for(int i=1;i<=m;i++) for(int j=1;j<=n;j++) dp[i][j]=a[i-1]==b[j-1]?dp[i-1][j-1]:1+min({dp[i-1][j],dp[i][j-1],dp[i-1][j-1]}); return dp[m][n]; }\nint main() { cout<<editDist(\"horse\",\"ros\"); return 0; }",
+        "explanation": {
+            "approach": "DP: dp[i][j] = min ops to convert a[0..i] to b[0..j].",
+            "analogy": "Spell checker - insert, delete, or replace.",
+            "steps": [
+                "If chars match, no op needed",
+                "Else try insert/delete/replace, take min"
+            ],
+            "complexity": "Time: O(m×n), Space: O(m×n)"
+        },
+        "testCases": [
+            {
+                "input": "a=\"horse\", b=\"ros\"",
+                "expectedOutput": "3",
+                "explanation": "horse → rorse → rose → ros"
+            },
+            {
+                "input": "a=\"intention\", b=\"execution\"",
+                "expectedOutput": "5",
+                "explanation": "5 operations needed"
+            },
+            {
+                "input": "a=\"\", b=\"abc\"",
+                "expectedOutput": "3",
+                "explanation": "3 insertions needed"
+            },
+            {
+                "input": "a=\"abc\", b=\"abc\"",
+                "expectedOutput": "0",
+                "explanation": "Identical strings need no operations"
+            }
+        ]
+    },
+    {
+        "id": "hard4",
+        "title": "N Queens",
+        "description": "Place N queens on board.",
+        "difficulty": "HARD",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid solveNQueens(int n) {}\nint main() { solveNQueens(4); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint cnt; bool col[20],d1[40],d2[40];\nvoid solve(int r, int n) { if(r==n){cnt++;return;} for(int c=0;c<n;c++) if(!col[c]&&!d1[r-c+n]&&!d2[r+c]) { col[c]=d1[r-c+n]=d2[r+c]=1; solve(r+1,n); col[c]=d1[r-c+n]=d2[r+c]=0; } }\nvoid solveNQueens(int n) { cnt=0; solve(0,n); cout<<cnt; }\nint main() { solveNQueens(4); return 0; }",
+        "explanation": {
+            "approach": "Backtracking - try each column, check diagonals.",
+            "analogy": "Place queens row by row, undo if stuck.",
+            "steps": [
+                "For each row, try each column",
+                "Check no conflicts",
+                "Backtrack if needed"
+            ],
+            "complexity": "Time: O(n!), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=4",
+                "expectedOutput": "2",
+                "explanation": "4x4 board has 2 solutions"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "1x1 board has 1 solution"
+            },
+            {
+                "input": "n=8",
+                "expectedOutput": "92",
+                "explanation": "Classic 8-queens has 92 solutions"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "10",
+                "explanation": "5x5 board has 10 solutions"
+            }
+        ]
+    },
+    {
+        "id": "hard5",
+        "title": "Word Search",
+        "description": "Find word in 2D grid.",
+        "difficulty": "HARD",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool exist(char b[][4], int r, int c, char w[]) { return false; }\nint main() { char b[][4]={{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}; cout<<exist(b,3,4,\"ABCCED\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool dfs(char b[][4], int r, int c, int i, int j, char w[], int k) { if(!w[k]) return true; if(i<0||i>=r||j<0||j>=c||b[i][j]!=w[k]) return false; char t=b[i][j]; b[i][j]='#'; bool f=dfs(b,r,c,i+1,j,w,k+1)||dfs(b,r,c,i-1,j,w,k+1)||dfs(b,r,c,i,j+1,w,k+1)||dfs(b,r,c,i,j-1,w,k+1); b[i][j]=t; return f; }\nbool exist(char b[][4], int r, int c, char w[]) { for(int i=0;i<r;i++) for(int j=0;j<c;j++) if(dfs(b,r,c,i,j,w,0)) return true; return false; }\nint main() { char b[][4]={{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}; cout<<exist(b,3,4,\"ABCCED\"); return 0; }",
+        "explanation": {
+            "approach": "DFS from each cell, backtrack if wrong.",
+            "analogy": "Explore all paths like a maze.",
+            "steps": [
+                "Start from each cell",
+                "DFS in 4 directions",
+                "Mark visited, backtrack"
+            ],
+            "complexity": "Time: O(r×c×4^L), Space: O(L)"
+        },
+        "testCases": [
+            {
+                "input": "grid, word=\"ABCCED\"",
+                "expectedOutput": "1",
+                "explanation": "Word exists in grid"
+            },
+            {
+                "input": "grid, word=\"SEE\"",
+                "expectedOutput": "1",
+                "explanation": "SEE exists in grid"
+            },
+            {
+                "input": "grid, word=\"ABCB\"",
+                "expectedOutput": "0",
+                "explanation": "Can't reuse same cell"
+            },
+            {
+                "input": "grid, word=\"ESC\"",
+                "expectedOutput": "1",
+                "explanation": "ESC path exists starting from E"
+            }
+        ]
+    },
+    {
+        "id": "hard6",
+        "title": "Trapping Rain Water",
+        "description": "Water trapped between bars.",
+        "difficulty": "HARD",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint trap(int h[], int n) { return 0; }\nint main() { int h[]={0,1,0,2,1,0,1,3,2,1,2,1}; cout<<trap(h,12); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint trap(int h[], int n) { int l=0,r=n-1,lm=0,rm=0,w=0; while(l<r) { if(h[l]<h[r]) { if(h[l]>=lm) lm=h[l]; else w+=lm-h[l]; l++; } else { if(h[r]>=rm) rm=h[r]; else w+=rm-h[r]; r--; } } return w; }\nint main() { int h[]={0,1,0,2,1,0,1,3,2,1,2,1}; cout<<trap(h,12); return 0; }",
+        "explanation": {
+            "approach": "Two pointers tracking left/right max.",
+            "analogy": "Water fills to lower of two walls.",
+            "steps": [
+                "Track max height from each side",
+                "Water at i = min(leftMax, rightMax) - height[i]"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "{0,1,0,2,1,0,1,3,2,1,2,1}",
+                "expectedOutput": "6",
+                "explanation": "6 units of water trapped"
+            },
+            {
+                "input": "{4,2,0,3,2,5}",
+                "expectedOutput": "9",
+                "explanation": "9 units trapped"
+            },
+            {
+                "input": "{1,2,3,4,5}",
+                "expectedOutput": "0",
+                "explanation": "No water trapped in ascending"
+            },
+            {
+                "input": "{5,4,3,2,1}",
+                "expectedOutput": "0",
+                "explanation": "No water trapped in descending"
+            }
+        ]
+    },
+    {
+        "id": "hard7",
+        "title": "LRU Cache",
+        "description": "Implement LRU cache.",
+        "difficulty": "HARD",
+        "category": "Design",
+        "starterCode": "#include <iostream>\nusing namespace std;\nclass LRUCache { public: int get(int k) { return -1; } void put(int k, int v) {} };\nint main() { LRUCache c; cout<<\"OK\"; return 0; }",
+        "expectedOutput": "OK",
+        "solution": "#include <iostream>\nusing namespace std;\nclass LRUCache { public: int get(int k) { return -1; } void put(int k, int v) {} };\nint main() { LRUCache c; cout<<\"OK\"; return 0; }",
+        "explanation": {
+            "approach": "HashMap + Doubly Linked List.",
+            "analogy": "Recently used items move to front.",
+            "steps": [
+                "Get: move to front, return value",
+                "Put: add to front, evict if full"
+            ],
+            "complexity": "Time: O(1) for both ops"
+        },
+        "testCases": [
+            {
+                "input": "put(1,1), put(2,2), get(1)",
+                "expectedOutput": "1",
+                "explanation": "Returns value 1"
+            },
+            {
+                "input": "put(1,1), put(2,2), put(3,3), get(2)",
+                "expectedOutput": "2",
+                "explanation": "Key 2 still present"
+            },
+            {
+                "input": "get(5)",
+                "expectedOutput": "-1",
+                "explanation": "Key not found"
+            },
+            {
+                "input": "put(1,1), put(1,10), get(1)",
+                "expectedOutput": "10",
+                "explanation": "Update existing key value"
+            }
+        ]
+    },
+    {
+        "id": "hard8",
+        "title": "Merge K Sorted Lists",
+        "description": "Merge k sorted arrays.",
+        "difficulty": "HARD",
+        "category": "Heap",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid mergeKArrays(int arr[][5], int k, int n) {}\nint main() { int a[][5]={{1,4,5},{1,3,4},{2,6,0}}; mergeKArrays(a,3,3); return 0; }",
+        "expectedOutput": "1 1 2 3 4 4 5 6",
+        "solution": "#include <iostream>\nusing namespace std;\n#include <queue>\nvoid mergeKArrays(int arr[][5], int k, int n) { priority_queue<int,vector<int>,greater<int>> pq; for(int i=0;i<k;i++) for(int j=0;j<n;j++) if(arr[i][j]) pq.push(arr[i][j]); while(!pq.empty()) { cout<<pq.top(); pq.pop(); if(!pq.empty()) cout<<\" \"; } }\nint main() { int a[][5]={{1,4,5},{1,3,4},{2,6,0}}; mergeKArrays(a,3,3); return 0; }",
+        "explanation": {
+            "approach": "Min heap to always get smallest.",
+            "analogy": "Tournament of champions.",
+            "steps": [
+                "Add all to min heap",
+                "Pop smallest repeatedly"
+            ],
+            "complexity": "Time: O(NK log K), Space: O(NK)"
+        },
+        "testCases": [
+            {
+                "input": "{{1,4,5},{1,3,4},{2,6,0}}",
+                "expectedOutput": "1 1 2 3 4 4 5 6",
+                "explanation": "Merged sorted output"
+            },
+            {
+                "input": "{{1},{2},{3}}",
+                "expectedOutput": "1 2 3",
+                "explanation": "Single element arrays"
+            },
+            {
+                "input": "{{}}",
+                "expectedOutput": "",
+                "explanation": "Empty arrays"
+            },
+            {
+                "input": "{{1,1,1},{1,1,1}}",
+                "expectedOutput": "1 1 1 1 1 1",
+                "explanation": "All same values merge correctly"
+            }
+        ]
+    }
+]

@@ -5,7 +5,7 @@
         "description": "Count subarrays with sum in [lower, upper] range.",
         "difficulty": "HARD",
         "category": "Divide Conquer",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countRangeSum(int nums[], int n, int lo, int hi) { return 0; }\nint main() { int a[]={-2,5,-1}; cout<<countRangeSum(a,3,-2,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countRangeSum(vector<int>& nums, int n, int lo, int hi) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    int lo;\n    cin >> lo;\n    int hi;\n    cin >> hi;\n    cout << countRangeSum(nums, n, lo, hi);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint countRangeSum(int nums[], int n, int lo, int hi) { int cnt=0; for(int i=0;i<n;i++) { long sum=0; for(int j=i;j<n;j++) { sum+=nums[j]; if(sum>=lo&&sum<=hi) cnt++; } } return cnt; }\nint main() { int a[]={-2,5,-1}; cout<<countRangeSum(a,3,-2,2); return 0; }",
         "explanation": {
@@ -45,7 +45,7 @@
         "description": "Count pairs where i < j and nums[i] > 2*nums[j].",
         "difficulty": "HARD",
         "category": "Divide Conquer",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint reversePairs(int nums[], int n) { return 0; }\nint main() { int a[]={1,3,2,3,1}; cout<<reversePairs(a,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint reversePairs(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << reversePairs(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\nint reversePairs(int nums[], int n) { int cnt=0; for(int i=0;i<n;i++) for(int j=i+1;j<n;j++) if(nums[i]>(long)2*nums[j]) cnt++; return cnt; }\nint main() { int a[]={1,3,2,3,1}; cout<<reversePairs(a,5); return 0; }",
         "explanation": {
@@ -117,7 +117,10 @@
                 "expectedOutput": "2",
                 "explanation": "Update value"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     },
     {
         "id": "h164",
@@ -157,7 +160,10 @@
                 "expectedOutput": "2",
                 "explanation": "Min updates"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     },
     {
         "id": "h165",
@@ -197,7 +203,10 @@
                 "expectedOutput": "2",
                 "explanation": "Middle after sorting"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     },
     {
         "id": "h166",
@@ -205,9 +214,9 @@
         "description": "Convert BST to string and reconstruct it.",
         "difficulty": "HARD",
         "category": "Design",
-        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid serialize(Node* r) {}\nNode* deserialize() { return nullptr; }\nint main() { Node* r=new Node(2); r->l=new Node(1); r->r=new Node(3); serialize(r); cout<<\"OK\"; return 0; }",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nchar serialized[200];\nint pos;\nvoid serialize(Node* r) {\n    // Implement: serialize tree to 'serialized' array\n}\nNode* deserialize() { return nullptr; }\nint main() {\n    Node* r=new Node(2); r->l=new Node(1); r->r=new Node(3);\n    pos=0;\n    serialize(r);\n    cout<<\"OK\";\n    return 0;\n}",
         "expectedOutput": "OK",
-        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid serialize(Node* r) { if(!r) { cout<<\"# \"; return; } cout<<r->v<<\" \"; serialize(r->l); serialize(r->r); }\nNode* deserialize() { return nullptr; }\nint main() { Node* r=new Node(2); r->l=new Node(1); r->r=new Node(3); serialize(r); cout<<\"OK\"; return 0; }",
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nchar serialized[200];\nint pos;\nvoid serialize(Node* r) {\n    if(!r) { serialized[pos++]='#'; serialized[pos++]=' '; return; }\n    int t=r->v, d=0; char buf[12];\n    if(t==0) buf[d++]='0';\n    else { while(t) { buf[d++]='0'+t%10; t/=10; } }\n    while(d--) serialized[pos++]=buf[d];\n    serialized[pos++]=' ';\n    serialize(r->l); serialize(r->r);\n}\nNode* deserialize() { return nullptr; }\nint main() {\n    Node* r=new Node(2); r->l=new Node(1); r->r=new Node(3);\n    pos=0;\n    serialize(r);\n    cout<<\"OK\";\n    return 0;\n}",
         "explanation": {
             "approach": "Preorder traversal with null markers.",
             "steps": [
@@ -237,7 +246,10 @@
                 "expectedOutput": "OK",
                 "explanation": "Linear tree"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "h167",
@@ -277,7 +289,10 @@
                 "expectedOutput": "a or b",
                 "explanation": "Both count 1"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     },
     {
         "id": "h168",
@@ -317,6 +332,9 @@
                 "expectedOutput": "4",
                 "explanation": "4 appears twice, most recent 4"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     }
 ]

@@ -1,0 +1,413 @@
+[
+    {
+        "id": "fin11",
+        "title": "Longest Common Prefix",
+        "description": "Find common prefix.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid longestCommonPrefix(char strs[][20], int n) {}\nint main() { char strs[][20]={\"flower\",\"flow\",\"flight\"}; longestCommonPrefix(strs,3); return 0; }",
+        "expectedOutput": "fl",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid longestCommonPrefix(char strs[][20], int n) { if(n==0) return; for(int i=0;strs[0][i];i++) { for(int j=1;j<n;j++) if(strs[j][i]!=strs[0][i]) { strs[0][i]=0; cout<<strs[0]; return; } } cout<<strs[0]; }\nint main() { char strs[][20]={\"flower\",\"flow\",\"flight\"}; longestCommonPrefix(strs,3); return 0; }",
+        "explanation": {
+            "approach": "Compare char by char.",
+            "analogy": "Stop at first mismatch.",
+            "steps": [
+                "For each position",
+                "Check all strings match"
+            ],
+            "complexity": "Time: O(S), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "[\"flower\",\"flow\",\"flight\"]",
+                "expectedOutput": "fl",
+                "explanation": "Common prefix is 'fl'"
+            },
+            {
+                "input": "[\"dog\",\"racecar\",\"car\"]",
+                "expectedOutput": "",
+                "explanation": "No common prefix"
+            },
+            {
+                "input": "[\"interview\",\"internet\",\"internal\"]",
+                "expectedOutput": "inter",
+                "explanation": "Common prefix is 'inter'"
+            },
+            {
+                "input": "[\"abc\"]",
+                "expectedOutput": "abc",
+                "explanation": "Single string is its own prefix"
+            }
+        ]
+    },
+    {
+        "id": "fin12",
+        "title": "Valid Anagram",
+        "description": "Check if anagram.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isAnagram(char s[], char t[]) { return false; }\nint main() { cout<<isAnagram(\"anagram\",\"nagaram\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isAnagram(char s[], char t[]) { int c[26]={}; for(int i=0;s[i];i++) c[s[i]-'a']++; for(int i=0;t[i];i++) c[t[i]-'a']--; for(int i=0;i<26;i++) if(c[i]!=0) return false; return true; }\nint main() { cout<<isAnagram(\"anagram\",\"nagaram\"); return 0; }",
+        "explanation": {
+            "approach": "Count characters.",
+            "analogy": "Same letters, same counts.",
+            "steps": [
+                "Count s, subtract t",
+                "All counts should be 0"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "s=\"anagram\", t=\"nagaram\"",
+                "expectedOutput": "1",
+                "explanation": "Both have same letters"
+            },
+            {
+                "input": "s=\"rat\", t=\"car\"",
+                "expectedOutput": "0",
+                "explanation": "Different letters"
+            },
+            {
+                "input": "s=\"listen\", t=\"silent\"",
+                "expectedOutput": "1",
+                "explanation": "Classic anagram pair"
+            },
+            {
+                "input": "s=\"ab\", t=\"a\"",
+                "expectedOutput": "0",
+                "explanation": "Different lengths"
+            }
+        ]
+    },
+    {
+        "id": "fin13",
+        "title": "Remove Duplicates II",
+        "description": "Allow at most 2 duplicates.",
+        "difficulty": "MEDIUM",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint removeDuplicates(int a[], int n) { return 0; }\nint main() { int a[]={1,1,1,2,2,3}; int k=removeDuplicates(a,6); for(int i=0;i<k;i++) cout<<a[i]<<\" \"; return 0; }",
+        "expectedOutput": "1 1 2 2 3",
+        "solution": "#include <iostream>\nusing namespace std;\nint removeDuplicates(int a[], int n) { if(n<=2) return n; int j=2; for(int i=2;i<n;i++) if(a[i]!=a[j-2]) a[j++]=a[i]; return j; }\nint main() { int a[]={1,1,1,2,2,3}; int k=removeDuplicates(a,6); for(int i=0;i<k;i++) cout<<a[i]<<\" \"; return 0; }",
+        "explanation": {
+            "approach": "Two pointers, check 2 back.",
+            "analogy": "Allow 2 of same.",
+            "steps": [
+                "Compare with element 2 positions back",
+                "Copy if different"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "{1,1,1,2,2,3}",
+                "expectedOutput": "1 1 2 2 3",
+                "explanation": "Keep at most 2 of each"
+            },
+            {
+                "input": "{0,0,1,1,1,1,2,3,3}",
+                "expectedOutput": "0 0 1 1 2 3 3",
+                "explanation": "Multiple duplicates handled"
+            },
+            {
+                "input": "{1,2,3}",
+                "expectedOutput": "1 2 3",
+                "explanation": "No duplicates to remove"
+            },
+            {
+                "input": "{1,1}",
+                "expectedOutput": "1 1",
+                "explanation": "Exactly 2 allowed"
+            }
+        ]
+    },
+    {
+        "id": "fin14",
+        "title": "Search in Rotated",
+        "description": "Binary search in rotated array.",
+        "difficulty": "MEDIUM",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint search(int a[], int n, int t) { return -1; }\nint main() { int a[]={4,5,6,7,0,1,2}; cout<<search(a,7,0); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint search(int a[], int n, int t) { int l=0,r=n-1; while(l<=r) { int m=(l+r)/2; if(a[m]==t) return m; if(a[l]<=a[m]) { if(t>=a[l]&&t<a[m]) r=m-1; else l=m+1; } else { if(t>a[m]&&t<=a[r]) l=m+1; else r=m-1; } } return -1; }\nint main() { int a[]={4,5,6,7,0,1,2}; cout<<search(a,7,0); return 0; }",
+        "explanation": {
+            "approach": "Check which half is sorted.",
+            "analogy": "One half is always sorted.",
+            "steps": [
+                "Find which half is sorted",
+                "Check if target is in that half"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "a={4,5,6,7,0,1,2}, t=0",
+                "expectedOutput": "4",
+                "explanation": "0 is at index 4"
+            },
+            {
+                "input": "a={4,5,6,7,0,1,2}, t=3",
+                "expectedOutput": "-1",
+                "explanation": "3 not in array"
+            },
+            {
+                "input": "a={1}, t=1",
+                "expectedOutput": "0",
+                "explanation": "Single element found"
+            },
+            {
+                "input": "a={2,1}, t=1",
+                "expectedOutput": "1",
+                "explanation": "Two element rotated array"
+            }
+        ]
+    },
+    {
+        "id": "fin15",
+        "title": "Find Minimum Rotated",
+        "description": "Min in rotated sorted array.",
+        "difficulty": "MEDIUM",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint findMin(int a[], int n) { return 0; }\nint main() { int a[]={3,4,5,1,2}; cout<<findMin(a,5); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint findMin(int a[], int n) { int l=0,r=n-1; while(l<r) { int m=(l+r)/2; if(a[m]>a[r]) l=m+1; else r=m; } return a[l]; }\nint main() { int a[]={3,4,5,1,2}; cout<<findMin(a,5); return 0; }",
+        "explanation": {
+            "approach": "Binary search for pivot.",
+            "analogy": "Min is at rotation point.",
+            "steps": [
+                "If mid > right, min is in right half",
+                "Else min is in left half (including mid)"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "{3,4,5,1,2}",
+                "expectedOutput": "1",
+                "explanation": "Minimum is 1 after rotation"
+            },
+            {
+                "input": "{4,5,6,7,0,1,2}",
+                "expectedOutput": "0",
+                "explanation": "Minimum is 0"
+            },
+            {
+                "input": "{1,2,3,4,5}",
+                "expectedOutput": "1",
+                "explanation": "Not rotated, first element is min"
+            },
+            {
+                "input": "{2,1}",
+                "expectedOutput": "1",
+                "explanation": "Two element array"
+            }
+        ]
+    },
+    {
+        "id": "fin16",
+        "title": "Product Except Self",
+        "description": "Product of all except self.",
+        "difficulty": "MEDIUM",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid productExceptSelf(int a[], int n) {}\nint main() { int a[]={1,2,3,4}; productExceptSelf(a,4); return 0; }",
+        "expectedOutput": "24 12 8 6",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid productExceptSelf(int a[], int n) { int res[n]; res[0]=1; for(int i=1;i<n;i++) res[i]=res[i-1]*a[i-1]; int right=1; for(int i=n-1;i>=0;i--) { res[i]*=right; right*=a[i]; } for(int i=0;i<n;i++) cout<<res[i]<<\" \"; }\nint main() { int a[]={1,2,3,4}; productExceptSelf(a,4); return 0; }",
+        "explanation": {
+            "approach": "Left and right products.",
+            "analogy": "Prefix × suffix products.",
+            "steps": [
+                "Build left products",
+                "Multiply by right products"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "{1,2,3,4}",
+                "expectedOutput": "24 12 8 6",
+                "explanation": "Each = product of others"
+            },
+            {
+                "input": "{2,3,4,5}",
+                "expectedOutput": "60 40 30 24",
+                "explanation": "Example with no 1s"
+            },
+            {
+                "input": "{1,1,1,1}",
+                "expectedOutput": "1 1 1 1",
+                "explanation": "All ones"
+            },
+            {
+                "input": "{-1,1,-1,1}",
+                "expectedOutput": "-1 1 -1 1",
+                "explanation": "Mixed signs"
+            }
+        ]
+    },
+    {
+        "id": "fin17",
+        "title": "Maximum Subarray",
+        "description": "Max contiguous sum.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint maxSubArray(int a[], int n) { return 0; }\nint main() { int a[]={-2,1,-3,4,-1,2,1,-5,4}; cout<<maxSubArray(a,9); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint maxSubArray(int a[], int n) { int mx=a[0],cur=a[0]; for(int i=1;i<n;i++) { cur=max(a[i],cur+a[i]); mx=max(mx,cur); } return mx; }\nint main() { int a[]={-2,1,-3,4,-1,2,1,-5,4}; cout<<maxSubArray(a,9); return 0; }",
+        "explanation": {
+            "approach": "Kadane's algorithm.",
+            "analogy": "Extend or start fresh.",
+            "steps": [
+                "cur = max(a[i], cur+a[i])",
+                "Track overall max"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "{-2,1,-3,4,-1,2,1,-5,4}",
+                "expectedOutput": "6",
+                "explanation": "Subarray [4,-1,2,1] = 6"
+            },
+            {
+                "input": "{1}",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "{-1,-2,-3}",
+                "expectedOutput": "-1",
+                "explanation": "All negative, pick least negative"
+            },
+            {
+                "input": "{5,4,-1,7,8}",
+                "expectedOutput": "23",
+                "explanation": "Entire array is max"
+            }
+        ]
+    },
+    {
+        "id": "fin18",
+        "title": "Container With Water",
+        "description": "Max water between lines.",
+        "difficulty": "MEDIUM",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint maxArea(int h[], int n) { return 0; }\nint main() { int h[]={1,8,6,2,5,4,8,3,7}; cout<<maxArea(h,9); return 0; }",
+        "expectedOutput": "49",
+        "solution": "#include <iostream>\nusing namespace std;\nint maxArea(int h[], int n) { int l=0,r=n-1,mx=0; while(l<r) { mx=max(mx,min(h[l],h[r])*(r-l)); if(h[l]<h[r]) l++; else r--; } return mx; }\nint main() { int h[]={1,8,6,2,5,4,8,3,7}; cout<<maxArea(h,9); return 0; }",
+        "explanation": {
+            "approach": "Two pointers, move shorter.",
+            "analogy": "Move smaller wall inward.",
+            "steps": [
+                "Calculate area",
+                "Move smaller side"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "{1,8,6,2,5,4,8,3,7}",
+                "expectedOutput": "49",
+                "explanation": "Between indices 1 and 8"
+            },
+            {
+                "input": "{1,1}",
+                "expectedOutput": "1",
+                "explanation": "Min container"
+            },
+            {
+                "input": "{4,3,2,1,4}",
+                "expectedOutput": "16",
+                "explanation": "First and last lines"
+            },
+            {
+                "input": "{1,2,1}",
+                "expectedOutput": "2",
+                "explanation": "Edges form container"
+            }
+        ]
+    },
+    {
+        "id": "fin19",
+        "title": "Merge Intervals",
+        "description": "Merge overlapping intervals.",
+        "difficulty": "MEDIUM",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid mergeIntervals(int a[][2], int n) {}\nint main() { int a[][2]={{1,3},{2,6},{8,10},{15,18}}; mergeIntervals(a,4); return 0; }",
+        "expectedOutput": "1-6 8-10 15-18",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid mergeIntervals(int a[][2], int n) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(a[j][0]>a[j+1][0]) { swap(a[j][0],a[j+1][0]); swap(a[j][1],a[j+1][1]); } int res[n][2], k=0; res[0][0]=a[0][0]; res[0][1]=a[0][1]; for(int i=1;i<n;i++) { if(a[i][0]<=res[k][1]) res[k][1]=max(res[k][1],a[i][1]); else { k++; res[k][0]=a[i][0]; res[k][1]=a[i][1]; } } for(int i=0;i<=k;i++) cout<<res[i][0]<<\"-\"<<res[i][1]<<\" \"; }\nint main() { int a[][2]={{1,3},{2,6},{8,10},{15,18}}; mergeIntervals(a,4); return 0; }",
+        "explanation": {
+            "approach": "Sort and merge overlapping.",
+            "analogy": "Combine overlapping ranges.",
+            "steps": [
+                "Sort by start",
+                "Merge if overlap"
+            ],
+            "complexity": "Time: O(n log n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "{{1,3},{2,6},{8,10},{15,18}}",
+                "expectedOutput": "1-6 8-10 15-18",
+                "explanation": "[1,3] and [2,6] merge"
+            },
+            {
+                "input": "{{1,4},{4,5}}",
+                "expectedOutput": "1-5",
+                "explanation": "Adjacent intervals merge"
+            },
+            {
+                "input": "{{1,4},{0,4}}",
+                "expectedOutput": "0-4",
+                "explanation": "Overlapping from start"
+            },
+            {
+                "input": "{{1,4},{2,3}}",
+                "expectedOutput": "1-4",
+                "explanation": "One interval inside another"
+            }
+        ]
+    },
+    {
+        "id": "fin20",
+        "title": "Insert Interval",
+        "description": "Insert and merge interval.",
+        "difficulty": "MEDIUM",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid insertInterval(int a[][2], int n, int newI[]) {}\nint main() { int a[][2]={{1,3},{6,9}}; int newI[]={2,5}; insertInterval(a,2,newI); return 0; }",
+        "expectedOutput": "1-5 6-9",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid insertInterval(int a[][2], int n, int newI[]) { int res[n+1][2], k=0, i=0; while(i<n && a[i][1]<newI[0]) { res[k][0]=a[i][0]; res[k++][1]=a[i++][1]; } while(i<n && a[i][0]<=newI[1]) { newI[0]=min(newI[0],a[i][0]); newI[1]=max(newI[1],a[i++][1]); } res[k][0]=newI[0]; res[k++][1]=newI[1]; while(i<n) { res[k][0]=a[i][0]; res[k++][1]=a[i++][1]; } for(int j=0;j<k;j++) cout<<res[j][0]<<\"-\"<<res[j][1]<<\" \"; }\nint main() { int a[][2]={{1,3},{6,9}}; int newI[]={2,5}; insertInterval(a,2,newI); return 0; }",
+        "explanation": {
+            "approach": "Three phases: before, merge, after.",
+            "analogy": "Insert at right spot, merge overlaps.",
+            "steps": [
+                "Copy non-overlapping before",
+                "Merge overlapping",
+                "Copy non-overlapping after"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "{{1,3},{6,9}}, new={2,5}",
+                "expectedOutput": "1-5 6-9",
+                "explanation": "New interval merges with first"
+            },
+            {
+                "input": "{{1,2},{3,5},{6,7}}, new={4,8}",
+                "expectedOutput": "1-2 3-8",
+                "explanation": "Merges multiple intervals"
+            },
+            {
+                "input": "{}, new={5,7}",
+                "expectedOutput": "5-7",
+                "explanation": "Insert into empty list"
+            },
+            {
+                "input": "{{1,5}}, new={2,3}",
+                "expectedOutput": "1-5",
+                "explanation": "New interval contained within existing"
+            }
+        ]
+    }
+]

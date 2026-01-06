@@ -5,7 +5,7 @@
         "description": "Calculate factorial recursively.",
         "difficulty": "EASY",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint factorial(int n) { return 0; }\nint main() { cout<<factorial(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint factorial(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << factorial(n);\n    return 0;\n}\n",
         "expectedOutput": "120",
         "solution": "#include <iostream>\nusing namespace std;\nint factorial(int n) { if(n <= 1) return 1; return n * factorial(n-1); }\nint main() { cout<<factorial(5); return 0; }",
         "explanation": {
@@ -46,7 +46,7 @@
         "description": "Nth Fibonacci number.",
         "difficulty": "EASY",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint fib(int n) { return 0; }\nint main() { cout<<fib(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint fib(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << fib(n);\n    return 0;\n}\n",
         "expectedOutput": "55",
         "solution": "#include <iostream>\nusing namespace std;\nint fib(int n) { if(n <= 1) return n; return fib(n-1) + fib(n-2); }\nint main() { cout<<fib(10); return 0; }",
         "explanation": {
@@ -87,7 +87,7 @@
         "description": "Sum 1 to N recursively.",
         "difficulty": "EASY",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sum(int n) { return 0; }\nint main() { cout<<sum(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sum(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sum(n);\n    return 0;\n}\n",
         "expectedOutput": "55",
         "solution": "#include <iostream>\nusing namespace std;\nint sum(int n) { if(n == 0) return 0; return n + sum(n-1); }\nint main() { cout<<sum(10); return 0; }",
         "explanation": {
@@ -128,7 +128,7 @@
         "description": "Calculate x^n recursively.",
         "difficulty": "EASY",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint power(int x, int n) { return 0; }\nint main() { cout<<power(2,10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint power(int x, int n) {\n    return 0;\n}\n\nint main() {\n    int x;\n    cin >> x;\n    int n;\n    cin >> n;\n    cout << power(x, n);\n    return 0;\n}\n",
         "expectedOutput": "1024",
         "solution": "#include <iostream>\nusing namespace std;\nint power(int x, int n) { if(n == 0) return 1; return x * power(x, n-1); }\nint main() { cout<<power(2,10); return 0; }",
         "explanation": {
@@ -169,7 +169,7 @@
         "description": "Euclidean algorithm.",
         "difficulty": "EASY",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) { return 0; }\nint main() { cout<<gcd(48,18); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint gcd(int a, int b) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    cout << gcd(a, b);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) { if(b == 0) return a; return gcd(b, a % b); }\nint main() { cout<<gcd(48,18); return 0; }",
         "explanation": {
@@ -210,7 +210,7 @@
         "description": "Reverse using recursion.",
         "difficulty": "EASY",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid reverse(char s[], int start, int end) {}\nint main() { char s[]=\"hello\"; reverse(s,0,4); cout<<s; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid reverse(vector<int>& s, int start, int end) {\n    // TODO\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    int start;\n    cin >> start;\n    int end;\n    cin >> end;\n    reverse(s, start, end);\n    return 0;\n}\n",
         "expectedOutput": "olleh",
         "solution": "#include <iostream>\nusing namespace std;\nvoid reverse(char s[], int l, int r) { if(l >= r) return; swap(s[l], s[r]); reverse(s, l+1, r-1); }\nint main() { char s[]=\"hello\"; reverse(s,0,4); cout<<s; return 0; }",
         "explanation": {
@@ -252,7 +252,7 @@
         "description": "Is palindrome recursively.",
         "difficulty": "EASY",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPalin(char s[], int l, int r) { return false; }\nint main() { char s[]=\"radar\"; cout<<isPalin(s,0,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPalin(vector<int>& s, int l, int r) {\n    return false;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    int l;\n    cin >> l;\n    int r;\n    cin >> r;\n    cout << isPalin(s, l, r);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isPalin(char s[], int l, int r) { if(l >= r) return true; if(s[l] != s[r]) return false; return isPalin(s, l+1, r-1); }\nint main() { char s[]=\"radar\"; cout<<isPalin(s,0,4); return 0; }",
         "explanation": {
@@ -294,7 +294,7 @@
         "description": "Print numbers ascending.",
         "difficulty": "EASY",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid print(int n) {}\nint main() { print(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid print(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    print(n);\n    return 0;\n}\n",
         "expectedOutput": "1 2 3 4 5",
         "solution": "#include <iostream>\nusing namespace std;\nvoid print(int n) { if(n == 0) return; print(n-1); cout << n << (n<5?\" \":\"\"); }\nint main() { print(5); return 0; }",
         "explanation": {
@@ -335,7 +335,7 @@
         "description": "Print numbers descending.",
         "difficulty": "EASY",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid print(int n) {}\nint main() { print(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid print(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    print(n);\n    return 0;\n}\n",
         "expectedOutput": "5 4 3 2 1",
         "solution": "#include <iostream>\nusing namespace std;\nvoid print(int n) { if(n == 0) return; cout << n << (n>1?\" \":\"\"); print(n-1); }\nint main() { print(5); return 0; }",
         "explanation": {
@@ -376,7 +376,7 @@
         "description": "Sum array recursively.",
         "difficulty": "EASY",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sum(int a[], int n) { return 0; }\nint main() { int a[]={1,2,3,4,5}; cout<<sum(a,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sum(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << sum(a, n);\n    return 0;\n}\n",
         "expectedOutput": "15",
         "solution": "#include <iostream>\nusing namespace std;\nint sum(int a[], int n) { if(n == 0) return 0; return a[n-1] + sum(a, n-1); }\nint main() { int a[]={1,2,3,4,5}; cout<<sum(a,5); return 0; }",
         "explanation": {
@@ -417,7 +417,7 @@
         "description": "Find max recursively.",
         "difficulty": "EASY",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint findMax(int a[], int n) { return 0; }\nint main() { int a[]={3,7,1,9,2}; cout<<findMax(a,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint findMax(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << findMax(a, n);\n    return 0;\n}\n",
         "expectedOutput": "9",
         "solution": "#include <iostream>\nusing namespace std;\nint findMax(int a[], int n) { if(n == 1) return a[0]; int m = findMax(a, n-1); return a[n-1] > m ? a[n-1] : m; }\nint main() { int a[]={3,7,1,9,2}; cout<<findMax(a,5); return 0; }",
         "explanation": {
@@ -459,7 +459,7 @@
         "description": "Count digits recursively.",
         "difficulty": "EASY",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countDigits(int n) { return 0; }\nint main() { cout<<countDigits(12345); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countDigits(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << countDigits(n);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nint countDigits(int n) { if(n == 0) return 0; return 1 + countDigits(n/10); }\nint main() { cout<<countDigits(12345); return 0; }",
         "explanation": {

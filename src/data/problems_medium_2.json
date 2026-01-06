@@ -5,7 +5,7 @@
         "description": "Unique combinations summing to target.",
         "difficulty": "MEDIUM",
         "category": "Backtracking",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint combinationSum(int candidates[], int n, int target) { return 0; }\nint main() { int c[]={2,3,6,7}; cout << combinationSum(c,4,7); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint combinationSum(vector<int>& candidates, int n, int target) {\n    return 0;\n}\n\nint main() {\n    int candidates_size;\n    cin >> candidates_size;\n    vector<int> candidates(candidates_size);\n    for (int i = 0; i < candidates_size; i++) cin >> candidates[i];\n    int n;\n    cin >> n;\n    int target;\n    cin >> target;\n    cout << combinationSum(candidates, n, target);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "testCases": [
             {
@@ -75,7 +75,7 @@
         "description": "Each number used once.",
         "difficulty": "MEDIUM",
         "category": "Backtracking",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint combinationSum2(int candidates[], int n, int target) { return 0; }\nint main() { int c[]={10,1,2,7,6,1,5}; cout << combinationSum2(c,7,8); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint combinationSum2(vector<int>& candidates, int n, int target) {\n    return 0;\n}\n\nint main() {\n    int candidates_size;\n    cin >> candidates_size;\n    vector<int> candidates(candidates_size);\n    for (int i = 0; i < candidates_size; i++) cin >> candidates[i];\n    int n;\n    cin >> n;\n    int target;\n    cin >> target;\n    cout << combinationSum2(candidates, n, target);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "testCases": [
             {
@@ -145,7 +145,7 @@
         "description": "All permutations of array.",
         "difficulty": "MEDIUM",
         "category": "Backtracking",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint permute(int nums[], int n) { return 0; }\nint main() { int nu[]={1,2,3}; cout << permute(nu,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint permute(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << permute(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "testCases": [
             {
@@ -215,7 +215,7 @@
         "description": "All subsets of array.",
         "difficulty": "MEDIUM",
         "category": "Backtracking",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint subsets(int nums[], int n) { return 0; }\nint main() { int nu[]={1,2,3}; cout << subsets(nu,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint subsets(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << subsets(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "8",
         "testCases": [
             {
@@ -284,7 +284,7 @@
         "description": "Find word in grid.",
         "difficulty": "MEDIUM",
         "category": "Backtracking",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool exist(char board[][4], int m, int n, char word[]) { return false; }\nint main() { char b[][4]={{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}; cout << exist(b,3,4,\"ABCCED\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool exist(vector<vector<int>>& board, int m, int n, vector<int>& word) {\n    return false;\n}\n\nint main() {\n    int board_rows, board_cols;\n    cin >> board_rows >> board_cols;\n    vector<vector<int>> board(board_rows, vector<int>(board_cols));\n    for (int i = 0; i < board_rows; i++)\n        for (int j = 0; j < board_cols; j++)\n            cin >> board[i][j];\n    int m;\n    cin >> m;\n    int n;\n    cin >> n;\n    int word_size;\n    cin >> word_size;\n    vector<int> word(word_size);\n    for (int i = 0; i < word_size; i++) cin >> word[i];\n    cout << exist(board, m, n, word);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -354,7 +354,7 @@
         "description": "All valid IP addresses.",
         "difficulty": "MEDIUM",
         "category": "Backtracking",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint restoreIpAddresses(char s[]) { return 0; }\nint main() { cout << restoreIpAddresses(\"25525511135\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint restoreIpAddresses(vector<int>& s) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << restoreIpAddresses(s);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "testCases": [
             {
@@ -424,7 +424,7 @@
         "description": "All valid n pairs.",
         "difficulty": "MEDIUM",
         "category": "Backtracking",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint generateParenthesis(int n) { return 0; }\nint main() { cout << generateParenthesis(3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint generateParenthesis(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << generateParenthesis(n);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "testCases": [
             {
@@ -494,7 +494,7 @@
         "description": "Phone number letter combos.",
         "difficulty": "MEDIUM",
         "category": "Backtracking",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint letterCombinations(char digits[]) { return 0; }\nint main() { cout << letterCombinations(\"23\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint letterCombinations(vector<int>& digits) {\n    return 0;\n}\n\nint main() {\n    int digits_size;\n    cin >> digits_size;\n    vector<int> digits(digits_size);\n    for (int i = 0; i < digits_size; i++) cin >> digits[i];\n    cout << letterCombinations(digits);\n    return 0;\n}\n",
         "expectedOutput": "9",
         "testCases": [
             {
@@ -563,7 +563,7 @@
         "description": "Solve sudoku puzzle.",
         "difficulty": "HARD",
         "category": "Backtracking",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool solveSudoku(int board[][9]) { return false; }\nint main() { cout << 1; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool solveSudoku(vector<vector<int>>& board) {\n    return false;\n}\n\nint main() {\n    int board_rows, board_cols;\n    cin >> board_rows >> board_cols;\n    vector<vector<int>> board(board_rows, vector<int>(board_cols));\n    for (int i = 0; i < board_rows; i++)\n        for (int j = 0; j < board_cols; j++)\n            cin >> board[i][j];\n    cout << solveSudoku(board);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -633,7 +633,7 @@
         "description": "Count valid placements.",
         "difficulty": "HARD",
         "category": "Backtracking",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint totalNQueens(int n) { return 0; }\nint main() { cout << totalNQueens(4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint totalNQueens(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << totalNQueens(n);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "testCases": [
             {

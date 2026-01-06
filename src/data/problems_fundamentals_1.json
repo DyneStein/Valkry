@@ -5,7 +5,7 @@
         "description": "Find indices summing to target.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid twoSum(int a[], int n, int t) {}\nint main() { int a[]={2,7,11,15}; twoSum(a,4,9); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid twoSum(vector<int>& a, int n, int t) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    int t;\n    cin >> t;\n    twoSum(a, n, t);\n    return 0;\n}\n",
         "expectedOutput": "0 1",
         "solution": "#include <iostream>\nusing namespace std;\nvoid twoSum(int a[], int n, int t) {\n    for(int i = 0; i < n; i++) {\n        for(int j = i + 1; j < n; j++) {\n            if(a[i] + a[j] == t) {\n                cout << i << \" \" << j;\n                return;\n            }\n        }\n    }\n}\nint main() { int a[]={2,7,11,15}; twoSum(a,4,9); return 0; }",
         "explanation": {
@@ -45,7 +45,7 @@
         "description": "Reverse array in-place.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid reverse(int a[], int n) {}\nint main() { int a[]={1,2,3,4,5}; reverse(a,5); for(int i=0;i<5;i++) cout<<a[i]<<\" \"; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid reverse(vector<int>& a, int n) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    reverse(a, n);\n    return 0;\n}\n",
         "expectedOutput": "5 4 3 2 1",
         "solution": "#include <iostream>\nusing namespace std;\nvoid reverse(int a[], int n) {\n    int left = 0, right = n - 1;\n    while(left < right) {\n        int temp = a[left];\n        a[left] = a[right];\n        a[right] = temp;\n        left++;\n        right--;\n    }\n}\nint main() { int a[]={1,2,3,4,5}; reverse(a,5); for(int i=0;i<5;i++) cout<<a[i]<<\" \"; return 0; }",
         "explanation": {
@@ -86,7 +86,7 @@
         "description": "Find max element.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint findMax(int a[], int n) { return 0; }\nint main() { int a[]={3,7,1,9,2}; cout<<findMax(a,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint findMax(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << findMax(a, n);\n    return 0;\n}\n",
         "expectedOutput": "9",
         "solution": "#include <iostream>\nusing namespace std;\nint findMax(int a[], int n) {\n    int maxVal = a[0];\n    for(int i = 1; i < n; i++) {\n        if(a[i] > maxVal) {\n            maxVal = a[i];\n        }\n    }\n    return maxVal;\n}\nint main() { int a[]={3,7,1,9,2}; cout<<findMax(a,5); return 0; }",
         "explanation": {
@@ -127,7 +127,7 @@
         "description": "Find min element.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint findMin(int a[], int n) { return 0; }\nint main() { int a[]={3,7,1,9,2}; cout<<findMin(a,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint findMin(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << findMin(a, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nint findMin(int a[], int n) {\n    int minVal = a[0];\n    for(int i = 1; i < n; i++) {\n        if(a[i] < minVal) {\n            minVal = a[i];\n        }\n    }\n    return minVal;\n}\nint main() { int a[]={3,7,1,9,2}; cout<<findMin(a,5); return 0; }",
         "explanation": {
@@ -168,7 +168,7 @@
         "description": "Sum all elements.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sum(int a[], int n) { return 0; }\nint main() { int a[]={1,2,3,4,5}; cout<<sum(a,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sum(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << sum(a, n);\n    return 0;\n}\n",
         "expectedOutput": "15",
         "solution": "#include <iostream>\nusing namespace std;\nint sum(int a[], int n) {\n    int total = 0;\n    for(int i = 0; i < n; i++) {\n        total += a[i];\n    }\n    return total;\n}\nint main() { int a[]={1,2,3,4,5}; cout<<sum(a,5); return 0; }",
         "explanation": {
@@ -209,7 +209,7 @@
         "description": "Calculate average.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\ndouble average(int a[], int n) { return 0; }\nint main() { int a[]={10,20,30,40,50}; cout<<average(a,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble average(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << average(a, n);\n    return 0;\n}\n",
         "expectedOutput": "30",
         "solution": "#include <iostream>\nusing namespace std;\ndouble average(int a[], int n) {\n    int total = 0;\n    for(int i = 0; i < n; i++) {\n        total += a[i];\n    }\n    return (double)total / n;\n}\nint main() { int a[]={10,20,30,40,50}; cout<<average(a,5); return 0; }",
         "explanation": {
@@ -250,7 +250,7 @@
         "description": "Count even numbers.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countEven(int a[], int n) { return 0; }\nint main() { int a[]={1,2,3,4,5,6}; cout<<countEven(a,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countEven(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << countEven(a, n);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint countEven(int a[], int n) {\n    int count = 0;\n    for(int i = 0; i < n; i++) {\n        if(a[i] % 2 == 0) {\n            count++;\n        }\n    }\n    return count;\n}\nint main() { int a[]={1,2,3,4,5,6}; cout<<countEven(a,6); return 0; }",
         "explanation": {
@@ -291,7 +291,7 @@
         "description": "Count odd numbers.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countOdd(int a[], int n) { return 0; }\nint main() { int a[]={1,2,3,4,5,6}; cout<<countOdd(a,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countOdd(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << countOdd(a, n);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint countOdd(int a[], int n) {\n    int count = 0;\n    for(int i = 0; i < n; i++) {\n        if(a[i] % 2 != 0) {\n            count++;\n        }\n    }\n    return count;\n}\nint main() { int a[]={1,2,3,4,5,6}; cout<<countOdd(a,6); return 0; }",
         "explanation": {
@@ -365,7 +365,10 @@
                 "expectedOutput": "7 7",
                 "explanation": "Same values"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "noInput",
+        "inputInstructions": "This problem has no input - just print the required output directly."
     },
     {
         "id": "fun10",
@@ -373,7 +376,7 @@
         "description": "Is number positive.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPositive(int n) { return false; }\nint main() { cout<<isPositive(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPositive(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isPositive(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isPositive(int n) {\n    return n > 0;\n}\nint main() { cout<<isPositive(5); return 0; }",
         "explanation": {
@@ -413,7 +416,7 @@
         "description": "Is number negative.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isNegative(int n) { return false; }\nint main() { cout<<isNegative(-5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isNegative(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isNegative(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isNegative(int n) {\n    return n < 0;\n}\nint main() { cout<<isNegative(-5); return 0; }",
         "explanation": {
@@ -453,7 +456,7 @@
         "description": "Max of three numbers.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint largest(int a, int b, int c) { return 0; }\nint main() { cout<<largest(5,9,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint largest(int a, int b, int c) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    int c;\n    cin >> c;\n    cout << largest(a, b, c);\n    return 0;\n}\n",
         "expectedOutput": "9",
         "solution": "#include <iostream>\nusing namespace std;\nint largest(int a, int b, int c) {\n    if(a >= b && a >= c) return a;\n    if(b >= a && b >= c) return b;\n    return c;\n}\nint main() { cout<<largest(5,9,3); return 0; }",
         "explanation": {
@@ -494,7 +497,7 @@
         "description": "Min of three numbers.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint smallest(int a, int b, int c) { return 0; }\nint main() { cout<<smallest(5,9,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint smallest(int a, int b, int c) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    int c;\n    cin >> c;\n    cout << smallest(a, b, c);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint smallest(int a, int b, int c) {\n    if(a <= b && a <= c) return a;\n    if(b <= a && b <= c) return b;\n    return c;\n}\nint main() { cout<<smallest(5,9,3); return 0; }",
         "explanation": {
@@ -535,7 +538,7 @@
         "description": "Check divisibility.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isDivisible(int a, int b) { return false; }\nint main() { cout<<isDivisible(10,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isDivisible(int a, int b) {\n    return false;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    cout << isDivisible(a, b);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isDivisible(int a, int b) {\n    return a % b == 0;\n}\nint main() { cout<<isDivisible(10,5); return 0; }",
         "explanation": {
@@ -575,7 +578,7 @@
         "description": "Factorial using loop.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint factorial(int n) { return 0; }\nint main() { cout<<factorial(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint factorial(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << factorial(n);\n    return 0;\n}\n",
         "expectedOutput": "120",
         "solution": "#include <iostream>\nusing namespace std;\nint factorial(int n) {\n    int result = 1;\n    for(int i = 1; i <= n; i++) {\n        result *= i;\n    }\n    return result;\n}\nint main() { cout<<factorial(5); return 0; }",
         "explanation": {
@@ -615,7 +618,7 @@
         "description": "Sum all digits.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint digitSum(int n) { return 0; }\nint main() { cout<<digitSum(1234); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint digitSum(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << digitSum(n);\n    return 0;\n}\n",
         "expectedOutput": "10",
         "solution": "#include <iostream>\nusing namespace std;\nint digitSum(int n) {\n    int sum = 0;\n    while(n > 0) {\n        sum += n % 10;\n        n /= 10;\n    }\n    return sum;\n}\nint main() { cout<<digitSum(1234); return 0; }",
         "explanation": {
@@ -656,7 +659,7 @@
         "description": "Number of digits.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countDigits(int n) { return 0; }\nint main() { cout<<countDigits(12345); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countDigits(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << countDigits(n);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nint countDigits(int n) {\n    int count = 0;\n    while(n > 0) {\n        count++;\n        n /= 10;\n    }\n    return count;\n}\nint main() { cout<<countDigits(12345); return 0; }",
         "explanation": {
@@ -697,7 +700,7 @@
         "description": "Reverse digits.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint reverse(int n) { return 0; }\nint main() { cout<<reverse(12345); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint reverse(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << reverse(n);\n    return 0;\n}\n",
         "expectedOutput": "54321",
         "solution": "#include <iostream>\nusing namespace std;\nint reverse(int n) {\n    int reversed = 0;\n    while(n > 0) {\n        reversed = reversed * 10 + n % 10;\n        n /= 10;\n    }\n    return reversed;\n}\nint main() { cout<<reverse(12345); return 0; }",
         "explanation": {
@@ -738,7 +741,7 @@
         "description": "Is number palindrome.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPalindrome(int n) { return false; }\nint main() { cout<<isPalindrome(12321); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPalindrome(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isPalindrome(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isPalindrome(int n) {\n    int original = n, reversed = 0;\n    while(n > 0) {\n        reversed = reversed * 10 + n % 10;\n        n /= 10;\n    }\n    return original == reversed;\n}\nint main() { cout<<isPalindrome(12321); return 0; }",
         "explanation": {
@@ -779,7 +782,7 @@
         "description": "Is perfect square.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPerfectSquare(int n) { return false; }\nint main() { cout<<isPerfectSquare(16); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPerfectSquare(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isPerfectSquare(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isPerfectSquare(int n) {\n    int root = 1;\n    while(root * root < n) root++;\n    return root * root == n;\n}\nint main() { cout<<isPerfectSquare(16); return 0; }",
         "explanation": {
@@ -820,7 +823,7 @@
         "description": "Right triangle of stars.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid pattern(int n) {}\nint main() { pattern(4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid pattern(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    pattern(n);\n    return 0;\n}\n",
         "expectedOutput": "* ** *** ****",
         "solution": "#include <iostream>\nusing namespace std;\nvoid pattern(int n) {\n    for(int i = 1; i <= n; i++) {\n        for(int j = 1; j <= i; j++) {\n            cout << \"*\";\n        }\n        if(i < n) cout << \" \";\n    }\n}\nint main() { pattern(4); return 0; }",
         "explanation": {
@@ -861,7 +864,7 @@
         "description": "Inverted triangle.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid pattern(int n) {}\nint main() { pattern(4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid pattern(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    pattern(n);\n    return 0;\n}\n",
         "expectedOutput": "**** *** ** *",
         "solution": "#include <iostream>\nusing namespace std;\nvoid pattern(int n) {\n    for(int i = n; i >= 1; i--) {\n        for(int j = 1; j <= i; j++) {\n            cout << \"*\";\n        }\n        if(i > 1) cout << \" \";\n    }\n}\nint main() { pattern(4); return 0; }",
         "explanation": {
@@ -902,7 +905,7 @@
         "description": "Is number prime.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPrime(int n) { return false; }\nint main() { cout<<isPrime(7); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPrime(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isPrime(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isPrime(int n) {\n    if(n < 2) return false;\n    for(int i = 2; i * i <= n; i++) {\n        if(n % i == 0) return false;\n    }\n    return true;\n}\nint main() { cout<<isPrime(7); return 0; }",
         "explanation": {
@@ -943,7 +946,7 @@
         "description": "Nth Fibonacci number.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint fib(int n) { return 0; }\nint main() { cout<<fib(6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint fib(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << fib(n);\n    return 0;\n}\n",
         "expectedOutput": "8",
         "solution": "#include <iostream>\nusing namespace std;\nint fib(int n) {\n    if(n <= 1) return n;\n    int a = 0, b = 1;\n    for(int i = 2; i <= n; i++) {\n        int c = a + b;\n        a = b;\n        b = c;\n    }\n    return b;\n}\nint main() { cout<<fib(6); return 0; }",
         "explanation": {
@@ -984,7 +987,7 @@
         "description": "Greatest Common Divisor.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) { return 0; }\nint main() { cout<<gcd(48,18); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint gcd(int a, int b) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    cout << gcd(a, b);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) {\n    while(b != 0) {\n        int t = b;\n        b = a % b;\n        a = t;\n    }\n    return a;\n}\nint main() { cout<<gcd(48,18); return 0; }",
         "explanation": {

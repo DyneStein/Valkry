@@ -5,7 +5,7 @@
         "description": "Return sum of two integers.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint add(int a, int b) { return 0; }\nint main() { cout << add(5, 3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint add(int a, int b) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    cout << add(a, b);\n    return 0;\n}\n",
         "expectedOutput": "8",
         "testCases": [
             {
@@ -75,7 +75,7 @@
         "description": "Return product of two integers.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint multiply(int a, int b) { return 0; }\nint main() { cout << multiply(4, 7); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint multiply(int a, int b) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    cout << multiply(a, b);\n    return 0;\n}\n",
         "expectedOutput": "28",
         "testCases": [
             {
@@ -145,7 +145,7 @@
         "description": "Return larger of two numbers.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint maxOfTwo(int a, int b) { return 0; }\nint main() { cout << maxOfTwo(10, 25); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint maxOfTwo(int a, int b) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    cout << maxOfTwo(a, b);\n    return 0;\n}\n",
         "expectedOutput": "25",
         "testCases": [
             {
@@ -215,7 +215,7 @@
         "description": "Return absolute value.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint absolute(int n) { return 0; }\nint main() { cout << absolute(-15); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint absolute(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << absolute(n);\n    return 0;\n}\n",
         "expectedOutput": "15",
         "testCases": [
             {
@@ -286,7 +286,7 @@
         "description": "Print 'Even' or 'Odd'.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid check(int n) {}\nint main() { check(7); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid check(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    check(n);\n    return 0;\n}\n",
         "expectedOutput": "Odd",
         "testCases": [
             {
@@ -419,7 +419,10 @@
                 "Use cout << \"Hello World\""
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "noInput",
+        "inputInstructions": "This problem has no input - just print the required output directly."
     },
     {
         "id": "easy7",
@@ -427,7 +430,7 @@
         "description": "Find sum of array elements.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sum(int arr[], int n) { return 0; }\nint main() { int a[] = {1,2,3,4,5}; cout << sum(a, 5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sum(vector<int>& arr, int n) {\n    return 0;\n}\n\nint main() {\n    int arr_size;\n    cin >> arr_size;\n    vector<int> arr(arr_size);\n    for (int i = 0; i < arr_size; i++) cin >> arr[i];\n    int n;\n    cin >> n;\n    cout << sum(arr, n);\n    return 0;\n}\n",
         "expectedOutput": "15",
         "testCases": [
             {
@@ -498,7 +501,7 @@
         "description": "Find largest element.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint findMax(int arr[], int n) { return 0; }\nint main() { int a[] = {3,1,4,1,5,9}; cout << findMax(a, 6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint findMax(vector<int>& arr, int n) {\n    return 0;\n}\n\nint main() {\n    int arr_size;\n    cin >> arr_size;\n    vector<int> arr(arr_size);\n    for (int i = 0; i < arr_size; i++) cin >> arr[i];\n    int n;\n    cin >> n;\n    cout << findMax(arr, n);\n    return 0;\n}\n",
         "expectedOutput": "9",
         "testCases": [
             {
@@ -569,7 +572,7 @@
         "description": "Find smallest element.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint findMin(int arr[], int n) { return 0; }\nint main() { int a[] = {3,1,4,1,5,9}; cout << findMin(a, 6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint findMin(vector<int>& arr, int n) {\n    return 0;\n}\n\nint main() {\n    int arr_size;\n    cin >> arr_size;\n    vector<int> arr(arr_size);\n    for (int i = 0; i < arr_size; i++) cin >> arr[i];\n    int n;\n    cin >> n;\n    cout << findMin(arr, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -640,7 +643,7 @@
         "description": "Reverse array in-place.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid reverse(int arr[], int n) {}\nint main() { int a[] = {1,2,3,4,5}; reverse(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid reverse(vector<int>& arr, int n) {\n    // TODO\n}\n\nint main() {\n    int arr_size;\n    cin >> arr_size;\n    vector<int> arr(arr_size);\n    for (int i = 0; i < arr_size; i++) cin >> arr[i];\n    int n;\n    cin >> n;\n    reverse(arr, n);\n    return 0;\n}\n",
         "expectedOutput": "5 4 3 2 1",
         "testCases": [
             {
@@ -711,7 +714,7 @@
         "description": "Count how many times x appears.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint count(int arr[], int n, int x) { return 0; }\nint main() { int a[] = {1,2,2,3,2,4}; cout << count(a, 6, 2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint count(vector<int>& arr, int n, int x) {\n    return 0;\n}\n\nint main() {\n    int arr_size;\n    cin >> arr_size;\n    vector<int> arr(arr_size);\n    for (int i = 0; i < arr_size; i++) cin >> arr[i];\n    int n;\n    cin >> n;\n    int x;\n    cin >> x;\n    cout << count(arr, n, x);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "testCases": [
             {
@@ -782,7 +785,7 @@
         "description": "Find index of element.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint search(int arr[], int n, int x) { return -1; }\nint main() { int a[] = {5,3,7,1,9}; cout << search(a, 5, 7); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint search(vector<int>& arr, int n, int x) {\n    return 0;\n}\n\nint main() {\n    int arr_size;\n    cin >> arr_size;\n    vector<int> arr(arr_size);\n    for (int i = 0; i < arr_size; i++) cin >> arr[i];\n    int n;\n    cin >> n;\n    int x;\n    cin >> x;\n    cout << search(arr, n, x);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "testCases": [
             {

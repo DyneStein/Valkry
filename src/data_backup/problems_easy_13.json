@@ -1,0 +1,702 @@
+[
+    {
+        "id": "e601",
+        "title": "Invert Binary Tree",
+        "description": "Mirror the tree.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* invertTree(Node* r) { return nullptr; }\nvoid pre(Node* r) { if(!r) return; cout<<r->v<<\" \"; pre(r->l); pre(r->r); }\nint main() { Node* r=new Node(4); r->l=new Node(2); r->r=new Node(7); r=invertTree(r); pre(r); return 0; }",
+        "expectedOutput": "4 7 2",
+        "testCases": [
+            {
+                "input": "[4,2,7]",
+                "expectedOutput": "4 7 2",
+                "explanation": "Children swapped"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "1",
+                "explanation": "Single node unchanged"
+            },
+            {
+                "input": "[]",
+                "expectedOutput": "",
+                "explanation": "Empty tree"
+            },
+            {
+                "input": "[4,2,7,1,3,6,9]",
+                "expectedOutput": "4 7 9 6 2 3 1",
+                "explanation": "Full tree inverted"
+            },
+            {
+                "input": "[2,1,3]",
+                "expectedOutput": "2 3 1",
+                "explanation": "Simple BST inverted"
+            },
+            {
+                "input": "[1,2]",
+                "expectedOutput": "1 null 2",
+                "explanation": "Left child becomes right"
+            },
+            {
+                "input": "[1,null,2]",
+                "expectedOutput": "1 2 null",
+                "explanation": "Right child becomes left"
+            },
+            {
+                "input": "[5,3,8,2,4,7,9]",
+                "expectedOutput": "5 8 9 7 3 4 2",
+                "explanation": "Complete tree"
+            },
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "1 3 2 5 4",
+                "explanation": "Recursively inverted"
+            },
+            {
+                "input": "[10,5,15,null,null,12,20]",
+                "expectedOutput": "10 15 20 12 5",
+                "explanation": "Partial tree"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* invertTree(Node* r) { if(!r) return 0; Node* t=r->l; r->l=invertTree(r->r); r->r=invertTree(t); return r; }\nvoid pre(Node* r) { if(!r) return; cout<<r->v<<\" \"; pre(r->l); pre(r->r); }\nint main() { Node* r=new Node(4); r->l=new Node(2); r->r=new Node(7); r=invertTree(r); pre(r); return 0; }",
+        "explanation": {
+            "approach": "Swap children recursively.",
+            "steps": [
+                "Swap left and right",
+                "Recurse"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        }
+    },
+    {
+        "id": "e602",
+        "title": "Same Tree",
+        "description": "Check if identical.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nbool isSameTree(Node* p, Node* q) { return false; }\nint main() { Node* p=new Node(1); p->l=new Node(2); Node* q=new Node(1); q->l=new Node(2); cout<<isSameTree(p,q); return 0; }",
+        "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "[1,2] [1,2]",
+                "expectedOutput": "1",
+                "explanation": "Same structure and values"
+            },
+            {
+                "input": "[1,2] [1,null,2]",
+                "expectedOutput": "0",
+                "explanation": "Different structure"
+            },
+            {
+                "input": "[1,2,1] [1,1,2]",
+                "expectedOutput": "0",
+                "explanation": "Different values"
+            },
+            {
+                "input": "[] []",
+                "expectedOutput": "1",
+                "explanation": "Both empty"
+            },
+            {
+                "input": "[1] [1]",
+                "expectedOutput": "1",
+                "explanation": "Single same node"
+            },
+            {
+                "input": "[1] [2]",
+                "expectedOutput": "0",
+                "explanation": "Single different node"
+            },
+            {
+                "input": "[1] []",
+                "expectedOutput": "0",
+                "explanation": "One empty"
+            },
+            {
+                "input": "[1,2,3] [1,2,3]",
+                "expectedOutput": "1",
+                "explanation": "Identical trees"
+            },
+            {
+                "input": "[1,2,3] [1,2,4]",
+                "expectedOutput": "0",
+                "explanation": "One value different"
+            },
+            {
+                "input": "[5,4,6,3,null,null,7] [5,4,6,3,null,null,7]",
+                "expectedOutput": "1",
+                "explanation": "Complex same tree"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nbool isSameTree(Node* p, Node* q) { if(!p&&!q) return true; if(!p||!q) return false; return p->v==q->v && isSameTree(p->l,q->l) && isSameTree(p->r,q->r); }\nint main() { Node* p=new Node(1); p->l=new Node(2); Node* q=new Node(1); q->l=new Node(2); cout<<isSameTree(p,q); return 0; }",
+        "explanation": {
+            "approach": "Compare recursively.",
+            "steps": [
+                "Both null = same",
+                "Compare values and children"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        }
+    },
+    {
+        "id": "e603",
+        "title": "Merge Two Binary Trees",
+        "description": "Merge overlapping nodes.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* mergeTrees(Node* r1, Node* r2) { return nullptr; }\nvoid pre(Node* r) { if(!r) return; cout<<r->v<<\" \"; pre(r->l); pre(r->r); }\nint main() { Node* t1=new Node(1); t1->l=new Node(3); Node* t2=new Node(2); t2->l=new Node(1); t2->r=new Node(3); Node* m=mergeTrees(t1,t2); pre(m); return 0; }",
+        "expectedOutput": "3 4 3",
+        "testCases": [
+            {
+                "input": "[1,3] [2,1,3]",
+                "expectedOutput": "3 4 3",
+                "explanation": "1+2=3, 3+1=4, null+3=3"
+            },
+            {
+                "input": "[1] [1,2]",
+                "expectedOutput": "2 2",
+                "explanation": "Values added"
+            },
+            {
+                "input": "[] [1]",
+                "expectedOutput": "1",
+                "explanation": "One empty"
+            },
+            {
+                "input": "[1] []",
+                "expectedOutput": "1",
+                "explanation": "Other empty"
+            },
+            {
+                "input": "[] []",
+                "expectedOutput": "",
+                "explanation": "Both empty"
+            },
+            {
+                "input": "[1,2,3] [1,2,3]",
+                "expectedOutput": "2 4 6",
+                "explanation": "All values doubled"
+            },
+            {
+                "input": "[0] [0]",
+                "expectedOutput": "0",
+                "explanation": "Zero values"
+            },
+            {
+                "input": "[5,3,2] [1,4,null,3]",
+                "expectedOutput": "6 7 3 2",
+                "explanation": "Complex merge"
+            },
+            {
+                "input": "[1,null,2] [1,2]",
+                "expectedOutput": "2 2 2",
+                "explanation": "Mixed structure"
+            },
+            {
+                "input": "[10,5,15] [10,5,15]",
+                "expectedOutput": "20 10 30",
+                "explanation": "Symmetric merge"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* mergeTrees(Node* r1, Node* r2) { if(!r1) return r2; if(!r2) return r1; r1->v+=r2->v; r1->l=mergeTrees(r1->l,r2->l); r1->r=mergeTrees(r1->r,r2->r); return r1; }\nvoid pre(Node* r) { if(!r) return; cout<<r->v<<\" \"; pre(r->l); pre(r->r); }\nint main() { Node* t1=new Node(1); t1->l=new Node(3); Node* t2=new Node(2); t2->l=new Node(1); t2->r=new Node(3); Node* m=mergeTrees(t1,t2); pre(m); return 0; }",
+        "explanation": {
+            "approach": "Add values, recurse.",
+            "steps": [
+                "Sum overlapping nodes",
+                "Recurse on children"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        }
+    },
+    {
+        "id": "e604",
+        "title": "Search in BST",
+        "description": "Find node in BST.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* searchBST(Node* r, int val) { return nullptr; }\nint main() { Node* r=new Node(4); r->l=new Node(2); r->r=new Node(7); Node* res=searchBST(r,2); cout<<(res?res->v:-1); return 0; }",
+        "expectedOutput": "2",
+        "testCases": [
+            {
+                "input": "[4,2,7] 2",
+                "expectedOutput": "2",
+                "explanation": "Found in left subtree"
+            },
+            {
+                "input": "[4,2,7] 5",
+                "expectedOutput": "-1",
+                "explanation": "Not found"
+            },
+            {
+                "input": "[4,2,7] 4",
+                "expectedOutput": "4",
+                "explanation": "Found at root"
+            },
+            {
+                "input": "[4,2,7] 7",
+                "expectedOutput": "7",
+                "explanation": "Found in right subtree"
+            },
+            {
+                "input": "[1] 1",
+                "expectedOutput": "1",
+                "explanation": "Single node match"
+            },
+            {
+                "input": "[1] 2",
+                "expectedOutput": "-1",
+                "explanation": "Single node no match"
+            },
+            {
+                "input": "[5,3,7,2,4,6,8] 6",
+                "expectedOutput": "6",
+                "explanation": "Found deep in tree"
+            },
+            {
+                "input": "[5,3,7,2,4,6,8] 1",
+                "expectedOutput": "-1",
+                "explanation": "Not in tree"
+            },
+            {
+                "input": "[10,5,15,3,7,12,20] 12",
+                "expectedOutput": "12",
+                "explanation": "Complex BST search"
+            },
+            {
+                "input": "[50,25,75] 100",
+                "expectedOutput": "-1",
+                "explanation": "Beyond range"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* searchBST(Node* r, int val) { if(!r||r->v==val) return r; return val<r->v?searchBST(r->l,val):searchBST(r->r,val); }\nint main() { Node* r=new Node(4); r->l=new Node(2); r->r=new Node(7); Node* res=searchBST(r,2); cout<<(res?res->v:-1); return 0; }",
+        "explanation": {
+            "approach": "BST property search.",
+            "steps": [
+                "If less go left",
+                "If more go right"
+            ],
+            "complexity": "Time: O(h), Space: O(h)"
+        }
+    },
+    {
+        "id": "e605",
+        "title": "Range Sum BST",
+        "description": "Sum values in range.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint rangeSumBST(Node* r, int lo, int hi) { return 0; }\nint main() { Node* r=new Node(10); r->l=new Node(5); r->r=new Node(15); r->l->l=new Node(3); r->l->r=new Node(7); cout<<rangeSumBST(r,7,15); return 0; }",
+        "expectedOutput": "32",
+        "testCases": [
+            {
+                "input": "[10,5,15,3,7] 7 15",
+                "expectedOutput": "32",
+                "explanation": "7+10+15=32"
+            },
+            {
+                "input": "[10,5,15,3,7,13,18,1,null,6] 6 10",
+                "expectedOutput": "23",
+                "explanation": "6+7+10=23"
+            },
+            {
+                "input": "[1] 1 1",
+                "expectedOutput": "1",
+                "explanation": "Single node in range"
+            },
+            {
+                "input": "[1] 2 3",
+                "expectedOutput": "0",
+                "explanation": "Out of range"
+            },
+            {
+                "input": "[10,5,15] 1 20",
+                "expectedOutput": "30",
+                "explanation": "All nodes in range"
+            },
+            {
+                "input": "[10,5,15] 5 5",
+                "expectedOutput": "5",
+                "explanation": "Exact match"
+            },
+            {
+                "input": "[10,5,15] 10 10",
+                "expectedOutput": "10",
+                "explanation": "Root only"
+            },
+            {
+                "input": "[5,3,7,2,4,6,8] 4 6",
+                "expectedOutput": "15",
+                "explanation": "4+5+6=15"
+            },
+            {
+                "input": "[100,50,150,25,75] 50 100",
+                "expectedOutput": "225",
+                "explanation": "50+75+100"
+            },
+            {
+                "input": "[20,10,30,5,15,25,35] 10 25",
+                "expectedOutput": "75",
+                "explanation": "10+15+20+25+5=75"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint rangeSumBST(Node* r, int lo, int hi) { if(!r) return 0; int s=0; if(r->v>=lo && r->v<=hi) s+=r->v; if(r->v>lo) s+=rangeSumBST(r->l,lo,hi); if(r->v<hi) s+=rangeSumBST(r->r,lo,hi); return s; }\nint main() { Node* r=new Node(10); r->l=new Node(5); r->r=new Node(15); r->l->l=new Node(3); r->l->r=new Node(7); cout<<rangeSumBST(r,7,15); return 0; }",
+        "explanation": {
+            "approach": "Prune using BST property.",
+            "steps": [
+                "Add if in range",
+                "Skip subtrees outside range"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        }
+    },
+    {
+        "id": "e606",
+        "title": "Minimum Depth Binary Tree",
+        "description": "Shortest path to leaf.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint minDepth(Node* r) { return 0; }\nint main() { Node* r=new Node(3); r->l=new Node(9); r->r=new Node(20); r->r->l=new Node(15); r->r->r=new Node(7); cout<<minDepth(r); return 0; }",
+        "expectedOutput": "2",
+        "testCases": [
+            {
+                "input": "[3,9,20,null,null,15,7]",
+                "expectedOutput": "2",
+                "explanation": "Path to 9 is shortest"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "1",
+                "explanation": "Root is leaf"
+            },
+            {
+                "input": "[1,2]",
+                "expectedOutput": "2",
+                "explanation": "Only left child"
+            },
+            {
+                "input": "[1,null,2]",
+                "expectedOutput": "2",
+                "explanation": "Only right child"
+            },
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "2",
+                "explanation": "Two children same level"
+            },
+            {
+                "input": "[2,null,3,null,4,null,5,null,6]",
+                "expectedOutput": "5",
+                "explanation": "Right-skewed"
+            },
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "2",
+                "explanation": "Leaf at level 2"
+            },
+            {
+                "input": "[1,2,3,4,5,6,7]",
+                "expectedOutput": "3",
+                "explanation": "Complete tree"
+            },
+            {
+                "input": "[1,2,null,3,null,4]",
+                "expectedOutput": "4",
+                "explanation": "Left-skewed"
+            },
+            {
+                "input": "[5,4,8,11,null,13,4,7,2]",
+                "expectedOutput": "2",
+                "explanation": "Multiple depths"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint minDepth(Node* r) { if(!r) return 0; if(!r->l) return 1+minDepth(r->r); if(!r->r) return 1+minDepth(r->l); return 1+min(minDepth(r->l),minDepth(r->r)); }\nint main() { Node* r=new Node(3); r->l=new Node(9); r->r=new Node(20); r->r->l=new Node(15); r->r->r=new Node(7); cout<<minDepth(r); return 0; }",
+        "explanation": {
+            "approach": "Handle single child case.",
+            "steps": [
+                "If one child null, go other way",
+                "Else take minimum"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        }
+    },
+    {
+        "id": "e607",
+        "title": "Count Complete Tree Nodes",
+        "description": "Count nodes efficiently.",
+        "difficulty": "MEDIUM",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint countNodes(Node* r) { return 0; }\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->l->l=new Node(4); r->l->r=new Node(5); r->r->l=new Node(6); cout<<countNodes(r); return 0; }",
+        "expectedOutput": "6",
+        "testCases": [
+            {
+                "input": "[1,2,3,4,5,6]",
+                "expectedOutput": "6",
+                "explanation": "Complete tree with 6 nodes"
+            },
+            {
+                "input": "[]",
+                "expectedOutput": "0",
+                "explanation": "Empty tree"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "1",
+                "explanation": "Single node"
+            },
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "3",
+                "explanation": "Full level"
+            },
+            {
+                "input": "[1,2,3,4,5,6,7]",
+                "expectedOutput": "7",
+                "explanation": "Perfect tree"
+            },
+            {
+                "input": "[1,2]",
+                "expectedOutput": "2",
+                "explanation": "Root with left child"
+            },
+            {
+                "input": "[1,2,3,4]",
+                "expectedOutput": "4",
+                "explanation": "One in last level"
+            },
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "5",
+                "explanation": "Two in last level"
+            },
+            {
+                "input": "[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]",
+                "expectedOutput": "15",
+                "explanation": "Large perfect tree"
+            },
+            {
+                "input": "[1,2,3,4,5,6,7,8]",
+                "expectedOutput": "8",
+                "explanation": "One extra in last level"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint countNodes(Node* r) { if(!r) return 0; return 1+countNodes(r->l)+countNodes(r->r); }\nint main() { Node* r=new Node(1); r->l=new Node(2); r->r=new Node(3); r->l->l=new Node(4); r->l->r=new Node(5); r->r->l=new Node(6); cout<<countNodes(r); return 0; }",
+        "explanation": {
+            "approach": "Recursive count.",
+            "steps": [
+                "Count left + right + 1"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        }
+    },
+    {
+        "id": "e608",
+        "title": "Sum of Left Leaves",
+        "description": "Sum all left leaves.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint sumOfLeftLeaves(Node* r) { return 0; }\nint main() { Node* r=new Node(3); r->l=new Node(9); r->r=new Node(20); r->r->l=new Node(15); r->r->r=new Node(7); cout<<sumOfLeftLeaves(r); return 0; }",
+        "expectedOutput": "24",
+        "testCases": [
+            {
+                "input": "[3,9,20,null,null,15,7]",
+                "expectedOutput": "24",
+                "explanation": "9+15=24"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "0",
+                "explanation": "Root is not left leaf"
+            },
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "4",
+                "explanation": "Only 4 is left leaf"
+            },
+            {
+                "input": "[1,2]",
+                "expectedOutput": "2",
+                "explanation": "2 is left leaf"
+            },
+            {
+                "input": "[1,null,2]",
+                "expectedOutput": "0",
+                "explanation": "No left leaves"
+            },
+            {
+                "input": "[1,2,3,4,5,6,7]",
+                "expectedOutput": "10",
+                "explanation": "4+6=10"
+            },
+            {
+                "input": "[0,2,4,1,null,3,-1,5,1,null,6,null,8]",
+                "expectedOutput": "5",
+                "explanation": "Complex tree"
+            },
+            {
+                "input": "[1,2,3,null,null,4,5]",
+                "expectedOutput": "6",
+                "explanation": "2+4=6"
+            },
+            {
+                "input": "[10,5,15,3,7]",
+                "expectedOutput": "3",
+                "explanation": "Only 3 is left leaf"
+            },
+            {
+                "input": "[1,0,2]",
+                "expectedOutput": "0",
+                "explanation": "Left leaf is 0"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint sumOfLeftLeaves(Node* r) { if(!r) return 0; int s=0; if(r->l && !r->l->l && !r->l->r) s+=r->l->v; s+=sumOfLeftLeaves(r->l)+sumOfLeftLeaves(r->r); return s; }\nint main() { Node* r=new Node(3); r->l=new Node(9); r->r=new Node(20); r->r->l=new Node(15); r->r->r=new Node(7); cout<<sumOfLeftLeaves(r); return 0; }",
+        "explanation": {
+            "approach": "Check if left child is leaf.",
+            "steps": [
+                "Add left leaf value",
+                "Recurse on children"
+            ],
+            "complexity": "Time: O(n), Space: O(h)"
+        }
+    },
+    {
+        "id": "e609",
+        "title": "Find Mode in BST",
+        "description": "Most frequent values.",
+        "difficulty": "EASY",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nvoid findMode(Node* r) {}\nint main() { Node* r=new Node(1); r->r=new Node(2); r->r->l=new Node(2); findMode(r); return 0; }",
+        "expectedOutput": "2",
+        "testCases": [
+            {
+                "input": "[1,null,2,2]",
+                "expectedOutput": "2",
+                "explanation": "2 appears twice"
+            },
+            {
+                "input": "[0]",
+                "expectedOutput": "0",
+                "explanation": "Single node"
+            },
+            {
+                "input": "[1,null,2]",
+                "expectedOutput": "1 2",
+                "explanation": "Both appear once"
+            },
+            {
+                "input": "[1,0,2,0,0]",
+                "expectedOutput": "0",
+                "explanation": "0 appears three times"
+            },
+            {
+                "input": "[2,1,3,1,1]",
+                "expectedOutput": "1",
+                "explanation": "1 appears three times"
+            },
+            {
+                "input": "[5,3,7,3,3,7,7]",
+                "expectedOutput": "3 7",
+                "explanation": "Both appear three times"
+            },
+            {
+                "input": "[1,1,2,1,1,2,2]",
+                "expectedOutput": "1",
+                "explanation": "1 appears four times"
+            },
+            {
+                "input": "[4,2,6,2,3]",
+                "expectedOutput": "2",
+                "explanation": "2 appears twice"
+            },
+            {
+                "input": "[10,5,15,null,null,10,20]",
+                "expectedOutput": "10",
+                "explanation": "10 appears twice"
+            },
+            {
+                "input": "[1,1,1]",
+                "expectedOutput": "1",
+                "explanation": "All same value"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nint cnt[101]={};\nvoid inorder(Node* r) { if(!r) return; inorder(r->l); cnt[r->v]++; inorder(r->r); }\nvoid findMode(Node* r) { inorder(r); int mx=0; for(int i=0;i<101;i++) mx=max(mx,cnt[i]); for(int i=0;i<101;i++) if(cnt[i]==mx) cout<<i<<\" \"; }\nint main() { Node* r=new Node(1); r->r=new Node(2); r->r->l=new Node(2); findMode(r); return 0; }",
+        "explanation": {
+            "approach": "Count occurrences.",
+            "steps": [
+                "Inorder traversal",
+                "Find max frequency"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        }
+    },
+    {
+        "id": "e610",
+        "title": "Lowest Common Ancestor BST",
+        "description": "LCA in BST.",
+        "difficulty": "MEDIUM",
+        "category": "Trees",
+        "starterCode": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* lowestCommonAncestor(Node* r, Node* p, Node* q) { return nullptr; }\nint main() { Node* r=new Node(6); r->l=new Node(2); r->r=new Node(8); cout<<lowestCommonAncestor(r,r->l,r->r)->v; return 0; }",
+        "expectedOutput": "6",
+        "testCases": [
+            {
+                "input": "[6,2,8] p=2 q=8",
+                "expectedOutput": "6",
+                "explanation": "Root is LCA"
+            },
+            {
+                "input": "[6,2,8,0,4,7,9] p=2 q=4",
+                "expectedOutput": "2",
+                "explanation": "One node is ancestor"
+            },
+            {
+                "input": "[6,2,8,0,4,7,9,null,null,3,5] p=3 q=5",
+                "expectedOutput": "4",
+                "explanation": "Deep LCA"
+            },
+            {
+                "input": "[2,1] p=2 q=1",
+                "expectedOutput": "2",
+                "explanation": "Root and child"
+            },
+            {
+                "input": "[6,2,8] p=2 q=2",
+                "expectedOutput": "2",
+                "explanation": "Same node"
+            },
+            {
+                "input": "[6,2,8,0,4,7,9] p=0 q=4",
+                "expectedOutput": "2",
+                "explanation": "Left subtree LCA"
+            },
+            {
+                "input": "[6,2,8,0,4,7,9] p=7 q=9",
+                "expectedOutput": "8",
+                "explanation": "Right subtree LCA"
+            },
+            {
+                "input": "[6,2,8,0,4,7,9] p=0 q=9",
+                "expectedOutput": "6",
+                "explanation": "Across subtrees"
+            },
+            {
+                "input": "[5,3,7,2,4,6,8] p=2 q=8",
+                "expectedOutput": "5",
+                "explanation": "Wide span"
+            },
+            {
+                "input": "[5,3,7,2,4,6,8] p=6 q=7",
+                "expectedOutput": "7",
+                "explanation": "Parent-child"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nstruct Node { int v; Node *l,*r; Node(int x):v(x),l(0),r(0){} };\nNode* lowestCommonAncestor(Node* r, Node* p, Node* q) { if(p->v<r->v && q->v<r->v) return lowestCommonAncestor(r->l,p,q); if(p->v>r->v && q->v>r->v) return lowestCommonAncestor(r->r,p,q); return r; }\nint main() { Node* r=new Node(6); r->l=new Node(2); r->r=new Node(8); cout<<lowestCommonAncestor(r,r->l,r->r)->v; return 0; }",
+        "explanation": {
+            "approach": "BST split point.",
+            "steps": [
+                "If both left, go left",
+                "If both right, go right",
+                "Else current is LCA"
+            ],
+            "complexity": "Time: O(h), Space: O(h)"
+        }
+    }
+]

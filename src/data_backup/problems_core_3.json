@@ -1,0 +1,415 @@
+[
+    {
+        "id": "core26",
+        "title": "Merge Sort Recursion",
+        "description": "Implement merge sort.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid mergeSort(int a[], int l, int r) {}\nint main() { int a[]={38,27,43,3,9,82,10}; mergeSort(a,0,6); for(int i=0;i<7;i++) cout<<a[i]<<\" \"; return 0; }",
+        "expectedOutput": "3 9 10 27 38 43 82",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid merge(int a[], int l, int m, int r) { int n1=m-l+1, n2=r-m; int L[n1], R[n2]; for(int i=0;i<n1;i++) L[i]=a[l+i]; for(int i=0;i<n2;i++) R[i]=a[m+1+i]; int i=0,j=0,k=l; while(i<n1 && j<n2) a[k++]=L[i]<=R[j]?L[i++]:R[j++]; while(i<n1) a[k++]=L[i++]; while(j<n2) a[k++]=R[j++]; }\nvoid mergeSort(int a[], int l, int r) { if(l<r) { int m=(l+r)/2; mergeSort(a,l,m); mergeSort(a,m+1,r); merge(a,l,m,r); } }\nint main() { int a[]={38,27,43,3,9,82,10}; mergeSort(a,0,6); for(int i=0;i<7;i++) cout<<a[i]<<\" \"; return 0; }",
+        "explanation": {
+            "approach": "Divide in half, sort each, merge.",
+            "analogy": "Split deck, sort each half, merge sorted halves.",
+            "steps": [
+                "Split at middle",
+                "Recursively sort halves",
+                "Merge sorted halves"
+            ],
+            "complexity": "Time: O(n log n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "{38,27,43,3,9,82,10}",
+                "expectedOutput": "3 9 10 27 38 43 82",
+                "explanation": "Sorted array"
+            },
+            {
+                "input": "{5,4,3,2,1}",
+                "expectedOutput": "1 2 3 4 5",
+                "explanation": "Reverse sorted"
+            },
+            {
+                "input": "{1}",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "{1,2,3,4,5}",
+                "expectedOutput": "1 2 3 4 5",
+                "explanation": "Already sorted"
+            }
+        ]
+    },
+    {
+        "id": "core27",
+        "title": "Quick Sort Recursion",
+        "description": "Implement quick sort.",
+        "difficulty": "MEDIUM",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid quickSort(int a[], int l, int r) {}\nint main() { int a[]={10,7,8,9,1,5}; quickSort(a,0,5); for(int i=0;i<6;i++) cout<<a[i]<<\" \"; return 0; }",
+        "expectedOutput": "1 5 7 8 9 10",
+        "solution": "#include <iostream>\nusing namespace std;\nint partition(int a[], int l, int r) { int p=a[r], i=l-1; for(int j=l;j<r;j++) if(a[j]<p) { i++; swap(a[i],a[j]); } swap(a[i+1],a[r]); return i+1; }\nvoid quickSort(int a[], int l, int r) { if(l<r) { int p=partition(a,l,r); quickSort(a,l,p-1); quickSort(a,p+1,r); } }\nint main() { int a[]={10,7,8,9,1,5}; quickSort(a,0,5); for(int i=0;i<6;i++) cout<<a[i]<<\" \"; return 0; }",
+        "explanation": {
+            "approach": "Pick pivot, partition around it, recurse.",
+            "analogy": "Put smaller left, larger right, repeat.",
+            "steps": [
+                "Choose pivot (last element)",
+                "Partition so smaller on left",
+                "Recurse on both sides"
+            ],
+            "complexity": "Time: O(n log n) avg, Space: O(log n)"
+        },
+        "testCases": [
+            {
+                "input": "{10,7,8,9,1,5}",
+                "expectedOutput": "1 5 7 8 9 10",
+                "explanation": "Sorted array"
+            },
+            {
+                "input": "{1,2,3}",
+                "expectedOutput": "1 2 3",
+                "explanation": "Already sorted"
+            },
+            {
+                "input": "{3,3,3}",
+                "expectedOutput": "3 3 3",
+                "explanation": "All same"
+            },
+            {
+                "input": "{9,8,7,6,5,4,3,2,1}",
+                "expectedOutput": "1 2 3 4 5 6 7 8 9",
+                "explanation": "Large reverse sorted"
+            }
+        ]
+    },
+    {
+        "id": "core28",
+        "title": "Count Paths in Grid",
+        "description": "Paths from top-left to bottom-right.",
+        "difficulty": "EASY",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countPaths(int m, int n) { return 0; }\nint main() { cout<<countPaths(3,3); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint countPaths(int m, int n) { if(m==1 || n==1) return 1; return countPaths(m-1,n) + countPaths(m,n-1); }\nint main() { cout<<countPaths(3,3); return 0; }",
+        "explanation": {
+            "approach": "Can only go right or down.",
+            "analogy": "Count ways to navigate grid.",
+            "steps": [
+                "Base: edge cells have 1 path",
+                "Each cell = paths from left + paths from above"
+            ],
+            "complexity": "Time: O(2^(m+n)), Space: O(m+n)"
+        },
+        "testCases": [
+            {
+                "input": "m=3, n=3",
+                "expectedOutput": "6",
+                "explanation": "6 unique paths"
+            },
+            {
+                "input": "m=2, n=2",
+                "expectedOutput": "2",
+                "explanation": "2 paths"
+            },
+            {
+                "input": "m=1, n=5",
+                "expectedOutput": "1",
+                "explanation": "Only one path along edge"
+            },
+            {
+                "input": "m=4, n=4",
+                "expectedOutput": "20",
+                "explanation": "C(6,3) = 20 paths"
+            }
+        ]
+    },
+    {
+        "id": "core29",
+        "title": "Ways to Climb Stairs",
+        "description": "1 or 2 steps at a time.",
+        "difficulty": "EASY",
+        "category": "Recursion",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint climbStairs(int n) { return 0; }\nint main() { cout<<climbStairs(5); return 0; }",
+        "expectedOutput": "8",
+        "solution": "#include <iostream>\nusing namespace std;\nint climbStairs(int n) { if(n<=2) return n; return climbStairs(n-1)+climbStairs(n-2); }\nint main() { cout<<climbStairs(5); return 0; }",
+        "explanation": {
+            "approach": "Fibonacci pattern - reach n from n-1 or n-2.",
+            "analogy": "Take 1 step from n-1 or 2 steps from n-2.",
+            "steps": [
+                "Base: 1 step=1 way, 2 steps=2 ways",
+                "f(n) = f(n-1) + f(n-2)"
+            ],
+            "complexity": "Time: O(2^n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "8",
+                "explanation": "8 ways to climb 5 stairs"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "3",
+                "explanation": "3 ways: 1+1+1, 1+2, 2+1"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Only one way"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "89",
+                "explanation": "89 ways for 10 stairs"
+            }
+        ]
+    },
+    {
+        "id": "core30",
+        "title": "Sieve of Eratosthenes",
+        "description": "Find all primes up to n.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid sieve(int n) {}\nint main() { sieve(30); return 0; }",
+        "expectedOutput": "2 3 5 7 11 13 17 19 23 29",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid sieve(int n) { bool p[n+1]; for(int i=0;i<=n;i++) p[i]=true; p[0]=p[1]=false; for(int i=2;i*i<=n;i++) if(p[i]) for(int j=i*i;j<=n;j+=i) p[j]=false; for(int i=2;i<=n;i++) if(p[i]) cout<<i<<\" \"; }\nint main() { sieve(30); return 0; }",
+        "explanation": {
+            "approach": "Mark multiples of each prime as composite.",
+            "analogy": "Cross out multiples, remaining are prime.",
+            "steps": [
+                "Assume all prime",
+                "For each prime, mark multiples",
+                "Print unmarked"
+            ],
+            "complexity": "Time: O(n log log n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=30",
+                "expectedOutput": "2 3 5 7 11 13 17 19 23 29",
+                "explanation": "Primes up to 30"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "2 3 5 7",
+                "explanation": "Primes up to 10"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "2",
+                "explanation": "Smallest prime"
+            },
+            {
+                "input": "n=50",
+                "expectedOutput": "2 3 5 7 11 13 17 19 23 29 31 37 41 43 47",
+                "explanation": "Primes up to 50"
+            }
+        ]
+    },
+    {
+        "id": "core31",
+        "title": "Euclidean GCD",
+        "description": "Greatest common divisor.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) { return 0; }\nint main() { cout<<gcd(48,18); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) { while(b) { int t=b; b=a%b; a=t; } return a; }\nint main() { cout<<gcd(48,18); return 0; }",
+        "explanation": {
+            "approach": "gcd(a,b) = gcd(b, a mod b).",
+            "analogy": "Keep taking remainders until 0.",
+            "steps": [
+                "Replace larger with remainder",
+                "Repeat until one is 0"
+            ],
+            "complexity": "Time: O(log min(a,b)), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "a=48, b=18",
+                "expectedOutput": "6",
+                "explanation": "GCD(48,18) = 6"
+            },
+            {
+                "input": "a=7, b=3",
+                "expectedOutput": "1",
+                "explanation": "Coprime numbers"
+            },
+            {
+                "input": "a=12, b=12",
+                "expectedOutput": "12",
+                "explanation": "Same numbers"
+            },
+            {
+                "input": "a=0, b=5",
+                "expectedOutput": "5",
+                "explanation": "GCD with 0"
+            }
+        ]
+    },
+    {
+        "id": "core32",
+        "title": "Modular Exponentiation",
+        "description": "Calculate (x^n) mod m.",
+        "difficulty": "MEDIUM",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nlong long modPow(long long x, long long n, long long m) { return 0; }\nint main() { cout<<modPow(2,10,1000); return 0; }",
+        "expectedOutput": "24",
+        "solution": "#include <iostream>\nusing namespace std;\nlong long modPow(long long x, long long n, long long m) { long long res=1; x%=m; while(n>0) { if(n&1) res=res*x%m; n>>=1; x=x*x%m; } return res; }\nint main() { cout<<modPow(2,10,1000); return 0; }",
+        "explanation": {
+            "approach": "Square-and-multiply algorithm.",
+            "analogy": "Use binary representation of exponent.",
+            "steps": [
+                "If bit is 1, multiply result",
+                "Square base each iteration"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "x=2, n=10, m=1000",
+                "expectedOutput": "24",
+                "explanation": "2^10 mod 1000 = 1024 mod 1000 = 24"
+            },
+            {
+                "input": "x=3, n=5, m=7",
+                "expectedOutput": "5",
+                "explanation": "243 mod 7 = 5"
+            },
+            {
+                "input": "x=2, n=0, m=10",
+                "expectedOutput": "1",
+                "explanation": "Any^0 = 1"
+            },
+            {
+                "input": "x=10, n=9, m=6",
+                "expectedOutput": "4",
+                "explanation": "10^9 mod 6 = 4"
+            }
+        ]
+    },
+    {
+        "id": "core33",
+        "title": "Extended Euclidean",
+        "description": "Find x, y for ax + by = gcd.",
+        "difficulty": "MEDIUM",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint extGCD(int a, int b, int &x, int &y) { return 0; }\nint main() { int x,y; cout<<extGCD(30,20,x,y)<<\" \"<<x<<\" \"<<y; return 0; }",
+        "expectedOutput": "10 1 -1",
+        "solution": "#include <iostream>\nusing namespace std;\nint extGCD(int a, int b, int &x, int &y) { if(b==0) { x=1; y=0; return a; } int x1,y1; int g=extGCD(b,a%b,x1,y1); x=y1; y=x1-(a/b)*y1; return g; }\nint main() { int x,y; cout<<extGCD(30,20,x,y)<<\" \"<<x<<\" \"<<y; return 0; }",
+        "explanation": {
+            "approach": "Work backwards from base case.",
+            "analogy": "Express gcd as linear combination.",
+            "steps": [
+                "Base: gcd(a,0), x=1, y=0",
+                "Work back: x=y1, y=x1-(a/b)*y1"
+            ],
+            "complexity": "Time: O(log min(a,b)), Space: O(log min(a,b))"
+        },
+        "testCases": [
+            {
+                "input": "a=30, b=20",
+                "expectedOutput": "10 1 -1",
+                "explanation": "30*1 + 20*(-1) = 10"
+            },
+            {
+                "input": "a=35, b=15",
+                "expectedOutput": "5 1 -2",
+                "explanation": "35*1 + 15*(-2) = 5"
+            },
+            {
+                "input": "a=7, b=5",
+                "expectedOutput": "1 -2 3",
+                "explanation": "7*(-2) + 5*3 = 1"
+            },
+            {
+                "input": "a=15, b=10",
+                "expectedOutput": "5 1 -1",
+                "explanation": "15*1 + 10*(-1) = 5"
+            }
+        ]
+    },
+    {
+        "id": "core34",
+        "title": "Modular Inverse",
+        "description": "Find x where ax ≡ 1 (mod m).",
+        "difficulty": "MEDIUM",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint modInverse(int a, int m) { return 0; }\nint main() { cout<<modInverse(3,7); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint extGCD(int a, int b, int &x, int &y) { if(b==0) { x=1; y=0; return a; } int x1,y1; int g=extGCD(b,a%b,x1,y1); x=y1; y=x1-(a/b)*y1; return g; }\nint modInverse(int a, int m) { int x,y; extGCD(a,m,x,y); return (x%m+m)%m; }\nint main() { cout<<modInverse(3,7); return 0; }",
+        "explanation": {
+            "approach": "Use extended Euclidean algorithm.",
+            "analogy": "Find x such that a×x gives remainder 1.",
+            "steps": [
+                "Use extGCD to find coefficients",
+                "Return x mod m"
+            ],
+            "complexity": "Time: O(log m), Space: O(log m)"
+        },
+        "testCases": [
+            {
+                "input": "a=3, m=7",
+                "expectedOutput": "5",
+                "explanation": "3*5 = 15 ≡ 1 (mod 7)"
+            },
+            {
+                "input": "a=2, m=5",
+                "expectedOutput": "3",
+                "explanation": "2*3 = 6 ≡ 1 (mod 5)"
+            },
+            {
+                "input": "a=7, m=11",
+                "expectedOutput": "8",
+                "explanation": "7*8 = 56 ≡ 1 (mod 11)"
+            },
+            {
+                "input": "a=4, m=13",
+                "expectedOutput": "10",
+                "explanation": "4*10 = 40 ≡ 1 (mod 13)"
+            }
+        ]
+    },
+    {
+        "id": "core35",
+        "title": "Chinese Remainder Theorem",
+        "description": "Find x satisfying system.",
+        "difficulty": "HARD",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint crt(int r[], int m[], int n) { return 0; }\nint main() { int r[]={2,3,2}, m[]={3,5,7}; cout<<crt(r,m,3); return 0; }",
+        "expectedOutput": "23",
+        "solution": "#include <iostream>\nusing namespace std;\nint extGCD(int a, int b, int &x, int &y) { if(b==0) { x=1; y=0; return a; } int x1,y1; int g=extGCD(b,a%b,x1,y1); x=y1; y=x1-(a/b)*y1; return g; }\nint crt(int r[], int m[], int n) { int M=1; for(int i=0;i<n;i++) M*=m[i]; int res=0; for(int i=0;i<n;i++) { int Mi=M/m[i], x, y; extGCD(Mi,m[i],x,y); res=(res+r[i]*Mi*x)%M; } return (res%M+M)%M; }\nint main() { int r[]={2,3,2}, m[]={3,5,7}; cout<<crt(r,m,3); return 0; }",
+        "explanation": {
+            "approach": "Combine remainders using modular inverses.",
+            "analogy": "Find x satisfying multiple mod conditions.",
+            "steps": [
+                "Compute product M",
+                "For each: x += r[i] * M/m[i] * inverse"
+            ],
+            "complexity": "Time: O(n log M), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "r={2,3,2}, m={3,5,7}",
+                "expectedOutput": "23",
+                "explanation": "23 mod 3=2, 23 mod 5=3, 23 mod 7=2"
+            },
+            {
+                "input": "r={1,2}, m={3,5}",
+                "expectedOutput": "7",
+                "explanation": "7 mod 3=1, 7 mod 5=2"
+            },
+            {
+                "input": "r={0,0}, m={2,3}",
+                "expectedOutput": "0",
+                "explanation": "0 satisfies both"
+            },
+            {
+                "input": "r={1,1,1}, m={2,3,5}",
+                "expectedOutput": "1",
+                "explanation": "1 mod 2=1, 1 mod 3=1, 1 mod 5=1"
+            }
+        ]
+    }
+]

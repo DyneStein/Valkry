@@ -1,0 +1,402 @@
+[
+    {
+        "id": "med61",
+        "title": "Maximal Square",
+        "description": "Largest square of 1s.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint maximalSquare(int m[][5], int r, int c) { return 0; }\nint main() { int m[][5]={{1,0,1,0,0},{1,0,1,1,1},{1,1,1,1,1},{1,0,0,1,0}}; cout<<maximalSquare(m,4,5); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint maximalSquare(int m[][5], int r, int c) { int dp[r][c], mx=0; for(int i=0;i<r;i++) for(int j=0;j<c;j++) { if(i==0||j==0) dp[i][j]=m[i][j]; else if(m[i][j]==1) dp[i][j]=1+min(dp[i-1][j],min(dp[i][j-1],dp[i-1][j-1])); else dp[i][j]=0; mx=max(mx,dp[i][j]); } return mx*mx; }\nint main() { int m[][5]={{1,0,1,0,0},{1,0,1,1,1},{1,1,1,1,1},{1,0,0,1,0}}; cout<<maximalSquare(m,4,5); return 0; }",
+        "explanation": {
+            "approach": "DP - square size at each cell.",
+            "steps": [
+                "dp[i][j] = max square ending at (i,j)",
+                "Min of top, left, diagonal + 1"
+            ],
+            "complexity": "Time: O(rc), Space: O(rc)"
+        },
+        "testCases": [
+            {
+                "input": "4x5 matrix with 1s and 0s",
+                "expectedOutput": "4",
+                "explanation": "2x2 square found, area = 4"
+            },
+            {
+                "input": "matrix all 0s",
+                "expectedOutput": "0",
+                "explanation": "No 1s, no square"
+            },
+            {
+                "input": "matrix [[1]]",
+                "expectedOutput": "1",
+                "explanation": "Single 1"
+            },
+            {
+                "input": "matrix [[1,1],[1,1]]",
+                "expectedOutput": "4",
+                "explanation": "Entire 2x2 is square"
+            }
+        ]
+    },
+    {
+        "id": "med62",
+        "title": "Longest String Chain",
+        "description": "Longest word chain.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint longestStrChain(char words[][10], int n) { return 0; }\nint main() { char words[][10]={\"a\",\"b\",\"ba\",\"bca\",\"bda\",\"bdca\"}; cout<<longestStrChain(words,6); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint len(char s[]) { int l=0; while(s[l]) l++; return l; }\nbool isPred(char a[], char b[]) { int la=len(a),lb=len(b); if(lb!=la+1) return false; int i=0,j=0; while(b[j]) { if(a[i]==b[j]) i++; j++; } return i==la; }\nint longestStrChain(char words[][10], int n) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(len(words[j])>len(words[j+1])) { char t[10]; int k=0; while(words[j][k]) { t[k]=words[j][k]; k++; } t[k]=0; k=0; while(words[j+1][k]) { words[j][k]=words[j+1][k]; k++; } words[j][k]=0; k=0; while(t[k]) { words[j+1][k]=t[k]; k++; } words[j+1][k]=0; } int dp[n]; for(int i=0;i<n;i++) dp[i]=1; for(int i=1;i<n;i++) for(int j=0;j<i;j++) if(isPred(words[j],words[i])) dp[i]=max(dp[i],dp[j]+1); int mx=0; for(int i=0;i<n;i++) mx=max(mx,dp[i]); return mx; }\nint main() { char words[][10]={\"a\",\"b\",\"ba\",\"bca\",\"bda\",\"bdca\"}; cout<<longestStrChain(words,6); return 0; }",
+        "explanation": {
+            "approach": "Sort by length, DP on predecessors.",
+            "steps": [
+                "Sort by length",
+                "For each word, check predecessors"
+            ],
+            "complexity": "Time: O(n² × L), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "words=[a,b,ba,bca,bda,bdca]",
+                "expectedOutput": "4",
+                "explanation": "Chain: a→ba→bda→bdca"
+            },
+            {
+                "input": "words=[xbc,pcxbcf,xb,cxbc,pcxbc]",
+                "expectedOutput": "5",
+                "explanation": "Full chain of 5"
+            },
+            {
+                "input": "words=[a]",
+                "expectedOutput": "1",
+                "explanation": "Single word"
+            },
+            {
+                "input": "words=[abc,def]",
+                "expectedOutput": "1",
+                "explanation": "No chain possible"
+            }
+        ]
+    },
+    {
+        "id": "med63",
+        "title": "Interleaving String",
+        "description": "Can s3 be interleaving of s1 and s2.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isInterleave(char s1[], char s2[], char s3[]) { return false; }\nint main() { cout<<isInterleave(\"aabcc\",\"dbbca\",\"aadbbcbcac\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isInterleave(char s1[], char s2[], char s3[]) { int m=0,n=0,l=0; while(s1[m]) m++; while(s2[n]) n++; while(s3[l]) l++; if(l!=m+n) return false; bool dp[m+1][n+1]; dp[0][0]=true; for(int i=1;i<=m;i++) dp[i][0]=dp[i-1][0]&&s1[i-1]==s3[i-1]; for(int j=1;j<=n;j++) dp[0][j]=dp[0][j-1]&&s2[j-1]==s3[j-1]; for(int i=1;i<=m;i++) for(int j=1;j<=n;j++) dp[i][j]=(dp[i-1][j]&&s1[i-1]==s3[i+j-1]) || (dp[i][j-1]&&s2[j-1]==s3[i+j-1]); return dp[m][n]; }\nint main() { cout<<isInterleave(\"aabcc\",\"dbbca\",\"aadbbcbcac\"); return 0; }",
+        "explanation": {
+            "approach": "DP - can reach each position.",
+            "steps": [
+                "dp[i][j] = can form s3[0..i+j] from s1[0..i] and s2[0..j]"
+            ],
+            "complexity": "Time: O(mn), Space: O(mn)"
+        },
+        "testCases": [
+            {
+                "input": "s1=aabcc, s2=dbbca, s3=aadbbcbcac",
+                "expectedOutput": "1",
+                "explanation": "Valid interleaving"
+            },
+            {
+                "input": "s1=aabcc, s2=dbbca, s3=aadbbbaccc",
+                "expectedOutput": "0",
+                "explanation": "Not valid interleaving"
+            },
+            {
+                "input": "s1=, s2=, s3=",
+                "expectedOutput": "1",
+                "explanation": "All empty strings"
+            },
+            {
+                "input": "s1=a, s2=b, s3=ab",
+                "expectedOutput": "1",
+                "explanation": "Simple interleave"
+            }
+        ]
+    },
+    {
+        "id": "med64",
+        "title": "Distinct Subsequences",
+        "description": "Number of distinct subsequences.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint numDistinct(char s[], char t[]) { return 0; }\nint main() { cout<<numDistinct(\"rabbbit\",\"rabbit\"); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint numDistinct(char s[], char t[]) { int m=0,n=0; while(s[m]) m++; while(t[n]) n++; int dp[m+1][n+1]={}; for(int i=0;i<=m;i++) dp[i][0]=1; for(int i=1;i<=m;i++) for(int j=1;j<=n;j++) { dp[i][j]=dp[i-1][j]; if(s[i-1]==t[j-1]) dp[i][j]+=dp[i-1][j-1]; } return dp[m][n]; }\nint main() { cout<<numDistinct(\"rabbbit\",\"rabbit\"); return 0; }",
+        "explanation": {
+            "approach": "DP - ways to form t from s.",
+            "steps": [
+                "dp[i][j] = ways to form t[0..j] from s[0..i]",
+                "Include match or skip"
+            ],
+            "complexity": "Time: O(mn), Space: O(mn)"
+        },
+        "testCases": [
+            {
+                "input": "s=rabbbit, t=rabbit",
+                "expectedOutput": "3",
+                "explanation": "3 ways to choose the 'b's"
+            },
+            {
+                "input": "s=babgbag, t=bag",
+                "expectedOutput": "5",
+                "explanation": "5 distinct bags"
+            },
+            {
+                "input": "s=a, t=a",
+                "expectedOutput": "1",
+                "explanation": "Single matching char"
+            },
+            {
+                "input": "s=abc, t=d",
+                "expectedOutput": "0",
+                "explanation": "No 'd' in source"
+            }
+        ]
+    },
+    {
+        "id": "med65",
+        "title": "Best Time Cooldown",
+        "description": "Buy/sell with cooldown.",
+        "difficulty": "MEDIUM",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint maxProfit(int p[], int n) { return 0; }\nint main() { int p[]={1,2,3,0,2}; cout<<maxProfit(p,5); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint maxProfit(int p[], int n) { if(n<=1) return 0; int dp[n][2]; dp[0][0]=0; dp[0][1]=-p[0]; dp[1][0]=max(0,p[1]-p[0]); dp[1][1]=max(-p[0],-p[1]); for(int i=2;i<n;i++) { dp[i][0]=max(dp[i-1][0],dp[i-1][1]+p[i]); dp[i][1]=max(dp[i-1][1],dp[i-2][0]-p[i]); } return dp[n-1][0]; }\nint main() { int p[]={1,2,3,0,2}; cout<<maxProfit(p,5); return 0; }",
+        "explanation": {
+            "approach": "DP with hold/not hold states.",
+            "steps": [
+                "dp[i][0] = max profit not holding",
+                "dp[i][1] = max profit holding"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "prices=[1,2,3,0,2]",
+                "expectedOutput": "3",
+                "explanation": "Buy@1, sell@3, cooldown, buy@0, sell@2"
+            },
+            {
+                "input": "prices=[1]",
+                "expectedOutput": "0",
+                "explanation": "Can't complete any transaction"
+            },
+            {
+                "input": "prices=[1,2]",
+                "expectedOutput": "1",
+                "explanation": "Buy@1, sell@2"
+            },
+            {
+                "input": "prices=[2,1]",
+                "expectedOutput": "0",
+                "explanation": "Price drops, don't trade"
+            }
+        ]
+    },
+    {
+        "id": "med66",
+        "title": "Burst Balloons",
+        "description": "Max coins from bursting.",
+        "difficulty": "HARD",
+        "category": "DP",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint maxCoins(int nums[], int n) { return 0; }\nint main() { int nums[]={3,1,5,8}; cout<<maxCoins(nums,4); return 0; }",
+        "expectedOutput": "167",
+        "solution": "#include <iostream>\nusing namespace std;\nint maxCoins(int nums[], int n) { int a[n+2]; a[0]=a[n+1]=1; for(int i=0;i<n;i++) a[i+1]=nums[i]; int dp[n+2][n+2]={}; for(int len=1;len<=n;len++) for(int l=1;l<=n-len+1;l++) { int r=l+len-1; for(int k=l;k<=r;k++) dp[l][r]=max(dp[l][r],dp[l][k-1]+a[l-1]*a[k]*a[r+1]+dp[k+1][r]); } return dp[1][n]; }\nint main() { int nums[]={3,1,5,8}; cout<<maxCoins(nums,4); return 0; }",
+        "explanation": {
+            "approach": "DP - last balloon to burst.",
+            "steps": [
+                "dp[l][r] = max coins for range",
+                "Try each as last to burst"
+            ],
+            "complexity": "Time: O(n³), Space: O(n²)"
+        },
+        "testCases": [
+            {
+                "input": "nums=[3,1,5,8]",
+                "expectedOutput": "167",
+                "explanation": "Optimal burst order gives 167"
+            },
+            {
+                "input": "nums=[1,5]",
+                "expectedOutput": "10",
+                "explanation": "Burst 1 then 5: 1*1*5 + 1*5*1 = 10"
+            },
+            {
+                "input": "nums=[5]",
+                "expectedOutput": "5",
+                "explanation": "Single balloon: 1*5*1 = 5"
+            },
+            {
+                "input": "nums=[1,2,3]",
+                "expectedOutput": "12",
+                "explanation": "Optimal = 12"
+            }
+        ]
+    },
+    {
+        "id": "med67",
+        "title": "Regular Expression",
+        "description": "Simple regex matching.",
+        "difficulty": "MEDIUM",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool match(char s[], char p[]) { return false; }\nint main() { cout<<match(\"aa\",\"a.\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool match(char s[], char p[]) { if(!*p) return !*s; if(p[0]=='.' || p[0]==s[0]) return match(s+1,p+1); return false; }\nint main() { cout<<match(\"aa\",\"a.\"); return 0; }",
+        "explanation": {
+            "approach": "Recursive matching.",
+            "steps": [
+                "Match current char or .",
+                "Recurse on rest"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "s=aa, p=a.",
+                "expectedOutput": "1",
+                "explanation": ". matches second 'a'"
+            },
+            {
+                "input": "s=ab, p=..",
+                "expectedOutput": "1",
+                "explanation": "Two dots match any two chars"
+            },
+            {
+                "input": "s=abc, p=ab",
+                "expectedOutput": "0",
+                "explanation": "Pattern shorter"
+            },
+            {
+                "input": "s=a, p=a",
+                "expectedOutput": "1",
+                "explanation": "Exact match"
+            }
+        ]
+    },
+    {
+        "id": "med68",
+        "title": "Decode String",
+        "description": "Decode k[encoded_string].",
+        "difficulty": "MEDIUM",
+        "category": "Stack",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid decodeString(char s[]) {}\nint main() { decodeString(\"3[a2[c]]\"); return 0; }",
+        "expectedOutput": "accaccacc",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid decodeString(char s[]) { char res[1000]={}; int ri=0; for(int i=0;s[i];) { if(s[i]>='a'&&s[i]<='z') res[ri++]=s[i++]; else if(s[i]>='0'&&s[i]<='9') { int k=0; while(s[i]>='0'&&s[i]<='9') k=k*10+s[i++]-'0'; i++; int start=i,depth=1; while(depth>0) { if(s[i]=='[') depth++; else if(s[i]==']') depth--; i++; } char sub[100]={}; int j=0; for(int t=start;t<i-1;t++) sub[j++]=s[t]; for(int t=0;t<k;t++) { int p=0; while(sub[p]) res[ri++]=sub[p++]; } } else i++; } cout<<res; }\nint main() { decodeString(\"3[a2[c]]\"); return 0; }",
+        "explanation": {
+            "approach": "Parse number, extract substring, repeat.",
+            "steps": [
+                "Find number k",
+                "Extract content in brackets",
+                "Repeat k times"
+            ],
+            "complexity": "Time: O(n × maxK), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "s=3[a2[c]]",
+                "expectedOutput": "accaccacc",
+                "explanation": "2[c]=cc, then 3[acc]=accaccacc"
+            },
+            {
+                "input": "s=2[abc]3[cd]ef",
+                "expectedOutput": "abcabccdcdcdef",
+                "explanation": "Decode and concatenate"
+            },
+            {
+                "input": "s=abc3[cd]xyz",
+                "expectedOutput": "abccdcdcdxyz",
+                "explanation": "Mixed literal and encoded"
+            },
+            {
+                "input": "s=2[a]",
+                "expectedOutput": "aa",
+                "explanation": "Simple repeat"
+            }
+        ]
+    },
+    {
+        "id": "med69",
+        "title": "Find All Anagrams",
+        "description": "Find anagram indices.",
+        "difficulty": "MEDIUM",
+        "category": "Sliding Window",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid findAnagrams(char s[], char p[]) {}\nint main() { findAnagrams(\"cbaebabacd\",\"abc\"); return 0; }",
+        "expectedOutput": "0 6",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid findAnagrams(char s[], char p[]) { int pc[26]={}, sc[26]={}; int plen=0,slen=0; while(p[plen]) pc[p[plen++]-'a']++; while(s[slen]) slen++; for(int i=0;i<slen;i++) { sc[s[i]-'a']++; if(i>=plen) sc[s[i-plen]-'a']--; if(i>=plen-1) { bool match=true; for(int j=0;j<26;j++) if(pc[j]!=sc[j]) { match=false; break; } if(match) cout<<i-plen+1<<\" \"; } } }\nint main() { findAnagrams(\"cbaebabacd\",\"abc\"); return 0; }",
+        "explanation": {
+            "approach": "Sliding window with char counts.",
+            "steps": [
+                "Add right char, remove left char",
+                "Compare counts"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "s=cbaebabacd, p=abc",
+                "expectedOutput": "0 6",
+                "explanation": "Anagrams at index 0 (cba) and 6 (bac)"
+            },
+            {
+                "input": "s=abab, p=ab",
+                "expectedOutput": "0 1 2",
+                "explanation": "Overlapping anagrams"
+            },
+            {
+                "input": "s=aaa, p=aa",
+                "expectedOutput": "0 1",
+                "explanation": "Two overlapping 'aa's"
+            },
+            {
+                "input": "s=abc, p=xyz",
+                "expectedOutput": "",
+                "explanation": "No anagrams found"
+            }
+        ]
+    },
+    {
+        "id": "med70",
+        "title": "Permutation in String",
+        "description": "Check if s2 contains permutation of s1.",
+        "difficulty": "MEDIUM",
+        "category": "Sliding Window",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool checkInclusion(char s1[], char s2[]) { return false; }\nint main() { cout<<checkInclusion(\"ab\",\"eidbaooo\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool checkInclusion(char s1[], char s2[]) { int c1[26]={},c2[26]={}; int l1=0,l2=0; while(s1[l1]) c1[s1[l1++]-'a']++; while(s2[l2]) l2++; for(int i=0;i<l2;i++) { c2[s2[i]-'a']++; if(i>=l1) c2[s2[i-l1]-'a']--; bool match=true; for(int j=0;j<26;j++) if(c1[j]!=c2[j]) { match=false; break; } if(match) return true; } return false; }\nint main() { cout<<checkInclusion(\"ab\",\"eidbaooo\"); return 0; }",
+        "explanation": {
+            "approach": "Sliding window of s1 length.",
+            "steps": [
+                "Slide window of size len(s1)",
+                "Compare character counts"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "s1=ab, s2=eidbaooo",
+                "expectedOutput": "1",
+                "explanation": "'ba' is permutation of 'ab'"
+            },
+            {
+                "input": "s1=ab, s2=eidboaoo",
+                "expectedOutput": "0",
+                "explanation": "No permutation found"
+            },
+            {
+                "input": "s1=a, s2=a",
+                "expectedOutput": "1",
+                "explanation": "Single char match"
+            },
+            {
+                "input": "s1=abc, s2=bbbca",
+                "expectedOutput": "1",
+                "explanation": "'bca' is permutation"
+            }
+        ]
+    }
+]

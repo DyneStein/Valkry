@@ -1,0 +1,410 @@
+[
+    {
+        "id": "prac11",
+        "title": "Fahrenheit to Celsius",
+        "description": "Convert temperature.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble fToC(double f) { return 0; }\nint main() { cout<<fToC(98.6); return 0; }",
+        "expectedOutput": "37",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble fToC(double f) { return (f-32)*5/9; }\nint main() { cout<<(int)fToC(98.6); return 0; }",
+        "explanation": {
+            "approach": "C = (F-32) × 5/9.",
+            "analogy": "Temperature conversion formula.",
+            "steps": [
+                "Subtract 32",
+                "Multiply by 5/9"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "f=98.6",
+                "expectedOutput": "37",
+                "explanation": "Body temperature"
+            },
+            {
+                "input": "f=32",
+                "expectedOutput": "0",
+                "explanation": "Freezing point"
+            },
+            {
+                "input": "f=212",
+                "expectedOutput": "100",
+                "explanation": "Boiling point"
+            },
+            {
+                "input": "f=68",
+                "expectedOutput": "20",
+                "explanation": "Room temperature"
+            }
+        ]
+    },
+    {
+        "id": "prac12",
+        "title": "Celsius to Fahrenheit",
+        "description": "Convert temperature.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble cToF(double c) { return 0; }\nint main() { cout<<cToF(37); return 0; }",
+        "expectedOutput": "98.6",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble cToF(double c) { return c*9/5+32; }\nint main() { cout<<cToF(37); return 0; }",
+        "explanation": {
+            "approach": "F = C × 9/5 + 32.",
+            "analogy": "Temperature conversion formula.",
+            "steps": [
+                "Multiply by 9/5",
+                "Add 32"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "c=37",
+                "expectedOutput": "98.6",
+                "explanation": "Body temperature"
+            },
+            {
+                "input": "c=0",
+                "expectedOutput": "32",
+                "explanation": "Freezing point"
+            },
+            {
+                "input": "c=100",
+                "expectedOutput": "212",
+                "explanation": "Boiling point"
+            },
+            {
+                "input": "c=-40",
+                "expectedOutput": "-40",
+                "explanation": "Same in both scales"
+            }
+        ]
+    },
+    {
+        "id": "prac13",
+        "title": "Simple Interest",
+        "description": "Calculate simple interest.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble simpleInterest(double p, double r, double t) { return 0; }\nint main() { cout<<simpleInterest(1000,5,2); return 0; }",
+        "expectedOutput": "100",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble simpleInterest(double p, double r, double t) { return p*r*t/100; }\nint main() { cout<<simpleInterest(1000,5,2); return 0; }",
+        "explanation": {
+            "approach": "SI = P × R × T / 100.",
+            "analogy": "Interest on principal.",
+            "steps": [
+                "Multiply principal, rate, time",
+                "Divide by 100"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "P=1000, R=5, T=2",
+                "expectedOutput": "100",
+                "explanation": "1000×5×2/100 = 100"
+            },
+            {
+                "input": "P=5000, R=10, T=1",
+                "expectedOutput": "500",
+                "explanation": "5000×10×1/100 = 500"
+            },
+            {
+                "input": "P=0, R=5, T=2",
+                "expectedOutput": "0",
+                "explanation": "No principal, no interest"
+            },
+            {
+                "input": "P=2000, R=7, T=3",
+                "expectedOutput": "420",
+                "explanation": "2000×7×3/100 = 420"
+            }
+        ]
+    },
+    {
+        "id": "prac14",
+        "title": "Compound Interest",
+        "description": "Calculate compound interest.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble compoundInterest(double p, double r, int t) { return 0; }\nint main() { cout<<(int)compoundInterest(1000,10,2); return 0; }",
+        "expectedOutput": "210",
+        "solution": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble compoundInterest(double p, double r, int t) { return p*pow(1+r/100,t)-p; }\nint main() { cout<<(int)compoundInterest(1000,10,2); return 0; }",
+        "explanation": {
+            "approach": "CI = P × (1+r/100)^t - P.",
+            "analogy": "Interest on interest.",
+            "steps": [
+                "Calculate amount with compound",
+                "Subtract principal"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "P=1000, R=10, T=2",
+                "expectedOutput": "210",
+                "explanation": "1000×1.21 - 1000 = 210"
+            },
+            {
+                "input": "P=1000, R=10, T=1",
+                "expectedOutput": "100",
+                "explanation": "Same as simple for T=1"
+            },
+            {
+                "input": "P=0, R=10, T=5",
+                "expectedOutput": "0",
+                "explanation": "No principal"
+            },
+            {
+                "input": "P=1000, R=5, T=3",
+                "expectedOutput": "157",
+                "explanation": "Approx 157.625"
+            }
+        ]
+    },
+    {
+        "id": "prac15",
+        "title": "Area of Triangle",
+        "description": "Calculate triangle area.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\ndouble triangleArea(double b, double h) { return 0; }\nint main() { cout<<triangleArea(10,5); return 0; }",
+        "expectedOutput": "25",
+        "solution": "#include <iostream>\nusing namespace std;\ndouble triangleArea(double b, double h) { return 0.5*b*h; }\nint main() { cout<<triangleArea(10,5); return 0; }",
+        "explanation": {
+            "approach": "A = 0.5 × base × height.",
+            "analogy": "Half of rectangle.",
+            "steps": [
+                "Multiply base and height",
+                "Divide by 2"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "b=10, h=5",
+                "expectedOutput": "25",
+                "explanation": "0.5 × 10 × 5 = 25"
+            },
+            {
+                "input": "b=6, h=4",
+                "expectedOutput": "12",
+                "explanation": "0.5 × 6 × 4 = 12"
+            },
+            {
+                "input": "b=0, h=5",
+                "expectedOutput": "0",
+                "explanation": "Zero base"
+            },
+            {
+                "input": "b=3, h=4",
+                "expectedOutput": "6",
+                "explanation": "0.5 × 3 × 4 = 6"
+            }
+        ]
+    },
+    {
+        "id": "prac16",
+        "title": "Volume of Cube",
+        "description": "Calculate cube volume.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint cubeVolume(int a) { return 0; }\nint main() { cout<<cubeVolume(3); return 0; }",
+        "expectedOutput": "27",
+        "solution": "#include <iostream>\nusing namespace std;\nint cubeVolume(int a) { return a*a*a; }\nint main() { cout<<cubeVolume(3); return 0; }",
+        "explanation": {
+            "approach": "V = a³.",
+            "analogy": "Side cubed.",
+            "steps": [
+                "Multiply side by itself 3 times"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "a=3",
+                "expectedOutput": "27",
+                "explanation": "3³ = 27"
+            },
+            {
+                "input": "a=1",
+                "expectedOutput": "1",
+                "explanation": "1³ = 1"
+            },
+            {
+                "input": "a=10",
+                "expectedOutput": "1000",
+                "explanation": "10³ = 1000"
+            },
+            {
+                "input": "a=5",
+                "expectedOutput": "125",
+                "explanation": "5³ = 125"
+            }
+        ]
+    },
+    {
+        "id": "prac17",
+        "title": "Volume of Sphere",
+        "description": "Calculate sphere volume.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble sphereVolume(double r) { return 0; }\nint main() { cout<<fixed<<setprecision(2)<<sphereVolume(3); return 0; }",
+        "expectedOutput": "113.10",
+        "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble sphereVolume(double r) { return 4.0/3.0*3.14159*r*r*r; }\nint main() { cout<<fixed<<setprecision(2)<<sphereVolume(3); return 0; }",
+        "explanation": {
+            "approach": "V = 4/3 × π × r³.",
+            "analogy": "Sphere volume formula.",
+            "steps": [
+                "Multiply 4/3, π, and r³"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "r=3",
+                "expectedOutput": "113.10",
+                "explanation": "4/3 × π × 27"
+            },
+            {
+                "input": "r=1",
+                "expectedOutput": "4.19",
+                "explanation": "4/3 × π × 1"
+            },
+            {
+                "input": "r=0",
+                "expectedOutput": "0.00",
+                "explanation": "Zero radius"
+            },
+            {
+                "input": "r=2",
+                "expectedOutput": "33.51",
+                "explanation": "4/3 × π × 8"
+            }
+        ]
+    },
+    {
+        "id": "prac18",
+        "title": "Perimeter of Rectangle",
+        "description": "Calculate rectangle perimeter.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint rectPerimeter(int l, int w) { return 0; }\nint main() { cout<<rectPerimeter(5,3); return 0; }",
+        "expectedOutput": "16",
+        "solution": "#include <iostream>\nusing namespace std;\nint rectPerimeter(int l, int w) { return 2*(l+w); }\nint main() { cout<<rectPerimeter(5,3); return 0; }",
+        "explanation": {
+            "approach": "P = 2 × (length + width).",
+            "analogy": "Sum of all sides.",
+            "steps": [
+                "Add length and width",
+                "Multiply by 2"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "l=5, w=3",
+                "expectedOutput": "16",
+                "explanation": "2 × (5+3) = 16"
+            },
+            {
+                "input": "l=10, w=10",
+                "expectedOutput": "40",
+                "explanation": "Square perimeter"
+            },
+            {
+                "input": "l=0, w=5",
+                "expectedOutput": "10",
+                "explanation": "Degenerate rectangle"
+            },
+            {
+                "input": "l=7, w=2",
+                "expectedOutput": "18",
+                "explanation": "2 × (7+2) = 18"
+            }
+        ]
+    },
+    {
+        "id": "prac19",
+        "title": "Hypotenuse",
+        "description": "Calculate hypotenuse.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble hypotenuse(double a, double b) { return 0; }\nint main() { cout<<hypotenuse(3,4); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble hypotenuse(double a, double b) { return sqrt(a*a+b*b); }\nint main() { cout<<hypotenuse(3,4); return 0; }",
+        "explanation": {
+            "approach": "c = √(a² + b²).",
+            "analogy": "Pythagorean theorem.",
+            "steps": [
+                "Square both sides",
+                "Sum and sqrt"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "a=3, b=4",
+                "expectedOutput": "5",
+                "explanation": "3-4-5 triangle"
+            },
+            {
+                "input": "a=5, b=12",
+                "expectedOutput": "13",
+                "explanation": "5-12-13 triangle"
+            },
+            {
+                "input": "a=0, b=5",
+                "expectedOutput": "5",
+                "explanation": "One leg is zero"
+            },
+            {
+                "input": "a=8, b=15",
+                "expectedOutput": "17",
+                "explanation": "8-15-17 triangle"
+            }
+        ]
+    },
+    {
+        "id": "prac20",
+        "title": "Print Multiplication Table",
+        "description": "Print table of n.",
+        "difficulty": "EASY",
+        "category": "Practice",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid multiTable(int n) {}\nint main() { multiTable(5); return 0; }",
+        "expectedOutput": "5 10 15 20 25 30 35 40 45 50",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid multiTable(int n) { for(int i=1;i<=10;i++) cout<<n*i<<\" \"; }\nint main() { multiTable(5); return 0; }",
+        "explanation": {
+            "approach": "Print n×i for i=1 to 10.",
+            "analogy": "Multiplication table.",
+            "steps": [
+                "Loop 1 to 10",
+                "Print n × i"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=5",
+                "expectedOutput": "5 10 15 20 25 30 35 40 45 50",
+                "explanation": "Table of 5"
+            },
+            {
+                "input": "n=7",
+                "expectedOutput": "7 14 21 28 35 42 49 56 63 70",
+                "explanation": "Table of 7"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1 2 3 4 5 6 7 8 9 10",
+                "explanation": "Table of 1"
+            },
+            {
+                "input": "n=12",
+                "expectedOutput": "12 24 36 48 60 72 84 96 108 120",
+                "explanation": "Table of 12"
+            }
+        ]
+    }
+]

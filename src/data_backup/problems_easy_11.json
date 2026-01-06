@@ -1,0 +1,732 @@
+[
+    {
+        "id": "e501",
+        "title": "Number of Steps to Zero",
+        "description": "Given a non-negative integer num, return the number of steps to reduce it to zero. If the current number is even, divide it by 2. If odd, subtract 1 from it.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint numberOfSteps(int num) { return 0; }\nint main() { cout << numberOfSteps(14); return 0; }",
+        "expectedOutput": "6",
+        "testCases": [
+            {
+                "input": "14",
+                "expectedOutput": "6",
+                "explanation": "14→7→6→3→2→1→0 = 6 steps"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "Already zero"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "1→0 = 1 step"
+            },
+            {
+                "input": "8",
+                "expectedOutput": "4",
+                "explanation": "8→4→2→1→0"
+            },
+            {
+                "input": "123",
+                "expectedOutput": "12",
+                "explanation": "Multiple operations"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "2",
+                "explanation": "2→1→0"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "3",
+                "explanation": "3→2→1→0"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "5",
+                "explanation": "7→6→3→2→1→0"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "10",
+                "explanation": "Powers of 2 are fast"
+            },
+            {
+                "input": "15",
+                "expectedOutput": "7",
+                "explanation": "15→14→7→6→3→2→1→0"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint numberOfSteps(int num) {\n    int count = 0;\n    while(num > 0) {\n        if(num % 2 == 0) {\n            num /= 2;  // If even, divide by 2\n        } else {\n            num--;     // If odd, subtract 1\n        }\n        count++;\n    }\n    return count;\n}\nint main() { cout << numberOfSteps(14); return 0; }",
+        "explanation": {
+            "approach": "Follow the rules: if number is even, halve it; if odd, subtract one. Count each operation.",
+            "analogy": "Like counting steps to climb down a ladder - each rung is either a big step (divide) or small step (subtract).",
+            "steps": [
+                "Start with the given number",
+                "If even: divide by 2 (big step down)",
+                "If odd: subtract 1 (small step down)",
+                "Count each step",
+                "Stop when you reach 0"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e502",
+        "title": "Subtract Product and Sum",
+        "description": "Given an integer n, return the difference between the product of its digits and the sum of its digits.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint subtractProductAndSum(int n) { return 0; }\nint main() { cout << subtractProductAndSum(234); return 0; }",
+        "expectedOutput": "15",
+        "testCases": [
+            {
+                "input": "234",
+                "expectedOutput": "15",
+                "explanation": "2×3×4=24, 2+3+4=9, 24-9=15"
+            },
+            {
+                "input": "4421",
+                "expectedOutput": "21",
+                "explanation": "4×4×2×1=32, 4+4+2+1=11, 32-11=21"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "0",
+                "explanation": "1-1=0"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "-1",
+                "explanation": "1×0=0, 1+0=1, 0-1=-1"
+            },
+            {
+                "input": "99",
+                "expectedOutput": "63",
+                "explanation": "9×9=81, 9+9=18, 81-18=63"
+            },
+            {
+                "input": "111",
+                "expectedOutput": "-2",
+                "explanation": "1×1×1=1, 1+1+1=3, 1-3=-2"
+            },
+            {
+                "input": "123",
+                "expectedOutput": "0",
+                "explanation": "1×2×3=6, 1+2+3=6, 6-6=0"
+            },
+            {
+                "input": "999",
+                "expectedOutput": "702",
+                "explanation": "729-27=702"
+            },
+            {
+                "input": "5",
+                "expectedOutput": "0",
+                "explanation": "5-5=0"
+            },
+            {
+                "input": "25",
+                "expectedOutput": "3",
+                "explanation": "2×5=10, 2+5=7, 10-7=3"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint subtractProductAndSum(int n) {\n    int product = 1, sum = 0;\n    while(n > 0) {\n        int digit = n % 10;\n        product *= digit;\n        sum += digit;\n        n /= 10;\n    }\n    return product - sum;\n}\nint main() { cout << subtractProductAndSum(234); return 0; }",
+        "explanation": {
+            "approach": "Extract each digit one by one. Keep a running product and sum. Return their difference.",
+            "analogy": "Like taking apart a number into its pieces - multiply them together for product, add them for sum, then subtract.",
+            "steps": [
+                "Initialize product=1 and sum=0",
+                "Get last digit using n % 10",
+                "Multiply it into product, add to sum",
+                "Remove last digit using n / 10",
+                "Return product - sum"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e503",
+        "title": "Integer to Roman",
+        "description": "Convert an integer to a Roman numeral.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid intToRoman(int num) {}\nint main() { intToRoman(3); return 0; }",
+        "expectedOutput": "III",
+        "testCases": [
+            {
+                "input": "3",
+                "expectedOutput": "III",
+                "explanation": "Three I's"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "IV",
+                "explanation": "Subtraction case"
+            },
+            {
+                "input": "9",
+                "expectedOutput": "IX",
+                "explanation": "9 = 10-1"
+            },
+            {
+                "input": "58",
+                "expectedOutput": "LVIII",
+                "explanation": "L=50, V=5, III=3"
+            },
+            {
+                "input": "1994",
+                "expectedOutput": "MCMXCIV",
+                "explanation": "M=1000, CM=900, XC=90, IV=4"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "I",
+                "explanation": "Single I"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "X",
+                "explanation": "Ten"
+            },
+            {
+                "input": "50",
+                "expectedOutput": "L",
+                "explanation": "Fifty"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "C",
+                "explanation": "Hundred"
+            },
+            {
+                "input": "3999",
+                "expectedOutput": "MMMCMXCIX",
+                "explanation": "Maximum valid"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nvoid intToRoman(int num) {\n    int values[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};\n    const char* symbols[] = {\"M\", \"CM\", \"D\", \"CD\", \"C\", \"XC\", \"L\", \"XL\", \"X\", \"IX\", \"V\", \"IV\", \"I\"};\n    for(int i = 0; i < 13; i++) {\n        while(num >= values[i]) {\n            cout << symbols[i];\n            num -= values[i];\n        }\n    }\n}\nint main() { intToRoman(3); return 0; }",
+        "explanation": {
+            "approach": "Greedy approach - always use the largest Roman numeral that fits.",
+            "analogy": "Like making change with coins - use the biggest coin possible, then move to smaller ones.",
+            "steps": [
+                "Create mapping of values to Roman symbols",
+                "Start with largest value (1000=M)",
+                "While number >= current value, output symbol and subtract",
+                "Move to next smaller value"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "e504",
+        "title": "Roman to Integer",
+        "description": "Convert a Roman numeral string to an integer.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint romanToInt(char s[]) { return 0; }\nint main() { cout << romanToInt(\"III\"); return 0; }",
+        "expectedOutput": "3",
+        "testCases": [
+            {
+                "input": "III",
+                "expectedOutput": "3",
+                "explanation": "1+1+1=3"
+            },
+            {
+                "input": "IV",
+                "expectedOutput": "4",
+                "explanation": "5-1=4"
+            },
+            {
+                "input": "IX",
+                "expectedOutput": "9",
+                "explanation": "10-1=9"
+            },
+            {
+                "input": "LVIII",
+                "expectedOutput": "58",
+                "explanation": "50+5+1+1+1"
+            },
+            {
+                "input": "MCMXCIV",
+                "expectedOutput": "1994",
+                "explanation": "1000+900+90+4"
+            },
+            {
+                "input": "I",
+                "expectedOutput": "1",
+                "explanation": "Single I"
+            },
+            {
+                "input": "V",
+                "expectedOutput": "5",
+                "explanation": "Five"
+            },
+            {
+                "input": "X",
+                "expectedOutput": "10",
+                "explanation": "Ten"
+            },
+            {
+                "input": "XL",
+                "expectedOutput": "40",
+                "explanation": "50-10"
+            },
+            {
+                "input": "CD",
+                "expectedOutput": "400",
+                "explanation": "500-100"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint getValue(char c) {\n    if(c == 'M') return 1000;\n    if(c == 'D') return 500;\n    if(c == 'C') return 100;\n    if(c == 'L') return 50;\n    if(c == 'X') return 10;\n    if(c == 'V') return 5;\n    if(c == 'I') return 1;\n    return 0;\n}\nint romanToInt(char s[]) {\n    int result = 0;\n    for(int i = 0; s[i]; i++) {\n        int curr = getValue(s[i]);\n        int next = getValue(s[i+1]);\n        if(curr < next) result -= curr;\n        else result += curr;\n    }\n    return result;\n}\nint main() { cout << romanToInt(\"III\"); return 0; }",
+        "explanation": {
+            "approach": "Scan left to right. If current value is less than next, subtract it.",
+            "analogy": "Reading backwards logic - if a small letter comes before a big one, it means 'minus'.",
+            "steps": [
+                "Create function to convert each Roman letter to value",
+                "Compare current value with next value",
+                "If current < next, subtract current",
+                "Otherwise, add current to result"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e505",
+        "title": "Day of Year",
+        "description": "Given a date string in format YYYY-MM-DD, return which day of the year it is.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint dayOfYear(char date[]) { return 0; }\nint main() { cout << dayOfYear(\"2019-01-09\"); return 0; }",
+        "expectedOutput": "9",
+        "testCases": [
+            {
+                "input": "2019-01-09",
+                "expectedOutput": "9",
+                "explanation": "9th day of January"
+            },
+            {
+                "input": "2019-02-10",
+                "expectedOutput": "41",
+                "explanation": "31+10=41"
+            },
+            {
+                "input": "2020-01-01",
+                "expectedOutput": "1",
+                "explanation": "First day"
+            },
+            {
+                "input": "2020-12-31",
+                "expectedOutput": "366",
+                "explanation": "Last day of leap year"
+            },
+            {
+                "input": "2019-12-31",
+                "expectedOutput": "365",
+                "explanation": "Last day non-leap"
+            },
+            {
+                "input": "2020-02-29",
+                "expectedOutput": "60",
+                "explanation": "Leap day"
+            },
+            {
+                "input": "2019-03-01",
+                "expectedOutput": "60",
+                "explanation": "Mar 1 non-leap"
+            },
+            {
+                "input": "2020-03-01",
+                "expectedOutput": "61",
+                "explanation": "Mar 1 leap year"
+            },
+            {
+                "input": "2000-02-29",
+                "expectedOutput": "60",
+                "explanation": "Century leap year"
+            },
+            {
+                "input": "1900-02-28",
+                "expectedOutput": "59",
+                "explanation": "Century non-leap"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint dayOfYear(char date[]) {\n    int year = (date[0]-'0')*1000 + (date[1]-'0')*100 + (date[2]-'0')*10 + (date[3]-'0');\n    int month = (date[5]-'0')*10 + (date[6]-'0');\n    int day = (date[8]-'0')*10 + (date[9]-'0');\n    int daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};\n    if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) daysInMonth[2] = 29;\n    int result = day;\n    for(int i = 1; i < month; i++) result += daysInMonth[i];\n    return result;\n}\nint main() { cout << dayOfYear(\"2019-01-09\"); return 0; }",
+        "explanation": {
+            "approach": "Parse the date, sum up all days from previous months, add current day.",
+            "analogy": "Like counting pages in a book - add all pages of previous chapters plus current page.",
+            "steps": [
+                "Parse year, month, and day from string",
+                "Check if leap year",
+                "Sum days of all months before current month",
+                "Add current day number"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "e506",
+        "title": "Day of the Week",
+        "description": "Given a date, return the name of the day using Zeller's congruence.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid dayOfTheWeek(int day, int month, int year) {}\nint main() { dayOfTheWeek(31, 8, 2019); return 0; }",
+        "expectedOutput": "Saturday",
+        "testCases": [
+            {
+                "input": "31 8 2019",
+                "expectedOutput": "Saturday",
+                "explanation": "Aug 31, 2019"
+            },
+            {
+                "input": "18 7 1999",
+                "expectedOutput": "Sunday",
+                "explanation": "July 18, 1999"
+            },
+            {
+                "input": "15 8 1993",
+                "expectedOutput": "Sunday",
+                "explanation": "Aug 15, 1993"
+            },
+            {
+                "input": "1 1 2000",
+                "expectedOutput": "Saturday",
+                "explanation": "Jan 1, 2000"
+            },
+            {
+                "input": "29 2 2020",
+                "expectedOutput": "Saturday",
+                "explanation": "Leap day 2020"
+            },
+            {
+                "input": "25 12 2021",
+                "expectedOutput": "Saturday",
+                "explanation": "Christmas 2021"
+            },
+            {
+                "input": "1 1 2024",
+                "expectedOutput": "Monday",
+                "explanation": "Jan 1, 2024"
+            },
+            {
+                "input": "4 7 1776",
+                "expectedOutput": "Thursday",
+                "explanation": "July 4, 1776"
+            },
+            {
+                "input": "14 2 2024",
+                "expectedOutput": "Wednesday",
+                "explanation": "Valentine's 2024"
+            },
+            {
+                "input": "31 12 1999",
+                "expectedOutput": "Friday",
+                "explanation": "NYE 1999"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nvoid dayOfTheWeek(int d, int m, int y) {\n    const char* days[] = {\"Sunday\", \"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\", \"Saturday\"};\n    if(m < 3) { m += 12; y--; }\n    int k = y % 100;\n    int j = y / 100;\n    int h = (d + 13*(m+1)/5 + k + k/4 + j/4 - 2*j) % 7;\n    h = (h + 6) % 7;\n    cout << days[h];\n}\nint main() { dayOfTheWeek(31, 8, 2019); return 0; }",
+        "explanation": {
+            "approach": "Use Zeller's congruence - a formula that calculates day of week from any date.",
+            "analogy": "Like a magic formula that tells you what day any calendar date was/will be.",
+            "steps": [
+                "Adjust month and year for Jan/Feb",
+                "Apply Zeller's formula",
+                "Adjust result to make Sunday=0",
+                "Output corresponding day name"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "e507",
+        "title": "Cells with Odd Values",
+        "description": "Given matrix and increment operations, count cells with odd values.",
+        "difficulty": "EASY",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint oddCells(int m, int n, int indices[][2], int k) { return 0; }\nint main() { int ind[][2] = {{0,1}, {1,1}}; cout << oddCells(2, 3, ind, 2); return 0; }",
+        "expectedOutput": "6",
+        "testCases": [
+            {
+                "input": "2 3\n0 1\n1 1",
+                "expectedOutput": "6",
+                "explanation": "6 cells have odd values"
+            },
+            {
+                "input": "2 2\n0 0",
+                "expectedOutput": "2",
+                "explanation": "Row 0 and col 0 incremented"
+            },
+            {
+                "input": "1 1\n0 0",
+                "expectedOutput": "0",
+                "explanation": "Cell incremented twice = even"
+            },
+            {
+                "input": "2 2\n0 0\n1 1",
+                "expectedOutput": "0",
+                "explanation": "All cells even"
+            },
+            {
+                "input": "3 3\n0 0",
+                "expectedOutput": "5",
+                "explanation": "Row and col except center"
+            },
+            {
+                "input": "2 3\n0 0\n0 0",
+                "expectedOutput": "0",
+                "explanation": "Double increment = even"
+            },
+            {
+                "input": "1 2\n0 0",
+                "expectedOutput": "1",
+                "explanation": "One cell odd"
+            },
+            {
+                "input": "2 1\n0 0",
+                "expectedOutput": "1",
+                "explanation": "One cell odd"
+            },
+            {
+                "input": "3 3\n0 0\n1 1\n2 2",
+                "expectedOutput": "9",
+                "explanation": "Diagonal operations"
+            },
+            {
+                "input": "2 2\n0 1\n1 0",
+                "expectedOutput": "4",
+                "explanation": "All cells odd"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint oddCells(int m, int n, int indices[][2], int k) {\n    int rowCount[50] = {}, colCount[50] = {};\n    for(int i = 0; i < k; i++) {\n        rowCount[indices[i][0]]++;\n        colCount[indices[i][1]]++;\n    }\n    int count = 0;\n    for(int i = 0; i < m; i++)\n        for(int j = 0; j < n; j++)\n            if((rowCount[i] + colCount[j]) % 2 == 1) count++;\n    return count;\n}\nint main() { int ind[][2] = {{0,1}, {1,1}}; cout << oddCells(2, 3, ind, 2); return 0; }",
+        "explanation": {
+            "approach": "Track increments per row/column. Cell value = row_count + col_count.",
+            "analogy": "Like counting traffic at intersections - each car passes for every increment.",
+            "steps": [
+                "Count increments for each row and column",
+                "For each cell, its value = rowCount + colCount",
+                "If sum is odd, increment answer"
+            ],
+            "complexity": "Time: O(m×n + k), Space: O(m + n)"
+        }
+    },
+    {
+        "id": "e508",
+        "title": "Shift 2D Grid",
+        "description": "Shift all elements k times circularly.",
+        "difficulty": "EASY",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid shiftGrid(int grid[][3], int m, int n, int k) {}\nint main() { int g[][3] = {{1,2,3}, {4,5,6}, {7,8,9}}; shiftGrid(g, 3, 3, 1); return 0; }",
+        "expectedOutput": "9 1 2 3 4 5 6 7 8",
+        "testCases": [
+            {
+                "input": "3 3 1\n1 2 3\n4 5 6\n7 8 9",
+                "expectedOutput": "9 1 2 3 4 5 6 7 8",
+                "explanation": "Shift by 1"
+            },
+            {
+                "input": "3 3 0\n1 2 3\n4 5 6\n7 8 9",
+                "expectedOutput": "1 2 3 4 5 6 7 8 9",
+                "explanation": "No shift"
+            },
+            {
+                "input": "3 3 9\n1 2 3\n4 5 6\n7 8 9",
+                "expectedOutput": "1 2 3 4 5 6 7 8 9",
+                "explanation": "Full cycle"
+            },
+            {
+                "input": "1 3 1\n1 2 3",
+                "expectedOutput": "3 1 2",
+                "explanation": "Single row"
+            },
+            {
+                "input": "3 1 1\n1\n2\n3",
+                "expectedOutput": "3 1 2",
+                "explanation": "Single column"
+            },
+            {
+                "input": "2 2 1\n1 2\n3 4",
+                "expectedOutput": "4 1 2 3",
+                "explanation": "2x2 shift"
+            },
+            {
+                "input": "2 2 2\n1 2\n3 4",
+                "expectedOutput": "3 4 1 2",
+                "explanation": "Half cycle"
+            },
+            {
+                "input": "1 1 5\n1",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "2 3 3\n1 2 3\n4 5 6",
+                "expectedOutput": "4 5 6 1 2 3",
+                "explanation": "Half shift"
+            },
+            {
+                "input": "3 3 4\n1 2 3\n4 5 6\n7 8 9",
+                "expectedOutput": "6 7 8 9 1 2 3 4 5",
+                "explanation": "Shift by 4"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nvoid shiftGrid(int grid[][3], int m, int n, int k) {\n    int size = m * n;\n    k %= size;\n    int temp[size];\n    for(int i = 0; i < m; i++)\n        for(int j = 0; j < n; j++)\n            temp[i * n + j] = grid[i][j];\n    for(int i = 0; i < m; i++)\n        for(int j = 0; j < n; j++) {\n            int oldIndex = (i * n + j - k + size) % size;\n            grid[i][j] = temp[oldIndex];\n        }\n    for(int i = 0; i < m; i++)\n        for(int j = 0; j < n; j++)\n            cout << grid[i][j] << \" \";\n}\nint main() { int g[][3] = {{1,2,3}, {4,5,6}, {7,8,9}}; shiftGrid(g, 3, 3, 1); return 0; }",
+        "explanation": {
+            "approach": "Flatten 2D to 1D, circular shift, reshape back.",
+            "analogy": "Like a conveyor belt - items move forward with last wrapping to front.",
+            "steps": [
+                "Flatten grid to 1D",
+                "Calculate new position for each element",
+                "Reshape back to 2D"
+            ],
+            "complexity": "Time: O(m × n), Space: O(m × n)"
+        }
+    },
+    {
+        "id": "e509",
+        "title": "Replace Elements with Greatest",
+        "description": "Replace each element with the greatest element to its right.",
+        "difficulty": "EASY",
+        "category": "Arrays",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid replaceElements(int arr[], int n) {}\nint main() { int a[] = {17, 18, 5, 4, 6, 1}; replaceElements(a, 6); for(int i = 0; i < 6; i++) cout << a[i] << \" \"; return 0; }",
+        "expectedOutput": "18 6 6 6 1 -1",
+        "testCases": [
+            {
+                "input": "6\n17 18 5 4 6 1",
+                "expectedOutput": "18 6 6 6 1 -1",
+                "explanation": "Replace with max to right"
+            },
+            {
+                "input": "1\n5",
+                "expectedOutput": "-1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "2\n1 2",
+                "expectedOutput": "2 -1",
+                "explanation": "Two elements"
+            },
+            {
+                "input": "3\n1 2 3",
+                "expectedOutput": "3 3 -1",
+                "explanation": "Ascending"
+            },
+            {
+                "input": "3\n3 2 1",
+                "expectedOutput": "2 1 -1",
+                "explanation": "Descending"
+            },
+            {
+                "input": "4\n5 5 5 5",
+                "expectedOutput": "5 5 5 -1",
+                "explanation": "All same"
+            },
+            {
+                "input": "5\n1 10 1 10 1",
+                "expectedOutput": "10 10 10 1 -1",
+                "explanation": "Alternating"
+            },
+            {
+                "input": "3\n0 0 0",
+                "expectedOutput": "0 0 -1",
+                "explanation": "All zeros"
+            },
+            {
+                "input": "4\n100 1 2 3",
+                "expectedOutput": "3 3 3 -1",
+                "explanation": "First is max"
+            },
+            {
+                "input": "4\n1 2 3 100",
+                "expectedOutput": "100 100 100 -1",
+                "explanation": "Last is max"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nvoid replaceElements(int arr[], int n) {\n    int maxRight = -1;\n    for(int i = n - 1; i >= 0; i--) {\n        int current = arr[i];\n        arr[i] = maxRight;\n        if(current > maxRight) maxRight = current;\n    }\n}\nint main() { int a[] = {17, 18, 5, 4, 6, 1}; replaceElements(a, 6); for(int i = 0; i < 6; i++) cout << a[i] << \" \"; return 0; }",
+        "explanation": {
+            "approach": "Scan right to left, track max seen so far.",
+            "analogy": "Like looking over your shoulder - each person reports the tallest behind them.",
+            "steps": [
+                "Start from rightmost element",
+                "Track maximum value seen (starts as -1)",
+                "Replace current with max, update max if needed",
+                "Move left and repeat"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "e510",
+        "title": "Sort by Number of 1 Bits",
+        "description": "Sort array by number of 1s in binary. If tied, sort by value.",
+        "difficulty": "EASY",
+        "category": "Sorting",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid sortByBits(int arr[], int n) {}\nint main() { int a[] = {0, 1, 2, 3, 4, 5, 6, 7, 8}; sortByBits(a, 9); for(int i = 0; i < 9; i++) cout << a[i] << \" \"; return 0; }",
+        "expectedOutput": "0 1 2 4 8 3 5 6 7",
+        "testCases": [
+            {
+                "input": "9\n0 1 2 3 4 5 6 7 8",
+                "expectedOutput": "0 1 2 4 8 3 5 6 7",
+                "explanation": "Sorted by bit count"
+            },
+            {
+                "input": "3\n1 2 3",
+                "expectedOutput": "1 2 3",
+                "explanation": "1-bit, 1-bit, 2-bit"
+            },
+            {
+                "input": "4\n7 8 15 16",
+                "expectedOutput": "8 16 7 15",
+                "explanation": "1,1,3,4 bits"
+            },
+            {
+                "input": "1\n5",
+                "expectedOutput": "5",
+                "explanation": "Single element"
+            },
+            {
+                "input": "2\n0 0",
+                "expectedOutput": "0 0",
+                "explanation": "Same values"
+            },
+            {
+                "input": "3\n3 5 6",
+                "expectedOutput": "3 5 6",
+                "explanation": "All 2 bits, sort by value"
+            },
+            {
+                "input": "5\n1 2 4 8 16",
+                "expectedOutput": "1 2 4 8 16",
+                "explanation": "All single bit"
+            },
+            {
+                "input": "4\n7 7 7 7",
+                "expectedOutput": "7 7 7 7",
+                "explanation": "All same"
+            },
+            {
+                "input": "3\n1023 511 255",
+                "expectedOutput": "255 511 1023",
+                "explanation": "High bit counts"
+            },
+            {
+                "input": "4\n0 15 7 3",
+                "expectedOutput": "0 3 7 15",
+                "explanation": "0,2,3,4 bits"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint countBits(int n) {\n    int count = 0;\n    while(n) { count += n & 1; n >>= 1; }\n    return count;\n}\nvoid sortByBits(int arr[], int n) {\n    for(int i = 0; i < n - 1; i++) {\n        for(int j = 0; j < n - i - 1; j++) {\n            int bits1 = countBits(arr[j]);\n            int bits2 = countBits(arr[j + 1]);\n            if(bits1 > bits2 || (bits1 == bits2 && arr[j] > arr[j + 1])) {\n                int temp = arr[j];\n                arr[j] = arr[j + 1];\n                arr[j + 1] = temp;\n            }\n        }\n    }\n}\nint main() { int a[] = {0, 1, 2, 3, 4, 5, 6, 7, 8}; sortByBits(a, 9); for(int i = 0; i < 9; i++) cout << a[i] << \" \"; return 0; }",
+        "explanation": {
+            "approach": "Count 1 bits in each number. Sort by bit count, then by value.",
+            "analogy": "Like sorting students by test score, then by name if tied.",
+            "steps": [
+                "Create function to count 1 bits",
+                "Use sorting algorithm",
+                "Compare by bit count first",
+                "If equal, compare by value"
+            ],
+            "complexity": "Time: O(n² × log(max)), Space: O(1)"
+        }
+    }
+]

@@ -1,0 +1,403 @@
+[
+    {
+        "id": "logic1",
+        "title": "Josephus Problem",
+        "description": "Find the position of the last survivor in elimination game.",
+        "difficulty": "MEDIUM",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint josephus(int n, int k) { return 0; }\nint main() { cout<<josephus(5,2); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint josephus(int n, int k) { if(n==1) return 0; return (josephus(n-1,k)+k)%n; }\nint main() { cout<<josephus(5,2); return 0; }",
+        "explanation": {
+            "approach": "Recursive formula: f(n,k) = (f(n-1,k)+k) mod n.",
+            "steps": [
+                "Base: 1 person at position 0",
+                "Recurse with shifted positions"
+            ],
+            "complexity": "Time: O(n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=5, k=2",
+                "expectedOutput": "2",
+                "explanation": "Position 2 survives (0-indexed)"
+            },
+            {
+                "input": "n=7, k=3",
+                "expectedOutput": "3",
+                "explanation": "Every 3rd eliminated"
+            },
+            {
+                "input": "n=1, k=1",
+                "expectedOutput": "0",
+                "explanation": "Single person survives"
+            },
+            {
+                "input": "n=10, k=1",
+                "expectedOutput": "9",
+                "explanation": "k=1 means last survives"
+            }
+        ]
+    },
+    {
+        "id": "logic2",
+        "title": "Tower of Hanoi Steps",
+        "description": "Calculate minimum moves to solve Tower of Hanoi.",
+        "difficulty": "EASY",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint hanoiMoves(int n) { return 0; }\nint main() { cout<<hanoiMoves(3); return 0; }",
+        "expectedOutput": "7",
+        "solution": "#include <iostream>\nusing namespace std;\nint hanoiMoves(int n) { return (1<<n)-1; }\nint main() { cout<<hanoiMoves(3); return 0; }",
+        "explanation": {
+            "approach": "Formula: 2^n - 1 moves needed.",
+            "steps": [
+                "Each disk doubles complexity",
+                "Total = 2^n - 1"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=3",
+                "expectedOutput": "7",
+                "explanation": "2^3-1=7 moves"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Single disk = 1 move"
+            },
+            {
+                "input": "n=4",
+                "expectedOutput": "15",
+                "explanation": "2^4-1=15"
+            },
+            {
+                "input": "n=5",
+                "expectedOutput": "31",
+                "explanation": "2^5-1=31"
+            }
+        ]
+    },
+    {
+        "id": "logic3",
+        "title": "Egg Drop Problem",
+        "description": "Find minimum tries needed with 2 eggs for n floors.",
+        "difficulty": "MEDIUM",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint eggDrop(int n) { return 0; }\nint main() { cout<<eggDrop(10); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint eggDrop(int n) { int tries=1; while(tries*(tries+1)/2<n) tries++; return tries; }\nint main() { cout<<eggDrop(10); return 0; }",
+        "explanation": {
+            "approach": "Find k where k(k+1)/2 >= n floors.",
+            "steps": [
+                "With k tries, can cover k(k+1)/2 floors",
+                "Find smallest valid k"
+            ],
+            "complexity": "Time: O(√n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "4",
+                "explanation": "4*5/2=10 floors covered"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "14",
+                "explanation": "14*15/2=105>=100"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "1 floor = 1 try"
+            },
+            {
+                "input": "n=36",
+                "expectedOutput": "8",
+                "explanation": "8*9/2=36"
+            }
+        ]
+    },
+    {
+        "id": "logic4",
+        "title": "Water Jug Problem",
+        "description": "Check if target liters can be measured with two jugs.",
+        "difficulty": "MEDIUM",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool canMeasure(int x, int y, int z) { return false; }\nint main() { cout<<canMeasure(3,5,4); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) { return b==0?a:gcd(b,a%b); }\nbool canMeasure(int x, int y, int z) { return z<=x+y && z%gcd(x,y)==0; }\nint main() { cout<<canMeasure(3,5,4); return 0; }",
+        "explanation": {
+            "approach": "Possible if z divides gcd(x,y) and z <= x+y.",
+            "steps": [
+                "Check z <= total capacity",
+                "Check z divisible by gcd"
+            ],
+            "complexity": "Time: O(log min(x,y)), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "x=3, y=5, z=4",
+                "expectedOutput": "1",
+                "explanation": "gcd(3,5)=1, 4%1=0"
+            },
+            {
+                "input": "x=2, y=6, z=5",
+                "expectedOutput": "0",
+                "explanation": "gcd=2, 5%2≠0"
+            },
+            {
+                "input": "x=1, y=1, z=2",
+                "expectedOutput": "1",
+                "explanation": "Use both jugs"
+            },
+            {
+                "input": "x=3, y=5, z=9",
+                "expectedOutput": "0",
+                "explanation": "z > x+y"
+            }
+        ]
+    },
+    {
+        "id": "logic5",
+        "title": "Monty Hall Problem",
+        "description": "Should you switch doors in the Monty Hall game?",
+        "difficulty": "EASY",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid montyHall() {}\nint main() { montyHall(); return 0; }",
+        "expectedOutput": "Switch",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid montyHall() { cout<<\"Switch\"; }\nint main() { montyHall(); return 0; }",
+        "explanation": {
+            "approach": "Switching wins 2/3 of the time.",
+            "steps": [
+                "Initial choice: 1/3 chance",
+                "Switching: 2/3 chance",
+                "Always switch!"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "Standard game",
+                "expectedOutput": "Switch",
+                "explanation": "Switch wins 2/3"
+            },
+            {
+                "input": "3 doors, 1 prize",
+                "expectedOutput": "Switch",
+                "explanation": "Classic Monty Hall"
+            },
+            {
+                "input": "Host reveals goat",
+                "expectedOutput": "Switch",
+                "explanation": "Still 2/3 by switching"
+            },
+            {
+                "input": "Any scenario",
+                "expectedOutput": "Switch",
+                "explanation": "Math always favors switch"
+            }
+        ]
+    },
+    {
+        "id": "logic6",
+        "title": "Birthday Paradox",
+        "description": "Find minimum people for >50% chance of shared birthday.",
+        "difficulty": "EASY",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint birthdayParadox() { return 0; }\nint main() { cout<<birthdayParadox(); return 0; }",
+        "expectedOutput": "23",
+        "solution": "#include <iostream>\nusing namespace std;\nint birthdayParadox() { double p=1; int n=0; while(p>0.5) { n++; p*=(365.0-n+1)/365; } return n; }\nint main() { cout<<birthdayParadox(); return 0; }",
+        "explanation": {
+            "approach": "Calculate probability of all different birthdays.",
+            "steps": [
+                "P(all different) = 365/365 × 364/365 × ...",
+                "Find when P < 0.5"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "50% threshold",
+                "expectedOutput": "23",
+                "explanation": "23 people = >50% match"
+            },
+            {
+                "input": "Standard calculation",
+                "expectedOutput": "23",
+                "explanation": "Famous result"
+            },
+            {
+                "input": "365 days",
+                "expectedOutput": "23",
+                "explanation": "Counterintuitive but true"
+            },
+            {
+                "input": "Probability math",
+                "expectedOutput": "23",
+                "explanation": "Birthday paradox constant"
+            }
+        ]
+    },
+    {
+        "id": "logic7",
+        "title": "Prisoner Hat Problem",
+        "description": "Maximum prisoners saved with optimal strategy.",
+        "difficulty": "EASY",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint maxSaves(int n) { return 0; }\nint main() { cout<<maxSaves(10); return 0; }",
+        "expectedOutput": "9",
+        "solution": "#include <iostream>\nusing namespace std;\nint maxSaves(int n) { return n-1; }\nint main() { cout<<maxSaves(10); return 0; }",
+        "explanation": {
+            "approach": "First person encodes parity, guarantees n-1 saves.",
+            "steps": [
+                "First says parity of black hats",
+                "Others deduce their color"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=10",
+                "expectedOutput": "9",
+                "explanation": "9 guaranteed saves"
+            },
+            {
+                "input": "n=100",
+                "expectedOutput": "99",
+                "explanation": "First sacrifices for info"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "1",
+                "explanation": "First tells second"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "0",
+                "explanation": "No info possible with 1"
+            }
+        ]
+    },
+    {
+        "id": "logic8",
+        "title": "Bridge Crossing Problem",
+        "description": "Minimum time for 4 people to cross bridge at night.",
+        "difficulty": "MEDIUM",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint bridgeCrossing(int a, int b, int c, int d) { return 0; }\nint main() { cout<<bridgeCrossing(1,2,5,10); return 0; }",
+        "expectedOutput": "17",
+        "solution": "#include <iostream>\nusing namespace std;\nint bridgeCrossing(int a, int b, int c, int d) { int t[4]={a,b,c,d}; for(int i=0;i<4;i++) for(int j=i+1;j<4;j++) if(t[i]>t[j]) swap(t[i],t[j]); return min(2*t[1]+t[0]+t[3], t[0]+2*t[1]+t[2]+t[3]); }\nint main() { cout<<bridgeCrossing(1,2,5,10); return 0; }",
+        "explanation": {
+            "approach": "Compare: fast shuttles vs pair slowest together.",
+            "steps": [
+                "Strategy 1: fastest shuttles everyone",
+                "Strategy 2: pair slowest"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "1,2,5,10",
+                "expectedOutput": "17",
+                "explanation": "Optimal: 1+2 go, 1 back, 5+10 go, 2 back, 1+2 go"
+            },
+            {
+                "input": "1,2,3,4",
+                "expectedOutput": "10",
+                "explanation": "Smaller difference"
+            },
+            {
+                "input": "1,1,1,1",
+                "expectedOutput": "4",
+                "explanation": "All same speed"
+            },
+            {
+                "input": "1,5,5,5",
+                "expectedOutput": "16",
+                "explanation": "One fast, three slow"
+            }
+        ]
+    },
+    {
+        "id": "logic9",
+        "title": "Fake Ball Weighing",
+        "description": "Minimum weighings to find one fake ball among n.",
+        "difficulty": "EASY",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint minWeighings(int n) { return 0; }\nint main() { cout<<minWeighings(9); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint minWeighings(int n) { int w=0; while(n>1) { n=(n+2)/3; w++; } return w; }\nint main() { cout<<minWeighings(9); return 0; }",
+        "explanation": {
+            "approach": "Divide into 3 groups, eliminate 2/3 each weighing.",
+            "steps": [
+                "Each weighing divides by 3",
+                "log₃(n) weighings needed"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=9",
+                "expectedOutput": "2",
+                "explanation": "9->3->1 in 2 weighings"
+            },
+            {
+                "input": "n=27",
+                "expectedOutput": "3",
+                "explanation": "27->9->3->1"
+            },
+            {
+                "input": "n=3",
+                "expectedOutput": "1",
+                "explanation": "One weighing enough"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "0",
+                "explanation": "Only one ball, no weighing"
+            }
+        ]
+    },
+    {
+        "id": "logic10",
+        "title": "Chessboard Rice Problem",
+        "description": "Total rice grains on chessboard (doubling each square).",
+        "difficulty": "EASY",
+        "category": "Logic",
+        "starterCode": "#include <iostream>\nusing namespace std;\nlong long totalRice(int n) { return 0; }\nint main() { cout<<totalRice(8); return 0; }",
+        "expectedOutput": "255",
+        "solution": "#include <iostream>\nusing namespace std;\nlong long totalRice(int n) { return (1LL<<n)-1; }\nint main() { cout<<totalRice(8); return 0; }",
+        "explanation": {
+            "approach": "Sum of geometric series: 2^n - 1.",
+            "steps": [
+                "Each square doubles previous",
+                "Total = 2^n - 1"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "n=8",
+                "expectedOutput": "255",
+                "explanation": "2^8-1=255"
+            },
+            {
+                "input": "n=64",
+                "expectedOutput": "18446744073709551615",
+                "explanation": "Full chessboard"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Just first square"
+            },
+            {
+                "input": "n=10",
+                "expectedOutput": "1023",
+                "explanation": "2^10-1"
+            }
+        ]
+    }
+]

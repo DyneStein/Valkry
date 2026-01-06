@@ -5,7 +5,7 @@
         "description": "Calculate x^n.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint power(int x, int n) { return 0; }\nint main() { cout<<power(2,10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint power(int x, int n) {\n    return 0;\n}\n\nint main() {\n    int x;\n    cin >> x;\n    int n;\n    cin >> n;\n    cout << power(x, n);\n    return 0;\n}\n",
         "expectedOutput": "1024",
         "testCases": [
             {
@@ -76,7 +76,7 @@
         "description": "Is n a perfect square.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPerfectSquare(int n) { return false; }\nint main() { cout<<isPerfectSquare(16); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPerfectSquare(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isPerfectSquare(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -147,7 +147,7 @@
         "description": "Is year a leap year.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isLeapYear(int y) { return false; }\nint main() { cout<<isLeapYear(2024); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isLeapYear(int y) {\n    return false;\n}\n\nint main() {\n    int y;\n    cin >> y;\n    cout << isLeapYear(y);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -217,7 +217,7 @@
         "description": "Number of days in month.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint daysInMonth(int m, int y) { return 0; }\nint main() { cout<<daysInMonth(2,2024); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint daysInMonth(int m, int y) {\n    return 0;\n}\n\nint main() {\n    int m;\n    cin >> m;\n    int y;\n    cin >> y;\n    cout << daysInMonth(m, y);\n    return 0;\n}\n",
         "expectedOutput": "29",
         "testCases": [
             {
@@ -288,7 +288,7 @@
         "description": "Sum 1 to n.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumN(int n) { return 0; }\nint main() { cout<<sumN(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sumN(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumN(n);\n    return 0;\n}\n",
         "expectedOutput": "55",
         "testCases": [
             {
@@ -358,7 +358,7 @@
         "description": "Sum 1² to n².",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumSquares(int n) { return 0; }\nint main() { cout<<sumSquares(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sumSquares(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumSquares(n);\n    return 0;\n}\n",
         "expectedOutput": "55",
         "testCases": [
             {
@@ -428,7 +428,7 @@
         "description": "Sum 1³ to n³.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumCubes(int n) { return 0; }\nint main() { cout<<sumCubes(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sumCubes(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumCubes(n);\n    return 0;\n}\n",
         "expectedOutput": "225",
         "testCases": [
             {
@@ -499,7 +499,7 @@
         "description": "Check if count of chars is even.",
         "difficulty": "EASY",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid evenOdd(char s[]) {}\nint main() { evenOdd(\"hello\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid evenOdd(vector<int>& s) {\n    // TODO\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    evenOdd(s);\n    return 0;\n}\n",
         "expectedOutput": "Odd",
         "testCases": [
             {
@@ -570,7 +570,7 @@
         "description": "Toggle each character case.",
         "difficulty": "EASY",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid toggleCase(char s[]) {}\nint main() { char s[]=\"Hello World\"; toggleCase(s); cout<<s; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid toggleCase(vector<int>& s) {\n    // TODO\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    toggleCase(s);\n    return 0;\n}\n",
         "expectedOutput": "hELLO wORLD",
         "testCases": [
             {
@@ -641,7 +641,7 @@
         "description": "Remove all spaces.",
         "difficulty": "EASY",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid removeSpaces(char s[]) {}\nint main() { char s[]=\"hello world test\"; removeSpaces(s); cout<<s; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid removeSpaces(vector<int>& s) {\n    // TODO\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    removeSpaces(s);\n    return 0;\n}\n",
         "expectedOutput": "helloworldtest",
         "testCases": [
             {
@@ -773,7 +773,10 @@
                 "Check each char if A-Z"
             ],
             "complexity": "Time: O(n), Space: O(1)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     },
     {
         "id": "easy60",
@@ -781,7 +784,7 @@
         "description": "Count consonants in string.",
         "difficulty": "EASY",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countConsonants(char s[]) { return 0; }\nint main() { cout<<countConsonants(\"hello world\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countConsonants(vector<int>& s) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << countConsonants(s);\n    return 0;\n}\n",
         "expectedOutput": "7",
         "testCases": [
             {

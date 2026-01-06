@@ -5,7 +5,7 @@
         "description": "Largest square of 1s.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint maximalSquare(int m[][5], int r, int c) { return 0; }\nint main() { int m[][5]={{1,0,1,0,0},{1,0,1,1,1},{1,1,1,1,1},{1,0,0,1,0}}; cout<<maximalSquare(m,4,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint maximalSquare(vector<vector<int>>& m, int r, int c) {\n    return 0;\n}\n\nint main() {\n    int m_rows, m_cols;\n    cin >> m_rows >> m_cols;\n    vector<vector<int>> m(m_rows, vector<int>(m_cols));\n    for (int i = 0; i < m_rows; i++)\n        for (int j = 0; j < m_cols; j++)\n            cin >> m[i][j];\n    int r;\n    cin >> r;\n    int c;\n    cin >> c;\n    cout << maximalSquare(m, r, c);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "solution": "#include <iostream>\nusing namespace std;\nint maximalSquare(int m[][5], int r, int c) { int dp[r][c], mx=0; for(int i=0;i<r;i++) for(int j=0;j<c;j++) { if(i==0||j==0) dp[i][j]=m[i][j]; else if(m[i][j]==1) dp[i][j]=1+min(dp[i-1][j],min(dp[i][j-1],dp[i-1][j-1])); else dp[i][j]=0; mx=max(mx,dp[i][j]); } return mx*mx; }\nint main() { int m[][5]={{1,0,1,0,0},{1,0,1,1,1},{1,1,1,1,1},{1,0,0,1,0}}; cout<<maximalSquare(m,4,5); return 0; }",
         "explanation": {
@@ -45,7 +45,7 @@
         "description": "Longest word chain.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint longestStrChain(char words[][10], int n) { return 0; }\nint main() { char words[][10]={\"a\",\"b\",\"ba\",\"bca\",\"bda\",\"bdca\"}; cout<<longestStrChain(words,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint longestStrChain(vector<vector<int>>& words, int n) {\n    return 0;\n}\n\nint main() {\n    int words_rows, words_cols;\n    cin >> words_rows >> words_cols;\n    vector<vector<int>> words(words_rows, vector<int>(words_cols));\n    for (int i = 0; i < words_rows; i++)\n        for (int j = 0; j < words_cols; j++)\n            cin >> words[i][j];\n    int n;\n    cin >> n;\n    cout << longestStrChain(words, n);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "solution": "#include <iostream>\nusing namespace std;\nint len(char s[]) { int l=0; while(s[l]) l++; return l; }\nbool isPred(char a[], char b[]) { int la=len(a),lb=len(b); if(lb!=la+1) return false; int i=0,j=0; while(b[j]) { if(a[i]==b[j]) i++; j++; } return i==la; }\nint longestStrChain(char words[][10], int n) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(len(words[j])>len(words[j+1])) { char t[10]; int k=0; while(words[j][k]) { t[k]=words[j][k]; k++; } t[k]=0; k=0; while(words[j+1][k]) { words[j][k]=words[j+1][k]; k++; } words[j][k]=0; k=0; while(t[k]) { words[j+1][k]=t[k]; k++; } words[j+1][k]=0; } int dp[n]; for(int i=0;i<n;i++) dp[i]=1; for(int i=1;i<n;i++) for(int j=0;j<i;j++) if(isPred(words[j],words[i])) dp[i]=max(dp[i],dp[j]+1); int mx=0; for(int i=0;i<n;i++) mx=max(mx,dp[i]); return mx; }\nint main() { char words[][10]={\"a\",\"b\",\"ba\",\"bca\",\"bda\",\"bdca\"}; cout<<longestStrChain(words,6); return 0; }",
         "explanation": {
@@ -85,7 +85,7 @@
         "description": "Can s3 be interleaving of s1 and s2.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isInterleave(char s1[], char s2[], char s3[]) { return false; }\nint main() { cout<<isInterleave(\"aabcc\",\"dbbca\",\"aadbbcbcac\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isInterleave(vector<int>& s1, vector<int>& s2, vector<int>& s3) {\n    return false;\n}\n\nint main() {\n    int s1_size;\n    cin >> s1_size;\n    vector<int> s1(s1_size);\n    for (int i = 0; i < s1_size; i++) cin >> s1[i];\n    int s2_size;\n    cin >> s2_size;\n    vector<int> s2(s2_size);\n    for (int i = 0; i < s2_size; i++) cin >> s2[i];\n    int s3_size;\n    cin >> s3_size;\n    vector<int> s3(s3_size);\n    for (int i = 0; i < s3_size; i++) cin >> s3[i];\n    cout << isInterleave(s1, s2, s3);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isInterleave(char s1[], char s2[], char s3[]) { int m=0,n=0,l=0; while(s1[m]) m++; while(s2[n]) n++; while(s3[l]) l++; if(l!=m+n) return false; bool dp[m+1][n+1]; dp[0][0]=true; for(int i=1;i<=m;i++) dp[i][0]=dp[i-1][0]&&s1[i-1]==s3[i-1]; for(int j=1;j<=n;j++) dp[0][j]=dp[0][j-1]&&s2[j-1]==s3[j-1]; for(int i=1;i<=m;i++) for(int j=1;j<=n;j++) dp[i][j]=(dp[i-1][j]&&s1[i-1]==s3[i+j-1]) || (dp[i][j-1]&&s2[j-1]==s3[i+j-1]); return dp[m][n]; }\nint main() { cout<<isInterleave(\"aabcc\",\"dbbca\",\"aadbbcbcac\"); return 0; }",
         "explanation": {
@@ -124,7 +124,7 @@
         "description": "Number of distinct subsequences.",
         "difficulty": "HARD",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint numDistinct(char s[], char t[]) { return 0; }\nint main() { cout<<numDistinct(\"rabbbit\",\"rabbit\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint numDistinct(vector<int>& s, vector<int>& t) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    int t_size;\n    cin >> t_size;\n    vector<int> t(t_size);\n    for (int i = 0; i < t_size; i++) cin >> t[i];\n    cout << numDistinct(s, t);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint numDistinct(char s[], char t[]) { int m=0,n=0; while(s[m]) m++; while(t[n]) n++; int dp[m+1][n+1]={}; for(int i=0;i<=m;i++) dp[i][0]=1; for(int i=1;i<=m;i++) for(int j=1;j<=n;j++) { dp[i][j]=dp[i-1][j]; if(s[i-1]==t[j-1]) dp[i][j]+=dp[i-1][j-1]; } return dp[m][n]; }\nint main() { cout<<numDistinct(\"rabbbit\",\"rabbit\"); return 0; }",
         "explanation": {
@@ -164,7 +164,7 @@
         "description": "Buy/sell with cooldown.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint maxProfit(int p[], int n) { return 0; }\nint main() { int p[]={1,2,3,0,2}; cout<<maxProfit(p,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint maxProfit(vector<int>& p, int n) {\n    return 0;\n}\n\nint main() {\n    int p_size;\n    cin >> p_size;\n    vector<int> p(p_size);\n    for (int i = 0; i < p_size; i++) cin >> p[i];\n    int n;\n    cin >> n;\n    cout << maxProfit(p, n);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint maxProfit(int p[], int n) { if(n<=1) return 0; int dp[n][2]; dp[0][0]=0; dp[0][1]=-p[0]; dp[1][0]=max(0,p[1]-p[0]); dp[1][1]=max(-p[0],-p[1]); for(int i=2;i<n;i++) { dp[i][0]=max(dp[i-1][0],dp[i-1][1]+p[i]); dp[i][1]=max(dp[i-1][1],dp[i-2][0]-p[i]); } return dp[n-1][0]; }\nint main() { int p[]={1,2,3,0,2}; cout<<maxProfit(p,5); return 0; }",
         "explanation": {
@@ -204,7 +204,7 @@
         "description": "Max coins from bursting.",
         "difficulty": "HARD",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint maxCoins(int nums[], int n) { return 0; }\nint main() { int nums[]={3,1,5,8}; cout<<maxCoins(nums,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint maxCoins(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << maxCoins(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "167",
         "solution": "#include <iostream>\nusing namespace std;\nint maxCoins(int nums[], int n) { int a[n+2]; a[0]=a[n+1]=1; for(int i=0;i<n;i++) a[i+1]=nums[i]; int dp[n+2][n+2]={}; for(int len=1;len<=n;len++) for(int l=1;l<=n-len+1;l++) { int r=l+len-1; for(int k=l;k<=r;k++) dp[l][r]=max(dp[l][r],dp[l][k-1]+a[l-1]*a[k]*a[r+1]+dp[k+1][r]); } return dp[1][n]; }\nint main() { int nums[]={3,1,5,8}; cout<<maxCoins(nums,4); return 0; }",
         "explanation": {
@@ -244,7 +244,7 @@
         "description": "Simple regex matching.",
         "difficulty": "MEDIUM",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool match(char s[], char p[]) { return false; }\nint main() { cout<<match(\"aa\",\"a.\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool match(vector<int>& s, vector<int>& p) {\n    return false;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    int p_size;\n    cin >> p_size;\n    vector<int> p(p_size);\n    for (int i = 0; i < p_size; i++) cin >> p[i];\n    cout << match(s, p);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool match(char s[], char p[]) { if(!*p) return !*s; if(p[0]=='.' || p[0]==s[0]) return match(s+1,p+1); return false; }\nint main() { cout<<match(\"aa\",\"a.\"); return 0; }",
         "explanation": {
@@ -284,7 +284,7 @@
         "description": "Decode k[encoded_string].",
         "difficulty": "MEDIUM",
         "category": "Stack",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid decodeString(char s[]) {}\nint main() { decodeString(\"3[a2[c]]\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid decodeString(vector<int>& s) {\n    // TODO\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    decodeString(s);\n    return 0;\n}\n",
         "expectedOutput": "accaccacc",
         "solution": "#include <iostream>\nusing namespace std;\nvoid decodeString(char s[]) { char res[1000]={}; int ri=0; for(int i=0;s[i];) { if(s[i]>='a'&&s[i]<='z') res[ri++]=s[i++]; else if(s[i]>='0'&&s[i]<='9') { int k=0; while(s[i]>='0'&&s[i]<='9') k=k*10+s[i++]-'0'; i++; int start=i,depth=1; while(depth>0) { if(s[i]=='[') depth++; else if(s[i]==']') depth--; i++; } char sub[100]={}; int j=0; for(int t=start;t<i-1;t++) sub[j++]=s[t]; for(int t=0;t<k;t++) { int p=0; while(sub[p]) res[ri++]=sub[p++]; } } else i++; } cout<<res; }\nint main() { decodeString(\"3[a2[c]]\"); return 0; }",
         "explanation": {
@@ -325,7 +325,7 @@
         "description": "Find anagram indices.",
         "difficulty": "MEDIUM",
         "category": "Sliding Window",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid findAnagrams(char s[], char p[]) {}\nint main() { findAnagrams(\"cbaebabacd\",\"abc\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid findAnagrams(vector<int>& s, vector<int>& p) {\n    // TODO\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    int p_size;\n    cin >> p_size;\n    vector<int> p(p_size);\n    for (int i = 0; i < p_size; i++) cin >> p[i];\n    findAnagrams(s, p);\n    return 0;\n}\n",
         "expectedOutput": "0 6",
         "solution": "#include <iostream>\nusing namespace std;\nvoid findAnagrams(char s[], char p[]) { int pc[26]={}, sc[26]={}; int plen=0,slen=0; while(p[plen]) pc[p[plen++]-'a']++; while(s[slen]) slen++; for(int i=0;i<slen;i++) { sc[s[i]-'a']++; if(i>=plen) sc[s[i-plen]-'a']--; if(i>=plen-1) { bool match=true; for(int j=0;j<26;j++) if(pc[j]!=sc[j]) { match=false; break; } if(match) cout<<i-plen+1<<\" \"; } } }\nint main() { findAnagrams(\"cbaebabacd\",\"abc\"); return 0; }",
         "explanation": {
@@ -365,7 +365,7 @@
         "description": "Check if s2 contains permutation of s1.",
         "difficulty": "MEDIUM",
         "category": "Sliding Window",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool checkInclusion(char s1[], char s2[]) { return false; }\nint main() { cout<<checkInclusion(\"ab\",\"eidbaooo\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool checkInclusion(vector<int>& s1, vector<int>& s2) {\n    return false;\n}\n\nint main() {\n    int s1_size;\n    cin >> s1_size;\n    vector<int> s1(s1_size);\n    for (int i = 0; i < s1_size; i++) cin >> s1[i];\n    int s2_size;\n    cin >> s2_size;\n    vector<int> s2(s2_size);\n    for (int i = 0; i < s2_size; i++) cin >> s2[i];\n    cout << checkInclusion(s1, s2);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool checkInclusion(char s1[], char s2[]) { int c1[26]={},c2[26]={}; int l1=0,l2=0; while(s1[l1]) c1[s1[l1++]-'a']++; while(s2[l2]) l2++; for(int i=0;i<l2;i++) { c2[s2[i]-'a']++; if(i>=l1) c2[s2[i-l1]-'a']--; bool match=true; for(int j=0;j<26;j++) if(c1[j]!=c2[j]) { match=false; break; } if(match) return true; } return false; }\nint main() { cout<<checkInclusion(\"ab\",\"eidbaooo\"); return 0; }",
         "explanation": {

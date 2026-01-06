@@ -5,7 +5,7 @@
         "description": "T(n) = T(n-1)+T(n-2)+T(n-3).",
         "difficulty": "EASY",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint tribonacci(int n) { return 0; }\nint main() { cout<<tribonacci(7); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint tribonacci(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << tribonacci(n);\n    return 0;\n}\n",
         "expectedOutput": "13",
         "solution": "#include <iostream>\nusing namespace std;\nint tribonacci(int n) { if(n==0) return 0; if(n<=2) return 1; return tribonacci(n-1)+tribonacci(n-2)+tribonacci(n-3); }\nint main() { cout<<tribonacci(7); return 0; }",
         "explanation": {
@@ -46,7 +46,7 @@
         "description": "Generate all subsets recursively.",
         "difficulty": "MEDIUM",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid powerSet(int a[], int n) {}\nint main() { int a[]={1,2}; powerSet(a,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid powerSet(vector<int>& a, int n) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    powerSet(a, n);\n    return 0;\n}\n",
         "expectedOutput": "{} {1} {1 2} {2}",
         "solution": "#include <iostream>\nusing namespace std;\nvoid gen(int a[], int n, int i, int cur[], int k) { if(i==n) { cout<<\"{\"; for(int j=0;j<k;j++) cout<<(j?\" \":\"\")<<cur[j]; cout<<\"} \"; return; } gen(a,n,i+1,cur,k); cur[k]=a[i]; gen(a,n,i+1,cur,k+1); }\nvoid powerSet(int a[], int n) { int cur[10]; gen(a,n,0,cur,0); }\nint main() { int a[]={1,2}; powerSet(a,2); return 0; }",
         "explanation": {
@@ -87,7 +87,7 @@
         "description": "All permutations of string.",
         "difficulty": "MEDIUM",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid permute(char s[]) {}\nint main() { char s[]=\"ABC\"; permute(s); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid permute(vector<int>& s) {\n    // TODO\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    permute(s);\n    return 0;\n}\n",
         "expectedOutput": "ABC ACB BAC BCA CBA CAB",
         "solution": "#include <iostream>\nusing namespace std;\nvoid perm(char s[], int l, int r) { if(l==r) { cout<<s<<\" \"; return; } for(int i=l;i<=r;i++) { swap(s[l],s[i]); perm(s,l+1,r); swap(s[l],s[i]); } }\nvoid permute(char s[]) { int n=0; while(s[n]) n++; perm(s,0,n-1); }\nint main() { char s[]=\"ABC\"; permute(s); return 0; }",
         "explanation": {
@@ -129,7 +129,7 @@
         "description": "Paths from top-left to bottom-right.",
         "difficulty": "MEDIUM",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countPaths(int r, int c) { return 0; }\nint main() { cout<<countPaths(3,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countPaths(int r, int c) {\n    return 0;\n}\n\nint main() {\n    int r;\n    cin >> r;\n    int c;\n    cin >> c;\n    cout << countPaths(r, c);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint countPaths(int r, int c) { if(r==1||c==1) return 1; return countPaths(r-1,c)+countPaths(r,c-1); }\nint main() { cout<<countPaths(3,3); return 0; }",
         "explanation": {
@@ -170,7 +170,7 @@
         "description": "Min cuts for palindrome partition.",
         "difficulty": "HARD",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint minCut(char s[]) { return 0; }\nint main() { cout<<minCut(\"aab\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint minCut(vector<int>& s) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << minCut(s);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isPalin(char s[], int l, int r) { while(l<r) if(s[l++]!=s[r--]) return false; return true; }\nint solve(char s[], int i, int n) { if(i>=n||isPalin(s,i,n-1)) return 0; int mn=1e9; for(int j=i;j<n-1;j++) if(isPalin(s,i,j)) mn=min(mn,1+solve(s,j+1,n)); return mn; }\nint minCut(char s[]) { int n=0; while(s[n]) n++; return solve(s,0,n); }\nint main() { cout<<minCut(\"aab\"); return 0; }",
         "explanation": {
@@ -211,7 +211,7 @@
         "description": "Can string be segmented.",
         "difficulty": "MEDIUM",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool wordBreak(char s[], char dict[][10], int n) { return false; }\nint main() { char dict[][10]={\"apple\",\"pen\"}; cout<<wordBreak(\"applepenapple\",dict,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool wordBreak(vector<int>& s, vector<vector<int>>& dict, int n) {\n    return false;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    int dict_rows, dict_cols;\n    cin >> dict_rows >> dict_cols;\n    vector<vector<int>> dict(dict_rows, vector<int>(dict_cols));\n    for (int i = 0; i < dict_rows; i++)\n        for (int j = 0; j < dict_cols; j++)\n            cin >> dict[i][j];\n    int n;\n    cin >> n;\n    cout << wordBreak(s, dict, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool eq(char a[], char b[], int len) { for(int i=0;i<len;i++) if(a[i]!=b[i]) return false; return !b[len]; }\nbool solve(char s[], int start, char dict[][10], int n, int slen) { if(start==slen) return true; for(int end=start+1;end<=slen;end++) for(int i=0;i<n;i++) if(eq(s+start,dict[i],end-start)) if(solve(s,end,dict,n,slen)) return true; return false; }\nbool wordBreak(char s[], char dict[][10], int n) { int slen=0; while(s[slen]) slen++; return solve(s,0,dict,n,slen); }\nint main() { char dict[][10]={\"apple\",\"pen\"}; cout<<wordBreak(\"applepenapple\",dict,2); return 0; }",
         "explanation": {
@@ -252,7 +252,7 @@
         "description": "Number of decodings.",
         "difficulty": "MEDIUM",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint numDecodings(char s[]) { return 0; }\nint main() { cout<<numDecodings(\"226\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint numDecodings(vector<int>& s) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << numDecodings(s);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint solve(char s[], int i, int n) { if(i==n) return 1; if(s[i]=='0') return 0; int ways=solve(s,i+1,n); if(i+1<n) { int two=(s[i]-'0')*10+(s[i+1]-'0'); if(two>=10 && two<=26) ways+=solve(s,i+2,n); } return ways; }\nint numDecodings(char s[]) { int n=0; while(s[n]) n++; return solve(s,0,n); }\nint main() { cout<<numDecodings(\"226\"); return 0; }",
         "explanation": {
@@ -293,7 +293,7 @@
         "description": "Number of unique BSTs.",
         "difficulty": "MEDIUM",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint numTrees(int n) { return 0; }\nint main() { cout<<numTrees(3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint numTrees(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << numTrees(n);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nint numTrees(int n) { if(n<=1) return 1; int total=0; for(int i=1;i<=n;i++) total+=numTrees(i-1)*numTrees(n-i); return total; }\nint main() { cout<<numTrees(3); return 0; }",
         "explanation": {
@@ -334,7 +334,7 @@
         "description": "Find kth symbol in row n.",
         "difficulty": "MEDIUM",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint kthGrammar(int n, int k) { return 0; }\nint main() { cout<<kthGrammar(4,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint kthGrammar(int n, int k) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int k;\n    cin >> k;\n    cout << kthGrammar(n, k);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nint kthGrammar(int n, int k) { if(n==1) return 0; int parent=kthGrammar(n-1,(k+1)/2); return k%2==1 ? parent : 1-parent; }\nint main() { cout<<kthGrammar(4,5); return 0; }",
         "explanation": {
@@ -375,7 +375,7 @@
         "description": "All possible results.",
         "difficulty": "MEDIUM",
         "category": "Recursion",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid diffWays(char e[]) {}\nint main() { diffWays(\"2*3-4*5\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid diffWays(vector<int>& e) {\n    // TODO\n}\n\nint main() {\n    int e_size;\n    cin >> e_size;\n    vector<int> e(e_size);\n    for (int i = 0; i < e_size; i++) cin >> e[i];\n    diffWays(e);\n    return 0;\n}\n",
         "expectedOutput": "-34 -10 -14 -10 10",
         "solution": "#include <iostream>\nusing namespace std;\nvoid solve(char e[], int l, int r, int res[], int *k) { bool hasOp=false; for(int i=l;i<=r;i++) { if(e[i]=='+'||e[i]=='-'||e[i]=='*') { hasOp=true; int left[100],right[100],lk=0,rk=0; solve(e,l,i-1,left,&lk); solve(e,i+1,r,right,&rk); for(int a=0;a<lk;a++) for(int b=0;b<rk;b++) { int v; if(e[i]=='+') v=left[a]+right[b]; else if(e[i]=='-') v=left[a]-right[b]; else v=left[a]*right[b]; res[(*k)++]=v; } } } if(!hasOp) { int v=0; for(int i=l;i<=r;i++) v=v*10+(e[i]-'0'); res[(*k)++]=v; } }\nvoid diffWays(char e[]) { int n=0; while(e[n]) n++; int res[100], k=0; solve(e,0,n-1,res,&k); for(int i=0;i<k;i++) cout<<res[i]<<\" \"; }\nint main() { diffWays(\"2*3-4*5\"); return 0; }",
         "explanation": {

@@ -5,7 +5,7 @@
         "description": "Days until warmer temp.",
         "difficulty": "MEDIUM",
         "category": "Stack",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid dailyTemps(int t[], int n) {}\nint main() { int t[]={73,74,75,71,69,72,76,73}; dailyTemps(t,8); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid dailyTemps(vector<int>& t, int n) {\n    // TODO\n}\n\nint main() {\n    int t_size;\n    cin >> t_size;\n    vector<int> t(t_size);\n    for (int i = 0; i < t_size; i++) cin >> t[i];\n    int n;\n    cin >> n;\n    dailyTemps(t, n);\n    return 0;\n}\n",
         "expectedOutput": "1 1 4 2 1 1 0 0",
         "solution": "#include <iostream>\nusing namespace std;\nvoid dailyTemps(int t[], int n) { int res[n]={}, stk[n], top=-1; for(int i=n-1;i>=0;i--) { while(top>=0 && t[stk[top]]<=t[i]) top--; res[i]=top<0?0:stk[top]-i; stk[++top]=i; } for(int i=0;i<n;i++) cout<<res[i]<<\" \"; }\nint main() { int t[]={73,74,75,71,69,72,76,73}; dailyTemps(t,8); return 0; }",
         "explanation": {
@@ -46,7 +46,7 @@
         "description": "Next larger element.",
         "difficulty": "MEDIUM",
         "category": "Stack",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid nextGreater(int a[], int n) {}\nint main() { int a[]={4,5,2,25}; nextGreater(a,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid nextGreater(vector<int>& a, int n) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    nextGreater(a, n);\n    return 0;\n}\n",
         "expectedOutput": "5 25 25 -1",
         "solution": "#include <iostream>\nusing namespace std;\nvoid nextGreater(int a[], int n) { int res[n], stk[n], top=-1; for(int i=n-1;i>=0;i--) { while(top>=0 && stk[top]<=a[i]) top--; res[i]=top<0?-1:stk[top]; stk[++top]=a[i]; } for(int i=0;i<n;i++) cout<<res[i]<<\" \"; }\nint main() { int a[]={4,5,2,25}; nextGreater(a,4); return 0; }",
         "explanation": {
@@ -87,7 +87,7 @@
         "description": "Count car fleets.",
         "difficulty": "MEDIUM",
         "category": "Stack",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint carFleet(int target, int pos[], int speed[], int n) { return 0; }\nint main() { int pos[]={10,8,0,5,3}, speed[]={2,4,1,1,3}; cout<<carFleet(12,pos,speed,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint carFleet(int target, vector<int>& pos, vector<int>& speed, int n) {\n    return 0;\n}\n\nint main() {\n    int target;\n    cin >> target;\n    int pos_size;\n    cin >> pos_size;\n    vector<int> pos(pos_size);\n    for (int i = 0; i < pos_size; i++) cin >> pos[i];\n    int speed_size;\n    cin >> speed_size;\n    vector<int> speed(speed_size);\n    for (int i = 0; i < speed_size; i++) cin >> speed[i];\n    int n;\n    cin >> n;\n    cout << carFleet(target, pos, speed, n);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint carFleet(int target, int pos[], int speed[], int n) { double time[n]; int idx[n]; for(int i=0;i<n;i++) { idx[i]=i; time[i]=(double)(target-pos[i])/speed[i]; } for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(pos[idx[j]]<pos[idx[j+1]]) { int t=idx[j]; idx[j]=idx[j+1]; idx[j+1]=t; } int fleets=0; double maxTime=-1; for(int i=0;i<n;i++) { if(time[idx[i]]>maxTime) { fleets++; maxTime=time[idx[i]]; } } return fleets; }\nint main() { int pos[]={10,8,0,5,3}, speed[]={2,4,1,1,3}; cout<<carFleet(12,pos,speed,5); return 0; }",
         "explanation": {
@@ -128,7 +128,7 @@
         "description": "Search in row/col sorted matrix.",
         "difficulty": "MEDIUM",
         "category": "Matrix",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool searchMatrix(int m[][5], int r, int c, int t) { return false; }\nint main() { int m[][5]={{1,4,7,11,15},{2,5,8,12,19},{3,6,9,16,22},{10,13,14,17,24},{18,21,23,26,30}}; cout<<searchMatrix(m,5,5,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool searchMatrix(vector<vector<int>>& m, int r, int c, int t) {\n    return false;\n}\n\nint main() {\n    int m_rows, m_cols;\n    cin >> m_rows >> m_cols;\n    vector<vector<int>> m(m_rows, vector<int>(m_cols));\n    for (int i = 0; i < m_rows; i++)\n        for (int j = 0; j < m_cols; j++)\n            cin >> m[i][j];\n    int r;\n    cin >> r;\n    int c;\n    cin >> c;\n    int t;\n    cin >> t;\n    cout << searchMatrix(m, r, c, t);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool searchMatrix(int m[][5], int r, int c, int t) { int i=0,j=c-1; while(i<r && j>=0) { if(m[i][j]==t) return true; if(m[i][j]>t) j--; else i++; } return false; }\nint main() { int m[][5]={{1,4,7,11,15},{2,5,8,12,19},{3,6,9,16,22},{10,13,14,17,24},{18,21,23,26,30}}; cout<<searchMatrix(m,5,5,5); return 0; }",
         "explanation": {
@@ -169,7 +169,7 @@
         "description": "Find median of merged arrays.",
         "difficulty": "HARD",
         "category": "Binary Search",
-        "starterCode": "#include <iostream>\nusing namespace std;\ndouble findMedian(int a[], int m, int b[], int n) { return 0; }\nint main() { int a[]={1,3}, b[]={2}; cout<<findMedian(a,2,b,1); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble findMedian(vector<int>& a, int m, vector<int>& b, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int m;\n    cin >> m;\n    int b_size;\n    cin >> b_size;\n    vector<int> b(b_size);\n    for (int i = 0; i < b_size; i++) cin >> b[i];\n    int n;\n    cin >> n;\n    cout << findMedian(a, m, b, n);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\ndouble findMedian(int a[], int m, int b[], int n) { if(m>n) return findMedian(b,n,a,m); int lo=0,hi=m,half=(m+n+1)/2; while(lo<=hi) { int i=(lo+hi)/2, j=half-i; int left1=i>0?a[i-1]:-1e9; int right1=i<m?a[i]:1e9; int left2=j>0?b[j-1]:-1e9; int right2=j<n?b[j]:1e9; if(left1<=right2 && left2<=right1) { if((m+n)%2) return max(left1,left2); return (max(left1,left2)+min(right1,right2))/2.0; } if(left1>right2) hi=i-1; else lo=i+1; } return 0; }\nint main() { int a[]={1,3}, b[]={2}; cout<<findMedian(a,2,b,1); return 0; }",
         "explanation": {
@@ -244,7 +244,10 @@
                 "expectedOutput": "2",
                 "explanation": "3rd largest updates"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     },
     {
         "id": "fin47",
@@ -252,7 +255,7 @@
         "description": "Smash stones until one left.",
         "difficulty": "EASY",
         "category": "Heap",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint lastStoneWeight(int stones[], int n) { return 0; }\nint main() { int stones[]={2,7,4,1,8,1}; cout<<lastStoneWeight(stones,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint lastStoneWeight(vector<int>& stones, int n) {\n    return 0;\n}\n\nint main() {\n    int stones_size;\n    cin >> stones_size;\n    vector<int> stones(stones_size);\n    for (int i = 0; i < stones_size; i++) cin >> stones[i];\n    int n;\n    cin >> n;\n    cout << lastStoneWeight(stones, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nint lastStoneWeight(int stones[], int n) { while(n>1) { int m1=0,m2=1; if(stones[m1]<stones[m2]) swap(m1,m2); for(int i=2;i<n;i++) { if(stones[i]>stones[m1]) { m2=m1; m1=i; } else if(stones[i]>stones[m2]) m2=i; } int diff=stones[m1]-stones[m2]; if(m1>m2) { stones[m1]=stones[--n]; stones[m2]=stones[--n]; } else { stones[m2]=stones[--n]; stones[m1]=stones[--n]; } if(diff>0) stones[n++]=diff; } return n?stones[0]:0; }\nint main() { int stones[]={2,7,4,1,8,1}; cout<<lastStoneWeight(stones,6); return 0; }",
         "explanation": {
@@ -293,7 +296,7 @@
         "description": "K closest points to origin.",
         "difficulty": "MEDIUM",
         "category": "Heap",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid kClosest(int p[][2], int n, int k) {}\nint main() { int p[][2]={{1,3},{-2,2},{5,8},{0,1}}; kClosest(p,4,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid kClosest(vector<vector<int>>& p, int n, int k) {\n    // TODO\n}\n\nint main() {\n    int p_rows, p_cols;\n    cin >> p_rows >> p_cols;\n    vector<vector<int>> p(p_rows, vector<int>(p_cols));\n    for (int i = 0; i < p_rows; i++)\n        for (int j = 0; j < p_cols; j++)\n            cin >> p[i][j];\n    int n;\n    cin >> n;\n    int k;\n    cin >> k;\n    kClosest(p, n, k);\n    return 0;\n}\n",
         "expectedOutput": "0,1 -2,2",
         "solution": "#include <iostream>\nusing namespace std;\nvoid kClosest(int p[][2], int n, int k) { int dist[n]; for(int i=0;i<n;i++) dist[i]=p[i][0]*p[i][0]+p[i][1]*p[i][1]; for(int i=0;i<k;i++) { int mn=i; for(int j=i+1;j<n;j++) if(dist[j]<dist[mn]) mn=j; swap(dist[i],dist[mn]); swap(p[i][0],p[mn][0]); swap(p[i][1],p[mn][1]); } for(int i=0;i<k;i++) cout<<p[i][0]<<\",\"<<p[i][1]<<\" \"; }\nint main() { int p[][2]={{1,3},{-2,2},{5,8},{0,1}}; kClosest(p,4,2); return 0; }",
         "explanation": {
@@ -334,7 +337,7 @@
         "description": "Min intervals to complete tasks.",
         "difficulty": "MEDIUM",
         "category": "Greedy",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint leastInterval(char tasks[], int n, int k) { return 0; }\nint main() { char tasks[]=\"AAABBB\"; cout<<leastInterval(tasks,6,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint leastInterval(vector<int>& tasks, int n, int k) {\n    return 0;\n}\n\nint main() {\n    int tasks_size;\n    cin >> tasks_size;\n    vector<int> tasks(tasks_size);\n    for (int i = 0; i < tasks_size; i++) cin >> tasks[i];\n    int n;\n    cin >> n;\n    int k;\n    cin >> k;\n    cout << leastInterval(tasks, n, k);\n    return 0;\n}\n",
         "expectedOutput": "8",
         "solution": "#include <iostream>\nusing namespace std;\nint leastInterval(char tasks[], int n, int k) { int freq[26]={}; for(int i=0;i<n;i++) freq[tasks[i]-'A']++; int maxF=0,maxC=0; for(int i=0;i<26;i++) maxF=max(maxF,freq[i]); for(int i=0;i<26;i++) if(freq[i]==maxF) maxC++; int slots=(maxF-1)*(k+1)+maxC; return max(n,slots); }\nint main() { char tasks[]=\"AAABBB\"; cout<<leastInterval(tasks,6,2); return 0; }",
         "explanation": {
@@ -409,6 +412,9 @@
                 "expectedOutput": "10",
                 "explanation": "Only user 1's tweets"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     }
 ]

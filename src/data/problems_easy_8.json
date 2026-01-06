@@ -5,7 +5,7 @@
         "description": "Print hollow diamond.",
         "difficulty": "EASY",
         "category": "Patterns",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid hollowDiamond(int n) {}\nint main() { hollowDiamond(3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid hollowDiamond(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    hollowDiamond(n);\n    return 0;\n}\n",
         "expectedOutput": "  *\n * *\n*   *\n * *\n  *",
         "testCases": [
             {
@@ -75,7 +75,7 @@
         "description": "Print A to Z pattern.",
         "difficulty": "EASY",
         "category": "Patterns",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid alphabetPattern(int n) {}\nint main() { alphabetPattern(4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid alphabetPattern(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    alphabetPattern(n);\n    return 0;\n}\n",
         "expectedOutput": "A\nA B\nA B C\nA B C D",
         "testCases": [
             {
@@ -145,7 +145,7 @@
         "description": "Print butterfly.",
         "difficulty": "EASY",
         "category": "Patterns",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid butterfly(int n) {}\nint main() { butterfly(3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid butterfly(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    butterfly(n);\n    return 0;\n}\n",
         "expectedOutput": "*    *\n**  **\n******\n**  **\n*    *",
         "testCases": [
             {
@@ -216,7 +216,7 @@
         "description": "Find smallest of 3 numbers.",
         "difficulty": "EASY",
         "category": "Basic",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint smallest(int a, int b, int c) { return 0; }\nint main() { cout<<smallest(5,3,8); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint smallest(int a, int b, int c) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    int c;\n    cin >> c;\n    cout << smallest(a, b, c);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "testCases": [
             {
@@ -287,7 +287,7 @@
         "description": "Find largest of 3 numbers.",
         "difficulty": "EASY",
         "category": "Basic",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint largest(int a, int b, int c) { return 0; }\nint main() { cout<<largest(5,3,8); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint largest(int a, int b, int c) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    int c;\n    cin >> c;\n    cout << largest(a, b, c);\n    return 0;\n}\n",
         "expectedOutput": "8",
         "testCases": [
             {
@@ -422,7 +422,10 @@
                 "a = a - b (original b)"
             ],
             "complexity": "Time: O(1), Space: O(1)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "noInput",
+        "inputInstructions": "This problem has no input - just print the required output directly."
     },
     {
         "id": "easy91",
@@ -430,7 +433,7 @@
         "description": "Find middle value.",
         "difficulty": "EASY",
         "category": "Basic",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint middle(int a, int b, int c) { return 0; }\nint main() { cout<<middle(5,8,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint middle(int a, int b, int c) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    int c;\n    cin >> c;\n    cout << middle(a, b, c);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "testCases": [
             {
@@ -502,7 +505,7 @@
         "description": "Get absolute value.",
         "difficulty": "EASY",
         "category": "Basic",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint absolute(int n) { return 0; }\nint main() { cout<<absolute(-5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint absolute(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << absolute(n);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "testCases": [
             {
@@ -572,7 +575,7 @@
         "description": "Calculate average.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\ndouble average(int a[], int n) { return 0; }\nint main() { int a[]={10,20,30,40,50}; cout<<average(a,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble average(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << average(a, n);\n    return 0;\n}\n",
         "expectedOutput": "30",
         "testCases": [
             {
@@ -643,7 +646,7 @@
         "description": "Multiply all elements.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint product(int a[], int n) { return 0; }\nint main() { int a[]={1,2,3,4,5}; cout<<product(a,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint product(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << product(a, n);\n    return 0;\n}\n",
         "expectedOutput": "120",
         "testCases": [
             {
@@ -714,7 +717,7 @@
         "description": "Count even numbers.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countEvens(int a[], int n) { return 0; }\nint main() { int a[]={1,2,3,4,5,6}; cout<<countEvens(a,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countEvens(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << countEvens(a, n);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "testCases": [
             {
@@ -784,7 +787,7 @@
         "description": "Count odd numbers.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countOdds(int a[], int n) { return 0; }\nint main() { int a[]={1,2,3,4,5,6}; cout<<countOdds(a,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countOdds(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << countOdds(a, n);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "testCases": [
             {

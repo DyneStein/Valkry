@@ -5,7 +5,7 @@
         "description": "Print greeting with name.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid greet(char name[]) {}\nint main() { greet(\"Alice\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid greet(vector<int>& name) {\n    // TODO\n}\n\nint main() {\n    int name_size;\n    cin >> name_size;\n    vector<int> name(name_size);\n    for (int i = 0; i < name_size; i++) cin >> name[i];\n    greet(name);\n    return 0;\n}\n",
         "expectedOutput": "Hello Alice!",
         "solution": "#include <iostream>\nusing namespace std;\nvoid greet(char name[]) { cout<<\"Hello \"<<name<<\"!\"; }\nint main() { greet(\"Alice\"); return 0; }",
         "explanation": {
@@ -45,7 +45,7 @@
         "description": "Calculate rectangle area.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint area(int l, int w) { return 0; }\nint main() { cout<<area(5,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint area(int l, int w) {\n    return 0;\n}\n\nint main() {\n    int l;\n    cin >> l;\n    int w;\n    cin >> w;\n    cout << area(l, w);\n    return 0;\n}\n",
         "expectedOutput": "15",
         "solution": "#include <iostream>\nusing namespace std;\nint area(int l, int w) { return l*w; }\nint main() { cout<<area(5,3); return 0; }",
         "explanation": {
@@ -85,7 +85,7 @@
         "description": "Calculate circumference.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble circumference(double r) { return 0; }\nint main() { cout<<fixed<<setprecision(2)<<circumference(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble circumference(double r) {\n    return 0;\n}\n\nint main() {\n    double r;\n    cin >> r;\n    cout << circumference(r);\n    return 0;\n}\n",
         "expectedOutput": "31.42",
         "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble circumference(double r) { return 2*3.14159*r; }\nint main() { cout<<fixed<<setprecision(2)<<circumference(5); return 0; }",
         "explanation": {
@@ -158,7 +158,10 @@
                 "expectedOutput": "C",
                 "explanation": "70-79 is C"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "oop",
+        "inputInstructions": "This is an OOP concept demonstration. Focus on implementing the pattern correctly."
     },
     {
         "id": "prac5",
@@ -166,7 +169,7 @@
         "description": "Convert years to days.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint ageDays(int years) { return 0; }\nint main() { cout<<ageDays(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint ageDays(int years) {\n    return 0;\n}\n\nint main() {\n    int years;\n    cin >> years;\n    cout << ageDays(years);\n    return 0;\n}\n",
         "expectedOutput": "3650",
         "solution": "#include <iostream>\nusing namespace std;\nint ageDays(int years) { return years*365; }\nint main() { cout<<ageDays(10); return 0; }",
         "explanation": {
@@ -206,7 +209,7 @@
         "description": "Calculate tip amount.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\nusing namespace std;\ndouble tip(double bill, int percent) { return 0; }\nint main() { cout<<tip(50,20); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble tip(double bill, int percent) {\n    return 0;\n}\n\nint main() {\n    double bill;\n    cin >> bill;\n    int percent;\n    cin >> percent;\n    cout << tip(bill, percent);\n    return 0;\n}\n",
         "expectedOutput": "10",
         "solution": "#include <iostream>\nusing namespace std;\ndouble tip(double bill, int percent) { return bill*percent/100; }\nint main() { cout<<tip(50,20); return 0; }",
         "explanation": {
@@ -247,7 +250,7 @@
         "description": "Calculate BMI.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble bmi(double w, double h) { return 0; }\nint main() { cout<<fixed<<setprecision(1)<<bmi(70,1.75); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble bmi(double w, double h) {\n    return 0;\n}\n\nint main() {\n    double w;\n    cin >> w;\n    double h;\n    cin >> h;\n    cout << bmi(w, h);\n    return 0;\n}\n",
         "expectedOutput": "22.9",
         "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble bmi(double w, double h) { return w/(h*h); }\nint main() { cout<<fixed<<setprecision(1)<<bmi(70,1.75); return 0; }",
         "explanation": {
@@ -287,7 +290,7 @@
         "description": "Distance between two points.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble distance(int x1, int y1, int x2, int y2) { return 0; }\nint main() { cout<<distance(0,0,3,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble distance(int x1, int y1, int x2, int y2) {\n    return 0;\n}\n\nint main() {\n    int x1;\n    cin >> x1;\n    int y1;\n    cin >> y1;\n    int x2;\n    cin >> x2;\n    int y2;\n    cin >> y2;\n    cout << distance(x1, y1, x2, y2);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "solution": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble distance(int x1, int y1, int x2, int y2) { return sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)); }\nint main() { cout<<distance(0,0,3,4); return 0; }",
         "explanation": {
@@ -329,7 +332,7 @@
         "description": "Find roots of ax²+bx+c=0.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\n#include <cmath>\nusing namespace std;\nvoid roots(int a, int b, int c) {}\nint main() { roots(1,-5,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid roots(int a, int b, int c) {\n    // TODO\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    int c;\n    cin >> c;\n    roots(a, b, c);\n    return 0;\n}\n",
         "expectedOutput": "3 2",
         "solution": "#include <iostream>\n#include <cmath>\nusing namespace std;\nvoid roots(int a, int b, int c) { double d=b*b-4*a*c; double r1=(-b+sqrt(d))/(2*a), r2=(-b-sqrt(d))/(2*a); cout<<(int)r1<<\" \"<<(int)r2; }\nint main() { roots(1,-5,6); return 0; }",
         "explanation": {
@@ -370,7 +373,7 @@
         "description": "Can sides form triangle.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isTriangle(int a, int b, int c) { return false; }\nint main() { cout<<isTriangle(3,4,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isTriangle(int a, int b, int c) {\n    return false;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    int c;\n    cin >> c;\n    cout << isTriangle(a, b, c);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isTriangle(int a, int b, int c) { return a+b>c && b+c>a && a+c>b; }\nint main() { cout<<isTriangle(3,4,5); return 0; }",
         "explanation": {

@@ -5,7 +5,7 @@
         "description": "You are climbing a staircase with n steps. Each time you can climb 1 or 2 steps. How many distinct ways can you climb to the top?",
         "difficulty": "EASY",
         "category": "Dynamic Programming",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint climbStairs(int n) { return 0; }\nint main() { cout << climbStairs(4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint climbStairs(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << climbStairs(n);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nint climbStairs(int n) {\n    if(n <= 2) return n;\n    int prev2 = 1, prev1 = 2;\n    for(int i = 3; i <= n; i++) {\n        int curr = prev1 + prev2;\n        prev2 = prev1;\n        prev1 = curr;\n    }\n    return prev1;\n}\nint main() { cout << climbStairs(4); return 0; }",
         "explanation": {
@@ -45,7 +45,7 @@
         "description": "Given coin denominations and target amount, find minimum coins needed. Return -1 if impossible.",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint coinChange(int coins[], int n, int amount) { return -1; }\nint main() { int c[] = {1, 2, 5}; cout << coinChange(c, 3, 11); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint coinChange(vector<int>& coins, int n, int amount) {\n    return 0;\n}\n\nint main() {\n    int coins_size;\n    cin >> coins_size;\n    vector<int> coins(coins_size);\n    for (int i = 0; i < coins_size; i++) cin >> coins[i];\n    int n;\n    cin >> n;\n    int amount;\n    cin >> amount;\n    cout << coinChange(coins, n, amount);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint coinChange(int coins[], int n, int amount) {\n    int dp[amount + 1];\n    for(int i = 0; i <= amount; i++) dp[i] = amount + 1;\n    dp[0] = 0;\n    for(int a = 1; a <= amount; a++) {\n        for(int i = 0; i < n; i++) {\n            if(coins[i] <= a)\n                dp[a] = min(dp[a], dp[a - coins[i]] + 1);\n        }\n    }\n    return dp[amount] > amount ? -1 : dp[amount];\n}\nint main() { int c[] = {1, 2, 5}; cout << coinChange(c, 3, 11); return 0; }",
         "explanation": {
@@ -85,9 +85,9 @@
         "description": "Find length of longest common subsequence of two strings.",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint longestCommonSubsequence(char a[], char b[]) { return 0; }\nint main() { cout << longestCommonSubsequence(\"abcde\", \"ace\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint longestCommonSubsequence(string text1, string text2) {\n    return 0;\n}\n\nint main() {\n    string s1, s2;\n    cin >> s1 >> s2;\n    cout << longestCommonSubsequence(s1, s2);\n    return 0;\n}",
         "expectedOutput": "3",
-        "solution": "#include <iostream>\nusing namespace std;\nint longestCommonSubsequence(char a[], char b[]) {\n    int m = 0, n = 0;\n    while(a[m]) m++;\n    while(b[n]) n++;\n    int dp[m + 1][n + 1];\n    for(int i = 0; i <= m; i++) dp[i][0] = 0;\n    for(int j = 0; j <= n; j++) dp[0][j] = 0;\n    for(int i = 1; i <= m; i++) {\n        for(int j = 1; j <= n; j++) {\n            if(a[i-1] == b[j-1]) dp[i][j] = dp[i-1][j-1] + 1;\n            else dp[i][j] = max(dp[i-1][j], dp[i][j-1]);\n        }\n    }\n    return dp[m][n];\n}\nint main() { cout << longestCommonSubsequence(\"abcde\", \"ace\"); return 0; }",
+        "solution": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint longestCommonSubsequence(string text1, string text2) {\n    int m = text1.length(), n = text2.length();\n    int dp[m + 1][n + 1];\n    \n    for(int i = 0; i <= m; i++) {\n        for(int j = 0; j <= n; j++) {\n            if (i == 0 || j == 0)\n                dp[i][j] = 0;\n            else if (text1[i - 1] == text2[j - 1])\n                dp[i][j] = dp[i - 1][j - 1] + 1;\n            else\n                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);\n        }\n    }\n    return dp[m][n];\n}\n\nint main() {\n    string s1, s2;\n    if (cin >> s1 >> s2) {\n        cout << longestCommonSubsequence(s1, s2);\n    }\n    return 0;\n}",
         "explanation": {
             "approach": "2D DP. Match chars or take max of skipping either.",
             "steps": [
@@ -98,24 +98,24 @@
         },
         "testCases": [
             {
-                "input": "a='abcde', b='ace'",
+                "input": "abcde ace",
                 "expectedOutput": "3",
                 "explanation": "LCS is 'ace'"
             },
             {
-                "input": "a='abc', b='abc'",
+                "input": "abc abc",
                 "expectedOutput": "3",
                 "explanation": "Identical strings"
             },
             {
-                "input": "a='abc', b='def'",
+                "input": "abc def",
                 "expectedOutput": "0",
                 "explanation": "No common chars"
             },
             {
-                "input": "a='', b='abc'",
-                "expectedOutput": "0",
-                "explanation": "Empty string"
+                "input": "bl yby",
+                "expectedOutput": "1",
+                "explanation": "LCS is 'b'"
             }
         ]
     },
@@ -125,7 +125,7 @@
         "description": "Can string be segmented into dictionary words?",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool wordBreak(char s[], char* dict[], int n) { return false; }\nint main() { char* d[] = {\"leet\", \"code\"}; cout << wordBreak(\"leetcode\", d, 2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool wordBreak(vector<int>& s, vector<string>& dict, int n) {\n    return false;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    int dict_size;\n    cin >> dict_size;\n    vector<string> dict(dict_size);\n    for (int i = 0; i < dict_size; i++) cin >> dict[i];\n    int n;\n    cin >> n;\n    cout << wordBreak(s, dict, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool match(char s[], int start, int end, char word[]) {\n    int i = 0;\n    for(int j = start; j < end; j++, i++)\n        if(word[i] == 0 || s[j] != word[i]) return false;\n    return word[i] == 0;\n}\nbool wordBreak(char s[], char* dict[], int n) {\n    int len = 0; while(s[len]) len++;\n    bool dp[len + 1];\n    for(int i = 0; i <= len; i++) dp[i] = false;\n    dp[0] = true;\n    for(int i = 1; i <= len; i++) {\n        for(int j = 0; j < i; j++) {\n            if(dp[j]) {\n                for(int w = 0; w < n; w++)\n                    if(match(s, j, i, dict[w])) dp[i] = true;\n            }\n        }\n    }\n    return dp[len];\n}\nint main() { char* d[] = {\"leet\", \"code\"}; cout << wordBreak(\"leetcode\", d, 2); return 0; }",
         "explanation": {
@@ -165,7 +165,7 @@
         "description": "Max money from houses, can't rob adjacent.",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint rob(int nums[], int n) { return 0; }\nint main() { int h[] = {2, 7, 9, 3, 1}; cout << rob(h, 5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint rob(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << rob(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "12",
         "solution": "#include <iostream>\nusing namespace std;\nint rob(int nums[], int n) {\n    if(n == 0) return 0;\n    if(n == 1) return nums[0];\n    int prev2 = nums[0];\n    int prev1 = max(nums[0], nums[1]);\n    for(int i = 2; i < n; i++) {\n        int curr = max(prev1, prev2 + nums[i]);\n        prev2 = prev1;\n        prev1 = curr;\n    }\n    return prev1;\n}\nint main() { int h[] = {2, 7, 9, 3, 1}; cout << rob(h, 5); return 0; }",
         "explanation": {
@@ -204,7 +204,7 @@
         "description": "Find contiguous subarray with largest product.",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint maxProduct(int nums[], int n) { return 0; }\nint main() { int a[] = {2, 3, -2, 4}; cout << maxProduct(a, 4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint maxProduct(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << maxProduct(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint maxProduct(int nums[], int n) {\n    int maxProd = nums[0], currMax = nums[0], currMin = nums[0];\n    for(int i = 1; i < n; i++) {\n        if(nums[i] < 0) { int t = currMax; currMax = currMin; currMin = t; }\n        currMax = max(nums[i], currMax * nums[i]);\n        currMin = min(nums[i], currMin * nums[i]);\n        maxProd = max(maxProd, currMax);\n    }\n    return maxProd;\n}\nint main() { int a[] = {2, 3, -2, 4}; cout << maxProduct(a, 4); return 0; }",
         "explanation": {
@@ -244,7 +244,7 @@
         "description": "Find length of LIS (not contiguous).",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint lengthOfLIS(int nums[], int n) { return 0; }\nint main() { int a[] = {10, 9, 2, 5, 3, 7, 101, 18}; cout << lengthOfLIS(a, 8); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint lengthOfLIS(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << lengthOfLIS(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "solution": "#include <iostream>\nusing namespace std;\nint lengthOfLIS(int nums[], int n) {\n    if(n == 0) return 0;\n    int dp[n];\n    for(int i = 0; i < n; i++) dp[i] = 1;\n    for(int i = 1; i < n; i++) {\n        for(int j = 0; j < i; j++) {\n            if(nums[j] < nums[i])\n                dp[i] = max(dp[i], dp[j] + 1);\n        }\n    }\n    int maxLen = 0;\n    for(int i = 0; i < n; i++) maxLen = max(maxLen, dp[i]);\n    return maxLen;\n}\nint main() { int a[] = {10, 9, 2, 5, 3, 7, 101, 18}; cout << lengthOfLIS(a, 8); return 0; }",
         "explanation": {
@@ -283,7 +283,7 @@
         "description": "Max value in knapsack with capacity W.",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint knapsack(int W, int wt[], int val[], int n) { return 0; }\nint main() { int w[] = {1, 2, 3}; int v[] = {10, 15, 40}; cout << knapsack(5, w, v, 3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint knapsack(int W, vector<int>& wt, vector<int>& val, int n) {\n    return 0;\n}\n\nint main() {\n    int W;\n    cin >> W;\n    int wt_size;\n    cin >> wt_size;\n    vector<int> wt(wt_size);\n    for (int i = 0; i < wt_size; i++) cin >> wt[i];\n    int val_size;\n    cin >> val_size;\n    vector<int> val(val_size);\n    for (int i = 0; i < val_size; i++) cin >> val[i];\n    int n;\n    cin >> n;\n    cout << knapsack(W, wt, val, n);\n    return 0;\n}\n",
         "expectedOutput": "55",
         "solution": "#include <iostream>\nusing namespace std;\nint knapsack(int W, int wt[], int val[], int n) {\n    int dp[n + 1][W + 1];\n    for(int i = 0; i <= n; i++) {\n        for(int w = 0; w <= W; w++) {\n            if(i == 0 || w == 0) dp[i][w] = 0;\n            else if(wt[i-1] <= w)\n                dp[i][w] = max(val[i-1] + dp[i-1][w - wt[i-1]], dp[i-1][w]);\n            else dp[i][w] = dp[i-1][w];\n        }\n    }\n    return dp[n][W];\n}\nint main() { int w[] = {1, 2, 3}; int v[] = {10, 15, 40}; cout << knapsack(5, w, v, 3); return 0; }",
         "explanation": {
@@ -322,7 +322,7 @@
         "description": "Count paths in m×n grid (only right/down).",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint uniquePaths(int m, int n) { return 0; }\nint main() { cout << uniquePaths(3, 7); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint uniquePaths(int m, int n) {\n    return 0;\n}\n\nint main() {\n    int m;\n    cin >> m;\n    int n;\n    cin >> n;\n    cout << uniquePaths(m, n);\n    return 0;\n}\n",
         "expectedOutput": "28",
         "solution": "#include <iostream>\nusing namespace std;\nint uniquePaths(int m, int n) {\n    int dp[m][n];\n    for(int j = 0; j < n; j++) dp[0][j] = 1;\n    for(int i = 0; i < m; i++) dp[i][0] = 1;\n    for(int i = 1; i < m; i++)\n        for(int j = 1; j < n; j++)\n            dp[i][j] = dp[i-1][j] + dp[i][j-1];\n    return dp[m-1][n-1];\n}\nint main() { cout << uniquePaths(3, 7); return 0; }",
         "explanation": {
@@ -362,7 +362,7 @@
         "description": "Can you reach last index?",
         "difficulty": "MEDIUM",
         "category": "Dynamic Programming",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool canJump(int nums[], int n) { return false; }\nint main() { int a[] = {2, 3, 1, 1, 4}; cout << canJump(a, 5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool canJump(vector<int>& nums, int n) {\n    return false;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << canJump(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool canJump(int nums[], int n) {\n    int maxReach = 0;\n    for(int i = 0; i < n; i++) {\n        if(i > maxReach) return false;\n        maxReach = max(maxReach, i + nums[i]);\n        if(maxReach >= n - 1) return true;\n    }\n    return true;\n}\nint main() { int a[] = {2, 3, 1, 1, 4}; cout << canJump(a, 5); return 0; }",
         "explanation": {

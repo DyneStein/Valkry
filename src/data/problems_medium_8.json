@@ -5,7 +5,7 @@
         "description": "Given an integer n, return the number of structurally unique BST's (binary search trees) which has exactly n nodes of unique values from 1 to n. This is the nth Catalan number.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint numTrees(int n) { return 0; }\nint main() { cout << numTrees(3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint numTrees(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << numTrees(n);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nint numTrees(int n) {\n    int dp[n + 1] = {};\n    dp[0] = dp[1] = 1;\n    for(int nodes = 2; nodes <= n; nodes++) {\n        for(int root = 1; root <= nodes; root++) {\n            int leftNodes = root - 1;\n            int rightNodes = nodes - root;\n            dp[nodes] += dp[leftNodes] * dp[rightNodes];\n        }\n    }\n    return dp[n];\n}\nint main() { cout << numTrees(3); return 0; }",
         "explanation": {
@@ -45,7 +45,7 @@
         "description": "An ugly number is a positive integer whose prime factors are limited to 2, 3, and 5. Given integer n, return the nth ugly number.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint nthUglyNumber(int n) { return 0; }\nint main() { cout << nthUglyNumber(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint nthUglyNumber(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << nthUglyNumber(n);\n    return 0;\n}\n",
         "expectedOutput": "12",
         "solution": "#include <iostream>\nusing namespace std;\nint nthUglyNumber(int n) {\n    int ugly[n];\n    ugly[0] = 1;\n    int i2 = 0, i3 = 0, i5 = 0;\n    for(int i = 1; i < n; i++) {\n        int next2 = ugly[i2] * 2;\n        int next3 = ugly[i3] * 3;\n        int next5 = ugly[i5] * 5;\n        ugly[i] = min(next2, min(next3, next5));\n        if(ugly[i] == next2) i2++;\n        if(ugly[i] == next3) i3++;\n        if(ugly[i] == next5) i5++;\n    }\n    return ugly[n - 1];\n}\nint main() { cout << nthUglyNumber(10); return 0; }",
         "explanation": {
@@ -85,7 +85,7 @@
         "description": "Given an integer n, count all numbers with unique digits in the range [0, 10^n).",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countNumbersWithUniqueDigits(int n) { return 0; }\nint main() { cout << countNumbersWithUniqueDigits(2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countNumbersWithUniqueDigits(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << countNumbersWithUniqueDigits(n);\n    return 0;\n}\n",
         "expectedOutput": "91",
         "solution": "#include <iostream>\nusing namespace std;\nint countNumbersWithUniqueDigits(int n) {\n    if(n == 0) return 1;\n    int result = 10;\n    int uniqueDigits = 9;\n    int availableDigits = 9;\n    for(int i = 2; i <= n && availableDigits > 0; i++) {\n        uniqueDigits *= availableDigits;\n        result += uniqueDigits;\n        availableDigits--;\n    }\n    return result;\n}\nint main() { cout << countNumbersWithUniqueDigits(2); return 0; }",
         "explanation": {
@@ -125,7 +125,7 @@
         "description": "Given an array of integers and a number k, you can increment any element at most k times total. Return the maximum possible frequency of any element.",
         "difficulty": "MEDIUM",
         "category": "Sliding Window",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint maxFrequency(int nums[], int n, int k) { return 0; }\nint main() { int nu[] = {1, 2, 4}; cout << maxFrequency(nu, 3, 5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint maxFrequency(vector<int>& nums, int n, int k) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    int k;\n    cin >> k;\n    cout << maxFrequency(nums, n, k);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint maxFrequency(int nums[], int n, int k) {\n    for(int i = 0; i < n - 1; i++) for(int j = 0; j < n - i - 1; j++) if(nums[j] > nums[j + 1]) { int temp = nums[j]; nums[j] = nums[j + 1]; nums[j + 1] = temp; }\n    long long sum = 0;\n    int left = 0, maxFreq = 1;\n    for(int right = 0; right < n; right++) {\n        sum += nums[right];\n        while((long long)nums[right] * (right - left + 1) - sum > k) { sum -= nums[left]; left++; }\n        maxFreq = max(maxFreq, right - left + 1);\n    }\n    return maxFreq;\n}\nint main() { int nu[] = {1, 2, 4}; cout << maxFrequency(nu, 3, 5); return 0; }",
         "explanation": {
@@ -165,7 +165,7 @@
         "description": "Given an array of positive integers, find the maximum sum of a subarray where all elements are unique.",
         "difficulty": "MEDIUM",
         "category": "Sliding Window",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint maximumUniqueSubarray(int nums[], int n) { return 0; }\nint main() { int nu[] = {4, 2, 4, 5, 6}; cout << maximumUniqueSubarray(nu, 5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint maximumUniqueSubarray(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << maximumUniqueSubarray(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "17",
         "solution": "#include <iostream>\nusing namespace std;\nint maximumUniqueSubarray(int nums[], int n) {\n    bool seen[10001] = {};\n    int left = 0, sum = 0, maxSum = 0;\n    for(int right = 0; right < n; right++) {\n        while(seen[nums[right]]) { seen[nums[left]] = false; sum -= nums[left]; left++; }\n        seen[nums[right]] = true;\n        sum += nums[right];\n        maxSum = max(maxSum, sum);\n    }\n    return maxSum;\n}\nint main() { int nu[] = {4, 2, 4, 5, 6}; cout << maximumUniqueSubarray(nu, 5); return 0; }",
         "explanation": {
@@ -205,7 +205,7 @@
         "description": "Given n vertical lines, find two that form a container with the most water.",
         "difficulty": "MEDIUM",
         "category": "Two Pointers",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint maxArea(int height[], int n) { return 0; }\nint main() { int h[] = {1, 8, 6, 2, 5, 4, 8, 3, 7}; cout << maxArea(h, 9); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint maxArea(vector<int>& height, int n) {\n    return 0;\n}\n\nint main() {\n    int height_size;\n    cin >> height_size;\n    vector<int> height(height_size);\n    for (int i = 0; i < height_size; i++) cin >> height[i];\n    int n;\n    cin >> n;\n    cout << maxArea(height, n);\n    return 0;\n}\n",
         "expectedOutput": "49",
         "solution": "#include <iostream>\nusing namespace std;\nint maxArea(int height[], int n) {\n    int left = 0, right = n - 1;\n    int maxWater = 0;\n    while(left < right) {\n        int h = min(height[left], height[right]);\n        int width = right - left;\n        maxWater = max(maxWater, h * width);\n        if(height[left] < height[right]) left++;\n        else right--;\n    }\n    return maxWater;\n}\nint main() { int h[] = {1, 8, 6, 2, 5, 4, 8, 3, 7}; cout << maxArea(h, 9); return 0; }",
         "explanation": {
@@ -245,7 +245,7 @@
         "description": "Given an array, find all unique triplets that sum to zero.",
         "difficulty": "MEDIUM",
         "category": "Two Pointers",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint threeSum(int nums[], int n) { return 0; }\nint main() { int nu[] = {-1, 0, 1, 2, -1, -4}; cout << threeSum(nu, 6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint threeSum(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << threeSum(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\nint threeSum(int nums[], int n) {\n    for(int i = 0; i < n - 1; i++) for(int j = 0; j < n - i - 1; j++) if(nums[j] > nums[j + 1]) { int temp = nums[j]; nums[j] = nums[j + 1]; nums[j + 1] = temp; }\n    int count = 0;\n    for(int i = 0; i < n - 2; i++) {\n        if(i > 0 && nums[i] == nums[i - 1]) continue;\n        int left = i + 1, right = n - 1;\n        while(left < right) {\n            int sum = nums[i] + nums[left] + nums[right];\n            if(sum == 0) { count++; while(left < right && nums[left] == nums[left + 1]) left++; while(left < right && nums[right] == nums[right - 1]) right--; left++; right--; }\n            else if(sum < 0) left++;\n            else right--;\n        }\n    }\n    return count;\n}\nint main() { int nu[] = {-1, 0, 1, 2, -1, -4}; cout << threeSum(nu, 6); return 0; }",
         "explanation": {
@@ -286,7 +286,7 @@
         "description": "Given an array and target, find the sum of three integers closest to target.",
         "difficulty": "MEDIUM",
         "category": "Two Pointers",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint threeSumClosest(int nums[], int n, int target) { return 0; }\nint main() { int nu[] = {-1, 2, 1, -4}; cout << threeSumClosest(nu, 4, 1); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint threeSumClosest(vector<int>& nums, int n, int target) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    int target;\n    cin >> target;\n    cout << threeSumClosest(nums, n, target);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\nint threeSumClosest(int nums[], int n, int target) {\n    for(int i = 0; i < n - 1; i++) for(int j = 0; j < n - i - 1; j++) if(nums[j] > nums[j + 1]) { int temp = nums[j]; nums[j] = nums[j + 1]; nums[j + 1] = temp; }\n    int closest = nums[0] + nums[1] + nums[2];\n    for(int i = 0; i < n - 2; i++) {\n        int left = i + 1, right = n - 1;\n        while(left < right) {\n            int sum = nums[i] + nums[left] + nums[right];\n            if(abs(sum - target) < abs(closest - target)) closest = sum;\n            if(sum < target) left++;\n            else right--;\n        }\n    }\n    return closest;\n}\nint main() { int nu[] = {-1, 2, 1, -4}; cout << threeSumClosest(nu, 4, 1); return 0; }",
         "explanation": {
@@ -327,7 +327,7 @@
         "description": "Given an array of 0s, 1s, and 2s, sort them in-place (Dutch National Flag).",
         "difficulty": "MEDIUM",
         "category": "Two Pointers",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid sortColors(int nums[], int n) {}\nint main() { int nu[] = {2, 0, 2, 1, 1, 0}; sortColors(nu, 6); for(int i = 0; i < 6; i++) cout << nu[i] << \" \"; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid sortColors(vector<int>& nums, int n) {\n    // TODO\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    sortColors(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "0 0 1 1 2 2",
         "solution": "#include <iostream>\nusing namespace std;\nvoid sortColors(int nums[], int n) {\n    int low = 0, mid = 0, high = n - 1;\n    while(mid <= high) {\n        if(nums[mid] == 0) { int temp = nums[low]; nums[low] = nums[mid]; nums[mid] = temp; low++; mid++; }\n        else if(nums[mid] == 1) mid++;\n        else { int temp = nums[mid]; nums[mid] = nums[high]; nums[high] = temp; high--; }\n    }\n}\nint main() { int nu[] = {2, 0, 2, 1, 1, 0}; sortColors(nu, 6); for(int i = 0; i < 6; i++) cout << nu[i] << \" \"; return 0; }",
         "explanation": {
@@ -368,7 +368,7 @@
         "description": "Find the minimal length of a contiguous subarray with sum >= target.",
         "difficulty": "MEDIUM",
         "category": "Sliding Window",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint minSubArrayLen(int target, int nums[], int n) { return 0; }\nint main() { int nu[] = {2, 3, 1, 2, 4, 3}; cout << minSubArrayLen(7, nu, 6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint minSubArrayLen(int target, vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int target;\n    cin >> target;\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << minSubArrayLen(target, nums, n);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "solution": "#include <iostream>\nusing namespace std;\nint minSubArrayLen(int target, int nums[], int n) {\n    int left = 0, sum = 0;\n    int minLen = n + 1;\n    for(int right = 0; right < n; right++) {\n        sum += nums[right];\n        while(sum >= target) {\n            minLen = min(minLen, right - left + 1);\n            sum -= nums[left];\n            left++;\n        }\n    }\n    return minLen > n ? 0 : minLen;\n}\nint main() { int nu[] = {2, 3, 1, 2, 4, 3}; cout << minSubArrayLen(7, nu, 6); return 0; }",
         "explanation": {

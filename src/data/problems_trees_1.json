@@ -38,7 +38,10 @@
                 "expectedOutput": "0",
                 "explanation": "Same values, different positions"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "tree12",
@@ -79,7 +82,10 @@
                 "expectedOutput": "1",
                 "explanation": "t is a leaf in s"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "tree13",
@@ -120,7 +126,10 @@
                 "expectedOutput": "1",
                 "explanation": "Single node unchanged"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "tree14",
@@ -161,7 +170,10 @@
                 "expectedOutput": "48",
                 "explanation": "11+4+5+8+13+4 or similar path"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     },
     {
         "id": "tree15",
@@ -202,7 +214,10 @@
                 "expectedOutput": "2 3 1",
                 "explanation": "Balanced tree"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "tree16",
@@ -243,7 +258,10 @@
                 "expectedOutput": "3 5",
                 "explanation": "Perfect binary tree linking"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     },
     {
         "id": "tree17",
@@ -284,7 +302,10 @@
                 "expectedOutput": "3",
                 "explanation": "Increasing path, all good"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "linkedList",
+        "inputInstructions": "This problem uses a linked list. The input is given as an array [1,2,3,4,5]. Build your linked list from this array before processing."
     },
     {
         "id": "tree18",
@@ -326,7 +347,10 @@
                 "expectedOutput": "1->2->4 1->2->5 1->3",
                 "explanation": "Three paths"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "tree19",
@@ -367,7 +391,10 @@
                 "expectedOutput": "3",
                 "explanation": "Chain path 4-3-2-1"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "tree",
+        "inputInstructions": "This problem uses a binary tree structure. The input format is a level-order array like [1,2,3,null,4]. Your solution should build the tree from this input."
     },
     {
         "id": "tree20",
@@ -409,6 +436,9 @@
                 "expectedOutput": "422",
                 "explanation": "100+101+100+101=402"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     }
 ]

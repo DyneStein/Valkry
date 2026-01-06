@@ -5,7 +5,7 @@
         "description": "Longest word buildable.",
         "difficulty": "MEDIUM",
         "category": "Trie",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid longestWord(char* words[], int n) {}\nint main() { char* w[]={\"w\",\"wo\",\"wor\",\"worl\",\"world\"}; longestWord(w,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid longestWord(vector<string>& words, int n) {\n    // TODO\n}\n\nint main() {\n    int words_size;\n    cin >> words_size;\n    vector<string> words(words_size);\n    for (int i = 0; i < words_size; i++) cin >> words[i];\n    int n;\n    cin >> n;\n    longestWord(words, n);\n    return 0;\n}\n",
         "expectedOutput": "world",
         "solution": "#include <iostream>\nusing namespace std;\nvoid longestWord(char* words[], int n) { cout<<\"world\"; }\nint main() { char* w[]={\"w\",\"wo\",\"wor\",\"worl\",\"world\"}; longestWord(w,5); return 0; }",
         "explanation": {
@@ -45,9 +45,9 @@
         "description": "Replace with root in dictionary.",
         "difficulty": "MEDIUM",
         "category": "Trie",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid replaceWords(char* dict[], int d, char sentence[]) {}\nint main() { char* di[]={\"cat\",\"bat\",\"rat\"}; char s[]=\"the cattle was rattled by the battery\"; replaceWords(di,3,s); cout << s; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid replaceWords(vector<string>& dict, int d, vector<int>& sentence) {\n    // TODO\n}\n\nint main() {\n    int dict_size;\n    cin >> dict_size;\n    vector<string> dict(dict_size);\n    for (int i = 0; i < dict_size; i++) cin >> dict[i];\n    int d;\n    cin >> d;\n    int sentence_size;\n    cin >> sentence_size;\n    vector<int> sentence(sentence_size);\n    for (int i = 0; i < sentence_size; i++) cin >> sentence[i];\n    replaceWords(dict, d, sentence);\n    return 0;\n}\n",
         "expectedOutput": "the cat was rat by the bat",
-        "solution": "#include <iostream>\nusing namespace std;\nvoid replaceWords(char* dict[], int d, char sentence[]) { cout<<\"the cat was rat by the bat\"; }\nint main() { char* di[]={\"cat\",\"bat\",\"rat\"}; char s[]=\"the cattle was rattled by the battery\"; replaceWords(di,3,s); cout << s; return 0; }",
+        "solution": "#include <iostream>\n#include <cstring>\n#include <string>\nusing namespace std;\nvoid replaceWords(char* dict[], int d, char sentence[]) {\n    string s(sentence);\n    string result = \"\";\n    int n = s.size();\n    int i = 0;\n    while (i < n) {\n        if (s[i] == ' ') { result += ' '; i++; continue; }\n        int start = i;\n        while (i < n && s[i] != ' ') i++;\n        string word = s.substr(start, i - start);\n        string best = word;\n        for (int j = 0; j < d; j++) {\n            string root = dict[j];\n            if (word.compare(0, root.size(), root) == 0) {\n                if (root.size() < best.size()) best = root;\n            }\n        }\n        result += best;\n    }\n    strcpy(sentence, result.c_str());\n}\nint main() {\n    char* di[]={\"cat\",\"bat\",\"rat\"};\n    char s[]=\"the cattle was rattled by the battery\";\n    replaceWords(di,3,s);\n    cout << s;\n    return 0;\n}",
         "explanation": {
             "approach": "Build trie, find shortest prefix.",
             "steps": [
@@ -117,7 +117,10 @@
                 "expectedOutput": "6",
                 "explanation": "All 3 match: 1+2+3=6"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     },
     {
         "id": "m224",
@@ -125,7 +128,7 @@
         "description": "Max XOR of any pair.",
         "difficulty": "MEDIUM",
         "category": "Trie",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint findMaximumXOR(int nums[], int n) { return 0; }\nint main() { int nu[]={3,10,5,25,2,8}; cout << findMaximumXOR(nu,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint findMaximumXOR(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << findMaximumXOR(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "28",
         "solution": "#include <iostream>\nusing namespace std;\nint findMaximumXOR(int nums[], int n) { int mx=0; for(int i=0;i<n;i++) for(int j=i+1;j<n;j++) mx=max(mx,nums[i]^nums[j]); return mx; }\nint main() { int nu[]={3,10,5,25,2,8}; cout << findMaximumXOR(nu,6); return 0; }",
         "explanation": {
@@ -197,6 +200,9 @@
                 "expectedOutput": "0",
                 "explanation": "Different length, not valid"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     }
 ]

@@ -5,7 +5,7 @@
         "description": "Search in sorted array.",
         "difficulty": "EASY",
         "category": "Binary Search",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint binarySearch(int arr[], int n, int x) { return -1; }\nint main() { int a[] = {1,3,5,7,9}; cout << binarySearch(a, 5, 5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint binarySearch(vector<int>& arr, int n, int x) {\n    return 0;\n}\n\nint main() {\n    int arr_size;\n    cin >> arr_size;\n    vector<int> arr(arr_size);\n    for (int i = 0; i < arr_size; i++) cin >> arr[i];\n    int n;\n    cin >> n;\n    int x;\n    cin >> x;\n    cout << binarySearch(arr, n, x);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "testCases": [
             {
@@ -77,7 +77,7 @@
         "description": "Sort array ascending.",
         "difficulty": "EASY",
         "category": "Sorting",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid bubbleSort(int arr[], int n) {}\nint main() { int a[] = {5,1,4,2,8}; bubbleSort(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid bubbleSort(vector<int>& arr, int n) {\n    // TODO\n}\n\nint main() {\n    int arr_size;\n    cin >> arr_size;\n    vector<int> arr(arr_size);\n    for (int i = 0; i < arr_size; i++) cin >> arr[i];\n    int n;\n    cin >> n;\n    bubbleSort(arr, n);\n    return 0;\n}\n",
         "expectedOutput": "1 2 4 5 8",
         "testCases": [
             {
@@ -149,7 +149,7 @@
         "description": "Sort by selecting minimum.",
         "difficulty": "EASY",
         "category": "Sorting",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid selectionSort(int arr[], int n) {}\nint main() { int a[] = {64,25,12,22,11}; selectionSort(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid selectionSort(vector<int>& arr, int n) {\n    // TODO\n}\n\nint main() {\n    int arr_size;\n    cin >> arr_size;\n    vector<int> arr(arr_size);\n    for (int i = 0; i < arr_size; i++) cin >> arr[i];\n    int n;\n    cin >> n;\n    selectionSort(arr, n);\n    return 0;\n}\n",
         "expectedOutput": "11 12 22 25 64",
         "testCases": [
             {
@@ -220,7 +220,7 @@
         "description": "Sort by inserting in place.",
         "difficulty": "EASY",
         "category": "Sorting",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid insertionSort(int arr[], int n) {}\nint main() { int a[] = {12,11,13,5,6}; insertionSort(a,5); for(int i=0;i<5;i++) cout<<a[i]<<(i<4?\" \":\"\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid insertionSort(vector<int>& arr, int n) {\n    // TODO\n}\n\nint main() {\n    int arr_size;\n    cin >> arr_size;\n    vector<int> arr(arr_size);\n    for (int i = 0; i < arr_size; i++) cin >> arr[i];\n    int n;\n    cin >> n;\n    insertionSort(arr, n);\n    return 0;\n}\n",
         "expectedOutput": "5 6 11 12 13",
         "testCases": [
             {
@@ -291,7 +291,7 @@
         "description": "Find length of string.",
         "difficulty": "EASY",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint strLen(char s[]) { return 0; }\nint main() { cout << strLen(\"hello\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint strLen(vector<int>& s) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << strLen(s);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "testCases": [
             {
@@ -362,7 +362,7 @@
         "description": "Copy string to another.",
         "difficulty": "EASY",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid strCopy(char dest[], char src[]) {}\nint main() { char d[20]; strCopy(d, \"hello\"); cout << d; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid strCopy(vector<int>& dest, vector<int>& src) {\n    // TODO\n}\n\nint main() {\n    int dest_size;\n    cin >> dest_size;\n    vector<int> dest(dest_size);\n    for (int i = 0; i < dest_size; i++) cin >> dest[i];\n    int src_size;\n    cin >> src_size;\n    vector<int> src(src_size);\n    for (int i = 0; i < src_size; i++) cin >> src[i];\n    strCopy(dest, src);\n    return 0;\n}\n",
         "expectedOutput": "hello",
         "testCases": [
             {
@@ -433,7 +433,7 @@
         "description": "Compare two strings.",
         "difficulty": "EASY",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint strCmp(char a[], char b[]) { return 0; }\nint main() { cout << strCmp(\"abc\", \"abc\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint strCmp(vector<int>& a, vector<int>& b) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int b_size;\n    cin >> b_size;\n    vector<int> b(b_size);\n    for (int i = 0; i < b_size; i++) cin >> b[i];\n    cout << strCmp(a, b);\n    return 0;\n}\n",
         "expectedOutput": "0",
         "testCases": [
             {
@@ -504,7 +504,7 @@
         "description": "Reverse a string.",
         "difficulty": "EASY",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid reverse(char s[]) {}\nint main() { char s[] = \"hello\"; reverse(s); cout << s; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid reverse(vector<int>& s) {\n    // TODO\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    reverse(s);\n    return 0;\n}\n",
         "expectedOutput": "olleh",
         "testCases": [
             {
@@ -575,7 +575,7 @@
         "description": "Is string a palindrome.",
         "difficulty": "EASY",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPalindrome(char s[]) { return false; }\nint main() { cout << isPalindrome(\"radar\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPalindrome(vector<int>& s) {\n    return false;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << isPalindrome(s);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -646,7 +646,7 @@
         "description": "Count vowels in string.",
         "difficulty": "EASY",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countVowels(char s[]) { return 0; }\nint main() { cout << countVowels(\"hello world\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countVowels(vector<int>& s) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << countVowels(s);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "testCases": [
             {
@@ -718,7 +718,7 @@
         "description": "Count words in string.",
         "difficulty": "EASY",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countWords(char s[]) { return 0; }\nint main() { cout << countWords(\"hello world test\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countWords(vector<int>& s) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << countWords(s);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "testCases": [
             {
@@ -789,7 +789,7 @@
         "description": "Convert string to uppercase.",
         "difficulty": "EASY",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid toUpper(char s[]) {}\nint main() { char s[] = \"hello\"; toUpper(s); cout << s; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid toUpper(vector<int>& s) {\n    // TODO\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    toUpper(s);\n    return 0;\n}\n",
         "expectedOutput": "HELLO",
         "testCases": [
             {
@@ -860,7 +860,7 @@
         "description": "Convert string to lowercase.",
         "difficulty": "EASY",
         "category": "Strings",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid toLower(char s[]) {}\nint main() { char s[] = \"HELLO\"; toLower(s); cout << s; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid toLower(vector<int>& s) {\n    // TODO\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    toLower(s);\n    return 0;\n}\n",
         "expectedOutput": "hello",
         "testCases": [
             {

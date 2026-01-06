@@ -1,0 +1,404 @@
+[
+    {
+        "id": "core51",
+        "title": "Valid Sudoku",
+        "description": "Check if a 9×9 Sudoku board is valid (no duplicates in rows, columns, or 3×3 boxes).",
+        "difficulty": "MEDIUM",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isValidSudoku(char board[][9]) { return false; }\nint main() { cout << \"Check Sudoku\"; return 0; }",
+        "expectedOutput": "Check Sudoku",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isValidSudoku(char board[][9]) {\n    for(int i = 0; i < 9; i++) {\n        bool row[10] = {}, col[10] = {}, box[10] = {};\n        for(int j = 0; j < 9; j++) {\n            if(board[i][j] != '.') {\n                int d = board[i][j] - '0';\n                if(row[d]) return false;\n                row[d] = true;\n            }\n            if(board[j][i] != '.') {\n                int d = board[j][i] - '0';\n                if(col[d]) return false;\n                col[d] = true;\n            }\n            int boxRow = 3 * (i / 3) + j / 3;\n            int boxCol = 3 * (i % 3) + j % 3;\n            if(board[boxRow][boxCol] != '.') {\n                int d = board[boxRow][boxCol] - '0';\n                if(box[d]) return false;\n                box[d] = true;\n            }\n        }\n    }\n    return true;\n}\nint main() { cout << \"Check Sudoku\"; return 0; }",
+        "explanation": {
+            "approach": "Check each row, column, and 3×3 box for duplicates.",
+            "steps": [
+                "Track seen digits with boolean arrays",
+                "Check all three in one pass"
+            ],
+            "complexity": "Time: O(81), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "Valid partial sudoku",
+                "expectedOutput": "1",
+                "explanation": "No rule violations"
+            },
+            {
+                "input": "Duplicate in row",
+                "expectedOutput": "0",
+                "explanation": "Same digit twice in row"
+            },
+            {
+                "input": "Duplicate in column",
+                "expectedOutput": "0",
+                "explanation": "Same digit twice in column"
+            },
+            {
+                "input": "Duplicate in 3x3 box",
+                "expectedOutput": "0",
+                "explanation": "Same digit in sub-box"
+            }
+        ]
+    },
+    {
+        "id": "core52",
+        "title": "Rotate Image",
+        "description": "Rotate n×n matrix 90° clockwise in-place.",
+        "difficulty": "MEDIUM",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid rotate(int m[][3], int n) {}\nint main() { int m[][3] = {{1,2,3}, {4,5,6}, {7,8,9}}; rotate(m, 3); for(int i=0;i<3;i++) for(int j=0;j<3;j++) cout << m[i][j] << \" \"; return 0; }",
+        "expectedOutput": "7 4 1 8 5 2 9 6 3",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid rotate(int m[][3], int n) {\n    for(int i = 0; i < n; i++)\n        for(int j = i; j < n; j++)\n            swap(m[i][j], m[j][i]);\n    for(int i = 0; i < n; i++) {\n        int l = 0, r = n - 1;\n        while(l < r) swap(m[i][l++], m[i][r--]);\n    }\n}\nint main() { int m[][3] = {{1,2,3}, {4,5,6}, {7,8,9}}; rotate(m, 3); for(int i=0;i<3;i++) for(int j=0;j<3;j++) cout << m[i][j] << \" \"; return 0; }",
+        "explanation": {
+            "approach": "Transpose then reverse each row.",
+            "steps": [
+                "Swap m[i][j] with m[j][i]",
+                "Reverse each row"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "3x3 matrix [[1,2,3],[4,5,6],[7,8,9]]",
+                "expectedOutput": "7 4 1 8 5 2 9 6 3",
+                "explanation": "90° clockwise rotation"
+            },
+            {
+                "input": "1x1 matrix [[1]]",
+                "expectedOutput": "1",
+                "explanation": "Single element unchanged"
+            },
+            {
+                "input": "2x2 matrix [[1,2],[3,4]]",
+                "expectedOutput": "3 1 4 2",
+                "explanation": "Simple 2x2 rotation"
+            },
+            {
+                "input": "4x4 matrix",
+                "expectedOutput": "Rotated 4x4",
+                "explanation": "Larger matrix works"
+            }
+        ]
+    },
+    {
+        "id": "core53",
+        "title": "Set Matrix Zeroes",
+        "description": "If element is 0, set entire row and column to 0. Use O(1) space.",
+        "difficulty": "MEDIUM",
+        "category": "Matrix",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid setZeroes(int m[][3], int rows, int cols) {}\nint main() { int m[][3] = {{1,1,1}, {1,0,1}, {1,1,1}}; setZeroes(m, 3, 3); for(int i=0;i<3;i++) for(int j=0;j<3;j++) cout << m[i][j] << \" \"; return 0; }",
+        "expectedOutput": "1 0 1 0 0 0 1 0 1",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid setZeroes(int m[][3], int rows, int cols) {\n    bool firstRowZero = false, firstColZero = false;\n    for(int j = 0; j < cols; j++) if(m[0][j] == 0) firstRowZero = true;\n    for(int i = 0; i < rows; i++) if(m[i][0] == 0) firstColZero = true;\n    for(int i = 1; i < rows; i++)\n        for(int j = 1; j < cols; j++)\n            if(m[i][j] == 0) { m[i][0] = 0; m[0][j] = 0; }\n    for(int i = 1; i < rows; i++)\n        for(int j = 1; j < cols; j++)\n            if(m[i][0] == 0 || m[0][j] == 0) m[i][j] = 0;\n    if(firstRowZero) for(int j = 0; j < cols; j++) m[0][j] = 0;\n    if(firstColZero) for(int i = 0; i < rows; i++) m[i][0] = 0;\n}\nint main() { int m[][3] = {{1,1,1}, {1,0,1}, {1,1,1}}; setZeroes(m, 3, 3); for(int i=0;i<3;i++) for(int j=0;j<3;j++) cout << m[i][j] << \" \"; return 0; }",
+        "explanation": {
+            "approach": "Use first row/column as markers.",
+            "steps": [
+                "Mark rows/cols to zero",
+                "Apply markers",
+                "Handle first row/col"
+            ],
+            "complexity": "Time: O(m×n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "[[1,1,1],[1,0,1],[1,1,1]]",
+                "expectedOutput": "1 0 1 0 0 0 1 0 1",
+                "explanation": "Middle zero spreads"
+            },
+            {
+                "input": "[[0,1,2],[3,4,5],[6,7,8]]",
+                "expectedOutput": "All first row/col zero",
+                "explanation": "Corner zero"
+            },
+            {
+                "input": "[[1,2,3],[4,5,6]]",
+                "expectedOutput": "Same matrix",
+                "explanation": "No zeros"
+            },
+            {
+                "input": "[[0,0],[0,0]]",
+                "expectedOutput": "All zeros",
+                "explanation": "All already zero"
+            }
+        ]
+    },
+    {
+        "id": "core54",
+        "title": "Search 2D Matrix",
+        "description": "Search in sorted matrix (rows sorted, each row starts larger than previous row ends).",
+        "difficulty": "MEDIUM",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool searchMatrix(int m[][4], int rows, int cols, int target) { return false; }\nint main() { int m[][4] = {{1,3,5,7}, {10,11,16,20}, {23,30,34,60}}; cout << searchMatrix(m, 3, 4, 3); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool searchMatrix(int m[][4], int rows, int cols, int target) {\n    int left = 0, right = rows * cols - 1;\n    while(left <= right) {\n        int mid = (left + right) / 2;\n        int val = m[mid / cols][mid % cols];\n        if(val == target) return true;\n        if(val < target) left = mid + 1;\n        else right = mid - 1;\n    }\n    return false;\n}\nint main() { int m[][4] = {{1,3,5,7}, {10,11,16,20}, {23,30,34,60}}; cout << searchMatrix(m, 3, 4, 3); return 0; }",
+        "explanation": {
+            "approach": "Treat as 1D sorted array, binary search.",
+            "steps": [
+                "Index i maps to (i/cols, i%cols)",
+                "Standard binary search"
+            ],
+            "complexity": "Time: O(log(m×n)), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "matrix, target=3",
+                "expectedOutput": "1",
+                "explanation": "3 found in first row"
+            },
+            {
+                "input": "matrix, target=13",
+                "expectedOutput": "0",
+                "explanation": "13 not in matrix"
+            },
+            {
+                "input": "matrix, target=60",
+                "expectedOutput": "1",
+                "explanation": "Last element"
+            },
+            {
+                "input": "matrix, target=1",
+                "expectedOutput": "1",
+                "explanation": "First element"
+            }
+        ]
+    },
+    {
+        "id": "core55",
+        "title": "Search 2D Matrix II",
+        "description": "Search in matrix where each row AND column is sorted (rows don't continue each other).",
+        "difficulty": "MEDIUM",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool searchMatrix(int m[][5], int rows, int cols, int target) { return false; }\nint main() { int mx[][5] = {{1,4,7,11,15}, {2,5,8,12,19}, {3,6,9,16,22}, {10,13,14,17,24}, {18,21,23,26,30}}; cout << searchMatrix(mx, 5, 5, 5); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool searchMatrix(int m[][5], int rows, int cols, int target) {\n    int row = 0, col = cols - 1;\n    while(row < rows && col >= 0) {\n        if(m[row][col] == target) return true;\n        if(m[row][col] > target) col--;\n        else row++;\n    }\n    return false;\n}\nint main() { int mx[][5] = {{1,4,7,11,15}, {2,5,8,12,19}, {3,6,9,16,22}, {10,13,14,17,24}, {18,21,23,26,30}}; cout << searchMatrix(mx, 5, 5, 5); return 0; }",
+        "explanation": {
+            "approach": "Start from top-right, eliminate row or column each step.",
+            "steps": [
+                "If too big, go left",
+                "If too small, go down"
+            ],
+            "complexity": "Time: O(m+n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "5x5 matrix, target=5",
+                "expectedOutput": "1",
+                "explanation": "5 found"
+            },
+            {
+                "input": "5x5 matrix, target=20",
+                "expectedOutput": "0",
+                "explanation": "20 not in matrix"
+            },
+            {
+                "input": "5x5 matrix, target=1",
+                "expectedOutput": "1",
+                "explanation": "Top-left corner"
+            },
+            {
+                "input": "5x5 matrix, target=30",
+                "expectedOutput": "1",
+                "explanation": "Bottom-right corner"
+            }
+        ]
+    },
+    {
+        "id": "core56",
+        "title": "Word Search",
+        "description": "Find if word exists in grid using adjacent cells (no reuse).",
+        "difficulty": "MEDIUM",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool exist(char board[][4], int m, int n, char word[]) { return false; }\nint main() { char b[][4] = {{\"ABCE\"}, {\"SFCS\"}, {\"ADEE\"}}; cout << exist(b, 3, 4, \"ABCCED\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool dfs(char board[][4], int m, int n, char word[], int i, int j, int k) {\n    if(word[k] == 0) return true;\n    if(i < 0 || i >= m || j < 0 || j >= n) return false;\n    if(board[i][j] != word[k]) return false;\n    char temp = board[i][j];\n    board[i][j] = '#';\n    bool found = dfs(board, m, n, word, i+1, j, k+1) ||\n                 dfs(board, m, n, word, i-1, j, k+1) ||\n                 dfs(board, m, n, word, i, j+1, k+1) ||\n                 dfs(board, m, n, word, i, j-1, k+1);\n    board[i][j] = temp;\n    return found;\n}\nbool exist(char board[][4], int m, int n, char word[]) {\n    for(int i = 0; i < m; i++)\n        for(int j = 0; j < n; j++)\n            if(dfs(board, m, n, word, i, j, 0)) return true;\n    return false;\n}\nint main() { char b[][4] = {{\"ABCE\"}, {\"SFCS\"}, {\"ADEE\"}}; cout << exist(b, 3, 4, \"ABCCED\"); return 0; }",
+        "explanation": {
+            "approach": "DFS with backtracking from each cell.",
+            "steps": [
+                "Try each starting cell",
+                "DFS in 4 directions",
+                "Mark visited, restore on backtrack"
+            ],
+            "complexity": "Time: O(m×n×4^L), Space: O(L)"
+        },
+        "testCases": [
+            {
+                "input": "grid, word='ABCCED'",
+                "expectedOutput": "1",
+                "explanation": "Path exists"
+            },
+            {
+                "input": "grid, word='SEE'",
+                "expectedOutput": "1",
+                "explanation": "Another valid path"
+            },
+            {
+                "input": "grid, word='ABCB'",
+                "expectedOutput": "0",
+                "explanation": "Can't reuse cell"
+            },
+            {
+                "input": "grid, word='Z'",
+                "expectedOutput": "0",
+                "explanation": "Letter not in grid"
+            }
+        ]
+    },
+    {
+        "id": "core57",
+        "title": "N-Queens",
+        "description": "Count ways to place n queens on n×n board with no attacks.",
+        "difficulty": "HARD",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint totalNQueens(int n) { return 0; }\nint main() { cout << totalNQueens(4); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint count;\nbool col[10], diag1[20], diag2[20];\nvoid solve(int row, int n) {\n    if(row == n) { count++; return; }\n    for(int c = 0; c < n; c++) {\n        if(!col[c] && !diag1[row-c+n] && !diag2[row+c]) {\n            col[c] = diag1[row-c+n] = diag2[row+c] = true;\n            solve(row + 1, n);\n            col[c] = diag1[row-c+n] = diag2[row+c] = false;\n        }\n    }\n}\nint totalNQueens(int n) {\n    count = 0;\n    for(int i = 0; i < 10; i++) col[i] = false;\n    for(int i = 0; i < 20; i++) diag1[i] = diag2[i] = false;\n    solve(0, n);\n    return count;\n}\nint main() { cout << totalNQueens(4); return 0; }",
+        "explanation": {
+            "approach": "Backtracking row by row, track columns and diagonals.",
+            "steps": [
+                "Place queen, check column/diagonals free",
+                "Recurse, backtrack"
+            ],
+            "complexity": "Time: O(n!), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=4",
+                "expectedOutput": "2",
+                "explanation": "Two valid arrangements"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Single queen, single cell"
+            },
+            {
+                "input": "n=8",
+                "expectedOutput": "92",
+                "explanation": "Classic 8-queens"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "0",
+                "explanation": "No valid solution"
+            }
+        ]
+    },
+    {
+        "id": "core58",
+        "title": "Sudoku Solver",
+        "description": "Solve a Sudoku puzzle by filling empty cells.",
+        "difficulty": "HARD",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid solveSudoku(char board[][9]) {}\nint main() { cout << \"Sudoku Solver\"; return 0; }",
+        "expectedOutput": "Sudoku Solver",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isValid(char board[][9], int row, int col, char c) {\n    for(int i = 0; i < 9; i++) {\n        if(board[row][i] == c) return false;\n        if(board[i][col] == c) return false;\n        int boxRow = 3 * (row / 3) + i / 3;\n        int boxCol = 3 * (col / 3) + i % 3;\n        if(board[boxRow][boxCol] == c) return false;\n    }\n    return true;\n}\nbool solve(char board[][9]) {\n    for(int i = 0; i < 9; i++) {\n        for(int j = 0; j < 9; j++) {\n            if(board[i][j] == '.') {\n                for(char c = '1'; c <= '9'; c++) {\n                    if(isValid(board, i, j, c)) {\n                        board[i][j] = c;\n                        if(solve(board)) return true;\n                        board[i][j] = '.';\n                    }\n                }\n                return false;\n            }\n        }\n    }\n    return true;\n}\nvoid solveSudoku(char board[][9]) { solve(board); }\nint main() { cout << \"Sudoku Solver\"; return 0; }",
+        "explanation": {
+            "approach": "Backtracking: try digits 1-9 in empty cells.",
+            "steps": [
+                "Find empty cell",
+                "Try valid digits",
+                "Backtrack if stuck"
+            ],
+            "complexity": "Time: O(9^empty_cells), Space: O(81)"
+        },
+        "testCases": [
+            {
+                "input": "Valid solvable puzzle",
+                "expectedOutput": "Solved board",
+                "explanation": "Standard sudoku"
+            },
+            {
+                "input": "Easy puzzle (few blanks)",
+                "expectedOutput": "Solved quickly",
+                "explanation": "Less backtracking"
+            },
+            {
+                "input": "Hard puzzle (many blanks)",
+                "expectedOutput": "Solved",
+                "explanation": "More backtracking"
+            },
+            {
+                "input": "Already solved",
+                "expectedOutput": "Same board",
+                "explanation": "No changes needed"
+            }
+        ]
+    },
+    {
+        "id": "core59",
+        "title": "Generate Parentheses",
+        "description": "Generate all valid combinations of n pairs of parentheses.",
+        "difficulty": "MEDIUM",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint count;\nvoid generateParenthesis(int n) {}\nint main() { generateParenthesis(3); return 0; }",
+        "expectedOutput": "5",
+        "solution": "#include <iostream>\nusing namespace std;\nint count;\nvoid generate(int open, int close, int n) {\n    if(open == n && close == n) { count++; return; }\n    if(open < n) generate(open + 1, close, n);\n    if(close < open) generate(open, close + 1, n);\n}\nvoid generateParenthesis(int n) {\n    count = 0;\n    generate(0, 0, n);\n    cout << count;\n}\nint main() { generateParenthesis(3); return 0; }",
+        "explanation": {
+            "approach": "Add ( if open<n, add ) if close<open.",
+            "steps": [
+                "Track open and close counts",
+                "Build valid strings only"
+            ],
+            "complexity": "Time: O(4^n/√n), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "n=3",
+                "expectedOutput": "5",
+                "explanation": "5 valid combinations"
+            },
+            {
+                "input": "n=1",
+                "expectedOutput": "1",
+                "explanation": "Just ()"
+            },
+            {
+                "input": "n=2",
+                "expectedOutput": "2",
+                "explanation": "(()) and ()()"
+            },
+            {
+                "input": "n=4",
+                "expectedOutput": "14",
+                "explanation": "Catalan number"
+            }
+        ]
+    },
+    {
+        "id": "core60",
+        "title": "Permutations",
+        "description": "Generate all permutations of distinct integers array.",
+        "difficulty": "MEDIUM",
+        "category": "Backtracking",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint count;\nvoid permute(int nums[], int n) {}\nint main() { int a[] = {1, 2, 3}; permute(a, 3); return 0; }",
+        "expectedOutput": "6",
+        "solution": "#include <iostream>\nusing namespace std;\nint count;\nvoid backtrack(int nums[], int n, int start) {\n    if(start == n) { count++; return; }\n    for(int i = start; i < n; i++) {\n        swap(nums[start], nums[i]);\n        backtrack(nums, n, start + 1);\n        swap(nums[start], nums[i]);\n    }\n}\nvoid permute(int nums[], int n) {\n    count = 0;\n    backtrack(nums, n, 0);\n    cout << count;\n}\nint main() { int a[] = {1, 2, 3}; permute(a, 3); return 0; }",
+        "explanation": {
+            "approach": "Swap each element to current position, recurse.",
+            "steps": [
+                "Swap, recurse for rest, swap back"
+            ],
+            "complexity": "Time: O(n×n!), Space: O(n)"
+        },
+        "testCases": [
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "6",
+                "explanation": "3! = 6 permutations"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "1",
+                "explanation": "Single element"
+            },
+            {
+                "input": "[1,2]",
+                "expectedOutput": "2",
+                "explanation": "2! = 2"
+            },
+            {
+                "input": "[1,2,3,4]",
+                "expectedOutput": "24",
+                "explanation": "4! = 24"
+            }
+        ]
+    }
+]

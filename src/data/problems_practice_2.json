@@ -5,7 +5,7 @@
         "description": "Convert temperature.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\nusing namespace std;\ndouble fToC(double f) { return 0; }\nint main() { cout<<fToC(98.6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble fToC(double f) {\n    return 0;\n}\n\nint main() {\n    double f;\n    cin >> f;\n    cout << fToC(f);\n    return 0;\n}\n",
         "expectedOutput": "37",
         "solution": "#include <iostream>\nusing namespace std;\ndouble fToC(double f) { return (f-32)*5/9; }\nint main() { cout<<(int)fToC(98.6); return 0; }",
         "explanation": {
@@ -46,7 +46,7 @@
         "description": "Convert temperature.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\nusing namespace std;\ndouble cToF(double c) { return 0; }\nint main() { cout<<cToF(37); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble cToF(double c) {\n    return 0;\n}\n\nint main() {\n    double c;\n    cin >> c;\n    cout << cToF(c);\n    return 0;\n}\n",
         "expectedOutput": "98.6",
         "solution": "#include <iostream>\nusing namespace std;\ndouble cToF(double c) { return c*9/5+32; }\nint main() { cout<<cToF(37); return 0; }",
         "explanation": {
@@ -87,7 +87,7 @@
         "description": "Calculate simple interest.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\nusing namespace std;\ndouble simpleInterest(double p, double r, double t) { return 0; }\nint main() { cout<<simpleInterest(1000,5,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble simpleInterest(double p, double r, double t) {\n    return 0;\n}\n\nint main() {\n    double p;\n    cin >> p;\n    double r;\n    cin >> r;\n    double t;\n    cin >> t;\n    cout << simpleInterest(p, r, t);\n    return 0;\n}\n",
         "expectedOutput": "100",
         "solution": "#include <iostream>\nusing namespace std;\ndouble simpleInterest(double p, double r, double t) { return p*r*t/100; }\nint main() { cout<<simpleInterest(1000,5,2); return 0; }",
         "explanation": {
@@ -128,7 +128,7 @@
         "description": "Calculate compound interest.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble compoundInterest(double p, double r, int t) { return 0; }\nint main() { cout<<(int)compoundInterest(1000,10,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble compoundInterest(double p, double r, int t) {\n    return 0;\n}\n\nint main() {\n    double p;\n    cin >> p;\n    double r;\n    cin >> r;\n    int t;\n    cin >> t;\n    cout << compoundInterest(p, r, t);\n    return 0;\n}\n",
         "expectedOutput": "210",
         "solution": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble compoundInterest(double p, double r, int t) { return p*pow(1+r/100,t)-p; }\nint main() { cout<<(int)compoundInterest(1000,10,2); return 0; }",
         "explanation": {
@@ -169,7 +169,7 @@
         "description": "Calculate triangle area.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\nusing namespace std;\ndouble triangleArea(double b, double h) { return 0; }\nint main() { cout<<triangleArea(10,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble triangleArea(double b, double h) {\n    return 0;\n}\n\nint main() {\n    double b;\n    cin >> b;\n    double h;\n    cin >> h;\n    cout << triangleArea(b, h);\n    return 0;\n}\n",
         "expectedOutput": "25",
         "solution": "#include <iostream>\nusing namespace std;\ndouble triangleArea(double b, double h) { return 0.5*b*h; }\nint main() { cout<<triangleArea(10,5); return 0; }",
         "explanation": {
@@ -210,7 +210,7 @@
         "description": "Calculate cube volume.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint cubeVolume(int a) { return 0; }\nint main() { cout<<cubeVolume(3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint cubeVolume(int a) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    cout << cubeVolume(a);\n    return 0;\n}\n",
         "expectedOutput": "27",
         "solution": "#include <iostream>\nusing namespace std;\nint cubeVolume(int a) { return a*a*a; }\nint main() { cout<<cubeVolume(3); return 0; }",
         "explanation": {
@@ -250,7 +250,7 @@
         "description": "Calculate sphere volume.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble sphereVolume(double r) { return 0; }\nint main() { cout<<fixed<<setprecision(2)<<sphereVolume(3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble sphereVolume(double r) {\n    return 0;\n}\n\nint main() {\n    double r;\n    cin >> r;\n    cout << sphereVolume(r);\n    return 0;\n}\n",
         "expectedOutput": "113.10",
         "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble sphereVolume(double r) { return 4.0/3.0*3.14159*r*r*r; }\nint main() { cout<<fixed<<setprecision(2)<<sphereVolume(3); return 0; }",
         "explanation": {
@@ -290,7 +290,7 @@
         "description": "Calculate rectangle perimeter.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint rectPerimeter(int l, int w) { return 0; }\nint main() { cout<<rectPerimeter(5,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint rectPerimeter(int l, int w) {\n    return 0;\n}\n\nint main() {\n    int l;\n    cin >> l;\n    int w;\n    cin >> w;\n    cout << rectPerimeter(l, w);\n    return 0;\n}\n",
         "expectedOutput": "16",
         "solution": "#include <iostream>\nusing namespace std;\nint rectPerimeter(int l, int w) { return 2*(l+w); }\nint main() { cout<<rectPerimeter(5,3); return 0; }",
         "explanation": {
@@ -331,7 +331,7 @@
         "description": "Calculate hypotenuse.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble hypotenuse(double a, double b) { return 0; }\nint main() { cout<<hypotenuse(3,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble hypotenuse(double a, double b) {\n    return 0;\n}\n\nint main() {\n    double a;\n    cin >> a;\n    double b;\n    cin >> b;\n    cout << hypotenuse(a, b);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "solution": "#include <iostream>\n#include <cmath>\nusing namespace std;\ndouble hypotenuse(double a, double b) { return sqrt(a*a+b*b); }\nint main() { cout<<hypotenuse(3,4); return 0; }",
         "explanation": {
@@ -372,7 +372,7 @@
         "description": "Print table of n.",
         "difficulty": "EASY",
         "category": "Practice",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid multiTable(int n) {}\nint main() { multiTable(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid multiTable(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    multiTable(n);\n    return 0;\n}\n",
         "expectedOutput": "5 10 15 20 25 30 35 40 45 50",
         "solution": "#include <iostream>\nusing namespace std;\nvoid multiTable(int n) { for(int i=1;i<=10;i++) cout<<n*i<<\" \"; }\nint main() { multiTable(5); return 0; }",
         "explanation": {

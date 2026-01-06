@@ -5,7 +5,7 @@
         "description": "Find nth term of AP.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint nthAP(int a, int d, int n) { return 0; }\nint main() { cout<<nthAP(2,3,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint nthAP(int a, int d, int n) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int d;\n    cin >> d;\n    int n;\n    cin >> n;\n    cout << nthAP(a, d, n);\n    return 0;\n}\n",
         "expectedOutput": "14",
         "solution": "#include <iostream>\nusing namespace std;\nint nthAP(int a, int d, int n) {\n    return a + (n-1) * d;\n}\nint main() { cout<<nthAP(2,3,5); return 0; }",
         "explanation": {
@@ -44,7 +44,7 @@
         "description": "Find nth term of GP.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint nthGP(int a, int r, int n) { return 0; }\nint main() { cout<<nthGP(2,3,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint nthGP(int a, int r, int n) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int r;\n    cin >> r;\n    int n;\n    cin >> n;\n    cout << nthGP(a, r, n);\n    return 0;\n}\n",
         "expectedOutput": "54",
         "solution": "#include <iostream>\nusing namespace std;\nint nthGP(int a, int r, int n) {\n    int result = a;\n    for(int i = 1; i < n; i++) result *= r;\n    return result;\n}\nint main() { cout<<nthGP(2,3,4); return 0; }",
         "explanation": {
@@ -83,7 +83,7 @@
         "description": "Calculate x^n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint power(int x, int n) { return 0; }\nint main() { cout<<power(2,10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint power(int x, int n) {\n    return 0;\n}\n\nint main() {\n    int x;\n    cin >> x;\n    int n;\n    cin >> n;\n    cout << power(x, n);\n    return 0;\n}\n",
         "expectedOutput": "1024",
         "solution": "#include <iostream>\nusing namespace std;\nint power(int x, int n) {\n    int result = 1;\n    for(int i = 0; i < n; i++) result *= x;\n    return result;\n}\nint main() { cout<<power(2,10); return 0; }",
         "explanation": {
@@ -123,7 +123,7 @@
         "description": "Calculate n^3.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint cube(int n) { return 0; }\nint main() { cout<<cube(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint cube(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << cube(n);\n    return 0;\n}\n",
         "expectedOutput": "125",
         "solution": "#include <iostream>\nusing namespace std;\nint cube(int n) {\n    return n * n * n;\n}\nint main() { cout<<cube(5); return 0; }",
         "explanation": {
@@ -162,7 +162,7 @@
         "description": "Floor of square root.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint mySqrt(int n) { return 0; }\nint main() { cout<<mySqrt(26); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint mySqrt(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << mySqrt(n);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nint mySqrt(int n) {\n    int i = 1;\n    while(i * i <= n) i++;\n    return i - 1;\n}\nint main() { cout<<mySqrt(26); return 0; }",
         "explanation": {
@@ -202,7 +202,7 @@
         "description": "Find percentage.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\ndouble percentage(int obtained, int total) { return 0; }\nint main() { cout<<percentage(45,50); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble percentage(int obtained, int total) {\n    return 0;\n}\n\nint main() {\n    int obtained;\n    cin >> obtained;\n    int total;\n    cin >> total;\n    cout << percentage(obtained, total);\n    return 0;\n}\n",
         "expectedOutput": "90",
         "solution": "#include <iostream>\nusing namespace std;\ndouble percentage(int obtained, int total) {\n    return (obtained * 100.0) / total;\n}\nint main() { cout<<percentage(45,50); return 0; }",
         "explanation": {
@@ -242,7 +242,7 @@
         "description": "Calculate SI.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\ndouble simpleInterest(int p, int r, int t) { return 0; }\nint main() { cout<<simpleInterest(1000,5,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble simpleInterest(int p, int r, int t) {\n    return 0;\n}\n\nint main() {\n    int p;\n    cin >> p;\n    int r;\n    cin >> r;\n    int t;\n    cin >> t;\n    cout << simpleInterest(p, r, t);\n    return 0;\n}\n",
         "expectedOutput": "100",
         "solution": "#include <iostream>\nusing namespace std;\ndouble simpleInterest(int p, int r, int t) {\n    return (p * r * t) / 100.0;\n}\nint main() { cout<<simpleInterest(1000,5,2); return 0; }",
         "explanation": {
@@ -282,7 +282,7 @@
         "description": "Temperature conversion.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\ndouble toFahrenheit(double c) { return 0; }\nint main() { cout<<toFahrenheit(0); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble toFahrenheit(double c) {\n    return 0;\n}\n\nint main() {\n    double c;\n    cin >> c;\n    cout << toFahrenheit(c);\n    return 0;\n}\n",
         "expectedOutput": "32",
         "solution": "#include <iostream>\nusing namespace std;\ndouble toFahrenheit(double c) {\n    return c * 9.0/5.0 + 32;\n}\nint main() { cout<<toFahrenheit(0); return 0; }",
         "explanation": {
@@ -322,7 +322,7 @@
         "description": "Temperature conversion.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\ndouble toCelsius(double f) { return 0; }\nint main() { cout<<toCelsius(32); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble toCelsius(double f) {\n    return 0;\n}\n\nint main() {\n    double f;\n    cin >> f;\n    cout << toCelsius(f);\n    return 0;\n}\n",
         "expectedOutput": "0",
         "solution": "#include <iostream>\nusing namespace std;\ndouble toCelsius(double f) {\n    return (f - 32) * 5.0/9.0;\n}\nint main() { cout<<toCelsius(32); return 0; }",
         "explanation": {
@@ -362,7 +362,7 @@
         "description": "Calculate area.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble areaCircle(double r) { return 0; }\nint main() { cout<<fixed<<setprecision(2)<<areaCircle(7); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble areaCircle(double r) {\n    return 0;\n}\n\nint main() {\n    double r;\n    cin >> r;\n    cout << areaCircle(r);\n    return 0;\n}\n",
         "expectedOutput": "153.94",
         "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble areaCircle(double r) {\n    return 3.14159 * r * r;\n}\nint main() { cout<<fixed<<setprecision(2)<<areaCircle(7); return 0; }",
         "explanation": {
@@ -402,7 +402,7 @@
         "description": "Using base and height.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\ndouble areaTriangle(double b, double h) { return 0; }\nint main() { cout<<areaTriangle(10,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\ndouble areaTriangle(double b, double h) {\n    return 0;\n}\n\nint main() {\n    double b;\n    cin >> b;\n    double h;\n    cin >> h;\n    cout << areaTriangle(b, h);\n    return 0;\n}\n",
         "expectedOutput": "25",
         "solution": "#include <iostream>\nusing namespace std;\ndouble areaTriangle(double b, double h) {\n    return 0.5 * b * h;\n}\nint main() { cout<<areaTriangle(10,5); return 0; }",
         "explanation": {
@@ -442,7 +442,7 @@
         "description": "Length times width.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint areaRect(int l, int w) { return 0; }\nint main() { cout<<areaRect(10,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint areaRect(int l, int w) {\n    return 0;\n}\n\nint main() {\n    int l;\n    cin >> l;\n    int w;\n    cin >> w;\n    cout << areaRect(l, w);\n    return 0;\n}\n",
         "expectedOutput": "50",
         "solution": "#include <iostream>\nusing namespace std;\nint areaRect(int l, int w) {\n    return l * w;\n}\nint main() { cout<<areaRect(10,5); return 0; }",
         "explanation": {
@@ -481,7 +481,7 @@
         "description": "Sum of all sides.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint perimeterRect(int l, int w) { return 0; }\nint main() { cout<<perimeterRect(10,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint perimeterRect(int l, int w) {\n    return 0;\n}\n\nint main() {\n    int l;\n    cin >> l;\n    int w;\n    cin >> w;\n    cout << perimeterRect(l, w);\n    return 0;\n}\n",
         "expectedOutput": "30",
         "solution": "#include <iostream>\nusing namespace std;\nint perimeterRect(int l, int w) {\n    return 2 * (l + w);\n}\nint main() { cout<<perimeterRect(10,5); return 0; }",
         "explanation": {
@@ -521,7 +521,7 @@
         "description": "Is year a leap year.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isLeapYear(int y) { return false; }\nint main() { cout<<isLeapYear(2024); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isLeapYear(int y) {\n    return false;\n}\n\nint main() {\n    int y;\n    cin >> y;\n    cout << isLeapYear(y);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isLeapYear(int y) {\n    return (y%4==0 && y%100!=0) || y%400==0;\n}\nint main() { cout<<isLeapYear(2024); return 0; }",
         "explanation": {
@@ -561,7 +561,7 @@
         "description": "Number of days.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint daysInMonth(int m) { return 0; }\nint main() { cout<<daysInMonth(2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint daysInMonth(int m) {\n    return 0;\n}\n\nint main() {\n    int m;\n    cin >> m;\n    cout << daysInMonth(m);\n    return 0;\n}\n",
         "expectedOutput": "28",
         "solution": "#include <iostream>\nusing namespace std;\nint daysInMonth(int m) {\n    int days[]={31,28,31,30,31,30,31,31,30,31,30,31};\n    return days[m-1];\n}\nint main() { cout<<daysInMonth(2); return 0; }",
         "explanation": {
@@ -601,7 +601,7 @@
         "description": "Least Common Multiple.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint lcm(int a, int b) { return 0; }\nint main() { cout<<lcm(4,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint lcm(int a, int b) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    cout << lcm(a, b);\n    return 0;\n}\n",
         "expectedOutput": "12",
         "solution": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) {\n    while(b) { int t=b; b=a%b; a=t; }\n    return a;\n}\nint lcm(int a, int b) {\n    return (a / gcd(a,b)) * b;\n}\nint main() { cout<<lcm(4,6); return 0; }",
         "explanation": {
@@ -641,7 +641,7 @@
         "description": "Highest Common Factor.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint hcf(int a, int b) { return 0; }\nint main() { cout<<hcf(48,18); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint hcf(int a, int b) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    cout << hcf(a, b);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint hcf(int a, int b) {\n    while(b) { int t=b; b=a%b; a=t; }\n    return a;\n}\nint main() { cout<<hcf(48,18); return 0; }",
         "explanation": {
@@ -681,7 +681,7 @@
         "description": "1+2+3+...+n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumN(int n) { return 0; }\nint main() { cout<<sumN(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sumN(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumN(n);\n    return 0;\n}\n",
         "expectedOutput": "55",
         "solution": "#include <iostream>\nusing namespace std;\nint sumN(int n) {\n    return n * (n + 1) / 2;\n}\nint main() { cout<<sumN(10); return 0; }",
         "explanation": {
@@ -720,7 +720,7 @@
         "description": "1²+2²+...+n².",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumSquares(int n) { return 0; }\nint main() { cout<<sumSquares(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sumSquares(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumSquares(n);\n    return 0;\n}\n",
         "expectedOutput": "55",
         "solution": "#include <iostream>\nusing namespace std;\nint sumSquares(int n) {\n    return n * (n + 1) * (2*n + 1) / 6;\n}\nint main() { cout<<sumSquares(5); return 0; }",
         "explanation": {
@@ -759,7 +759,7 @@
         "description": "1³+2³+...+n³.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumCubes(int n) { return 0; }\nint main() { cout<<sumCubes(4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sumCubes(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumCubes(n);\n    return 0;\n}\n",
         "expectedOutput": "100",
         "solution": "#include <iostream>\nusing namespace std;\nint sumCubes(int n) {\n    int s = n * (n + 1) / 2;\n    return s * s;\n}\nint main() { cout<<sumCubes(4); return 0; }",
         "explanation": {
@@ -799,7 +799,7 @@
         "description": "Print numbers 1 to n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid printN(int n) {}\nint main() { printN(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid printN(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    printN(n);\n    return 0;\n}\n",
         "expectedOutput": "1 2 3 4 5",
         "solution": "#include <iostream>\nusing namespace std;\nvoid printN(int n) {\n    for(int i=1;i<=n;i++) cout<<i<<\" \";\n}\nint main() { printN(5); return 0; }",
         "explanation": {
@@ -839,7 +839,7 @@
         "description": "Print countdown.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid printReverse(int n) {}\nint main() { printReverse(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid printReverse(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    printReverse(n);\n    return 0;\n}\n",
         "expectedOutput": "5 4 3 2 1",
         "solution": "#include <iostream>\nusing namespace std;\nvoid printReverse(int n) {\n    for(int i=n;i>=1;i--) cout<<i<<\" \";\n}\nint main() { printReverse(5); return 0; }",
         "explanation": {
@@ -879,7 +879,7 @@
         "description": "Odd numbers 1 to n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid printOdds(int n) {}\nint main() { printOdds(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid printOdds(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    printOdds(n);\n    return 0;\n}\n",
         "expectedOutput": "1 3 5 7 9",
         "solution": "#include <iostream>\nusing namespace std;\nvoid printOdds(int n) {\n    for(int i=1;i<=n;i+=2) cout<<i<<\" \";\n}\nint main() { printOdds(10); return 0; }",
         "explanation": {
@@ -919,7 +919,7 @@
         "description": "Even numbers 2 to n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid printEvens(int n) {}\nint main() { printEvens(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid printEvens(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    printEvens(n);\n    return 0;\n}\n",
         "expectedOutput": "2 4 6 8 10",
         "solution": "#include <iostream>\nusing namespace std;\nvoid printEvens(int n) {\n    for(int i=2;i<=n;i+=2) cout<<i<<\" \";\n}\nint main() { printEvens(10); return 0; }",
         "explanation": {
@@ -959,7 +959,7 @@
         "description": "Print table of n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid table(int n) {}\nint main() { table(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid table(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    table(n);\n    return 0;\n}\n",
         "expectedOutput": "5 10 15 20 25 30 35 40 45 50",
         "solution": "#include <iostream>\nusing namespace std;\nvoid table(int n) {\n    for(int i=1;i<=10;i++) cout<<n*i<<\" \";\n}\nint main() { table(5); return 0; }",
         "explanation": {

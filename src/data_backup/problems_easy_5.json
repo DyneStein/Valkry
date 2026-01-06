@@ -1,0 +1,848 @@
+[
+    {
+        "id": "easy49",
+        "title": "Power of Number",
+        "description": "Calculate x^n.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint power(int x, int n) { return 0; }\nint main() { cout<<power(2,10); return 0; }",
+        "expectedOutput": "1024",
+        "testCases": [
+            {
+                "input": "2 10",
+                "expectedOutput": "1024",
+                "explanation": "2^10 = 1024"
+            },
+            {
+                "input": "2 0",
+                "expectedOutput": "1",
+                "explanation": "Any number to 0 is 1"
+            },
+            {
+                "input": "5 1",
+                "expectedOutput": "5",
+                "explanation": "Any number to 1 is itself"
+            },
+            {
+                "input": "3 3",
+                "expectedOutput": "27",
+                "explanation": "3^3 = 27"
+            },
+            {
+                "input": "10 2",
+                "expectedOutput": "100",
+                "explanation": "10 squared"
+            },
+            {
+                "input": "2 5",
+                "expectedOutput": "32",
+                "explanation": "2^5 = 32"
+            },
+            {
+                "input": "1 100",
+                "expectedOutput": "1",
+                "explanation": "1 to any power is 1"
+            },
+            {
+                "input": "7 2",
+                "expectedOutput": "49",
+                "explanation": "7 squared"
+            },
+            {
+                "input": "3 4",
+                "expectedOutput": "81",
+                "explanation": "3^4 = 81"
+            },
+            {
+                "input": "4 3",
+                "expectedOutput": "64",
+                "explanation": "4^3 = 64"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint power(int x, int n) { int r=1; while(n>0) { if(n%2) r*=x; x*=x; n/=2; } return r; }\nint main() { cout<<power(2,10); return 0; }",
+        "explanation": {
+            "approach": "Fast exponentiation by squaring.",
+            "analogy": "Double the exponent, halve the work.",
+            "steps": [
+                "If odd, multiply result",
+                "Square base, halve exponent"
+            ],
+            "complexity": "Time: O(log n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy50",
+        "title": "Check Perfect Square",
+        "description": "Is n a perfect square.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPerfectSquare(int n) { return false; }\nint main() { cout<<isPerfectSquare(16); return 0; }",
+        "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "16",
+                "expectedOutput": "1",
+                "explanation": "4×4 = 16"
+            },
+            {
+                "input": "15",
+                "expectedOutput": "0",
+                "explanation": "No integer square root"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "1×1 = 1"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "1",
+                "explanation": "0×0 = 0"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "1",
+                "explanation": "2×2 = 4"
+            },
+            {
+                "input": "9",
+                "expectedOutput": "1",
+                "explanation": "3×3 = 9"
+            },
+            {
+                "input": "25",
+                "expectedOutput": "1",
+                "explanation": "5×5 = 25"
+            },
+            {
+                "input": "26",
+                "expectedOutput": "0",
+                "explanation": "Between 25 and 36"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "1",
+                "explanation": "10×10 = 100"
+            },
+            {
+                "input": "99",
+                "expectedOutput": "0",
+                "explanation": "Just below 100"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nbool isPerfectSquare(int n) { int r=0; while(r*r<n) r++; return r*r==n; }\nint main() { cout<<isPerfectSquare(16); return 0; }",
+        "explanation": {
+            "approach": "Find root, check if r² = n.",
+            "analogy": "Is there an integer whose square equals n?",
+            "steps": [
+                "Find sqrt",
+                "Check if exact"
+            ],
+            "complexity": "Time: O(√n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy51",
+        "title": "Leap Year Check",
+        "description": "Is year a leap year.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isLeapYear(int y) { return false; }\nint main() { cout<<isLeapYear(2024); return 0; }",
+        "expectedOutput": "1",
+        "testCases": [
+            {
+                "input": "2024",
+                "expectedOutput": "1",
+                "explanation": "Divisible by 4, not by 100"
+            },
+            {
+                "input": "2023",
+                "expectedOutput": "0",
+                "explanation": "Not divisible by 4"
+            },
+            {
+                "input": "2000",
+                "expectedOutput": "1",
+                "explanation": "Divisible by 400"
+            },
+            {
+                "input": "1900",
+                "expectedOutput": "0",
+                "explanation": "Divisible by 100 but not 400"
+            },
+            {
+                "input": "2020",
+                "expectedOutput": "1",
+                "explanation": "Recent leap year"
+            },
+            {
+                "input": "2021",
+                "expectedOutput": "0",
+                "explanation": "Not a leap year"
+            },
+            {
+                "input": "2100",
+                "expectedOutput": "0",
+                "explanation": "Century not leap"
+            },
+            {
+                "input": "1600",
+                "expectedOutput": "1",
+                "explanation": "Divisible by 400"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "1",
+                "explanation": "Small leap year"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "0",
+                "explanation": "First century year"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nbool isLeapYear(int y) { return (y%4==0 && y%100!=0) || y%400==0; }\nint main() { cout<<isLeapYear(2024); return 0; }",
+        "explanation": {
+            "approach": "Divisible by 4 but not 100, or by 400.",
+            "analogy": "Calendar leap year rules.",
+            "steps": [
+                "Check divisibility rules"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy52",
+        "title": "Days in Month",
+        "description": "Number of days in month.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint daysInMonth(int m, int y) { return 0; }\nint main() { cout<<daysInMonth(2,2024); return 0; }",
+        "expectedOutput": "29",
+        "testCases": [
+            {
+                "input": "2 2024",
+                "expectedOutput": "29",
+                "explanation": "Feb in leap year"
+            },
+            {
+                "input": "2 2023",
+                "expectedOutput": "28",
+                "explanation": "Feb in non-leap year"
+            },
+            {
+                "input": "1 2020",
+                "expectedOutput": "31",
+                "explanation": "January has 31"
+            },
+            {
+                "input": "4 2020",
+                "expectedOutput": "30",
+                "explanation": "April has 30"
+            },
+            {
+                "input": "12 2020",
+                "expectedOutput": "31",
+                "explanation": "December has 31"
+            },
+            {
+                "input": "6 2020",
+                "expectedOutput": "30",
+                "explanation": "June has 30"
+            },
+            {
+                "input": "7 2020",
+                "expectedOutput": "31",
+                "explanation": "July has 31"
+            },
+            {
+                "input": "8 2020",
+                "expectedOutput": "31",
+                "explanation": "August has 31"
+            },
+            {
+                "input": "9 2020",
+                "expectedOutput": "30",
+                "explanation": "September has 30"
+            },
+            {
+                "input": "2 2000",
+                "expectedOutput": "29",
+                "explanation": "Feb 2000 leap"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint daysInMonth(int m, int y) { int d[]={31,28,31,30,31,30,31,31,30,31,30,31}; if(m==2 && ((y%4==0 && y%100!=0) || y%400==0)) return 29; return d[m-1]; }\nint main() { cout<<daysInMonth(2,2024); return 0; }",
+        "explanation": {
+            "approach": "Lookup table with leap year check.",
+            "analogy": "30 days hath September...",
+            "steps": [
+                "Use days array",
+                "Handle Feb leap year"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy53",
+        "title": "Sum of N Natural",
+        "description": "Sum 1 to n.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumN(int n) { return 0; }\nint main() { cout<<sumN(10); return 0; }",
+        "expectedOutput": "55",
+        "testCases": [
+            {
+                "input": "10",
+                "expectedOutput": "55",
+                "explanation": "1+2+...+10 = 55"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Sum of 1"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "Sum of nothing"
+            },
+            {
+                "input": "5",
+                "expectedOutput": "15",
+                "explanation": "1+2+3+4+5"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "5050",
+                "explanation": "Classic formula result"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "3",
+                "explanation": "1+2 = 3"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "6",
+                "explanation": "1+2+3 = 6"
+            },
+            {
+                "input": "50",
+                "expectedOutput": "1275",
+                "explanation": "Half of 100 case"
+            },
+            {
+                "input": "20",
+                "expectedOutput": "210",
+                "explanation": "Sum to 20"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "28",
+                "explanation": "1+2+...+7"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint sumN(int n) { return n*(n+1)/2; }\nint main() { cout<<sumN(10); return 0; }",
+        "explanation": {
+            "approach": "Gauss formula n(n+1)/2.",
+            "analogy": "Pair up: 1+10=11, 2+9=11, etc.",
+            "steps": [
+                "Use formula n(n+1)/2"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy54",
+        "title": "Sum of Squares",
+        "description": "Sum 1² to n².",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumSquares(int n) { return 0; }\nint main() { cout<<sumSquares(5); return 0; }",
+        "expectedOutput": "55",
+        "testCases": [
+            {
+                "input": "5",
+                "expectedOutput": "55",
+                "explanation": "1+4+9+16+25 = 55"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Only 1²"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "5",
+                "explanation": "1+4 = 5"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "14",
+                "explanation": "1+4+9 = 14"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "30",
+                "explanation": "1+4+9+16 = 30"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "385",
+                "explanation": "Sum to 10²"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "Sum of nothing"
+            },
+            {
+                "input": "6",
+                "expectedOutput": "91",
+                "explanation": "1+4+9+16+25+36"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "140",
+                "explanation": "Sum to 7²"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "338350",
+                "explanation": "Large sum"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint sumSquares(int n) { return n*(n+1)*(2*n+1)/6; }\nint main() { cout<<sumSquares(5); return 0; }",
+        "explanation": {
+            "approach": "Formula n(n+1)(2n+1)/6.",
+            "analogy": "Sum of pyramid blocks.",
+            "steps": [
+                "Use formula"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy55",
+        "title": "Sum of Cubes",
+        "description": "Sum 1³ to n³.",
+        "difficulty": "EASY",
+        "category": "Math",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint sumCubes(int n) { return 0; }\nint main() { cout<<sumCubes(5); return 0; }",
+        "expectedOutput": "225",
+        "testCases": [
+            {
+                "input": "5",
+                "expectedOutput": "225",
+                "explanation": "1+8+27+64+125 = 225"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "1",
+                "explanation": "Only 1³"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "9",
+                "explanation": "1+8 = 9"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "36",
+                "explanation": "1+8+27 = 36"
+            },
+            {
+                "input": "4",
+                "expectedOutput": "100",
+                "explanation": "1+8+27+64 = 100"
+            },
+            {
+                "input": "10",
+                "expectedOutput": "3025",
+                "explanation": "Sum to 10³"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0",
+                "explanation": "Sum of nothing"
+            },
+            {
+                "input": "6",
+                "expectedOutput": "441",
+                "explanation": "Sum to 6³"
+            },
+            {
+                "input": "7",
+                "expectedOutput": "784",
+                "explanation": "28² = 784"
+            },
+            {
+                "input": "100",
+                "expectedOutput": "25502500",
+                "explanation": "5050² = 25502500"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nint sumCubes(int n) { int s=n*(n+1)/2; return s*s; }\nint main() { cout<<sumCubes(5); return 0; }",
+        "explanation": {
+            "approach": "Formula: (n(n+1)/2)².",
+            "analogy": "Sum of cubes = square of sum.",
+            "steps": [
+                "Calculate sum of n",
+                "Square it"
+            ],
+            "complexity": "Time: O(1), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy56",
+        "title": "Even or Odd String",
+        "description": "Check if count of chars is even.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid evenOdd(char s[]) {}\nint main() { evenOdd(\"hello\"); return 0; }",
+        "expectedOutput": "Odd",
+        "testCases": [
+            {
+                "input": "hello",
+                "expectedOutput": "Odd",
+                "explanation": "5 chars is odd"
+            },
+            {
+                "input": "hi",
+                "expectedOutput": "Even",
+                "explanation": "2 chars is even"
+            },
+            {
+                "input": "a",
+                "expectedOutput": "Odd",
+                "explanation": "1 char is odd"
+            },
+            {
+                "input": "ab",
+                "expectedOutput": "Even",
+                "explanation": "2 chars is even"
+            },
+            {
+                "input": "abc",
+                "expectedOutput": "Odd",
+                "explanation": "3 chars is odd"
+            },
+            {
+                "input": "abcd",
+                "expectedOutput": "Even",
+                "explanation": "4 chars is even"
+            },
+            {
+                "input": "",
+                "expectedOutput": "Even",
+                "explanation": "0 chars is even"
+            },
+            {
+                "input": "test string",
+                "expectedOutput": "Odd",
+                "explanation": "11 chars odd"
+            },
+            {
+                "input": "even",
+                "expectedOutput": "Even",
+                "explanation": "4 chars"
+            },
+            {
+                "input": "odd",
+                "expectedOutput": "Odd",
+                "explanation": "3 chars"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nvoid evenOdd(char s[]) { int len=0; while(s[len]) len++; cout<<(len%2==0?\"Even\":\"Odd\"); }\nint main() { evenOdd(\"hello\"); return 0; }",
+        "explanation": {
+            "approach": "Count length, check parity.",
+            "analogy": "Is string length even or odd?",
+            "steps": [
+                "Count characters",
+                "Check if even or odd"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy57",
+        "title": "Toggle Case",
+        "description": "Toggle each character case.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid toggleCase(char s[]) {}\nint main() { char s[]=\"Hello World\"; toggleCase(s); cout<<s; return 0; }",
+        "expectedOutput": "hELLO wORLD",
+        "testCases": [
+            {
+                "input": "Hello World",
+                "expectedOutput": "hELLO wORLD",
+                "explanation": "Toggle each letter"
+            },
+            {
+                "input": "ABC",
+                "expectedOutput": "abc",
+                "explanation": "All upper to lower"
+            },
+            {
+                "input": "abc",
+                "expectedOutput": "ABC",
+                "explanation": "All lower to upper"
+            },
+            {
+                "input": "AbC",
+                "expectedOutput": "aBc",
+                "explanation": "Mixed case"
+            },
+            {
+                "input": "123",
+                "expectedOutput": "123",
+                "explanation": "Numbers unchanged"
+            },
+            {
+                "input": "Hello123",
+                "expectedOutput": "hELLO123",
+                "explanation": "Mixed with numbers"
+            },
+            {
+                "input": "a",
+                "expectedOutput": "A",
+                "explanation": "Single lower"
+            },
+            {
+                "input": "A",
+                "expectedOutput": "a",
+                "explanation": "Single upper"
+            },
+            {
+                "input": "Test Case",
+                "expectedOutput": "tEST cASE",
+                "explanation": "Two words"
+            },
+            {
+                "input": "",
+                "expectedOutput": "",
+                "explanation": "Empty string"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nvoid toggleCase(char s[]) { for(int i=0;s[i];i++) { if(s[i]>='A'&&s[i]<='Z') s[i]+=32; else if(s[i]>='a'&&s[i]<='z') s[i]-=32; } }\nint main() { char s[]=\"Hello World\"; toggleCase(s); cout<<s; return 0; }",
+        "explanation": {
+            "approach": "Flip case of each letter.",
+            "analogy": "Uppercase becomes lower and vice versa.",
+            "steps": [
+                "If uppercase, add 32",
+                "If lowercase, subtract 32"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy58",
+        "title": "Remove Spaces",
+        "description": "Remove all spaces.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid removeSpaces(char s[]) {}\nint main() { char s[]=\"hello world test\"; removeSpaces(s); cout<<s; return 0; }",
+        "expectedOutput": "helloworldtest",
+        "testCases": [
+            {
+                "input": "hello world test",
+                "expectedOutput": "helloworldtest",
+                "explanation": "Remove all spaces"
+            },
+            {
+                "input": "abc",
+                "expectedOutput": "abc",
+                "explanation": "No spaces to remove"
+            },
+            {
+                "input": "   ",
+                "expectedOutput": "",
+                "explanation": "All spaces removed"
+            },
+            {
+                "input": "a b c",
+                "expectedOutput": "abc",
+                "explanation": "Single char words"
+            },
+            {
+                "input": " hello",
+                "expectedOutput": "hello",
+                "explanation": "Leading space"
+            },
+            {
+                "input": "hello ",
+                "expectedOutput": "hello",
+                "explanation": "Trailing space"
+            },
+            {
+                "input": "hello  world",
+                "expectedOutput": "helloworld",
+                "explanation": "Multiple spaces"
+            },
+            {
+                "input": "",
+                "expectedOutput": "",
+                "explanation": "Empty string"
+            },
+            {
+                "input": "no spaces",
+                "expectedOutput": "nospaces",
+                "explanation": "Two words"
+            },
+            {
+                "input": "  a  b  ",
+                "expectedOutput": "ab",
+                "explanation": "Multiple spaces"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nvoid removeSpaces(char s[]) { int j=0; for(int i=0;s[i];i++) if(s[i]!=' ') s[j++]=s[i]; s[j]=0; }\nint main() { char s[]=\"hello world test\"; removeSpaces(s); cout<<s; return 0; }",
+        "explanation": {
+            "approach": "Copy non-space chars.",
+            "analogy": "Filter out spaces.",
+            "steps": [
+                "Copy if not space"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy59",
+        "title": "First Uppercase",
+        "description": "Find first uppercase letter.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nchar firstUpper(char s[]) { return 0; }\nint main() { cout<<firstUpper(\"helloWorld\"); return 0; }",
+        "expectedOutput": "W",
+        "testCases": [
+            {
+                "input": "helloWorld",
+                "expectedOutput": "W",
+                "explanation": "W is first uppercase"
+            },
+            {
+                "input": "Hello",
+                "expectedOutput": "H",
+                "explanation": "H at start"
+            },
+            {
+                "input": "hello",
+                "expectedOutput": "",
+                "explanation": "No uppercase"
+            },
+            {
+                "input": "HELLO",
+                "expectedOutput": "H",
+                "explanation": "First of many"
+            },
+            {
+                "input": "abcDef",
+                "expectedOutput": "D",
+                "explanation": "D in middle"
+            },
+            {
+                "input": "abcdefG",
+                "expectedOutput": "G",
+                "explanation": "G at end"
+            },
+            {
+                "input": "A",
+                "expectedOutput": "A",
+                "explanation": "Single uppercase"
+            },
+            {
+                "input": "a",
+                "expectedOutput": "",
+                "explanation": "Single lowercase"
+            },
+            {
+                "input": "123ABC",
+                "expectedOutput": "A",
+                "explanation": "After numbers"
+            },
+            {
+                "input": "testCamelCase",
+                "expectedOutput": "C",
+                "explanation": "Camel case"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nchar firstUpper(char s[]) { for(int i=0;s[i];i++) if(s[i]>='A'&&s[i]<='Z') return s[i]; return 0; }\nint main() { cout<<firstUpper(\"helloWorld\"); return 0; }",
+        "explanation": {
+            "approach": "Scan for uppercase.",
+            "analogy": "Find first capital letter.",
+            "steps": [
+                "Check each char if A-Z"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    },
+    {
+        "id": "easy60",
+        "title": "Count Consonants",
+        "description": "Count consonants in string.",
+        "difficulty": "EASY",
+        "category": "Strings",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint countConsonants(char s[]) { return 0; }\nint main() { cout<<countConsonants(\"hello world\"); return 0; }",
+        "expectedOutput": "7",
+        "testCases": [
+            {
+                "input": "hello world",
+                "expectedOutput": "7",
+                "explanation": "h,l,l,w,r,l,d = 7"
+            },
+            {
+                "input": "aeiou",
+                "expectedOutput": "0",
+                "explanation": "All vowels"
+            },
+            {
+                "input": "bcdfg",
+                "expectedOutput": "5",
+                "explanation": "All consonants"
+            },
+            {
+                "input": "abc",
+                "expectedOutput": "2",
+                "explanation": "b and c"
+            },
+            {
+                "input": "HELLO",
+                "expectedOutput": "3",
+                "explanation": "H,L,L"
+            },
+            {
+                "input": "123",
+                "expectedOutput": "0",
+                "explanation": "No letters"
+            },
+            {
+                "input": "rhythm",
+                "expectedOutput": "6",
+                "explanation": "All consonants"
+            },
+            {
+                "input": "a",
+                "expectedOutput": "0",
+                "explanation": "Single vowel"
+            },
+            {
+                "input": "b",
+                "expectedOutput": "1",
+                "explanation": "Single consonant"
+            },
+            {
+                "input": "Beautiful",
+                "expectedOutput": "4",
+                "explanation": "B,t,f,l"
+            }
+        ],
+        "solution": "#include <iostream>\nusing namespace std;\nbool isVowel(char c) { c=tolower(c); return c=='a'||c=='e'||c=='i'||c=='o'||c=='u'; }\nint countConsonants(char s[]) { int c=0; for(int i=0;s[i];i++) if(isalpha(s[i]) && !isVowel(s[i])) c++; return c; }\nint main() { cout<<countConsonants(\"hello world\"); return 0; }",
+        "explanation": {
+            "approach": "Count letters that aren't vowels.",
+            "analogy": "Count non-vowel letters.",
+            "steps": [
+                "Check if letter and not vowel"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        }
+    }
+]

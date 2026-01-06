@@ -5,7 +5,7 @@
         "description": "Formula: n(n+1)(2n+1)/6.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumSquares(int n) { return 0; }\nint main() { cout<<sumSquares(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sumSquares(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumSquares(n);\n    return 0;\n}\n",
         "expectedOutput": "55",
         "solution": "#include <iostream>\nusing namespace std;\nint sumSquares(int n) {\n    return n * (n + 1) * (2 * n + 1) / 6;\n}\nint main() { cout<<sumSquares(5); return 0; }",
         "explanation": {
@@ -44,7 +44,7 @@
         "description": "Formula: (n(n+1)/2)².",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumCubes(int n) { return 0; }\nint main() { cout<<sumCubes(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sumCubes(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumCubes(n);\n    return 0;\n}\n",
         "expectedOutput": "225",
         "solution": "#include <iostream>\nusing namespace std;\nint sumCubes(int n) {\n    int sum = n * (n + 1) / 2;\n    return sum * sum;\n}\nint main() { cout<<sumCubes(5); return 0; }",
         "explanation": {
@@ -84,7 +84,7 @@
         "description": "Print odd 1 to N.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid printOdd(int n) {}\nint main() { printOdd(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid printOdd(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    printOdd(n);\n    return 0;\n}\n",
         "expectedOutput": "1 3 5 7 9",
         "solution": "#include <iostream>\nusing namespace std;\nvoid printOdd(int n) {\n    for(int i = 1; i <= n; i += 2)\n        cout << i << \" \";\n}\nint main() { printOdd(10); return 0; }",
         "explanation": {
@@ -123,7 +123,7 @@
         "description": "Print even 1 to N.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid printEven(int n) {}\nint main() { printEven(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid printEven(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    printEven(n);\n    return 0;\n}\n",
         "expectedOutput": "2 4 6 8 10",
         "solution": "#include <iostream>\nusing namespace std;\nvoid printEven(int n) {\n    for(int i = 2; i <= n; i += 2)\n        cout << i << \" \";\n}\nint main() { printEven(10); return 0; }",
         "explanation": {
@@ -162,7 +162,7 @@
         "description": "Sum of even numbers.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumEven(int n) { return 0; }\nint main() { cout<<sumEven(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sumEven(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumEven(n);\n    return 0;\n}\n",
         "expectedOutput": "30",
         "solution": "#include <iostream>\nusing namespace std;\nint sumEven(int n) {\n    int sum = 0;\n    for(int i = 2; i <= n; i += 2) sum += i;\n    return sum;\n}\nint main() { cout<<sumEven(10); return 0; }",
         "explanation": {
@@ -201,7 +201,7 @@
         "description": "Sum of odd numbers.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumOdd(int n) { return 0; }\nint main() { cout<<sumOdd(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sumOdd(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumOdd(n);\n    return 0;\n}\n",
         "expectedOutput": "25",
         "solution": "#include <iostream>\nusing namespace std;\nint sumOdd(int n) {\n    int sum = 0;\n    for(int i = 1; i <= n; i += 2) sum += i;\n    return sum;\n}\nint main() { cout<<sumOdd(10); return 0; }",
         "explanation": {
@@ -240,7 +240,7 @@
         "description": "Multiply all digits.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint productDigits(int n) { return 0; }\nint main() { cout<<productDigits(234); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint productDigits(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << productDigits(n);\n    return 0;\n}\n",
         "expectedOutput": "24",
         "solution": "#include <iostream>\nusing namespace std;\nint productDigits(int n) {\n    int prod = 1;\n    while(n > 0) {\n        prod *= n % 10;\n        n /= 10;\n    }\n    return prod;\n}\nint main() { cout<<productDigits(234); return 0; }",
         "explanation": {
@@ -280,7 +280,7 @@
         "description": "Get first digit.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint firstDigit(int n) { return 0; }\nint main() { cout<<firstDigit(12345); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint firstDigit(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << firstDigit(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nint firstDigit(int n) {\n    while(n >= 10) n /= 10;\n    return n;\n}\nint main() { cout<<firstDigit(12345); return 0; }",
         "explanation": {
@@ -319,7 +319,7 @@
         "description": "Get last digit.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint lastDigit(int n) { return 0; }\nint main() { cout<<lastDigit(12345); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint lastDigit(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << lastDigit(n);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nint lastDigit(int n) {\n    return n % 10;\n}\nint main() { cout<<lastDigit(12345); return 0; }",
         "explanation": {
@@ -358,7 +358,7 @@
         "description": "Sum of first and last digit.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumFirstLast(int n) { return 0; }\nint main() { cout<<sumFirstLast(12345); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sumFirstLast(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumFirstLast(n);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint sumFirstLast(int n) {\n    int last = n % 10;\n    while(n >= 10) n /= 10;\n    return n + last;\n}\nint main() { cout<<sumFirstLast(12345); return 0; }",
         "explanation": {
@@ -398,7 +398,7 @@
         "description": "Swap first and last.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint swapFirstLast(int n) { return 0; }\nint main() { cout<<swapFirstLast(12345); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint swapFirstLast(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << swapFirstLast(n);\n    return 0;\n}\n",
         "expectedOutput": "52341",
         "solution": "#include <iostream>\nusing namespace std;\nint swapFirstLast(int n) {\n    int mult = 1, temp = n;\n    while(temp >= 10) { mult *= 10; temp /= 10; }\n    int first = temp, last = n % 10;\n    return n - first * mult - last + last * mult + first;\n}\nint main() { cout<<swapFirstLast(12345); return 0; }",
         "explanation": {
@@ -438,7 +438,7 @@
         "description": "Number without first digit.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint removeFirst(int n) { return 0; }\nint main() { cout<<removeFirst(12345); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint removeFirst(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << removeFirst(n);\n    return 0;\n}\n",
         "expectedOutput": "2345",
         "solution": "#include <iostream>\nusing namespace std;\nint removeFirst(int n) {\n    int mult = 1, temp = n;\n    while(temp >= 10) { mult *= 10; temp /= 10; }\n    return n % mult;\n}\nint main() { cout<<removeFirst(12345); return 0; }",
         "explanation": {
@@ -478,7 +478,7 @@
         "description": "Number without last digit.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint removeLast(int n) { return 0; }\nint main() { cout<<removeLast(12345); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint removeLast(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << removeLast(n);\n    return 0;\n}\n",
         "expectedOutput": "1234",
         "solution": "#include <iostream>\nusing namespace std;\nint removeLast(int n) {\n    return n / 10;\n}\nint main() { cout<<removeLast(12345); return 0; }",
         "explanation": {
@@ -517,7 +517,7 @@
         "description": "Is Armstrong number.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isArmstrong(int n) { return false; }\nint main() { cout<<isArmstrong(153); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isArmstrong(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isArmstrong(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isArmstrong(int n) {\n    int sum = 0, temp = n;\n    int digits = 0, t = n;\n    while(t > 0) { digits++; t /= 10; }\n    while(temp > 0) {\n        int d = temp % 10;\n        int p = 1;\n        for(int i=0;i<digits;i++) p *= d;\n        sum += p;\n        temp /= 10;\n    }\n    return sum == n;\n}\nint main() { cout<<isArmstrong(153); return 0; }",
         "explanation": {
@@ -558,7 +558,7 @@
         "description": "Sum of factorials of digits.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isStrong(int n) { return false; }\nint main() { cout<<isStrong(145); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isStrong(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isStrong(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nint fact(int x) { int f=1; for(int i=2;i<=x;i++) f*=i; return f; }\nbool isStrong(int n) {\n    int sum = 0, temp = n;\n    while(temp > 0) {\n        sum += fact(temp % 10);\n        temp /= 10;\n    }\n    return sum == n;\n}\nint main() { cout<<isStrong(145); return 0; }",
         "explanation": {
@@ -598,7 +598,7 @@
         "description": "Sum of divisors equals n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPerfect(int n) { return false; }\nint main() { cout<<isPerfect(28); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPerfect(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isPerfect(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isPerfect(int n) {\n    int sum = 1;\n    for(int i = 2; i * i <= n; i++) {\n        if(n % i == 0) {\n            sum += i;\n            if(i != n/i) sum += n/i;\n        }\n    }\n    return sum == n && n > 1;\n}\nint main() { cout<<isPerfect(28); return 0; }",
         "explanation": {
@@ -638,7 +638,7 @@
         "description": "Sum of divisors > n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isAbundant(int n) { return false; }\nint main() { cout<<isAbundant(12); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isAbundant(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isAbundant(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isAbundant(int n) {\n    int sum = 1;\n    for(int i = 2; i * i <= n; i++) {\n        if(n % i == 0) {\n            sum += i;\n            if(i != n/i) sum += n/i;\n        }\n    }\n    return sum > n;\n}\nint main() { cout<<isAbundant(12); return 0; }",
         "explanation": {
@@ -678,7 +678,7 @@
         "description": "Sum of divisors < n.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isDeficient(int n) { return false; }\nint main() { cout<<isDeficient(15); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isDeficient(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isDeficient(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isDeficient(int n) {\n    int sum = 1;\n    for(int i = 2; i * i <= n; i++) {\n        if(n % i == 0) {\n            sum += i;\n            if(i != n/i) sum += n/i;\n        }\n    }\n    return sum < n;\n}\nint main() { cout<<isDeficient(15); return 0; }",
         "explanation": {
@@ -718,7 +718,7 @@
         "description": "Divisible by sum of digits.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isHarshad(int n) { return false; }\nint main() { cout<<isHarshad(18); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isHarshad(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isHarshad(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isHarshad(int n) {\n    int sum = 0, temp = n;\n    while(temp > 0) { sum += temp % 10; temp /= 10; }\n    return n % sum == 0;\n}\nint main() { cout<<isHarshad(18); return 0; }",
         "explanation": {
@@ -758,7 +758,7 @@
         "description": "Square ends with number.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isAutomorphic(int n) { return false; }\nint main() { cout<<isAutomorphic(25); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isAutomorphic(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isAutomorphic(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isAutomorphic(int n) {\n    int sq = n * n;\n    int mult = 1, temp = n;\n    while(temp > 0) { mult *= 10; temp /= 10; }\n    return sq % mult == n;\n}\nint main() { cout<<isAutomorphic(25); return 0; }",
         "explanation": {
@@ -798,7 +798,7 @@
         "description": "Find nth prime.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint nthPrime(int n) { return 0; }\nint main() { cout<<nthPrime(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint nthPrime(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << nthPrime(n);\n    return 0;\n}\n",
         "expectedOutput": "11",
         "solution": "#include <iostream>\nusing namespace std;\nbool isPrime(int x) {\n    if(x<2) return false;\n    for(int i=2;i*i<=x;i++) if(x%i==0) return false;\n    return true;\n}\nint nthPrime(int n) {\n    int count = 0, num = 1;\n    while(count < n) { num++; if(isPrime(num)) count++; }\n    return num;\n}\nint main() { cout<<nthPrime(5); return 0; }",
         "explanation": {
@@ -838,7 +838,7 @@
         "description": "Print prime factors.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid primeFactors(int n) {}\nint main() { primeFactors(12); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid primeFactors(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    primeFactors(n);\n    return 0;\n}\n",
         "expectedOutput": "2 2 3",
         "solution": "#include <iostream>\nusing namespace std;\nvoid primeFactors(int n) {\n    for(int i = 2; i * i <= n; i++) {\n        while(n % i == 0) { cout << i << \" \"; n /= i; }\n    }\n    if(n > 1) cout << n;\n}\nint main() { primeFactors(12); return 0; }",
         "explanation": {
@@ -878,7 +878,7 @@
         "description": "Number of divisors.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countDivisors(int n) { return 0; }\nint main() { cout<<countDivisors(12); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countDivisors(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << countDivisors(n);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint countDivisors(int n) {\n    int count = 0;\n    for(int i = 1; i * i <= n; i++) {\n        if(n % i == 0) {\n            count++;\n            if(i != n/i) count++;\n        }\n    }\n    return count;\n}\nint main() { cout<<countDivisors(12); return 0; }",
         "explanation": {
@@ -918,7 +918,7 @@
         "description": "Sum all divisors.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumDivisors(int n) { return 0; }\nint main() { cout<<sumDivisors(12); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sumDivisors(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumDivisors(n);\n    return 0;\n}\n",
         "expectedOutput": "28",
         "solution": "#include <iostream>\nusing namespace std;\nint sumDivisors(int n) {\n    int sum = 0;\n    for(int i = 1; i * i <= n; i++) {\n        if(n % i == 0) {\n            sum += i;\n            if(i != n/i) sum += n/i;\n        }\n    }\n    return sum;\n}\nint main() { cout<<sumDivisors(12); return 0; }",
         "explanation": {
@@ -958,7 +958,7 @@
         "description": "Product of all divisors.",
         "difficulty": "EASY",
         "category": "Fundamentals",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint productDivisors(int n) { return 0; }\nint main() { cout<<productDivisors(6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint productDivisors(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << productDivisors(n);\n    return 0;\n}\n",
         "expectedOutput": "36",
         "solution": "#include <iostream>\nusing namespace std;\nint productDivisors(int n) {\n    int prod = 1;\n    for(int i = 1; i * i <= n; i++) {\n        if(n % i == 0) {\n            prod *= i;\n            if(i != n/i) prod *= n/i;\n        }\n    }\n    return prod;\n}\nint main() { cout<<productDivisors(6); return 0; }",
         "explanation": {

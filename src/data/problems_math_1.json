@@ -5,7 +5,7 @@
         "description": "Print first n Fibonacci numbers.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid fibonacci(int n) {}\nint main() { fibonacci(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid fibonacci(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    fibonacci(n);\n    return 0;\n}\n",
         "expectedOutput": "0 1 1 2 3 5 8 13 21 34",
         "solution": "#include <iostream>\nusing namespace std;\nvoid fibonacci(int n) { int a=0, b=1; for(int i=0;i<n;i++) { cout<<a<<\" \"; int c=a+b; a=b; b=c; } }\nint main() { fibonacci(10); return 0; }",
         "explanation": {
@@ -45,7 +45,7 @@
         "description": "Generate nth row of Pascal's triangle.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid pascalRow(int n) {}\nint main() { pascalRow(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid pascalRow(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    pascalRow(n);\n    return 0;\n}\n",
         "expectedOutput": "1 4 6 4 1",
         "solution": "#include <iostream>\nusing namespace std;\nvoid pascalRow(int n) { int c=1; for(int i=0;i<n;i++) { cout<<c<<\" \"; c=c*(n-1-i)/(i+1); } }\nint main() { pascalRow(5); return 0; }",
         "explanation": {
@@ -85,7 +85,7 @@
         "description": "Calculate nth Catalan number.",
         "difficulty": "MEDIUM",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nlong long catalan(int n) { return 0; }\nint main() { cout<<catalan(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nlong long catalan(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << catalan(n);\n    return 0;\n}\n",
         "expectedOutput": "42",
         "solution": "#include <iostream>\nusing namespace std;\nlong long catalan(int n) { long long dp[n+1]={}; dp[0]=dp[1]=1; for(int i=2;i<=n;i++) for(int j=0;j<i;j++) dp[i]+=dp[j]*dp[i-1-j]; return dp[n]; }\nint main() { cout<<catalan(5); return 0; }",
         "explanation": {
@@ -125,7 +125,7 @@
         "description": "Calculate binomial coefficient n choose r.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nlong long nCr(int n, int r) { return 0; }\nint main() { cout<<nCr(10,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nlong long nCr(int n, int r) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    int r;\n    cin >> r;\n    cout << nCr(n, r);\n    return 0;\n}\n",
         "expectedOutput": "120",
         "solution": "#include <iostream>\nusing namespace std;\nlong long nCr(int n, int r) { if(r>n-r) r=n-r; long long res=1; for(int i=0;i<r;i++) { res*=(n-i); res/=(i+1); } return res; }\nint main() { cout<<nCr(10,3); return 0; }",
         "explanation": {
@@ -165,7 +165,7 @@
         "description": "Calculate number of subsets of n elements.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint powerSetSize(int n) { return 0; }\nint main() { cout<<powerSetSize(4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint powerSetSize(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << powerSetSize(n);\n    return 0;\n}\n",
         "expectedOutput": "16",
         "solution": "#include <iostream>\nusing namespace std;\nint powerSetSize(int n) { return 1<<n; }\nint main() { cout<<powerSetSize(4); return 0; }",
         "explanation": {
@@ -205,7 +205,7 @@
         "description": "Count total set bits in all numbers from 1 to n.",
         "difficulty": "MEDIUM",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint countSetBits(int n) { return 0; }\nint main() { cout<<countSetBits(7); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint countSetBits(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << countSetBits(n);\n    return 0;\n}\n",
         "expectedOutput": "12",
         "solution": "#include <iostream>\nusing namespace std;\nint countSetBits(int n) { int total=0; for(int i=1;i<=n;i++) { int x=i; while(x) { total+=x&1; x>>=1; } } return total; }\nint main() { cout<<countSetBits(7); return 0; }",
         "explanation": {
@@ -246,7 +246,7 @@
         "description": "Sum all multiples of 3 or 5 below n.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint sumMultiples(int n) { return 0; }\nint main() { cout<<sumMultiples(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint sumMultiples(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumMultiples(n);\n    return 0;\n}\n",
         "expectedOutput": "23",
         "solution": "#include <iostream>\nusing namespace std;\nint sumMultiples(int n) { int sum=0; for(int i=1;i<n;i++) if(i%3==0||i%5==0) sum+=i; return sum; }\nint main() { cout<<sumMultiples(10); return 0; }",
         "explanation": {
@@ -286,7 +286,7 @@
         "description": "Find single-digit sum of all digits (repeated).",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint digitalRoot(int n) { return 0; }\nint main() { cout<<digitalRoot(12345); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint digitalRoot(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << digitalRoot(n);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint digitalRoot(int n) { if(n==0) return 0; return 1+(n-1)%9; }\nint main() { cout<<digitalRoot(12345); return 0; }",
         "explanation": {
@@ -326,7 +326,7 @@
         "description": "Count trailing zeros in n factorial.",
         "difficulty": "EASY",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint trailingZeros(int n) { return 0; }\nint main() { cout<<trailingZeros(25); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint trailingZeros(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << trailingZeros(n);\n    return 0;\n}\n",
         "expectedOutput": "6",
         "solution": "#include <iostream>\nusing namespace std;\nint trailingZeros(int n) { int c=0; while(n>=5) { n/=5; c+=n; } return c; }\nint main() { cout<<trailingZeros(25); return 0; }",
         "explanation": {
@@ -365,7 +365,7 @@
         "description": "Find smallest prime factor for each number 0 to n.",
         "difficulty": "MEDIUM",
         "category": "Math",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid smallestPrimeFactor(int n) {}\nint main() { smallestPrimeFactor(10); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid smallestPrimeFactor(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    smallestPrimeFactor(n);\n    return 0;\n}\n",
         "expectedOutput": "0 1 2 3 2 5 2 7 2 3 2",
         "solution": "#include <iostream>\nusing namespace std;\nvoid smallestPrimeFactor(int n) { int spf[n+1]; for(int i=0;i<=n;i++) spf[i]=i; for(int i=2;i*i<=n;i++) if(spf[i]==i) for(int j=i*i;j<=n;j+=i) if(spf[j]==j) spf[j]=i; for(int i=0;i<=n;i++) cout<<spf[i]<<\" \"; }\nint main() { smallestPrimeFactor(10); return 0; }",
         "explanation": {

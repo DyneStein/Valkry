@@ -39,7 +39,10 @@
                 "expectedOutput": "2",
                 "explanation": "Cycle starts at middle node"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "linkedList",
+        "inputInstructions": "This problem uses a linked list. The input is given as an array [1,2,3,4,5]. Build your linked list from this array before processing."
     },
     {
         "id": "fin32",
@@ -81,7 +84,10 @@
                 "expectedOutput": "",
                 "explanation": "Empty list reversed is empty"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "linkedList",
+        "inputInstructions": "This problem uses a linked list. The input is given as an array [1,2,3,4,5]. Build your linked list from this array before processing."
     },
     {
         "id": "fin33",
@@ -89,7 +95,7 @@
         "description": "Max profit one transaction.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint maxProfit(int p[], int n) { return 0; }\nint main() { int p[]={7,1,5,3,6,4}; cout<<maxProfit(p,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint maxProfit(vector<int>& p, int n) {\n    return 0;\n}\n\nint main() {\n    int p_size;\n    cin >> p_size;\n    vector<int> p(p_size);\n    for (int i = 0; i < p_size; i++) cin >> p[i];\n    int n;\n    cin >> n;\n    cout << maxProfit(p, n);\n    return 0;\n}\n",
         "expectedOutput": "5",
         "solution": "#include <iostream>\nusing namespace std;\nint maxProfit(int p[], int n) { int mn=1e9,mx=0; for(int i=0;i<n;i++) { mn=min(mn,p[i]); mx=max(mx,p[i]-mn); } return mx; }\nint main() { int p[]={7,1,5,3,6,4}; cout<<maxProfit(p,6); return 0; }",
         "explanation": {
@@ -130,7 +136,7 @@
         "description": "Max profit unlimited transactions.",
         "difficulty": "MEDIUM",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint maxProfit(int p[], int n) { return 0; }\nint main() { int p[]={7,1,5,3,6,4}; cout<<maxProfit(p,6); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint maxProfit(vector<int>& p, int n) {\n    return 0;\n}\n\nint main() {\n    int p_size;\n    cin >> p_size;\n    vector<int> p(p_size);\n    for (int i = 0; i < p_size; i++) cin >> p[i];\n    int n;\n    cin >> n;\n    cout << maxProfit(p, n);\n    return 0;\n}\n",
         "expectedOutput": "7",
         "solution": "#include <iostream>\nusing namespace std;\nint maxProfit(int p[], int n) { int profit=0; for(int i=1;i<n;i++) if(p[i]>p[i-1]) profit+=p[i]-p[i-1]; return profit; }\nint main() { int p[]={7,1,5,3,6,4}; cout<<maxProfit(p,6); return 0; }",
         "explanation": {
@@ -170,7 +176,7 @@
         "description": "Check if array has duplicates.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool containsDuplicate(int a[], int n) { return false; }\nint main() { int a[]={1,2,3,1}; cout<<containsDuplicate(a,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool containsDuplicate(vector<int>& a, int n) {\n    return false;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << containsDuplicate(a, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool containsDuplicate(int a[], int n) { for(int i=0;i<n;i++) for(int j=i+1;j<n;j++) if(a[i]==a[j]) return true; return false; }\nint main() { int a[]={1,2,3,1}; cout<<containsDuplicate(a,4); return 0; }",
         "explanation": {
@@ -210,7 +216,7 @@
         "description": "Find element appearing once.",
         "difficulty": "EASY",
         "category": "Bits",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint singleNumber(int a[], int n) { return 0; }\nint main() { int a[]={4,1,2,1,2}; cout<<singleNumber(a,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint singleNumber(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << singleNumber(a, n);\n    return 0;\n}\n",
         "expectedOutput": "4",
         "solution": "#include <iostream>\nusing namespace std;\nint singleNumber(int a[], int n) { int x=0; for(int i=0;i<n;i++) x^=a[i]; return x; }\nint main() { int a[]={4,1,2,1,2}; cout<<singleNumber(a,5); return 0; }",
         "explanation": {
@@ -251,7 +257,7 @@
         "description": "Element appearing > n/2 times.",
         "difficulty": "EASY",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint majorityElement(int a[], int n) { return 0; }\nint main() { int a[]={3,2,3}; cout<<majorityElement(a,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint majorityElement(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << majorityElement(a, n);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint majorityElement(int a[], int n) { int c=0,m=0; for(int i=0;i<n;i++) { if(c==0) m=a[i]; c+=(a[i]==m)?1:-1; } return m; }\nint main() { int a[]={3,2,3}; cout<<majorityElement(a,3); return 0; }",
         "explanation": {
@@ -292,7 +298,7 @@
         "description": "Check balanced brackets.",
         "difficulty": "EASY",
         "category": "Stack",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isValid(char s[]) { return false; }\nint main() { cout<<isValid(\"()[]{}\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isValid(vector<int>& s) {\n    return false;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << isValid(s);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isValid(char s[]) { char stk[100]; int top=-1; for(int i=0;s[i];i++) { if(s[i]=='('||s[i]=='['||s[i]=='{') stk[++top]=s[i]; else { if(top<0) return false; char p=stk[top--]; if((s[i]==')' && p!='(') || (s[i]==']' && p!='[') || (s[i]=='}' && p!='{')) return false; } } return top==-1; }\nint main() { cout<<isValid(\"()[]{}\"); return 0; }",
         "explanation": {
@@ -367,7 +373,10 @@
                 "expectedOutput": "0",
                 "explanation": "All same, min is 0"
             }
-        ]
+        ],
+        "requiresManualInput": true,
+        "inputCategory": "class",
+        "inputInstructions": "This is a class design problem. Implement the required methods. The judge tests method calls, not stdin input."
     },
     {
         "id": "fin40",
@@ -375,7 +384,7 @@
         "description": "Evaluate reverse polish notation.",
         "difficulty": "MEDIUM",
         "category": "Stack",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint evalRPN(char tokens[][10], int n) { return 0; }\nint main() { char t[][10]={\"2\",\"1\",\"+\",\"3\",\"*\"}; cout<<evalRPN(t,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint evalRPN(vector<vector<int>>& tokens, int n) {\n    return 0;\n}\n\nint main() {\n    int tokens_rows, tokens_cols;\n    cin >> tokens_rows >> tokens_cols;\n    vector<vector<int>> tokens(tokens_rows, vector<int>(tokens_cols));\n    for (int i = 0; i < tokens_rows; i++)\n        for (int j = 0; j < tokens_cols; j++)\n            cin >> tokens[i][j];\n    int n;\n    cin >> n;\n    cout << evalRPN(tokens, n);\n    return 0;\n}\n",
         "expectedOutput": "9",
         "solution": "#include <iostream>\nusing namespace std;\nbool isOp(char c) { return c=='+'||c=='-'||c=='*'||c=='/'; }\nint evalRPN(char tokens[][10], int n) { int stk[100],top=-1; for(int i=0;i<n;i++) { if(isOp(tokens[i][0]) && !tokens[i][1]) { int b=stk[top--],a=stk[top--]; if(tokens[i][0]=='+') stk[++top]=a+b; else if(tokens[i][0]=='-') stk[++top]=a-b; else if(tokens[i][0]=='*') stk[++top]=a*b; else stk[++top]=a/b; } else { int v=0,neg=0,j=0; if(tokens[i][0]=='-') { neg=1; j=1; } for(;tokens[i][j];j++) v=v*10+(tokens[i][j]-'0'); stk[++top]=neg?-v:v; } } return stk[0]; }\nint main() { char t[][10]={\"2\",\"1\",\"+\",\"3\",\"*\"}; cout<<evalRPN(t,5); return 0; }",
         "explanation": {

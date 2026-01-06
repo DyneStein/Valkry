@@ -5,7 +5,7 @@
         "description": "Find element appearing once.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint singleNumber(int nums[], int n) { return 0; }\nint main() { int a[]={2,2,1}; cout<<singleNumber(a,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint singleNumber(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << singleNumber(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -137,7 +137,10 @@
                 "Shift right"
             ],
             "complexity": "Time: O(32), Space: O(1)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "bitwise",
+        "inputInstructions": "This problem involves bit manipulation with unsigned integers. Handle the input as a 32-bit unsigned value."
     },
     {
         "id": "e453",
@@ -208,7 +211,10 @@
                 "Shift both"
             ],
             "complexity": "Time: O(32), Space: O(1)"
-        }
+        },
+        "requiresManualInput": true,
+        "inputCategory": "bitwise",
+        "inputInstructions": "This problem involves bit manipulation with unsigned integers. Handle the input as a 32-bit unsigned value."
     },
     {
         "id": "e454",
@@ -216,7 +222,7 @@
         "description": "Find missing 0 to n.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint missingNumber(int nums[], int n) { return 0; }\nint main() { int a[]={3,0,1}; cout<<missingNumber(a,3); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint missingNumber(vector<int>& nums, int n) {\n    return 0;\n}\n\nint main() {\n    int nums_size;\n    cin >> nums_size;\n    vector<int> nums(nums_size);\n    for (int i = 0; i < nums_size; i++) cin >> nums[i];\n    int n;\n    cin >> n;\n    cout << missingNumber(nums, n);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "testCases": [
             {
@@ -286,7 +292,7 @@
         "description": "Check if power of 2.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isPowerOfTwo(int n) { return false; }\nint main() { cout<<isPowerOfTwo(16); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isPowerOfTwo(int n) {\n    return false;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << isPowerOfTwo(n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "testCases": [
             {
@@ -355,7 +361,7 @@
         "description": "Count bits for 0 to n.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid countBits(int n) {}\nint main() { countBits(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid countBits(int n) {\n    // TODO\n}\n\nint main() {\n    int n;\n    cin >> n;\n    countBits(n);\n    return 0;\n}\n",
         "expectedOutput": "0 1 1 2 1 2",
         "testCases": [
             {
@@ -425,7 +431,7 @@
         "description": "Bits differing.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint hammingDistance(int x, int y) { return 0; }\nint main() { cout<<hammingDistance(1,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint hammingDistance(int x, int y) {\n    return 0;\n}\n\nint main() {\n    int x;\n    cin >> x;\n    int y;\n    cin >> y;\n    cout << hammingDistance(x, y);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "testCases": [
             {
@@ -495,7 +501,7 @@
         "description": "Read binary watch.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid readBinaryWatch(int turnedOn) {}\nint main() { readBinaryWatch(1); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid readBinaryWatch(int turnedOn) {\n    // TODO\n}\n\nint main() {\n    int turnedOn;\n    cin >> turnedOn;\n    readBinaryWatch(turnedOn);\n    return 0;\n}\n",
         "expectedOutput": "0:01 0:02 0:04 0:08 0:16 0:32 1:00 2:00 4:00 8:00",
         "testCases": [
             {
@@ -565,7 +571,7 @@
         "description": "Add without + or -.",
         "difficulty": "MEDIUM",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint getSum(int a, int b) { return 0; }\nint main() { cout<<getSum(1,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint getSum(int a, int b) {\n    return 0;\n}\n\nint main() {\n    int a;\n    cin >> a;\n    int b;\n    cin >> b;\n    cout << getSum(a, b);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "testCases": [
             {
@@ -635,7 +641,7 @@
         "description": "Flip all bits.",
         "difficulty": "EASY",
         "category": "Bit Manipulation",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint bitwiseComplement(int n) { return 0; }\nint main() { cout<<bitwiseComplement(5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint bitwiseComplement(int n) {\n    return 0;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << bitwiseComplement(n);\n    return 0;\n}\n",
         "expectedOutput": "2",
         "testCases": [
             {

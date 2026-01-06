@@ -5,7 +5,7 @@
         "description": "Rotate matrix clockwise.",
         "difficulty": "MEDIUM",
         "category": "Matrix",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid rotate(int m[][3], int n) {}\nint main() { int m[3][3]={{1,2,3},{4,5,6},{7,8,9}}; rotate(m,3); for(int i=0;i<3;i++) { for(int j=0;j<3;j++) cout<<m[i][j]<<\" \"; } return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid rotate(vector<vector<int>>& m, int n) {\n    // TODO\n}\n\nint main() {\n    int m_rows, m_cols;\n    cin >> m_rows >> m_cols;\n    vector<vector<int>> m(m_rows, vector<int>(m_cols));\n    for (int i = 0; i < m_rows; i++)\n        for (int j = 0; j < m_cols; j++)\n            cin >> m[i][j];\n    int n;\n    cin >> n;\n    rotate(m, n);\n    return 0;\n}\n",
         "expectedOutput": "7 4 1 8 5 2 9 6 3",
         "solution": "#include <iostream>\nusing namespace std;\nvoid rotate(int m[][3], int n) { for(int i=0;i<n;i++) for(int j=i;j<n;j++) swap(m[i][j],m[j][i]); for(int i=0;i<n;i++) for(int j=0;j<n/2;j++) swap(m[i][j],m[i][n-1-j]); }\nint main() { int m[3][3]={{1,2,3},{4,5,6},{7,8,9}}; rotate(m,3); for(int i=0;i<3;i++) { for(int j=0;j<3;j++) cout<<m[i][j]<<\" \"; } return 0; }",
         "explanation": {
@@ -46,7 +46,7 @@
         "description": "Print matrix in spiral.",
         "difficulty": "MEDIUM",
         "category": "Matrix",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid spiral(int m[][4], int r, int c) {}\nint main() { int m[3][4]={{1,2,3,4},{5,6,7,8},{9,10,11,12}}; spiral(m,3,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid spiral(vector<vector<int>>& m, int r, int c) {\n    // TODO\n}\n\nint main() {\n    int m_rows, m_cols;\n    cin >> m_rows >> m_cols;\n    vector<vector<int>> m(m_rows, vector<int>(m_cols));\n    for (int i = 0; i < m_rows; i++)\n        for (int j = 0; j < m_cols; j++)\n            cin >> m[i][j];\n    int r;\n    cin >> r;\n    int c;\n    cin >> c;\n    spiral(m, r, c);\n    return 0;\n}\n",
         "expectedOutput": "1 2 3 4 8 12 11 10 9 5 6 7",
         "solution": "#include <iostream>\nusing namespace std;\nvoid spiral(int m[][4], int r, int c) { int t=0,b=r-1,l=0,ri=c-1; while(t<=b && l<=ri) { for(int i=l;i<=ri;i++) cout<<m[t][i]<<\" \"; t++; for(int i=t;i<=b;i++) cout<<m[i][ri]<<\" \"; ri--; if(t<=b) { for(int i=ri;i>=l;i--) cout<<m[b][i]<<\" \"; b--; } if(l<=ri) { for(int i=b;i>=t;i--) cout<<m[i][l]<<\" \"; l++; } } }\nint main() { int m[3][4]={{1,2,3,4},{5,6,7,8},{9,10,11,12}}; spiral(m,3,4); return 0; }",
         "explanation": {
@@ -88,7 +88,7 @@
         "description": "Set row and col to 0.",
         "difficulty": "MEDIUM",
         "category": "Matrix",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid setZeroes(int m[][3], int r, int c) {}\nint main() { int m[3][3]={{1,1,1},{1,0,1},{1,1,1}}; setZeroes(m,3,3); for(int i=0;i<3;i++) for(int j=0;j<3;j++) cout<<m[i][j]<<\" \"; return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid setZeroes(vector<vector<int>>& m, int r, int c) {\n    // TODO\n}\n\nint main() {\n    int m_rows, m_cols;\n    cin >> m_rows >> m_cols;\n    vector<vector<int>> m(m_rows, vector<int>(m_cols));\n    for (int i = 0; i < m_rows; i++)\n        for (int j = 0; j < m_cols; j++)\n            cin >> m[i][j];\n    int r;\n    cin >> r;\n    int c;\n    cin >> c;\n    setZeroes(m, r, c);\n    return 0;\n}\n",
         "expectedOutput": "1 0 1 0 0 0 1 0 1",
         "solution": "#include <iostream>\nusing namespace std;\nvoid setZeroes(int m[][3], int r, int c) { bool r0=false, c0=false; for(int i=0;i<r;i++) if(m[i][0]==0) c0=true; for(int j=0;j<c;j++) if(m[0][j]==0) r0=true; for(int i=1;i<r;i++) for(int j=1;j<c;j++) if(m[i][j]==0) { m[i][0]=0; m[0][j]=0; } for(int i=1;i<r;i++) for(int j=1;j<c;j++) if(m[i][0]==0||m[0][j]==0) m[i][j]=0; if(c0) for(int i=0;i<r;i++) m[i][0]=0; if(r0) for(int j=0;j<c;j++) m[0][j]=0; }\nint main() { int m[3][3]={{1,1,1},{1,0,1},{1,1,1}}; setZeroes(m,3,3); for(int i=0;i<3;i++) for(int j=0;j<3;j++) cout<<m[i][j]<<\" \"; return 0; }",
         "explanation": {
@@ -130,7 +130,7 @@
         "description": "Check valid sudoku.",
         "difficulty": "MEDIUM",
         "category": "Matrix",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool isValidSudoku(int b[][9]) { return false; }\nint main() { int b[9][9]={{5,3,0,0,7,0,0,0,0},{6,0,0,1,9,5,0,0,0},{0,9,8,0,0,0,0,6,0},{8,0,0,0,6,0,0,0,3},{4,0,0,8,0,3,0,0,1},{7,0,0,0,2,0,0,0,6},{0,6,0,0,0,0,2,8,0},{0,0,0,4,1,9,0,0,5},{0,0,0,0,8,0,0,7,9}}; cout<<isValidSudoku(b); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool isValidSudoku(vector<vector<int>>& b) {\n    return false;\n}\n\nint main() {\n    int b_rows, b_cols;\n    cin >> b_rows >> b_cols;\n    vector<vector<int>> b(b_rows, vector<int>(b_cols));\n    for (int i = 0; i < b_rows; i++)\n        for (int j = 0; j < b_cols; j++)\n            cin >> b[i][j];\n    cout << isValidSudoku(b);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool isValidSudoku(int b[][9]) { for(int i=0;i<9;i++) { int r[10]={}, c[10]={}; for(int j=0;j<9;j++) { if(b[i][j] && r[b[i][j]]++) return false; if(b[j][i] && c[b[j][i]]++) return false; } } for(int bi=0;bi<3;bi++) for(int bj=0;bj<3;bj++) { int s[10]={}; for(int i=0;i<3;i++) for(int j=0;j<3;j++) if(b[bi*3+i][bj*3+j] && s[b[bi*3+i][bj*3+j]]++) return false; } return true; }\nint main() { int b[9][9]={{5,3,0,0,7,0,0,0,0},{6,0,0,1,9,5,0,0,0},{0,9,8,0,0,0,0,6,0},{8,0,0,0,6,0,0,0,3},{4,0,0,8,0,3,0,0,1},{7,0,0,0,2,0,0,0,6},{0,6,0,0,0,0,2,8,0},{0,0,0,4,1,9,0,0,5},{0,0,0,0,8,0,0,7,9}}; cout<<isValidSudoku(b); return 0; }",
         "explanation": {
@@ -172,7 +172,7 @@
         "description": "Can string be segmented.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool wordBreak(char s[], char dict[][10], int n) { return false; }\nint main() { char dict[][10]={\"leet\",\"code\"}; cout<<wordBreak(\"leetcode\",dict,2); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool wordBreak(vector<int>& s, vector<vector<int>>& dict, int n) {\n    return false;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    int dict_rows, dict_cols;\n    cin >> dict_rows >> dict_cols;\n    vector<vector<int>> dict(dict_rows, vector<int>(dict_cols));\n    for (int i = 0; i < dict_rows; i++)\n        for (int j = 0; j < dict_cols; j++)\n            cin >> dict[i][j];\n    int n;\n    cin >> n;\n    cout << wordBreak(s, dict, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool wordBreak(char s[], char dict[][10], int n) { int len=0; while(s[len]) len++; bool dp[len+1]={}; dp[0]=true; for(int i=1;i<=len;i++) for(int j=0;j<i;j++) if(dp[j]) { bool match=false; for(int k=0;k<n;k++) { int wl=0; while(dict[k][wl]) wl++; if(wl==i-j) { bool ok=true; for(int m=0;m<wl;m++) if(s[j+m]!=dict[k][m]) ok=false; if(ok) match=true; } } if(match) dp[i]=true; } return dp[len]; }\nint main() { char dict[][10]={\"leet\",\"code\"}; cout<<wordBreak(\"leetcode\",dict,2); return 0; }",
         "explanation": {
@@ -213,7 +213,7 @@
         "description": "Max money without adjacent.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint rob(int a[], int n) { return 0; }\nint main() { int a[]={2,7,9,3,1}; cout<<rob(a,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint rob(vector<int>& a, int n) {\n    return 0;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << rob(a, n);\n    return 0;\n}\n",
         "expectedOutput": "12",
         "solution": "#include <iostream>\nusing namespace std;\nint rob(int a[], int n) { if(n==0) return 0; if(n==1) return a[0]; int prev2=a[0], prev1=max(a[0],a[1]); for(int i=2;i<n;i++) { int cur=max(prev1, prev2+a[i]); prev2=prev1; prev1=cur; } return prev1; }\nint main() { int a[]={2,7,9,3,1}; cout<<rob(a,5); return 0; }",
         "explanation": {
@@ -254,7 +254,7 @@
         "description": "Paths in grid.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint uniquePaths(int m, int n) { return 0; }\nint main() { cout<<uniquePaths(3,7); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint uniquePaths(int m, int n) {\n    return 0;\n}\n\nint main() {\n    int m;\n    cin >> m;\n    int n;\n    cin >> n;\n    cout << uniquePaths(m, n);\n    return 0;\n}\n",
         "expectedOutput": "28",
         "solution": "#include <iostream>\nusing namespace std;\nint uniquePaths(int m, int n) { int dp[m][n]; for(int i=0;i<m;i++) for(int j=0;j<n;j++) dp[i][j]=(i==0||j==0)?1:dp[i-1][j]+dp[i][j-1]; return dp[m-1][n-1]; }\nint main() { cout<<uniquePaths(3,7); return 0; }",
         "explanation": {
@@ -295,7 +295,7 @@
         "description": "Ways to decode number string.",
         "difficulty": "MEDIUM",
         "category": "DP",
-        "starterCode": "#include <iostream>\nusing namespace std;\nint numDecodings(char s[]) { return 0; }\nint main() { cout<<numDecodings(\"226\"); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint numDecodings(vector<int>& s) {\n    return 0;\n}\n\nint main() {\n    int s_size;\n    cin >> s_size;\n    vector<int> s(s_size);\n    for (int i = 0; i < s_size; i++) cin >> s[i];\n    cout << numDecodings(s);\n    return 0;\n}\n",
         "expectedOutput": "3",
         "solution": "#include <iostream>\nusing namespace std;\nint numDecodings(char s[]) { int n=0; while(s[n]) n++; if(n==0||s[0]=='0') return 0; int dp[n+1]={}; dp[0]=1; dp[1]=1; for(int i=2;i<=n;i++) { if(s[i-1]!='0') dp[i]=dp[i-1]; int two=(s[i-2]-'0')*10+(s[i-1]-'0'); if(two>=10&&two<=26) dp[i]+=dp[i-2]; } return dp[n]; }\nint main() { cout<<numDecodings(\"226\"); return 0; }",
         "explanation": {
@@ -336,7 +336,7 @@
         "description": "Can reach last index.",
         "difficulty": "MEDIUM",
         "category": "Greedy",
-        "starterCode": "#include <iostream>\nusing namespace std;\nbool canJump(int a[], int n) { return false; }\nint main() { int a[]={2,3,1,1,4}; cout<<canJump(a,5); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nbool canJump(vector<int>& a, int n) {\n    return false;\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    cout << canJump(a, n);\n    return 0;\n}\n",
         "expectedOutput": "1",
         "solution": "#include <iostream>\nusing namespace std;\nbool canJump(int a[], int n) { int reach=0; for(int i=0;i<n;i++) { if(i>reach) return false; reach=max(reach, i+a[i]); } return true; }\nint main() { int a[]={2,3,1,1,4}; cout<<canJump(a,5); return 0; }",
         "explanation": {
@@ -377,7 +377,7 @@
         "description": "Product of all except current.",
         "difficulty": "MEDIUM",
         "category": "Arrays",
-        "starterCode": "#include <iostream>\nusing namespace std;\nvoid productExceptSelf(int a[], int n) {}\nint main() { int a[]={1,2,3,4}; productExceptSelf(a,4); return 0; }",
+        "starterCode": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nvoid productExceptSelf(vector<int>& a, int n) {\n    // TODO\n}\n\nint main() {\n    int a_size;\n    cin >> a_size;\n    vector<int> a(a_size);\n    for (int i = 0; i < a_size; i++) cin >> a[i];\n    int n;\n    cin >> n;\n    productExceptSelf(a, n);\n    return 0;\n}\n",
         "expectedOutput": "24 12 8 6",
         "solution": "#include <iostream>\nusing namespace std;\nvoid productExceptSelf(int a[], int n) { int res[n]; res[0]=1; for(int i=1;i<n;i++) res[i]=res[i-1]*a[i-1]; int right=1; for(int i=n-1;i>=0;i--) { res[i]*=right; right*=a[i]; } for(int i=0;i<n;i++) cout<<res[i]<<\" \"; }\nint main() { int a[]={1,2,3,4}; productExceptSelf(a,4); return 0; }",
         "explanation": {

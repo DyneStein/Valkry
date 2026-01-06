@@ -1,0 +1,401 @@
+[
+    {
+        "id": "m211",
+        "title": "Subarray Product Less Than K",
+        "description": "Count subarrays with product < k.",
+        "difficulty": "MEDIUM",
+        "category": "Sliding Window",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint numSubarrayProductLessThanK(int nums[], int n, int k) { return 0; }\nint main() { int nu[]={10,5,2,6}; cout << numSubarrayProductLessThanK(nu,4,100); return 0; }",
+        "expectedOutput": "8",
+        "solution": "#include <iostream>\nusing namespace std;\nint numSubarrayProductLessThanK(int nums[], int n, int k) { if(k<=1) return 0; int l=0,p=1,c=0; for(int r=0;r<n;r++) { p*=nums[r]; while(p>=k) p/=nums[l++]; c+=r-l+1; } return c; }\nint main() { int nu[]={10,5,2,6}; cout << numSubarrayProductLessThanK(nu,4,100); return 0; }",
+        "explanation": {
+            "approach": "Sliding window with product.",
+            "steps": [
+                "Expand right, shrink if product >= k",
+                "Count subarrays ending at r"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "{10,5,2,6}, k=100",
+                "expectedOutput": "8",
+                "explanation": "8 subarrays with product < 100"
+            },
+            {
+                "input": "{1,2,3}, k=0",
+                "expectedOutput": "0",
+                "explanation": "No valid subarrays when k<=1"
+            },
+            {
+                "input": "{1,1,1}, k=2",
+                "expectedOutput": "6",
+                "explanation": "All subarrays have product 1"
+            },
+            {
+                "input": "{10,9,10,4,3,8,3,3,6,2,10,10,9,3}, k=19",
+                "expectedOutput": "18",
+                "explanation": "Complex array with larger k"
+            }
+        ]
+    },
+    {
+        "id": "m212",
+        "title": "Container With Most Water",
+        "description": "Max water between two lines.",
+        "difficulty": "MEDIUM",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint maxArea(int height[], int n) { return 0; }\nint main() { int h[]={1,8,6,2,5,4,8,3,7}; cout << maxArea(h,9); return 0; }",
+        "expectedOutput": "49",
+        "solution": "#include <iostream>\nusing namespace std;\nint maxArea(int height[], int n) { int l=0,r=n-1,mx=0; while(l<r) { mx=max(mx,min(height[l],height[r])*(r-l)); if(height[l]<height[r]) l++; else r--; } return mx; }\nint main() { int h[]={1,8,6,2,5,4,8,3,7}; cout << maxArea(h,9); return 0; }",
+        "explanation": {
+            "approach": "Two pointers from ends.",
+            "steps": [
+                "Calculate area",
+                "Move shorter line inward"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "{1,8,6,2,5,4,8,3,7}",
+                "expectedOutput": "49",
+                "explanation": "max(min(8,7)*7) = 49"
+            },
+            {
+                "input": "{1,1}",
+                "expectedOutput": "1",
+                "explanation": "Minimum case"
+            },
+            {
+                "input": "{4,3,2,1,4}",
+                "expectedOutput": "16",
+                "explanation": "4 * 4 = 16"
+            },
+            {
+                "input": "{1,2,1}",
+                "expectedOutput": "2",
+                "explanation": "min(1,1)*2 = 2"
+            }
+        ]
+    },
+    {
+        "id": "m213",
+        "title": "3Sum",
+        "description": "Find all triplets summing to 0.",
+        "difficulty": "MEDIUM",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint threeSum(int nums[], int n) { return 0; }\nint main() { int nu[]={-1,0,1,2,-1,-4}; cout << threeSum(nu,6); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint threeSum(int nums[], int n) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(nums[j]>nums[j+1]) swap(nums[j],nums[j+1]); int c=0; for(int i=0;i<n-2;i++) { if(i>0&&nums[i]==nums[i-1]) continue; int l=i+1,r=n-1; while(l<r) { int s=nums[i]+nums[l]+nums[r]; if(s==0) { c++; while(l<r&&nums[l]==nums[l+1]) l++; while(l<r&&nums[r]==nums[r-1]) r--; l++; r--; } else if(s<0) l++; else r--; } } return c; }\nint main() { int nu[]={-1,0,1,2,-1,-4}; cout << threeSum(nu,6); return 0; }",
+        "explanation": {
+            "approach": "Sort and two pointers.",
+            "steps": [
+                "Sort array",
+                "Fix one, two-pointer for remaining"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "{-1,0,1,2,-1,-4}",
+                "expectedOutput": "2",
+                "explanation": "[-1,-1,2] and [-1,0,1]"
+            },
+            {
+                "input": "{0,0,0}",
+                "expectedOutput": "1",
+                "explanation": "Only [0,0,0]"
+            },
+            {
+                "input": "{1,2,-3,4}",
+                "expectedOutput": "1",
+                "explanation": "[1,2,-3]"
+            },
+            {
+                "input": "{-2,0,1,1,2}",
+                "expectedOutput": "2",
+                "explanation": "[-2,0,2] and [-2,1,1]"
+            }
+        ]
+    },
+    {
+        "id": "m214",
+        "title": "3Sum Closest",
+        "description": "Triplet sum closest to target.",
+        "difficulty": "MEDIUM",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint threeSumClosest(int nums[], int n, int target) { return 0; }\nint main() { int nu[]={-1,2,1,-4}; cout << threeSumClosest(nu,4,1); return 0; }",
+        "expectedOutput": "2",
+        "solution": "#include <iostream>\nusing namespace std;\nint threeSumClosest(int nums[], int n, int target) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(nums[j]>nums[j+1]) swap(nums[j],nums[j+1]); int closest=nums[0]+nums[1]+nums[2]; for(int i=0;i<n-2;i++) { int l=i+1,r=n-1; while(l<r) { int s=nums[i]+nums[l]+nums[r]; if(abs(s-target)<abs(closest-target)) closest=s; if(s<target) l++; else r--; } } return closest; }\nint main() { int nu[]={-1,2,1,-4}; cout << threeSumClosest(nu,4,1); return 0; }",
+        "explanation": {
+            "approach": "Sort and two pointers.",
+            "steps": [
+                "Sort",
+                "Track closest sum"
+            ],
+            "complexity": "Time: O(n²), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "{-1,2,1,-4}, target=1",
+                "expectedOutput": "2",
+                "explanation": "-1+2+1=2 is closest to 1"
+            },
+            {
+                "input": "{0,0,0}, target=1",
+                "expectedOutput": "0",
+                "explanation": "0 is closest to 1"
+            },
+            {
+                "input": "{1,1,1,0}, target=-100",
+                "expectedOutput": "2",
+                "explanation": "0+1+1=2 is closest"
+            },
+            {
+                "input": "{1,2,4,8,16,32,64,128}, target=82",
+                "expectedOutput": "82",
+                "explanation": "Exact match: 2+16+64=82"
+            }
+        ]
+    },
+    {
+        "id": "m215",
+        "title": "4Sum",
+        "description": "Find quadruplets summing to target.",
+        "difficulty": "MEDIUM",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint fourSum(int nums[], int n, int target) { return 0; }\nint main() { int nu[]={1,0,-1,0,-2,2}; cout << fourSum(nu,6,0); return 0; }",
+        "expectedOutput": "3",
+        "solution": "#include <iostream>\nusing namespace std;\nint fourSum(int nums[], int n, int target) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(nums[j]>nums[j+1]) swap(nums[j],nums[j+1]); int c=0; for(int i=0;i<n-3;i++) { if(i>0&&nums[i]==nums[i-1]) continue; for(int j=i+1;j<n-2;j++) { if(j>i+1&&nums[j]==nums[j-1]) continue; int l=j+1,r=n-1; while(l<r) { long s=(long)nums[i]+nums[j]+nums[l]+nums[r]; if(s==target) { c++; while(l<r&&nums[l]==nums[l+1]) l++; while(l<r&&nums[r]==nums[r-1]) r--; l++; r--; } else if(s<target) l++; else r--; } } } return c; }\nint main() { int nu[]={1,0,-1,0,-2,2}; cout << fourSum(nu,6,0); return 0; }",
+        "explanation": {
+            "approach": "Extend 3Sum with extra loop.",
+            "steps": [
+                "Fix two elements",
+                "Two-pointer for remaining"
+            ],
+            "complexity": "Time: O(n³), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "{1,0,-1,0,-2,2}, target=0",
+                "expectedOutput": "3",
+                "explanation": "3 unique quadruplets"
+            },
+            {
+                "input": "{2,2,2,2,2}, target=8",
+                "expectedOutput": "1",
+                "explanation": "Only [2,2,2,2]"
+            },
+            {
+                "input": "{0,0,0,0}, target=0",
+                "expectedOutput": "1",
+                "explanation": "All zeros"
+            },
+            {
+                "input": "{-3,-2,-1,0,0,1,2,3}, target=0",
+                "expectedOutput": "8",
+                "explanation": "Multiple quadruplet combinations"
+            }
+        ]
+    },
+    {
+        "id": "m216",
+        "title": "Sort Colors",
+        "description": "Dutch national flag.",
+        "difficulty": "MEDIUM",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nvoid sortColors(int nums[], int n) {}\nint main() { int nu[]={2,0,2,1,1,0}; sortColors(nu,6); for(int i=0;i<6;i++) cout<<nu[i]<<\" \"; return 0; }",
+        "expectedOutput": "0 0 1 1 2 2",
+        "solution": "#include <iostream>\nusing namespace std;\nvoid sortColors(int nums[], int n) { int l=0,m=0,r=n-1; while(m<=r) { if(nums[m]==0) swap(nums[l++],nums[m++]); else if(nums[m]==1) m++; else swap(nums[m],nums[r--]); } }\nint main() { int nu[]={2,0,2,1,1,0}; sortColors(nu,6); for(int i=0;i<6;i++) cout<<nu[i]<<\" \"; return 0; }",
+        "explanation": {
+            "approach": "Three pointers.",
+            "steps": [
+                "0s before l, 2s after r",
+                "Swap accordingly"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "{2,0,2,1,1,0}",
+                "expectedOutput": "0 0 1 1 2 2",
+                "explanation": "Sorted colors"
+            },
+            {
+                "input": "{2,0,1}",
+                "expectedOutput": "0 1 2",
+                "explanation": "Simple case"
+            },
+            {
+                "input": "{0}",
+                "expectedOutput": "0",
+                "explanation": "Single element"
+            },
+            {
+                "input": "{1,2,0,2,1,0}",
+                "expectedOutput": "0 0 1 1 2 2",
+                "explanation": "Different starting order"
+            }
+        ]
+    },
+    {
+        "id": "m217",
+        "title": "Boats to Save People",
+        "description": "Min boats needed.",
+        "difficulty": "MEDIUM",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint numRescueBoats(int people[], int n, int limit) { return 0; }\nint main() { int p[]={3,5,3,4}; cout << numRescueBoats(p,4,5); return 0; }",
+        "expectedOutput": "4",
+        "solution": "#include <iostream>\nusing namespace std;\nint numRescueBoats(int people[], int n, int limit) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(people[j]>people[j+1]) swap(people[j],people[j+1]); int l=0,r=n-1,boats=0; while(l<=r) { if(people[l]+people[r]<=limit) l++; r--; boats++; } return boats; }\nint main() { int p[]={3,5,3,4}; cout << numRescueBoats(p,4,5); return 0; }",
+        "explanation": {
+            "approach": "Sort and pair lightest with heaviest.",
+            "steps": [
+                "Sort",
+                "Try pairing l and r"
+            ],
+            "complexity": "Time: O(n log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "{3,5,3,4}, limit=5",
+                "expectedOutput": "4",
+                "explanation": "Each person needs own boat"
+            },
+            {
+                "input": "{1,2}, limit=3",
+                "expectedOutput": "1",
+                "explanation": "Both fit in one boat"
+            },
+            {
+                "input": "{3,2,2,1}, limit=3",
+                "expectedOutput": "3",
+                "explanation": "(1,2), (2), (3)"
+            },
+            {
+                "input": "{1,1,1,1}, limit=2",
+                "expectedOutput": "2",
+                "explanation": "Two pairs of 1s"
+            }
+        ]
+    },
+    {
+        "id": "m218",
+        "title": "Long Pressed Name",
+        "description": "Check long pressed typing.",
+        "difficulty": "MEDIUM",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nbool isLongPressedName(char name[], char typed[]) { return false; }\nint main() { cout << isLongPressedName(\"alex\",\"aaleex\"); return 0; }",
+        "expectedOutput": "1",
+        "solution": "#include <iostream>\nusing namespace std;\nbool isLongPressedName(char name[], char typed[]) { int i=0,j=0; while(typed[j]) { if(name[i]&&name[i]==typed[j]) { i++; j++; } else if(j>0&&typed[j]==typed[j-1]) j++; else return false; } return !name[i]; }\nint main() { cout << isLongPressedName(\"alex\",\"aaleex\"); return 0; }",
+        "explanation": {
+            "approach": "Two pointers matching.",
+            "steps": [
+                "Match chars or accept repeats"
+            ],
+            "complexity": "Time: O(n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "name=\"alex\", typed=\"aaleex\"",
+                "expectedOutput": "1",
+                "explanation": "Valid long press"
+            },
+            {
+                "input": "name=\"saeed\", typed=\"ssaaedd\"",
+                "expectedOutput": "0",
+                "explanation": "Missing second 'e'"
+            },
+            {
+                "input": "name=\"a\", typed=\"aaaa\"",
+                "expectedOutput": "1",
+                "explanation": "Simple long press"
+            },
+            {
+                "input": "name=\"leelee\", typed=\"lleeelee\"",
+                "expectedOutput": "1",
+                "explanation": "Valid with multiple repeats"
+            }
+        ]
+    },
+    {
+        "id": "m219",
+        "title": "Find K-th Smallest Pair Distance",
+        "description": "Kth smallest distance.",
+        "difficulty": "MEDIUM",
+        "category": "Binary Search",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint smallestDistancePair(int nums[], int n, int k) { return 0; }\nint main() { int nu[]={1,3,1}; cout << smallestDistancePair(nu,3,1); return 0; }",
+        "expectedOutput": "0",
+        "solution": "#include <iostream>\nusing namespace std;\nint countPairs(int nums[], int n, int d) { int c=0; for(int i=0,j=0;i<n;i++) { while(j<n&&nums[j]-nums[i]<=d) j++; c+=j-i-1; } return c; }\nint smallestDistancePair(int nums[], int n, int k) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(nums[j]>nums[j+1]) swap(nums[j],nums[j+1]); int l=0,r=nums[n-1]-nums[0]; while(l<r) { int m=(l+r)/2; if(countPairs(nums,n,m)>=k) r=m; else l=m+1; } return l; }\nint main() { int nu[]={1,3,1}; cout << smallestDistancePair(nu,3,1); return 0; }",
+        "explanation": {
+            "approach": "Binary search on answer.",
+            "steps": [
+                "Sort",
+                "Binary search distance, count pairs"
+            ],
+            "complexity": "Time: O(n log n + n log W), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "{1,3,1}, k=1",
+                "expectedOutput": "0",
+                "explanation": "Smallest distance is 0 (1-1)"
+            },
+            {
+                "input": "{1,6,1}, k=3",
+                "expectedOutput": "5",
+                "explanation": "Distances: 0, 5, 5"
+            },
+            {
+                "input": "{1,2,3}, k=2",
+                "expectedOutput": "1",
+                "explanation": "Distances: 1, 1, 2"
+            },
+            {
+                "input": "{1,2,3,4}, k=5",
+                "expectedOutput": "2",
+                "explanation": "Sorted distances: 1,1,1,2,2,3"
+            }
+        ]
+    },
+    {
+        "id": "m220",
+        "title": "Minimize Maximum Pair Sum",
+        "description": "Min of max pair sums.",
+        "difficulty": "MEDIUM",
+        "category": "Two Pointers",
+        "starterCode": "#include <iostream>\nusing namespace std;\nint minPairSum(int nums[], int n) { return 0; }\nint main() { int nu[]={3,5,2,3}; cout << minPairSum(nu,4); return 0; }",
+        "expectedOutput": "7",
+        "solution": "#include <iostream>\nusing namespace std;\nint minPairSum(int nums[], int n) { for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++) if(nums[j]>nums[j+1]) swap(nums[j],nums[j+1]); int mx=0; for(int i=0;i<n/2;i++) mx=max(mx,nums[i]+nums[n-1-i]); return mx; }\nint main() { int nu[]={3,5,2,3}; cout << minPairSum(nu,4); return 0; }",
+        "explanation": {
+            "approach": "Sort and pair extremes.",
+            "steps": [
+                "Sort",
+                "Pair smallest with largest"
+            ],
+            "complexity": "Time: O(n log n), Space: O(1)"
+        },
+        "testCases": [
+            {
+                "input": "{3,5,2,3}",
+                "expectedOutput": "7",
+                "explanation": "Pair (2,5) and (3,3) -> max is 7"
+            },
+            {
+                "input": "{3,5,4,2,4,6}",
+                "expectedOutput": "8",
+                "explanation": "Optimal pairing"
+            },
+            {
+                "input": "{1,1}",
+                "expectedOutput": "2",
+                "explanation": "Single pair"
+            },
+            {
+                "input": "{1,2,3,4,5,6}",
+                "expectedOutput": "7",
+                "explanation": "1+6=2+5=3+4=7"
+            }
+        ]
+    }
+]

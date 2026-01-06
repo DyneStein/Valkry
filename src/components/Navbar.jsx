@@ -13,9 +13,11 @@ const Navbar = () => {
         { to: '/', label: 'Home' },
         { to: '/arena', label: 'Arena' },
         { to: '/learn', label: 'Learn' },
+        { to: '/visualizer', label: 'Visualizer' },
         { to: '/friends', label: 'Friends' },
         { to: '/leaderboard', label: 'Leaderboard' },
-        { to: '/about', label: 'About' },
+        ...(user ? [{ to: '/dashboard', label: 'Dashboard' }] : []),
+        { to: '/docs', label: 'Docs' },
     ];
 
     const isActive = (path) => location.pathname === path;
@@ -89,24 +91,34 @@ const Navbar = () => {
                             {link.label}
                         </Link>
                     ))}
-                    {user && (
-                        <Link
-                            to="/dashboard"
-                            style={{
-                                display: 'block',
-                                padding: '10px 20px',
-                                fontSize: '14px',
-                                fontWeight: '500',
-                                color: isActive('/dashboard') ? 'var(--text)' : 'var(--text-secondary)',
-                                background: isActive('/dashboard') ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
-                                borderRadius: '999px',
-                                textDecoration: 'none',
-                                transition: 'all 0.2s ease'
-                            }}
-                        >
-                            Dashboard
-                        </Link>
-                    )}
+                    <Link
+                        to="/about"
+                        style={{
+                            display: 'block',
+                            padding: '10px 20px',
+                            fontSize: '14px',
+                            fontWeight: '500',
+                            color: isActive('/about') ? 'var(--text)' : 'var(--text-secondary)',
+                            background: isActive('/about') ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+                            borderRadius: '999px',
+                            textDecoration: 'none',
+                            transition: 'all 0.2s ease'
+                        }}
+                        onMouseEnter={e => {
+                            if (!isActive('/about')) {
+                                e.currentTarget.style.color = 'var(--text)';
+                                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+                            }
+                        }}
+                        onMouseLeave={e => {
+                            if (!isActive('/about')) {
+                                e.currentTarget.style.color = 'var(--text-secondary)';
+                                e.currentTarget.style.background = 'transparent';
+                            }
+                        }}
+                    >
+                        About
+                    </Link>
                 </div>
 
                 {/* User / Auth - Interactive area */}
